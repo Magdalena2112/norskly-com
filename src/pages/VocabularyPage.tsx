@@ -20,6 +20,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 // ─── Types ───
 interface VocabWord {
   word: string;
+  translation: string;
   synonym: string | null;
   antonym: string | null;
   examples: string[];
@@ -120,14 +121,15 @@ function GenerateTab({ level, userId }: { level: string; userId?: string }) {
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
 
-  const generate = async () => {
+  const generate = async (loadMore = false) => {
     if (!theme.trim()) return;
     setLoading(true);
-    setWords([]);
-    setSaved(false);
+    if (!loadMore) { setWords([]); setSaved(false); }
     try {
-      const data = await callVocabAI({ action: "generate_vocab", level, theme: theme.trim() });
-      setWords(data.words || []);
+      const exclude_words = loadMore ? words.map((w) => w.word) : [];
+      const data = await callVocabAI({ action: "generate_vocab", level, theme: theme.trim(), exclude_words });
+      const newWords = data.words || [];
+      setWords((prev) => loadMore ? [...prev, ...newWords] : newWords);
     } catch (e: any) {
       console.error(e);
     } finally {
@@ -173,8 +175,8 @@ function GenerateTab({ level, userId }: { level: string; userId?: string }) {
             onChange={(e) => setTheme(e.target.value)}
             maxLength={100}
           />
-          <Button variant="hero" className="w-full" onClick={generate} disabled={loading || !theme.trim()}>
-            {loading ? <><Loader2 className="w-4 h-4 animate-spin" /> Generišem...</> : "Generiši reči"}
+          <Button variant="hero" className="w-full" onClick={() => generate(false)} disabled={loading || !theme.trim()}>
+            {loading && words.length === 0 ? <><Loader2 className="w-4 h-4 animate-spin" /> Generišem...</> : "Generiši reči"}
           </Button>
         </CardContent>
       </Card>
@@ -184,7 +186,7 @@ function GenerateTab({ level, userId }: { level: string; userId?: string }) {
           {words.map((w, i) => (
             <Card key={i}>
               <CardContent className="pt-5 pb-5 space-y-2">
-                <p className="text-xl font-display font-bold text-foreground">{w.word}</p>
+                <p className="text-xl font-display font-bold text-foreground">{w.word} <span className="text-base font-normal text-muted-foreground">— {w.translation}</span></p>
                 <div className="flex flex-wrap gap-3 text-xs">
                   {w.synonym && (
                     <span className="bg-accent/10 text-accent px-2 py-1 rounded-full">
@@ -204,16 +206,26 @@ function GenerateTab({ level, userId }: { level: string; userId?: string }) {
             </Card>
           ))}
 
-          {!saved ? (
-            <Button variant="hero" className="w-full gap-2" onClick={saveWords} disabled={saving}>
-              {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
-              Sačuvaj reči (+8 poena)
-            </Button>
-          ) : (
-            <Button variant="ghost" className="w-full text-accent" disabled>
-              <CheckCircle2 className="w-4 h-4 mr-2" /> Sačuvano! ✓
-            </Button>
-          )}
+          <div className="flex gap-3">
+            {!saved ? (
+              <Button variant="hero" className="flex-1 gap-2" onClick={saveWords} disabled={saving}>
+                {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
+                Sačuvaj reči (+8 poena)
+              </Button>
+            ) : (
+              <Button variant="ghost" className="flex-1 text-accent" disabled>
+                <CheckCircle2 className="w-4 h-4 mr-2" /> Sačuvano! ✓
+              </Button>
+            )}
+          </div>
+          <Button
+            variant="outline"
+            className="w-full gap-2"
+            onClick={() => generate(true)}
+            disabled={loading}
+          >
+            {loading ? <><Loader2 className="w-4 h-4 animate-spin" /> Učitavam...</> : "Generiši još reči"}
+          </Button>
         </motion.div>
       )}
     </div>
