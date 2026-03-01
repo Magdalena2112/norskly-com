@@ -125,14 +125,29 @@ Odgovori ISKLJUČIVO u JSON formatu, bez markdown-a. Format:
 
     const aiData = await aiResponse.json();
     let content = aiData.choices?.[0]?.message?.content || "";
-    content = content.replace(/```json\s*/g, "").replace(/```\s*/g, "").trim();
+    // Strip markdown fences
+    content = content.replace(/```json\s*/gi, "").replace(/```\s*/g, "").trim();
 
     let parsed;
     try {
       parsed = JSON.parse(content);
     } catch {
-      console.error("Failed to parse AI response:", content);
-      throw new Error("Invalid AI response format");
+      // Try to extract JSON from mixed text
+      const jsonMatch = content.match(/\{[\s\S]*\}/);
+      if (jsonMatch) {
+        try {
+          let cleaned = jsonMatch[0]
+            .replace(/,\s*}/g, "}")
+            .replace(/,\s*]/g, "]");
+          parsed = JSON.parse(cleaned);
+        } catch {
+          console.error("Failed to parse AI response after repair:", content);
+          throw new Error("Invalid AI response format");
+        }
+      } else {
+        console.error("No JSON found in AI response:", content);
+        throw new Error("Invalid AI response format");
+      }
     }
 
     return new Response(JSON.stringify(parsed), {
