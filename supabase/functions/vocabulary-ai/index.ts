@@ -93,7 +93,7 @@ Odgovori ISKLJUČIVO u JSON formatu, bez markdown-a. Format:
       "explanation": "Objašnjenje na srpskom"
     }
   ]
-}`;
+}` + qualityCheck;
       userPrompt = `Generiši 10 kviz pitanja koristeći sledeće norveške reči: ${theme}. Nivo: ${level}. Pitanja mogu biti prevod, popuni blanko, sinonim/antonim itd.`;
     } else {
       return new Response(JSON.stringify({ error: "Invalid action" }), {
