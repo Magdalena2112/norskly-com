@@ -9,13 +9,15 @@ export async function logActivity(
   points: number,
   payload: Record<string, unknown> = {}
 ) {
-  const { error } = await supabase.from("activities").insert({
-    user_id: userId,
-    module,
-    type,
-    points,
-    payload,
-  });
+  const { error } = await supabase.from("activities").insert([
+    {
+      user_id: userId,
+      module,
+      type,
+      points,
+      payload: payload as any,
+    },
+  ]);
 
   if (error) {
     console.error("Failed to log activity:", error.message);
