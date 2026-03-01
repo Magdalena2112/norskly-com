@@ -96,7 +96,7 @@ Odgovori ISKLJUČIVO u JSON formatu, bez markdown-a. Format:
       "explanation": "Objašnjenje na srpskom"
     }
   ]
-}`;
+}` + qualityCheck;
       userPrompt = `Generiši 5 kviz pitanja na temu "${topic}". Nivo: ${level}. Svako pitanje ima 4 opcije i jedno tačno rešenje.`;
     } else {
       return new Response(JSON.stringify({ error: "Invalid action" }), {

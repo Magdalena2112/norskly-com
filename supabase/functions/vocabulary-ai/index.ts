@@ -67,7 +67,7 @@ Odgovori ISKLJUČIVO u JSON formatu, bez markdown-a. Format:
       "examples": ["primer rečenica 1", "primer rečenica 2"]
     }
   ]
-}`;
+}` + qualityCheck;
       const excludeNote = exclude_words?.length ? `\nNE ponavljaj ove reči: ${exclude_words.join(", ")}.` : "";
       userPrompt = `Generiši 8 reči na temu "${theme}". Nivo: ${level}. Za svaku reč daj prevod na srpskom, sinonim (ako postoji), antonim (ako postoji) i 2 primera korišćenja u rečenici.${excludeNote}`;
     } else if (action === "correct_sentence") {
