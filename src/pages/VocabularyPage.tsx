@@ -186,7 +186,7 @@ function GenerateTab({ level, userId }: { level: string; userId?: string }) {
           {words.map((w, i) => (
             <Card key={i}>
               <CardContent className="pt-5 pb-5 space-y-2">
-                <p className="text-xl font-display font-bold text-foreground">{w.word}</p>
+                <p className="text-xl font-display font-bold text-foreground">{w.word} <span className="text-base font-normal text-muted-foreground">— {w.translation}</span></p>
                 <div className="flex flex-wrap gap-3 text-xs">
                   {w.synonym && (
                     <span className="bg-accent/10 text-accent px-2 py-1 rounded-full">
