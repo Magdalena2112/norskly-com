@@ -38,6 +38,17 @@ Deno.serve(async (req) => {
 
     const { action, level, theme, word, sentence, exclude_words } = await req.json();
 
+    const qualityCheck = `
+
+OBAVEZNA SAMOPROVERA pre slanja odgovora:
+- Norveški tekst nema gramatičke greške.
+- Red reči u rečenicama je ispravan (V2 pravilo u glavnoj rečenici).
+- Prepozicije su prirodne (ne doslovno sa srpskog).
+- Korišćen je nivo ${level} (ne pretežak vokabular).
+- Značenje je isto kao cilj; nema izmišljenih detalja.
+- Nema kontradikcija i nema "čudnih" formulacija.
+Ako bilo šta nije sigurno: pojednostavi rečenicu. Ne dodaj nove informacije.`;
+
     let systemPrompt = "";
     let userPrompt = "";
 
