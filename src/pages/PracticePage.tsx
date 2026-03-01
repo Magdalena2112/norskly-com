@@ -1,32 +1,85 @@
 import { useState, useRef, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useProfile } from "@/context/ProfileContext";
+import { useAuth } from "@/context/AuthContext";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Send, Settings, BookOpen, Sparkles } from "lucide-react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  Send,
+  Settings,
+  Sparkles,
+  StopCircle,
+  ChevronDown,
+  ChevronUp,
+  Trophy,
+  AlertTriangle,
+  BookOpen,
+} from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
+import { logActivity } from "@/lib/logActivity";
+import { toast } from "sonner";
 
 interface Message {
   role: "user" | "assistant";
   content: string;
 }
 
-const situationSuggestions = [
-  "Želim da se predstavim na poslu",
-  "Treba da napišem mejl stanodavcu",
-  "Kako da naručim kafu u kafeteriji",
-  "Želim da zakažem termin kod lekara",
-  "Kako da pitam za put na ulici",
-  "Treba da odgovorim na oglas za posao",
+interface RecapData {
+  strengths: string[];
+  mistakes: string[];
+  useful_phrases: { norwegian: string; serbian: string }[];
+}
+
+const situationPresets = [
+  { value: "predstavljanje", label: "Predstavljanje na poslu" },
+  { value: "kafeterija", label: "Naručivanje u kafeteriji" },
+  { value: "lekar", label: "Zakazivanje kod lekara" },
+  { value: "stanodavac", label: "Komunikacija sa stanodavcem" },
+  { value: "prodavnica", label: "Kupovina u prodavnici" },
+  { value: "telefon", label: "Telefonski razgovor" },
+  { value: "slobodno", label: "Slobodna tema" },
 ];
+
+const formalityOptions = [
+  { value: "opušten", label: "Opušten (du)" },
+  { value: "formalan", label: "Formalan (De)" },
+  { value: "poslovni", label: "Poslovni" },
+];
+
+const roleOptions = [
+  { value: "sagovornik", label: "Prijatelj / sagovornik" },
+  { value: "kolega", label: "Kolega na poslu" },
+  { value: "prodavac", label: "Prodavac / konobar" },
+  { value: "lekar", label: "Lekar / recepcioner" },
+  { value: "nastavnik", label: "Nastavnik norveškog" },
+];
+
+const CHAT_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/talk-ai`;
 
 export default function PracticePage() {
   const { profile } = useProfile();
+  const { user } = useAuth();
   const navigate = useNavigate();
+
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [showControls, setShowControls] = useState(true);
+  const [recap, setRecap] = useState<RecapData | null>(null);
+  const [recapLoading, setRecapLoading] = useState(false);
+
+  const [situation, setSituation] = useState("slobodno");
+  const [formality, setFormality] = useState("opušten");
+  const [role, setRole] = useState("sagovornik");
+
   const bottomRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -36,18 +89,272 @@ export default function PracticePage() {
   const sendMessage = async (text: string) => {
     if (!text.trim() || isLoading) return;
     const userMsg: Message = { role: "user", content: text };
-    setMessages((prev) => [...prev, userMsg]);
+    const updatedMessages = [...messages, userMsg];
+    setMessages(updatedMessages);
     setInput("");
     setIsLoading(true);
+    setShowControls(false);
 
-    // Mock AI response for now — will be replaced with Lovable Cloud edge function
-    setTimeout(() => {
-      const mockResponse = generateMockResponse(text, profile);
-      setMessages((prev) => [...prev, { role: "assistant", content: mockResponse }]);
-      setIsLoading(false);
-    }, 1200);
+    let assistantSoFar = "";
+    const upsertAssistant = (chunk: string) => {
+      assistantSoFar += chunk;
+      setMessages((prev) => {
+        const last = prev[prev.length - 1];
+        if (last?.role === "assistant") {
+          return prev.map((m, i) =>
+            i === prev.length - 1 ? { ...m, content: assistantSoFar } : m
+          );
+        }
+        return [...prev, { role: "assistant", content: assistantSoFar }];
+      });
+    };
+
+    try {
+      const resp = await fetch(CHAT_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
+        },
+        body: JSON.stringify({
+          action: "chat",
+          messages: updatedMessages,
+          profile: {
+            name: profile.name,
+            level: profile.level,
+            learning_goal: profile.learning_goal,
+          },
+          settings: {
+            situation: situationPresets.find((s) => s.value === situation)?.label,
+            formality: formalityOptions.find((f) => f.value === formality)?.label,
+            role: roleOptions.find((r) => r.value === role)?.label,
+          },
+        }),
+      });
+
+      if (!resp.ok) {
+        if (resp.status === 429) {
+          toast.error("Previše zahteva. Pokušaj ponovo za minut.");
+        } else if (resp.status === 402) {
+          toast.error("Potrebno je dopuniti kredite.");
+        } else {
+          toast.error("Greška pri slanju poruke.");
+        }
+        setIsLoading(false);
+        return;
+      }
+
+      if (!resp.body) throw new Error("No stream body");
+
+      const reader = resp.body.getReader();
+      const decoder = new TextDecoder();
+      let textBuffer = "";
+      let streamDone = false;
+
+      while (!streamDone) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        textBuffer += decoder.decode(value, { stream: true });
+
+        let newlineIndex: number;
+        while ((newlineIndex = textBuffer.indexOf("\n")) !== -1) {
+          let line = textBuffer.slice(0, newlineIndex);
+          textBuffer = textBuffer.slice(newlineIndex + 1);
+
+          if (line.endsWith("\r")) line = line.slice(0, -1);
+          if (line.startsWith(":") || line.trim() === "") continue;
+          if (!line.startsWith("data: ")) continue;
+
+          const jsonStr = line.slice(6).trim();
+          if (jsonStr === "[DONE]") {
+            streamDone = true;
+            break;
+          }
+
+          try {
+            const parsed = JSON.parse(jsonStr);
+            const content = parsed.choices?.[0]?.delta?.content as string | undefined;
+            if (content) upsertAssistant(content);
+          } catch {
+            textBuffer = line + "\n" + textBuffer;
+            break;
+          }
+        }
+      }
+
+      // flush remaining
+      if (textBuffer.trim()) {
+        for (let raw of textBuffer.split("\n")) {
+          if (!raw) continue;
+          if (raw.endsWith("\r")) raw = raw.slice(0, -1);
+          if (raw.startsWith(":") || raw.trim() === "") continue;
+          if (!raw.startsWith("data: ")) continue;
+          const jsonStr = raw.slice(6).trim();
+          if (jsonStr === "[DONE]") continue;
+          try {
+            const parsed = JSON.parse(jsonStr);
+            const content = parsed.choices?.[0]?.delta?.content as string | undefined;
+            if (content) upsertAssistant(content);
+          } catch {
+            /* ignore */
+          }
+        }
+      }
+    } catch (e) {
+      console.error("Talk error:", e);
+      toast.error("Greška pri komunikaciji sa AI-jem.");
+    }
+
+    setIsLoading(false);
   };
 
+  const endSession = async () => {
+    if (messages.length < 2) {
+      toast.info("Razgovaraj bar jednu turu pre završetka sesije.");
+      return;
+    }
+    setRecapLoading(true);
+
+    try {
+      const resp = await fetch(CHAT_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
+        },
+        body: JSON.stringify({
+          action: "recap",
+          messages,
+          profile: {
+            name: profile.name,
+            level: profile.level,
+            learning_goal: profile.learning_goal,
+          },
+        }),
+      });
+
+      if (!resp.ok) throw new Error("Recap failed");
+
+      const data: RecapData = await resp.json();
+      setRecap(data);
+
+      if (user) {
+        await logActivity(user.id, "talk", "session_complete", 12, {
+          message_count: messages.length,
+          situation,
+          formality,
+          role,
+        });
+      }
+    } catch (e) {
+      console.error("Recap error:", e);
+      toast.error("Greška pri generisanju rezimea.");
+    }
+    setRecapLoading(false);
+  };
+
+  const startNewSession = () => {
+    setMessages([]);
+    setRecap(null);
+    setShowControls(true);
+  };
+
+  // ── Recap screen ──
+  if (recap) {
+    return (
+      <div className="min-h-screen bg-background flex flex-col">
+        <header className="border-b border-border bg-background/80 backdrop-blur-md sticky top-0 z-50">
+          <div className="container flex items-center justify-between h-14">
+            <span className="font-display font-bold text-lg text-foreground">Norskly</span>
+          </div>
+        </header>
+
+        <div className="flex-1 overflow-y-auto">
+          <div className="container max-w-2xl py-10 space-y-8">
+            <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}>
+              <h2 className="text-2xl font-display font-bold text-foreground mb-2 text-center">
+                Rezime sesije 🎉
+              </h2>
+              <p className="text-muted-foreground text-center text-sm mb-8">
+                +12 poena · {messages.length} poruka
+              </p>
+            </motion.div>
+
+            {/* Strengths */}
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+              className="bg-card border border-border rounded-2xl p-6"
+            >
+              <div className="flex items-center gap-2 mb-4">
+                <Trophy className="w-5 h-5 text-accent" />
+                <h3 className="font-display font-bold text-foreground">Snage</h3>
+              </div>
+              <ul className="space-y-2">
+                {recap.strengths.map((s, i) => (
+                  <li key={i} className="flex items-start gap-2 text-sm text-card-foreground">
+                    <span className="text-accent mt-0.5">✓</span>
+                    {s}
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+
+            {/* Mistakes */}
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="bg-card border border-border rounded-2xl p-6"
+            >
+              <div className="flex items-center gap-2 mb-4">
+                <AlertTriangle className="w-5 h-5 text-destructive" />
+                <h3 className="font-display font-bold text-foreground">Greške za popraviti</h3>
+              </div>
+              <ul className="space-y-2">
+                {recap.mistakes.map((m, i) => (
+                  <li key={i} className="flex items-start gap-2 text-sm text-card-foreground">
+                    <span className="text-destructive mt-0.5">✗</span>
+                    {m}
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+
+            {/* Useful phrases */}
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              className="bg-card border border-border rounded-2xl p-6"
+            >
+              <div className="flex items-center gap-2 mb-4">
+                <BookOpen className="w-5 h-5 text-primary" />
+                <h3 className="font-display font-bold text-foreground">Korisni izrazi</h3>
+              </div>
+              <div className="space-y-3">
+                {recap.useful_phrases.map((p, i) => (
+                  <div key={i} className="flex flex-col gap-0.5">
+                    <span className="text-sm font-medium text-foreground">{p.norwegian}</span>
+                    <span className="text-xs text-muted-foreground">{p.serbian}</span>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+
+            <div className="flex justify-center pt-4 pb-8">
+              <Button variant="hero" size="lg" onClick={startNewSession}>
+                Nova sesija
+              </Button>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // ── Chat screen ──
   return (
     <div className="min-h-screen bg-background flex flex-col">
       {/* Header */}
@@ -55,15 +362,106 @@ export default function PracticePage() {
         <div className="container flex items-center justify-between h-14">
           <span className="font-display font-bold text-lg text-foreground">Norskly</span>
           <div className="flex items-center gap-2">
-            <span className="text-xs bg-accent/10 text-accent px-3 py-1 rounded-full font-medium">
-              {profile.level} · {profile.learning_goal}
-            </span>
+            {messages.length >= 2 && (
+              <Button
+                variant="destructive"
+                size="sm"
+                onClick={endSession}
+                disabled={recapLoading}
+                className="gap-1.5"
+              >
+                <StopCircle className="w-4 h-4" />
+                {recapLoading ? "Generiše se..." : "Završi sesiju"}
+              </Button>
+            )}
             <Button variant="ghost" size="icon" onClick={() => navigate("/onboarding")}>
               <Settings className="w-4 h-4" />
             </Button>
           </div>
         </div>
       </header>
+
+      {/* Controls panel */}
+      <AnimatePresence>
+        {showControls && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            className="border-b border-border bg-card/50 overflow-hidden"
+          >
+            <div className="container max-w-3xl py-4">
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
+                  Podešavanja sesije
+                </span>
+                <button
+                  onClick={() => setShowControls(false)}
+                  className="text-muted-foreground hover:text-foreground"
+                >
+                  <ChevronUp className="w-4 h-4" />
+                </button>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div>
+                  <label className="text-xs text-muted-foreground mb-1 block">Situacija</label>
+                  <Select value={situation} onValueChange={setSituation}>
+                    <SelectTrigger className="h-9 text-sm">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {situationPresets.map((s) => (
+                        <SelectItem key={s.value} value={s.value}>
+                          {s.label}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div>
+                  <label className="text-xs text-muted-foreground mb-1 block">Formalnost</label>
+                  <Select value={formality} onValueChange={setFormality}>
+                    <SelectTrigger className="h-9 text-sm">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {formalityOptions.map((f) => (
+                        <SelectItem key={f.value} value={f.value}>
+                          {f.label}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div>
+                  <label className="text-xs text-muted-foreground mb-1 block">Uloga AI-ja</label>
+                  <Select value={role} onValueChange={setRole}>
+                    <SelectTrigger className="h-9 text-sm">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {roleOptions.map((r) => (
+                        <SelectItem key={r.value} value={r.value}>
+                          {r.label}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {!showControls && messages.length > 0 && (
+        <button
+          onClick={() => setShowControls(true)}
+          className="border-b border-border bg-card/50 py-1.5 text-xs text-muted-foreground flex items-center justify-center gap-1 hover:text-foreground transition-colors"
+        >
+          <ChevronDown className="w-3 h-3" /> Podešavanja
+        </button>
+      )}
 
       {/* Chat area */}
       <div className="flex-1 overflow-y-auto">
@@ -81,10 +479,14 @@ export default function PracticePage() {
                 Hei, {profile.name || "korisniče"}! 👋
               </h2>
               <p className="text-muted-foreground mb-8 max-w-md mx-auto">
-                Opiši situaciju na srpskom, a ja ću ti pomoći da se izraziš na norveškom.
+                Izaberi situaciju gore i započni razgovor na norveškom. Ja ću ti odgovarati i pomagati.
               </p>
               <div className="flex flex-wrap justify-center gap-2">
-                {situationSuggestions.map((s) => (
+                {[
+                  "Hei, jeg heter " + (profile.name || "..."),
+                  "Kan du hjelpe meg?",
+                  "Jeg vil gjerne øve på norsk",
+                ].map((s) => (
                   <button
                     key={s}
                     onClick={() => sendMessage(s)}
@@ -122,17 +524,13 @@ export default function PracticePage() {
             </motion.div>
           ))}
 
-          {isLoading && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="flex justify-start"
-            >
+          {isLoading && messages[messages.length - 1]?.role !== "assistant" && (
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex justify-start">
               <div className="bg-card border border-border rounded-2xl rounded-bl-md px-5 py-4">
                 <div className="flex gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-accent animate-pulse-glow" />
-                  <span className="w-2 h-2 rounded-full bg-accent animate-pulse-glow" style={{ animationDelay: "0.3s" }} />
-                  <span className="w-2 h-2 rounded-full bg-accent animate-pulse-glow" style={{ animationDelay: "0.6s" }} />
+                  <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
+                  <span className="w-2 h-2 rounded-full bg-accent animate-pulse" style={{ animationDelay: "0.3s" }} />
+                  <span className="w-2 h-2 rounded-full bg-accent animate-pulse" style={{ animationDelay: "0.6s" }} />
                 </div>
               </div>
             </motion.div>
@@ -154,7 +552,7 @@ export default function PracticePage() {
           <Input
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="Opiši situaciju ili napiši poruku..."
+            placeholder="Napiši poruku na norveškom..."
             className="flex-1 h-12"
             disabled={isLoading}
           />
@@ -165,34 +563,4 @@ export default function PracticePage() {
       </div>
     </div>
   );
-}
-
-// Mock response generator
-function generateMockResponse(userMessage: string, profile: any): string {
-  const name = profile.name || "korisniče";
-  const level = profile.level || "A1";
-
-  return `## 1️⃣ Kontekst i cilj komunikacije
-
-**Situacija:** Svakodnevna komunikacija
-**Cilj:** Pomoći ti, ${name}, da se izraziš prirodno na norveškom.
-**Formalnost:** Srednji nivo
-
-## 2️⃣ Tipične greške za nivo ${level}
-
-- ❌ Pogrešan red reči u pitanjima
-- ❌ Mešanje "en" i "et" članova
-- ❌ Izostavljanje "å" ispred infinitiva
-
-## 3️⃣ Predlog poruke (norveški)
-
-> **Hei! Jeg vil gjerne bestille en kaffe, takk.**
-
-## 4️⃣ Alternativna verzija (formalnija)
-
-> **God dag. Kunne jeg fått en kopp kaffe, vær så snill?**
-
-## 5️⃣ Objašnjenje
-
-Prva verzija je opuštenija i pogodna za svakodnevne situacije. Druga koristi kondicional ("kunne jeg fått") što zvuči učtivije i profesionalnije. Oba oblika su potpuno prihvatljiva u Norveskoj.`;
 }
