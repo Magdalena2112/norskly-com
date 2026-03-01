@@ -74,6 +74,45 @@ export type Database = {
         }
         Relationships: []
       }
+      talk_sessions: {
+        Row: {
+          created_at: string
+          formality: string
+          id: string
+          message_count: number
+          messages: Json
+          points: number
+          recap: Json | null
+          role: string
+          situation: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          formality?: string
+          id?: string
+          message_count?: number
+          messages?: Json
+          points?: number
+          recap?: Json | null
+          role?: string
+          situation?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          formality?: string
+          id?: string
+          message_count?: number
+          messages?: Json
+          points?: number
+          recap?: Json | null
+          role?: string
+          situation?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       vocab_items: {
         Row: {
           antonym: string | null
