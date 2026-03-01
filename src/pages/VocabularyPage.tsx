@@ -20,6 +20,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 // ─── Types ───
 interface VocabWord {
   word: string;
+  translation: string;
   synonym: string | null;
   antonym: string | null;
   examples: string[];
