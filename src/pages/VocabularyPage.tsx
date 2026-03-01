@@ -175,8 +175,8 @@ function GenerateTab({ level, userId }: { level: string; userId?: string }) {
             onChange={(e) => setTheme(e.target.value)}
             maxLength={100}
           />
-          <Button variant="hero" className="w-full" onClick={generate} disabled={loading || !theme.trim()}>
-            {loading ? <><Loader2 className="w-4 h-4 animate-spin" /> Generišem...</> : "Generiši reči"}
+          <Button variant="hero" className="w-full" onClick={() => generate(false)} disabled={loading || !theme.trim()}>
+            {loading && words.length === 0 ? <><Loader2 className="w-4 h-4 animate-spin" /> Generišem...</> : "Generiši reči"}
           </Button>
         </CardContent>
       </Card>
