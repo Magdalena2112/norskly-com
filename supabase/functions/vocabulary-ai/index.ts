@@ -41,6 +41,8 @@ Deno.serve(async (req) => {
     let systemPrompt = "";
     let userPrompt = "";
 
+    const { action, level, theme, word, sentence, exclude_words } = await req.json();
+
     if (action === "generate_vocab") {
       systemPrompt = `Ti si nastavnik norveškog jezika (Bokmål). Generišeš vokabular za nivo ${level}.
 Odgovori ISKLJUČIVO u JSON formatu, bez markdown-a. Format:
@@ -48,13 +50,15 @@ Odgovori ISKLJUČIVO u JSON formatu, bez markdown-a. Format:
   "words": [
     {
       "word": "norveška reč",
+      "translation": "prevod na srpskom",
       "synonym": "sinonim na norveškom ili null",
       "antonym": "antonim na norveškom ili null",
       "examples": ["primer rečenica 1", "primer rečenica 2"]
     }
   ]
 }`;
-      userPrompt = `Generiši 8 reči na temu "${theme}". Nivo: ${level}. Za svaku reč daj sinonim (ako postoji), antonim (ako postoji) i 2 primera korišćenja u rečenici.`;
+      const excludeNote = exclude_words?.length ? `\nNE ponavljaj ove reči: ${exclude_words.join(", ")}.` : "";
+      userPrompt = `Generiši 8 reči na temu "${theme}". Nivo: ${level}. Za svaku reč daj prevod na srpskom, sinonim (ako postoji), antonim (ako postoji) i 2 primera korišćenja u rečenici.${excludeNote}`;
     } else if (action === "correct_sentence") {
       systemPrompt = `Ti si nastavnik norveškog jezika (Bokmål). Korisnik pokušava da koristi reč "${word}" u rečenici. Ispravi rečenicu i objasni.
 Odgovori ISKLJUČIVO u JSON formatu, bez markdown-a. Format:
