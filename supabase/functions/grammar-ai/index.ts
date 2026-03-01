@@ -19,7 +19,12 @@ Deno.serve(async (req) => {
 
     const authHeader = req.headers.get("Authorization");
     const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
-    const supabaseKey = Deno.env.get("SUPABASE_PUBLISHABLE_KEY")!;
+    const supabaseKey = Deno.env.get("SUPABASE_ANON_KEY") || Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
+    if (!supabaseUrl || !supabaseKey) {
+      return new Response(JSON.stringify({ error: "Missing Supabase config" }), {
+        status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
     const supabase = createClient(supabaseUrl, supabaseKey, {
       global: { headers: { Authorization: authHeader! } },
     });
