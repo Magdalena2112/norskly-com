@@ -155,7 +155,7 @@ export default function LandingPage() {
             <Button
               variant="hero"
               size="xl"
-              onClick={() => navigate("/onboarding")}
+              onClick={() => navigate("/auth")}
             >
               Kreiraj profil
             </Button>
