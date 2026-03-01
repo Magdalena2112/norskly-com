@@ -66,7 +66,7 @@ Odgovori ISKLJUČIVO u JSON formatu, bez markdown-a. Format:
       "hint": "Kratak hint na srpskom"
     }
   ]
-}`;
+}` + qualityCheck;
       userPrompt = `Generiši ${count || 5} vežbi na temu "${topic}". Nivo: ${level}. Svaka vežba treba da ima rečenicu sa blankom i rešenje.`;
     } else if (action === "correct_text") {
       systemPrompt = `Ti si nastavnik norveškog jezika (Bokmål). Ispravljaš tekst korisnika na nivou ${level}.
