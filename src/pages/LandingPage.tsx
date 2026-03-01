@@ -49,10 +49,10 @@ export default function LandingPage() {
             Norskly
           </span>
           <div className="flex items-center gap-3">
-            <Button variant="ghost" size="sm" onClick={() => navigate("/onboarding")}>
+            <Button variant="ghost" size="sm" onClick={() => navigate("/auth")}>
               Prijava
             </Button>
-            <Button variant="hero" size="sm" onClick={() => navigate("/onboarding")}>
+            <Button variant="hero" size="sm" onClick={() => navigate("/auth")}>
               Započni besplatno
             </Button>
           </div>
@@ -85,10 +85,10 @@ export default function LandingPage() {
               AI feedback i praktične lekcije prilagođene tvom nivou.
             </p>
             <div className="flex flex-wrap gap-4">
-              <Button variant="hero" size="xl" onClick={() => navigate("/onboarding")}>
+              <Button variant="hero" size="xl" onClick={() => navigate("/auth")}>
                 Započni besplatno
               </Button>
-              <Button variant="hero-outline" size="xl" onClick={() => navigate("/onboarding")}>
+              <Button variant="hero-outline" size="xl" onClick={() => navigate("/auth")}>
                 Saznaj više
               </Button>
             </div>
@@ -155,7 +155,7 @@ export default function LandingPage() {
             <Button
               variant="hero"
               size="xl"
-              onClick={() => navigate("/onboarding")}
+              onClick={() => navigate("/auth")}
             >
               Kreiraj profil
             </Button>
