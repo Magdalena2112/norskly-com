@@ -81,7 +81,7 @@ Odgovori ISKLJUČIVO u JSON formatu, bez markdown-a. Format:
     }
   ],
   "overall_feedback": "Opšti komentar na srpskom"
-}`;
+}` + qualityCheck;
       userPrompt = `Ispravi sledeći tekst na norveškom i objasni greške:\n\n"${text}"`;
     } else if (action === "generate_quiz") {
       systemPrompt = `Ti si nastavnik norveškog jezika (Bokmål). Generišeš kviz pitanja za nivo ${level}.
