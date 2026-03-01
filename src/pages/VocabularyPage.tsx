@@ -206,16 +206,26 @@ function GenerateTab({ level, userId }: { level: string; userId?: string }) {
             </Card>
           ))}
 
-          {!saved ? (
-            <Button variant="hero" className="w-full gap-2" onClick={saveWords} disabled={saving}>
-              {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
-              Sačuvaj reči (+8 poena)
-            </Button>
-          ) : (
-            <Button variant="ghost" className="w-full text-accent" disabled>
-              <CheckCircle2 className="w-4 h-4 mr-2" /> Sačuvano! ✓
-            </Button>
-          )}
+          <div className="flex gap-3">
+            {!saved ? (
+              <Button variant="hero" className="flex-1 gap-2" onClick={saveWords} disabled={saving}>
+                {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
+                Sačuvaj reči (+8 poena)
+              </Button>
+            ) : (
+              <Button variant="ghost" className="flex-1 text-accent" disabled>
+                <CheckCircle2 className="w-4 h-4 mr-2" /> Sačuvano! ✓
+              </Button>
+            )}
+          </div>
+          <Button
+            variant="outline"
+            className="w-full gap-2"
+            onClick={() => generate(true)}
+            disabled={loading}
+          >
+            {loading ? <><Loader2 className="w-4 h-4 animate-spin" /> Učitavam...</> : "Generiši još reči"}
+          </Button>
         </motion.div>
       )}
     </div>
