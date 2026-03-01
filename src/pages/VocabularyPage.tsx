@@ -121,14 +121,15 @@ function GenerateTab({ level, userId }: { level: string; userId?: string }) {
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
 
-  const generate = async () => {
+  const generate = async (loadMore = false) => {
     if (!theme.trim()) return;
     setLoading(true);
-    setWords([]);
-    setSaved(false);
+    if (!loadMore) { setWords([]); setSaved(false); }
     try {
-      const data = await callVocabAI({ action: "generate_vocab", level, theme: theme.trim() });
-      setWords(data.words || []);
+      const exclude_words = loadMore ? words.map((w) => w.word) : [];
+      const data = await callVocabAI({ action: "generate_vocab", level, theme: theme.trim(), exclude_words });
+      const newWords = data.words || [];
+      setWords((prev) => loadMore ? [...prev, ...newWords] : newWords);
     } catch (e: any) {
       console.error(e);
     } finally {
