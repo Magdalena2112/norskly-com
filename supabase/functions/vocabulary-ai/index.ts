@@ -36,12 +36,12 @@ Deno.serve(async (req) => {
       });
     }
 
-    const { action, level, theme, word, sentence } = await req.json();
+    const { action, level, theme, word, sentence, exclude_words } = await req.json();
 
     let systemPrompt = "";
     let userPrompt = "";
 
-    const { action, level, theme, word, sentence, exclude_words } = await req.json();
+
 
     if (action === "generate_vocab") {
       systemPrompt = `Ti si nastavnik norveškog jezika (Bokmål). Generišeš vokabular za nivo ${level}.
