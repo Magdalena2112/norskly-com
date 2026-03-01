@@ -39,6 +39,17 @@ Deno.serve(async (req) => {
 
     const { action, level, topic, count, text } = await req.json();
 
+    const qualityCheck = `
+
+OBAVEZNA SAMOPROVERA pre slanja odgovora:
+- Norveški tekst nema gramatičke greške.
+- Red reči u rečenicama je ispravan (V2 pravilo u glavnoj rečenici).
+- Prepozicije su prirodne (ne doslovno sa srpskog).
+- Korišćen je nivo ${level} (ne pretežak vokabular).
+- Značenje je isto kao cilj; nema izmišljenih detalja.
+- Nema kontradikcija i nema "čudnih" formulacija.
+Ako bilo šta nije sigurno: pojednostavi rečenicu. Ne dodaj nove informacije.`;
+
     let systemPrompt = "";
     let userPrompt = "";
 
@@ -55,7 +66,7 @@ Odgovori ISKLJUČIVO u JSON formatu, bez markdown-a. Format:
       "hint": "Kratak hint na srpskom"
     }
   ]
-}`;
+}` + qualityCheck;
       userPrompt = `Generiši ${count || 5} vežbi na temu "${topic}". Nivo: ${level}. Svaka vežba treba da ima rečenicu sa blankom i rešenje.`;
     } else if (action === "correct_text") {
       systemPrompt = `Ti si nastavnik norveškog jezika (Bokmål). Ispravljaš tekst korisnika na nivou ${level}.
@@ -70,7 +81,7 @@ Odgovori ISKLJUČIVO u JSON formatu, bez markdown-a. Format:
     }
   ],
   "overall_feedback": "Opšti komentar na srpskom"
-}`;
+}` + qualityCheck;
       userPrompt = `Ispravi sledeći tekst na norveškom i objasni greške:\n\n"${text}"`;
     } else if (action === "generate_quiz") {
       systemPrompt = `Ti si nastavnik norveškog jezika (Bokmål). Generišeš kviz pitanja za nivo ${level}.
@@ -85,7 +96,7 @@ Odgovori ISKLJUČIVO u JSON formatu, bez markdown-a. Format:
       "explanation": "Objašnjenje na srpskom"
     }
   ]
-}`;
+}` + qualityCheck;
       userPrompt = `Generiši 5 kviz pitanja na temu "${topic}". Nivo: ${level}. Svako pitanje ima 4 opcije i jedno tačno rešenje.`;
     } else {
       return new Response(JSON.stringify({ error: "Invalid action" }), {

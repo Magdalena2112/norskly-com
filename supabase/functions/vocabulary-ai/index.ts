@@ -38,6 +38,17 @@ Deno.serve(async (req) => {
 
     const { action, level, theme, word, sentence, exclude_words } = await req.json();
 
+    const qualityCheck = `
+
+OBAVEZNA SAMOPROVERA pre slanja odgovora:
+- Norveški tekst nema gramatičke greške.
+- Red reči u rečenicama je ispravan (V2 pravilo u glavnoj rečenici).
+- Prepozicije su prirodne (ne doslovno sa srpskog).
+- Korišćen je nivo ${level} (ne pretežak vokabular).
+- Značenje je isto kao cilj; nema izmišljenih detalja.
+- Nema kontradikcija i nema "čudnih" formulacija.
+Ako bilo šta nije sigurno: pojednostavi rečenicu. Ne dodaj nove informacije.`;
+
     let systemPrompt = "";
     let userPrompt = "";
 
@@ -56,7 +67,7 @@ Odgovori ISKLJUČIVO u JSON formatu, bez markdown-a. Format:
       "examples": ["primer rečenica 1", "primer rečenica 2"]
     }
   ]
-}`;
+}` + qualityCheck;
       const excludeNote = exclude_words?.length ? `\nNE ponavljaj ove reči: ${exclude_words.join(", ")}.` : "";
       userPrompt = `Generiši 8 reči na temu "${theme}". Nivo: ${level}. Za svaku reč daj prevod na srpskom, sinonim (ako postoji), antonim (ako postoji) i 2 primera korišćenja u rečenici.${excludeNote}`;
     } else if (action === "correct_sentence") {
@@ -67,7 +78,7 @@ Odgovori ISKLJUČIVO u JSON formatu, bez markdown-a. Format:
   "is_correct": true/false,
   "explanation": "Objašnjenje na srpskom - da li je pravilno korišćena reč, gramatika itd.",
   "tips": "Kratki saveti za bolje korišćenje reči"
-}`;
+}` + qualityCheck;
       userPrompt = `Korisnik je napisao: "${sentence}"\nReč koju treba da koristi: "${word}"\nNivo: ${level}`;
     } else if (action === "generate_quiz") {
       systemPrompt = `Ti si nastavnik norveškog jezika (Bokmål). Generišeš kviz pitanja iz datih reči za nivo ${level}.
@@ -82,7 +93,7 @@ Odgovori ISKLJUČIVO u JSON formatu, bez markdown-a. Format:
       "explanation": "Objašnjenje na srpskom"
     }
   ]
-}`;
+}` + qualityCheck;
       userPrompt = `Generiši 10 kviz pitanja koristeći sledeće norveške reči: ${theme}. Nivo: ${level}. Pitanja mogu biti prevod, popuni blanko, sinonim/antonim itd.`;
     } else {
       return new Response(JSON.stringify({ error: "Invalid action" }), {
