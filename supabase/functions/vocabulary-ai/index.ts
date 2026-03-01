@@ -78,7 +78,7 @@ Odgovori ISKLJUČIVO u JSON formatu, bez markdown-a. Format:
   "is_correct": true/false,
   "explanation": "Objašnjenje na srpskom - da li je pravilno korišćena reč, gramatika itd.",
   "tips": "Kratki saveti za bolje korišćenje reči"
-}`;
+}` + qualityCheck;
       userPrompt = `Korisnik je napisao: "${sentence}"\nReč koju treba da koristi: "${word}"\nNivo: ${level}`;
     } else if (action === "generate_quiz") {
       systemPrompt = `Ti si nastavnik norveškog jezika (Bokmål). Generišeš kviz pitanja iz datih reči za nivo ${level}.
