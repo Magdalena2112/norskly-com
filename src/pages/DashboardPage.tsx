@@ -1,0 +1,97 @@
+import { motion } from "framer-motion";
+import { useProfile } from "@/context/ProfileContext";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { BookOpen, Languages, MessageSquare, TrendingUp, Settings } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+
+const modules = [
+  {
+    title: "Gramatika",
+    description: "Vežbaj gramatiku kroz kvizove prilagođene tvom nivou.",
+    icon: BookOpen,
+    route: "/grammar",
+    gradient: "from-primary to-primary/70",
+  },
+  {
+    title: "Vokabular",
+    description: "Uči nove reči sa flashcard sistemom.",
+    icon: Languages,
+    route: "/vocabulary",
+    gradient: "from-accent to-accent/70",
+  },
+  {
+    title: "Razgovor",
+    description: "Vežbaj pisanje poruka u realnim situacijama.",
+    icon: MessageSquare,
+    route: "/talk",
+    gradient: "from-primary to-accent",
+  },
+  {
+    title: "Napredak",
+    description: "Prati svoj napredak i postignuća.",
+    icon: TrendingUp,
+    route: "/progress",
+    gradient: "from-accent to-primary",
+  },
+];
+
+export default function DashboardPage() {
+  const { profile } = useProfile();
+  const navigate = useNavigate();
+
+  return (
+    <div className="min-h-screen bg-background flex flex-col">
+      <header className="border-b border-border bg-background/80 backdrop-blur-md sticky top-0 z-50">
+        <div className="container flex items-center justify-between h-14">
+          <span className="font-display font-bold text-lg text-foreground">Norskly</span>
+          <div className="flex items-center gap-2">
+            <span className="text-xs bg-accent/10 text-accent px-3 py-1 rounded-full font-medium">
+              {profile.level} · {profile.learning_goal}
+            </span>
+            <Button variant="ghost" size="icon" onClick={() => navigate("/onboarding")}>
+              <Settings className="w-4 h-4" />
+            </Button>
+          </div>
+        </div>
+      </header>
+
+      <div className="flex-1 container max-w-3xl py-8">
+        <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}>
+          <h1 className="text-3xl font-display font-bold text-foreground mb-1">
+            Hei, {profile.name || "korisniče"}! 👋
+          </h1>
+          <p className="text-muted-foreground mb-8">Izaberi modul i nastavi sa učenjem norveškog.</p>
+        </motion.div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {modules.map((mod, i) => (
+            <motion.div
+              key={mod.route}
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.08 }}
+            >
+              <Card
+                className="cursor-pointer group hover:shadow-nordic transition-all duration-200 hover:-translate-y-0.5"
+                onClick={() => navigate(mod.route)}
+              >
+                <CardContent className="pt-6 pb-6 flex items-start gap-4">
+                  <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${mod.gradient} flex items-center justify-center shrink-0`}>
+                    <mod.icon className="w-6 h-6 text-primary-foreground" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-foreground group-hover:text-accent transition-colors">
+                      {mod.title}
+                    </h3>
+                    <p className="text-sm text-muted-foreground mt-0.5">{mod.description}</p>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
