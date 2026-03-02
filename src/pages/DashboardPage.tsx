@@ -61,16 +61,19 @@ export default function DashboardPage() {
   const navigate = useNavigate();
 
   const [xpData, setXpData] = useState<{ total_xp: number; level: number } | null>(null);
+  const [upcomingLesson, setUpcomingLesson] = useState<{ start_time: string; end_time: string; status: string } | null>(null);
+  const [lessonLoaded, setLessonLoaded] = useState(false);
 
   useEffect(() => {
     if (!user) return;
     (async () => {
-      const { data } = await supabase
-        .from("user_xp")
-        .select("total_xp, level")
-        .eq("user_id", user.id)
-        .maybeSingle();
-      setXpData(data || { total_xp: 0, level: 1 });
+      const [{ data: xp }, { data: lesson }] = await Promise.all([
+        supabase.from("user_xp").select("total_xp, level").eq("user_id", user.id).maybeSingle(),
+        supabase.from("lessons").select("start_time, end_time, status").eq("user_id", user.id).eq("status", "scheduled").gte("start_time", new Date().toISOString()).order("start_time", { ascending: true }).limit(1).maybeSingle(),
+      ]);
+      setXpData(xp || { total_xp: 0, level: 1 });
+      setUpcomingLesson(lesson);
+      setLessonLoaded(true);
     })();
   }, [user]);
 
