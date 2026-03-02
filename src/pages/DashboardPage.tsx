@@ -5,10 +5,11 @@ import { useAuth } from "@/context/AuthContext";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-import { BookOpen, Languages, MessageSquare, TrendingUp, Settings, Zap } from "lucide-react";
+import { BookOpen, Languages, MessageSquare, TrendingUp, Settings, Zap, GraduationCap, CalendarCheck } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import WeeklyDigest from "@/components/WeeklyDigest";
+import { format } from "date-fns";
 
 const XP_TITLES: Record<number, string> = {
   1: "Utforsker",
@@ -46,6 +47,14 @@ const modules = [
     gradient: "from-primary to-accent",
   },
   {
+    title: "Snakk med lærer",
+    description: "Bestill en 90-minutters time med lærer.",
+    icon: GraduationCap,
+    route: "/book-lesson",
+    gradient: "from-accent to-primary/80",
+    buttonLabel: "Bestill time",
+  },
+  {
     title: "Napredak",
     description: "Prati svoj napredak i postignuća.",
     icon: TrendingUp,
@@ -60,16 +69,19 @@ export default function DashboardPage() {
   const navigate = useNavigate();
 
   const [xpData, setXpData] = useState<{ total_xp: number; level: number } | null>(null);
+  const [upcomingLesson, setUpcomingLesson] = useState<{ start_time: string; end_time: string; status: string } | null>(null);
+  const [lessonLoaded, setLessonLoaded] = useState(false);
 
   useEffect(() => {
     if (!user) return;
     (async () => {
-      const { data } = await supabase
-        .from("user_xp")
-        .select("total_xp, level")
-        .eq("user_id", user.id)
-        .maybeSingle();
-      setXpData(data || { total_xp: 0, level: 1 });
+      const [{ data: xp }, { data: lesson }] = await Promise.all([
+        supabase.from("user_xp").select("total_xp, level").eq("user_id", user.id).maybeSingle(),
+        supabase.from("lessons").select("start_time, end_time, status").eq("user_id", user.id).eq("status", "scheduled").gte("start_time", new Date().toISOString()).order("start_time", { ascending: true }).limit(1).maybeSingle(),
+      ]);
+      setXpData(xp || { total_xp: 0, level: 1 });
+      setUpcomingLesson(lesson);
+      setLessonLoaded(true);
     })();
   }, [user]);
 
@@ -153,12 +165,51 @@ export default function DashboardPage() {
                       {mod.title}
                     </h3>
                     <p className="text-sm text-muted-foreground mt-0.5">{mod.description}</p>
+                    {"buttonLabel" in mod && (
+                      <Button size="sm" variant="hero" className="mt-2">
+                        {(mod as any).buttonLabel}
+                      </Button>
+                    )}
                   </div>
                 </CardContent>
               </Card>
             </motion.div>
           ))}
         </div>
+
+        {/* Upcoming Lesson Widget */}
+        {lessonLoaded && (
+          <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}>
+            <Card className="mt-6 border-accent/20 bg-gradient-to-r from-accent/5 to-primary/5">
+              <CardContent className="pt-5 pb-5">
+                <div className="flex items-center gap-2 mb-3">
+                  <CalendarCheck className="w-5 h-5 text-accent" />
+                  <h3 className="font-semibold text-foreground">Mine kommende timer</h3>
+                </div>
+                {upcomingLesson ? (
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm font-medium text-foreground">
+                        {format(new Date(upcomingLesson.start_time), "dd.MM.yyyy HH:mm")} – {format(new Date(upcomingLesson.end_time), "HH:mm")}
+                      </p>
+                      <p className="text-xs text-muted-foreground mt-0.5">Planlagt</p>
+                    </div>
+                    <Button size="sm" variant="outline" onClick={() => navigate("/my-lessons")}>
+                      Se detaljer
+                    </Button>
+                  </div>
+                ) : (
+                  <div className="flex items-center justify-between">
+                    <p className="text-sm text-muted-foreground">Ingen planlagte timer.</p>
+                    <Button size="sm" variant="hero" onClick={() => navigate("/book-lesson")}>
+                      Bestill nå
+                    </Button>
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          </motion.div>
+        )}
       </div>
     </div>
   );
