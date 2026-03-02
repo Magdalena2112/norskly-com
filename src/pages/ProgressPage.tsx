@@ -44,7 +44,7 @@ const SEVERITY_LABELS: Record<number, string> = {
 };
 
 export default function ProgressPage() {
-  const { profile } = useProfile();
+  const { profile, updateProfile } = useProfile();
   const { user } = useAuth();
   const navigate = useNavigate();
 
