@@ -371,10 +371,7 @@ function CorrectionTab({ level, userId }: { level: string; userId?: string }) {
       const data = await callGrammarAI({ action: "correct_text", level, text: text.trim() });
       setResult(data);
       if (userId) {
-        await logActivity(userId, "grammar", "text_corrected", 12, {
-          mistakes_count: data.mistakes?.length || 0,
-        });
-        // Log structured errors from AI
+        // Log structured errors from AI (no XP for content generation)
         if (data._errors?.length) {
           await logErrors(userId, "grammar", "text_correction", data._errors.slice(0, 5));
         }
