@@ -140,6 +140,7 @@ function ExercisesTab({ level, userId, initialTopic }: { level: string; userId?:
   const [exercises, setExercises] = useState<Exercise[]>([]);
   const [states, setStates] = useState<ExerciseState[]>([]);
   const [loading, setLoading] = useState(false);
+  const [exerciseXpLogged, setExerciseXpLogged] = useState(false);
 
   const generate = async () => {
     if (!topic.trim()) return;
