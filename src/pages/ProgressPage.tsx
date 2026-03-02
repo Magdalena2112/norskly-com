@@ -242,8 +242,35 @@ export default function ProgressPage() {
     }
     return `Povremena greška — kratka sesija vežbi bi trebalo da bude dovoljna za učvršćivanje.`;
   };
+  const handleLevelUp = () => {
+    if (!nextLevel) return;
+    updateProfile({ level: nextLevel as any });
+    setShowLevelUpDialog(false);
+  };
 
   return (
+    <>
+    <AlertDialog open={showLevelUpDialog} onOpenChange={setShowLevelUpDialog}>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle className="flex items-center gap-2">
+            <Award className="w-5 h-5 text-accent" />
+            Prelazak na {nextLevel}?
+          </AlertDialogTitle>
+          <AlertDialogDescription>
+            Tvoj skor spremnosti je <strong>{readinessScore?.total}/100</strong>. Da li želiš da pređeš sa nivoa{" "}
+            <strong>{profile.level}</strong> na <strong>{nextLevel}</strong>?
+            Sav budući sadržaj biće prilagođen novom nivou.
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>Ostani na {profile.level}</AlertDialogCancel>
+          <AlertDialogAction onClick={handleLevelUp}>
+            Da, pređi na {nextLevel} 🎉
+          </AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
     <div className="min-h-screen bg-background flex flex-col">
       <header className="border-b border-border bg-background/80 backdrop-blur-md sticky top-0 z-50">
         <div className="container flex items-center gap-3 h-14">
