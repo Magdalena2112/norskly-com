@@ -95,8 +95,17 @@ Odgovori ISKLJUČIVO u JSON formatu, bez markdown-a. Format:
   "corrected_sentence": "Ispravljena rečenica",
   "is_correct": true/false,
   "explanation": "Objašnjenje na srpskom - da li je pravilno korišćena reč, gramatika itd.",
-  "tips": "Kratki saveti za bolje korišćenje reči"
-}` + qualityCheck;
+  "tips": "Kratki saveti za bolje korišćenje reči",
+  "nivo_analiza": {
+    "gramatika": "kratka ocena",
+    "vokabular": "kratka ocena",
+    "jasnoća": "kratka ocena",
+    "povezivanje": "kratka ocena",
+    "prirodnost": "kratka ocena"
+  },
+  "sledeci_korak": ["preporuka 1", "preporuka 2"]
+}
+${cefrEvalBlock}` + qualityCheck;
       userPrompt = `Korisnik je napisao: "${sentence}"\nReč koju treba da koristi: "${word}"\nNivo: ${level}`;
     } else if (action === "generate_quiz") {
       systemPrompt = `Ti si nastavnik norveškog jezika (Bokmål). Generišeš kviz pitanja iz datih reči za nivo ${level}.

@@ -103,8 +103,17 @@ Odgovori ISKLJUČIVO u JSON formatu, bez markdown-a. Format:
       "explanation": "Kratko objašnjenje na srpskom"
     }
   ],
-  "overall_feedback": "Opšti komentar na srpskom"
-}` + qualityCheck;
+  "overall_feedback": "Opšti komentar na srpskom",
+  "nivo_analiza": {
+    "gramatika": "kratka ocena",
+    "vokabular": "kratka ocena",
+    "jasnoća": "kratka ocena",
+    "povezivanje": "kratka ocena",
+    "prirodnost": "kratka ocena"
+  },
+  "sledeci_korak": ["preporuka 1", "preporuka 2"]
+}
+${cefrEvalBlock}` + qualityCheck;
       userPrompt = `Ispravi sledeći tekst na norveškom i objasni greške:\n\n"${text}"`;
     } else if (action === "generate_quiz") {
       systemPrompt = `Ti si nastavnik norveškog jezika (Bokmål). Generišeš kviz pitanja za nivo ${level}.

@@ -121,6 +121,7 @@ PRAVILA:
 4. Ispravi greške korisnika blago i poučno.
 5. Drži se zadate situacije i formalnosti.
 6. Budi prirodan i ohrabrujući.
+${cefrEvalBlock}
 ${qualityCheck}`;
 
       const response = await fetch(GATEWAY_URL, {
