@@ -538,7 +538,7 @@ function ExplainTab({ level, userId, initialQuery }: { level: string; userId?: s
       const data = await callGrammarAI({ action: "explain_topic", level, text: query.trim() });
       setResult(data);
       if (userId) {
-        await logActivity(userId, "grammar", "topic_explained", 8, { query: query.trim() });
+        // No XP for content generation (explanations)
         setLogged(true);
       }
     } catch (e: any) {
