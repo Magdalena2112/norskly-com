@@ -204,6 +204,22 @@ function ExercisesTab({ level, userId, initialTopic }: { level: string; userId?:
 
   const allDone = states.length > 0 && states.every((s) => s.status !== "pending");
 
+  // Award XP when all exercises are completed
+  React.useEffect(() => {
+    if (allDone && userId && !exerciseXpLogged && states.length > 0) {
+      const correctCount = states.filter((s) => s.status === "correct").length;
+      const pct = (correctCount / states.length) * 100;
+      const bonus = pct >= 80 ? 5 : 0;
+      logActivity(userId, "grammar", "exercises_completed", 10 + bonus, {
+        topic,
+        correct: correctCount,
+        total: states.length,
+        percentage: pct,
+      }, { dedupKey: `grammar_ex_${topic}_${Date.now()}`, checkDailyBonus: true });
+      setExerciseXpLogged(true);
+    }
+  }, [allDone]);
+
   return (
     <div className="space-y-4">
       <Card className="shadow-nordic">
