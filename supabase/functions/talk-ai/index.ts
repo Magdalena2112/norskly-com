@@ -46,16 +46,57 @@ Deno.serve(async (req) => {
 
     const { action, messages, profile, settings } = await req.json();
 
+    const userLevel = profile?.level || "A1";
+
+    const cefrExpectations: Record<string, string> = {
+      A1: "Fokus na osnovnu strukturu rečenice i razumljivost. Očekuj jednostavne rečenice, osnovne glagole u prezentu.",
+      A2: "Fokus na stabilnost glagolskih vremena i jednostavne veznike (og, men, fordi). Očekuj kratke povezane rečenice.",
+      B1: "Fokus na zavisne rečenice i izražavanje mišljenja (jeg synes at, jeg tror at). Očekuj složenije strukture.",
+      B2: "Fokus na stilsku varijaciju i složene strukture (leddsetninger, passiv). Očekuj idiomatske izraze.",
+      C1: "Fokus na nijanse, idiomatski jezik i preciznost. Očekuj akademski/profesionalni registar.",
+    };
+    const cefrFocus = cefrExpectations[userLevel] || cefrExpectations["A1"];
+
     const qualityCheck = `
 
 OBAVEZNA SAMOPROVERA pre slanja odgovora:
 - Norveški tekst nema gramatičke greške.
 - Red reči u rečenicama je ispravan (V2 pravilo u glavnoj rečenici).
 - Prepozicije su prirodne (ne doslovno sa srpskog).
-- Korišćen je nivo ${profile?.level || "A1"} (ne pretežak vokabular).
+- Korišćen je nivo ${userLevel} (ne pretežak vokabular).
 - Značenje je isto kao cilj; nema izmišljenih detalja.
 - Nema kontradikcija i nema "čudnih" formulacija.
 Ako bilo šta nije sigurno: pojednostavi rečenicu. Ne dodaj nove informacije.`;
+
+    const cefrEvalBlock = `
+
+VIŠEDIMENZIONALNA EVALUACIJA (primeni kad ispravljaš ili daješ povratnu informaciju korisniku):
+Nivo korisnika: ${userLevel}. ${cefrFocus}
+
+Evaluiraj korisnikov tekst po 5 dimenzija:
+1. Gramatika – tačnost gramatičkih struktura
+2. Vokabular – raspon i prikladnost reči
+3. Jasnoća – razumljivost poruke
+4. Povezivanje – upotreba veznika i struktura rečenica
+5. Prirodnost – ton i pragmatička prikladnost
+
+PRAVILA za povratnu informaciju:
+- Navedi snage u svakoj dimenziji kratko (✓ ili kratka pohvala).
+- Identifikuj NAJVIŠE 2 najvažnije oblasti za poboljšanje.
+- Ne preopterećuj učenika – budi koncizan.
+- Na kraju ispravljanja dodaj blok:
+
+**Nivo analiza:**
+- Gramatika: [kratka ocena]
+- Vokabular: [kratka ocena]
+- Jasnoća: [kratka ocena]
+- Povezivanje: [kratka ocena]
+- Prirodnost: [kratka ocena]
+
+**Sledeći korak u učenju:**
+[1–2 konkretne preporuke na srpskom]
+
+Objašnjenja piši jednostavno na srpskom, bez lingvističkog žargona.`;
 
     // ── CHAT action ──
     if (action === "chat") {
@@ -80,6 +121,7 @@ PRAVILA:
 4. Ispravi greške korisnika blago i poučno.
 5. Drži se zadate situacije i formalnosti.
 6. Budi prirodan i ohrabrujući.
+${cefrEvalBlock}
 ${qualityCheck}`;
 
       const response = await fetch(GATEWAY_URL, {
@@ -124,7 +166,7 @@ ${qualityCheck}`;
     // ── RECAP action ──
     if (action === "recap") {
       const systemPrompt = `Ti si nastavnik norveškog jezika. Analiziraj sledeći razgovor i napravi rezime sesije.
-Korisnik se zove ${profile?.name || "korisnik"}, nivo je ${profile?.level || "A1"}.
+Korisnik se zove ${profile?.name || "korisnik"}, nivo je ${userLevel}. ${cefrFocus}
 
 Odgovori ISKLJUČIVO u JSON formatu, bez markdown-a. Format:
 {
@@ -136,10 +178,19 @@ Odgovori ISKLJUČIVO u JSON formatu, bez markdown-a. Format:
     { "norwegian": "norveški izraz", "serbian": "srpski prevod" },
     { "norwegian": "norveški izraz", "serbian": "srpski prevod" },
     { "norwegian": "norveški izraz", "serbian": "srpski prevod" }
-  ]
+  ],
+  "nivo_analiza": {
+    "gramatika": "kratka ocena",
+    "vokabular": "kratka ocena",
+    "jasnoća": "kratka ocena",
+    "povezivanje": "kratka ocena",
+    "prirodnost": "kratka ocena"
+  },
+  "sledeci_korak": ["preporuka 1", "preporuka 2"]
 }
 
 Strengths i mistakes piši na srpskom. Strengths su pozitivne stvari iz razgovora. Mistakes su konkretne greške.
+Nivo analiza: oceni svaku od 5 dimenzija kratko (1 rečenica). Sledeći korak: daj 1-2 konkretne preporuke.
 ${qualityCheck}`;
 
       const conversationText = (messages || [])

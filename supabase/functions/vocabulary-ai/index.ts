@@ -38,6 +38,15 @@ Deno.serve(async (req) => {
 
     const { action, level, theme, word, sentence, exclude_words } = await req.json();
 
+    const cefrExpectations: Record<string, string> = {
+      A1: "Fokus na osnovnu strukturu rečenice i razumljivost.",
+      A2: "Fokus na stabilnost glagolskih vremena i jednostavne veznike.",
+      B1: "Fokus na zavisne rečenice i izražavanje mišljenja.",
+      B2: "Fokus na stilsku varijaciju i složene strukture.",
+      C1: "Fokus na nijanse, idiomatski jezik i preciznost.",
+    };
+    const cefrFocus = cefrExpectations[level] || cefrExpectations["A1"];
+
     const qualityCheck = `
 
 OBAVEZNA SAMOPROVERA pre slanja odgovora:
@@ -48,6 +57,15 @@ OBAVEZNA SAMOPROVERA pre slanja odgovora:
 - Značenje je isto kao cilj; nema izmišljenih detalja.
 - Nema kontradikcija i nema "čudnih" formulacija.
 Ako bilo šta nije sigurno: pojednostavi rečenicu. Ne dodaj nove informacije.`;
+
+    const cefrEvalBlock = `
+
+VIŠEDIMENZIONALNA EVALUACIJA za ispravku rečenice:
+Nivo korisnika: ${level}. ${cefrFocus}
+
+Kad ispravljaš korisnikovu rečenicu, evaluiraj po 5 dimenzija:
+1. Gramatika 2. Vokabular 3. Jasnoća 4. Povezivanje 5. Prirodnost
+Navedi snage kratko, identifikuj NAJVIŠE 2 oblasti za poboljšanje.`;
 
     let systemPrompt = "";
     let userPrompt = "";
@@ -77,8 +95,17 @@ Odgovori ISKLJUČIVO u JSON formatu, bez markdown-a. Format:
   "corrected_sentence": "Ispravljena rečenica",
   "is_correct": true/false,
   "explanation": "Objašnjenje na srpskom - da li je pravilno korišćena reč, gramatika itd.",
-  "tips": "Kratki saveti za bolje korišćenje reči"
-}` + qualityCheck;
+  "tips": "Kratki saveti za bolje korišćenje reči",
+  "nivo_analiza": {
+    "gramatika": "kratka ocena",
+    "vokabular": "kratka ocena",
+    "jasnoća": "kratka ocena",
+    "povezivanje": "kratka ocena",
+    "prirodnost": "kratka ocena"
+  },
+  "sledeci_korak": ["preporuka 1", "preporuka 2"]
+}
+${cefrEvalBlock}` + qualityCheck;
       userPrompt = `Korisnik je napisao: "${sentence}"\nReč koju treba da koristi: "${word}"\nNivo: ${level}`;
     } else if (action === "generate_quiz") {
       systemPrompt = `Ti si nastavnik norveškog jezika (Bokmål). Generišeš kviz pitanja iz datih reči za nivo ${level}.

@@ -39,6 +39,15 @@ Deno.serve(async (req) => {
 
     const { action, level, topic, count, text } = await req.json();
 
+    const cefrExpectations: Record<string, string> = {
+      A1: "Fokus na osnovnu strukturu rečenice i razumljivost.",
+      A2: "Fokus na stabilnost glagolskih vremena i jednostavne veznike.",
+      B1: "Fokus na zavisne rečenice i izražavanje mišljenja.",
+      B2: "Fokus na stilsku varijaciju i složene strukture.",
+      C1: "Fokus na nijanse, idiomatski jezik i preciznost.",
+    };
+    const cefrFocus = cefrExpectations[level] || cefrExpectations["A1"];
+
     const qualityCheck = `
 
 OBAVEZNA SAMOPROVERA pre slanja odgovora:
@@ -49,6 +58,20 @@ OBAVEZNA SAMOPROVERA pre slanja odgovora:
 - Značenje je isto kao cilj; nema izmišljenih detalja.
 - Nema kontradikcija i nema "čudnih" formulacija.
 Ako bilo šta nije sigurno: pojednostavi rečenicu. Ne dodaj nove informacije.`;
+
+    const cefrEvalBlock = `
+
+VIŠEDIMENZIONALNA EVALUACIJA za ispravljanje teksta:
+Nivo korisnika: ${level}. ${cefrFocus}
+
+Kad ispravljaš tekst, evaluiraj po 5 dimenzija:
+1. Gramatika – tačnost struktura
+2. Vokabular – raspon i prikladnost
+3. Jasnoća – razumljivost
+4. Povezivanje – upotreba veznika
+5. Prirodnost – ton i pragmatička prikladnost
+
+Navedi snage kratko, identifikuj NAJVIŠE 2 oblasti za poboljšanje.`;
 
     let systemPrompt = "";
     let userPrompt = "";
@@ -80,8 +103,17 @@ Odgovori ISKLJUČIVO u JSON formatu, bez markdown-a. Format:
       "explanation": "Kratko objašnjenje na srpskom"
     }
   ],
-  "overall_feedback": "Opšti komentar na srpskom"
-}` + qualityCheck;
+  "overall_feedback": "Opšti komentar na srpskom",
+  "nivo_analiza": {
+    "gramatika": "kratka ocena",
+    "vokabular": "kratka ocena",
+    "jasnoća": "kratka ocena",
+    "povezivanje": "kratka ocena",
+    "prirodnost": "kratka ocena"
+  },
+  "sledeci_korak": ["preporuka 1", "preporuka 2"]
+}
+${cefrEvalBlock}` + qualityCheck;
       userPrompt = `Ispravi sledeći tekst na norveškom i objasni greške:\n\n"${text}"`;
     } else if (action === "generate_quiz") {
       systemPrompt = `Ti si nastavnik norveškog jezika (Bokmål). Generišeš kviz pitanja za nivo ${level}.
