@@ -116,8 +116,8 @@ export default function DashboardPage() {
                       {xpData.level}
                     </div>
                     <div>
-                      <p className="text-sm font-semibold text-foreground">Level {xpData.level}</p>
-                      <p className="text-[11px] text-muted-foreground">{xpData.total_xp} ukupno XP</p>
+                      <p className="text-sm font-semibold text-foreground">{XP_TITLES[Math.min(xpData.level, 10)] || `Level ${xpData.level}`}</p>
+                      <p className="text-[11px] text-muted-foreground">Lvl {xpData.level} · {xpData.total_xp} XP</p>
                     </div>
                   </div>
                   <p className="text-xs text-muted-foreground">{xpInLevel}/{xpForNext} XP do sledećeg nivoa</p>
