@@ -103,25 +103,48 @@ export default function GrammarPage() {
 }
 
 // ═══════════════════════════════════════
-// TAB 1: Generate Exercises
+// TAB 1: Generate Exercises (Error Mirror)
 // ═══════════════════════════════════════
+interface ExerciseState {
+  answer: string;
+  attempts: number;
+  status: "pending" | "correct" | "revealed";
+  feedback: string;
+  logged: boolean;
+}
+
+function normalizeAnswer(s: string) {
+  return s.trim().toLowerCase().replace(/\s+/g, " ");
+}
+
+function getHint(attempt: number, solution: string, answer: string): string {
+  const hints = [
+    "Obrati pažnju na oblik reči.",
+    "Razmisli o redosledu reči u rečenici.",
+    "Pogledaj da li je potreban određeni član ili predlog.",
+  ];
+  if (attempt === 1) return hints[0];
+  if (attempt === 2) return "Blizu si! Proveri još jednom pravopis i oblik.";
+  return hints[Math.min(attempt - 1, hints.length - 1)];
+}
+
 function ExercisesTab({ level, userId }: { level: string; userId?: string }) {
   const [topic, setTopic] = useState("");
   const [count, setCount] = useState(5);
   const [exercises, setExercises] = useState<Exercise[]>([]);
-  const [showSolutions, setShowSolutions] = useState(false);
+  const [states, setStates] = useState<ExerciseState[]>([]);
   const [loading, setLoading] = useState(false);
-  const [completed, setCompleted] = useState(false);
 
   const generate = async () => {
     if (!topic.trim()) return;
     setLoading(true);
     setExercises([]);
-    setShowSolutions(false);
-    setCompleted(false);
+    setStates([]);
     try {
       const data = await callGrammarAI({ action: "generate_exercises", level, topic: topic.trim(), count });
-      setExercises(data.exercises || []);
+      const exs = data.exercises || [];
+      setExercises(exs);
+      setStates(exs.map(() => ({ answer: "", attempts: 0, status: "pending" as const, feedback: "", logged: false })));
     } catch (e: any) {
       console.error(e);
     } finally {
@@ -129,12 +152,41 @@ function ExercisesTab({ level, userId }: { level: string; userId?: string }) {
     }
   };
 
-  const markCompleted = async () => {
-    if (userId) {
-      await logActivity(userId, "grammar", "exercises_completed", 10, { topic, count: exercises.length });
-    }
-    setCompleted(true);
+  const updateState = (i: number, patch: Partial<ExerciseState>) => {
+    setStates((prev) => prev.map((s, idx) => (idx === i ? { ...s, ...patch } : s)));
   };
+
+  const checkAnswer = async (i: number) => {
+    const ex = exercises[i];
+    const st = states[i];
+    const userAns = normalizeAnswer(st.answer);
+    const correctAns = normalizeAnswer(ex.solution);
+
+    if (userAns === correctAns) {
+      updateState(i, { status: "correct", feedback: "Odlično! Tačan odgovor. 🎉", attempts: st.attempts + 1 });
+      if (userId && !st.logged) {
+        await logActivity(userId, "grammar", "exercise_correct", 2, { topic, exercise_id: ex.id });
+        updateState(i, { logged: true });
+      }
+    } else {
+      const newAttempts = st.attempts + 1;
+      if (newAttempts >= 3) {
+        updateState(i, { status: "revealed", attempts: newAttempts, feedback: "" });
+        if (userId && !st.logged) {
+          updateState(i, { logged: true });
+        }
+      } else {
+        const hint = getHint(newAttempts, ex.solution, st.answer);
+        updateState(i, { attempts: newAttempts, feedback: hint });
+      }
+    }
+  };
+
+  const reveal = (i: number) => {
+    updateState(i, { status: "revealed", feedback: "" });
+  };
+
+  const allDone = states.length > 0 && states.every((s) => s.status !== "pending");
 
   return (
     <div className="space-y-4">
@@ -171,41 +223,86 @@ function ExercisesTab({ level, userId }: { level: string; userId?: string }) {
 
       {exercises.length > 0 && (
         <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="space-y-3">
-          {exercises.map((ex, i) => (
-            <Card key={ex.id || i}>
-              <CardContent className="pt-5 pb-5 space-y-2">
-                <p className="text-xs text-accent font-medium uppercase tracking-wider">Zadatak {i + 1}</p>
-                <p className="text-sm text-muted-foreground">{ex.instruction}</p>
-                <p className="text-foreground font-medium">{ex.sentence}</p>
-                {ex.hint && <p className="text-xs text-muted-foreground italic">💡 {ex.hint}</p>}
-                {showSolutions && (
-                  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mt-2 p-3 rounded-lg bg-accent/10">
-                    <p className="text-sm font-medium text-accent">✅ {ex.solution}</p>
-                  </motion.div>
-                )}
-              </CardContent>
-            </Card>
-          ))}
+          {exercises.map((ex, i) => {
+            const st = states[i];
+            if (!st) return null;
+            return (
+              <Card key={ex.id || i}>
+                <CardContent className="pt-5 pb-5 space-y-3">
+                  <p className="text-xs text-accent font-medium uppercase tracking-wider">Zadatak {i + 1}</p>
+                  <p className="text-sm text-muted-foreground">{ex.instruction}</p>
+                  <p className="text-foreground font-medium">{ex.sentence}</p>
 
-          <div className="flex gap-3">
-            <Button
-              variant="outline"
-              className="flex-1 gap-2"
-              onClick={() => setShowSolutions(!showSolutions)}
-            >
-              {showSolutions ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-              {showSolutions ? "Sakrij rešenja" : "Prikaži rešenja"}
-            </Button>
-            {!completed ? (
-              <Button variant="hero" className="flex-1 gap-2" onClick={markCompleted}>
-                <CheckCircle2 className="w-4 h-4" /> Završeno (+10 poena)
-              </Button>
-            ) : (
-              <Button variant="ghost" className="flex-1 text-accent" disabled>
-                <CheckCircle2 className="w-4 h-4 mr-2" /> Zabeleženo! ✓
-              </Button>
-            )}
-          </div>
+                  {st.status === "correct" && (
+                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="p-3 rounded-lg bg-accent/10">
+                      <p className="text-sm font-medium text-accent flex items-center gap-2">
+                        <CheckCircle2 className="w-4 h-4" /> {st.feedback}
+                      </p>
+                    </motion.div>
+                  )}
+
+                  {st.status === "revealed" && (
+                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="p-3 rounded-lg bg-muted">
+                      <p className="text-sm font-medium text-foreground">Rešenje: <span className="text-accent">{ex.solution}</span></p>
+                    </motion.div>
+                  )}
+
+                  {st.status === "pending" && (
+                    <>
+                      <div className="flex gap-2">
+                        <Input
+                          placeholder="Tvoj odgovor..."
+                          value={st.answer}
+                          onChange={(e) => updateState(i, { answer: e.target.value })}
+                          onKeyDown={(e) => e.key === "Enter" && st.answer.trim() && checkAnswer(i)}
+                          className="flex-1"
+                        />
+                        <Button
+                          variant="hero"
+                          size="sm"
+                          onClick={() => checkAnswer(i)}
+                          disabled={!st.answer.trim()}
+                        >
+                          Proveri
+                        </Button>
+                      </div>
+
+                      {st.feedback && (
+                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="p-3 rounded-lg bg-destructive/10 border border-destructive/20">
+                          <p className="text-sm text-foreground flex items-center gap-2">
+                            <Lightbulb className="w-4 h-4 text-accent shrink-0" />
+                            {st.feedback}
+                          </p>
+                          <p className="text-xs text-muted-foreground mt-1">Pokušaj {st.attempts}/3</p>
+                        </motion.div>
+                      )}
+
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className="text-xs text-muted-foreground"
+                        onClick={() => reveal(i)}
+                      >
+                        <Eye className="w-3 h-3 mr-1" /> Prikaži rešenje
+                      </Button>
+                    </>
+                  )}
+                </CardContent>
+              </Card>
+            );
+          })}
+
+          {allDone && (
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+              <Card className="border-accent/30 bg-accent/5">
+                <CardContent className="pt-5 pb-5 text-center">
+                  <p className="text-sm font-medium text-accent">
+                    ✅ Sve vežbe završene! Tačno: {states.filter((s) => s.status === "correct").length}/{states.length}
+                  </p>
+                </CardContent>
+              </Card>
+            </motion.div>
+          )}
         </motion.div>
       )}
     </div>
