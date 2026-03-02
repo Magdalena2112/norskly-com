@@ -736,7 +736,7 @@ function QuizTab({ level, userId, initialTopic }: { level: string; userId?: stri
           score: finalScore,
           total: questions.length,
           percentage: pct,
-        });
+        }, { dedupKey: `grammar_quiz_${topic}_${Date.now()}`, checkDailyBonus: true });
         setLogged(true);
       }
     } else {

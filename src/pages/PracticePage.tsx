@@ -312,12 +312,25 @@ export default function PracticePage() {
       }
 
       if (user) {
-        await logActivity(user.id, "talk", "session_complete", 12, {
-          message_count: messages.length,
-          situation,
-          formality,
-          role,
-        });
+        const userMsgCount = messages.filter((m: any) => m.role === "user").length;
+        if (userMsgCount >= 5) {
+          // Quality bonus: check if recap has good nivo_analiza
+          const qualityBonus = data?.nivo_analiza &&
+            ["gramatika", "vokabular", "jasnoća", "povezivanje", "prirodnost"]
+              .every((k: string) => {
+                const val = (data.nivo_analiza as any)?.[k] || "";
+                return /dobr|odličn|tačn|stabili/i.test(val);
+              }) ? 3 : 0;
+
+          await logActivity(user.id, "talk", "session_complete", 12 + qualityBonus, {
+            message_count: messages.length,
+            user_message_count: userMsgCount,
+            situation,
+            formality,
+            role,
+            quality_bonus: qualityBonus,
+          }, { dedupKey: `talk_${Date.now()}`, checkDailyBonus: true });
+        }
       }
     } catch (e) {
       console.error("Recap error:", e);

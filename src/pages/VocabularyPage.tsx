@@ -644,7 +644,7 @@ function QuizTab({ level, userId }: { level: string; userId?: string }) {
           score: finalScore,
           total: questions.length,
           percentage: pct,
-        });
+        }, { dedupKey: `vocab_quiz_${Date.now()}`, checkDailyBonus: true });
         setLogged(true);
       }
     } else {
