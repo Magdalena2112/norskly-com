@@ -14,6 +14,10 @@ import GrammarPage from "./pages/GrammarPage";
 import VocabularyPage from "./pages/VocabularyPage";
 import TalkPage from "./pages/TalkPage";
 import ProgressPage from "./pages/ProgressPage";
+import BookLessonPage from "./pages/BookLessonPage";
+import MyLessonsPage from "./pages/MyLessonsPage";
+import AdminAvailabilityPage from "./pages/AdminAvailabilityPage";
+import AdminLessonsPage from "./pages/AdminLessonsPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
