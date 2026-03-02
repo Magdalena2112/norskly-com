@@ -109,7 +109,7 @@ export default function ProgressPage() {
         const quizzes = grammarActivities.filter((a) => a.type === "quiz_completed" || a.type === "exercises_completed");
         if (quizzes.length > 0) {
           const avgPct = quizzes.reduce((sum, q) => sum + ((q.payload as any)?.percentage || 50), 0) / quizzes.length;
-          grammarScore = (grammarScore + avgPct) / 2;
+          grammarScore = Math.min(100, (grammarScore + avgPct) / 2);
         }
       } else {
         grammarScore = 20; // no data penalty
