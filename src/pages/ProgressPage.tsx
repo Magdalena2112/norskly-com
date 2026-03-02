@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useProfile } from "@/context/ProfileContext";
 import { useAuth } from "@/context/AuthContext";
 import { Button } from "@/components/ui/button";
@@ -7,10 +7,16 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Progress } from "@/components/ui/progress";
 import {
   ArrowLeft, BookOpen, MessageSquare, Brain, TrendingUp,
-  AlertTriangle, Search, PenTool, Loader2, Sparkles,
+  AlertTriangle, Search, PenTool, Loader2, Sparkles, Award, ArrowUpCircle,
 } from "lucide-react";
+import {
+  AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent,
+  AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
+
+const CEFR_ORDER = ["A1", "A2", "B1", "B2", "C1"] as const;
 
 const levelProgress: Record<string, number> = {
   A1: 10, A2: 30, B1: 50, B2: 70, C1: 90,
@@ -38,13 +44,132 @@ const SEVERITY_LABELS: Record<number, string> = {
 };
 
 export default function ProgressPage() {
-  const { profile } = useProfile();
+  const { profile, updateProfile } = useProfile();
   const { user } = useAuth();
   const navigate = useNavigate();
 
   const [errorStats, setErrorStats] = useState<ErrorTopicStat[]>([]);
   const [loadingErrors, setLoadingErrors] = useState(true);
+  const [readinessScore, setReadinessScore] = useState<{
+    total: number;
+    grammar: number;
+    vocabulary: number;
+    communication: number;
+    consistency: number;
+  } | null>(null);
+  const [loadingReadiness, setLoadingReadiness] = useState(true);
+  const [showLevelUpDialog, setShowLevelUpDialog] = useState(false);
 
+  const nextLevel = useMemo(() => {
+    const idx = CEFR_ORDER.indexOf(profile.level as any);
+    return idx >= 0 && idx < CEFR_ORDER.length - 1 ? CEFR_ORDER[idx + 1] : null;
+  }, [profile.level]);
+
+  // Compute CEFR readiness score
+  useEffect(() => {
+    if (!user) return;
+    (async () => {
+      setLoadingReadiness(true);
+      const thirtyDaysAgo = new Date();
+      thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+      const isoDate = thirtyDaysAgo.toISOString();
+
+      // Fetch last 30 days activities and errors in parallel
+      const [activitiesRes, errorsRes, vocabRes] = await Promise.all([
+        supabase
+          .from("activities")
+          .select("module, type, points, payload, created_at")
+          .eq("user_id", user.id)
+          .gte("created_at", isoDate)
+          .order("created_at", { ascending: false })
+          .limit(200),
+        supabase
+          .from("error_events")
+          .select("module, severity, category")
+          .eq("user_id", user.id)
+          .gte("created_at", isoDate),
+        supabase
+          .from("vocab_items")
+          .select("status")
+          .eq("user_id", user.id),
+      ]);
+
+      const activities = activitiesRes.data || [];
+      const errors = errorsRes.data || [];
+      const vocabItems = vocabRes.data || [];
+
+      // 1. Grammar accuracy (30%) – based on error rate in grammar module
+      const grammarActivities = activities.filter((a) => a.module === "grammar");
+      const grammarErrors = errors.filter((e) => e.module === "grammar");
+      let grammarScore = 50; // baseline
+      if (grammarActivities.length > 0) {
+        const errorRate = grammarErrors.length / Math.max(grammarActivities.length, 1);
+        grammarScore = Math.max(0, Math.min(100, 100 - errorRate * 40));
+        // Boost from quiz/exercise scores
+        const quizzes = grammarActivities.filter((a) => a.type === "quiz_completed" || a.type === "exercises_completed");
+        if (quizzes.length > 0) {
+          const avgPct = quizzes.reduce((sum, q) => sum + ((q.payload as any)?.percentage || 50), 0) / quizzes.length;
+          grammarScore = (grammarScore + avgPct) / 2;
+        }
+      } else {
+        grammarScore = 20; // no data penalty
+      }
+
+      // 2. Vocabulary mastery (25%) – based on known vs total vocab
+      let vocabScore = 20;
+      if (vocabItems.length > 0) {
+        const known = vocabItems.filter((v) => v.status === "known" || v.status === "practiced").length;
+        vocabScore = Math.min(100, (known / vocabItems.length) * 100);
+        // Quiz performance boost
+        const vocabQuizzes = activities.filter((a) => a.module === "vocabulary" && a.type === "quiz_completed");
+        if (vocabQuizzes.length > 0) {
+          const avgPct = vocabQuizzes.reduce((sum, q) => sum + ((q.payload as any)?.percentage || 50), 0) / vocabQuizzes.length;
+          vocabScore = (vocabScore + avgPct) / 2;
+        }
+      }
+
+      // 3. Communication clarity (25%) – based on talk sessions and error severity
+      const talkActivities = activities.filter((a) => a.module === "talk");
+      const talkErrors = errors.filter((e) => e.module === "talk");
+      let commScore = 20;
+      if (talkActivities.length > 0) {
+        const avgSev = talkErrors.length > 0
+          ? talkErrors.reduce((s, e) => s + e.severity, 0) / talkErrors.length
+          : 1;
+        commScore = Math.max(0, Math.min(100, 100 - (avgSev - 1) * 30 - (talkErrors.length / Math.max(talkActivities.length, 1)) * 20));
+        // Bonus for volume
+        commScore = Math.min(100, commScore + Math.min(talkActivities.length * 3, 15));
+      }
+
+      // 4. Consistency (20%) – last 10 activities spread over days
+      let consistencyScore = 0;
+      const last10 = activities.slice(0, 10);
+      if (last10.length >= 5) {
+        const uniqueDays = new Set(last10.map((a) => a.created_at.slice(0, 10))).size;
+        consistencyScore = Math.min(100, (uniqueDays / Math.min(7, last10.length)) * 100);
+        // Activity variety bonus
+        const uniqueModules = new Set(last10.map((a) => a.module)).size;
+        consistencyScore = Math.min(100, consistencyScore + uniqueModules * 5);
+      } else if (last10.length > 0) {
+        consistencyScore = last10.length * 8;
+      }
+
+      const total = Math.round(
+        grammarScore * 0.3 + vocabScore * 0.25 + commScore * 0.25 + consistencyScore * 0.2
+      );
+
+      setReadinessScore({
+        total: Math.min(100, total),
+        grammar: Math.round(grammarScore),
+        vocabulary: Math.round(vocabScore),
+        communication: Math.round(commScore),
+        consistency: Math.round(consistencyScore),
+      });
+      setLoadingReadiness(false);
+    })();
+  }, [user]);
+
+  // Fetch error stats
   useEffect(() => {
     if (!user) return;
     (async () => {
@@ -64,7 +189,6 @@ export default function ProgressPage() {
         return;
       }
 
-      // Aggregate by topic
       const topicMap = new Map<string, { count: number; totalSeverity: number; category: string; module: string }>();
       for (const row of data || []) {
         const key = row.topic;
@@ -118,8 +242,35 @@ export default function ProgressPage() {
     }
     return `Povremena greška — kratka sesija vežbi bi trebalo da bude dovoljna za učvršćivanje.`;
   };
+  const handleLevelUp = () => {
+    if (!nextLevel) return;
+    updateProfile({ level: nextLevel as any });
+    setShowLevelUpDialog(false);
+  };
 
   return (
+    <>
+    <AlertDialog open={showLevelUpDialog} onOpenChange={setShowLevelUpDialog}>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle className="flex items-center gap-2">
+            <Award className="w-5 h-5 text-accent" />
+            Prelazak na {nextLevel}?
+          </AlertDialogTitle>
+          <AlertDialogDescription>
+            Tvoj skor spremnosti je <strong>{readinessScore?.total}/100</strong>. Da li želiš da pređeš sa nivoa{" "}
+            <strong>{profile.level}</strong> na <strong>{nextLevel}</strong>?
+            Sav budući sadržaj biće prilagođen novom nivou.
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>Ostani na {profile.level}</AlertDialogCancel>
+          <AlertDialogAction onClick={handleLevelUp}>
+            Da, pređi na {nextLevel} 🎉
+          </AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
     <div className="min-h-screen bg-background flex flex-col">
       <header className="border-b border-border bg-background/80 backdrop-blur-md sticky top-0 z-50">
         <div className="container flex items-center gap-3 h-14">
@@ -146,6 +297,87 @@ export default function ProgressPage() {
               <p className="text-sm text-muted-foreground text-center">
                 Trenutni nivo: <span className="font-semibold text-accent">{profile.level}</span>
               </p>
+            </CardContent>
+          </Card>
+        </motion.div>
+
+        {/* CEFR Readiness Score */}
+        <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
+          <Card className="shadow-nordic">
+            <CardHeader>
+              <CardTitle className="text-lg flex items-center gap-2">
+                <Award className="w-5 h-5 text-primary" />
+                Spremnost za sledeći nivo
+              </CardTitle>
+              <CardDescription>
+                {nextLevel ? `${profile.level} → ${nextLevel}` : "Dostignut maksimalni nivo"}
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              {loadingReadiness ? (
+                <div className="text-center py-6">
+                  <Loader2 className="w-6 h-6 animate-spin text-accent mx-auto" />
+                </div>
+              ) : readinessScore ? (
+                <div className="space-y-5">
+                  {/* Main score */}
+                  <div className="flex items-center gap-5">
+                    <div className={`w-20 h-20 rounded-full border-4 flex items-center justify-center shrink-0 ${
+                      readinessScore.total >= 75 ? "border-accent bg-accent/10" : "border-muted bg-muted/30"
+                    }`}>
+                      <span className={`text-2xl font-bold ${readinessScore.total >= 75 ? "text-accent" : "text-foreground"}`}>
+                        {readinessScore.total}
+                      </span>
+                    </div>
+                    <div className="flex-1">
+                      <p className="text-sm font-medium text-foreground">
+                        {readinessScore.total >= 75
+                          ? "Kjempebra! Du er klar for neste nivå! 🎉"
+                          : readinessScore.total >= 50
+                          ? "Dobar napredak — nastavi sa vežbanjem!"
+                          : "Nastavi sa radom na svim oblastima."}
+                      </p>
+                      <p className="text-xs text-muted-foreground mt-0.5">
+                        Potrebno: 75/100 za prelazak na {nextLevel || "—"}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Component bars */}
+                  {[
+                    { label: "Gramatička tačnost", value: readinessScore.grammar, weight: "30%" },
+                    { label: "Vokabular", value: readinessScore.vocabulary, weight: "25%" },
+                    { label: "Komunikacija", value: readinessScore.communication, weight: "25%" },
+                    { label: "Konzistentnost", value: readinessScore.consistency, weight: "20%" },
+                  ].map((comp) => (
+                    <div key={comp.label} className="space-y-1">
+                      <div className="flex justify-between text-xs">
+                        <span className="text-muted-foreground">{comp.label} <span className="opacity-60">({comp.weight})</span></span>
+                        <span className="font-medium text-foreground">{comp.value}/100</span>
+                      </div>
+                      <Progress value={comp.value} className="h-2" />
+                    </div>
+                  ))}
+
+                  {/* Level up button */}
+                  {readinessScore.total >= 75 && nextLevel && (
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: 0.3 }}
+                    >
+                      <Button
+                        variant="hero"
+                        className="w-full gap-2"
+                        onClick={() => setShowLevelUpDialog(true)}
+                      >
+                        <ArrowUpCircle className="w-4 h-4" />
+                        Pređi na {nextLevel}
+                      </Button>
+                    </motion.div>
+                  )}
+                </div>
+              ) : null}
             </CardContent>
           </Card>
         </motion.div>
@@ -342,5 +574,6 @@ export default function ProgressPage() {
         </Card>
       </div>
     </div>
+    </>
   );
 }
