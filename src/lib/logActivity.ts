@@ -26,18 +26,16 @@ export async function logActivity(
   const { dedupKey, checkDailyBonus = false } = options;
 
   // Insert activity with optional dedup key
-  const insertData: Record<string, unknown> = {
+  const insertData = {
     user_id: userId,
     module,
     type,
     points,
     payload: payload as any,
+    dedup_key: dedupKey || null,
   };
-  if (dedupKey) {
-    insertData.dedup_key = dedupKey;
-  }
 
-  const { error: actError } = await supabase.from("activities").insert([insertData]);
+  const { error: actError } = await supabase.from("activities").insert([insertData] as any);
 
   if (actError) {
     // Duplicate key = already rewarded, skip silently
