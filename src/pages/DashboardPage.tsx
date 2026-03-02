@@ -62,8 +62,12 @@ export default function DashboardPage() {
           <h1 className="text-3xl font-display font-bold text-foreground mb-1">
             Hei, {profile.name || "korisniče"}! 👋
           </h1>
-          <p className="text-muted-foreground mb-8">Izaberi modul i nastavi sa učenjem norveškog.</p>
+          <p className="text-muted-foreground mb-6">Izaberi modul i nastavi sa učenjem norveškog.</p>
         </motion.div>
+
+        <WeeklyDigest />
+
+        <div className="mt-6"></div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {modules.map((mod, i) => (
