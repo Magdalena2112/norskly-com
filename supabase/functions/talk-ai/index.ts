@@ -166,7 +166,7 @@ ${qualityCheck}`;
     // ── RECAP action ──
     if (action === "recap") {
       const systemPrompt = `Ti si nastavnik norveškog jezika. Analiziraj sledeći razgovor i napravi rezime sesije.
-Korisnik se zove ${profile?.name || "korisnik"}, nivo je ${profile?.level || "A1"}.
+Korisnik se zove ${profile?.name || "korisnik"}, nivo je ${userLevel}. ${cefrFocus}
 
 Odgovori ISKLJUČIVO u JSON formatu, bez markdown-a. Format:
 {
@@ -178,10 +178,19 @@ Odgovori ISKLJUČIVO u JSON formatu, bez markdown-a. Format:
     { "norwegian": "norveški izraz", "serbian": "srpski prevod" },
     { "norwegian": "norveški izraz", "serbian": "srpski prevod" },
     { "norwegian": "norveški izraz", "serbian": "srpski prevod" }
-  ]
+  ],
+  "nivo_analiza": {
+    "gramatika": "kratka ocena",
+    "vokabular": "kratka ocena",
+    "jasnoća": "kratka ocena",
+    "povezivanje": "kratka ocena",
+    "prirodnost": "kratka ocena"
+  },
+  "sledeci_korak": ["preporuka 1", "preporuka 2"]
 }
 
 Strengths i mistakes piši na srpskom. Strengths su pozitivne stvari iz razgovora. Mistakes su konkretne greške.
+Nivo analiza: oceni svaku od 5 dimenzija kratko (1 rečenica). Sledeći korak: daj 1-2 konkretne preporuke.
 ${qualityCheck}`;
 
       const conversationText = (messages || [])
