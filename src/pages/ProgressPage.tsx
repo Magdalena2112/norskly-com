@@ -574,5 +574,6 @@ export default function ProgressPage() {
         </Card>
       </div>
     </div>
+    </>
   );
 }
