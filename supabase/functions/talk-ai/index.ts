@@ -46,16 +46,57 @@ Deno.serve(async (req) => {
 
     const { action, messages, profile, settings } = await req.json();
 
+    const userLevel = profile?.level || "A1";
+
+    const cefrExpectations: Record<string, string> = {
+      A1: "Fokus na osnovnu strukturu rečenice i razumljivost. Očekuj jednostavne rečenice, osnovne glagole u prezentu.",
+      A2: "Fokus na stabilnost glagolskih vremena i jednostavne veznike (og, men, fordi). Očekuj kratke povezane rečenice.",
+      B1: "Fokus na zavisne rečenice i izražavanje mišljenja (jeg synes at, jeg tror at). Očekuj složenije strukture.",
+      B2: "Fokus na stilsku varijaciju i složene strukture (leddsetninger, passiv). Očekuj idiomatske izraze.",
+      C1: "Fokus na nijanse, idiomatski jezik i preciznost. Očekuj akademski/profesionalni registar.",
+    };
+    const cefrFocus = cefrExpectations[userLevel] || cefrExpectations["A1"];
+
     const qualityCheck = `
 
 OBAVEZNA SAMOPROVERA pre slanja odgovora:
 - Norveški tekst nema gramatičke greške.
 - Red reči u rečenicama je ispravan (V2 pravilo u glavnoj rečenici).
 - Prepozicije su prirodne (ne doslovno sa srpskog).
-- Korišćen je nivo ${profile?.level || "A1"} (ne pretežak vokabular).
+- Korišćen je nivo ${userLevel} (ne pretežak vokabular).
 - Značenje je isto kao cilj; nema izmišljenih detalja.
 - Nema kontradikcija i nema "čudnih" formulacija.
 Ako bilo šta nije sigurno: pojednostavi rečenicu. Ne dodaj nove informacije.`;
+
+    const cefrEvalBlock = `
+
+VIŠEDIMENZIONALNA EVALUACIJA (primeni kad ispravljaš ili daješ povratnu informaciju korisniku):
+Nivo korisnika: ${userLevel}. ${cefrFocus}
+
+Evaluiraj korisnikov tekst po 5 dimenzija:
+1. Gramatika – tačnost gramatičkih struktura
+2. Vokabular – raspon i prikladnost reči
+3. Jasnoća – razumljivost poruke
+4. Povezivanje – upotreba veznika i struktura rečenica
+5. Prirodnost – ton i pragmatička prikladnost
+
+PRAVILA za povratnu informaciju:
+- Navedi snage u svakoj dimenziji kratko (✓ ili kratka pohvala).
+- Identifikuj NAJVIŠE 2 najvažnije oblasti za poboljšanje.
+- Ne preopterećuj učenika – budi koncizan.
+- Na kraju ispravljanja dodaj blok:
+
+**Nivo analiza:**
+- Gramatika: [kratka ocena]
+- Vokabular: [kratka ocena]
+- Jasnoća: [kratka ocena]
+- Povezivanje: [kratka ocena]
+- Prirodnost: [kratka ocena]
+
+**Sledeći korak u učenju:**
+[1–2 konkretne preporuke na srpskom]
+
+Objašnjenja piši jednostavno na srpskom, bez lingvističkog žargona.`;
 
     // ── CHAT action ──
     if (action === "chat") {

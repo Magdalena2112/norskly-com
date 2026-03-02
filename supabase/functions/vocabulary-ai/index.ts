@@ -38,6 +38,15 @@ Deno.serve(async (req) => {
 
     const { action, level, theme, word, sentence, exclude_words } = await req.json();
 
+    const cefrExpectations: Record<string, string> = {
+      A1: "Fokus na osnovnu strukturu rečenice i razumljivost.",
+      A2: "Fokus na stabilnost glagolskih vremena i jednostavne veznike.",
+      B1: "Fokus na zavisne rečenice i izražavanje mišljenja.",
+      B2: "Fokus na stilsku varijaciju i složene strukture.",
+      C1: "Fokus na nijanse, idiomatski jezik i preciznost.",
+    };
+    const cefrFocus = cefrExpectations[level] || cefrExpectations["A1"];
+
     const qualityCheck = `
 
 OBAVEZNA SAMOPROVERA pre slanja odgovora:
@@ -48,6 +57,15 @@ OBAVEZNA SAMOPROVERA pre slanja odgovora:
 - Značenje je isto kao cilj; nema izmišljenih detalja.
 - Nema kontradikcija i nema "čudnih" formulacija.
 Ako bilo šta nije sigurno: pojednostavi rečenicu. Ne dodaj nove informacije.`;
+
+    const cefrEvalBlock = `
+
+VIŠEDIMENZIONALNA EVALUACIJA za ispravku rečenice:
+Nivo korisnika: ${level}. ${cefrFocus}
+
+Kad ispravljaš korisnikovu rečenicu, evaluiraj po 5 dimenzija:
+1. Gramatika 2. Vokabular 3. Jasnoća 4. Povezivanje 5. Prirodnost
+Navedi snage kratko, identifikuj NAJVIŠE 2 oblasti za poboljšanje.`;
 
     let systemPrompt = "";
     let userPrompt = "";
