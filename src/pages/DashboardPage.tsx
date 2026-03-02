@@ -5,10 +5,11 @@ import { useAuth } from "@/context/AuthContext";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-import { BookOpen, Languages, MessageSquare, TrendingUp, Settings, Zap } from "lucide-react";
+import { BookOpen, Languages, MessageSquare, TrendingUp, Settings, Zap, GraduationCap, CalendarCheck } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import WeeklyDigest from "@/components/WeeklyDigest";
+import { format } from "date-fns";
 
 const XP_TITLES: Record<number, string> = {
   1: "Utforsker",
