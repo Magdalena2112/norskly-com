@@ -147,6 +147,7 @@ function ExercisesTab({ level, userId, initialTopic }: { level: string; userId?:
     setLoading(true);
     setExercises([]);
     setStates([]);
+    setExerciseXpLogged(false);
     try {
       const data = await callGrammarAI({ action: "generate_exercises", level, topic: topic.trim(), count });
       const exs = data.exercises || [];
