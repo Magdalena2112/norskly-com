@@ -446,7 +446,7 @@ function FlashcardsTab({ userId }: { userId?: string }) {
         await logActivity(userId, "vocabulary", "flashcards_completed", 8, {
           known: known.length + (isKnown ? 1 : 0),
           unknown: unknown.length + (isKnown ? 0 : 1),
-        });
+        }, { dedupKey: `flashcards_${Date.now()}`, checkDailyBonus: true });
         setLogged(true);
       }
       return;
