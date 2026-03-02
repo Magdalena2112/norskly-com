@@ -153,7 +153,7 @@ function GenerateTab({ level, userId }: { level: string; userId?: string }) {
       }));
       const { error } = await supabase.from("vocab_items").insert(rows);
       if (error) throw error;
-      await logActivity(userId, "vocabulary", "words_saved", 8, { theme: theme.trim(), count: words.length });
+      // No XP for content generation (word saving)
       setSaved(true);
     } catch (e: any) {
       console.error(e);
