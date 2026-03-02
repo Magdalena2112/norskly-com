@@ -84,7 +84,7 @@ export default function DashboardPage() {
           <div className="flex items-center gap-2">
             {xpData && (
               <span className="text-xs bg-primary/10 text-primary px-2.5 py-1 rounded-full font-semibold flex items-center gap-1">
-                <Zap className="w-3 h-3" /> Lvl {xpData.level} · {xpData.total_xp} XP
+                <Zap className="w-3 h-3" /> {XP_TITLES[Math.min(xpData.level, 10)] || `Lvl ${xpData.level}`} · {xpData.total_xp} XP
               </span>
             )}
             <span className="text-xs bg-accent/10 text-accent px-3 py-1 rounded-full font-medium">
