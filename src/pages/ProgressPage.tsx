@@ -168,6 +168,9 @@ export default function ProgressPage() {
       setLoadingReadiness(false);
     })();
   }, [user]);
+
+  // Fetch error stats
+  useEffect(() => {
     if (!user) return;
     (async () => {
       setLoadingErrors(true);
@@ -186,7 +189,6 @@ export default function ProgressPage() {
         return;
       }
 
-      // Aggregate by topic
       const topicMap = new Map<string, { count: number; totalSeverity: number; category: string; module: string }>();
       for (const row of data || []) {
         const key = row.topic;
