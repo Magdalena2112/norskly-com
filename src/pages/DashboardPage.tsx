@@ -10,6 +10,19 @@ import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import WeeklyDigest from "@/components/WeeklyDigest";
 
+const XP_TITLES: Record<number, string> = {
+  1: "Utforsker",
+  2: "Lærling",
+  3: "Kommunikatør",
+  4: "Taler",
+  5: "Trygg taler",
+  6: "Avansert kommunikatør",
+  7: "Flytende",
+  8: "Dyktig",
+  9: "Ekspert",
+  10: "Norskly-mester",
+};
+
 const modules = [
   {
     title: "Gramatika",
@@ -71,7 +84,7 @@ export default function DashboardPage() {
           <div className="flex items-center gap-2">
             {xpData && (
               <span className="text-xs bg-primary/10 text-primary px-2.5 py-1 rounded-full font-semibold flex items-center gap-1">
-                <Zap className="w-3 h-3" /> Lvl {xpData.level} · {xpData.total_xp} XP
+                <Zap className="w-3 h-3" /> {XP_TITLES[Math.min(xpData.level, 10)] || `Lvl ${xpData.level}`} · {xpData.total_xp} XP
               </span>
             )}
             <span className="text-xs bg-accent/10 text-accent px-3 py-1 rounded-full font-medium">
@@ -103,8 +116,8 @@ export default function DashboardPage() {
                       {xpData.level}
                     </div>
                     <div>
-                      <p className="text-sm font-semibold text-foreground">Level {xpData.level}</p>
-                      <p className="text-[11px] text-muted-foreground">{xpData.total_xp} ukupno XP</p>
+                      <p className="text-sm font-semibold text-foreground">{XP_TITLES[Math.min(xpData.level, 10)] || `Level ${xpData.level}`}</p>
+                      <p className="text-[11px] text-muted-foreground">Lvl {xpData.level} · {xpData.total_xp} XP</p>
                     </div>
                   </div>
                   <p className="text-xs text-muted-foreground">{xpInLevel}/{xpForNext} XP do sledećeg nivoa</p>
