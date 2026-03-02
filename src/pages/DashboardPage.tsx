@@ -47,6 +47,14 @@ const modules = [
     gradient: "from-primary to-accent",
   },
   {
+    title: "Snakk med lærer",
+    description: "Bestill en 90-minutters time med lærer.",
+    icon: GraduationCap,
+    route: "/book-lesson",
+    gradient: "from-accent to-primary/80",
+    buttonLabel: "Bestill time",
+  },
+  {
     title: "Napredak",
     description: "Prati svoj napredak i postignuća.",
     icon: TrendingUp,
