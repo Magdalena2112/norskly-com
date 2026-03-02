@@ -215,6 +215,14 @@ function CorrectionTab({ level, userId }: { level: string; userId?: string }) {
     corrected_text: string;
     mistakes: Mistake[];
     overall_feedback: string;
+    nivo_analiza?: {
+      gramatika?: string;
+      vokabular?: string;
+      jasnoća?: string;
+      povezivanje?: string;
+      prirodnost?: string;
+    };
+    sledeci_korak?: string[];
   } | null>(null);
   const [loading, setLoading] = useState(false);
   const [logged, setLogged] = useState(false);
@@ -303,6 +311,50 @@ function CorrectionTab({ level, userId }: { level: string; userId?: string }) {
                 <p className="text-sm text-foreground">{result.overall_feedback}</p>
               </CardContent>
             </Card>
+          )}
+
+          {result.nivo_analiza && (
+            <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}>
+              <Card>
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-base">📊 Nivo analiza</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-2">
+                  {[
+                    { label: "Gramatika", value: result.nivo_analiza.gramatika },
+                    { label: "Vokabular", value: result.nivo_analiza.vokabular },
+                    { label: "Jasnoća", value: result.nivo_analiza.jasnoća },
+                    { label: "Povezivanje", value: result.nivo_analiza.povezivanje },
+                    { label: "Prirodnost", value: result.nivo_analiza.prirodnost },
+                  ].map((dim) => (
+                    dim.value && (
+                      <div key={dim.label} className="flex gap-2 items-start text-sm">
+                        <span className="font-medium text-foreground min-w-[100px]">{dim.label}:</span>
+                        <span className="text-muted-foreground">{dim.value}</span>
+                      </div>
+                    )
+                  ))}
+                </CardContent>
+              </Card>
+            </motion.div>
+          )}
+
+          {result.sledeci_korak && result.sledeci_korak.length > 0 && (
+            <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
+              <Card className="border-accent/30 bg-accent/5">
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-base">🎯 Sledeći korak u učenju</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-2">
+                  {result.sledeci_korak.map((step, i) => (
+                    <div key={i} className="flex gap-2 items-start text-sm">
+                      <span className="text-accent font-bold">{i + 1}.</span>
+                      <span className="text-foreground">{step}</span>
+                    </div>
+                  ))}
+                </CardContent>
+              </Card>
+            </motion.div>
           )}
 
           {logged && (
