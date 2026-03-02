@@ -47,6 +47,30 @@ export type Database = {
         }
         Relationships: []
       }
+      availability_slots: {
+        Row: {
+          created_at: string
+          duration_minutes: number
+          id: string
+          start_time: string
+          status: string
+        }
+        Insert: {
+          created_at?: string
+          duration_minutes?: number
+          id?: string
+          start_time: string
+          status?: string
+        }
+        Update: {
+          created_at?: string
+          duration_minutes?: number
+          id?: string
+          start_time?: string
+          status?: string
+        }
+        Relationships: []
+      }
       error_events: {
         Row: {
           attempt_no: number | null
@@ -121,6 +145,47 @@ export type Database = {
           user_text?: string
         }
         Relationships: []
+      }
+      lessons: {
+        Row: {
+          created_at: string
+          end_time: string
+          id: string
+          slot_id: string
+          start_time: string
+          status: string
+          student_note: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          end_time: string
+          id?: string
+          slot_id: string
+          start_time: string
+          status?: string
+          student_note?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          end_time?: string
+          id?: string
+          slot_id?: string
+          start_time?: string
+          status?: string
+          student_note?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lessons_slot_id_fkey"
+            columns: ["slot_id"]
+            isOneToOne: false
+            referencedRelation: "availability_slots"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       talk_sessions: {
         Row: {
