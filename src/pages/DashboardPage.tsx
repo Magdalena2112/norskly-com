@@ -174,21 +174,42 @@ export default function DashboardPage() {
                 </CardContent>
               </Card>
             </motion.div>
-                <CardContent className="pt-6 pb-6 flex items-start gap-4">
-                  <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${mod.gradient} flex items-center justify-center shrink-0`}>
-                    <mod.icon className="w-6 h-6 text-primary-foreground" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-foreground group-hover:text-accent transition-colors">
-                      {mod.title}
-                    </h3>
-                    <p className="text-sm text-muted-foreground mt-0.5">{mod.description}</p>
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
           ))}
         </div>
+
+        {/* Upcoming Lesson Widget */}
+        {lessonLoaded && (
+          <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}>
+            <Card className="mt-6 border-accent/20 bg-gradient-to-r from-accent/5 to-primary/5">
+              <CardContent className="pt-5 pb-5">
+                <div className="flex items-center gap-2 mb-3">
+                  <CalendarCheck className="w-5 h-5 text-accent" />
+                  <h3 className="font-semibold text-foreground">Mine kommende timer</h3>
+                </div>
+                {upcomingLesson ? (
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm font-medium text-foreground">
+                        {format(new Date(upcomingLesson.start_time), "dd.MM.yyyy HH:mm")} – {format(new Date(upcomingLesson.end_time), "HH:mm")}
+                      </p>
+                      <p className="text-xs text-muted-foreground mt-0.5">Planlagt</p>
+                    </div>
+                    <Button size="sm" variant="outline" onClick={() => navigate("/my-lessons")}>
+                      Se detaljer
+                    </Button>
+                  </div>
+                ) : (
+                  <div className="flex items-center justify-between">
+                    <p className="text-sm text-muted-foreground">Ingen planlagte timer.</p>
+                    <Button size="sm" variant="hero" onClick={() => navigate("/book-lesson")}>
+                      Bestill nå
+                    </Button>
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          </motion.div>
+        )}
       </div>
     </div>
   );
