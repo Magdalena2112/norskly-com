@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { BookOpen, Languages, MessageSquare, TrendingUp, Settings } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import WeeklyDigest from "@/components/WeeklyDigest";
 
 const modules = [
   {
