@@ -153,7 +153,7 @@ function GenerateTab({ level, userId }: { level: string; userId?: string }) {
       }));
       const { error } = await supabase.from("vocab_items").insert(rows);
       if (error) throw error;
-      await logActivity(userId, "vocabulary", "words_saved", 8, { theme: theme.trim(), count: words.length });
+      // No XP for content generation (word saving)
       setSaved(true);
     } catch (e: any) {
       console.error(e);
@@ -279,6 +279,15 @@ function SentenceTab({ level, userId }: { level: string; userId?: string }) {
       // Log errors from sentence correction
       if (userId && data._errors?.length) {
         await logErrors(userId, "vocabulary", "exercise_check", data._errors.slice(0, 2), selectedWord);
+      }
+
+      // Award XP for sentence writing: +6, +2 bonus if correct
+      if (userId) {
+        const bonus = data.is_correct ? 2 : 0;
+        await logActivity(userId, "vocabulary", "sentence_written", 6 + bonus, {
+          word: selectedWord,
+          is_correct: data.is_correct,
+        }, { checkDailyBonus: true });
       }
 
       // Save user_sentence to vocab_items
@@ -437,7 +446,7 @@ function FlashcardsTab({ userId }: { userId?: string }) {
         await logActivity(userId, "vocabulary", "flashcards_completed", 8, {
           known: known.length + (isKnown ? 1 : 0),
           unknown: unknown.length + (isKnown ? 0 : 1),
-        });
+        }, { dedupKey: `flashcards_${Date.now()}`, checkDailyBonus: true });
         setLogged(true);
       }
       return;
@@ -635,7 +644,7 @@ function QuizTab({ level, userId }: { level: string; userId?: string }) {
           score: finalScore,
           total: questions.length,
           percentage: pct,
-        });
+        }, { dedupKey: `vocab_quiz_${Date.now()}`, checkDailyBonus: true });
         setLogged(true);
       }
     } else {

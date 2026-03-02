@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { useProfile } from "@/context/ProfileContext";
 import { useAuth } from "@/context/AuthContext";
@@ -140,12 +140,14 @@ function ExercisesTab({ level, userId, initialTopic }: { level: string; userId?:
   const [exercises, setExercises] = useState<Exercise[]>([]);
   const [states, setStates] = useState<ExerciseState[]>([]);
   const [loading, setLoading] = useState(false);
+  const [exerciseXpLogged, setExerciseXpLogged] = useState(false);
 
   const generate = async () => {
     if (!topic.trim()) return;
     setLoading(true);
     setExercises([]);
     setStates([]);
+    setExerciseXpLogged(false);
     try {
       const data = await callGrammarAI({ action: "generate_exercises", level, topic: topic.trim(), count });
       const exs = data.exercises || [];
@@ -171,7 +173,6 @@ function ExercisesTab({ level, userId, initialTopic }: { level: string; userId?:
     if (userAns === correctAns) {
       updateState(i, { status: "correct", feedback: "Odlično! Tačan odgovor. 🎉", attempts: st.attempts + 1 });
       if (userId && !st.logged) {
-        await logActivity(userId, "grammar", "exercise_correct", 2, { topic, exercise_id: ex.id });
         updateState(i, { logged: true });
       }
     } else {
@@ -203,6 +204,22 @@ function ExercisesTab({ level, userId, initialTopic }: { level: string; userId?:
   };
 
   const allDone = states.length > 0 && states.every((s) => s.status !== "pending");
+
+  // Award XP when all exercises are completed
+  React.useEffect(() => {
+    if (allDone && userId && !exerciseXpLogged && states.length > 0) {
+      const correctCount = states.filter((s) => s.status === "correct").length;
+      const pct = (correctCount / states.length) * 100;
+      const bonus = pct >= 80 ? 5 : 0;
+      logActivity(userId, "grammar", "exercises_completed", 10 + bonus, {
+        topic,
+        correct: correctCount,
+        total: states.length,
+        percentage: pct,
+      }, { dedupKey: `grammar_ex_${topic}_${Date.now()}`, checkDailyBonus: true });
+      setExerciseXpLogged(true);
+    }
+  }, [allDone]);
 
   return (
     <div className="space-y-4">
@@ -355,10 +372,7 @@ function CorrectionTab({ level, userId }: { level: string; userId?: string }) {
       const data = await callGrammarAI({ action: "correct_text", level, text: text.trim() });
       setResult(data);
       if (userId) {
-        await logActivity(userId, "grammar", "text_corrected", 12, {
-          mistakes_count: data.mistakes?.length || 0,
-        });
-        // Log structured errors from AI
+        // Log structured errors from AI (no XP for content generation)
         if (data._errors?.length) {
           await logErrors(userId, "grammar", "text_correction", data._errors.slice(0, 5));
         }
@@ -525,7 +539,7 @@ function ExplainTab({ level, userId, initialQuery }: { level: string; userId?: s
       const data = await callGrammarAI({ action: "explain_topic", level, text: query.trim() });
       setResult(data);
       if (userId) {
-        await logActivity(userId, "grammar", "topic_explained", 8, { query: query.trim() });
+        // No XP for content generation (explanations)
         setLogged(true);
       }
     } catch (e: any) {
@@ -723,7 +737,7 @@ function QuizTab({ level, userId, initialTopic }: { level: string; userId?: stri
           score: finalScore,
           total: questions.length,
           percentage: pct,
-        });
+        }, { dedupKey: `grammar_quiz_${topic}_${Date.now()}`, checkDailyBonus: true });
         setLogged(true);
       }
     } else {

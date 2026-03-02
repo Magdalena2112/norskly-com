@@ -17,6 +17,7 @@ export type Database = {
       activities: {
         Row: {
           created_at: string
+          dedup_key: string | null
           id: string
           module: string
           payload: Json | null
@@ -26,6 +27,7 @@ export type Database = {
         }
         Insert: {
           created_at?: string
+          dedup_key?: string | null
           id?: string
           module: string
           payload?: Json | null
@@ -35,6 +37,7 @@ export type Database = {
         }
         Update: {
           created_at?: string
+          dedup_key?: string | null
           id?: string
           module?: string
           payload?: Json | null
@@ -158,6 +161,36 @@ export type Database = {
         }
         Relationships: []
       }
+      user_xp: {
+        Row: {
+          created_at: string
+          id: string
+          last_daily_bonus_date: string | null
+          level: number
+          total_xp: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          last_daily_bonus_date?: string | null
+          level?: number
+          total_xp?: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          last_daily_bonus_date?: string | null
+          level?: number
+          total_xp?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       vocab_items: {
         Row: {
           antonym: string | null
@@ -202,7 +235,14 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      award_xp: {
+        Args: {
+          _check_daily_bonus?: boolean
+          _points: number
+          _user_id: string
+        }
+        Returns: Json
+      }
     }
     Enums: {
       [_ in never]: never
