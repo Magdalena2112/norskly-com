@@ -274,6 +274,87 @@ export default function ProgressPage() {
           </Card>
         </motion.div>
 
+        {/* CEFR Readiness Score */}
+        <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
+          <Card className="shadow-nordic">
+            <CardHeader>
+              <CardTitle className="text-lg flex items-center gap-2">
+                <Award className="w-5 h-5 text-primary" />
+                Spremnost za sledeći nivo
+              </CardTitle>
+              <CardDescription>
+                {nextLevel ? `${profile.level} → ${nextLevel}` : "Dostignut maksimalni nivo"}
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              {loadingReadiness ? (
+                <div className="text-center py-6">
+                  <Loader2 className="w-6 h-6 animate-spin text-accent mx-auto" />
+                </div>
+              ) : readinessScore ? (
+                <div className="space-y-5">
+                  {/* Main score */}
+                  <div className="flex items-center gap-5">
+                    <div className={`w-20 h-20 rounded-full border-4 flex items-center justify-center shrink-0 ${
+                      readinessScore.total >= 75 ? "border-accent bg-accent/10" : "border-muted bg-muted/30"
+                    }`}>
+                      <span className={`text-2xl font-bold ${readinessScore.total >= 75 ? "text-accent" : "text-foreground"}`}>
+                        {readinessScore.total}
+                      </span>
+                    </div>
+                    <div className="flex-1">
+                      <p className="text-sm font-medium text-foreground">
+                        {readinessScore.total >= 75
+                          ? "Kjempebra! Du er klar for neste nivå! 🎉"
+                          : readinessScore.total >= 50
+                          ? "Dobar napredak — nastavi sa vežbanjem!"
+                          : "Nastavi sa radom na svim oblastima."}
+                      </p>
+                      <p className="text-xs text-muted-foreground mt-0.5">
+                        Potrebno: 75/100 za prelazak na {nextLevel || "—"}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Component bars */}
+                  {[
+                    { label: "Gramatička tačnost", value: readinessScore.grammar, weight: "30%" },
+                    { label: "Vokabular", value: readinessScore.vocabulary, weight: "25%" },
+                    { label: "Komunikacija", value: readinessScore.communication, weight: "25%" },
+                    { label: "Konzistentnost", value: readinessScore.consistency, weight: "20%" },
+                  ].map((comp) => (
+                    <div key={comp.label} className="space-y-1">
+                      <div className="flex justify-between text-xs">
+                        <span className="text-muted-foreground">{comp.label} <span className="opacity-60">({comp.weight})</span></span>
+                        <span className="font-medium text-foreground">{comp.value}/100</span>
+                      </div>
+                      <Progress value={comp.value} className="h-2" />
+                    </div>
+                  ))}
+
+                  {/* Level up button */}
+                  {readinessScore.total >= 75 && nextLevel && (
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: 0.3 }}
+                    >
+                      <Button
+                        variant="hero"
+                        className="w-full gap-2"
+                        onClick={() => setShowLevelUpDialog(true)}
+                      >
+                        <ArrowUpCircle className="w-4 h-4" />
+                        Pređi na {nextLevel}
+                      </Button>
+                    </motion.div>
+                  )}
+                </div>
+              ) : null}
+            </CardContent>
+          </Card>
+        </motion.div>
+
         {/* Stats grid */}
         <div className="grid grid-cols-2 gap-4">
           {stats.map((stat, i) => (
