@@ -215,6 +215,14 @@ function CorrectionTab({ level, userId }: { level: string; userId?: string }) {
     corrected_text: string;
     mistakes: Mistake[];
     overall_feedback: string;
+    nivo_analiza?: {
+      gramatika?: string;
+      vokabular?: string;
+      jasnoća?: string;
+      povezivanje?: string;
+      prirodnost?: string;
+    };
+    sledeci_korak?: string[];
   } | null>(null);
   const [loading, setLoading] = useState(false);
   const [logged, setLogged] = useState(false);
