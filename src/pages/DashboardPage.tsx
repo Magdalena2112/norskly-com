@@ -165,6 +165,24 @@ export default function DashboardPage() {
                       {mod.title}
                     </h3>
                     <p className="text-sm text-muted-foreground mt-0.5">{mod.description}</p>
+                    {"buttonLabel" in mod && (
+                      <Button size="sm" variant="hero" className="mt-2">
+                        {(mod as any).buttonLabel}
+                      </Button>
+                    )}
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+                <CardContent className="pt-6 pb-6 flex items-start gap-4">
+                  <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${mod.gradient} flex items-center justify-center shrink-0`}>
+                    <mod.icon className="w-6 h-6 text-primary-foreground" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-foreground group-hover:text-accent transition-colors">
+                      {mod.title}
+                    </h3>
+                    <p className="text-sm text-muted-foreground mt-0.5">{mod.description}</p>
                   </div>
                 </CardContent>
               </Card>
