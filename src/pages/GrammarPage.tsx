@@ -8,7 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Progress } from "@/components/ui/progress";
-import { ArrowLeft, CheckCircle2, XCircle, ChevronRight, Loader2, BookOpen, PenTool, Brain, Eye, EyeOff } from "lucide-react";
+import { ArrowLeft, CheckCircle2, XCircle, ChevronRight, Loader2, BookOpen, PenTool, Brain, Eye, EyeOff, Search, Lightbulb, AlertTriangle } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { logActivity } from "@/lib/logActivity";
@@ -69,12 +69,15 @@ export default function GrammarPage() {
 
       <div className="flex-1 container max-w-2xl py-6">
         <Tabs defaultValue="exercises" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-3">
+          <TabsList className="grid w-full grid-cols-4">
             <TabsTrigger value="exercises" className="gap-1.5 text-xs sm:text-sm">
               <BookOpen className="w-4 h-4" /> Vežbe
             </TabsTrigger>
             <TabsTrigger value="correction" className="gap-1.5 text-xs sm:text-sm">
               <PenTool className="w-4 h-4" /> Korekcija
+            </TabsTrigger>
+            <TabsTrigger value="explain" className="gap-1.5 text-xs sm:text-sm">
+              <Search className="w-4 h-4" /> Objašnjenja
             </TabsTrigger>
             <TabsTrigger value="quiz" className="gap-1.5 text-xs sm:text-sm">
               <Brain className="w-4 h-4" /> Kviz
@@ -86,6 +89,9 @@ export default function GrammarPage() {
           </TabsContent>
           <TabsContent value="correction">
             <CorrectionTab level={level} userId={user?.id} />
+          </TabsContent>
+          <TabsContent value="explain">
+            <ExplainTab level={level} userId={user?.id} />
           </TabsContent>
           <TabsContent value="quiz">
             <QuizTab level={level} userId={user?.id} />
@@ -367,7 +373,174 @@ function CorrectionTab({ level, userId }: { level: string; userId?: string }) {
 }
 
 // ═══════════════════════════════════════
-// TAB 3: Mini Quiz
+// TAB 3: Objašnjenja (Free-form topic search)
+// ═══════════════════════════════════════
+interface ExplainExample {
+  no: string;
+  sr: string;
+}
+interface ExplainMistake {
+  pogresno: string;
+  tacno: string;
+  objasnjenje: string;
+}
+interface ExplainResult {
+  naslov: string;
+  definicija: string;
+  upotreba: string;
+  primeri: ExplainExample[];
+  tipicne_greske: ExplainMistake[];
+  mini_savet: string;
+}
+
+function ExplainTab({ level, userId }: { level: string; userId?: string }) {
+  const [query, setQuery] = useState("");
+  const [result, setResult] = useState<ExplainResult | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [logged, setLogged] = useState(false);
+
+  const search = async () => {
+    if (!query.trim()) return;
+    setLoading(true);
+    setResult(null);
+    setLogged(false);
+    try {
+      const data = await callGrammarAI({ action: "explain_topic", level, text: query.trim() });
+      setResult(data);
+      if (userId) {
+        await logActivity(userId, "grammar", "topic_explained", 8, { query: query.trim() });
+        setLogged(true);
+      }
+    } catch (e: any) {
+      console.error(e);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="space-y-4">
+      <Card className="shadow-nordic">
+        <CardHeader>
+          <CardTitle className="text-lg">Objašnjenja gramatike</CardTitle>
+          <CardDescription>
+            Postavite bilo koje pitanje o norveškoj gramatici — na srpskom ili norveškom.
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+            <Input
+              placeholder='npr. "leddsetninger med fordi", "razlika između for i til"...'
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && search()}
+              className="pl-10"
+              maxLength={200}
+            />
+          </div>
+          <Button variant="hero" className="w-full" onClick={search} disabled={loading || !query.trim()}>
+            {loading ? <><Loader2 className="w-4 h-4 animate-spin" /> Tražim objašnjenje...</> : "Objasni"}
+          </Button>
+        </CardContent>
+      </Card>
+
+      {result && (
+        <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="space-y-4">
+          {/* Title */}
+          <Card className="border-accent/30 bg-accent/5">
+            <CardContent className="pt-5 pb-5">
+              <h3 className="font-display font-bold text-lg text-foreground">{result.naslov}</h3>
+            </CardContent>
+          </Card>
+
+          {/* 1️⃣ Definicija */}
+          <Card>
+            <CardHeader className="pb-2">
+              <CardTitle className="text-base flex items-center gap-2">
+                <span>1️⃣</span> Definicija
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm text-foreground leading-relaxed">{result.definicija}</p>
+            </CardContent>
+          </Card>
+
+          {/* 2️⃣ Upotreba */}
+          <Card>
+            <CardHeader className="pb-2">
+              <CardTitle className="text-base flex items-center gap-2">
+                <span>2️⃣</span> Kako se koristi u praksi
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm text-foreground leading-relaxed">{result.upotreba}</p>
+            </CardContent>
+          </Card>
+
+          {/* 3️⃣ Primeri */}
+          {result.primeri && result.primeri.length > 0 && (
+            <Card>
+              <CardHeader className="pb-2">
+                <CardTitle className="text-base flex items-center gap-2">
+                  <span>3️⃣</span> Primeri
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-2">
+                {result.primeri.map((p, i) => (
+                  <div key={i} className="p-3 rounded-lg bg-muted space-y-1">
+                    <p className="text-sm font-medium text-foreground">{p.no}</p>
+                    <p className="text-xs text-muted-foreground">{p.sr}</p>
+                  </div>
+                ))}
+              </CardContent>
+            </Card>
+          )}
+
+          {/* 4️⃣ Tipične greške */}
+          {result.tipicne_greske && result.tipicne_greske.length > 0 && (
+            <Card>
+              <CardHeader className="pb-2">
+                <CardTitle className="text-base flex items-center gap-2">
+                  <AlertTriangle className="w-4 h-4 text-destructive" />
+                  <span>4️⃣</span> Tipične greške
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-2">
+                {result.tipicne_greske.map((m, i) => (
+                  <div key={i} className="p-3 rounded-lg bg-destructive/5 border border-destructive/10 space-y-1">
+                    <div className="flex gap-2 text-sm">
+                      <span className="text-destructive line-through">{m.pogresno}</span>
+                      <span className="text-accent">→ {m.tacno}</span>
+                    </div>
+                    <p className="text-xs text-muted-foreground">{m.objasnjenje}</p>
+                  </div>
+                ))}
+              </CardContent>
+            </Card>
+          )}
+
+          {/* 5️⃣ Mini savet */}
+          {result.mini_savet && (
+            <Card className="border-accent/30 bg-accent/5">
+              <CardContent className="pt-5 pb-5 flex gap-3 items-start">
+                <Lightbulb className="w-5 h-5 text-accent shrink-0 mt-0.5" />
+                <p className="text-sm text-foreground">{result.mini_savet}</p>
+              </CardContent>
+            </Card>
+          )}
+
+          {logged && (
+            <p className="text-center text-xs text-accent font-medium">✅ +8 poena zabeleženo</p>
+          )}
+        </motion.div>
+      )}
+    </div>
+  );
+}
+
+// ═══════════════════════════════════════
+// TAB 4: Mini Quiz
 // ═══════════════════════════════════════
 function QuizTab({ level, userId }: { level: string; userId?: string }) {
   const [topic, setTopic] = useState("");

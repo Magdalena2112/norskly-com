@@ -130,6 +130,31 @@ Odgovori ISKLJUČIVO u JSON formatu, bez markdown-a. Format:
   ]
 }` + qualityCheck;
       userPrompt = `Generiši 5 kviz pitanja na temu "${topic}". Nivo: ${level}. Svako pitanje ima 4 opcije i jedno tačno rešenje.`;
+    } else if (action === "explain_topic") {
+      systemPrompt = `Ti si nastavnik norveškog jezika (Bokmål). Objašnjavaš gramatičke teme za nivo ${level}.
+${cefrFocus}
+
+Korisnik može postaviti pitanje na srpskom, norveškom ili mešovito. Protumači nameru čak i ako je formulacija neformalna.
+Ako je tema preširoka, automatski je suzi na najkorisniji aspekt za nivo ${level}.
+Ako je tema napredna za nivo korisnika, pojednostavi objašnjenje.
+
+Odgovori ISKLJUČIVO u JSON formatu, bez markdown-a. Format:
+{
+  "naslov": "Kratki naslov teme na srpskom",
+  "definicija": "Jednostavno objašnjenje pravila na srpskom, prilagođeno nivou ${level}",
+  "upotreba": "Kada i kako se koristi u svakodnevnoj komunikaciji (na srpskom)",
+  "primeri": [
+    { "no": "Rečenica na norveškom", "sr": "Prevod na srpski" }
+  ],
+  "tipicne_greske": [
+    { "pogresno": "Pogrešan primer", "tacno": "Tačan primer", "objasnjenje": "Kratko objašnjenje" }
+  ],
+  "mini_savet": "Kratak praktičan savet za učenje"
+}
+
+Generiši 3–5 primera prilagođenih nivou ${level}. Navedi 1–3 tipične greške specifične za nivo.
+Objašnjenja piši na srpskom, primere na norveškom.` + qualityCheck;
+      userPrompt = `Objasni sledeću gramatičku temu za nivo ${level}:\n\n"${text || topic}"`;
     } else {
       return new Response(JSON.stringify({ error: "Invalid action" }), {
         status: 400,
