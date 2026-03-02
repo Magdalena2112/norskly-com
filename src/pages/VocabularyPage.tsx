@@ -281,6 +281,15 @@ function SentenceTab({ level, userId }: { level: string; userId?: string }) {
         await logErrors(userId, "vocabulary", "exercise_check", data._errors.slice(0, 2), selectedWord);
       }
 
+      // Award XP for sentence writing: +6, +2 bonus if correct
+      if (userId) {
+        const bonus = data.is_correct ? 2 : 0;
+        await logActivity(userId, "vocabulary", "sentence_written", 6 + bonus, {
+          word: selectedWord,
+          is_correct: data.is_correct,
+        }, { checkDailyBonus: true });
+      }
+
       // Save user_sentence to vocab_items
       if (userId) {
         const item = savedWords.find((w) => w.word === selectedWord);
