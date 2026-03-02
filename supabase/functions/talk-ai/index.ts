@@ -100,15 +100,9 @@ Objašnjenja piši jednostavno na srpskom, bez lingvističkog žargona.`;
 
     // ── CHAT action ──
     if (action === "chat") {
-      const situationCtx = settings?.situation
-        ? `Situacija: ${settings.situation}.`
-        : "";
-      const formalityCtx = settings?.formality
-        ? `Formalnost: ${settings.formality}.`
-        : "";
-      const roleCtx = settings?.role
-        ? `Tvoja uloga u razgovoru: ${settings.role}.`
-        : "";
+      const situationCtx = settings?.situation ? `Situacija: ${settings.situation}.` : "";
+      const formalityCtx = settings?.formality ? `Formalnost: ${settings.formality}.` : "";
+      const roleCtx = settings?.role ? `Tvoja uloga u razgovoru: ${settings.role}.` : "";
 
       const systemPrompt = `Ti si AI sagovornik za vežbanje norveškog jezika (Bokmål).
 Korisnik se zove ${profile?.name || "korisnik"}, nivo je ${profile?.level || "A1"}, cilj učenja: ${profile?.learning_goal || "svakodnevna komunikacija"}.
@@ -186,8 +180,22 @@ Odgovori ISKLJUČIVO u JSON formatu, bez markdown-a. Format:
     "povezivanje": "kratka ocena",
     "prirodnost": "kratka ocena"
   },
-  "sledeci_korak": ["preporuka 1", "preporuka 2"]
+  "sledeci_korak": ["preporuka 1", "preporuka 2"],
+  "_errors": [
+    {
+      "category": "kategorija greške",
+      "topic": "specifična tema",
+      "severity": 1-3,
+      "example_wrong": "pogrešan primer iz razgovora",
+      "example_correct": "ispravljena verzija"
+    }
+  ]
 }
+
+PRAVILA ZA _errors:
+- Identifikuj TAČNO 3 najvažnije greške iz razgovora.
+- Svaka greška mora imati konkretan primer iz razgovora.
+- Kategorije: word_order, verb_form, preposition, article, spelling, gender, meaning_confusion, idiom_misuse, formality_mismatch.
 
 Strengths i mistakes piši na srpskom. Strengths su pozitivne stvari iz razgovora. Mistakes su konkretne greške.
 Nivo analiza: oceni svaku od 5 dimenzija kratko (1 rečenica). Sledeći korak: daj 1-2 konkretne preporuke.

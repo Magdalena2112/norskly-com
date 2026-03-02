@@ -30,6 +30,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import { logActivity } from "@/lib/logActivity";
+import { logErrors } from "@/lib/logErrors";
 import { toast } from "sonner";
 import { formatDistanceToNow } from "date-fns";
 import { sr } from "date-fns/locale";
@@ -299,11 +300,16 @@ export default function PracticePage() {
 
       if (!resp.ok) throw new Error("Recap failed");
 
-      const data: RecapData = await resp.json();
+      const data = await resp.json();
       setRecap(data);
 
       // Save session to DB
       await saveSession(data);
+
+      // Log structured errors from recap (exactly 3)
+      if (user && data._errors?.length) {
+        await logErrors(user.id, "talk", "recap", data._errors.slice(0, 3), situation);
+      }
 
       if (user) {
         await logActivity(user.id, "talk", "session_complete", 12, {
