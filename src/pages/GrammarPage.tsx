@@ -9,7 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Progress } from "@/components/ui/progress";
 import { ArrowLeft, CheckCircle2, XCircle, ChevronRight, Loader2, BookOpen, PenTool, Brain, Eye, EyeOff, Search, Lightbulb, AlertTriangle } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { logActivity } from "@/lib/logActivity";
 import { logErrors } from "@/lib/logErrors";
@@ -52,7 +52,12 @@ export default function GrammarPage() {
   const { profile } = useProfile();
   const { user } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   const level = profile.level || "A1";
+
+  // Accept navigation state from Progress page
+  const navState = (location.state as { tab?: string; query?: string; topic?: string }) || {};
+  const defaultTab = navState.tab || "exercises";
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
@@ -69,7 +74,7 @@ export default function GrammarPage() {
       </header>
 
       <div className="flex-1 container max-w-2xl py-6">
-        <Tabs defaultValue="exercises" className="space-y-6">
+        <Tabs defaultValue={defaultTab} className="space-y-6">
           <TabsList className="grid w-full grid-cols-4">
             <TabsTrigger value="exercises" className="gap-1.5 text-xs sm:text-sm">
               <BookOpen className="w-4 h-4" /> Vežbe
@@ -86,16 +91,16 @@ export default function GrammarPage() {
           </TabsList>
 
           <TabsContent value="exercises">
-            <ExercisesTab level={level} userId={user?.id} />
+            <ExercisesTab level={level} userId={user?.id} initialTopic={navState.tab === "exercises" ? navState.topic : undefined} />
           </TabsContent>
           <TabsContent value="correction">
             <CorrectionTab level={level} userId={user?.id} />
           </TabsContent>
           <TabsContent value="explain">
-            <ExplainTab level={level} userId={user?.id} />
+            <ExplainTab level={level} userId={user?.id} initialQuery={navState.tab === "explain" ? navState.query : undefined} />
           </TabsContent>
           <TabsContent value="quiz">
-            <QuizTab level={level} userId={user?.id} />
+            <QuizTab level={level} userId={user?.id} initialTopic={navState.tab === "quiz" ? navState.topic : undefined} />
           </TabsContent>
         </Tabs>
       </div>
@@ -129,8 +134,8 @@ function getHint(attempt: number, solution: string, answer: string): string {
   return hints[Math.min(attempt - 1, hints.length - 1)];
 }
 
-function ExercisesTab({ level, userId }: { level: string; userId?: string }) {
-  const [topic, setTopic] = useState("");
+function ExercisesTab({ level, userId, initialTopic }: { level: string; userId?: string; initialTopic?: string }) {
+  const [topic, setTopic] = useState(initialTopic || "");
   const [count, setCount] = useState(5);
   const [exercises, setExercises] = useState<Exercise[]>([]);
   const [states, setStates] = useState<ExerciseState[]>([]);
@@ -505,8 +510,8 @@ interface ExplainResult {
   mini_savet: string;
 }
 
-function ExplainTab({ level, userId }: { level: string; userId?: string }) {
-  const [query, setQuery] = useState("");
+function ExplainTab({ level, userId, initialQuery }: { level: string; userId?: string; initialQuery?: string }) {
+  const [query, setQuery] = useState(initialQuery || "");
   const [result, setResult] = useState<ExplainResult | null>(null);
   const [loading, setLoading] = useState(false);
   const [logged, setLogged] = useState(false);
@@ -654,8 +659,8 @@ function ExplainTab({ level, userId }: { level: string; userId?: string }) {
 // ═══════════════════════════════════════
 // TAB 4: Mini Quiz
 // ═══════════════════════════════════════
-function QuizTab({ level, userId }: { level: string; userId?: string }) {
-  const [topic, setTopic] = useState("");
+function QuizTab({ level, userId, initialTopic }: { level: string; userId?: string; initialTopic?: string }) {
+  const [topic, setTopic] = useState(initialTopic || "");
   const [questions, setQuestions] = useState<QuizQuestion[]>([]);
   const [current, setCurrent] = useState(0);
   const [selected, setSelected] = useState<number | null>(null);
