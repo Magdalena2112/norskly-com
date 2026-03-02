@@ -43,7 +43,25 @@ const modules = [
 
 export default function DashboardPage() {
   const { profile } = useProfile();
+  const { user } = useAuth();
   const navigate = useNavigate();
+
+  const [xpData, setXpData] = useState<{ total_xp: number; level: number } | null>(null);
+
+  useEffect(() => {
+    if (!user) return;
+    (async () => {
+      const { data } = await supabase
+        .from("user_xp")
+        .select("total_xp, level")
+        .eq("user_id", user.id)
+        .maybeSingle();
+      setXpData(data || { total_xp: 0, level: 1 });
+    })();
+  }, [user]);
+
+  const xpInLevel = xpData ? xpData.total_xp % 100 : 0;
+  const xpForNext = 100;
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
@@ -51,6 +69,11 @@ export default function DashboardPage() {
         <div className="container flex items-center justify-between h-14">
           <span className="font-display font-bold text-lg text-foreground">Norskly</span>
           <div className="flex items-center gap-2">
+            {xpData && (
+              <span className="text-xs bg-primary/10 text-primary px-2.5 py-1 rounded-full font-semibold flex items-center gap-1">
+                <Zap className="w-3 h-3" /> Lvl {xpData.level} · {xpData.total_xp} XP
+              </span>
+            )}
             <span className="text-xs bg-accent/10 text-accent px-3 py-1 rounded-full font-medium">
               {profile.level} · {profile.learning_goal}
             </span>
@@ -66,8 +89,31 @@ export default function DashboardPage() {
           <h1 className="text-3xl font-display font-bold text-foreground mb-1">
             Hei, {profile.name || "korisniče"}! 👋
           </h1>
-          <p className="text-muted-foreground mb-6">Izaberi modul i nastavi sa učenjem norveškog.</p>
+          <p className="text-muted-foreground mb-4">Izaberi modul i nastavi sa učenjem norveškog.</p>
         </motion.div>
+
+        {/* XP Progress Card */}
+        {xpData && (
+          <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.05 }}>
+            <Card className="mb-6 shadow-nordic border-primary/15 bg-gradient-to-r from-primary/5 to-accent/5">
+              <CardContent className="pt-5 pb-5">
+                <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center gap-2">
+                    <div className="w-9 h-9 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-bold">
+                      {xpData.level}
+                    </div>
+                    <div>
+                      <p className="text-sm font-semibold text-foreground">Level {xpData.level}</p>
+                      <p className="text-[11px] text-muted-foreground">{xpData.total_xp} ukupno XP</p>
+                    </div>
+                  </div>
+                  <p className="text-xs text-muted-foreground">{xpInLevel}/{xpForNext} XP do sledećeg nivoa</p>
+                </div>
+                <Progress value={(xpInLevel / xpForNext) * 100} className="h-2.5" />
+              </CardContent>
+            </Card>
+          </motion.div>
+        )}
 
         <WeeklyDigest />
 
