@@ -15,6 +15,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { logActivity } from "@/lib/logActivity";
+import { logErrors } from "@/lib/logErrors";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 // ─── Types ───
@@ -274,6 +275,11 @@ function SentenceTab({ level, userId }: { level: string; userId?: string }) {
         sentence: sentence.trim(),
       });
       setResult(data);
+
+      // Log errors from sentence correction
+      if (userId && data._errors?.length) {
+        await logErrors(userId, "vocabulary", "exercise_check", data._errors.slice(0, 2), selectedWord);
+      }
 
       // Save user_sentence to vocab_items
       if (userId) {
@@ -598,10 +604,24 @@ function QuizTab({ level, userId }: { level: string; userId?: string }) {
     }
   };
 
-  const handleSelect = (idx: number) => {
+  const handleSelect = async (idx: number) => {
     if (selected !== null) return;
     setSelected(idx);
-    if (idx === questions[current].correct) setScore((s) => s + 1);
+    if (idx === questions[current].correct) {
+      setScore((s) => s + 1);
+    } else if (userId) {
+      const q = questions[current];
+      const errorData = (q as any)._error;
+      if (errorData) {
+        await logErrors(userId, "vocabulary", "quiz", [{
+          category: errorData.category || "meaning_confusion",
+          topic: errorData.topic || "vocabulary quiz",
+          severity: errorData.severity || 1,
+          example_wrong: errorData.example_wrong || q.options[idx],
+          example_correct: errorData.example_correct || q.options[q.correct],
+        }]);
+      }
+    }
   };
 
   const handleNext = async () => {

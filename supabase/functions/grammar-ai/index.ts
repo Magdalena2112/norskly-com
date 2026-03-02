@@ -8,6 +8,22 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
+const ERROR_EXTRACT_BLOCK = `
+
+Takođe, u odgovor OBAVEZNO dodaj polje "_errors" koje sadrži strukturirane greške korisnika.
+Format:
+"_errors": [
+  {
+    "category": "kratka kategorija greške (npr. word_order, verb_form, preposition, article, spelling)",
+    "topic": "specifična tema (npr. V2 pravilo, presens vs perfektum)",
+    "severity": 1-3 (1=mala, 2=srednja, 3=velika),
+    "example_wrong": "pogrešan deo",
+    "example_correct": "tačan deo"
+  }
+]
+Ako nema grešaka, vrati prazan niz: "_errors": []
+`;
+
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response("ok", { headers: corsHeaders });
@@ -75,6 +91,7 @@ Navedi snage kratko, identifikuj NAJVIŠE 2 oblasti za poboljšanje.`;
 
     let systemPrompt = "";
     let userPrompt = "";
+    let errorLimit = 2;
 
     if (action === "generate_exercises") {
       systemPrompt = `Ti si nastavnik norveškog jezika (Bokmål). Generišeš gramatičke vežbe za nivo ${level}.
@@ -91,7 +108,23 @@ Odgovori ISKLJUČIVO u JSON formatu, bez markdown-a. Format:
   ]
 }` + qualityCheck;
       userPrompt = `Generiši ${count || 5} vežbi na temu "${topic}". Nivo: ${level}. Svaka vežba treba da ima rečenicu sa blankom i rešenje.`;
+    } else if (action === "check_exercise") {
+      errorLimit = 2;
+      systemPrompt = `Ti si nastavnik norveškog jezika (Bokmål). Korisnik pokušava da reši gramatičku vežbu.
+Odgovori ISKLJUČIVO u JSON formatu, bez markdown-a. Format:
+{
+  "is_correct": true/false,
+  "hint": "Ako je netačno: kratki hint na srpskom koji ukazuje na pravilo, bez davanja odgovora. Ako je tačno: kratka pohvala.",
+  "close": true/false,
+  "_errors": [...]
+}
+${ERROR_EXTRACT_BLOCK}
+OGRANIČENJE: Maksimalno ${errorLimit} greške u _errors nizu.
+Ako je tačan odgovor, "_errors" mora biti prazan niz.` + qualityCheck;
+      userPrompt = `Vežba: "${text}"\nKorisnikov odgovor: "${topic}"\nTačan odgovor: "${count}"\nNivo: ${level}\nBroj pokušaja: ${(await req.clone().json()).attempt_no || 1}`;
+      // Re-parse to get attempt_no properly
     } else if (action === "correct_text") {
+      errorLimit = 5;
       systemPrompt = `Ti si nastavnik norveškog jezika (Bokmål). Ispravljaš tekst korisnika na nivou ${level}.
 Odgovori ISKLJUČIVO u JSON formatu, bez markdown-a. Format:
 {
@@ -111,8 +144,11 @@ Odgovori ISKLJUČIVO u JSON formatu, bez markdown-a. Format:
     "povezivanje": "kratka ocena",
     "prirodnost": "kratka ocena"
   },
-  "sledeci_korak": ["preporuka 1", "preporuka 2"]
+  "sledeci_korak": ["preporuka 1", "preporuka 2"],
+  "_errors": [...]
 }
+${ERROR_EXTRACT_BLOCK}
+OGRANIČENJE: Maksimalno ${errorLimit} grešaka u _errors nizu.
 ${cefrEvalBlock}` + qualityCheck;
       userPrompt = `Ispravi sledeći tekst na norveškom i objasni greške:\n\n"${text}"`;
     } else if (action === "generate_quiz") {
@@ -125,11 +161,18 @@ Odgovori ISKLJUČIVO u JSON formatu, bez markdown-a. Format:
       "question": "Pitanje na srpskom",
       "options": ["opcija1", "opcija2", "opcija3", "opcija4"],
       "correct": 0,
-      "explanation": "Objašnjenje na srpskom"
+      "explanation": "Objašnjenje na srpskom",
+      "_error": {
+        "category": "kategorija greške",
+        "topic": "specifična tema",
+        "severity": 1,
+        "example_wrong": "pogrešna opcija koja se najčešće bira",
+        "example_correct": "tačan odgovor"
+      }
     }
   ]
 }` + qualityCheck;
-      userPrompt = `Generiši 5 kviz pitanja na temu "${topic}". Nivo: ${level}. Svako pitanje ima 4 opcije i jedno tačno rešenje.`;
+      userPrompt = `Generiši 5 kviz pitanja na temu "${topic}". Nivo: ${level}. Svako pitanje ima 4 opcije i jedno tačno rešenje. Za svako pitanje dodaj _error objekat sa kategorijom greške.`;
     } else if (action === "explain_topic") {
       systemPrompt = `Ti si nastavnik norveškog jezika (Bokmål). Objašnjavaš gramatičke teme za nivo ${level}.
 ${cefrFocus}
@@ -186,19 +229,28 @@ Objašnjenja piši na srpskom, primere na norveškom.` + qualityCheck;
 
     const aiData = await aiResponse.json();
     let content = aiData.choices?.[0]?.message?.content || "";
-
-    // Strip markdown code fences if present
     content = content.replace(/```json\s*/g, "").replace(/```\s*/g, "").trim();
 
     let parsed;
     try {
       parsed = JSON.parse(content);
     } catch {
-      console.error("Failed to parse AI response:", content);
-      throw new Error("Invalid AI response format");
+      const jsonMatch = content.match(/\{[\s\S]*\}/);
+      if (jsonMatch) {
+        try {
+          let cleaned = jsonMatch[0].replace(/,\s*}/g, "}").replace(/,\s*]/g, "]");
+          parsed = JSON.parse(cleaned);
+        } catch {
+          console.error("Failed to parse AI response after repair:", content);
+          throw new Error("Invalid AI response format");
+        }
+      } else {
+        console.error("No JSON found in AI response:", content);
+        throw new Error("Invalid AI response format");
+      }
     }
 
-    // If correction, save to grammar_submissions
+    // Save correction to grammar_submissions
     if (action === "correct_text") {
       await supabase.from("grammar_submissions").insert({
         user_id: user.id,

@@ -12,6 +12,7 @@ import { ArrowLeft, CheckCircle2, XCircle, ChevronRight, Loader2, BookOpen, PenT
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { logActivity } from "@/lib/logActivity";
+import { logErrors } from "@/lib/logErrors";
 
 // ─── Types ───
 interface Exercise {
@@ -170,6 +171,16 @@ function ExercisesTab({ level, userId }: { level: string; userId?: string }) {
       }
     } else {
       const newAttempts = st.attempts + 1;
+      // Log error on each wrong attempt
+      if (userId) {
+        await logErrors(userId, "grammar", "exercise_check", [{
+          category: "exercise_mistake",
+          topic: topic || "grammar exercise",
+          severity: newAttempts >= 3 ? 2 : 1,
+          example_wrong: st.answer,
+          example_correct: ex.solution,
+        }], ex.sentence, newAttempts);
+      }
       if (newAttempts >= 3) {
         updateState(i, { status: "revealed", attempts: newAttempts, feedback: "" });
         if (userId && !st.logged) {
@@ -342,6 +353,10 @@ function CorrectionTab({ level, userId }: { level: string; userId?: string }) {
         await logActivity(userId, "grammar", "text_corrected", 12, {
           mistakes_count: data.mistakes?.length || 0,
         });
+        // Log structured errors from AI
+        if (data._errors?.length) {
+          await logErrors(userId, "grammar", "text_correction", data._errors.slice(0, 5));
+        }
         setLogged(true);
       }
     } catch (e: any) {
@@ -668,10 +683,25 @@ function QuizTab({ level, userId }: { level: string; userId?: string }) {
     }
   };
 
-  const handleSelect = (idx: number) => {
+  const handleSelect = async (idx: number) => {
     if (selected !== null) return;
     setSelected(idx);
-    if (idx === questions[current].correct) setScore((s) => s + 1);
+    if (idx === questions[current].correct) {
+      setScore((s) => s + 1);
+    } else if (userId) {
+      // Log quiz wrong answer error
+      const q = questions[current];
+      const errorData = (q as any)._error;
+      if (errorData) {
+        await logErrors(userId, "grammar", "quiz", [{
+          category: errorData.category || "quiz_mistake",
+          topic: errorData.topic || topic,
+          severity: errorData.severity || 1,
+          example_wrong: errorData.example_wrong || q.options[idx],
+          example_correct: errorData.example_correct || q.options[q.correct],
+        }]);
+      }
+    }
   };
 
   const handleNext = async () => {

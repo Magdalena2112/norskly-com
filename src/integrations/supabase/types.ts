@@ -44,6 +44,51 @@ export type Database = {
         }
         Relationships: []
       }
+      error_events: {
+        Row: {
+          attempt_no: number | null
+          category: string
+          context: string | null
+          created_at: string
+          example_correct: string
+          example_wrong: string
+          id: string
+          module: string
+          severity: number
+          source_type: string
+          topic: string
+          user_id: string
+        }
+        Insert: {
+          attempt_no?: number | null
+          category: string
+          context?: string | null
+          created_at?: string
+          example_correct: string
+          example_wrong: string
+          id?: string
+          module: string
+          severity?: number
+          source_type: string
+          topic: string
+          user_id: string
+        }
+        Update: {
+          attempt_no?: number | null
+          category?: string
+          context?: string | null
+          created_at?: string
+          example_correct?: string
+          example_wrong?: string
+          id?: string
+          module?: string
+          severity?: number
+          source_type?: string
+          topic?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       grammar_submissions: {
         Row: {
           corrected_text: string | null

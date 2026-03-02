@@ -8,6 +8,22 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
 
+const ERROR_EXTRACT_BLOCK = `
+
+Takođe, u odgovor OBAVEZNO dodaj polje "_errors" koje sadrži strukturirane greške korisnika.
+Format:
+"_errors": [
+  {
+    "category": "kratka kategorija greške (npr. word_order, verb_form, preposition, meaning_confusion, spelling, wrong_gender)",
+    "topic": "specifična tema (npr. pogrešan rod imenice, zamena značenja reči)",
+    "severity": 1-3 (1=mala, 2=srednja, 3=velika),
+    "example_wrong": "pogrešan deo",
+    "example_correct": "tačan deo"
+  }
+]
+Ako nema grešaka, vrati prazan niz: "_errors": []
+`;
+
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response("ok", { headers: corsHeaders });
@@ -58,19 +74,8 @@ OBAVEZNA SAMOPROVERA pre slanja odgovora:
 - Nema kontradikcija i nema "čudnih" formulacija.
 Ako bilo šta nije sigurno: pojednostavi rečenicu. Ne dodaj nove informacije.`;
 
-    const cefrEvalBlock = `
-
-VIŠEDIMENZIONALNA EVALUACIJA za ispravku rečenice:
-Nivo korisnika: ${level}. ${cefrFocus}
-
-Kad ispravljaš korisnikovu rečenicu, evaluiraj po 5 dimenzija:
-1. Gramatika 2. Vokabular 3. Jasnoća 4. Povezivanje 5. Prirodnost
-Navedi snage kratko, identifikuj NAJVIŠE 2 oblasti za poboljšanje.`;
-
     let systemPrompt = "";
     let userPrompt = "";
-
-
 
     if (action === "generate_vocab") {
       systemPrompt = `Ti si nastavnik norveškog jezika (Bokmål). Generišeš vokabular za nivo ${level}.
@@ -103,9 +108,11 @@ Odgovori ISKLJUČIVO u JSON formatu, bez markdown-a. Format:
     "povezivanje": "kratka ocena",
     "prirodnost": "kratka ocena"
   },
-  "sledeci_korak": ["preporuka 1", "preporuka 2"]
+  "sledeci_korak": ["preporuka 1", "preporuka 2"],
+  "_errors": [...]
 }
-${cefrEvalBlock}` + qualityCheck;
+${ERROR_EXTRACT_BLOCK}
+OGRANIČENJE: Maksimalno 2 greške u _errors nizu.` + qualityCheck;
       userPrompt = `Korisnik je napisao: "${sentence}"\nReč koju treba da koristi: "${word}"\nNivo: ${level}`;
     } else if (action === "generate_quiz") {
       systemPrompt = `Ti si nastavnik norveškog jezika (Bokmål). Generišeš kviz pitanja iz datih reči za nivo ${level}.
@@ -117,11 +124,18 @@ Odgovori ISKLJUČIVO u JSON formatu, bez markdown-a. Format:
       "question": "Pitanje na srpskom",
       "options": ["opcija1", "opcija2", "opcija3", "opcija4"],
       "correct": 0,
-      "explanation": "Objašnjenje na srpskom"
+      "explanation": "Objašnjenje na srpskom",
+      "_error": {
+        "category": "kategorija greške (npr. meaning_confusion, wrong_translation, wrong_gender)",
+        "topic": "specifična tema",
+        "severity": 1,
+        "example_wrong": "pogrešna opcija",
+        "example_correct": "tačan odgovor"
+      }
     }
   ]
 }` + qualityCheck;
-      userPrompt = `Generiši 10 kviz pitanja koristeći sledeće norveške reči: ${theme}. Nivo: ${level}. Pitanja mogu biti prevod, popuni blanko, sinonim/antonim itd.`;
+      userPrompt = `Generiši 10 kviz pitanja koristeći sledeće norveške reči: ${theme}. Nivo: ${level}. Pitanja mogu biti prevod, popuni blanko, sinonim/antonim itd. Za svako pitanje dodaj _error objekat.`;
     } else {
       return new Response(JSON.stringify({ error: "Invalid action" }), {
         status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" },
@@ -163,14 +177,12 @@ Odgovori ISKLJUČIVO u JSON formatu, bez markdown-a. Format:
 
     const aiData = await aiResponse.json();
     let content = aiData.choices?.[0]?.message?.content || "";
-    // Strip markdown fences
     content = content.replace(/```json\s*/gi, "").replace(/```\s*/g, "").trim();
 
     let parsed;
     try {
       parsed = JSON.parse(content);
     } catch {
-      // Try to extract JSON from mixed text
       const jsonMatch = content.match(/\{[\s\S]*\}/);
       if (jsonMatch) {
         try {
