@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useProfile } from "@/context/ProfileContext";
 import { useAuth } from "@/context/AuthContext";
 import { Button } from "@/components/ui/button";
@@ -7,10 +7,16 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Progress } from "@/components/ui/progress";
 import {
   ArrowLeft, BookOpen, MessageSquare, Brain, TrendingUp,
-  AlertTriangle, Search, PenTool, Loader2, Sparkles,
+  AlertTriangle, Search, PenTool, Loader2, Sparkles, Award, ArrowUpCircle,
 } from "lucide-react";
+import {
+  AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent,
+  AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
+
+const CEFR_ORDER = ["A1", "A2", "B1", "B2", "C1"] as const;
 
 const levelProgress: Record<string, number> = {
   A1: 10, A2: 30, B1: 50, B2: 70, C1: 90,
