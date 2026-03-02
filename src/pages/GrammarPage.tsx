@@ -172,7 +172,6 @@ function ExercisesTab({ level, userId, initialTopic }: { level: string; userId?:
     if (userAns === correctAns) {
       updateState(i, { status: "correct", feedback: "Odlično! Tačan odgovor. 🎉", attempts: st.attempts + 1 });
       if (userId && !st.logged) {
-        await logActivity(userId, "grammar", "exercise_correct", 2, { topic, exercise_id: ex.id });
         updateState(i, { logged: true });
       }
     } else {
