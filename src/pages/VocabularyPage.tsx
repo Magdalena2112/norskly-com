@@ -201,7 +201,12 @@ function GenerateTab({ level, userId }: { level: string; userId?: string }) {
           {words.map((w, i) => (
             <Card key={i}>
               <CardContent className="pt-5 pb-5 space-y-2">
-                <p className="text-xl font-display font-bold text-foreground">{w.word} <span className="text-base font-normal text-muted-foreground">— {w.translation}</span></p>
+                <div className="flex items-center gap-2">
+                  <p className="text-xl font-display font-bold text-foreground">{w.word} <span className="text-base font-normal text-muted-foreground">— {w.translation}</span></p>
+                  <Button variant="ghost" size="icon" className="h-8 w-8 shrink-0" onClick={() => speakNorwegian(w.word)} title="Izgovor">
+                    <Volume2 className="w-4 h-4 text-accent" />
+                  </Button>
+                </div>
                 <div className="flex flex-wrap gap-3 text-xs">
                   {w.synonym && (
                     <span className="bg-accent/10 text-accent px-2 py-1 rounded-full">
