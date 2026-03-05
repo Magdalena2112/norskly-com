@@ -46,6 +46,20 @@ interface QuizQuestion {
   explanation: string;
 }
 
+// ─── TTS helper ───
+function speakNorwegian(text: string) {
+  if (!window.speechSynthesis) return;
+  window.speechSynthesis.cancel();
+  const utter = new SpeechSynthesisUtterance(text);
+  utter.lang = "nb-NO";
+  utter.rate = 0.9;
+  // Try to find a Norwegian voice
+  const voices = window.speechSynthesis.getVoices();
+  const nbVoice = voices.find((v) => v.lang.startsWith("nb") || v.lang.startsWith("no"));
+  if (nbVoice) utter.voice = nbVoice;
+  window.speechSynthesis.speak(utter);
+}
+
 // ─── AI call helper ───
 async function callVocabAI(body: Record<string, unknown>) {
   const { data: { session } } = await supabase.auth.getSession();
