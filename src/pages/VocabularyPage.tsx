@@ -10,7 +10,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Progress } from "@/components/ui/progress";
 import {
   ArrowLeft, Loader2, BookOpen, PenTool, Brain, Layers,
-  CheckCircle2, XCircle, Save, ThumbsUp, ThumbsDown, RotateCcw,
+  CheckCircle2, XCircle, Save, ThumbsUp, ThumbsDown, RotateCcw, Volume2,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
@@ -44,6 +44,20 @@ interface QuizQuestion {
   options: string[];
   correct: number;
   explanation: string;
+}
+
+// ─── TTS helper ───
+function speakNorwegian(text: string) {
+  if (!window.speechSynthesis) return;
+  window.speechSynthesis.cancel();
+  const utter = new SpeechSynthesisUtterance(text);
+  utter.lang = "nb-NO";
+  utter.rate = 0.9;
+  // Try to find a Norwegian voice
+  const voices = window.speechSynthesis.getVoices();
+  const nbVoice = voices.find((v) => v.lang.startsWith("nb") || v.lang.startsWith("no"));
+  if (nbVoice) utter.voice = nbVoice;
+  window.speechSynthesis.speak(utter);
 }
 
 // ─── AI call helper ───
@@ -187,7 +201,12 @@ function GenerateTab({ level, userId }: { level: string; userId?: string }) {
           {words.map((w, i) => (
             <Card key={i}>
               <CardContent className="pt-5 pb-5 space-y-2">
-                <p className="text-xl font-display font-bold text-foreground">{w.word} <span className="text-base font-normal text-muted-foreground">— {w.translation}</span></p>
+                <div className="flex items-center gap-2">
+                  <p className="text-xl font-display font-bold text-foreground">{w.word} <span className="text-base font-normal text-muted-foreground">— {w.translation}</span></p>
+                  <Button variant="ghost" size="icon" className="h-8 w-8 shrink-0" onClick={() => speakNorwegian(w.word)} title="Izgovor">
+                    <Volume2 className="w-4 h-4 text-accent" />
+                  </Button>
+                </div>
                 <div className="flex flex-wrap gap-3 text-xs">
                   {w.synonym && (
                     <span className="bg-accent/10 text-accent px-2 py-1 rounded-full">
