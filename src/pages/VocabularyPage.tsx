@@ -134,6 +134,20 @@ export default function VocabularyPage() {
   );
 }
 
+// ─── Source Selector ───
+function SourceSelector({ source, setSource }: { source: "all" | "collections"; setSource: (s: "all" | "collections") => void }) {
+  return (
+    <div className="flex gap-2">
+      <Button variant={source === "all" ? "default" : "outline"} size="sm" className="flex-1" onClick={() => setSource("all")}>
+        Sve reči
+      </Button>
+      <Button variant={source === "collections" ? "default" : "outline"} size="sm" className="flex-1" onClick={() => setSource("collections")}>
+        Iz kolekcija
+      </Button>
+    </div>
+  );
+}
+
 // ═══════════════════════════════════════
 // TAB 1: Generate vocabulary by theme
 // ═══════════════════════════════════════
