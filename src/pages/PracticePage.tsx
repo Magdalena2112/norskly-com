@@ -225,6 +225,7 @@ export default function PracticePage() {
   const [pastSessions, setPastSessions] = useState<TalkSession[]>([]);
   const [historyLoading, setHistoryLoading] = useState(false);
   const [viewingSession, setViewingSession] = useState<TalkSession | null>(null);
+  const [currentSessionId, setCurrentSessionId] = useState<string | null>(null);
 
   const bottomRef = useRef<HTMLDivElement>(null);
 
@@ -240,7 +241,7 @@ export default function PracticePage() {
       .select("*")
       .eq("user_id", user.id)
       .order("created_at", { ascending: false })
-      .limit(20);
+      .limit(30);
 
     if (error) {
       console.error("Failed to fetch history:", error);
@@ -254,19 +255,60 @@ export default function PracticePage() {
     if (showHistory) fetchHistory();
   }, [showHistory, fetchHistory]);
 
+  /** Generate title from first user message */
+  const generateTitle = (msgs: Message[]): string => {
+    const firstUser = msgs.find(m => m.role === "user");
+    if (!firstUser) return "Novi razgovor";
+    const text = firstUser.content.slice(0, 60);
+    return text.length < firstUser.content.length ? text + "…" : text;
+  };
+
+  /** Auto-save: create or update session in DB */
+  const autoSaveSession = async (updatedMessages: Message[], recapData?: RecapData) => {
+    if (!user) return null;
+    const title = generateTitle(updatedMessages);
+
+    if (currentSessionId) {
+      // Update existing session
+      await supabase
+        .from("talk_sessions")
+        .update({
+          messages: updatedMessages as unknown as any,
+          message_count: updatedMessages.length,
+          title,
+          updated_at: new Date().toISOString(),
+          ...(recapData ? { recap: recapData as unknown as any, points: 12 } : {}),
+        } as any)
+        .eq("id", currentSessionId);
+      return currentSessionId;
+    } else {
+      // Create new session
+      const { data, error } = await supabase
+        .from("talk_sessions")
+        .insert({
+          user_id: user.id,
+          situation,
+          formality,
+          role,
+          messages: updatedMessages as unknown as any,
+          message_count: updatedMessages.length,
+          title,
+          points: 0,
+        } as any)
+        .select("id")
+        .single();
+      if (error) {
+        console.error("Failed to create session:", error);
+        return null;
+      }
+      const newId = (data as any)?.id;
+      setCurrentSessionId(newId);
+      return newId;
+    }
+  };
+
   const saveSession = async (recapData: RecapData) => {
-    if (!user) return;
-    const { error } = await supabase.from("talk_sessions").insert({
-      user_id: user.id,
-      situation,
-      formality,
-      role,
-      messages: messages as unknown as any,
-      recap: recapData as unknown as any,
-      message_count: messages.length,
-      points: 12,
-    });
-    if (error) console.error("Failed to save session:", error);
+    await autoSaveSession(messages, recapData);
   };
 
   const sendMessage = async (text: string) => {
