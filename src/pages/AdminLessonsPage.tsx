@@ -67,9 +67,14 @@ export default function AdminLessonsPage() {
             </Button>
             <h1 className="text-2xl font-bold text-foreground">Upravljanje lekcijama</h1>
           </div>
-          <Button variant="outline" onClick={() => navigate("/admin/availability")}>
-            <Settings className="h-4 w-4 mr-2" /> Termini
-          </Button>
+          <div className="flex gap-2">
+            <Button variant="outline" onClick={() => navigate("/admin/teacher-profile")}>
+              Profil nastavnika
+            </Button>
+            <Button variant="outline" onClick={() => navigate("/admin/availability")}>
+              <Settings className="h-4 w-4 mr-2" /> Termini
+            </Button>
+          </div>
         </div>
 
         <Card>
