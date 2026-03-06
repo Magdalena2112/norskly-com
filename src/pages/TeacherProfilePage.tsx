@@ -10,21 +10,13 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import { Skeleton } from "@/components/ui/skeleton";
 import { useToast } from "@/hooks/use-toast";
-import { ArrowLeft, Clock, GraduationCap, BookOpen, MessageSquare, Star, CalendarIcon } from "lucide-react";
+import { ArrowLeft, Clock, GraduationCap, BookOpen, Star, CalendarIcon } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { logActivity } from "@/lib/logActivity";
 import { motion } from "framer-motion";
-import teacherPhoto from "@/assets/teacher-photo.jpg";
-
-const TEACHER = {
-  name: "Ingrid Haugen",
-  bio: "Sertifikovani profesor norveškog jezika sa više od 8 godina iskustva u podučavanju stranih studenata. Specijalizovana za komunikativni pristup i prilagođavanje nastave individualnim potrebama svakog studenta.",
-  focus: ["Konverzacija", "Gramatika", "Poslovni norveški", "Priprema za Norskprøven"],
-  duration: 90,
-  rating: 4.9,
-  students: 120,
-};
+import teacherPhotoFallback from "@/assets/teacher-photo.jpg";
 
 export default function TeacherProfilePage() {
   const { user } = useAuth();
@@ -35,6 +27,19 @@ export default function TeacherProfilePage() {
   const [selectedSlot, setSelectedSlot] = useState<any>(null);
   const [note, setNote] = useState("");
   const [dialogOpen, setDialogOpen] = useState(false);
+
+  const { data: teacher, isLoading: teacherLoading } = useQuery({
+    queryKey: ["teacher-profile"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("teacher_profile")
+        .select("*")
+        .limit(1)
+        .maybeSingle();
+      if (error) throw error;
+      return data;
+    },
+  });
 
   const { data: slots = [], isLoading } = useQuery({
     queryKey: ["open-slots"],
@@ -100,9 +105,17 @@ export default function TeacherProfilePage() {
 
   const datesWithSlots = slots.map((s: any) => new Date(s.start_time));
 
+  const teacherName = teacher?.name || "Ingrid Haugen";
+  const teacherBio = teacher?.bio || "";
+  const teacherFocus: string[] = teacher?.focus || [];
+  const teacherDuration = teacher?.duration_minutes || 90;
+  const teacherRating = teacher?.rating || 4.9;
+  const teacherStudents = teacher?.students_count || 120;
+  const teacherPhoto = teacher?.photo_url || teacherPhotoFallback;
+  const initials = teacherName.split(" ").map((n: string) => n[0]).join("");
+
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
       <header className="border-b border-border bg-background/80 backdrop-blur-md sticky top-0 z-50">
         <div className="container flex items-center gap-3 h-14">
           <Button variant="ghost" size="icon" onClick={() => navigate("/practice")}>
@@ -118,41 +131,56 @@ export default function TeacherProfilePage() {
           <Card className="overflow-hidden">
             <div className="h-24 bg-gradient-to-r from-primary/20 via-accent/20 to-primary/10" />
             <CardContent className="relative pt-0 pb-6">
-              <div className="flex flex-col sm:flex-row gap-5 -mt-12">
-                <Avatar className="w-24 h-24 border-4 border-background shadow-lg shrink-0">
-                  <AvatarImage src={teacherPhoto} alt={TEACHER.name} />
-                  <AvatarFallback className="text-2xl font-bold bg-primary text-primary-foreground">IH</AvatarFallback>
-                </Avatar>
-                <div className="pt-2 sm:pt-14">
-                  <h1 className="text-2xl font-display font-bold text-foreground">{TEACHER.name}</h1>
-                  <div className="flex items-center gap-3 mt-1 flex-wrap">
-                    <span className="flex items-center gap-1 text-sm text-muted-foreground">
-                      <Star className="w-4 h-4 text-accent fill-accent" /> {TEACHER.rating}
-                    </span>
-                    <span className="flex items-center gap-1 text-sm text-muted-foreground">
-                      <GraduationCap className="w-4 h-4" /> {TEACHER.students}+ studenata
-                    </span>
-                    <span className="flex items-center gap-1 text-sm text-muted-foreground">
-                      <Clock className="w-4 h-4" /> {TEACHER.duration} min po času
-                    </span>
+              {teacherLoading ? (
+                <div className="flex flex-col sm:flex-row gap-5 -mt-12">
+                  <Skeleton className="w-24 h-24 rounded-full shrink-0" />
+                  <div className="pt-2 sm:pt-14 space-y-2 flex-1">
+                    <Skeleton className="h-7 w-48" />
+                    <Skeleton className="h-4 w-64" />
+                    <Skeleton className="h-16 w-full mt-4" />
                   </div>
                 </div>
-              </div>
+              ) : (
+                <>
+                  <div className="flex flex-col sm:flex-row gap-5 -mt-12">
+                    <Avatar className="w-24 h-24 border-4 border-background shadow-lg shrink-0">
+                      <AvatarImage src={teacherPhoto} alt={teacherName} />
+                      <AvatarFallback className="text-2xl font-bold bg-primary text-primary-foreground">{initials}</AvatarFallback>
+                    </Avatar>
+                    <div className="pt-2 sm:pt-14">
+                      <h1 className="text-2xl font-display font-bold text-foreground">{teacherName}</h1>
+                      <div className="flex items-center gap-3 mt-1 flex-wrap">
+                        <span className="flex items-center gap-1 text-sm text-muted-foreground">
+                          <Star className="w-4 h-4 text-accent fill-accent" /> {teacherRating}
+                        </span>
+                        <span className="flex items-center gap-1 text-sm text-muted-foreground">
+                          <GraduationCap className="w-4 h-4" /> {teacherStudents}+ studenata
+                        </span>
+                        <span className="flex items-center gap-1 text-sm text-muted-foreground">
+                          <Clock className="w-4 h-4" /> {teacherDuration} min po času
+                        </span>
+                      </div>
+                    </div>
+                  </div>
 
-              <p className="mt-5 text-muted-foreground leading-relaxed">{TEACHER.bio}</p>
+                  <p className="mt-5 text-muted-foreground leading-relaxed">{teacherBio}</p>
 
-              <div className="mt-4">
-                <h3 className="text-sm font-semibold text-foreground mb-2 flex items-center gap-1.5">
-                  <BookOpen className="w-4 h-4 text-primary" /> Oblasti podučavanja
-                </h3>
-                <div className="flex flex-wrap gap-2">
-                  {TEACHER.focus.map((f) => (
-                    <Badge key={f} variant="secondary" className="font-normal">
-                      {f}
-                    </Badge>
-                  ))}
-                </div>
-              </div>
+                  {teacherFocus.length > 0 && (
+                    <div className="mt-4">
+                      <h3 className="text-sm font-semibold text-foreground mb-2 flex items-center gap-1.5">
+                        <BookOpen className="w-4 h-4 text-primary" /> Oblasti podučavanja
+                      </h3>
+                      <div className="flex flex-wrap gap-2">
+                        {teacherFocus.map((f: string) => (
+                          <Badge key={f} variant="secondary" className="font-normal">
+                            {f}
+                          </Badge>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </>
+              )}
             </CardContent>
           </Card>
         </motion.div>
@@ -229,11 +257,11 @@ export default function TeacherProfilePage() {
             <div className="space-y-4">
               <div className="flex items-center gap-3">
                 <Avatar className="w-10 h-10">
-                  <AvatarImage src={teacherPhoto} alt={TEACHER.name} />
-                  <AvatarFallback>IH</AvatarFallback>
+                  <AvatarImage src={teacherPhoto} alt={teacherName} />
+                  <AvatarFallback>{initials}</AvatarFallback>
                 </Avatar>
                 <div>
-                  <p className="font-medium text-foreground">{TEACHER.name}</p>
+                  <p className="font-medium text-foreground">{teacherName}</p>
                   <p className="text-sm text-muted-foreground">
                     {format(new Date(selectedSlot.start_time), "dd.MM.yyyy")} · {format(new Date(selectedSlot.start_time), "HH:mm")} – {format(addMinutes(new Date(selectedSlot.start_time), 90), "HH:mm")}
                   </p>
