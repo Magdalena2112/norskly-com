@@ -4,8 +4,8 @@ import { useProfile } from "@/context/ProfileContext";
 import { useAuth } from "@/context/AuthContext";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
 import { BookOpen, Languages, MessageSquare, TrendingUp, Settings, Zap, GraduationCap, CalendarCheck } from "lucide-react";
+import XpProgressCard from "@/components/XpProgressCard";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import WeeklyDigest from "@/components/WeeklyDigest";
@@ -120,23 +120,7 @@ export default function DashboardPage() {
         {/* XP Progress Card */}
         {xpData && (
           <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.05 }}>
-            <Card className="mb-6 shadow-nordic border-primary/15 bg-gradient-to-r from-primary/5 to-accent/5">
-              <CardContent className="pt-5 pb-5">
-                <div className="flex items-center justify-between mb-2">
-                  <div className="flex items-center gap-2">
-                    <div className="w-9 h-9 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-bold">
-                      {xpData.level}
-                    </div>
-                    <div>
-                      <p className="text-sm font-semibold text-foreground">{XP_TITLES[Math.min(xpData.level, 10)] || `Level ${xpData.level}`}</p>
-                      <p className="text-[11px] text-muted-foreground">Lvl {xpData.level} · {xpData.total_xp} XP</p>
-                    </div>
-                  </div>
-                  <p className="text-xs text-muted-foreground">{xpInLevel}/{xpForNext} XP do sledećeg nivoa</p>
-                </div>
-                <Progress value={(xpInLevel / xpForNext) * 100} className="h-2.5" />
-              </CardContent>
-            </Card>
+            <XpProgressCard level={xpData.level} totalXp={xpData.total_xp} />
           </motion.div>
         )}
 
