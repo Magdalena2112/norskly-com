@@ -169,25 +169,25 @@ export default function DashboardPage() {
               <CardContent className="pt-5 pb-5">
                 <div className="flex items-center gap-2 mb-3">
                   <CalendarCheck className="w-5 h-5 text-accent" />
-                  <h3 className="font-semibold text-foreground">Mine kommende timer</h3>
-                </div>
-                {upcomingLesson ? (
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <p className="text-sm font-medium text-foreground">
-                        {format(new Date(upcomingLesson.start_time), "dd.MM.yyyy HH:mm")} – {format(new Date(upcomingLesson.end_time), "HH:mm")}
-                      </p>
-                      <p className="text-xs text-muted-foreground mt-0.5">Planlagt</p>
+                   <h3 className="font-semibold text-foreground">Moji predstojeći časovi</h3>
+                 </div>
+                 {upcomingLesson ? (
+                   <div className="flex items-center justify-between">
+                     <div>
+                       <p className="text-sm font-medium text-foreground">
+                         {format(new Date(upcomingLesson.start_time), "dd.MM.yyyy HH:mm")} – {format(new Date(upcomingLesson.end_time), "HH:mm")}
+                       </p>
+                       <p className="text-xs text-muted-foreground mt-0.5">Zakazano</p>
                     </div>
-                    <Button size="sm" variant="outline" onClick={() => navigate("/my-lessons")}>
-                      Se detaljer
-                    </Button>
-                  </div>
-                ) : (
-                  <div className="flex items-center justify-between">
-                    <p className="text-sm text-muted-foreground">Ingen planlagte timer.</p>
-                    <Button size="sm" variant="hero" onClick={() => navigate("/book-lesson")}>
-                      Bestill nå
+                     <Button size="sm" variant="outline" onClick={() => navigate("/my-lessons")}>
+                       Pogledaj detalje
+                     </Button>
+                   </div>
+                 ) : (
+                   <div className="flex items-center justify-between">
+                     <p className="text-sm text-muted-foreground">Nema zakazanih časova.</p>
+                     <Button size="sm" variant="hero" onClick={() => navigate("/book-lesson")}>
+                       Rezerviši sada
                     </Button>
                   </div>
                 )}
