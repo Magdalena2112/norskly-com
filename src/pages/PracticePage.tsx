@@ -33,6 +33,7 @@ import {
   ArrowRight,
   Trash2,
   Play,
+  Volume2,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
