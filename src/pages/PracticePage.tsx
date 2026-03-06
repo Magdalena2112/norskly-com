@@ -26,6 +26,11 @@ import {
   X,
   MessageSquare,
   Clock,
+  MessageCircle,
+  Languages,
+  PenLine,
+  Star,
+  ArrowRight,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
