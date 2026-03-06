@@ -110,10 +110,10 @@ export default function LandingPage() {
             className="text-center mb-16">
             
             <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
-              Zašto Norskly?
+              Zašto učiti norveški uz Norskly?
             </h2>
             <p className="text-muted-foreground max-w-md mx-auto">
-              Platforma dizajnirana da te osposobi za stvarnu komunikaciju na norveškom jeziku.
+              Platforma koja ti pomaže da brže i sigurnije progovoriš norveški.
             </p>
           </motion.div>
 
@@ -122,13 +122,13 @@ export default function LandingPage() {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
-            className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
             
             {features.map((f) =>
             <motion.div
               key={f.title}
               variants={item}
-              className="bg-background rounded-xl p-6 shadow-nordic hover:shadow-lg transition-shadow">
+              className="bg-background rounded-xl p-6 shadow-nordic hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
               
                 <div className="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center mb-4">
                   <f.icon className="w-6 h-6 text-accent" />
@@ -137,6 +137,18 @@ export default function LandingPage() {
                 <p className="text-sm text-muted-foreground leading-relaxed">{f.desc}</p>
               </motion.div>
             )}
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3 }}
+            className="text-center mt-14">
+            <p className="text-muted-foreground mb-5">Počni da učiš norveški već danas.</p>
+            <Button variant="hero" size="xl" onClick={() => navigate("/auth")}>
+              Započni besplatno
+            </Button>
           </motion.div>
         </div>
       </section>
