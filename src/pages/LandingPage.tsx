@@ -83,8 +83,7 @@ export default function LandingPage() {
 </span>
             </h1>
             <p className="text-lg text-muted-foreground max-w-lg mb-8 leading-relaxed">
-              Norskly ti pomaže da savladaš norveški kroz realne situacije, personalizovan
-              AI feedback i praktične lekcije prilagođene tvom nivou.
+              Din vei til flytende norsk starter her
             </p>
             <div className="flex flex-wrap gap-4">
               <Button variant="hero" size="xl" onClick={() => navigate("/auth")}>
