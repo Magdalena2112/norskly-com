@@ -8,22 +8,27 @@ const features = [
 {
   icon: MessageCircle,
   title: "Realne situacije",
-  desc: "Vežbaj norveški kroz svakodnevne razgovore — od kafića do poslovnih mejlova."
+  desc: "Vežbaj norveški kroz svakodnevne situacije – od neformalnih razgovora do poslovne komunikacije."
 },
 {
   icon: Target,
   title: "Personalizovano učenje",
-  desc: "AI se prilagođava tvom nivou, ciljevima i stilu komunikacije."
+  desc: "AI prilagođava lekcije tvom nivou, ciljevima i tempu učenja."
 },
 {
   icon: BookOpen,
   title: "Gramatika u kontekstu",
-  desc: "Nauči gramatiku kroz primere, ne pravila. Svaka lekcija je primenljiva."
+  desc: "Uči gramatiku kroz primere i realne rečenice, ne samo kroz pravila."
 },
 {
   icon: Sparkles,
   title: "Trenutni feedback",
-  desc: "Dobij ispravke i predloge u realnom vremenu sa detaljnim objašnjenjima."
+  desc: "Dobij ispravke i objašnjenja u realnom vremenu dok vežbaš norveški."
+},
+{
+  icon: GraduationCap,
+  title: "Individualni časovi",
+  desc: "Rezerviši individualni čas sa profesorom norveškog jezika i vežbaj konverzaciju uz personalizovan feedback."
 }];
 
 
