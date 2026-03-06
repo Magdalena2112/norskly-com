@@ -653,21 +653,16 @@ export default function PracticePage() {
               animate={{ opacity: 1, y: 0 }}
               className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
             >
-              <div
-                className={`max-w-[85%] rounded-2xl px-5 py-3 ${
-                  msg.role === "user"
-                    ? "bg-primary text-primary-foreground rounded-br-md"
-                    : "bg-card border border-border text-card-foreground rounded-bl-md"
-                }`}
-              >
-                {msg.role === "assistant" ? (
-                  <div className="prose prose-sm max-w-none text-card-foreground">
-                    <ReactMarkdown>{msg.content}</ReactMarkdown>
-                  </div>
-                ) : (
+              {msg.role === "assistant" ? (
+                <div className="max-w-[90%]">
+                  <StructuredAssistantMessage content={msg.content} />
+                </div>
+              ) : (
+                <div className="max-w-[85%] rounded-2xl px-5 py-3 bg-primary text-primary-foreground rounded-br-md">
                   <p className="text-sm">{msg.content}</p>
-                )}
-              </div>
+                </div>
+              )}
+            </motion.div>
             </motion.div>
           ))}
 
