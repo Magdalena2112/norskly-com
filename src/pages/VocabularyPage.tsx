@@ -657,6 +657,7 @@ function FlashcardsTab({ userId }: { userId?: string }) {
 // TAB 4: Quiz from saved words
 // ═══════════════════════════════════════
 function QuizTab({ level, userId }: { level: string; userId?: string }) {
+  const [source, setSource] = useState<"all" | "collections">("all");
   const [savedWords, setSavedWords] = useState<SavedWord[]>([]);
   const [loadingWords, setLoadingWords] = useState(true);
   const [questions, setQuestions] = useState<QuizQuestion[]>([]);
@@ -666,6 +667,7 @@ function QuizTab({ level, userId }: { level: string; userId?: string }) {
   const [finished, setFinished] = useState(false);
   const [loading, setLoading] = useState(false);
   const [logged, setLogged] = useState(false);
+  const [started, setStarted] = useState(false);
 
   useEffect(() => {
     if (!userId) return;
@@ -680,6 +682,27 @@ function QuizTab({ level, userId }: { level: string; userId?: string }) {
       setLoadingWords(false);
     })();
   }, [userId]);
+
+  const startFromCollections = (words: any[]) => {
+    const mapped: SavedWord[] = words.map((w) => ({
+      id: w.id,
+      word: w.word,
+      synonym: w.synonym,
+      antonym: w.antonym,
+      examples: w.example_sentence ? [w.example_sentence] : [],
+      theme: w.topic,
+      user_sentence: null,
+      status: "new",
+    }));
+    setSavedWords(mapped);
+    setStarted(true);
+    setQuestions([]);
+    setCurrent(0);
+    setSelected(null);
+    setScore(0);
+    setFinished(false);
+    setLogged(false);
+  };
 
   const generateQuiz = async () => {
     if (savedWords.length < 3) return;
