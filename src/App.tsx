@@ -15,6 +15,7 @@ import VocabularyPage from "./pages/VocabularyPage";
 import TalkPage from "./pages/TalkPage";
 import ProgressPage from "./pages/ProgressPage";
 import BookLessonPage from "./pages/BookLessonPage";
+import TeacherProfilePage from "./pages/TeacherProfilePage";
 import MyLessonsPage from "./pages/MyLessonsPage";
 import AdminAvailabilityPage from "./pages/AdminAvailabilityPage";
 import AdminLessonsPage from "./pages/AdminLessonsPage";
