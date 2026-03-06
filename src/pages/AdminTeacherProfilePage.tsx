@@ -47,6 +47,7 @@ export default function AdminTeacherProfilePage() {
       setFocus(profile.focus || []);
       setRating(String(profile.rating));
       setStudentsCount(String(profile.students_count));
+      setMeetLink((profile as any).meet_link || "");
       setPhotoUrl(profile.photo_url);
     }
   }, [profile]);
