@@ -12,7 +12,7 @@ import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useToast } from "@/hooks/use-toast";
-import { ArrowLeft, Clock, GraduationCap, BookOpen, Star, CalendarIcon } from "lucide-react";
+import { ArrowLeft, Clock, GraduationCap, BookOpen, Star, CalendarIcon, Video, CheckCircle, Copy } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { logActivity } from "@/lib/logActivity";
 import { motion } from "framer-motion";
@@ -27,6 +27,7 @@ export default function TeacherProfilePage() {
   const [selectedSlot, setSelectedSlot] = useState<any>(null);
   const [note, setNote] = useState("");
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [confirmationData, setConfirmationData] = useState<any>(null);
 
   const { data: teacher, isLoading: teacherLoading } = useQuery({
     queryKey: ["teacher-profile"],
@@ -79,9 +80,18 @@ export default function TeacherProfilePage() {
       await logActivity(user.id, "talk", "lesson_scheduled", 5, {
         slot_id: selectedSlot.id,
       });
+
+      return { startTime, endTime };
     },
-    onSuccess: () => {
-      toast({ title: "Lekcija zakazana!", description: "Vidimo se uskoro 🎉" });
+    onSuccess: (data) => {
+      setConfirmationData({
+        date: data.startTime,
+        endTime: data.endTime,
+        teacherName,
+        meetLink: (teacher as any)?.meet_link || "",
+        duration: teacherDuration,
+        userEmail: user?.email,
+      });
       queryClient.invalidateQueries({ queryKey: ["open-slots"] });
       setDialogOpen(false);
       setSelectedSlot(null);
@@ -113,6 +123,102 @@ export default function TeacherProfilePage() {
   const teacherStudents = teacher?.students_count || 120;
   const teacherPhoto = teacher?.photo_url || teacherPhotoFallback;
   const initials = teacherName.split(" ").map((n: string) => n[0]).join("");
+  const meetLink = (teacher as any)?.meet_link || "";
+
+  const copyMeetLink = () => {
+    if (confirmationData?.meetLink) {
+      navigator.clipboard.writeText(confirmationData.meetLink);
+      toast({ title: "Link kopiran!" });
+    }
+  };
+
+  // Confirmation screen
+  if (confirmationData) {
+    return (
+      <div className="min-h-screen bg-background">
+        <header className="border-b border-border bg-background/80 backdrop-blur-md sticky top-0 z-50">
+          <div className="container flex items-center gap-3 h-14">
+            <Button variant="ghost" size="icon" onClick={() => navigate("/practice")}>
+              <ArrowLeft className="h-5 w-5" />
+            </Button>
+            <span className="font-display font-bold text-lg text-foreground">Potvrda rezervacije</span>
+          </div>
+        </header>
+
+        <div className="container max-w-lg py-12">
+          <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }}>
+            <Card>
+              <CardContent className="pt-8 pb-8 text-center space-y-6">
+                <div className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center mx-auto">
+                  <CheckCircle className="w-8 h-8 text-accent" />
+                </div>
+                <div>
+                  <h2 className="text-2xl font-display font-bold text-foreground">Čas je zakazan!</h2>
+                  <p className="text-muted-foreground mt-1">Vidimo se uskoro 🎉</p>
+                </div>
+
+                <div className="bg-muted/50 rounded-lg p-5 text-left space-y-3">
+                  <div className="flex justify-between">
+                    <span className="text-sm text-muted-foreground">Nastavnik</span>
+                    <span className="text-sm font-medium text-foreground">{confirmationData.teacherName}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-sm text-muted-foreground">Datum</span>
+                    <span className="text-sm font-medium text-foreground">{format(confirmationData.date, "dd.MM.yyyy")}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-sm text-muted-foreground">Vreme</span>
+                    <span className="text-sm font-medium text-foreground">
+                      {format(confirmationData.date, "HH:mm")} – {format(confirmationData.endTime, "HH:mm")}
+                    </span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-sm text-muted-foreground">Trajanje</span>
+                    <span className="text-sm font-medium text-foreground">{confirmationData.duration} minuta</span>
+                  </div>
+                  {confirmationData.userEmail && (
+                    <div className="flex justify-between">
+                      <span className="text-sm text-muted-foreground">Potvrda na</span>
+                      <span className="text-sm font-medium text-foreground">{confirmationData.userEmail}</span>
+                    </div>
+                  )}
+                </div>
+
+                {confirmationData.meetLink && (
+                  <div className="bg-primary/5 border border-primary/20 rounded-lg p-4 space-y-2">
+                    <div className="flex items-center justify-center gap-2 text-sm font-semibold text-foreground">
+                      <Video className="w-4 h-4 text-primary" />
+                      Link za video poziv
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <a
+                        href={confirmationData.meetLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-sm text-primary underline truncate flex-1 text-center"
+                      >
+                        {confirmationData.meetLink}
+                      </a>
+                      <Button variant="ghost" size="icon" className="shrink-0 h-8 w-8" onClick={copyMeetLink}>
+                        <Copy className="w-4 h-4" />
+                      </Button>
+                    </div>
+                  </div>
+                )}
+
+                <div className="flex flex-col gap-2 pt-2">
+                  <Button onClick={() => navigate("/my-lessons")}>Moji časovi</Button>
+                  <Button variant="outline" onClick={() => { setConfirmationData(null); }}>
+                    Zakaži još jedan čas
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background">
@@ -164,6 +270,13 @@ export default function TeacherProfilePage() {
                   </div>
 
                   <p className="mt-5 text-muted-foreground leading-relaxed">{teacherBio}</p>
+
+                  {meetLink && (
+                    <div className="mt-4 flex items-center gap-2 text-sm text-muted-foreground">
+                      <Video className="w-4 h-4 text-primary" />
+                      <span>Časovi se održavaju online putem video poziva</span>
+                    </div>
+                  )}
 
                   {teacherFocus.length > 0 && (
                     <div className="mt-4">
@@ -266,6 +379,24 @@ export default function TeacherProfilePage() {
                     {format(new Date(selectedSlot.start_time), "dd.MM.yyyy")} · {format(new Date(selectedSlot.start_time), "HH:mm")} – {format(addMinutes(new Date(selectedSlot.start_time), 90), "HH:mm")}
                   </p>
                 </div>
+              </div>
+              <div className="bg-muted/50 rounded-lg p-3 space-y-1.5 text-sm">
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">Trajanje</span>
+                  <span className="text-foreground font-medium">{teacherDuration} minuta</span>
+                </div>
+                {meetLink && (
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">Video poziv</span>
+                    <span className="text-primary font-medium flex items-center gap-1"><Video className="w-3 h-3" /> Uključen</span>
+                  </div>
+                )}
+                {user?.email && (
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">Potvrda na</span>
+                    <span className="text-foreground font-medium">{user.email}</span>
+                  </div>
+                )}
               </div>
               <Textarea
                 placeholder="Napomena za nastavnika (opciono)"

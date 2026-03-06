@@ -310,6 +310,7 @@ export type Database = {
           duration_minutes: number
           focus: string[]
           id: string
+          meet_link: string | null
           name: string
           photo_url: string | null
           rating: number
@@ -321,6 +322,7 @@ export type Database = {
           duration_minutes?: number
           focus?: string[]
           id?: string
+          meet_link?: string | null
           name?: string
           photo_url?: string | null
           rating?: number
@@ -332,6 +334,7 @@ export type Database = {
           duration_minutes?: number
           focus?: string[]
           id?: string
+          meet_link?: string | null
           name?: string
           photo_url?: string | null
           rating?: number
