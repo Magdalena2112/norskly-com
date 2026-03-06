@@ -71,6 +71,39 @@ export type Database = {
         }
         Relationships: []
       }
+      collection_words: {
+        Row: {
+          collection_id: string
+          id: string
+          word_id: string
+        }
+        Insert: {
+          collection_id: string
+          id?: string
+          word_id: string
+        }
+        Update: {
+          collection_id?: string
+          id?: string
+          word_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "collection_words_collection_id_fkey"
+            columns: ["collection_id"]
+            isOneToOne: false
+            referencedRelation: "word_collections"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "collection_words_word_id_fkey"
+            columns: ["word_id"]
+            isOneToOne: false
+            referencedRelation: "vocabulary_words"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       error_events: {
         Row: {
           attempt_no: number | null
@@ -292,6 +325,66 @@ export type Database = {
           user_id?: string
           user_sentence?: string | null
           word?: string
+        }
+        Relationships: []
+      }
+      vocabulary_words: {
+        Row: {
+          antonym: string | null
+          created_at: string
+          example_sentence: string | null
+          id: string
+          synonym: string | null
+          topic: string
+          translation: string
+          user_id: string
+          word: string
+        }
+        Insert: {
+          antonym?: string | null
+          created_at?: string
+          example_sentence?: string | null
+          id?: string
+          synonym?: string | null
+          topic?: string
+          translation?: string
+          user_id: string
+          word: string
+        }
+        Update: {
+          antonym?: string | null
+          created_at?: string
+          example_sentence?: string | null
+          id?: string
+          synonym?: string | null
+          topic?: string
+          translation?: string
+          user_id?: string
+          word?: string
+        }
+        Relationships: []
+      }
+      word_collections: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          name: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          name: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          name?: string
+          user_id?: string
         }
         Relationships: []
       }
