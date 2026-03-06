@@ -95,9 +95,12 @@ export default function VocabularyPage() {
 
       <div className="flex-1 container max-w-2xl py-6">
         <Tabs defaultValue="generate" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-4">
+          <TabsList className="grid w-full grid-cols-5">
             <TabsTrigger value="generate" className="gap-1 text-xs sm:text-sm">
               <BookOpen className="w-4 h-4 hidden sm:block" /> Generiši
+            </TabsTrigger>
+            <TabsTrigger value="collections" className="gap-1 text-xs sm:text-sm">
+              <FolderOpen className="w-4 h-4 hidden sm:block" /> Ordsamlinger
             </TabsTrigger>
             <TabsTrigger value="sentence" className="gap-1 text-xs sm:text-sm">
               <PenTool className="w-4 h-4 hidden sm:block" /> Rečenica
@@ -112,6 +115,9 @@ export default function VocabularyPage() {
 
           <TabsContent value="generate">
             <GenerateTab level={level} userId={user?.id} />
+          </TabsContent>
+          <TabsContent value="collections">
+            <VocabCollections userId={user?.id} />
           </TabsContent>
           <TabsContent value="sentence">
             <SentenceTab level={level} userId={user?.id} />
