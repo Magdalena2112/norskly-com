@@ -126,9 +126,10 @@ export default function VocabCollections({ userId }: { userId?: string }) {
     const { data } = await supabase
       .from("collection_words" as any)
       .select("id, word_id, vocabulary_words(id, word, translation, example_sentence, synonym, antonym, topic)")
-      .eq("collection_id", col.id) as any;
+      .eq("collection_id", col.id);
 
-    const words: CollectionWord[] = (data || [])
+    const rows = (data as unknown as any[]) || [];
+    const words: CollectionWord[] = rows
       .filter((r: any) => r.vocabulary_words)
       .map((r: any) => ({
         ...r.vocabulary_words,
