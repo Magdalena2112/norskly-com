@@ -19,6 +19,8 @@ import TeacherProfilePage from "./pages/TeacherProfilePage";
 import MyLessonsPage from "./pages/MyLessonsPage";
 import AdminAvailabilityPage from "./pages/AdminAvailabilityPage";
 import AdminLessonsPage from "./pages/AdminLessonsPage";
+import AdminTeacherProfilePage from "./pages/AdminTeacherProfilePage";
+import NotFound from "./pages/NotFound";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
