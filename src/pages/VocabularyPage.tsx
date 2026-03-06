@@ -18,7 +18,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { logActivity } from "@/lib/logActivity";
 import { logErrors } from "@/lib/logErrors";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import VocabCollections, { CollectionPicker } from "@/components/VocabCollections";
+import VocabCollections from "@/components/VocabCollections";
+import CollectionSelector from "@/components/CollectionSelector";
 
 // ─── Types ───
 interface VocabWord {
