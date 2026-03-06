@@ -511,12 +511,40 @@ export default function PracticePage() {
     setMessages([]);
     setRecap(null);
     setViewingSession(null);
+    setCurrentSessionId(null);
     setShowControls(true);
   };
 
   const viewSession = (session: TalkSession) => {
     setViewingSession(session);
     setShowHistory(false);
+  };
+
+  const continueSession = (session: TalkSession) => {
+    setMessages(session.messages as Message[]);
+    setCurrentSessionId(session.id);
+    setSituation(session.situation);
+    setFormality(session.formality);
+    setRole(session.role);
+    setRecap(null);
+    setViewingSession(null);
+    setShowHistory(false);
+    setShowControls(false);
+  };
+
+  const deleteSession = async (sessionId: string) => {
+    const { error } = await supabase
+      .from("talk_sessions")
+      .delete()
+      .eq("id", sessionId);
+    if (error) {
+      toast.error("Greška pri brisanju sesije.");
+      return;
+    }
+    setPastSessions((prev) => prev.filter((s) => s.id !== sessionId));
+    if (viewingSession?.id === sessionId) setViewingSession(null);
+    if (currentSessionId === sessionId) setCurrentSessionId(null);
+    toast.success("Sesija obrisana.");
   };
 
   const getSituationLabel = (val: string) =>
