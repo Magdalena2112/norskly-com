@@ -164,6 +164,7 @@ function GenerateTab({ level, userId }: { level: string; userId?: string }) {
     if (!userId || words.length === 0) return;
     setSaving(true);
     try {
+      // Save to vocab_items (legacy)
       const rows = words.map((w) => ({
         user_id: userId,
         word: w.word,
@@ -175,7 +176,19 @@ function GenerateTab({ level, userId }: { level: string; userId?: string }) {
       }));
       const { error } = await supabase.from("vocab_items").insert(rows);
       if (error) throw error;
-      // No XP for content generation (word saving)
+
+      // Also save to vocabulary_words (for collections)
+      const vwRows = words.map((w) => ({
+        user_id: userId,
+        word: w.word,
+        translation: w.translation || "",
+        example_sentence: w.examples?.[0] || null,
+        synonym: w.synonym || null,
+        antonym: w.antonym || null,
+        topic: theme.trim(),
+      }));
+      await supabase.from("vocabulary_words" as any).insert(vwRows as any);
+
       setSaved(true);
     } catch (e: any) {
       console.error(e);
