@@ -486,12 +486,30 @@ function SentenceTab({ level, userId }: { level: string; userId?: string }) {
 // ═══════════════════════════════════════
 type FlashcardDirection = "no-sr" | "sr-no";
 
+interface QueueItem {
+  wordIndex: number;
+  failCount: number;
+}
+
+/** Build a spaced-repetition queue: "learning" words first, then the rest */
+function buildQueue(words: SavedWord[]): QueueItem[] {
+  const learning: QueueItem[] = [];
+  const rest: QueueItem[] = [];
+  words.forEach((w, i) => {
+    const item = { wordIndex: i, failCount: 0 };
+    if (w.status === "learning") learning.push(item);
+    else rest.push(item);
+  });
+  return [...learning, ...rest];
+}
+
 function FlashcardsTab({ userId }: { userId?: string }) {
   const [savedWords, setSavedWords] = useState<SavedWord[]>([]);
-  const [index, setIndex] = useState(0);
+  const [queue, setQueue] = useState<QueueItem[]>([]);
   const [flipped, setFlipped] = useState(false);
-  const [known, setKnown] = useState<number[]>([]);
-  const [unknown, setUnknown] = useState<number[]>([]);
+  const [knownCount, setKnownCount] = useState(0);
+  const [unknownCount, setUnknownCount] = useState(0);
+  const [totalReviews, setTotalReviews] = useState(0);
   const [logged, setLogged] = useState(false);
   const [started, setStarted] = useState(false);
   const [direction, setDirection] = useState<FlashcardDirection>(() => {
@@ -520,59 +538,83 @@ function FlashcardsTab({ userId }: { userId?: string }) {
       status: "new",
     }));
     setSavedWords(mapped);
+    setQueue(buildQueue(mapped));
     setStarted(true);
-    setIndex(0);
     setFlipped(false);
-    setKnown([]);
-    setUnknown([]);
+    setKnownCount(0);
+    setUnknownCount(0);
+    setTotalReviews(0);
     setLogged(false);
   };
 
-  const reviewed = known.length + unknown.length;
-  const isDone = savedWords.length > 0 && reviewed >= Math.min(10, savedWords.length);
-  const card = savedWords[index];
+  const maxReviews = Math.max(10, Math.min(20, savedWords.length * 2));
+  const isDone = started && (queue.length === 0 || totalReviews >= maxReviews);
+  const current = queue[0];
+  const card = current ? savedWords[current.wordIndex] : undefined;
 
   const frontText = card ? (direction === "no-sr" ? card.word : card.translation) : "";
   const backMainText = card ? (direction === "no-sr" ? card.translation : card.word) : "";
 
   const handleAction = async (isKnown: boolean) => {
-    if (isKnown) setKnown((p) => [...p, index]);
-    else setUnknown((p) => [...p, index]);
+    if (!current || !card) return;
     setFlipped(false);
+    setTotalReviews((r) => r + 1);
 
-    if (userId && card) {
-      await supabase
-        .from("vocab_items")
-        .update({ status: isKnown ? "known" : "learning" })
-        .eq("id", card.id);
+    if (isKnown) {
+      // Remove from queue — word is done
+      setKnownCount((c) => c + 1);
+      setQueue((q) => q.slice(1));
+
+      if (userId) {
+        await supabase
+          .from("vocab_items")
+          .update({ status: "known" })
+          .eq("id", card.id);
+      }
+    } else {
+      // Re-insert later in queue with increased fail count
+      setUnknownCount((c) => c + 1);
+      const newFail = current.failCount + 1;
+      // Insert position: after 2 cards on first fail, after 1 on subsequent
+      const gap = newFail <= 1 ? 3 : 2;
+      setQueue((q) => {
+        const rest = q.slice(1);
+        const insertAt = Math.min(gap, rest.length);
+        const updated = [...rest];
+        updated.splice(insertAt, 0, { wordIndex: current.wordIndex, failCount: newFail });
+        return updated;
+      });
+
+      if (userId) {
+        await supabase
+          .from("vocab_items")
+          .update({ status: "learning" })
+          .eq("id", card.id);
+      }
     }
 
-    const nextReviewed = reviewed + 1;
-    if (nextReviewed >= Math.min(10, savedWords.length)) {
+    // Check if session will be done after this action
+    const nextTotal = totalReviews + 1;
+    const nextQueueLen = isKnown ? queue.length - 1 : queue.length; // re-inserted so same length
+    if (nextQueueLen === 0 || nextTotal >= maxReviews) {
       if (userId && !logged) {
+        const finalKnown = knownCount + (isKnown ? 1 : 0);
+        const finalUnknown = unknownCount + (isKnown ? 0 : 1);
         await logActivity(userId, "vocabulary", "flashcards_completed", 8, {
-          known: known.length + (isKnown ? 1 : 0),
-          unknown: unknown.length + (isKnown ? 0 : 1),
+          known: finalKnown,
+          unknown: finalUnknown,
         }, { dedupKey: `flashcards_${Date.now()}`, checkDailyBonus: true });
         setLogged(true);
-      }
-      return;
-    }
-
-    for (let i = 1; i <= savedWords.length; i++) {
-      const next = (index + i) % savedWords.length;
-      if (!known.includes(next) && !unknown.includes(next) && next !== index) {
-        setIndex(next);
-        return;
       }
     }
   };
 
   const handleRestart = () => {
-    setIndex(0);
+    setQueue(buildQueue(savedWords));
     setFlipped(false);
-    setKnown([]);
-    setUnknown([]);
+    setKnownCount(0);
+    setUnknownCount(0);
+    setTotalReviews(0);
     setLogged(false);
   };
 
@@ -597,9 +639,10 @@ function FlashcardsTab({ userId }: { userId?: string }) {
             <p className="text-5xl mb-2">🎯</p>
             <h2 className="text-2xl font-display font-bold text-foreground">Sesija završena!</h2>
             <div className="flex gap-6 justify-center text-sm">
-              <span className="text-accent font-medium">✅ Znam: {known.length}</span>
-              <span className="text-destructive font-medium">❌ Ne znam: {unknown.length}</span>
+              <span className="text-accent font-medium">✅ Znam: {knownCount}</span>
+              <span className="text-destructive font-medium">❌ Ne znam: {unknownCount}</span>
             </div>
+            <p className="text-xs text-muted-foreground">Ukupno pregleda: {totalReviews}</p>
             {logged && <p className="text-xs text-accent font-medium">+8 poena zabeleženo</p>}
             <div className="flex gap-3 justify-center pt-4">
               <Button variant="outline" onClick={handleRestart} className="gap-2">
@@ -611,6 +654,13 @@ function FlashcardsTab({ userId }: { userId?: string }) {
       </motion.div>
     );
   }
+
+  const progressVal = savedWords.length > 0
+    ? ((savedWords.length - queue.length + (savedWords.length - new Set(queue.map(q => q.wordIndex)).size)) / savedWords.length) * 100
+    : 0;
+  // Simpler: percentage of unique words completed
+  const uniqueRemaining = new Set(queue.map(q => q.wordIndex)).size;
+  const completedPct = savedWords.length > 0 ? ((savedWords.length - uniqueRemaining) / savedWords.length) * 100 : 0;
 
   return (
     <div className="space-y-4">
@@ -641,13 +691,17 @@ function FlashcardsTab({ userId }: { userId?: string }) {
         </div>
       </div>
 
-      <Progress value={(reviewed / Math.min(10, savedWords.length)) * 100} className="h-2" />
+      <Progress value={completedPct} className="h-2" />
+      <div className="flex justify-between text-xs text-muted-foreground">
+        <span>{current?.failCount ? `Ponavljanje #${current.failCount + 1}` : "Novo"}</span>
+        <span>{uniqueRemaining} preostalo</span>
+      </div>
       <p className="text-xs text-muted-foreground text-center uppercase tracking-wider">{card?.theme}</p>
 
       <div className="cursor-pointer" onClick={() => setFlipped(!flipped)}>
         <AnimatePresence mode="wait">
           <motion.div
-            key={`${index}-${flipped}`}
+            key={`${current?.wordIndex}-${flipped}-${current?.failCount}`}
             initial={{ rotateY: 90, opacity: 0 }}
             animate={{ rotateY: 0, opacity: 1 }}
             exit={{ rotateY: -90, opacity: 0 }}
@@ -658,6 +712,9 @@ function FlashcardsTab({ userId }: { userId?: string }) {
                 {!flipped ? (
                   <>
                     <p className="text-4xl font-display font-bold text-foreground">{frontText}</p>
+                    {current?.failCount ? (
+                      <p className="text-xs text-destructive/70">Ponovi ovu reč</p>
+                    ) : null}
                     <p className="text-sm text-muted-foreground">Tapni da vidiš detalje</p>
                   </>
                 ) : (
