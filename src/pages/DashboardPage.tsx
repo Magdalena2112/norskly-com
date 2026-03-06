@@ -135,9 +135,10 @@ export default function DashboardPage() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.08 }}
+              className={"fullWidth" in mod && mod.fullWidth ? "sm:col-span-2" : ""}
             >
               <Card
-                className="cursor-pointer group hover:shadow-nordic transition-all duration-200 hover:-translate-y-0.5"
+                className="cursor-pointer group hover:shadow-nordic transition-all duration-200 hover:-translate-y-0.5 h-full"
                 onClick={() => navigate(mod.route)}
               >
                 <CardContent className="pt-6 pb-6 flex items-start gap-4">
