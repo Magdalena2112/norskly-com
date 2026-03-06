@@ -440,6 +440,7 @@ function SentenceTab({ level, userId }: { level: string; userId?: string }) {
 // TAB 3: Flashcards from saved words
 // ═══════════════════════════════════════
 function FlashcardsTab({ userId }: { userId?: string }) {
+  const [source, setSource] = useState<"all" | "collections">("all");
   const [savedWords, setSavedWords] = useState<SavedWord[]>([]);
   const [loadingWords, setLoadingWords] = useState(true);
   const [index, setIndex] = useState(0);
@@ -447,6 +448,7 @@ function FlashcardsTab({ userId }: { userId?: string }) {
   const [known, setKnown] = useState<number[]>([]);
   const [unknown, setUnknown] = useState<number[]>([]);
   const [logged, setLogged] = useState(false);
+  const [started, setStarted] = useState(false);
 
   useEffect(() => {
     if (!userId) return;
@@ -461,6 +463,26 @@ function FlashcardsTab({ userId }: { userId?: string }) {
       setLoadingWords(false);
     })();
   }, [userId]);
+
+  const startFromCollections = (words: any[]) => {
+    const mapped: SavedWord[] = words.map((w) => ({
+      id: w.id,
+      word: w.word,
+      synonym: w.synonym,
+      antonym: w.antonym,
+      examples: w.example_sentence ? [w.example_sentence] : [],
+      theme: w.topic,
+      user_sentence: null,
+      status: "new",
+    }));
+    setSavedWords(mapped);
+    setStarted(true);
+    setIndex(0);
+    setFlipped(false);
+    setKnown([]);
+    setUnknown([]);
+    setLogged(false);
+  };
 
   const reviewed = known.length + unknown.length;
   const isDone = savedWords.length > 0 && reviewed >= Math.min(10, savedWords.length);
