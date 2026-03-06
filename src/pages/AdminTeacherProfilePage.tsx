@@ -198,6 +198,11 @@ export default function AdminTeacherProfilePage() {
                 <Input type="number" min="0" value={studentsCount} onChange={(e) => setStudentsCount(e.target.value)} />
               </div>
             </div>
+            <div>
+              <label className="text-sm font-medium text-foreground mb-1.5 block">Link za video poziv (Meet/Zoom)</label>
+              <Input value={meetLink} onChange={(e) => setMeetLink(e.target.value)} placeholder="https://meet.google.com/..." />
+              <p className="text-xs text-muted-foreground mt-1">Ovaj link će biti poslat studentima nakon rezervacije.</p>
+            </div>
           </CardContent>
         </Card>
 
