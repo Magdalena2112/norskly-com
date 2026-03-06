@@ -89,6 +89,95 @@ const roleOptions = [
 
 const CHAT_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/talk-ai`;
 
+// ── Section parser for structured AI responses ──
+const SECTION_KEYS = ["ODGOVOR", "VOKABULAR", "ISPRAVKE", "POVRATNA INFORMACIJA", "SLEDEĆI KORAK"] as const;
+type SectionKey = typeof SECTION_KEYS[number];
+
+interface ParsedSection {
+  key: SectionKey;
+  content: string;
+}
+
+function parseSections(text: string): ParsedSection[] | null {
+  // Check if text has at least the main section marker
+  if (!text.includes("[ODGOVOR]")) return null;
+
+  const sections: ParsedSection[] = [];
+  for (let i = 0; i < SECTION_KEYS.length; i++) {
+    const marker = `[${SECTION_KEYS[i]}]`;
+    const startIdx = text.indexOf(marker);
+    if (startIdx === -1) continue;
+
+    const contentStart = startIdx + marker.length;
+    // Find end: next section marker or end of text
+    let endIdx = text.length;
+    for (let j = i + 1; j < SECTION_KEYS.length; j++) {
+      const nextMarker = `[${SECTION_KEYS[j]}]`;
+      const nextIdx = text.indexOf(nextMarker, contentStart);
+      if (nextIdx !== -1) {
+        endIdx = nextIdx;
+        break;
+      }
+    }
+    const content = text.slice(contentStart, endIdx).trim();
+    if (content) sections.push({ key: SECTION_KEYS[i], content });
+  }
+  return sections.length > 0 ? sections : null;
+}
+
+const sectionConfig: Record<SectionKey, { icon: React.ReactNode; label: string; accent: string }> = {
+  "ODGOVOR": { icon: <MessageCircle className="w-4 h-4" />, label: "Odgovor", accent: "text-accent" },
+  "VOKABULAR": { icon: <Languages className="w-4 h-4" />, label: "Vokabular", accent: "text-primary" },
+  "ISPRAVKE": { icon: <PenLine className="w-4 h-4" />, label: "Ispravke", accent: "text-destructive" },
+  "POVRATNA INFORMACIJA": { icon: <Star className="w-4 h-4" />, label: "Povratna informacija", accent: "text-accent" },
+  "SLEDEĆI KORAK": { icon: <ArrowRight className="w-4 h-4" />, label: "Sledeći korak", accent: "text-primary" },
+};
+
+function StructuredAssistantMessage({ content }: { content: string }) {
+  const sections = parseSections(content);
+
+  // Fallback: render as plain markdown if no sections found (e.g. during streaming)
+  if (!sections) {
+    return (
+      <div className="bg-card border border-border text-card-foreground rounded-2xl rounded-bl-md px-5 py-3">
+        <div className="prose prose-sm max-w-none text-card-foreground">
+          <ReactMarkdown>{content}</ReactMarkdown>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="space-y-2">
+      {sections.map((section, i) => {
+        const config = sectionConfig[section.key];
+        const isMain = section.key === "ODGOVOR";
+
+        return (
+          <div
+            key={i}
+            className={`rounded-2xl px-4 py-3 ${
+              isMain
+                ? "bg-card border border-border text-card-foreground rounded-bl-md"
+                : "bg-muted/50 border border-border/50 text-card-foreground"
+            }`}
+          >
+            {!isMain && (
+              <div className={`flex items-center gap-1.5 mb-1.5 ${config.accent}`}>
+                {config.icon}
+                <span className="text-xs font-semibold uppercase tracking-wider">{config.label}</span>
+              </div>
+            )}
+            <div className={`prose prose-sm max-w-none text-card-foreground ${isMain ? "text-base" : "text-sm"}`}>
+              <ReactMarkdown>{section.content}</ReactMarkdown>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
 export default function PracticePage() {
   const { profile } = useProfile();
   const { user } = useAuth();
