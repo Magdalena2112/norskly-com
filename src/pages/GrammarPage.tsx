@@ -731,6 +731,7 @@ function QuizTab({ level, userId, initialTopic }: { level: string; userId?: stri
   const handleSelect = async (idx: number) => {
     if (selected !== null) return;
     setSelected(idx);
+    setAnswers((prev) => [...prev, idx]);
     if (idx === questions[current].correct) {
       setScore((s) => s + 1);
     } else if (userId) {
