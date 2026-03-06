@@ -153,7 +153,7 @@ export default function VocabCollections({ userId }: { userId?: string }) {
       .select("*")
       .eq("user_id", userId)
       .order("created_at", { ascending: false });
-    setAllWords((data as VocabWord[]) || []);
+    setAllWords((data as unknown as VocabWord[]) || []);
     setLoadingWords(false);
   };
 
