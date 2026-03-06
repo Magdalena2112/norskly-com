@@ -714,7 +714,7 @@ function QuizTab({ level, userId, initialTopic }: { level: string; userId?: stri
     setLoading(true);
     setQuestions([]);
     setCurrent(0);
-    setSelected(null);
+    setAnswers([]);
     setScore(0);
     setFinished(false);
     setLogged(false);
