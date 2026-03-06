@@ -663,7 +663,6 @@ export default function PracticePage() {
                 </div>
               )}
             </motion.div>
-            </motion.div>
           ))}
 
           {isLoading && messages[messages.length - 1]?.role !== "assistant" && (
