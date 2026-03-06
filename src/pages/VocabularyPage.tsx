@@ -484,6 +484,8 @@ function SentenceTab({ level, userId }: { level: string; userId?: string }) {
 // ═══════════════════════════════════════
 // TAB 3: Flashcards from saved words
 // ═══════════════════════════════════════
+type FlashcardDirection = "no-sr" | "sr-no";
+
 function FlashcardsTab({ userId }: { userId?: string }) {
   const [savedWords, setSavedWords] = useState<SavedWord[]>([]);
   const [index, setIndex] = useState(0);
@@ -492,11 +494,24 @@ function FlashcardsTab({ userId }: { userId?: string }) {
   const [unknown, setUnknown] = useState<number[]>([]);
   const [logged, setLogged] = useState(false);
   const [started, setStarted] = useState(false);
+  const [direction, setDirection] = useState<FlashcardDirection>(() => {
+    try {
+      const saved = localStorage.getItem("flashcard_direction");
+      if (saved === "sr-no" || saved === "no-sr") return saved;
+    } catch {}
+    return "no-sr";
+  });
+
+  const handleDirectionChange = (val: FlashcardDirection) => {
+    setDirection(val);
+    localStorage.setItem("flashcard_direction", val);
+  };
 
   const startFromCollections = (words: any[]) => {
     const mapped: SavedWord[] = words.map((w) => ({
       id: w.id,
       word: w.word,
+      translation: w.translation || "",
       synonym: w.synonym,
       antonym: w.antonym,
       examples: w.example_sentence ? [w.example_sentence] : [],
@@ -516,6 +531,9 @@ function FlashcardsTab({ userId }: { userId?: string }) {
   const reviewed = known.length + unknown.length;
   const isDone = savedWords.length > 0 && reviewed >= Math.min(10, savedWords.length);
   const card = savedWords[index];
+
+  const frontText = card ? (direction === "no-sr" ? card.word : card.translation) : "";
+  const backMainText = card ? (direction === "no-sr" ? card.translation : card.word) : "";
 
   const handleAction = async (isKnown: boolean) => {
     if (isKnown) setKnown((p) => [...p, index]);
@@ -596,6 +614,33 @@ function FlashcardsTab({ userId }: { userId?: string }) {
 
   return (
     <div className="space-y-4">
+      {/* Direction toggle */}
+      <div className="flex items-center justify-center gap-2">
+        <span className="text-xs text-muted-foreground font-medium">Smer kartica:</span>
+        <div className="inline-flex rounded-lg border border-border bg-muted p-0.5 gap-0.5">
+          <button
+            onClick={() => handleDirectionChange("no-sr")}
+            className={`px-3 py-1 rounded-md text-xs font-medium transition-colors ${
+              direction === "no-sr"
+                ? "bg-background text-foreground shadow-sm"
+                : "text-muted-foreground hover:text-foreground"
+            }`}
+          >
+            NO → SR
+          </button>
+          <button
+            onClick={() => handleDirectionChange("sr-no")}
+            className={`px-3 py-1 rounded-md text-xs font-medium transition-colors ${
+              direction === "sr-no"
+                ? "bg-background text-foreground shadow-sm"
+                : "text-muted-foreground hover:text-foreground"
+            }`}
+          >
+            SR → NO
+          </button>
+        </div>
+      </div>
+
       <Progress value={(reviewed / Math.min(10, savedWords.length)) * 100} className="h-2" />
       <p className="text-xs text-muted-foreground text-center uppercase tracking-wider">{card?.theme}</p>
 
@@ -612,14 +657,12 @@ function FlashcardsTab({ userId }: { userId?: string }) {
               <CardContent className="pt-6 text-center space-y-3">
                 {!flipped ? (
                   <>
-                    <p className="text-4xl font-display font-bold text-foreground">{card?.word}</p>
+                    <p className="text-4xl font-display font-bold text-foreground">{frontText}</p>
                     <p className="text-sm text-muted-foreground">Tapni da vidiš detalje</p>
                   </>
                 ) : (
                   <>
-                    <p className="text-2xl font-display font-bold text-accent">{card?.word}</p>
-                    {card?.synonym && <p className="text-sm text-muted-foreground">Sinonim: {card.synonym}</p>}
-                    {card?.antonym && <p className="text-sm text-muted-foreground">Antonim: {card.antonym}</p>}
+                    <p className="text-2xl font-display font-bold text-accent">{backMainText}</p>
                     {card?.examples?.map((ex: string, j: number) => (
                       <p key={j} className="text-sm text-muted-foreground italic">"{ex}"</p>
                     ))}
