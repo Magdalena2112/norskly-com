@@ -77,18 +77,24 @@ export default function GrammarPage() {
 
       <div className="flex-1 container max-w-2xl py-6">
         <Tabs defaultValue={defaultTab} className="space-y-6">
-          <TabsList className="grid w-full grid-cols-4">
-            <TabsTrigger value="exercises" className="gap-1.5 text-xs sm:text-sm">
-              <BookOpen className="w-4 h-4" /> Vežbe
+          <TabsList className="grid w-full grid-cols-6">
+            <TabsTrigger value="exercises" className="gap-1 text-xs">
+              <BookOpen className="w-3.5 h-3.5" /> Vežbe
             </TabsTrigger>
-            <TabsTrigger value="correction" className="gap-1.5 text-xs sm:text-sm">
-              <PenTool className="w-4 h-4" /> Korekcija
+            <TabsTrigger value="correction" className="gap-1 text-xs">
+              <PenTool className="w-3.5 h-3.5" /> Korekcija
             </TabsTrigger>
-            <TabsTrigger value="explain" className="gap-1.5 text-xs sm:text-sm">
-              <Search className="w-4 h-4" /> Objašnjenja
+            <TabsTrigger value="explain" className="gap-1 text-xs">
+              <Search className="w-3.5 h-3.5" /> Objašnjenja
             </TabsTrigger>
-            <TabsTrigger value="quiz" className="gap-1.5 text-xs sm:text-sm">
-              <Brain className="w-4 h-4" /> Kviz
+            <TabsTrigger value="quiz" className="gap-1 text-xs">
+              <Brain className="w-3.5 h-3.5" /> Kviz
+            </TabsTrigger>
+            <TabsTrigger value="history" className="gap-1 text-xs">
+              <History className="w-3.5 h-3.5" /> Istorija
+            </TabsTrigger>
+            <TabsTrigger value="progress" className="gap-1 text-xs">
+              <TrendingUp className="w-3.5 h-3.5" /> Napredak
             </TabsTrigger>
           </TabsList>
 
@@ -103,6 +109,12 @@ export default function GrammarPage() {
           </TabsContent>
           <TabsContent value="quiz">
             <QuizTab level={level} userId={user?.id} initialTopic={navState.tab === "quiz" ? navState.topic : undefined} />
+          </TabsContent>
+          <TabsContent value="history">
+            <GrammarHistoryTab userId={user?.id} />
+          </TabsContent>
+          <TabsContent value="progress">
+            <GrammarProgressTab userId={user?.id} />
           </TabsContent>
         </Tabs>
       </div>
