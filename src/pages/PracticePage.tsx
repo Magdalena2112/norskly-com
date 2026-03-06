@@ -583,9 +583,12 @@ export default function PracticePage() {
         <div className="flex-1 overflow-y-auto">
           <div className="container max-w-3xl py-6 space-y-4">
             {/* Session info */}
-            <div className="text-center text-xs text-muted-foreground mb-4">
-              {getSituationLabel(s.situation)} · {s.message_count} poruka ·{" "}
-              {formatDistanceToNow(new Date(s.created_at), { addSuffix: true, locale: sr })}
+            <div className="text-center mb-4">
+              <p className="text-sm font-medium text-foreground">{(s as any).title || getSituationLabel(s.situation)}</p>
+              <p className="text-xs text-muted-foreground mt-1">
+                {getSituationLabel(s.situation)} · {s.message_count} poruka ·{" "}
+                {formatDistanceToNow(new Date(s.created_at), { addSuffix: true, locale: sr })}
+              </p>
             </div>
 
             {/* Messages */}
