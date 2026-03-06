@@ -424,6 +424,12 @@ export default function PracticePage() {
       toast.error("Greška pri komunikaciji sa AI-jem.");
     }
 
+    // Auto-save after each exchange
+    if (assistantSoFar) {
+      const finalMessages = [...updatedMessages, { role: "assistant" as const, content: assistantSoFar }];
+      await autoSaveSession(finalMessages);
+    }
+
     setIsLoading(false);
   };
 
