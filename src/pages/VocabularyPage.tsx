@@ -288,11 +288,25 @@ function GenerateTab({ level, userId }: { level: string; userId?: string }) {
             </Card>
           ))}
 
+          {collections.length > 0 && !saved && (
+            <Select value={selectedCollection} onValueChange={setSelectedCollection}>
+              <SelectTrigger>
+                <SelectValue placeholder="Dodaj u kolekciju (opciono)" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="none">Bez kolekcije</SelectItem>
+                {collections.map((c) => (
+                  <SelectItem key={c.id} value={c.id}>{c.name}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          )}
+
           <div className="flex gap-3">
             {!saved ? (
               <Button variant="hero" className="flex-1 gap-2" onClick={saveWords} disabled={saving}>
                 {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
-                Sačuvaj reči (+8 poena)
+                Sačuvaj reči{selectedCollection && selectedCollection !== "none" ? " i dodaj u kolekciju" : ""} (+8 poena)
               </Button>
             ) : (
               <Button variant="ghost" className="flex-1 text-accent" disabled>
