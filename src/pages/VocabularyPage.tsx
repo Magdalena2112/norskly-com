@@ -343,7 +343,7 @@ function SentenceTab({ level, userId }: { level: string; userId?: string }) {
         .select("*")
         .eq("user_id", userId)
         .order("created_at", { ascending: false });
-      setSavedWords((data as SavedWord[]) || []);
+      setSavedWords((data || []).map((d: any) => ({ ...d, translation: d.translation || "" })) as SavedWord[]);
       setLoadingWords(false);
     })();
   }, [userId]);
