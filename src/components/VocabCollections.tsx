@@ -364,8 +364,9 @@ export function CollectionPicker({
         const { data: cw } = await supabase
           .from("collection_words" as any)
           .select("vocabulary_words(id, word, translation, example_sentence, synonym, antonym, topic)")
-          .eq("collection_id", c.id) as any;
-        const words = (cw || []).filter((r: any) => r.vocabulary_words).map((r: any) => r.vocabulary_words);
+          .eq("collection_id", c.id);
+        const cwRows = (cw as unknown as any[]) || [];
+        const words = cwRows.filter((r: any) => r.vocabulary_words).map((r: any) => r.vocabulary_words);
         result.push({ ...c, words, wordCount: words.length });
       }
       setCollections(result);
