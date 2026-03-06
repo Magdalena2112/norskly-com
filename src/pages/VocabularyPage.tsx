@@ -694,6 +694,7 @@ function FlashcardsTab({ userId }: { userId?: string }) {
       <Progress value={completedPct} className="h-2" />
       <div className="flex justify-between text-xs text-muted-foreground">
         <span>{current?.failCount ? `Ponavljanje #${current.failCount + 1}` : "Novo"}</span>
+        <span className="font-medium">{savedWords.length - uniqueRemaining}/{savedWords.length} završeno</span>
         <span>{uniqueRemaining} preostalo</span>
       </div>
       <p className="text-xs text-muted-foreground text-center uppercase tracking-wider">{card?.theme}</p>
