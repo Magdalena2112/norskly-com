@@ -754,7 +754,6 @@ function QuizTab({ level, userId, initialTopic }: { level: string; userId?: stri
       // Log activity
       if (userId && !logged) {
         const finalScore = selected === questions[current].correct ? score + 1 : score;
-        // Adjusted since score state hasn't updated yet for last question
         const pct = (finalScore / questions.length) * 100;
         const bonus = pct >= 80 ? 5 : 0;
         await logActivity(userId, "grammar", "quiz_completed", 15 + bonus, {
@@ -763,6 +762,20 @@ function QuizTab({ level, userId, initialTopic }: { level: string; userId?: stri
           total: questions.length,
           percentage: pct,
         }, { dedupKey: `grammar_quiz_${topic}_${Date.now()}`, checkDailyBonus: true });
+        // Save quiz session
+        await supabase.from("grammar_sessions").insert({
+          user_id: userId,
+          session_type: "quiz",
+          topic,
+          questions: questions.map((q) => ({ question: q.question })),
+          user_answers: questions.map((q, i) => {
+            // We need to track selected answers - use score tracking
+            return i < current ? "answered" : (i === current ? String(selected) : "");
+          }),
+          correct_answers: questions.map((q) => q.options[q.correct]),
+          score: finalScore,
+          total: questions.length,
+        } as any);
         setLogged(true);
       }
     } else {
