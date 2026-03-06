@@ -33,6 +33,7 @@ interface VocabWord {
 interface SavedWord {
   id: string;
   word: string;
+  translation: string;
   synonym: string | null;
   antonym: string | null;
   examples: string[];
