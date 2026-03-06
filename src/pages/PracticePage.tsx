@@ -711,30 +711,61 @@ export default function PracticePage() {
                     Nemaš prethodnih sesija.
                   </p>
                 ) : (
-                  pastSessions.map((session) => (
-                    <button
-                      key={session.id}
-                      onClick={() => viewSession(session)}
-                      className="w-full text-left p-3 rounded-xl border border-border bg-card hover:border-accent transition-colors"
-                    >
-                      <div className="flex items-start gap-2">
-                        <MessageSquare className="w-4 h-4 text-accent mt-0.5 shrink-0" />
-                        <div className="min-w-0 flex-1">
-                          <p className="text-sm font-medium text-foreground truncate">
-                            {getSituationLabel(session.situation)}
-                          </p>
-                          <div className="flex items-center gap-2 mt-1 text-xs text-muted-foreground">
-                            <Clock className="w-3 h-3" />
-                            {formatDistanceToNow(new Date(session.created_at), {
-                              addSuffix: true,
-                              locale: sr,
-                            })}
-                            <span>· {session.message_count} poruka</span>
+                  pastSessions.map((session) => {
+                    const firstMsg = (session.messages as Message[])?.[0];
+                    const title = (session as any).title || getSituationLabel(session.situation);
+                    const preview = firstMsg?.content?.slice(0, 50) || "";
+
+                    return (
+                      <div
+                        key={session.id}
+                        className="p-3 rounded-xl border border-border bg-card hover:border-accent transition-colors"
+                      >
+                        <button
+                          onClick={() => viewSession(session)}
+                          className="w-full text-left"
+                        >
+                          <div className="flex items-start gap-2">
+                            <MessageSquare className="w-4 h-4 text-accent mt-0.5 shrink-0" />
+                            <div className="min-w-0 flex-1">
+                              <p className="text-sm font-medium text-foreground truncate">
+                                {title}
+                              </p>
+                              {preview && (
+                                <p className="text-xs text-muted-foreground truncate mt-0.5">
+                                  {preview}
+                                </p>
+                              )}
+                              <div className="flex items-center gap-2 mt-1 text-xs text-muted-foreground">
+                                <Clock className="w-3 h-3" />
+                                {formatDistanceToNow(new Date(session.created_at), {
+                                  addSuffix: true,
+                                  locale: sr,
+                                })}
+                                <span>· {session.message_count} poruka</span>
+                              </div>
+                            </div>
                           </div>
+                        </button>
+                        <div className="flex gap-1.5 mt-2 ml-6">
+                          {!session.recap && (
+                            <button
+                              onClick={() => continueSession(session)}
+                              className="flex items-center gap-1 text-xs text-accent hover:text-accent/80 transition-colors"
+                            >
+                              <Play className="w-3 h-3" /> Nastavi
+                            </button>
+                          )}
+                          <button
+                            onClick={(e) => { e.stopPropagation(); deleteSession(session.id); }}
+                            className="flex items-center gap-1 text-xs text-destructive hover:text-destructive/80 transition-colors"
+                          >
+                            <Trash2 className="w-3 h-3" /> Obriši
+                          </button>
                         </div>
                       </div>
-                    </button>
-                  ))
+                    );
+                  })
                 )}
               </div>
             </motion.div>
