@@ -149,6 +149,45 @@ export type Database = {
         }
         Relationships: []
       }
+      grammar_sessions: {
+        Row: {
+          correct_answers: Json
+          created_at: string
+          id: string
+          questions: Json
+          score: number
+          session_type: string
+          topic: string
+          total: number
+          user_answers: Json
+          user_id: string
+        }
+        Insert: {
+          correct_answers?: Json
+          created_at?: string
+          id?: string
+          questions?: Json
+          score?: number
+          session_type?: string
+          topic: string
+          total?: number
+          user_answers?: Json
+          user_id: string
+        }
+        Update: {
+          correct_answers?: Json
+          created_at?: string
+          id?: string
+          questions?: Json
+          score?: number
+          session_type?: string
+          topic?: string
+          total?: number
+          user_answers?: Json
+          user_id?: string
+        }
+        Relationships: []
+      }
       grammar_submissions: {
         Row: {
           corrected_text: string | null

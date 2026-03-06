@@ -8,11 +8,13 @@ import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Progress } from "@/components/ui/progress";
-import { ArrowLeft, CheckCircle2, XCircle, ChevronRight, Loader2, BookOpen, PenTool, Brain, Eye, EyeOff, Search, Lightbulb, AlertTriangle } from "lucide-react";
+import { ArrowLeft, CheckCircle2, XCircle, ChevronRight, Loader2, BookOpen, PenTool, Brain, Eye, EyeOff, Search, Lightbulb, AlertTriangle, History, TrendingUp } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { logActivity } from "@/lib/logActivity";
 import { logErrors } from "@/lib/logErrors";
+import GrammarHistoryTab from "@/components/grammar/GrammarHistoryTab";
+import GrammarProgressTab from "@/components/grammar/GrammarProgressTab";
 
 // ─── Types ───
 interface Exercise {
@@ -75,18 +77,24 @@ export default function GrammarPage() {
 
       <div className="flex-1 container max-w-2xl py-6">
         <Tabs defaultValue={defaultTab} className="space-y-6">
-          <TabsList className="grid w-full grid-cols-4">
-            <TabsTrigger value="exercises" className="gap-1.5 text-xs sm:text-sm">
-              <BookOpen className="w-4 h-4" /> Vežbe
+          <TabsList className="grid w-full grid-cols-6">
+            <TabsTrigger value="exercises" className="gap-1 text-xs">
+              <BookOpen className="w-3.5 h-3.5" /> Vežbe
             </TabsTrigger>
-            <TabsTrigger value="correction" className="gap-1.5 text-xs sm:text-sm">
-              <PenTool className="w-4 h-4" /> Korekcija
+            <TabsTrigger value="correction" className="gap-1 text-xs">
+              <PenTool className="w-3.5 h-3.5" /> Korekcija
             </TabsTrigger>
-            <TabsTrigger value="explain" className="gap-1.5 text-xs sm:text-sm">
-              <Search className="w-4 h-4" /> Objašnjenja
+            <TabsTrigger value="explain" className="gap-1 text-xs">
+              <Search className="w-3.5 h-3.5" /> Objašnjenja
             </TabsTrigger>
-            <TabsTrigger value="quiz" className="gap-1.5 text-xs sm:text-sm">
-              <Brain className="w-4 h-4" /> Kviz
+            <TabsTrigger value="quiz" className="gap-1 text-xs">
+              <Brain className="w-3.5 h-3.5" /> Kviz
+            </TabsTrigger>
+            <TabsTrigger value="history" className="gap-1 text-xs">
+              <History className="w-3.5 h-3.5" /> Istorija
+            </TabsTrigger>
+            <TabsTrigger value="progress" className="gap-1 text-xs">
+              <TrendingUp className="w-3.5 h-3.5" /> Napredak
             </TabsTrigger>
           </TabsList>
 
@@ -101,6 +109,12 @@ export default function GrammarPage() {
           </TabsContent>
           <TabsContent value="quiz">
             <QuizTab level={level} userId={user?.id} initialTopic={navState.tab === "quiz" ? navState.topic : undefined} />
+          </TabsContent>
+          <TabsContent value="history">
+            <GrammarHistoryTab userId={user?.id} />
+          </TabsContent>
+          <TabsContent value="progress">
+            <GrammarProgressTab userId={user?.id} />
           </TabsContent>
         </Tabs>
       </div>
@@ -217,6 +231,17 @@ function ExercisesTab({ level, userId, initialTopic }: { level: string; userId?:
         total: states.length,
         percentage: pct,
       }, { dedupKey: `grammar_ex_${topic}_${Date.now()}`, checkDailyBonus: true });
+      // Save session to grammar_sessions
+      supabase.from("grammar_sessions").insert({
+        user_id: userId,
+        session_type: "exercise",
+        topic,
+        questions: exercises.map((e) => ({ instruction: e.instruction, sentence: e.sentence })),
+        user_answers: states.map((s) => s.answer || (s.status === "revealed" ? "(prikazano)" : "")),
+        correct_answers: exercises.map((e) => e.solution),
+        score: correctCount,
+        total: states.length,
+      } as any).then(() => {});
       setExerciseXpLogged(true);
     }
   }, [allDone]);
@@ -678,6 +703,7 @@ function QuizTab({ level, userId, initialTopic }: { level: string; userId?: stri
   const [questions, setQuestions] = useState<QuizQuestion[]>([]);
   const [current, setCurrent] = useState(0);
   const [selected, setSelected] = useState<number | null>(null);
+  const [answers, setAnswers] = useState<number[]>([]);
   const [score, setScore] = useState(0);
   const [finished, setFinished] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -688,7 +714,7 @@ function QuizTab({ level, userId, initialTopic }: { level: string; userId?: stri
     setLoading(true);
     setQuestions([]);
     setCurrent(0);
-    setSelected(null);
+    setAnswers([]);
     setScore(0);
     setFinished(false);
     setLogged(false);
@@ -705,6 +731,7 @@ function QuizTab({ level, userId, initialTopic }: { level: string; userId?: stri
   const handleSelect = async (idx: number) => {
     if (selected !== null) return;
     setSelected(idx);
+    setAnswers((prev) => [...prev, idx]);
     if (idx === questions[current].correct) {
       setScore((s) => s + 1);
     } else if (userId) {
@@ -729,7 +756,6 @@ function QuizTab({ level, userId, initialTopic }: { level: string; userId?: stri
       // Log activity
       if (userId && !logged) {
         const finalScore = selected === questions[current].correct ? score + 1 : score;
-        // Adjusted since score state hasn't updated yet for last question
         const pct = (finalScore / questions.length) * 100;
         const bonus = pct >= 80 ? 5 : 0;
         await logActivity(userId, "grammar", "quiz_completed", 15 + bonus, {
@@ -738,6 +764,17 @@ function QuizTab({ level, userId, initialTopic }: { level: string; userId?: stri
           total: questions.length,
           percentage: pct,
         }, { dedupKey: `grammar_quiz_${topic}_${Date.now()}`, checkDailyBonus: true });
+        // Save quiz session
+        await supabase.from("grammar_sessions").insert({
+          user_id: userId,
+          session_type: "quiz",
+          topic,
+          questions: questions.map((q) => ({ question: q.question, options: q.options })),
+          user_answers: [...answers, selected].map((a, i) => a !== null && a !== undefined ? questions[i]?.options[a] || String(a) : ""),
+          correct_answers: questions.map((q) => q.options[q.correct]),
+          score: finalScore,
+          total: questions.length,
+        } as any);
         setLogged(true);
       }
     } else {
