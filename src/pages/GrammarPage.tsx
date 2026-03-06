@@ -769,11 +769,8 @@ function QuizTab({ level, userId, initialTopic }: { level: string; userId?: stri
           user_id: userId,
           session_type: "quiz",
           topic,
-          questions: questions.map((q) => ({ question: q.question })),
-          user_answers: questions.map((q, i) => {
-            // We need to track selected answers - use score tracking
-            return i < current ? "answered" : (i === current ? String(selected) : "");
-          }),
+          questions: questions.map((q) => ({ question: q.question, options: q.options })),
+          user_answers: [...answers, selected].map((a, i) => a !== null && a !== undefined ? questions[i]?.options[a] || String(a) : ""),
           correct_answers: questions.map((q) => q.options[q.correct]),
           score: finalScore,
           total: questions.length,
