@@ -706,6 +706,7 @@ function QuizTab({ level, userId }: { level: string; userId?: string }) {
     const mapped: SavedWord[] = words.map((w) => ({
       id: w.id,
       word: w.word,
+      translation: w.translation || "",
       synonym: w.synonym,
       antonym: w.antonym,
       examples: w.example_sentence ? [w.example_sentence] : [],
