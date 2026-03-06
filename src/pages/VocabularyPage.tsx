@@ -767,7 +767,16 @@ function QuizTab({ level, userId }: { level: string; userId?: string }) {
   const q = questions[current];
   const progress = questions.length ? ((current + (finished ? 1 : 0)) / questions.length) * 100 : 0;
 
-  if (loadingWords) {
+  if (!started && source === "collections") {
+    return (
+      <div className="space-y-4">
+        <SourceSelector source={source} setSource={(s) => { setSource(s); setStarted(false); }} />
+        <CollectionPicker userId={userId} onStart={startFromCollections} actionLabel="Pokreni kviz" actionIcon={<Brain className="w-4 h-4" />} minWords={3} />
+      </div>
+    );
+  }
+
+  if (loadingWords && source === "all") {
     return (
       <Card className="shadow-nordic">
         <CardContent className="pt-8 pb-8 text-center">
@@ -779,12 +788,15 @@ function QuizTab({ level, userId }: { level: string; userId?: string }) {
 
   if (savedWords.length < 3) {
     return (
-      <Card className="shadow-nordic">
-        <CardContent className="pt-8 pb-8 text-center space-y-2">
-          <p className="text-muted-foreground">Potrebno je najmanje 3 sačuvane reči za kviz.</p>
-          <p className="text-sm text-muted-foreground">Imate {savedWords.length} reči. Generišite još u "Generiši" tabu.</p>
-        </CardContent>
-      </Card>
+      <div className="space-y-4">
+        <SourceSelector source={source} setSource={setSource} />
+        <Card className="shadow-nordic">
+          <CardContent className="pt-8 pb-8 text-center space-y-2">
+            <p className="text-muted-foreground">Potrebno je najmanje 3 sačuvane reči za kviz.</p>
+            <p className="text-sm text-muted-foreground">Imate {savedWords.length} reči. Generišite još u "Generiši" tabu.</p>
+          </CardContent>
+        </Card>
+      </div>
     );
   }
 
