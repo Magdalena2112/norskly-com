@@ -63,6 +63,8 @@ interface TalkSession {
   message_count: number;
   points: number;
   created_at: string;
+  title: string;
+  updated_at: string;
 }
 
 const situationPresets = [
