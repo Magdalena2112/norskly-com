@@ -231,6 +231,17 @@ function ExercisesTab({ level, userId, initialTopic }: { level: string; userId?:
         total: states.length,
         percentage: pct,
       }, { dedupKey: `grammar_ex_${topic}_${Date.now()}`, checkDailyBonus: true });
+      // Save session to grammar_sessions
+      supabase.from("grammar_sessions").insert({
+        user_id: userId,
+        session_type: "exercise",
+        topic,
+        questions: exercises.map((e) => ({ instruction: e.instruction, sentence: e.sentence })),
+        user_answers: states.map((s) => s.answer || (s.status === "revealed" ? "(prikazano)" : "")),
+        correct_answers: exercises.map((e) => e.solution),
+        score: correctCount,
+        total: states.length,
+      } as any).then(() => {});
       setExerciseXpLogged(true);
     }
   }, [allDone]);
