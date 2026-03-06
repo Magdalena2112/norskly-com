@@ -133,10 +133,54 @@ const sectionConfig: Record<SectionKey, { icon: React.ReactNode; label: string; 
   "SLEDEĆI KORAK": { icon: <ArrowRight className="w-4 h-4" />, label: "Sledeći korak", accent: "text-primary" },
 };
 
+function CollapsibleSection({ section, defaultOpen }: { section: ParsedSection; defaultOpen: boolean }) {
+  const [open, setOpen] = useState(defaultOpen);
+  const config = sectionConfig[section.key];
+  const isMain = section.key === "ODGOVOR";
+
+  if (isMain) {
+    return (
+      <div className="bg-card border border-border text-card-foreground rounded-2xl rounded-bl-md px-4 py-3">
+        <div className="prose prose-sm max-w-none text-card-foreground text-base">
+          <ReactMarkdown>{section.content}</ReactMarkdown>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="bg-muted/50 border border-border/50 text-card-foreground rounded-2xl overflow-hidden">
+      <button
+        onClick={() => setOpen(!open)}
+        className="w-full flex items-center justify-between px-4 py-2.5 hover:bg-muted/80 transition-colors"
+      >
+        <div className={`flex items-center gap-1.5 ${config.accent}`}>
+          {config.icon}
+          <span className="text-xs font-semibold uppercase tracking-wider">{config.label}</span>
+        </div>
+        <ChevronDown className={`w-3.5 h-3.5 text-muted-foreground transition-transform ${open ? "rotate-180" : ""}`} />
+      </button>
+      <AnimatePresence initial={false}>
+        {open && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.2 }}
+          >
+            <div className="px-4 pb-3 prose prose-sm max-w-none text-card-foreground text-sm">
+              <ReactMarkdown>{section.content}</ReactMarkdown>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
 function StructuredAssistantMessage({ content }: { content: string }) {
   const sections = parseSections(content);
 
-  // Fallback: render as plain markdown if no sections found (e.g. during streaming)
   if (!sections) {
     return (
       <div className="bg-card border border-border text-card-foreground rounded-2xl rounded-bl-md px-5 py-3">
@@ -149,31 +193,9 @@ function StructuredAssistantMessage({ content }: { content: string }) {
 
   return (
     <div className="space-y-2">
-      {sections.map((section, i) => {
-        const config = sectionConfig[section.key];
-        const isMain = section.key === "ODGOVOR";
-
-        return (
-          <div
-            key={i}
-            className={`rounded-2xl px-4 py-3 ${
-              isMain
-                ? "bg-card border border-border text-card-foreground rounded-bl-md"
-                : "bg-muted/50 border border-border/50 text-card-foreground"
-            }`}
-          >
-            {!isMain && (
-              <div className={`flex items-center gap-1.5 mb-1.5 ${config.accent}`}>
-                {config.icon}
-                <span className="text-xs font-semibold uppercase tracking-wider">{config.label}</span>
-              </div>
-            )}
-            <div className={`prose prose-sm max-w-none text-card-foreground ${isMain ? "text-base" : "text-sm"}`}>
-              <ReactMarkdown>{section.content}</ReactMarkdown>
-            </div>
-          </div>
-        );
-      })}
+      {sections.map((section, i) => (
+        <CollapsibleSection key={i} section={section} defaultOpen={section.key === "ODGOVOR" || section.key === "ISPRAVKE"} />
+      ))}
     </div>
   );
 }
