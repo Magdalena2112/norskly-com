@@ -532,7 +532,16 @@ function FlashcardsTab({ userId }: { userId?: string }) {
     setLogged(false);
   };
 
-  if (loadingWords) {
+  if (!started && source === "collections") {
+    return (
+      <div className="space-y-4">
+        <SourceSelector source={source} setSource={(s) => { setSource(s); setStarted(false); }} />
+        <CollectionPicker userId={userId} onStart={startFromCollections} actionLabel="Pokreni kartice" actionIcon={<Layers className="w-4 h-4" />} />
+      </div>
+    );
+  }
+
+  if (loadingWords && source === "all") {
     return (
       <Card className="shadow-nordic">
         <CardContent className="pt-8 pb-8 text-center">
@@ -544,12 +553,15 @@ function FlashcardsTab({ userId }: { userId?: string }) {
 
   if (savedWords.length === 0) {
     return (
-      <Card className="shadow-nordic">
-        <CardContent className="pt-8 pb-8 text-center space-y-2">
-          <p className="text-muted-foreground">Nemate sačuvanih reči za kartice.</p>
-          <p className="text-sm text-muted-foreground">Prvo generišite i sačuvajte reči u "Generiši" tabu.</p>
-        </CardContent>
-      </Card>
+      <div className="space-y-4">
+        <SourceSelector source={source} setSource={setSource} />
+        <Card className="shadow-nordic">
+          <CardContent className="pt-8 pb-8 text-center space-y-2">
+            <p className="text-muted-foreground">Nemate sačuvanih reči za kartice.</p>
+            <p className="text-sm text-muted-foreground">Prvo generišite i sačuvajte reči u "Generiši" tabu.</p>
+          </CardContent>
+        </Card>
+      </div>
     );
   }
 
