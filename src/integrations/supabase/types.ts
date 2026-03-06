@@ -304,6 +304,42 @@ export type Database = {
         }
         Relationships: []
       }
+      teacher_profile: {
+        Row: {
+          bio: string
+          duration_minutes: number
+          focus: string[]
+          id: string
+          name: string
+          photo_url: string | null
+          rating: number
+          students_count: number
+          updated_at: string
+        }
+        Insert: {
+          bio?: string
+          duration_minutes?: number
+          focus?: string[]
+          id?: string
+          name?: string
+          photo_url?: string | null
+          rating?: number
+          students_count?: number
+          updated_at?: string
+        }
+        Update: {
+          bio?: string
+          duration_minutes?: number
+          focus?: string[]
+          id?: string
+          name?: string
+          photo_url?: string | null
+          rating?: number
+          students_count?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
       user_xp: {
         Row: {
           created_at: string
