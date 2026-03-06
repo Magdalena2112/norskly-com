@@ -559,6 +559,20 @@ export default function PracticePage() {
           <div className="container flex items-center justify-between h-14">
             <span className="font-display font-bold text-lg text-foreground">Norskly</span>
             <div className="flex items-center gap-2">
+              {!s.recap && (
+                <Button variant="hero" size="sm" onClick={() => continueSession(s)} className="gap-1.5">
+                  <Play className="w-3.5 h-3.5" /> Nastavi
+                </Button>
+              )}
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => deleteSession(s.id)}
+                className="text-destructive hover:text-destructive"
+                title="Obriši sesiju"
+              >
+                <Trash2 className="w-4 h-4" />
+              </Button>
               <Button variant="ghost" size="sm" onClick={() => setViewingSession(null)}>
                 ← Nazad
               </Button>
