@@ -179,15 +179,15 @@ export default function DashboardPage() {
                        </p>
                        <p className="text-xs text-muted-foreground mt-0.5">Zakazano</p>
                     </div>
-                    <Button size="sm" variant="outline" onClick={() => navigate("/my-lessons")}>
-                      Se detaljer
-                    </Button>
-                  </div>
-                ) : (
-                  <div className="flex items-center justify-between">
-                    <p className="text-sm text-muted-foreground">Ingen planlagte timer.</p>
-                    <Button size="sm" variant="hero" onClick={() => navigate("/book-lesson")}>
-                      Bestill nå
+                     <Button size="sm" variant="outline" onClick={() => navigate("/my-lessons")}>
+                       Pogledaj detalje
+                     </Button>
+                   </div>
+                 ) : (
+                   <div className="flex items-center justify-between">
+                     <p className="text-sm text-muted-foreground">Nema zakazanih časova.</p>
+                     <Button size="sm" variant="hero" onClick={() => navigate("/book-lesson")}>
+                       Rezerviši sada
                     </Button>
                   </div>
                 )}
