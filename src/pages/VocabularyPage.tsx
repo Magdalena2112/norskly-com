@@ -222,7 +222,7 @@ function GenerateTab({ level, userId }: { level: string; userId?: string }) {
         .select("id") as any;
 
       // Add to selected collection if chosen
-      if (selectedCollection && insertedWords?.length) {
+      if (selectedCollection && selectedCollection !== "none" && insertedWords?.length) {
         const cwRows = insertedWords.map((w: any) => ({
           collection_id: selectedCollection,
           word_id: w.id,
