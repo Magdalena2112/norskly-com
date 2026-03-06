@@ -63,9 +63,10 @@ export default function AdminTeacherProfilePage() {
           focus,
           rating: parseFloat(rating),
           students_count: parseInt(studentsCount),
+          meet_link: meetLink,
           photo_url: photoUrl,
           updated_at: new Date().toISOString(),
-        })
+        } as any)
         .eq("id", profile.id);
       if (error) throw error;
     },
