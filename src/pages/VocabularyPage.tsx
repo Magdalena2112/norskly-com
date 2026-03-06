@@ -157,6 +157,21 @@ function GenerateTab({ level, userId }: { level: string; userId?: string }) {
   const [loading, setLoading] = useState(false);
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
+  const [collections, setCollections] = useState<{ id: string; name: string }[]>([]);
+  const [selectedCollection, setSelectedCollection] = useState<string>("");
+
+  // Fetch user collections
+  useEffect(() => {
+    if (!userId) return;
+    (async () => {
+      const { data } = await supabase
+        .from("word_collections" as any)
+        .select("id, name")
+        .eq("user_id", userId)
+        .order("created_at", { ascending: false });
+      setCollections((data as unknown as { id: string; name: string }[]) || []);
+    })();
+  }, [userId]);
 
   const generate = async (loadMore = false) => {
     if (!theme.trim()) return;
@@ -191,7 +206,7 @@ function GenerateTab({ level, userId }: { level: string; userId?: string }) {
       const { error } = await supabase.from("vocab_items").insert(rows);
       if (error) throw error;
 
-      // Also save to vocabulary_words (for collections)
+      // Save to vocabulary_words (for collections)
       const vwRows = words.map((w) => ({
         user_id: userId,
         word: w.word,
@@ -201,7 +216,19 @@ function GenerateTab({ level, userId }: { level: string; userId?: string }) {
         antonym: w.antonym || null,
         topic: theme.trim(),
       }));
-      await supabase.from("vocabulary_words" as any).insert(vwRows as any);
+      const { data: insertedWords } = await supabase
+        .from("vocabulary_words" as any)
+        .insert(vwRows as any)
+        .select("id") as any;
+
+      // Add to selected collection if chosen
+      if (selectedCollection && selectedCollection !== "none" && insertedWords?.length) {
+        const cwRows = insertedWords.map((w: any) => ({
+          collection_id: selectedCollection,
+          word_id: w.id,
+        }));
+        await supabase.from("collection_words" as any).insert(cwRows as any);
+      }
 
       setSaved(true);
     } catch (e: any) {
@@ -261,11 +288,25 @@ function GenerateTab({ level, userId }: { level: string; userId?: string }) {
             </Card>
           ))}
 
+          {collections.length > 0 && !saved && (
+            <Select value={selectedCollection} onValueChange={setSelectedCollection}>
+              <SelectTrigger>
+                <SelectValue placeholder="Dodaj u kolekciju (opciono)" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="none">Bez kolekcije</SelectItem>
+                {collections.map((c) => (
+                  <SelectItem key={c.id} value={c.id}>{c.name}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          )}
+
           <div className="flex gap-3">
             {!saved ? (
               <Button variant="hero" className="flex-1 gap-2" onClick={saveWords} disabled={saving}>
                 {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
-                Sačuvaj reči (+8 poena)
+                Sačuvaj reči{selectedCollection && selectedCollection !== "none" ? " i dodaj u kolekciju" : ""} (+8 poena)
               </Button>
             ) : (
               <Button variant="ghost" className="flex-1 text-accent" disabled>
