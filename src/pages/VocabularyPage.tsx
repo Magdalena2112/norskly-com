@@ -18,7 +18,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { logActivity } from "@/lib/logActivity";
 import { logErrors } from "@/lib/logErrors";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import VocabCollections, { CollectionPicker } from "@/components/VocabCollections";
+import VocabCollections from "@/components/VocabCollections";
+import CollectionSelector from "@/components/CollectionSelector";
 
 // ─── Types ───
 interface VocabWord {
@@ -134,19 +135,7 @@ export default function VocabularyPage() {
   );
 }
 
-// ─── Source Selector ───
-function SourceSelector({ source, setSource }: { source: "all" | "collections"; setSource: (s: "all" | "collections") => void }) {
-  return (
-    <div className="flex gap-2">
-      <Button variant={source === "all" ? "default" : "outline"} size="sm" className="flex-1" onClick={() => setSource("all")}>
-        Sve reči
-      </Button>
-      <Button variant={source === "collections" ? "default" : "outline"} size="sm" className="flex-1" onClick={() => setSource("collections")}>
-        Iz kolekcija
-      </Button>
-    </div>
-  );
-}
+// SourceSelector removed – replaced by CollectionSelector
 
 // ═══════════════════════════════════════
 // TAB 1: Generate vocabulary by theme
@@ -495,29 +484,13 @@ function SentenceTab({ level, userId }: { level: string; userId?: string }) {
 // TAB 3: Flashcards from saved words
 // ═══════════════════════════════════════
 function FlashcardsTab({ userId }: { userId?: string }) {
-  const [source, setSource] = useState<"all" | "collections">("all");
   const [savedWords, setSavedWords] = useState<SavedWord[]>([]);
-  const [loadingWords, setLoadingWords] = useState(true);
   const [index, setIndex] = useState(0);
   const [flipped, setFlipped] = useState(false);
   const [known, setKnown] = useState<number[]>([]);
   const [unknown, setUnknown] = useState<number[]>([]);
   const [logged, setLogged] = useState(false);
   const [started, setStarted] = useState(false);
-
-  useEffect(() => {
-    if (!userId) return;
-    (async () => {
-      setLoadingWords(true);
-      const { data } = await supabase
-        .from("vocab_items")
-        .select("*")
-        .eq("user_id", userId)
-        .order("created_at", { ascending: false });
-      setSavedWords((data as SavedWord[]) || []);
-      setLoadingWords(false);
-    })();
-  }, [userId]);
 
   const startFromCollections = (words: any[]) => {
     const mapped: SavedWord[] = words.map((w) => ({
@@ -548,7 +521,6 @@ function FlashcardsTab({ userId }: { userId?: string }) {
     else setUnknown((p) => [...p, index]);
     setFlipped(false);
 
-    // Update status in DB
     if (userId && card) {
       await supabase
         .from("vocab_items")
@@ -558,7 +530,6 @@ function FlashcardsTab({ userId }: { userId?: string }) {
 
     const nextReviewed = reviewed + 1;
     if (nextReviewed >= Math.min(10, savedWords.length)) {
-      // Will show done screen
       if (userId && !logged) {
         await logActivity(userId, "vocabulary", "flashcards_completed", 8, {
           known: known.length + (isKnown ? 1 : 0),
@@ -569,7 +540,6 @@ function FlashcardsTab({ userId }: { userId?: string }) {
       return;
     }
 
-    // Find next unreviewed card
     for (let i = 1; i <= savedWords.length; i++) {
       const next = (index + i) % savedWords.length;
       if (!known.includes(next) && !unknown.includes(next) && next !== index) {
@@ -587,36 +557,16 @@ function FlashcardsTab({ userId }: { userId?: string }) {
     setLogged(false);
   };
 
-  if (!started && source === "collections") {
+  if (!started) {
     return (
-      <div className="space-y-4">
-        <SourceSelector source={source} setSource={(s) => { setSource(s); setStarted(false); }} />
-        <CollectionPicker userId={userId} onStart={startFromCollections} actionLabel="Pokreni kartice" actionIcon={<Layers className="w-4 h-4" />} />
-      </div>
-    );
-  }
-
-  if (loadingWords && source === "all") {
-    return (
-      <Card className="shadow-nordic">
-        <CardContent className="pt-8 pb-8 text-center">
-          <Loader2 className="w-6 h-6 animate-spin text-accent mx-auto" />
-        </CardContent>
-      </Card>
-    );
-  }
-
-  if (savedWords.length === 0) {
-    return (
-      <div className="space-y-4">
-        <SourceSelector source={source} setSource={setSource} />
-        <Card className="shadow-nordic">
-          <CardContent className="pt-8 pb-8 text-center space-y-2">
-            <p className="text-muted-foreground">Nemate sačuvanih reči za kartice.</p>
-            <p className="text-sm text-muted-foreground">Prvo generišite i sačuvajte reči u "Generiši" tabu.</p>
-          </CardContent>
-        </Card>
-      </div>
+      <CollectionSelector
+        userId={userId}
+        tabKey="kartice"
+        onStart={startFromCollections}
+        actionLabel="Započni vežbanje"
+        actionIcon={<Layers className="w-4 h-4" />}
+        minWords={1}
+      />
     );
   }
 
@@ -698,9 +648,7 @@ function FlashcardsTab({ userId }: { userId?: string }) {
 // TAB 4: Quiz from saved words
 // ═══════════════════════════════════════
 function QuizTab({ level, userId }: { level: string; userId?: string }) {
-  const [source, setSource] = useState<"all" | "collections">("all");
   const [savedWords, setSavedWords] = useState<SavedWord[]>([]);
-  const [loadingWords, setLoadingWords] = useState(true);
   const [questions, setQuestions] = useState<QuizQuestion[]>([]);
   const [current, setCurrent] = useState(0);
   const [selected, setSelected] = useState<number | null>(null);
@@ -709,20 +657,6 @@ function QuizTab({ level, userId }: { level: string; userId?: string }) {
   const [loading, setLoading] = useState(false);
   const [logged, setLogged] = useState(false);
   const [started, setStarted] = useState(false);
-
-  useEffect(() => {
-    if (!userId) return;
-    (async () => {
-      setLoadingWords(true);
-      const { data } = await supabase
-        .from("vocab_items")
-        .select("*")
-        .eq("user_id", userId)
-        .order("created_at", { ascending: false });
-      setSavedWords((data as SavedWord[]) || []);
-      setLoadingWords(false);
-    })();
-  }, [userId]);
 
   const startFromCollections = (words: any[]) => {
     const mapped: SavedWord[] = words.map((w) => ({
@@ -808,36 +742,27 @@ function QuizTab({ level, userId }: { level: string; userId?: string }) {
   const q = questions[current];
   const progress = questions.length ? ((current + (finished ? 1 : 0)) / questions.length) * 100 : 0;
 
-  if (!started && source === "collections") {
+  if (!started) {
     return (
-      <div className="space-y-4">
-        <SourceSelector source={source} setSource={(s) => { setSource(s); setStarted(false); }} />
-        <CollectionPicker userId={userId} onStart={startFromCollections} actionLabel="Pokreni kviz" actionIcon={<Brain className="w-4 h-4" />} minWords={3} />
-      </div>
-    );
-  }
-
-  if (loadingWords && source === "all") {
-    return (
-      <Card className="shadow-nordic">
-        <CardContent className="pt-8 pb-8 text-center">
-          <Loader2 className="w-6 h-6 animate-spin text-accent mx-auto" />
-        </CardContent>
-      </Card>
+      <CollectionSelector
+        userId={userId}
+        tabKey="kviz"
+        onStart={startFromCollections}
+        actionLabel="Započni vežbanje"
+        actionIcon={<Brain className="w-4 h-4" />}
+        minWords={3}
+      />
     );
   }
 
   if (savedWords.length < 3) {
     return (
-      <div className="space-y-4">
-        <SourceSelector source={source} setSource={setSource} />
-        <Card className="shadow-nordic">
-          <CardContent className="pt-8 pb-8 text-center space-y-2">
-            <p className="text-muted-foreground">Potrebno je najmanje 3 sačuvane reči za kviz.</p>
-            <p className="text-sm text-muted-foreground">Imate {savedWords.length} reči. Generišite još u "Generiši" tabu.</p>
-          </CardContent>
-        </Card>
-      </div>
+      <Card className="shadow-nordic">
+        <CardContent className="pt-8 pb-8 text-center space-y-2">
+          <p className="text-muted-foreground">Potrebno je najmanje 3 sačuvane reči za kviz.</p>
+          <p className="text-sm text-muted-foreground">Imate {savedWords.length} reči. Generišite još u "Generiši" tabu.</p>
+        </CardContent>
+      </Card>
     );
   }
 
