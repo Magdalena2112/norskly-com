@@ -231,6 +231,8 @@ export type Database = {
           recap: Json | null
           role: string
           situation: string
+          title: string | null
+          updated_at: string | null
           user_id: string
         }
         Insert: {
@@ -243,6 +245,8 @@ export type Database = {
           recap?: Json | null
           role?: string
           situation?: string
+          title?: string | null
+          updated_at?: string | null
           user_id: string
         }
         Update: {
@@ -255,6 +259,8 @@ export type Database = {
           recap?: Json | null
           role?: string
           situation?: string
+          title?: string | null
+          updated_at?: string | null
           user_id?: string
         }
         Relationships: []

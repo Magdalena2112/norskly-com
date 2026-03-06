@@ -31,6 +31,8 @@ import {
   PenLine,
   Star,
   ArrowRight,
+  Trash2,
+  Play,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
@@ -61,6 +63,8 @@ interface TalkSession {
   message_count: number;
   points: number;
   created_at: string;
+  title: string;
+  updated_at: string;
 }
 
 const situationPresets = [
@@ -221,6 +225,7 @@ export default function PracticePage() {
   const [pastSessions, setPastSessions] = useState<TalkSession[]>([]);
   const [historyLoading, setHistoryLoading] = useState(false);
   const [viewingSession, setViewingSession] = useState<TalkSession | null>(null);
+  const [currentSessionId, setCurrentSessionId] = useState<string | null>(null);
 
   const bottomRef = useRef<HTMLDivElement>(null);
 
@@ -236,7 +241,7 @@ export default function PracticePage() {
       .select("*")
       .eq("user_id", user.id)
       .order("created_at", { ascending: false })
-      .limit(20);
+      .limit(30);
 
     if (error) {
       console.error("Failed to fetch history:", error);
@@ -250,19 +255,60 @@ export default function PracticePage() {
     if (showHistory) fetchHistory();
   }, [showHistory, fetchHistory]);
 
+  /** Generate title from first user message */
+  const generateTitle = (msgs: Message[]): string => {
+    const firstUser = msgs.find(m => m.role === "user");
+    if (!firstUser) return "Novi razgovor";
+    const text = firstUser.content.slice(0, 60);
+    return text.length < firstUser.content.length ? text + "…" : text;
+  };
+
+  /** Auto-save: create or update session in DB */
+  const autoSaveSession = async (updatedMessages: Message[], recapData?: RecapData) => {
+    if (!user) return null;
+    const title = generateTitle(updatedMessages);
+
+    if (currentSessionId) {
+      // Update existing session
+      await supabase
+        .from("talk_sessions")
+        .update({
+          messages: updatedMessages as unknown as any,
+          message_count: updatedMessages.length,
+          title,
+          updated_at: new Date().toISOString(),
+          ...(recapData ? { recap: recapData as unknown as any, points: 12 } : {}),
+        } as any)
+        .eq("id", currentSessionId);
+      return currentSessionId;
+    } else {
+      // Create new session
+      const { data, error } = await supabase
+        .from("talk_sessions")
+        .insert({
+          user_id: user.id,
+          situation,
+          formality,
+          role,
+          messages: updatedMessages as unknown as any,
+          message_count: updatedMessages.length,
+          title,
+          points: 0,
+        } as any)
+        .select("id")
+        .single();
+      if (error) {
+        console.error("Failed to create session:", error);
+        return null;
+      }
+      const newId = (data as any)?.id;
+      setCurrentSessionId(newId);
+      return newId;
+    }
+  };
+
   const saveSession = async (recapData: RecapData) => {
-    if (!user) return;
-    const { error } = await supabase.from("talk_sessions").insert({
-      user_id: user.id,
-      situation,
-      formality,
-      role,
-      messages: messages as unknown as any,
-      recap: recapData as unknown as any,
-      message_count: messages.length,
-      points: 12,
-    });
-    if (error) console.error("Failed to save session:", error);
+    await autoSaveSession(messages, recapData);
   };
 
   const sendMessage = async (text: string) => {
@@ -378,6 +424,12 @@ export default function PracticePage() {
       toast.error("Greška pri komunikaciji sa AI-jem.");
     }
 
+    // Auto-save after each exchange
+    if (assistantSoFar) {
+      const finalMessages = [...updatedMessages, { role: "assistant" as const, content: assistantSoFar }];
+      await autoSaveSession(finalMessages);
+    }
+
     setIsLoading(false);
   };
 
@@ -459,12 +511,40 @@ export default function PracticePage() {
     setMessages([]);
     setRecap(null);
     setViewingSession(null);
+    setCurrentSessionId(null);
     setShowControls(true);
   };
 
   const viewSession = (session: TalkSession) => {
     setViewingSession(session);
     setShowHistory(false);
+  };
+
+  const continueSession = (session: TalkSession) => {
+    setMessages(session.messages as Message[]);
+    setCurrentSessionId(session.id);
+    setSituation(session.situation);
+    setFormality(session.formality);
+    setRole(session.role);
+    setRecap(null);
+    setViewingSession(null);
+    setShowHistory(false);
+    setShowControls(false);
+  };
+
+  const deleteSession = async (sessionId: string) => {
+    const { error } = await supabase
+      .from("talk_sessions")
+      .delete()
+      .eq("id", sessionId);
+    if (error) {
+      toast.error("Greška pri brisanju sesije.");
+      return;
+    }
+    setPastSessions((prev) => prev.filter((s) => s.id !== sessionId));
+    if (viewingSession?.id === sessionId) setViewingSession(null);
+    if (currentSessionId === sessionId) setCurrentSessionId(null);
+    toast.success("Sesija obrisana.");
   };
 
   const getSituationLabel = (val: string) =>
@@ -479,6 +559,20 @@ export default function PracticePage() {
           <div className="container flex items-center justify-between h-14">
             <span className="font-display font-bold text-lg text-foreground">Norskly</span>
             <div className="flex items-center gap-2">
+              {!s.recap && (
+                <Button variant="hero" size="sm" onClick={() => continueSession(s)} className="gap-1.5">
+                  <Play className="w-3.5 h-3.5" /> Nastavi
+                </Button>
+              )}
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => deleteSession(s.id)}
+                className="text-destructive hover:text-destructive"
+                title="Obriši sesiju"
+              >
+                <Trash2 className="w-4 h-4" />
+              </Button>
               <Button variant="ghost" size="sm" onClick={() => setViewingSession(null)}>
                 ← Nazad
               </Button>
@@ -489,9 +583,12 @@ export default function PracticePage() {
         <div className="flex-1 overflow-y-auto">
           <div className="container max-w-3xl py-6 space-y-4">
             {/* Session info */}
-            <div className="text-center text-xs text-muted-foreground mb-4">
-              {getSituationLabel(s.situation)} · {s.message_count} poruka ·{" "}
-              {formatDistanceToNow(new Date(s.created_at), { addSuffix: true, locale: sr })}
+            <div className="text-center mb-4">
+              <p className="text-sm font-medium text-foreground">{(s as any).title || getSituationLabel(s.situation)}</p>
+              <p className="text-xs text-muted-foreground mt-1">
+                {getSituationLabel(s.situation)} · {s.message_count} poruka ·{" "}
+                {formatDistanceToNow(new Date(s.created_at), { addSuffix: true, locale: sr })}
+              </p>
             </div>
 
             {/* Messages */}
@@ -617,30 +714,61 @@ export default function PracticePage() {
                     Nemaš prethodnih sesija.
                   </p>
                 ) : (
-                  pastSessions.map((session) => (
-                    <button
-                      key={session.id}
-                      onClick={() => viewSession(session)}
-                      className="w-full text-left p-3 rounded-xl border border-border bg-card hover:border-accent transition-colors"
-                    >
-                      <div className="flex items-start gap-2">
-                        <MessageSquare className="w-4 h-4 text-accent mt-0.5 shrink-0" />
-                        <div className="min-w-0 flex-1">
-                          <p className="text-sm font-medium text-foreground truncate">
-                            {getSituationLabel(session.situation)}
-                          </p>
-                          <div className="flex items-center gap-2 mt-1 text-xs text-muted-foreground">
-                            <Clock className="w-3 h-3" />
-                            {formatDistanceToNow(new Date(session.created_at), {
-                              addSuffix: true,
-                              locale: sr,
-                            })}
-                            <span>· {session.message_count} poruka</span>
+                  pastSessions.map((session) => {
+                    const firstMsg = (session.messages as Message[])?.[0];
+                    const title = (session as any).title || getSituationLabel(session.situation);
+                    const preview = firstMsg?.content?.slice(0, 50) || "";
+
+                    return (
+                      <div
+                        key={session.id}
+                        className="p-3 rounded-xl border border-border bg-card hover:border-accent transition-colors"
+                      >
+                        <button
+                          onClick={() => viewSession(session)}
+                          className="w-full text-left"
+                        >
+                          <div className="flex items-start gap-2">
+                            <MessageSquare className="w-4 h-4 text-accent mt-0.5 shrink-0" />
+                            <div className="min-w-0 flex-1">
+                              <p className="text-sm font-medium text-foreground truncate">
+                                {title}
+                              </p>
+                              {preview && (
+                                <p className="text-xs text-muted-foreground truncate mt-0.5">
+                                  {preview}
+                                </p>
+                              )}
+                              <div className="flex items-center gap-2 mt-1 text-xs text-muted-foreground">
+                                <Clock className="w-3 h-3" />
+                                {formatDistanceToNow(new Date(session.created_at), {
+                                  addSuffix: true,
+                                  locale: sr,
+                                })}
+                                <span>· {session.message_count} poruka</span>
+                              </div>
+                            </div>
                           </div>
+                        </button>
+                        <div className="flex gap-1.5 mt-2 ml-6">
+                          {!session.recap && (
+                            <button
+                              onClick={() => continueSession(session)}
+                              className="flex items-center gap-1 text-xs text-accent hover:text-accent/80 transition-colors"
+                            >
+                              <Play className="w-3 h-3" /> Nastavi
+                            </button>
+                          )}
+                          <button
+                            onClick={(e) => { e.stopPropagation(); deleteSession(session.id); }}
+                            className="flex items-center gap-1 text-xs text-destructive hover:text-destructive/80 transition-colors"
+                          >
+                            <Trash2 className="w-3 h-3" /> Obriši
+                          </button>
                         </div>
                       </div>
-                    </button>
-                  ))
+                    );
+                  })
                 )}
               </div>
             </motion.div>
