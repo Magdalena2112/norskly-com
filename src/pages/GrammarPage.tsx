@@ -13,6 +13,8 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { logActivity } from "@/lib/logActivity";
 import { logErrors } from "@/lib/logErrors";
+import GrammarHistoryTab from "@/components/grammar/GrammarHistoryTab";
+import GrammarProgressTab from "@/components/grammar/GrammarProgressTab";
 
 // ─── Types ───
 interface Exercise {
