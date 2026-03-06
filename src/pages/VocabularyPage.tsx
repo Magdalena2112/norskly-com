@@ -11,12 +11,14 @@ import { Progress } from "@/components/ui/progress";
 import {
   ArrowLeft, Loader2, BookOpen, PenTool, Brain, Layers,
   CheckCircle2, XCircle, Save, ThumbsUp, ThumbsDown, RotateCcw, Volume2,
+  FolderOpen,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { logActivity } from "@/lib/logActivity";
 import { logErrors } from "@/lib/logErrors";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import VocabCollections, { CollectionPicker } from "@/components/VocabCollections";
 
 // ─── Types ───
 interface VocabWord {
