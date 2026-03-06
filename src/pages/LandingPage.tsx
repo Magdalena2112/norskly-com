@@ -78,7 +78,9 @@ export default function LandingPage() {
             </p>
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-display font-extrabold leading-tight mb-6 text-foreground">
               Govori norveški
-              <span className="text-gradient-nordic block">prirodno i sigurno</span>
+              <span className="text-gradient-nordic block"> sa samopouzdanjem
+
+</span>
             </h1>
             <p className="text-lg text-muted-foreground max-w-lg mb-8 leading-relaxed">
               Norskly ti pomaže da savladaš norveški kroz realne situacije, personalizovan
@@ -99,9 +101,7 @@ export default function LandingPage() {
       {/* Features */}
       <section className="py-24 bg-nordic-warm">
         <div className="container">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="text-center mb-16">
             
