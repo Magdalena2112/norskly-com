@@ -1,0 +1,1 @@
+ALTER TABLE public.teacher_profile ADD COLUMN meet_link text DEFAULT '';
