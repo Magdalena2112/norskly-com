@@ -33,6 +33,7 @@ import {
   ArrowRight,
   Trash2,
   Play,
+  Volume2,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
@@ -137,6 +138,21 @@ const sectionConfig: Record<SectionKey, { icon: React.ReactNode; label: string; 
   "SLEDEĆI KORAK": { icon: <ArrowRight className="w-4 h-4" />, label: "Sledeći korak", accent: "text-primary" },
 };
 
+// ── TTS helper ──
+function speakNorwegian(text: string) {
+  if (!window.speechSynthesis) return;
+  window.speechSynthesis.cancel();
+  // Strip markdown formatting for cleaner speech
+  const clean = text.replace(/\*\*([^*]+)\*\*/g, "$1").replace(/\*([^*]+)\*/g, "$1").replace(/[#_~`>]/g, "").trim();
+  const utter = new SpeechSynthesisUtterance(clean);
+  utter.lang = "nb-NO";
+  utter.rate = 0.9;
+  const voices = window.speechSynthesis.getVoices();
+  const nbVoice = voices.find((v) => v.lang.startsWith("nb") || v.lang.startsWith("no"));
+  if (nbVoice) utter.voice = nbVoice;
+  window.speechSynthesis.speak(utter);
+}
+
 function CollapsibleSection({ section, defaultOpen }: { section: ParsedSection; defaultOpen: boolean }) {
   const [open, setOpen] = useState(defaultOpen);
   const config = sectionConfig[section.key];
@@ -145,8 +161,17 @@ function CollapsibleSection({ section, defaultOpen }: { section: ParsedSection; 
   if (isMain) {
     return (
       <div className="bg-card border border-border text-card-foreground rounded-2xl rounded-bl-md px-4 py-3">
-        <div className="prose prose-sm max-w-none text-card-foreground text-base">
-          <ReactMarkdown>{section.content}</ReactMarkdown>
+        <div className="flex items-start gap-2">
+          <div className="prose prose-sm max-w-none text-card-foreground text-base flex-1">
+            <ReactMarkdown>{section.content}</ReactMarkdown>
+          </div>
+          <button
+            onClick={() => speakNorwegian(section.content)}
+            className="shrink-0 mt-1 p-1.5 rounded-lg text-accent hover:bg-accent/10 transition-colors"
+            title="Slušaj izgovor"
+          >
+            <Volume2 className="w-4 h-4" />
+          </button>
         </div>
       </div>
     );
