@@ -102,7 +102,7 @@ export default function VocabularyPage() {
               <BookOpen className="w-4 h-4 hidden sm:block" /> Generiši
             </TabsTrigger>
             <TabsTrigger value="collections" className="gap-1 text-xs sm:text-sm">
-              <FolderOpen className="w-4 h-4 hidden sm:block" /> Ordsamlinger
+              <FolderOpen className="w-4 h-4 hidden sm:block" /> Kolekcije
             </TabsTrigger>
             <TabsTrigger value="sentence" className="gap-1 text-xs sm:text-sm">
               <PenTool className="w-4 h-4 hidden sm:block" /> Rečenica
