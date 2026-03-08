@@ -50,6 +50,7 @@ export default function OnboardingPage() {
     if (step < steps.length - 1) setStep(step + 1);
     else {
       updateProfile(form);
+      localStorage.setItem("norskly_onboarding_done", "true");
       navigate("/practice");
     }
   };
