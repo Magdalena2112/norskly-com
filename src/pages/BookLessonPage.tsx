@@ -152,10 +152,10 @@ export default function BookLessonPage() {
     <div className="min-h-screen bg-aurora p-4 md:p-8">
       <div className="max-w-3xl mx-auto space-y-6">
         <div className="flex items-center gap-3">
-          <Button variant="ghost" size="icon" onClick={() => navigate("/practice")}>
+          <Button variant="ghost" size="icon" onClick={() => navigate("/practice")} className="text-primary-foreground hover:text-primary-foreground/80">
             <ArrowLeft className="h-5 w-5" />
           </Button>
-          <h1 className="text-2xl font-bold text-foreground">Zakaži lekciju</h1>
+          <h1 className="text-2xl font-bold text-primary-foreground">Zakaži lekciju</h1>
         </div>
 
         <div className="grid md:grid-cols-2 gap-6">

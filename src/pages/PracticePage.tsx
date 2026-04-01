@@ -678,7 +678,7 @@ export default function PracticePage() {
       {/* Header */}
       <header className="border-b border-border/20 bg-background/10 backdrop-blur-md sticky top-0 z-50">
         <div className="container flex items-center justify-between h-14">
-          <span className="font-display font-bold text-lg text-foreground">Norskly</span>
+          <span className="font-display font-bold text-lg text-primary-foreground">Norskly</span>
           <div className="flex items-center gap-2">
             <Button
               variant="ghost"

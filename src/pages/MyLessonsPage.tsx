@@ -72,10 +72,10 @@ export default function MyLessonsPage() {
     <div className="min-h-screen bg-aurora p-4 md:p-8">
       <div className="max-w-2xl mx-auto space-y-6">
         <div className="flex items-center gap-3">
-          <Button variant="ghost" size="icon" onClick={() => navigate("/practice")}>
+          <Button variant="ghost" size="icon" onClick={() => navigate("/practice")} className="text-primary-foreground hover:text-primary-foreground/80">
             <ArrowLeft className="h-5 w-5" />
           </Button>
-          <h1 className="text-2xl font-bold text-foreground">Moje lekcije</h1>
+          <h1 className="text-2xl font-bold text-primary-foreground">Moje lekcije</h1>
         </div>
 
         <Card>
