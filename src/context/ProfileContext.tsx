@@ -30,7 +30,7 @@ export function ProfileProvider({ children }: { children: ReactNode }) {
       try {
         const { data } = await supabase
           .from("profiles")
-          .select("display_name, level, learning_goal, focus_area, confidence_level")
+          .select("display_name, level, learning_goal, focus_area, confidence_level, preferred_tone, lives_in_norway")
           .eq("user_id", user.id)
           .maybeSingle();
 
@@ -39,10 +39,10 @@ export function ProfileProvider({ children }: { children: ReactNode }) {
             name: data.display_name || "",
             level: (data.level as UserProfile["level"]) || "A1",
             learning_goal: data.learning_goal || defaultProfile.learning_goal,
-            preferred_tone: profile.preferred_tone || defaultProfile.preferred_tone,
+            preferred_tone: data.preferred_tone || defaultProfile.preferred_tone,
             focus_area: data.focus_area || defaultProfile.focus_area,
             confidence_level: data.confidence_level ?? defaultProfile.confidence_level,
-            lives_in_norway: profile.lives_in_norway ?? defaultProfile.lives_in_norway,
+            lives_in_norway: data.lives_in_norway ?? defaultProfile.lives_in_norway,
           };
           setProfile(dbProfile);
           localStorage.setItem("norskly_profile", JSON.stringify(dbProfile));

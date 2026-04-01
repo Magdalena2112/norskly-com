@@ -268,7 +268,9 @@ export type Database = {
           id: string
           learning_goal: string | null
           level: string | null
+          lives_in_norway: boolean | null
           onboarding_completed: boolean
+          preferred_tone: string | null
           updated_at: string | null
           user_id: string
         }
@@ -280,7 +282,9 @@ export type Database = {
           id?: string
           learning_goal?: string | null
           level?: string | null
+          lives_in_norway?: boolean | null
           onboarding_completed?: boolean
+          preferred_tone?: string | null
           updated_at?: string | null
           user_id: string
         }
@@ -292,7 +296,9 @@ export type Database = {
           id?: string
           learning_goal?: string | null
           level?: string | null
+          lives_in_norway?: boolean | null
           onboarding_completed?: boolean
+          preferred_tone?: string | null
           updated_at?: string | null
           user_id?: string
         }
