@@ -61,6 +61,14 @@ export default function GrammarPage() {
   const navState = (location.state as { tab?: string; query?: string; topic?: string }) || {};
   const defaultTab = navState.tab || "exercises";
 
+  const [activeTab, setActiveTab] = useState(defaultTab);
+  const [explainTopic, setExplainTopic] = useState("");
+
+  const goToExplainTab = (topicText: string) => {
+    setExplainTopic(topicText);
+    setActiveTab("explain");
+  };
+
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <header className="border-b border-border bg-background/80 backdrop-blur-md sticky top-0 z-50">
@@ -76,7 +84,7 @@ export default function GrammarPage() {
       </header>
 
       <div className="flex-1 container max-w-2xl py-6">
-        <Tabs defaultValue={defaultTab} className="space-y-6">
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
           <TabsList className="grid w-full grid-cols-6">
             <TabsTrigger value="exercises" className="gap-1 text-xs">
               <BookOpen className="w-3.5 h-3.5" /> Vežbe
