@@ -42,8 +42,10 @@ export default function BookLessonPage() {
       if (!user || !selectedSlot) throw new Error("Missing data");
       const startTime = new Date(selectedSlot.start_time);
       const endTime = addMinutes(startTime, 90);
+      const lessonId = crypto.randomUUID();
 
       const { error: lessonError } = await supabase.from("lessons").insert({
+        id: lessonId,
         user_id: user.id,
         slot_id: selectedSlot.id,
         start_time: startTime.toISOString(),
@@ -61,6 +63,49 @@ export default function BookLessonPage() {
       await logActivity(user.id, "talk", "lesson_scheduled", 5, {
         slot_id: selectedSlot.id,
       });
+
+      // Send confirmation emails
+      const dateStr = format(startTime, "dd.MM.yyyy");
+      const timeStr = `${format(startTime, "HH:mm")} – ${format(endTime, "HH:mm")}`;
+
+      // Get student profile for display name
+      const { data: profile } = await supabase
+        .from("profiles")
+        .select("display_name")
+        .eq("user_id", user.id)
+        .maybeSingle();
+
+      const studentName = profile?.display_name || user.email || "Učenik";
+
+      // Email to student
+      if (user.email) {
+        supabase.functions.invoke("send-transactional-email", {
+          body: {
+            templateName: "lesson-booked-student",
+            recipientEmail: user.email,
+            idempotencyKey: `lesson-student-${lessonId}`,
+            templateData: { date: dateStr, time: timeStr, note: note || undefined },
+          },
+        }).catch((e) => console.error("Student email failed:", e));
+      }
+
+      // Email to teacher
+      const { data: teacher } = await supabase
+        .from("teacher_profile")
+        .select("email")
+        .limit(1)
+        .maybeSingle();
+
+      if (teacher?.email) {
+        supabase.functions.invoke("send-transactional-email", {
+          body: {
+            templateName: "lesson-booked-teacher",
+            recipientEmail: teacher.email,
+            idempotencyKey: `lesson-teacher-${lessonId}`,
+            templateData: { studentName, date: dateStr, time: timeStr, note: note || undefined },
+          },
+        }).catch((e) => console.error("Teacher email failed:", e));
+      }
     },
     onSuccess: () => {
       toast({ title: "Lekcija zakazana!", description: "Vidimo se uskoro 🎉" });
