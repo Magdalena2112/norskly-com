@@ -1,49 +1,65 @@
 
 
-## Problem
+## Plan: Fix email slanja nakon zakazivanja časa
 
-Greška "duplicate key value violates unique constraint idx_lessons_slot_active" nastaje jer:
-
-1. Učenik zakaže čas → lekcija se upiše u bazu ✅
-2. Kod pokuša da ažurira slot status na "booked" → **RLS blokira** jer samo admin može da ažurira slotove ❌
-3. Slot ostaje "open" sa postojećom lekcijom
-4. Učenik pokuša ponovo → unique constraint blokira drugi pokušaj
+### Problem
+Mejlovi se ne šalju jer `send-transactional-email` edge funkcija nikada nije pozvana od strane klijenta. U edge function logovima postoji samo jedan test poziv (moj), a `email_send_log` tabela je potpuno prazna. Domen je verifikovan, cron job postoji, šabloni su registrovani — problem je u komunikaciji klijent → edge funkcija.
 
 ### Uzrok
-Tabela `availability_slots` ima UPDATE polisu samo za admin/admin_teacher uloge. Učenik nema pravo da menja status slota.
+1. **`verify_jwt = true`** u `config.toml` za `send-transactional-email` može da blokira pozive ako JWT nije pravilno prosleđen
+2. **`.catch()` bez `await`** — email pozivi se ne čekaju i greške se gutaju bez traga
+3. Ostale edge funkcije (talk-ai, grammar-ai) koriste `verify_jwt = false` i rade
 
-Takođe, postoje 3 "zaglavljena" slota u bazi koja treba popraviti.
+### Plan
 
-## Plan
+**1. Promeniti `verify_jwt` na `false` za `send-transactional-email`**
+- U `supabase/config.toml`, postaviti `verify_jwt = false`
+- Dodati in-code JWT validaciju (kao što rade ostale funkcije) — ovo je sigurnije jer omogućava bolje error poruke
 
-**1. Dodati RLS polisu za studente da mogu da označe slot kao "booked"**
-- Nova UPDATE polisa na `availability_slots` koja dozvoljava authenticated korisnicima da ažuriraju status sa 'open' na 'booked'
-- Ograničiti da se može menjati SAMO `status` kolona
+**2. Dodati in-code autentifikaciju u edge funkciju**
+- U `send-transactional-email/index.ts`, dodati `getClaims()` proveru na početku
+- Ovo zamenjuje gateway-level JWT validaciju
 
-**2. Popraviti zaglavljena stanja u bazi**
-- Ažurirati 3 slota koji imaju lekcije ali su i dalje "open" na status "booked"
+**3. Popraviti BookLessonPage.tsx — awajtovati email pozive**
+- Umesto `supabase.functions.invoke(...).catch(...)`, koristiti `await` sa try/catch
+- Logirati greške ali ne blokirati uspešno zakazivanje časa
 
-**3. Poboljšati BookLessonPage.tsx**
-- Obrnuti redosled: prvo ažurirati slot na "booked", pa onda insertovati lekciju — ovo sprečava orphane
-- Dodati bolju poruku greške za korisnika ako slot nije više dostupan
+**4. Ponovo deployovati edge funkciju**
+- Deploy `send-transactional-email` sa novim kodom
+
+**5. Testirati pozivom edge funkcije**
+- Pozvati funkciju sa test podacima i proveriti da li radi
 
 ### Tehnički detalji
 
-**Migracija:**
-```sql
--- Dozvoli studentima da označe slot kao zauzet
-CREATE POLICY "Students can book open slots"
-  ON public.availability_slots FOR UPDATE
-  TO authenticated
-  USING (status = 'open')
-  WITH CHECK (status = 'booked');
-
--- Popravka zaglaveljnih slotova
-UPDATE availability_slots SET status = 'booked'
-WHERE id IN (
-  SELECT slot_id FROM lessons WHERE status = 'scheduled'
-) AND status = 'open';
+**config.toml izmena:**
+```toml
+[functions.send-transactional-email]
+verify_jwt = false
 ```
 
-**BookLessonPage.tsx izmena:** Obrnuti redosled operacija — prvo zauzmi slot, pa onda kreiraj lekciju. Ako slot update vrati 0 redova, znači da ga je neko već zauzeo.
+**Edge funkcija — dodati auth check:**
+```typescript
+const authHeader = req.headers.get('Authorization')
+if (!authHeader?.startsWith('Bearer ')) {
+  return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401, headers: corsHeaders })
+}
+const supabaseAuth = createClient(supabaseUrl, Deno.env.get('SUPABASE_ANON_KEY')!, {
+  global: { headers: { Authorization: authHeader } }
+})
+const { data, error } = await supabaseAuth.auth.getClaims(authHeader.replace('Bearer ', ''))
+if (error || !data?.claims) {
+  return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401, headers: corsHeaders })
+}
+```
+
+**BookLessonPage.tsx — pravilno awajtovanje:**
+```typescript
+// Umesto .catch(), koristiti try/catch sa await
+try {
+  await supabase.functions.invoke("send-transactional-email", { body: {...} });
+} catch (e) {
+  console.error("Email failed:", e);
+}
+```
 
