@@ -1,27 +1,21 @@
 
 
-## Plan: Northern Lights Background for Dashboard
+## Plan: Extend Hero Image to Full Page Background
 
 ### What
-Replace the solid `bg-[#d3e2e9]/[0.64]` background on the dashboard with an animated aurora borealis-inspired gradient.
+Move the hero background image from the hero `<section>` to the top-level `<div>` so it covers the entire landing page.
 
 ### How
 
-**File: `src/pages/DashboardPage.tsx` (line 103)**
-- Replace the static background class with a CSS gradient that blends deep navy, teal, green, and subtle purple — classic aurora colors
-- Use a subtle animated gradient shift via CSS keyframes for a living aurora feel
+**File: `src/pages/LandingPage.tsx`**
 
-**File: `src/index.css`**
-- Add a `@keyframes aurora` animation that slowly shifts a large gradient background position
-- Add a `.bg-aurora` utility class combining the multi-stop gradient with the animation
-- Keep colors muted/pastel to maintain readability and the Nordic aesthetic
+1. Move the background image markup (the `<img>` and gradient overlay) from inside the hero `<section>` (around lines 73-77) to just inside the root `<div>` (after line 70), making it a fixed/absolute full-page background.
 
-**Color palette:**
-- Deep navy base: `#0f1b2d`
-- Teal/cyan: `#1a3a4a`, `#2d6a6a`  
-- Aurora green: `#3a8a6a`, `#4aaa7a`
-- Subtle purple: `#2a2a5a`
-- All blended softly with low opacity overlays to keep text readable
+2. Update the root `<div>` to have `relative` positioning so the background sits behind all sections.
 
-**Readability:** A semi-transparent warm overlay will sit beneath content to ensure card contrast remains intact.
+3. Remove the `relative` and `overflow-hidden` from the hero `<section>` since the image is no longer scoped to it.
+
+4. Adjust the gradient overlay to be more subtle across the full page, ensuring readability for features, CTA, and footer sections.
+
+5. Update `bg-nordic-warm` on the features section and other section backgrounds to be semi-transparent (e.g., `bg-background/60 backdrop-blur-sm`) so the image shows through.
 
