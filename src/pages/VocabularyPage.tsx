@@ -293,18 +293,61 @@ function GenerateTab({ level, userId }: { level: string; userId?: string }) {
             }} />
           ))}
 
-          {collections.length > 0 && !saved && (
-            <Select value={selectedCollection} onValueChange={setSelectedCollection}>
-              <SelectTrigger>
-                <SelectValue placeholder="Dodaj u kolekciju (opciono)" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="none">Bez kolekcije</SelectItem>
-                {collections.map((c) => (
-                  <SelectItem key={c.id} value={c.id}>{c.name}</SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+          {!saved && (
+            <>
+              <Select value={selectedCollection} onValueChange={(v) => {
+                if (v === "__create__") {
+                  setShowCreateDialog(true);
+                } else {
+                  setSelectedCollection(v);
+                }
+              }}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Dodaj u kolekciju (opciono)" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="none">Bez kolekcije</SelectItem>
+                  <SelectItem value="__create__">
+                    <span className="flex items-center gap-1.5"><Plus className="w-3.5 h-3.5" /> Kreiraj novu kolekciju</span>
+                  </SelectItem>
+                  {collections.map((c) => (
+                    <SelectItem key={c.id} value={c.id}>{c.name}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+
+              <Dialog open={showCreateDialog} onOpenChange={setShowCreateDialog}>
+                <DialogContent className="sm:max-w-md">
+                  <DialogHeader>
+                    <DialogTitle>Nova kolekcija</DialogTitle>
+                  </DialogHeader>
+                  <div className="space-y-3">
+                    <Input
+                      placeholder="Naziv kolekcije"
+                      value={newCollectionName}
+                      onChange={(e) => setNewCollectionName(e.target.value)}
+                      maxLength={60}
+                    />
+                    <Textarea
+                      placeholder="Opis (opciono)"
+                      value={newCollectionDesc}
+                      onChange={(e) => setNewCollectionDesc(e.target.value)}
+                      maxLength={200}
+                      className="min-h-[60px]"
+                    />
+                    <Button
+                      variant="hero"
+                      className="w-full"
+                      onClick={createCollection}
+                      disabled={creatingCollection || !newCollectionName.trim()}
+                    >
+                      {creatingCollection ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : <Plus className="w-4 h-4 mr-2" />}
+                      Kreiraj
+                    </Button>
+                  </div>
+                </DialogContent>
+              </Dialog>
+            </>
           )}
 
           <div className="flex gap-3">
