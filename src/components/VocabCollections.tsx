@@ -22,6 +22,8 @@ interface VocabWord {
   synonym: string | null;
   antonym: string | null;
   topic: string;
+  word_type?: string | null;
+  grammar_forms?: GrammarForms | null;
 }
 
 interface Collection {
