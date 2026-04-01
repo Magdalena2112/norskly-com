@@ -85,14 +85,19 @@ export default function BookLessonPage() {
 
       // Email to student
       if (user.email) {
-        supabase.functions.invoke("send-transactional-email", {
-          body: {
-            templateName: "lesson-booked-student",
-            recipientEmail: user.email,
-            idempotencyKey: `lesson-student-${lessonId}`,
-            templateData: { date: dateStr, time: timeStr, note: note || undefined },
-          },
-        }).catch((e) => console.error("Student email failed:", e));
+        try {
+          const { error: studentEmailError } = await supabase.functions.invoke("send-transactional-email", {
+            body: {
+              templateName: "lesson-booked-student",
+              recipientEmail: user.email,
+              idempotencyKey: `lesson-student-${lessonId}`,
+              templateData: { date: dateStr, time: timeStr, note: note || undefined },
+            },
+          });
+          if (studentEmailError) console.error("Student email failed:", studentEmailError);
+        } catch (e) {
+          console.error("Student email failed:", e);
+        }
       }
 
       // Email to teacher
@@ -103,14 +108,19 @@ export default function BookLessonPage() {
         .maybeSingle();
 
       if (teacher?.email) {
-        supabase.functions.invoke("send-transactional-email", {
-          body: {
-            templateName: "lesson-booked-teacher",
-            recipientEmail: teacher.email,
-            idempotencyKey: `lesson-teacher-${lessonId}`,
-            templateData: { studentName, date: dateStr, time: timeStr, note: note || undefined },
-          },
-        }).catch((e) => console.error("Teacher email failed:", e));
+        try {
+          const { error: teacherEmailError } = await supabase.functions.invoke("send-transactional-email", {
+            body: {
+              templateName: "lesson-booked-teacher",
+              recipientEmail: teacher.email,
+              idempotencyKey: `lesson-teacher-${lessonId}`,
+              templateData: { studentName, date: dateStr, time: timeStr, note: note || undefined },
+            },
+          });
+          if (teacherEmailError) console.error("Teacher email failed:", teacherEmailError);
+        } catch (e) {
+          console.error("Teacher email failed:", e);
+        }
       }
     },
     onSuccess: () => {
