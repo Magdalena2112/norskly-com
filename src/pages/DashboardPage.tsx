@@ -5,7 +5,8 @@ import { useAuth } from "@/context/AuthContext";
 import { useUserRole } from "@/hooks/useUserRole";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { BookOpen, Languages, MessageSquare, TrendingUp, Settings, Zap, GraduationCap, CalendarCheck, Shield } from "lucide-react";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { BookOpen, Languages, MessageSquare, TrendingUp, Settings, Zap, GraduationCap, CalendarCheck, Shield, LogOut } from "lucide-react";
 import XpProgressCard from "@/components/XpProgressCard";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
@@ -67,7 +68,7 @@ const modules = [
 
 export default function DashboardPage() {
   const { profile, loading: profileLoading } = useProfile();
-  const { user } = useAuth();
+  const { user, signOut } = useAuth();
   const { isAdmin } = useUserRole();
   const navigate = useNavigate();
 
@@ -119,9 +120,23 @@ export default function DashboardPage() {
             <span className="text-xs bg-accent/10 text-accent px-3 py-1 rounded-full font-medium">
               {profile.level} · {profile.learning_goal}
             </span>
-            <Button variant="ghost" size="icon" onClick={() => navigate("/onboarding")}>
-              <Settings className="w-4 h-4" />
-            </Button>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="icon">
+                  <Settings className="w-4 h-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-48">
+                <DropdownMenuItem onClick={() => navigate("/onboarding")} className="cursor-pointer gap-2">
+                  <Settings className="w-4 h-4" />
+                  Podešavanja
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={async () => { await signOut(); navigate("/auth"); }} className="cursor-pointer gap-2 text-destructive focus:text-destructive">
+                  <LogOut className="w-4 h-4" />
+                  Odjavi se
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </div>
       </header>
