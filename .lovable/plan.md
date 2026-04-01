@@ -1,22 +1,34 @@
 
 
-## Plan: Settings Dropdown with Onboarding & Logout
+## Plan: Add Back Arrow to Every Page
 
 ### What
-Replace the single Settings icon button (line 122-124) with a dropdown menu that has two options:
-1. **Podešavanja** (Settings/Onboarding) — navigates to `/onboarding`
-2. **Odjavi se** (Logout) — signs out and redirects to `/auth`
+Create a reusable `BackButton` component and add it to pages that don't already have a back navigation arrow. Several pages (Grammar, Vocabulary, Progress, BookLesson, MyLessons, TeacherProfile, AdminStudentDetail) already have back arrows in their headers. The following pages need one added:
+
+- **DashboardPage** — back to landing
+- **PracticePage** (also TalkPage) — back to dashboard (has 3 header instances at lines 583, 649, 679)
+- **OnboardingPage** — back to previous page
+- **AuthPage** — back to landing
+
+Pages intentionally excluded: **LandingPage** (root), **NotFound**, **UnsubscribePage**.
 
 ### How
 
-**File: `src/pages/DashboardPage.tsx`**
+**1. Create `src/components/BackButton.tsx`**
+- A small reusable component: ghost button with `ArrowLeft` icon
+- Uses `useNavigate(-1)` by default, or accepts an optional `to` prop for explicit route
+- Styled consistently: `text-primary-foreground hover:text-primary-foreground/80`
 
-1. Import `DropdownMenu`, `DropdownMenuContent`, `DropdownMenuItem`, `DropdownMenuTrigger` from `@/components/ui/dropdown-menu`, and `LogOut` from `lucide-react`.
+**2. Update `src/pages/DashboardPage.tsx`**
+- Add `BackButton` in the header, before the "Norskly" text (left side)
 
-2. Replace the Settings `<Button>` (lines 122-124) with a `DropdownMenu` containing:
-   - Trigger: the same Settings icon button
-   - Menu item 1: `<Settings icon> Podešavanja` → `navigate("/onboarding")`
-   - Menu item 2: `<LogOut icon> Odjavi se` → `await signOut(); navigate("/auth")`
+**3. Update `src/pages/PracticePage.tsx`**
+- Add `BackButton` (pointing to `/practice` i.e. dashboard) in all 3 header instances (lines ~583, ~649, ~679)
+- Import `ArrowLeft` from lucide-react
 
-3. Destructure `signOut` from `useAuth()` (already imported on line 67).
+**4. Update `src/pages/AuthPage.tsx`**
+- Add `BackButton` to navigate back to landing page
+
+**5. Update `src/pages/OnboardingPage.tsx`**
+- Add `BackButton` using `navigate(-1)` in the top-left corner
 
