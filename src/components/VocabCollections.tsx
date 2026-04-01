@@ -364,7 +364,7 @@ export function CollectionPicker({
       for (const c of (cols as any[]) || []) {
         const { data: cw } = await supabase
           .from("collection_words" as any)
-          .select("vocabulary_words(id, word, translation, example_sentence, synonym, antonym, topic)")
+          .select("vocabulary_words(id, word, translation, example_sentence, synonym, antonym, topic, word_type, grammar_forms)")
           .eq("collection_id", c.id);
         const cwRows = (cw as unknown as any[]) || [];
         const words = cwRows.filter((r: any) => r.vocabulary_words).map((r: any) => r.vocabulary_words);
