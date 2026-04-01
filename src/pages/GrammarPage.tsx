@@ -361,10 +361,15 @@ function ExercisesTab({ level, userId, initialTopic, onGoToExplain }: { level: s
           {allDone && (
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
               <Card className="border-accent/30 bg-accent/5">
-                <CardContent className="pt-5 pb-5 text-center">
+                <CardContent className="pt-5 pb-5 text-center space-y-3">
                   <p className="text-sm font-medium text-accent">
                     ✅ Sve vežbe završene! Tačno: {states.filter((s) => s.status === "correct").length}/{states.length}
                   </p>
+                  {onGoToExplain && topic && (
+                    <Button variant="outline" size="sm" onClick={() => onGoToExplain(topic)}>
+                      <BookOpen className="w-4 h-4 mr-1" /> Objasni: {topic}
+                    </Button>
+                  )}
                 </CardContent>
               </Card>
             </motion.div>
