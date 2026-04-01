@@ -127,6 +127,11 @@ export default function VocabWordCard({ data, onRemove, showRemove }: VocabWordC
                   {typeInfo.label}
                 </span>
               )}
+              {wordType === "imenica" && grammarForms?.kjonn && (
+                <span className="text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full bg-yellow-500/15 text-yellow-700 dark:text-yellow-300">
+                  {String(grammarForms.kjonn)}
+                </span>
+              )}
             </div>
           </div>
           <div className="flex items-center gap-1 shrink-0">
