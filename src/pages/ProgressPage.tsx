@@ -271,8 +271,8 @@ export default function ProgressPage() {
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
-    <div className="min-h-screen bg-background flex flex-col">
-      <header className="border-b border-border bg-background/80 backdrop-blur-md sticky top-0 z-50">
+    <div className="min-h-screen bg-aurora flex flex-col">
+      <header className="border-b border-border/20 bg-background/10 backdrop-blur-md sticky top-0 z-50">
         <div className="container flex items-center gap-3 h-14">
           <Button variant="ghost" size="icon" onClick={() => navigate("/practice")}>
             <ArrowLeft className="w-4 h-4" />
