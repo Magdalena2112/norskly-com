@@ -65,6 +65,7 @@ export default function OnboardingPage() {
             learning_goal: form.learning_goal || "",
             focus_area: form.focus_area || "",
             confidence_level: form.confidence_level ?? 3,
+            onboarding_completed: true,
           }, { onConflict: "user_id" })
           .then();
       }

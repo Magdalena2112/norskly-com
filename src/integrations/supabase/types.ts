@@ -268,6 +268,7 @@ export type Database = {
           id: string
           learning_goal: string | null
           level: string | null
+          onboarding_completed: boolean
           updated_at: string | null
           user_id: string
         }
@@ -279,6 +280,7 @@ export type Database = {
           id?: string
           learning_goal?: string | null
           level?: string | null
+          onboarding_completed?: boolean
           updated_at?: string | null
           user_id: string
         }
@@ -290,6 +292,7 @@ export type Database = {
           id?: string
           learning_goal?: string | null
           level?: string | null
+          onboarding_completed?: boolean
           updated_at?: string | null
           user_id?: string
         }

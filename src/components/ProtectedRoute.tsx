@@ -1,13 +1,29 @@
 import { Navigate, useLocation } from "react-router-dom";
 import { useAuth } from "@/context/AuthContext";
 import { useUserRole } from "@/hooks/useUserRole";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
 
 export function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const { user, loading } = useAuth();
   const { isAdmin, loading: roleLoading } = useUserRole();
   const location = useLocation();
 
-  if (loading || roleLoading) {
+  const { data: onboardingCompleted, isLoading: onboardingLoading } = useQuery({
+    queryKey: ["onboarding-status", user?.id],
+    queryFn: async () => {
+      const { data } = await supabase
+        .from("profiles")
+        .select("onboarding_completed")
+        .eq("user_id", user!.id)
+        .maybeSingle();
+      return data?.onboarding_completed ?? false;
+    },
+    enabled: !!user && !isAdmin,
+    staleTime: Infinity,
+  });
+
+  if (loading || roleLoading || (!!user && !isAdmin && onboardingLoading)) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="flex gap-1.5">
@@ -21,12 +37,9 @@ export function ProtectedRoute({ children }: { children: React.ReactNode }) {
 
   if (!user) return <Navigate to="/auth" replace />;
 
-  // Admins skip onboarding entirely
   if (isAdmin) return <>{children}</>;
 
-  // Redirect students to onboarding if not completed
-  const onboardingDone = localStorage.getItem("norskly_onboarding_done");
-  if (!onboardingDone && location.pathname !== "/onboarding") {
+  if (!onboardingCompleted && location.pathname !== "/onboarding") {
     return <Navigate to="/onboarding" replace />;
   }
 
