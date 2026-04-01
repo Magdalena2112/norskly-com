@@ -275,7 +275,7 @@ function ExercisesTab({ level, userId, initialTopic, onGoToExplain }: { level: s
 
   return (
     <div className="space-y-4">
-      <Card className="shadow-nordic">
+      <Card className="shadow-nordic bg-background/80 backdrop-blur-sm border-border/30">
         <CardHeader>
           <CardTitle className="text-lg">Generiši vežbe</CardTitle>
           <CardDescription>Unesite temu i broj zadataka.</CardDescription>
@@ -444,7 +444,7 @@ function CorrectionTab({ level, userId }: { level: string; userId?: string }) {
 
   return (
     <div className="space-y-4">
-      <Card className="shadow-nordic">
+      <Card className="shadow-nordic bg-background/80 backdrop-blur-sm border-border/30">
         <CardHeader>
           <CardTitle className="text-lg">Korekcija teksta</CardTitle>
           <CardDescription>Napišite tekst na norveškom, AI će ga ispraviti.</CardDescription>
@@ -736,7 +736,7 @@ function ExplainTab({ level, userId, initialQuery }: { level: string; userId?: s
 
   const mainContent = (
     <div className="space-y-4 flex-1 min-w-0">
-      <Card className="shadow-nordic">
+      <Card className="shadow-nordic bg-background/80 backdrop-blur-sm border-border/30">
         <CardHeader>
           <CardTitle className="text-lg">Objašnjenja gramatike</CardTitle>
           <CardDescription>
@@ -1170,7 +1170,7 @@ function QuizTab({ level, userId, initialTopic }: { level: string; userId?: stri
   return (
     <div className="space-y-4">
       {questions.length === 0 && !loading && (
-        <Card className="shadow-nordic">
+        <Card className="shadow-nordic bg-background/80 backdrop-blur-sm border-border/30">
           <CardHeader>
             <CardTitle className="text-lg">Mini kviz</CardTitle>
             <CardDescription>Izaberi temu i testiraj svoje znanje sa 5 pitanja.</CardDescription>
@@ -1190,7 +1190,7 @@ function QuizTab({ level, userId, initialTopic }: { level: string; userId?: stri
       )}
 
       {loading && (
-        <Card className="shadow-nordic">
+        <Card className="shadow-nordic bg-background/80 backdrop-blur-sm border-border/30">
           <CardContent className="pt-8 pb-8 text-center space-y-3">
             <Loader2 className="w-8 h-8 animate-spin text-accent mx-auto" />
             <p className="text-muted-foreground text-sm">Generišem pitanja...</p>
@@ -1202,7 +1202,7 @@ function QuizTab({ level, userId, initialTopic }: { level: string; userId?: stri
         <>
           <Progress value={progress} className="h-2" />
           <motion.div key={current} initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }}>
-            <Card className="shadow-nordic">
+            <Card className="shadow-nordic bg-background/80 backdrop-blur-sm border-border/30">
               <CardHeader>
                 <CardDescription className="text-xs uppercase tracking-wider text-accent font-medium">
                   Pitanje {current + 1}/{questions.length}

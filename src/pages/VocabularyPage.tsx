@@ -230,7 +230,7 @@ function GenerateTab({ level, userId }: { level: string; userId?: string }) {
 
   return (
     <div className="space-y-4">
-      <Card className="shadow-nordic">
+      <Card className="shadow-nordic bg-background/80 backdrop-blur-sm border-border/30">
         <CardHeader>
           <CardTitle className="text-lg">Generiši vokabular po temi</CardTitle>
           <CardDescription>Unesite temu i dobijte nove reči sa primerima.</CardDescription>
@@ -394,7 +394,7 @@ function SentenceTab({ level, userId }: { level: string; userId?: string }) {
 
   if (loadingWords) {
     return (
-      <Card className="shadow-nordic">
+      <Card className="shadow-nordic bg-background/80 backdrop-blur-sm border-border/30">
         <CardContent className="pt-8 pb-8 text-center">
           <Loader2 className="w-6 h-6 animate-spin text-accent mx-auto" />
         </CardContent>
@@ -404,7 +404,7 @@ function SentenceTab({ level, userId }: { level: string; userId?: string }) {
 
   if (savedWords.length === 0) {
     return (
-      <Card className="shadow-nordic">
+      <Card className="shadow-nordic bg-background/80 backdrop-blur-sm border-border/30">
         <CardContent className="pt-8 pb-8 text-center space-y-2">
           <p className="text-muted-foreground">Nemate sačuvanih reči.</p>
           <p className="text-sm text-muted-foreground">Prvo generišite i sačuvajte reči u "Generiši" tabu.</p>
@@ -415,7 +415,7 @@ function SentenceTab({ level, userId }: { level: string; userId?: string }) {
 
   return (
     <div className="space-y-4">
-      <Card className="shadow-nordic">
+      <Card className="shadow-nordic bg-background/80 backdrop-blur-sm border-border/30">
         <CardHeader>
           <CardTitle className="text-lg">Koristi reč u rečenici</CardTitle>
           <CardDescription>Izaberite reč i napišite rečenicu. AI će je ispraviti.</CardDescription>
@@ -860,7 +860,7 @@ function QuizTab({ level, userId }: { level: string; userId?: string }) {
 
   if (savedWords.length < 3) {
     return (
-      <Card className="shadow-nordic">
+      <Card className="shadow-nordic bg-background/80 backdrop-blur-sm border-border/30">
         <CardContent className="pt-8 pb-8 text-center space-y-2">
           <p className="text-muted-foreground">Potrebno je najmanje 3 sačuvane reči za kviz.</p>
           <p className="text-sm text-muted-foreground">Imate {savedWords.length} reči. Generišite još u "Generiši" tabu.</p>
@@ -872,7 +872,7 @@ function QuizTab({ level, userId }: { level: string; userId?: string }) {
   return (
     <div className="space-y-4">
       {questions.length === 0 && !loading && (
-        <Card className="shadow-nordic">
+        <Card className="shadow-nordic bg-background/80 backdrop-blur-sm border-border/30">
           <CardHeader>
             <CardTitle className="text-lg">Kviz iz sačuvanih reči</CardTitle>
             <CardDescription>10 pitanja iz vaših sačuvanih reči ({savedWords.length} reči).</CardDescription>
@@ -886,7 +886,7 @@ function QuizTab({ level, userId }: { level: string; userId?: string }) {
       )}
 
       {loading && (
-        <Card className="shadow-nordic">
+        <Card className="shadow-nordic bg-background/80 backdrop-blur-sm border-border/30">
           <CardContent className="pt-8 pb-8 text-center space-y-3">
             <Loader2 className="w-8 h-8 animate-spin text-accent mx-auto" />
             <p className="text-muted-foreground text-sm">Generišem pitanja...</p>
@@ -898,7 +898,7 @@ function QuizTab({ level, userId }: { level: string; userId?: string }) {
         <>
           <Progress value={progress} className="h-2" />
           <motion.div key={current} initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }}>
-            <Card className="shadow-nordic">
+            <Card className="shadow-nordic bg-background/80 backdrop-blur-sm border-border/30">
               <CardHeader>
                 <CardDescription className="text-xs uppercase tracking-wider text-accent font-medium">
                   Pitanje {current + 1}/{questions.length}

@@ -182,7 +182,7 @@ export default function VocabCollections({ userId }: { userId?: string }) {
   if (view === "list") {
     return (
       <div className="space-y-4">
-        <Card className="shadow-nordic">
+        <Card className="shadow-nordic bg-background/80 backdrop-blur-sm border-border/30">
           <CardHeader>
             <CardTitle className="text-lg">Mine ordsamlinger</CardTitle>
             <CardDescription>Organizuj reči u kolekcije za kartice i kvizove.</CardDescription>

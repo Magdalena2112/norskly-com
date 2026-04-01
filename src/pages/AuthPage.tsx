@@ -56,7 +56,7 @@ export default function AuthPage() {
           <p className="text-muted-foreground text-sm mt-1">Adaptivno učenje norveškog</p>
         </div>
 
-        <Card className="shadow-nordic">
+        <Card className="shadow-nordic bg-background/80 backdrop-blur-sm border-border/30">
           <CardHeader className="text-center">
             <CardTitle className="text-xl">{isLogin ? "Prijava" : "Registracija"}</CardTitle>
             <CardDescription>
