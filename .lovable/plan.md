@@ -1,23 +1,45 @@
 
 
-## Fix: Gramatičke vežbe ponavljaju iste zadatke
+## Plan: Potvrdni mejl nakon zakazivanja časa
 
-### Zašto se ponavljaju
-Trenutni pristup koristi `unique_seed: Date.now()` i tekstualnu instrukciju "generiši nove". Ali LLM nema informaciju o prethodnim zadacima — pa generiše iste obrasce. Takođe, `temperature: 0.7` je umerena vrednost.
+### Šta će se desiti
+Nakon što učenik zakaže čas, sistem će automatski poslati potvrdni mejl:
+- **Učeniku** — potvrda sa datumom, vremenom i napomenom
+- **Profesoru** — obaveštenje o novom zakazanom času sa imenom učenika i napomenom
 
-### Rešenje
+### Potrebni koraci
 
-**1. `src/pages/GrammarPage.tsx` — slanje prethodnih rečenica AI-ju**
-- Pre generisanja, dohvati iz `grammar_sessions` poslednje sesije za istog korisnika i istu temu
-- Izvuci prethodne rečenice (iz `questions` JSONB kolone)
-- Pošalji ih u AI poziv kao novo polje `previous_sentences` (niz stringova, max 30)
+**1. Podešavanje email domena (prvi korak)**
+Pre slanja mejlova, potrebno je podesiti email domen — to je domen sa kojeg će mejlovi stizati (npr. `notify@tvoj-domen.com`). Ovo zahteva da imaš svoj domen i da dodaš DNS zapise kod svog provajdera.
 
-**2. `supabase/functions/grammar-ai/index.ts` — korišćenje prethodnih rečenica**
-- Primi novo polje `previous_sentences` iz request body-ja
-- U `generate_exercises` system promptu dodaj eksplicitan blok: "Evo rečenica koje su već korišćene — NE KORISTI ih ponovo i NE pravi slične varijante:" sa listom prethodnih rečenica
-- Povećaj `temperature` sa 0.7 na 0.9 za `generate_exercises` akciju
+Kada klikneš dugme ispod, otvoriće se dijalog za podešavanje domena.
 
-**3. Fajlovi:**
-- `src/pages/GrammarPage.tsx` — dodaj fetch prethodnih rečenica pre generisanja (~15 linija)
-- `supabase/functions/grammar-ai/index.ts` — primi `previous_sentences`, ugradi u prompt, povećaj temperature (~10 linija)
+**2. Kreiranje email infrastrukture**
+Automatski se kreira sistem za slanje mejlova (red čekanja, logovanje, ponovni pokušaji).
+
+**3. Kreiranje email šablona**
+Dva šablona:
+- `lesson-booked-student` — mejl za učenika sa detaljima časa
+- `lesson-booked-teacher` — mejl za profesora sa imenom učenika i detaljima
+
+**4. Izmena BookLessonPage.tsx**
+Nakon uspešnog zakazivanja, pozivaju se dva slanja mejla:
+- Mejl učeniku (na email iz auth profila)
+- Mejl profesoru (na email iz `teacher_profile` tabele)
+
+**5. Kreiranje unsubscribe stranice**
+Obavezna stranica za odjavu od mejlova (zakonski zahtev).
+
+### Tehnički detalji
+- Mejlovi se šalju kroz `send-transactional-email` edge funkciju
+- Šabloni su React Email komponente sa brendiranim stilom
+- Email profesora se čita iz `teacher_profile` tabele (treba proveriti da li postoji email kolona)
+- Idempotency key: `lesson-student-{lessonId}` i `lesson-teacher-{lessonId}`
+
+### Prvi korak sada
+Pošto email domen još nije podešen, potrebno je prvo to uraditi:
+
+<lov-actions>
+<lov-open-email-setup>Podesi email domen</lov-open-email-setup>
+</lov-actions>
 
