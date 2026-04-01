@@ -577,11 +577,101 @@ interface ExplainResult {
   upotreba?: string;
 }
 
+interface SavedExplanation {
+  id: string;
+  title: string;
+  query: string;
+  explanation_data: ExplainResult;
+  created_at: string;
+}
+
+function SavedSidebar({ saved, onLoad, onRemove }: { saved: SavedExplanation[]; onLoad: (s: SavedExplanation) => void; onRemove: (id: string) => void }) {
+  if (saved.length === 0) {
+    return (
+      <div className="flex flex-col items-center justify-center py-8 text-center">
+        <Bookmark className="w-8 h-8 text-muted-foreground/40 mb-2" />
+        <p className="text-sm text-muted-foreground">Još nema sačuvanih objašnjenja</p>
+        <p className="text-xs text-muted-foreground/60 mt-1">Sačuvaj objašnjenje klikom na ⭐</p>
+      </div>
+    );
+  }
+  return (
+    <div className="space-y-1">
+      {saved.map((s) => (
+        <div key={s.id} className="flex items-center gap-1 group">
+          <button
+            onClick={() => onLoad(s)}
+            className="flex-1 text-left text-sm px-3 py-2 rounded-md hover:bg-muted transition-colors truncate text-foreground"
+          >
+            {s.title}
+          </button>
+          <button
+            onClick={() => onRemove(s.id)}
+            className="opacity-0 group-hover:opacity-100 p-1 rounded hover:bg-destructive/10 transition-all shrink-0"
+            title="Ukloni"
+          >
+            <X className="w-3.5 h-3.5 text-muted-foreground hover:text-destructive" />
+          </button>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 function ExplainTab({ level, userId, initialQuery }: { level: string; userId?: string; initialQuery?: string }) {
   const [query, setQuery] = useState(initialQuery || "");
   const [result, setResult] = useState<ExplainResult | null>(null);
   const [loading, setLoading] = useState(false);
   const [logged, setLogged] = useState(false);
+  const [savedExplanations, setSavedExplanations] = useState<SavedExplanation[]>([]);
+  const [savedOpen, setSavedOpen] = useState(false);
+  const isMobile = useIsMobile();
+
+  // Load saved explanations
+  const fetchSaved = useCallback(async () => {
+    if (!userId) return;
+    const { data } = await supabase
+      .from("saved_explanations")
+      .select("*")
+      .eq("user_id", userId)
+      .order("created_at", { ascending: false });
+    if (data) setSavedExplanations(data.map((d: any) => ({ ...d, explanation_data: d.explanation_data as ExplainResult })));
+  }, [userId]);
+
+  useEffect(() => { fetchSaved(); }, [fetchSaved]);
+
+  const isSaved = result ? savedExplanations.some((s) => s.query === query.trim().toLowerCase()) : false;
+
+  const toggleSave = async () => {
+    if (!userId || !result) return;
+    const normalizedQuery = query.trim().toLowerCase();
+    if (isSaved) {
+      const item = savedExplanations.find((s) => s.query === normalizedQuery);
+      if (item) {
+        await supabase.from("saved_explanations").delete().eq("id", item.id);
+        await fetchSaved();
+      }
+    } else {
+      await supabase.from("saved_explanations").insert({
+        user_id: userId,
+        title: result.naslov || query.trim(),
+        query: normalizedQuery,
+        explanation_data: result as any,
+      });
+      await fetchSaved();
+    }
+  };
+
+  const loadSaved = (s: SavedExplanation) => {
+    setQuery(s.query);
+    setResult(s.explanation_data);
+    setLogged(true);
+  };
+
+  const removeSaved = async (id: string) => {
+    await supabase.from("saved_explanations").delete().eq("id", id);
+    await fetchSaved();
+  };
 
   // Auto-search when initialQuery changes
   React.useEffect(() => {
@@ -616,7 +706,6 @@ function ExplainTab({ level, userId, initialQuery }: { level: string; userId?: s
     setQuery(topic);
     setResult(null);
     setLogged(false);
-    // Will trigger auto-search via useEffect
   };
 
   // Normalize examples (handle legacy array format)
@@ -628,8 +717,8 @@ function ExplainTab({ level, userId, initialQuery }: { level: string; userId?: s
     return result.primeri;
   };
 
-  return (
-    <div className="space-y-4">
+  const mainContent = (
+    <div className="space-y-4 flex-1 min-w-0">
       <Card className="shadow-nordic">
         <CardHeader>
           <CardTitle className="text-lg">Objašnjenja gramatike</CardTitle>
@@ -655,12 +744,38 @@ function ExplainTab({ level, userId, initialQuery }: { level: string; userId?: s
         </CardContent>
       </Card>
 
+      {/* Mobile: collapsible saved list */}
+      {isMobile && (
+        <Collapsible open={savedOpen} onOpenChange={setSavedOpen}>
+          <CollapsibleTrigger asChild>
+            <Button variant="outline" size="sm" className="w-full justify-between text-xs">
+              <span className="flex items-center gap-1.5">
+                <Bookmark className="w-3.5 h-3.5" /> Sačuvana objašnjenja ({savedExplanations.length})
+              </span>
+              <ChevronDown className={`w-3.5 h-3.5 transition-transform ${savedOpen ? "rotate-180" : ""}`} />
+            </Button>
+          </CollapsibleTrigger>
+          <CollapsibleContent>
+            <Card className="mt-2">
+              <CardContent className="pt-4 pb-3">
+                <SavedSidebar saved={savedExplanations} onLoad={loadSaved} onRemove={removeSaved} />
+              </CardContent>
+            </Card>
+          </CollapsibleContent>
+        </Collapsible>
+      )}
+
       {result && (
         <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="space-y-4">
-          {/* Title */}
+          {/* Title + Bookmark */}
           <Card className="border-accent/30 bg-accent/5">
-            <CardContent className="pt-5 pb-5">
+            <CardContent className="pt-5 pb-5 flex items-center justify-between gap-3">
               <h3 className="font-display font-bold text-lg text-foreground">{result.naslov}</h3>
+              {userId && (
+                <Button variant="ghost" size="icon" onClick={toggleSave} className="shrink-0" title={isSaved ? "Ukloni iz sačuvanih" : "Sačuvaj objašnjenje"}>
+                  {isSaved ? <BookmarkCheck className="w-5 h-5 text-accent" /> : <Bookmark className="w-5 h-5 text-muted-foreground" />}
+                </Button>
+              )}
             </CardContent>
           </Card>
 
@@ -917,6 +1032,31 @@ function ExplainTab({ level, userId, initialQuery }: { level: string; userId?: s
       )}
     </div>
   );
+
+  // Desktop: flex layout with sidebar
+  if (!isMobile) {
+    return (
+      <div className="flex gap-6">
+        {mainContent}
+        <div className="w-64 shrink-0">
+          <div className="sticky top-20">
+            <Card>
+              <CardHeader className="pb-2">
+                <CardTitle className="text-sm flex items-center gap-2">
+                  <Bookmark className="w-4 h-4 text-accent" /> Sačuvana objašnjenja
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="pb-3">
+                <SavedSidebar saved={savedExplanations} onLoad={loadSaved} onRemove={removeSaved} />
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return mainContent;
 }
 
 // ═══════════════════════════════════════
