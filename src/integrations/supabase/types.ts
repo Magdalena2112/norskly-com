@@ -304,6 +304,33 @@ export type Database = {
         }
         Relationships: []
       }
+      saved_explanations: {
+        Row: {
+          created_at: string
+          explanation_data: Json
+          id: string
+          query: string
+          title: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          explanation_data?: Json
+          id?: string
+          query: string
+          title: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          explanation_data?: Json
+          id?: string
+          query?: string
+          title?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       talk_sessions: {
         Row: {
           created_at: string
