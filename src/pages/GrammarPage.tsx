@@ -113,7 +113,7 @@ export default function GrammarPage() {
             <CorrectionTab level={level} userId={user?.id} />
           </TabsContent>
           <TabsContent value="explain">
-            <ExplainTab level={level} userId={user?.id} initialQuery={navState.tab === "explain" ? navState.query : undefined} />
+            <ExplainTab level={level} userId={user?.id} initialQuery={explainTopic || (navState.tab === "explain" ? navState.query : undefined)} />
           </TabsContent>
           <TabsContent value="quiz">
             <QuizTab level={level} userId={user?.id} initialTopic={navState.tab === "quiz" ? navState.topic : undefined} />
