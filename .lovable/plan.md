@@ -1,28 +1,17 @@
 
 
-## Plan: Dodaj opciju kreiranja kolekcije iz generisanja reči
+## Plan: Prikaži član (en/ei/et) pored imenica
 
 ### Šta
-U "Generiši" tabu, pored postojećeg dropdown-a za izbor kolekcije, dodati opciju "Kreiraj novu kolekciju" koja otvara inline dijalog za unos imena i opisa nove kolekcije. Nakon kreiranja, nova kolekcija se automatski selektuje u dropdown-u.
+Za reči tipa "imenica", prikazati gramatički rod (en/ei/et) kao mali badge pored word type labele, direktno vidljiv bez otvaranja gramatičke sekcije.
 
 ### Kako
 
-**File: `src/pages/VocabularyPage.tsx` — `GenerateTab` komponenta**
+**File: `src/components/VocabWordCard.tsx`**
 
-1. Dodati state za kreiranje kolekcije: `showCreateDialog`, `newCollectionName`, `newCollectionDesc`, `creatingCollection`.
+1. Nakon što se odredi `typeInfo`, proveriti da li je `wordType === "imenica"` i da li `grammarForms?.kjonn` postoji.
+2. Ako da, prikazati dodatni badge pored word type badge-a sa vrednošću `grammarForms.kjonn` (npr. "en", "ei", "et").
+3. Stilizovati kao mali tag sličan word type badge-u ali sa drugom bojom (npr. `bg-yellow-500/15 text-yellow-700`).
 
-2. U `Select` dropdown (linija 271-281), dodati posebnu stavku na vrhu: "＋ Kreiraj novu kolekciju" sa vrednošću `"__create__"`.
-
-3. U `onValueChange` handleru, ako je vrednost `"__create__"`, otvoriti `Dialog` za kreiranje umesto da se selektuje.
-
-4. U `Dialog`-u prikazati `Input` za naziv i opcioni `Textarea` za opis, sa dugmetom "Kreiraj". Po kreiranju:
-   - Insert u `word_collections` tabelu
-   - Refreshovati listu kolekcija
-   - Automatski selektovati novu kolekciju u dropdown-u
-
-5. Prikazati dropdown za kolekcije **uvek** (ne samo kad `collections.length > 0`), jer korisnik sada može kreirati kolekciju direktno.
-
-### Komponente za import
-- `Dialog`, `DialogContent`, `DialogHeader`, `DialogTitle` (već dostupni u projektu)
-- `Plus` ikonica (već importovana)
+Primer prikaza: `[imenica] [en]` pored reči.
 
