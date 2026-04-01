@@ -684,7 +684,42 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      teacher_profile_public: {
+        Row: {
+          bio: string | null
+          duration_minutes: number | null
+          focus: string[] | null
+          id: string | null
+          name: string | null
+          photo_url: string | null
+          rating: number | null
+          students_count: number | null
+          updated_at: string | null
+        }
+        Insert: {
+          bio?: string | null
+          duration_minutes?: number | null
+          focus?: string[] | null
+          id?: string | null
+          name?: string | null
+          photo_url?: string | null
+          rating?: number | null
+          students_count?: number | null
+          updated_at?: string | null
+        }
+        Update: {
+          bio?: string | null
+          duration_minutes?: number | null
+          focus?: string[] | null
+          id?: string | null
+          name?: string | null
+          photo_url?: string | null
+          rating?: number | null
+          students_count?: number | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       award_xp: {
