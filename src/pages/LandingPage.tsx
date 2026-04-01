@@ -104,7 +104,7 @@ export default function LandingPage() {
       </section>
 
       {/* Gradient transition: Hero → Features */}
-      <div className="h-24 bg-gradient-to-b from-transparent to-background/60" />
+      <div className="h-32 bg-gradient-to-b from-transparent via-background/30 to-background/70" />
 
       {/* Features */}
       <section className="pb-24 bg-background/60 backdrop-blur-sm">
