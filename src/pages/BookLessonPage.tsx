@@ -104,12 +104,12 @@ export default function BookLessonPage() {
       const { data: teacherEmail } = await supabase
         .rpc("get_teacher_email");
 
-      if (teacher?.email) {
+      if (teacherEmail) {
         try {
           const { error: teacherEmailError } = await supabase.functions.invoke("send-transactional-email", {
             body: {
               templateName: "lesson-booked-teacher",
-              recipientEmail: teacher.email,
+              recipientEmail: teacherEmail,
               idempotencyKey: `lesson-teacher-${lessonId}`,
               templateData: { studentName, date: dateStr, time: timeStr, note: note || undefined },
             },
