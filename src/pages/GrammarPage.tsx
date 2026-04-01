@@ -85,7 +85,7 @@ export default function GrammarPage() {
         </div>
       </header>
 
-      <div className="flex-1 container max-w-2xl py-6">
+      <div className={`flex-1 container py-6 ${activeTab === "explain" ? "max-w-5xl" : "max-w-2xl"}`}>
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
           <TabsList className="grid w-full grid-cols-6">
             <TabsTrigger value="exercises" className="gap-1 text-xs">
