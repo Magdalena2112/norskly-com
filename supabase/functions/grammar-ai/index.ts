@@ -96,8 +96,11 @@ Navedi snage kratko, identifikuj NAJVIŠE 2 oblasti za poboljšanje.`;
     const uniqueSeed = unique_seed || "";
 
     if (action === "generate_exercises") {
+      const prevBlock = Array.isArray(previous_sentences) && previous_sentences.length > 0
+        ? `\n\nEvo rečenica koje su VEĆ KORIŠĆENE u prethodnim vežbama — NE KORISTI ih ponovo i NE pravi slične varijante:\n${previous_sentences.map((s: string, i: number) => `${i + 1}. ${s}`).join("\n")}\n`
+        : "";
       systemPrompt = `Ti si nastavnik norveškog jezika (Bokmål). Generišeš gramatičke vežbe za nivo ${level}.
-VAŽNO: Svaki put generiši potpuno NOVE i RAZNOVRSNE rečenice. Ne ponavljaj prethodne primere. Variraj kontekst, vokabular i strukturu rečenica. Koristi različite životne situacije (posao, porodica, putovanja, hobiji, svakodnevica). Seed: ${uniqueSeed}
+VAŽNO: Svaki put generiši potpuno NOVE i RAZNOVRSNE rečenice. Ne ponavljaj prethodne primere. Variraj kontekst, vokabular i strukturu rečenica. Koristi različite životne situacije (posao, porodica, putovanja, hobiji, svakodnevica). Seed: ${uniqueSeed}${prevBlock}
 Odgovori ISKLJUČIVO u JSON formatu, bez markdown-a. Format:
 {
   "exercises": [
