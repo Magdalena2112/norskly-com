@@ -23,6 +23,7 @@ import AdminStudentDetailPage from "./pages/AdminStudentDetailPage";
 import AdminLessonsPage from "./pages/AdminLessonsPage";
 import AdminAvailabilityPage from "./pages/AdminAvailabilityPage";
 import AdminTeacherProfilePage from "./pages/AdminTeacherProfilePage";
+import UnsubscribePage from "./pages/UnsubscribePage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
