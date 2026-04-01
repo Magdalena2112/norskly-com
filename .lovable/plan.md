@@ -1,45 +1,23 @@
 
 
-## Plan: Potvrdni mejl nakon zakazivanja časa
+## Fix: Mejl potvrde časa ne stiže
 
-### Šta će se desiti
-Nakon što učenik zakaže čas, sistem će automatski poslati potvrdni mejl:
-- **Učeniku** — potvrda sa datumom, vremenom i napomenom
-- **Profesoru** — obaveštenje o novom zakazanom času sa imenom učenika i napomenom
+### Problem
+Lekcije se uspešno zakazuju (poslednja pre 20 min), ali `email_send_log` tabela je potpuno prazna i nema logova za `send-transactional-email` edge funkciju. To znači da edge funkcija nikada nije pozvana ili nikada nije deployovana.
 
-### Potrebni koraci
+Domen `notify.norskly.com` je verifikovan i spreman. Infrastruktura (cron job, queues) postoji. Problem je gotovo sigurno da **edge funkcija `send-transactional-email` nije deployovana**.
 
-**1. Podešavanje email domena (prvi korak)**
-Pre slanja mejlova, potrebno je podesiti email domen — to je domen sa kojeg će mejlovi stizati (npr. `notify@tvoj-domen.com`). Ovo zahteva da imaš svoj domen i da dodaš DNS zapise kod svog provajdera.
+### Plan
 
-Kada klikneš dugme ispod, otvoriće se dijalog za podešavanje domena.
+**1. Deployovati sve email edge funkcije**
+- Deploy: `send-transactional-email`, `process-email-queue`, `handle-email-unsubscribe`, `handle-email-suppression`, `preview-transactional-email`
 
-**2. Kreiranje email infrastrukture**
-Automatski se kreira sistem za slanje mejlova (red čekanja, logovanje, ponovni pokušaji).
+**2. Testirati edge funkciju direktno**
+- Pozvati `send-transactional-email` sa test podacima da se potvrdi da radi
 
-**3. Kreiranje email šablona**
-Dva šablona:
-- `lesson-booked-student` — mejl za učenika sa detaljima časa
-- `lesson-booked-teacher` — mejl za profesora sa imenom učenika i detaljima
+**3. Proveriti `email_send_log` nakon testa**
+- Ako se pojavi zapis sa statusom `pending` → funkcija radi, mejlovi će stizati
 
-**4. Izmena BookLessonPage.tsx**
-Nakon uspešnog zakazivanja, pozivaju se dva slanja mejla:
-- Mejl učeniku (na email iz auth profila)
-- Mejl profesoru (na email iz `teacher_profile` tabele)
-
-**5. Kreiranje unsubscribe stranice**
-Obavezna stranica za odjavu od mejlova (zakonski zahtev).
-
-### Tehnički detalji
-- Mejlovi se šalju kroz `send-transactional-email` edge funkciju
-- Šabloni su React Email komponente sa brendiranim stilom
-- Email profesora se čita iz `teacher_profile` tabele (treba proveriti da li postoji email kolona)
-- Idempotency key: `lesson-student-{lessonId}` i `lesson-teacher-{lessonId}`
-
-### Prvi korak sada
-Pošto email domen još nije podešen, potrebno je prvo to uraditi:
-
-<lov-actions>
-<lov-open-email-setup>Podesi email domen</lov-open-email-setup>
-</lov-actions>
+### Tehnički detalj
+Kod u `BookLessonPage.tsx` koristi `.catch()` koji samo loguje grešku u konzolu — korisnik nikad ne vidi da je mejl fejlovao. Nakon deploya, ovo će raditi transparentno.
 
