@@ -695,6 +695,15 @@ export type Database = {
         }
         Returns: Json
       }
+      book_lesson: {
+        Args: {
+          p_end: string
+          p_note?: string
+          p_slot_id: string
+          p_start: string
+        }
+        Returns: string
+      }
       delete_email: {
         Args: { message_id: number; queue_name: string }
         Returns: boolean
