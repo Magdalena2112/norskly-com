@@ -107,7 +107,7 @@ export default function GrammarPage() {
           </TabsList>
 
           <TabsContent value="exercises">
-            <ExercisesTab level={level} userId={user?.id} initialTopic={navState.tab === "exercises" ? navState.topic : undefined} />
+            <ExercisesTab level={level} userId={user?.id} initialTopic={navState.tab === "exercises" ? navState.topic : undefined} onGoToExplain={goToExplainTab} />
           </TabsContent>
           <TabsContent value="correction">
             <CorrectionTab level={level} userId={user?.id} />
