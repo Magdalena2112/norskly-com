@@ -276,9 +276,9 @@ function ExercisesTab({ level, userId, initialTopic, onGoToExplain }: { level: s
             <Input
               type="number"
               min={1}
-              max={10}
+              max={20}
               value={count}
-              onChange={(e) => setCount(Math.min(10, Math.max(1, parseInt(e.target.value) || 1)))}
+              onChange={(e) => setCount(Math.min(20, Math.max(1, parseInt(e.target.value) || 1)))}
             />
           </div>
           <Button variant="hero" className="w-full" onClick={generate} disabled={loading || !topic.trim()}>
