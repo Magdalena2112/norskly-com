@@ -2,6 +2,8 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { useProfile } from "@/context/ProfileContext";
+import { useAuth } from "@/context/AuthContext";
+import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { UserProfile } from "@/types/profile";
@@ -35,6 +37,7 @@ function OptionCard({
 export default function OnboardingPage() {
   const navigate = useNavigate();
   const { updateProfile, profile } = useProfile();
+  const { user } = useAuth();
   const [step, setStep] = useState(0);
   const [form, setForm] = useState<Partial<UserProfile>>({
     name: profile.name || "",
@@ -51,6 +54,20 @@ export default function OnboardingPage() {
     else {
       updateProfile(form);
       localStorage.setItem("norskly_onboarding_done", "true");
+      // Sync to profiles table
+      if (user) {
+        supabase
+          .from("profiles")
+          .upsert({
+            user_id: user.id,
+            display_name: form.name || "",
+            level: form.level || "A1",
+            learning_goal: form.learning_goal || "",
+            focus_area: form.focus_area || "",
+            confidence_level: form.confidence_level ?? 3,
+          }, { onConflict: "user_id" })
+          .then();
+      }
       navigate("/practice");
     }
   };

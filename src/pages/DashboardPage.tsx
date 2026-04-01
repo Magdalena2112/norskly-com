@@ -2,9 +2,10 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useProfile } from "@/context/ProfileContext";
 import { useAuth } from "@/context/AuthContext";
+import { useUserRole } from "@/hooks/useUserRole";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { BookOpen, Languages, MessageSquare, TrendingUp, Settings, Zap, GraduationCap, CalendarCheck } from "lucide-react";
+import { BookOpen, Languages, MessageSquare, TrendingUp, Settings, Zap, GraduationCap, CalendarCheck, Shield } from "lucide-react";
 import XpProgressCard from "@/components/XpProgressCard";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
@@ -63,9 +64,11 @@ const modules = [
     fullWidth: true,
   },
 ];
+
 export default function DashboardPage() {
   const { profile } = useProfile();
   const { user } = useAuth();
+  const { isAdmin } = useUserRole();
   const navigate = useNavigate();
 
   const [xpData, setXpData] = useState<{ total_xp: number; level: number } | null>(null);
@@ -94,6 +97,12 @@ export default function DashboardPage() {
         <div className="container flex items-center justify-between h-14">
           <span className="font-display font-bold text-lg text-foreground">Norskly</span>
           <div className="flex items-center gap-2">
+            {isAdmin && (
+              <Button variant="outline" size="sm" onClick={() => navigate("/admin/dashboard")} className="gap-1.5">
+                <Shield className="w-3.5 h-3.5" />
+                Admin
+              </Button>
+            )}
             {xpData && (
               <span className="text-xs bg-primary/10 text-primary px-2.5 py-1 rounded-full font-semibold flex items-center gap-1">
                 <Zap className="w-3 h-3" /> {XP_TITLES[Math.min(xpData.level, 10)] || `Lvl ${xpData.level}`} · {xpData.total_xp} XP
@@ -117,7 +126,6 @@ export default function DashboardPage() {
           <p className="text-muted-foreground mb-4">Izaberi modul i nastavi sa učenjem norveškog.</p>
         </motion.div>
 
-        {/* XP Progress Card */}
         {xpData && (
           <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.05 }}>
             <XpProgressCard level={xpData.level} totalXp={xpData.total_xp} />
@@ -162,7 +170,6 @@ export default function DashboardPage() {
           ))}
         </div>
 
-        {/* Upcoming Lesson Widget */}
         {lessonLoaded && (
           <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}>
             <Card className="mt-6 border-accent/20 bg-gradient-to-r from-accent/5 to-primary/5">

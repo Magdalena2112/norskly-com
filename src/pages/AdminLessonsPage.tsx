@@ -1,3 +1,4 @@
+import { AdminLayout } from "@/components/admin/AdminLayout";
 import { supabase } from "@/integrations/supabase/client";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { format } from "date-fns";
@@ -5,8 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
-import { ArrowLeft, CheckCircle, Calendar, Settings } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { CheckCircle, Calendar } from "lucide-react";
 
 const STATUS_LABELS: Record<string, string> = {
   scheduled: "Zakazano",
@@ -22,7 +22,6 @@ const STATUS_VARIANTS: Record<string, "default" | "secondary" | "destructive"> =
 
 export default function AdminLessonsPage() {
   const { toast } = useToast();
-  const navigate = useNavigate();
   const queryClient = useQueryClient();
 
   const { data: lessons = [], isLoading } = useQuery({
@@ -58,24 +57,9 @@ export default function AdminLessonsPage() {
   const others = lessons.filter((l: any) => l.status !== "scheduled");
 
   return (
-    <div className="min-h-screen bg-background p-4 md:p-8">
-      <div className="max-w-2xl mx-auto space-y-6">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <Button variant="ghost" size="icon" onClick={() => navigate("/practice")}>
-              <ArrowLeft className="h-5 w-5" />
-            </Button>
-            <h1 className="text-2xl font-bold text-foreground">Upravljanje lekcijama</h1>
-          </div>
-          <div className="flex gap-2">
-            <Button variant="outline" onClick={() => navigate("/admin/teacher-profile")}>
-              Profil nastavnika
-            </Button>
-            <Button variant="outline" onClick={() => navigate("/admin/availability")}>
-              <Settings className="h-4 w-4 mr-2" /> Termini
-            </Button>
-          </div>
-        </div>
+    <AdminLayout>
+      <div className="max-w-3xl mx-auto space-y-6">
+        <h1 className="text-2xl font-display font-bold text-foreground">Upravljanje lekcijama</h1>
 
         <Card>
           <CardHeader>
@@ -138,6 +122,6 @@ export default function AdminLessonsPage() {
           </Card>
         )}
       </div>
-    </div>
+    </AdminLayout>
   );
 }
