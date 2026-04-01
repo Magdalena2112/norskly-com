@@ -103,8 +103,11 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* Gradient transition: Hero → Features */}
+      <div className="h-24 bg-gradient-to-b from-transparent to-background/60" />
+
       {/* Features */}
-      <section className="py-24 bg-background/60 backdrop-blur-sm">
+      <section className="pb-24 bg-background/60 backdrop-blur-sm">
         <div className="container">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
