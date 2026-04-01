@@ -53,7 +53,7 @@ Deno.serve(async (req) => {
       });
     }
 
-    const { action, level, topic, count, text, unique_seed } = await req.json();
+    const { action, level, topic, count, text, unique_seed, attempt_no } = await req.json();
 
     const cefrExpectations: Record<string, string> = {
       A1: "Fokus na osnovnu strukturu rečenice i razumljivost.",
