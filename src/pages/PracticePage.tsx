@@ -28,6 +28,7 @@ import {
   Clock,
   MessageCircle,
   Languages,
+  ArrowLeft,
   PenLine,
   Star,
   ArrowRight,
@@ -36,6 +37,7 @@ import {
   Volume2,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import BackButton from "@/components/BackButton";
 import ReactMarkdown from "react-markdown";
 import { logActivity } from "@/lib/logActivity";
 import { logErrors } from "@/lib/logErrors";
@@ -582,7 +584,10 @@ export default function PracticePage() {
       <div className="min-h-screen bg-aurora flex flex-col">
         <header className="border-b border-border/20 bg-background/10 backdrop-blur-md sticky top-0 z-50">
           <div className="container flex items-center justify-between h-14">
-            <span className="font-display font-bold text-lg text-primary-foreground">Norskly</span>
+            <div className="flex items-center gap-1">
+              <BackButton to="/practice" />
+              <span className="font-display font-bold text-lg text-primary-foreground">Norskly</span>
+            </div>
             <div className="flex items-center gap-2">
               {!s.recap && (
                 <Button variant="hero" size="sm" onClick={() => continueSession(s)} className="gap-1.5">
@@ -648,7 +653,10 @@ export default function PracticePage() {
       <div className="min-h-screen bg-aurora flex flex-col">
         <header className="border-b border-border/20 bg-background/10 backdrop-blur-md sticky top-0 z-50">
           <div className="container flex items-center justify-between h-14">
-            <span className="font-display font-bold text-lg text-primary-foreground">Norskly</span>
+            <div className="flex items-center gap-1">
+              <BackButton to="/practice" />
+              <span className="font-display font-bold text-lg text-primary-foreground">Norskly</span>
+            </div>
           </div>
         </header>
         <div className="flex-1 overflow-y-auto">
@@ -678,7 +686,10 @@ export default function PracticePage() {
       {/* Header */}
       <header className="border-b border-border/20 bg-background/10 backdrop-blur-md sticky top-0 z-50">
         <div className="container flex items-center justify-between h-14">
-          <span className="font-display font-bold text-lg text-primary-foreground">Norskly</span>
+            <div className="flex items-center gap-1">
+              <BackButton to="/practice" />
+              <span className="font-display font-bold text-lg text-primary-foreground">Norskly</span>
+            </div>
           <div className="flex items-center gap-2">
             <Button
               variant="ghost"
