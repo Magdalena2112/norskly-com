@@ -156,7 +156,7 @@ function getHint(attempt: number, solution: string, answer: string): string {
   return hints[Math.min(attempt - 1, hints.length - 1)];
 }
 
-function ExercisesTab({ level, userId, initialTopic }: { level: string; userId?: string; initialTopic?: string }) {
+function ExercisesTab({ level, userId, initialTopic, onGoToExplain }: { level: string; userId?: string; initialTopic?: string; onGoToExplain?: (topic: string) => void }) {
   const [topic, setTopic] = useState(initialTopic || "");
   const [count, setCount] = useState(5);
   const [exercises, setExercises] = useState<Exercise[]>([]);
