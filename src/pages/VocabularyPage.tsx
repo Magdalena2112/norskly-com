@@ -20,14 +20,17 @@ import { logErrors } from "@/lib/logErrors";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import VocabCollections from "@/components/VocabCollections";
 import CollectionSelector from "@/components/CollectionSelector";
+import VocabWordCard, { type GrammarForms } from "@/components/VocabWordCard";
 
 // ─── Types ───
 interface VocabWord {
   word: string;
   translation: string;
+  word_type?: string | null;
   synonym: string | null;
   antonym: string | null;
   examples: string[];
+  grammar_forms?: GrammarForms | null;
 }
 
 interface SavedWord {
