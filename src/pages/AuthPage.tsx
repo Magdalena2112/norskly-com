@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
+import BackButton from "@/components/BackButton";
 
 export default function AuthPage() {
   const [isLogin, setIsLogin] = useState(true);
