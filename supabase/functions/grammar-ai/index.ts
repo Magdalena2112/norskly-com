@@ -53,7 +53,7 @@ Deno.serve(async (req) => {
       });
     }
 
-    const { action, level, topic, count, text, unique_seed, attempt_no } = await req.json();
+    const { action, level, topic, count, text, unique_seed, attempt_no, previous_sentences } = await req.json();
 
     const cefrExpectations: Record<string, string> = {
       A1: "Fokus na osnovnu strukturu rečenice i razumljivost.",
@@ -96,8 +96,11 @@ Navedi snage kratko, identifikuj NAJVIŠE 2 oblasti za poboljšanje.`;
     const uniqueSeed = unique_seed || "";
 
     if (action === "generate_exercises") {
+      const prevBlock = Array.isArray(previous_sentences) && previous_sentences.length > 0
+        ? `\n\nEvo rečenica koje su VEĆ KORIŠĆENE u prethodnim vežbama — NE KORISTI ih ponovo i NE pravi slične varijante:\n${previous_sentences.map((s: string, i: number) => `${i + 1}. ${s}`).join("\n")}\n`
+        : "";
       systemPrompt = `Ti si nastavnik norveškog jezika (Bokmål). Generišeš gramatičke vežbe za nivo ${level}.
-VAŽNO: Svaki put generiši potpuno NOVE i RAZNOVRSNE rečenice. Ne ponavljaj prethodne primere. Variraj kontekst, vokabular i strukturu rečenica. Koristi različite životne situacije (posao, porodica, putovanja, hobiji, svakodnevica). Seed: ${uniqueSeed}
+VAŽNO: Svaki put generiši potpuno NOVE i RAZNOVRSNE rečenice. Ne ponavljaj prethodne primere. Variraj kontekst, vokabular i strukturu rečenica. Koristi različite životne situacije (posao, porodica, putovanja, hobiji, svakodnevica). Seed: ${uniqueSeed}${prevBlock}
 Odgovori ISKLJUČIVO u JSON formatu, bez markdown-a. Format:
 {
   "exercises": [
@@ -258,7 +261,7 @@ VAŽNA UPUTSTVA:
           { role: "system", content: systemPrompt },
           { role: "user", content: userPrompt },
         ],
-        temperature: 0.7,
+        temperature: action === "generate_exercises" ? 0.9 : 0.7,
       }),
     });
 
