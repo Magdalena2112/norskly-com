@@ -118,11 +118,8 @@ export default function TeacherProfilePage() {
       }
 
       // Email to teacher
-      const { data: teacherData } = await supabase
-        .from("teacher_profile")
-        .select("email")
-        .limit(1)
-        .maybeSingle();
+      const { data: teacherEmail } = await supabase
+        .rpc("get_teacher_email");
 
       if (teacherData?.email) {
         try {

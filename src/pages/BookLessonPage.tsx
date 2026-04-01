@@ -101,11 +101,8 @@ export default function BookLessonPage() {
       }
 
       // Email to teacher
-      const { data: teacher } = await supabase
-        .from("teacher_profile")
-        .select("email")
-        .limit(1)
-        .maybeSingle();
+      const { data: teacherEmail } = await supabase
+        .rpc("get_teacher_email");
 
       if (teacher?.email) {
         try {
