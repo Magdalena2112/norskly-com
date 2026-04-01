@@ -103,7 +103,7 @@ export default function DashboardPage() {
     <div className="min-h-screen flex flex-col bg-aurora">
       <header className="border-b border-border/20 bg-background/10 backdrop-blur-md sticky top-0 z-50">
         <div className="container flex items-center justify-between h-14">
-          <span className="font-display font-bold text-lg text-foreground">Norskly</span>
+          <span className="font-display font-bold text-lg text-primary-foreground">Norskly</span>
           <div className="flex items-center gap-2">
             {isAdmin && (
               <Button variant="outline" size="sm" onClick={() => navigate("/admin/dashboard")} className="gap-1.5">
