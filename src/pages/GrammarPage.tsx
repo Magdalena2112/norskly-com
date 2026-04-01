@@ -75,11 +75,11 @@ export default function GrammarPage() {
     <div className="min-h-screen bg-aurora flex flex-col">
       <header className="border-b border-border/20 bg-background/10 backdrop-blur-md sticky top-0 z-50">
         <div className="container flex items-center gap-3 h-14">
-          <Button variant="ghost" size="icon" onClick={() => navigate("/practice")}>
+          <Button variant="ghost" size="icon" onClick={() => navigate("/practice")} className="text-primary-foreground hover:text-primary-foreground/80">
             <ArrowLeft className="w-4 h-4" />
           </Button>
-          <span className="font-display font-bold text-lg text-foreground">Gramatika</span>
-          <span className="ml-auto text-xs bg-accent/10 text-accent px-3 py-1 rounded-full font-medium">
+          <span className="font-display font-bold text-lg text-primary-foreground">Gramatika</span>
+          <span className="ml-auto text-xs bg-primary-foreground/15 text-primary-foreground px-3 py-1 rounded-full font-medium">
             Nivo {level}
           </span>
         </div>
