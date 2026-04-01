@@ -37,6 +37,7 @@ import {
   Volume2,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import BackButton from "@/components/BackButton";
 import ReactMarkdown from "react-markdown";
 import { logActivity } from "@/lib/logActivity";
 import { logErrors } from "@/lib/logErrors";
