@@ -200,6 +200,11 @@ export default function AdminTeacherProfilePage() {
               <Input value={meetLink} onChange={(e) => setMeetLink(e.target.value)} placeholder="https://meet.google.com/..." />
               <p className="text-xs text-muted-foreground mt-1">Ovaj link će biti poslat studentima nakon rezervacije.</p>
             </div>
+            <div>
+              <label className="text-sm font-medium text-foreground mb-1.5 block">Email za obaveštenja</label>
+              <Input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="admin@example.com" />
+              <p className="text-xs text-muted-foreground mt-1">Na ovaj email stižu obaveštenja o zakazanim časovima.</p>
+            </div>
           </CardContent>
         </Card>
 
