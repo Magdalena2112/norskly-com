@@ -1,26 +1,71 @@
 
 
-## Plan: Fix Student Booking — Swap Insert Order
+## Plan: Atomsko zakazivanje preko SECURITY DEFINER funkcije
 
 ### Problem
-The "Students can book open slots" RLS policy on `availability_slots` has a WITH CHECK that requires a matching row in `lessons` before allowing the update. But the code in `BookLessonPage.tsx` updates the slot first (line 48-53), then inserts the lesson (line 59-66). Since the lesson doesn't exist yet when the slot update runs, RLS blocks it and returns 0 rows, causing "Ovaj termin je već zauzet."
+Booking fails because the client makes two separate calls (insert lesson, then update slot). The RLS `WITH CHECK` on `availability_slots` can't reliably see the just-inserted lesson row, causing persistent "violates row-level security policy" errors.
 
 ### Fix
+Replace the two client-side calls with a single atomic `book_lesson` database function that runs as `SECURITY DEFINER`, bypassing RLS internally while still validating the caller via `auth.uid()`.
 
-**File: `src/pages/BookLessonPage.tsx`**
+### Changes
 
-Swap the order of operations in `bookMutation`:
-1. **First** insert the lesson into `lessons` table
-2. **Then** update the `availability_slots` status to `booked`
-3. If the slot update fails (already booked by someone else), delete the lesson as rollback
+**1. Database migration — create `book_lesson` function**
 
-This way, when the slot update runs, the RLS WITH CHECK finds the lesson row and allows the update.
+```sql
+CREATE OR REPLACE FUNCTION public.book_lesson(
+  p_slot_id uuid,
+  p_start timestamptz,
+  p_end timestamptz,
+  p_note text DEFAULT NULL
+)
+RETURNS uuid
+LANGUAGE plpgsql
+SECURITY DEFINER
+SET search_path = public
+AS $$
+DECLARE
+  v_lesson_id uuid := gen_random_uuid();
+BEGIN
+  -- Claim the slot atomically
+  UPDATE availability_slots
+  SET status = 'booked'
+  WHERE id = p_slot_id AND status = 'open';
 
-### Technical Detail
+  IF NOT FOUND THEN
+    RAISE EXCEPTION 'Ovaj termin je već zauzet. Izaberi drugi.';
+  END IF;
+
+  -- Create lesson
+  INSERT INTO lessons (id, user_id, slot_id, start_time, end_time, student_note)
+  VALUES (v_lesson_id, auth.uid(), p_slot_id, p_start, p_end, p_note);
+
+  RETURN v_lesson_id;
+END;
+$$;
+
+GRANT EXECUTE ON FUNCTION public.book_lesson(uuid, timestamptz, timestamptz, text) TO authenticated;
 ```
-Current:  update slot → insert lesson  (fails: RLS needs lesson to exist)
-Fixed:    insert lesson → update slot → rollback lesson if slot taken
+
+**2. `src/pages/BookLessonPage.tsx` — simplify `bookMutation`**
+
+Replace the insert+update logic with a single RPC call:
+
+```typescript
+const { data: lessonId, error } = await supabase.rpc("book_lesson", {
+  p_slot_id: selectedSlot.id,
+  p_start: startTime.toISOString(),
+  p_end: endTime.toISOString(),
+  p_note: note || null,
+});
+if (error) throw error;
 ```
 
-Only `BookLessonPage.tsx` needs changes. No database migration required.
+Remove the old insert/update/rollback code. Keep the email sending and activity logging as-is, using `lessonId` from the RPC result.
+
+### Why this works
+- Single database call = atomic (no race condition, no RLS visibility issue)
+- `SECURITY DEFINER` bypasses RLS within the function
+- `auth.uid()` still validates the caller is authenticated
+- Slot is claimed before lesson is created, preventing double-booking
 
