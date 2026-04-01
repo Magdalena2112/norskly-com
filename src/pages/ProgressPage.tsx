@@ -284,7 +284,7 @@ export default function ProgressPage() {
       <div className="flex-1 container max-w-2xl py-8 space-y-8">
         {/* Overall progress */}
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}>
-          <Card className="shadow-nordic">
+          <Card className="shadow-nordic bg-background/80 backdrop-blur-sm border-border/30">
             <CardHeader>
               <CardTitle className="text-lg">Ukupni napredak</CardTitle>
             </CardHeader>
@@ -303,7 +303,7 @@ export default function ProgressPage() {
 
         {/* CEFR Readiness Score */}
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
-          <Card className="shadow-nordic">
+          <Card className="shadow-nordic bg-background/80 backdrop-blur-sm border-border/30">
             <CardHeader>
               <CardTitle className="text-lg flex items-center gap-2">
                 <Award className="w-5 h-5 text-primary" />
@@ -403,7 +403,7 @@ export default function ProgressPage() {
 
         {/* ═══ Error Analysis Section ═══ */}
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
-          <Card className="shadow-nordic">
+          <Card className="shadow-nordic bg-background/80 backdrop-blur-sm border-border/30">
             <CardHeader>
               <CardTitle className="text-lg flex items-center gap-2">
                 <AlertTriangle className="w-5 h-5 text-destructive" />
@@ -533,7 +533,7 @@ export default function ProgressPage() {
 
         {/* Milestones */}
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}>
-          <Card className="shadow-nordic">
+          <Card className="shadow-nordic bg-background/80 backdrop-blur-sm border-border/30">
             <CardHeader>
               <CardTitle className="text-lg">Miljokazi</CardTitle>
             </CardHeader>
