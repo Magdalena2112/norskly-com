@@ -100,10 +100,10 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#d3e2e9]/[0.64]">
-      <header className="border-b border-border bg-background/80 backdrop-blur-md sticky top-0 z-50">
+    <div className="min-h-screen flex flex-col bg-aurora">
+      <header className="border-b border-border/20 bg-background/10 backdrop-blur-md sticky top-0 z-50">
         <div className="container flex items-center justify-between h-14">
-          <span className="font-display font-bold text-lg text-foreground">Norskly</span>
+          <span className="font-display font-bold text-lg text-primary-foreground">Norskly</span>
           <div className="flex items-center gap-2">
             {isAdmin && (
               <Button variant="outline" size="sm" onClick={() => navigate("/admin/dashboard")} className="gap-1.5">
@@ -128,10 +128,10 @@ export default function DashboardPage() {
 
       <div className="flex-1 container max-w-3xl py-8">
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}>
-          <h1 className="text-3xl font-display font-bold text-foreground mb-1">
+          <h1 className="text-3xl font-display font-bold text-primary-foreground mb-1">
             Hei, {profile.name || "korisniče"}! 👋
           </h1>
-          <p className="text-muted-foreground mb-4">Izaberi modul i nastavi sa učenjem norveškog.</p>
+          <p className="text-primary-foreground/70 mb-4">Izaberi modul i nastavi sa učenjem norveškog.</p>
         </motion.div>
 
         {xpData && (
