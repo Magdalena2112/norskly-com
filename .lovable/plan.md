@@ -1,42 +1,26 @@
 
 
-## Onboarding Only for New Users
+## Fix: Onboarding Completion Not Redirecting
 
 ### Problem
-Currently, onboarding is enforced via `localStorage` (`norskly_onboarding_done`). If a user clears their browser data or switches devices, they're forced through onboarding again. It should only be required for genuinely new users.
+After completing onboarding, the user gets stuck because:
+1. The `profiles.onboarding_completed` upsert is fire-and-forget (`.then()` with no await)
+2. `ProtectedRoute` caches `onboarding_completed = false` with `staleTime: Infinity`, so even after the DB update, the cached value still says `false`
+3. When `navigate("/practice")` fires, `ProtectedRoute` reads the stale cache and redirects back to `/onboarding`
 
 ### Solution
-Add an `onboarding_completed` boolean column to the `profiles` table (default `false`). Check this column in `ProtectedRoute` instead of localStorage. Set it to `true` when onboarding finishes.
+In `OnboardingPage.tsx`:
+- **Await** the Supabase upsert so the DB is updated before navigating
+- **Invalidate** the `onboarding-status` React Query cache after the upsert succeeds
+- Then navigate to `/practice`
 
-### Database Migration
-```sql
-ALTER TABLE public.profiles ADD COLUMN onboarding_completed boolean NOT NULL DEFAULT false;
-
--- Mark existing users as completed (they already went through onboarding)
-UPDATE public.profiles SET onboarding_completed = true WHERE display_name IS NOT NULL AND display_name != '';
-```
-
-### Frontend Changes
-
-**`src/components/ProtectedRoute.tsx`**
-- Replace `localStorage.getItem("norskly_onboarding_done")` with a query to `profiles.onboarding_completed`
-- Use React Query to fetch the profile's `onboarding_completed` flag
-- Only redirect to `/onboarding` if `onboarding_completed` is `false`
+### Changes
 
 **`src/pages/OnboardingPage.tsx`**
-- On completion, update `profiles.onboarding_completed = true` in the database (in addition to existing profile sync)
-- Keep localStorage set as a fallback/cache for faster checks
+- Import `useQueryClient` from `@tanstack/react-query`
+- Make the `next()` function async
+- Await the upsert call
+- Call `queryClient.invalidateQueries({ queryKey: ["onboarding-status"] })` before navigating
 
-### Flow
-```text
-New user signs up → trigger creates profile (onboarding_completed=false)
-  → ProtectedRoute sees false → redirect to /onboarding
-  → completes onboarding → sets onboarding_completed=true in DB
-  → never redirected again, regardless of device/browser
-
-Existing user → migration sets onboarding_completed=true
-  → never redirected
-```
-
-3 files touched: 1 migration, `ProtectedRoute.tsx`, `OnboardingPage.tsx`.
+One file, minimal change.
 
