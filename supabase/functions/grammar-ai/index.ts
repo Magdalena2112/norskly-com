@@ -183,22 +183,61 @@ Korisnik može postaviti pitanje na srpskom, norveškom ili mešovito. Protumač
 Ako je tema preširoka, automatski je suzi na najkorisniji aspekt za nivo ${level}.
 Ako je tema napredna za nivo korisnika, pojednostavi objašnjenje.
 
+Svako objašnjenje treba da bude kao mini-lekcija: detaljno, strukturirano i pedagoški korisno.
+
 Odgovori ISKLJUČIVO u JSON formatu, bez markdown-a. Format:
 {
   "naslov": "Kratki naslov teme na srpskom",
-  "definicija": "Jednostavno objašnjenje pravila na srpskom, prilagođeno nivou ${level}",
-  "upotreba": "Kada i kako se koristi u svakodnevnoj komunikaciji (na srpskom)",
-  "primeri": [
-    { "no": "Rečenica na norveškom", "sr": "Prevod na srpski" }
+  "sazetak": "Kratak rezime od 2–3 rečenice koji daje brz i jednostavan odgovor pre detaljnih sekcija.",
+  "definicija": "Detaljno objašnjenje gramatičke teme: šta je, koja je funkcija, kada se koristi, koja je logika iza pravila. Ovo treba da bude dublje od prostog opisa — objasni ZAŠTO pravilo postoji i kako funkcioniše u jeziku. Prilagodi dubinu nivou ${level}.",
+  "formula": {
+    "label": "Naziv gramatičkog obrasca (npr. Perfektum, Preteritum, Leddsetning)",
+    "pattern": "Obrazac/formula (npr. subjekt + har/er + perfektum particip)",
+    "examples": ["Primer 1 na norveškom", "Primer 2 na norveškom"]
+  },
+  "kada_se_koristi": [
+    "Situacija 1 kada se koristi (na srpskom)",
+    "Situacija 2 kada se koristi"
   ],
+  "kada_se_ne_koristi": [
+    "Situacija ili čest slučaj kada se NE koristi ili kada treba koristiti drugi oblik (na srpskom)",
+    "Kontrast sa sličnom strukturom"
+  ],
+  "poredjenje": {
+    "title": "Naslov poređenja (npr. Preteritum vs Perfektum)",
+    "left_label": "Leva strana (npr. Preteritum)",
+    "right_label": "Desna strana (npr. Perfektum)",
+    "rows": [
+      { "left": "Primer levo (norveški)", "right": "Primer desno (norveški)", "note": "Kratko objašnjenje razlike (srpski)" }
+    ]
+  },
+  "primeri": {
+    "jednostavni": [
+      { "no": "Jednostavan primer na norveškom", "sr": "Prevod na srpski" }
+    ],
+    "iz_zivota": [
+      { "no": "Primer iz svakodnevnog života", "sr": "Prevod", "kontekst": "Kratko objašnjenje konteksta" }
+    ],
+    "kontrastni": [
+      { "pogresno": "Pogrešna upotreba", "tacno": "Tačna upotreba", "objasnjenje": "Zašto je pogrešno" }
+    ]
+  },
   "tipicne_greske": [
-    { "pogresno": "Pogrešan primer", "tacno": "Tačan primer", "objasnjenje": "Kratko objašnjenje" }
+    { "pogresno": "Pogrešan primer", "tacno": "Tačan primer", "objasnjenje": "Detaljno objašnjenje zašto je pogrešno i koje pravilo je prekršeno" }
   ],
-  "mini_savet": "Kratak praktičan savet za učenje"
+  "mini_savet": "Kratak praktičan savet ili trik za pamćenje — pravilo palca koje pomaže studentu da zapamti koncept",
+  "povezane_teme": ["Povezana tema 1", "Povezana tema 2"]
 }
 
-Generiši 3–5 primera prilagođenih nivou ${level}. Navedi 1–3 tipične greške specifične za nivo.
-Objašnjenja piši na srpskom, primere na norveškom.` + qualityCheck;
+VAŽNA UPUTSTVA:
+- Generiši 3–5 jednostavnih primera, 2–3 primera iz života, i 1–3 kontrastna primera, prilagođenih nivou ${level}.
+- Navedi 2–4 tipične greške specifične za nivo, sa detaljnim objašnjenjima.
+- Za "kada_se_koristi" navedi 3–5 stavki.
+- Za "kada_se_ne_koristi" navedi 2–3 stavki sa jasnim kontrastima.
+- Ako tema uključuje dva srodna koncepta (npr. preteritum vs perfektum, bestemt vs ubestemt), OBAVEZNO popuni "poredjenje" sa 3–5 redova. Ako nema prirodnog poređenja, vrati "poredjenje": null.
+- Za "povezane_teme" navedi 2–4 povezane gramatičke teme koje bi student mogao da istraži dalje.
+- Objašnjenja piši na srpskom, primere na norveškom.
+- Formulu piši jednostavno i jasno, sa 2–3 primera primene.` + qualityCheck;
       userPrompt = `Objasni sledeću gramatičku temu za nivo ${level}:\n\n"${text || topic}"`;
     } else {
       return new Response(JSON.stringify({ error: "Invalid action" }), {
