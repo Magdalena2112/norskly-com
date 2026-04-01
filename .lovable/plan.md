@@ -1,34 +1,76 @@
 
 
-## Poboljšanje sekcije Vežbe u Gramatici
+## Redesign: Objašnjenja section — mini-lesson format
 
-### Problem
-1. AI generiše iste/slične zadatke jer nema instrukcije da varira sadržaj
-2. Maksimalan broj zadataka je ograničen na 10 (treba 20)
-3. Nakon završene sesije nema dugmeta koje vodi na objašnjenje te teme
+### Overview
+Expand the grammar explanation system from 5 fields to 10 structured sections, updating both the AI prompt (edge function) and the frontend rendering (GrammarPage.tsx).
 
-### Izmene
+### Changes
 
-**1. `src/pages/GrammarPage.tsx` — ExercisesTab komponenta**
-- Povećati `max` za broj zadataka sa 10 na 20 (linija 271)
-- Dodati u `generate` funkciju timestamp ili random seed u AI poziv (`unique_seed: Date.now()`) da forsira raznovrsnost
-- Nakon završene sesije (`allDone` blok, linije 353-363), dodati dugme "Objasni ovu temu" koje navigira na tab "explain" sa temom kao parametrom
+**1. `supabase/functions/grammar-ai/index.ts` — explain_topic prompt**
 
-**2. `supabase/functions/grammar-ai/index.ts` — generate_exercises prompt**
-- Dodati instrukciju u system prompt: "Svaki put generiši potpuno nove i raznovrsne rečenice. Ne ponavljaj prethodne primere. Variraj kontekst, vokabular i strukturu rečenica."
+Replace the current JSON schema with an expanded one:
 
-### Detalji
-
-Dugme nakon sesije:
-```tsx
-<Button onClick={() => {/* switch to explain tab with topic */}}>
-  📖 Objasni: {topic}
-</Button>
+```json
+{
+  "naslov": "Short title",
+  "sazetak": "2-3 sentence quick summary",
+  "definicija": "Detailed definition — what, why, when, logic",
+  "formula": {
+    "label": "Grammar pattern name",
+    "pattern": "subject + har + past participle",
+    "examples": ["Jeg har spist", "Hun har lest"]
+  },
+  "kada_se_koristi": ["bullet 1", "bullet 2", ...],
+  "kada_se_ne_koristi": ["contrast/limit 1", ...],
+  "poredjenje": {
+    "title": "e.g. Preterit vs Perfekt",
+    "left_label": "Preterit",
+    "right_label": "Perfekt",
+    "rows": [
+      { "left": "Jeg spiste", "right": "Jeg har spist", "note": "..." }
+    ]
+  },
+  "primeri": {
+    "jednostavni": [{ "no": "...", "sr": "..." }],
+    "iz_zivota": [{ "no": "...", "sr": "...", "kontekst": "..." }],
+    "kontrastni": [{ "pogresno": "...", "tacno": "...", "objasnjenje": "..." }]
+  },
+  "tipicne_greske": [
+    { "pogresno": "...", "tacno": "...", "objasnjenje": "..." }
+  ],
+  "mini_savet": "Memory trick or rule-of-thumb",
+  "povezane_teme": ["topic 1", "topic 2"]
+}
 ```
 
-Za prebacivanje na tab koristiću React state (controlled tabs umesto defaultValue) ili `navigate` sa state parametrom.
+Update the prompt instructions to require all 10 sections, with guidance on depth and variety. If no comparison is relevant, AI returns `poredjenje: null`.
 
-Za raznovrsnost, u AI prompt dodajem eksplicitnu instrukciju + šaljem `unique_seed` koji prompt uključuje kao kontekst.
+**2. `src/pages/GrammarPage.tsx` — ExplainTab UI**
 
-3 izmene ukupno: GrammarPage.tsx (max 20, dugme za objašnjenja, controlled tabs), grammar-ai/index.ts (prompt za raznovrsnost).
+Update `ExplainResult` interface to match the new schema. Redesign the rendering into 10 visually distinct sections:
+
+1. **Title card** — accent background, bold title
+2. **Summary** — highlighted card with 2-3 sentence overview (new)
+3. **Detailed definition** — expandable/collapsible card with in-depth explanation
+4. **Formula block** — visually distinct code-like card with grammar pattern (new)
+5. **When used** — bullet list with BookOpen icon (new)
+6. **When NOT used** — bullet list with AlertTriangle icon, different bg (new)
+7. **Comparison table** — side-by-side table/grid layout, only shown when data exists (new)
+8. **Examples** — accordion with 3 sub-sections (simple, real-life, contrastive) (expanded)
+9. **Common mistakes** — improved with wrong/correct/explanation per item (keep + improve)
+10. **Memory tip** — highlighted Lightbulb card (keep)
+11. **Related topics** — clickable chips that trigger a new search (new)
+
+UI approach:
+- Use `Accordion` for longer sections (definition, examples) to keep it scannable
+- Use a table element for comparison block
+- Related topics render as `Button variant="outline"` chips that call `setQuery(topic); search()`
+- Formula block uses `bg-muted font-mono` styling
+- Clean visual hierarchy with numbered section headers and icons
+- Mobile-responsive: comparison table scrolls horizontally on small screens
+
+**3. Files affected**
+- `supabase/functions/grammar-ai/index.ts` — expanded explain_topic prompt + JSON schema
+- `src/pages/GrammarPage.tsx` — new `ExplainResult` interface + redesigned ExplainTab rendering (~100 lines replaced)
 
