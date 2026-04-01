@@ -190,18 +190,7 @@ function GenerateTab({ level, userId }: { level: string; userId?: string }) {
     }
   };
 
-  // Fetch user collections
-  useEffect(() => {
-    if (!userId) return;
-    (async () => {
-      const { data } = await supabase
-        .from("word_collections" as any)
-        .select("id, name")
-        .eq("user_id", userId)
-        .order("created_at", { ascending: false });
-      setCollections((data as unknown as { id: string; name: string }[]) || []);
-    })();
-  }, [userId]);
+  useEffect(() => { fetchCollections(); }, [userId]);
 
   const generate = async (loadMore = false) => {
     if (!theme.trim()) return;
