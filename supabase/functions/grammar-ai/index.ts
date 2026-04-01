@@ -53,7 +53,7 @@ Deno.serve(async (req) => {
       });
     }
 
-    const { action, level, topic, count, text } = await req.json();
+    const { action, level, topic, count, text, unique_seed, attempt_no } = await req.json();
 
     const cefrExpectations: Record<string, string> = {
       A1: "Fokus na osnovnu strukturu rečenice i razumljivost.",
@@ -93,7 +93,7 @@ Navedi snage kratko, identifikuj NAJVIŠE 2 oblasti za poboljšanje.`;
     let userPrompt = "";
     let errorLimit = 2;
 
-    const uniqueSeed = (await req.clone().json()).unique_seed || "";
+    const uniqueSeed = unique_seed || "";
 
     if (action === "generate_exercises") {
       systemPrompt = `Ti si nastavnik norveškog jezika (Bokmål). Generišeš gramatičke vežbe za nivo ${level}.
@@ -124,8 +124,7 @@ Odgovori ISKLJUČIVO u JSON formatu, bez markdown-a. Format:
 ${ERROR_EXTRACT_BLOCK}
 OGRANIČENJE: Maksimalno ${errorLimit} greške u _errors nizu.
 Ako je tačan odgovor, "_errors" mora biti prazan niz.` + qualityCheck;
-      userPrompt = `Vežba: "${text}"\nKorisnikov odgovor: "${topic}"\nTačan odgovor: "${count}"\nNivo: ${level}\nBroj pokušaja: ${(await req.clone().json()).attempt_no || 1}`;
-      // Re-parse to get attempt_no properly
+      userPrompt = `Vežba: "${text}"\nKorisnikov odgovor: "${topic}"\nTačan odgovor: "${count}"\nNivo: ${level}\nBroj pokušaja: ${attempt_no || 1}`;
     } else if (action === "correct_text") {
       errorLimit = 5;
       systemPrompt = `Ti si nastavnik norveškog jezika (Bokmål). Ispravljaš tekst korisnika na nivou ${level}.
