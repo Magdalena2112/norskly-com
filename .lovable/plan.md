@@ -1,17 +1,26 @@
 
 
-## Plan: Prikaži član (en/ei/et) pored imenica
+## Plan: Fix Student Booking — Swap Insert Order
 
-### Šta
-Za reči tipa "imenica", prikazati gramatički rod (en/ei/et) kao mali badge pored word type labele, direktno vidljiv bez otvaranja gramatičke sekcije.
+### Problem
+The "Students can book open slots" RLS policy on `availability_slots` has a WITH CHECK that requires a matching row in `lessons` before allowing the update. But the code in `BookLessonPage.tsx` updates the slot first (line 48-53), then inserts the lesson (line 59-66). Since the lesson doesn't exist yet when the slot update runs, RLS blocks it and returns 0 rows, causing "Ovaj termin je već zauzet."
 
-### Kako
+### Fix
 
-**File: `src/components/VocabWordCard.tsx`**
+**File: `src/pages/BookLessonPage.tsx`**
 
-1. Nakon što se odredi `typeInfo`, proveriti da li je `wordType === "imenica"` i da li `grammarForms?.kjonn` postoji.
-2. Ako da, prikazati dodatni badge pored word type badge-a sa vrednošću `grammarForms.kjonn` (npr. "en", "ei", "et").
-3. Stilizovati kao mali tag sličan word type badge-u ali sa drugom bojom (npr. `bg-yellow-500/15 text-yellow-700`).
+Swap the order of operations in `bookMutation`:
+1. **First** insert the lesson into `lessons` table
+2. **Then** update the `availability_slots` status to `booked`
+3. If the slot update fails (already booked by someone else), delete the lesson as rollback
 
-Primer prikaza: `[imenica] [en]` pored reči.
+This way, when the slot update runs, the RLS WITH CHECK finds the lesson row and allows the update.
+
+### Technical Detail
+```
+Current:  update slot → insert lesson  (fails: RLS needs lesson to exist)
+Fixed:    insert lesson → update slot → rollback lesson if slot taken
+```
+
+Only `BookLessonPage.tsx` needs changes. No database migration required.
 
