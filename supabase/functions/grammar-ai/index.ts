@@ -93,7 +93,7 @@ Navedi snage kratko, identifikuj NAJVIŠE 2 oblasti za poboljšanje.`;
     let userPrompt = "";
     let errorLimit = 2;
 
-    const uniqueSeed = (await req.clone().json()).unique_seed || "";
+    const uniqueSeed = unique_seed || "";
 
     if (action === "generate_exercises") {
       systemPrompt = `Ti si nastavnik norveškog jezika (Bokmål). Generišeš gramatičke vežbe za nivo ${level}.
