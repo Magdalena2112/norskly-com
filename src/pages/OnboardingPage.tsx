@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { UserProfile } from "@/types/profile";
 import { ChevronRight, ChevronLeft, User, Target, MessageSquare, BookOpen, Gauge } from "lucide-react";
+import BackButton from "@/components/BackButton";
 
 const steps = ["Ime", "Nivo", "Cilj", "Stil", "Fokus", "Samopouzdanje", "Norveška"];
 
