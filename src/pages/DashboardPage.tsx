@@ -120,9 +120,23 @@ export default function DashboardPage() {
             <span className="text-xs bg-accent/10 text-accent px-3 py-1 rounded-full font-medium">
               {profile.level} · {profile.learning_goal}
             </span>
-            <Button variant="ghost" size="icon" onClick={() => navigate("/onboarding")}>
-              <Settings className="w-4 h-4" />
-            </Button>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="icon">
+                  <Settings className="w-4 h-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-48">
+                <DropdownMenuItem onClick={() => navigate("/onboarding")} className="cursor-pointer gap-2">
+                  <Settings className="w-4 h-4" />
+                  Podešavanja
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={async () => { await signOut(); navigate("/auth"); }} className="cursor-pointer gap-2 text-destructive focus:text-destructive">
+                  <LogOut className="w-4 h-4" />
+                  Odjavi se
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </div>
       </header>
