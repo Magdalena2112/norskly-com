@@ -157,8 +157,11 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* Gradient transition: Features → CTA */}
+      <div className="h-24 bg-gradient-to-b from-background/60 to-transparent" />
+
       {/* CTA */}
-      <section className="py-24">
+      <section className="pb-24">
         <div className="container">
           <motion.div
             initial={{ opacity: 0, scale: 0.96 }}
