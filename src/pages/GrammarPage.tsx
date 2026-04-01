@@ -544,22 +544,35 @@ function CorrectionTab({ level, userId }: { level: string; userId?: string }) {
 // ═══════════════════════════════════════
 // TAB 3: Objašnjenja (Free-form topic search)
 // ═══════════════════════════════════════
-interface ExplainExample {
-  no: string;
-  sr: string;
-}
-interface ExplainMistake {
-  pogresno: string;
-  tacno: string;
-  objasnjenje: string;
+interface ExplainSimpleExample { no: string; sr: string; }
+interface ExplainLifeExample { no: string; sr: string; kontekst?: string; }
+interface ExplainContrastExample { pogresno: string; tacno: string; objasnjenje: string; }
+interface ExplainMistake { pogresno: string; tacno: string; objasnjenje: string; }
+interface ExplainFormula { label: string; pattern: string; examples: string[]; }
+interface ExplainComparison {
+  title: string;
+  left_label: string;
+  right_label: string;
+  rows: { left: string; right: string; note: string }[];
 }
 interface ExplainResult {
   naslov: string;
+  sazetak?: string;
   definicija: string;
-  upotreba: string;
-  primeri: ExplainExample[];
-  tipicne_greske: ExplainMistake[];
-  mini_savet: string;
+  formula?: ExplainFormula | null;
+  kada_se_koristi?: string[];
+  kada_se_ne_koristi?: string[];
+  poredjenje?: ExplainComparison | null;
+  primeri?: {
+    jednostavni?: ExplainSimpleExample[];
+    iz_zivota?: ExplainLifeExample[];
+    kontrastni?: ExplainContrastExample[];
+  } | ExplainSimpleExample[];
+  tipicne_greske?: ExplainMistake[];
+  mini_savet?: string;
+  povezane_teme?: string[];
+  // Legacy fields
+  upotreba?: string;
 }
 
 function ExplainTab({ level, userId, initialQuery }: { level: string; userId?: string; initialQuery?: string }) {
@@ -567,6 +580,19 @@ function ExplainTab({ level, userId, initialQuery }: { level: string; userId?: s
   const [result, setResult] = useState<ExplainResult | null>(null);
   const [loading, setLoading] = useState(false);
   const [logged, setLogged] = useState(false);
+
+  // Auto-search when initialQuery changes
+  React.useEffect(() => {
+    if (initialQuery && initialQuery !== query) {
+      setQuery(initialQuery);
+    }
+  }, [initialQuery]);
+
+  React.useEffect(() => {
+    if (query && !result && !loading) {
+      search();
+    }
+  }, [query]);
 
   const search = async () => {
     if (!query.trim()) return;
@@ -576,15 +602,28 @@ function ExplainTab({ level, userId, initialQuery }: { level: string; userId?: s
     try {
       const data = await callGrammarAI({ action: "explain_topic", level, text: query.trim() });
       setResult(data);
-      if (userId) {
-        // No XP for content generation (explanations)
-        setLogged(true);
-      }
+      if (userId) setLogged(true);
     } catch (e: any) {
       console.error(e);
     } finally {
       setLoading(false);
     }
+  };
+
+  const searchTopic = (topic: string) => {
+    setQuery(topic);
+    setResult(null);
+    setLogged(false);
+    // Will trigger auto-search via useEffect
+  };
+
+  // Normalize examples (handle legacy array format)
+  const getExamples = () => {
+    if (!result?.primeri) return null;
+    if (Array.isArray(result.primeri)) {
+      return { jednostavni: result.primeri as ExplainSimpleExample[], iz_zivota: [], kontrastni: [] };
+    }
+    return result.primeri;
   };
 
   return (
@@ -623,56 +662,203 @@ function ExplainTab({ level, userId, initialQuery }: { level: string; userId?: s
             </CardContent>
           </Card>
 
-          {/* 1️⃣ Definicija */}
-          <Card>
-            <CardHeader className="pb-2">
-              <CardTitle className="text-base flex items-center gap-2">
-                <span>1️⃣</span> Definicija
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-sm text-foreground leading-relaxed">{result.definicija}</p>
-            </CardContent>
-          </Card>
-
-          {/* 2️⃣ Upotreba */}
-          <Card>
-            <CardHeader className="pb-2">
-              <CardTitle className="text-base flex items-center gap-2">
-                <span>2️⃣</span> Kako se koristi u praksi
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-sm text-foreground leading-relaxed">{result.upotreba}</p>
-            </CardContent>
-          </Card>
-
-          {/* 3️⃣ Primeri */}
-          {result.primeri && result.primeri.length > 0 && (
-            <Card>
-              <CardHeader className="pb-2">
-                <CardTitle className="text-base flex items-center gap-2">
-                  <span>3️⃣</span> Primeri
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-2">
-                {result.primeri.map((p, i) => (
-                  <div key={i} className="p-3 rounded-lg bg-muted space-y-1">
-                    <p className="text-sm font-medium text-foreground">{p.no}</p>
-                    <p className="text-xs text-muted-foreground">{p.sr}</p>
-                  </div>
-                ))}
+          {/* 1️⃣ Quick Summary */}
+          {result.sazetak && (
+            <Card className="bg-primary/5 border-primary/20">
+              <CardContent className="pt-5 pb-5">
+                <p className="text-sm text-foreground leading-relaxed">{result.sazetak}</p>
               </CardContent>
             </Card>
           )}
 
-          {/* 4️⃣ Tipične greške */}
+          {/* 2️⃣ Detailed Definition */}
+          <Card>
+            <CardHeader className="pb-2">
+              <CardTitle className="text-base flex items-center gap-2">
+                <BookOpen className="w-4 h-4 text-accent" /> Definicija
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm text-foreground leading-relaxed whitespace-pre-line">{result.definicija}</p>
+            </CardContent>
+          </Card>
+
+          {/* 3️⃣ Formula Block */}
+          {result.formula && (
+            <Card className="border-accent/20">
+              <CardHeader className="pb-2">
+                <CardTitle className="text-base flex items-center gap-2">
+                  <span className="text-accent">📐</span> Gramatički obrazac: {result.formula.label}
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <div className="bg-muted rounded-lg p-4 border border-border">
+                  <p className="font-mono text-sm text-foreground font-semibold text-center">{result.formula.pattern}</p>
+                </div>
+                {result.formula.examples?.length > 0 && (
+                  <div className="space-y-1">
+                    {result.formula.examples.map((ex, i) => (
+                      <p key={i} className="text-sm text-muted-foreground pl-2 border-l-2 border-accent/30">{ex}</p>
+                    ))}
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          )}
+
+          {/* 4️⃣ When Used */}
+          {result.kada_se_koristi && result.kada_se_koristi.length > 0 && (
+            <Card>
+              <CardHeader className="pb-2">
+                <CardTitle className="text-base flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-accent" /> Kada se koristi
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <ul className="space-y-2">
+                  {result.kada_se_koristi.map((item, i) => (
+                    <li key={i} className="text-sm text-foreground flex items-start gap-2">
+                      <span className="text-accent mt-0.5">•</span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </CardContent>
+            </Card>
+          )}
+
+          {/* Legacy: upotreba (for old format) */}
+          {!result.kada_se_koristi && result.upotreba && (
+            <Card>
+              <CardHeader className="pb-2">
+                <CardTitle className="text-base flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-accent" /> Kako se koristi u praksi
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-foreground leading-relaxed">{result.upotreba}</p>
+              </CardContent>
+            </Card>
+          )}
+
+          {/* 5️⃣ When NOT Used */}
+          {result.kada_se_ne_koristi && result.kada_se_ne_koristi.length > 0 && (
+            <Card className="bg-destructive/5 border-destructive/10">
+              <CardHeader className="pb-2">
+                <CardTitle className="text-base flex items-center gap-2">
+                  <AlertTriangle className="w-4 h-4 text-destructive" /> Kada se NE koristi
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <ul className="space-y-2">
+                  {result.kada_se_ne_koristi.map((item, i) => (
+                    <li key={i} className="text-sm text-foreground flex items-start gap-2">
+                      <span className="text-destructive mt-0.5">•</span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </CardContent>
+            </Card>
+          )}
+
+          {/* 6️⃣ Comparison Table */}
+          {result.poredjenje && result.poredjenje.rows?.length > 0 && (
+            <Card>
+              <CardHeader className="pb-2">
+                <CardTitle className="text-base flex items-center gap-2">
+                  <span>⚖️</span> {result.poredjenje.title}
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-sm border-collapse">
+                    <thead>
+                      <tr className="border-b border-border">
+                        <th className="text-left py-2 px-3 font-semibold text-accent">{result.poredjenje.left_label}</th>
+                        <th className="text-left py-2 px-3 font-semibold text-accent">{result.poredjenje.right_label}</th>
+                        <th className="text-left py-2 px-3 font-semibold text-muted-foreground">Napomena</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {result.poredjenje.rows.map((row, i) => (
+                        <tr key={i} className="border-b border-border/50">
+                          <td className="py-2 px-3 text-foreground">{row.left}</td>
+                          <td className="py-2 px-3 text-foreground">{row.right}</td>
+                          <td className="py-2 px-3 text-muted-foreground text-xs">{row.note}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </CardContent>
+            </Card>
+          )}
+
+          {/* 7️⃣ Examples — 3 sub-sections */}
+          {(() => {
+            const examples = getExamples();
+            if (!examples) return null;
+            const hasSimple = examples.jednostavni && examples.jednostavni.length > 0;
+            const hasLife = examples.iz_zivota && examples.iz_zivota.length > 0;
+            const hasContrast = examples.kontrastni && examples.kontrastni.length > 0;
+            if (!hasSimple && !hasLife && !hasContrast) return null;
+            return (
+              <Card>
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-base flex items-center gap-2">
+                    <span>📝</span> Primeri
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  {hasSimple && (
+                    <div className="space-y-2">
+                      <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Jednostavni primeri</p>
+                      {examples.jednostavni!.map((p, i) => (
+                        <div key={i} className="p-3 rounded-lg bg-muted space-y-1">
+                          <p className="text-sm font-medium text-foreground">{p.no}</p>
+                          <p className="text-xs text-muted-foreground">{p.sr}</p>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                  {hasLife && (
+                    <div className="space-y-2">
+                      <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Primeri iz života</p>
+                      {examples.iz_zivota!.map((p, i) => (
+                        <div key={i} className="p-3 rounded-lg bg-accent/5 border border-accent/10 space-y-1">
+                          <p className="text-sm font-medium text-foreground">{p.no}</p>
+                          <p className="text-xs text-muted-foreground">{p.sr}</p>
+                          {p.kontekst && <p className="text-xs text-accent italic">📌 {p.kontekst}</p>}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                  {hasContrast && (
+                    <div className="space-y-2">
+                      <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Kontrastni primeri</p>
+                      {examples.kontrastni!.map((p, i) => (
+                        <div key={i} className="p-3 rounded-lg bg-destructive/5 border border-destructive/10 space-y-1">
+                          <div className="flex gap-2 text-sm">
+                            <span className="text-destructive line-through">{p.pogresno}</span>
+                            <span className="text-accent">→ {p.tacno}</span>
+                          </div>
+                          <p className="text-xs text-muted-foreground">{p.objasnjenje}</p>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
+            );
+          })()}
+
+          {/* 8️⃣ Common Mistakes */}
           {result.tipicne_greske && result.tipicne_greske.length > 0 && (
             <Card>
               <CardHeader className="pb-2">
                 <CardTitle className="text-base flex items-center gap-2">
-                  <AlertTriangle className="w-4 h-4 text-destructive" />
-                  <span>4️⃣</span> Tipične greške
+                  <AlertTriangle className="w-4 h-4 text-destructive" /> Tipične greške
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-2">
@@ -689,18 +875,41 @@ function ExplainTab({ level, userId, initialQuery }: { level: string; userId?: s
             </Card>
           )}
 
-          {/* 5️⃣ Mini savet */}
+          {/* 9️⃣ Memory Tip */}
           {result.mini_savet && (
             <Card className="border-accent/30 bg-accent/5">
               <CardContent className="pt-5 pb-5 flex gap-3 items-start">
                 <Lightbulb className="w-5 h-5 text-accent shrink-0 mt-0.5" />
-                <p className="text-sm text-foreground">{result.mini_savet}</p>
+                <div>
+                  <p className="text-xs font-semibold text-accent uppercase tracking-wider mb-1">Savet za pamćenje</p>
+                  <p className="text-sm text-foreground">{result.mini_savet}</p>
+                </div>
+              </CardContent>
+            </Card>
+          )}
+
+          {/* 🔗 Related Topics */}
+          {result.povezane_teme && result.povezane_teme.length > 0 && (
+            <Card>
+              <CardHeader className="pb-2">
+                <CardTitle className="text-base flex items-center gap-2">
+                  <span>🔗</span> Povezane teme
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="flex flex-wrap gap-2">
+                  {result.povezane_teme.map((t, i) => (
+                    <Button key={i} variant="outline" size="sm" onClick={() => searchTopic(t)} className="text-xs">
+                      {t}
+                    </Button>
+                  ))}
+                </div>
               </CardContent>
             </Card>
           )}
 
           {logged && (
-            <p className="text-center text-xs text-accent font-medium">✅ +8 poena zabeleženo</p>
+            <p className="text-center text-xs text-accent font-medium">✅ Objašnjenje učitano</p>
           )}
         </motion.div>
       )}
