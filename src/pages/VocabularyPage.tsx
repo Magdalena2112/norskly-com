@@ -11,8 +11,9 @@ import { Progress } from "@/components/ui/progress";
 import {
   ArrowLeft, Loader2, BookOpen, PenTool, Brain, Layers,
   CheckCircle2, XCircle, Save, ThumbsUp, ThumbsDown, RotateCcw, Volume2,
-  FolderOpen,
+  FolderOpen, Plus,
 } from "lucide-react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { logActivity } from "@/lib/logActivity";
