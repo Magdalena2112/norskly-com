@@ -46,7 +46,13 @@ export default function LandingPage() {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen relative">
+      {/* Full-page background */}
+      <div className="fixed inset-0 -z-10">
+        <img src={heroBg} alt="" className="w-full h-full object-cover" width={1504} height={846} fetchPriority="high" decoding="async" sizes="100vw" />
+        <div className="absolute inset-0 bg-background/60" />
+      </div>
+
       {/* Nav */}
       <nav className="fixed top-0 inset-x-0 z-50 backdrop-blur-md bg-background/80 border-b border-border">
         <div className="container flex items-center justify-between h-16">
@@ -65,12 +71,7 @@ export default function LandingPage() {
       </nav>
 
       {/* Hero */}
-      <section className="relative min-h-[90vh] flex items-center overflow-hidden">
-        <div className="absolute inset-0">
-          <img src={heroBg} alt="" className="w-full h-full object-cover" width={1504} height={846} fetchPriority="high" decoding="async" sizes="100vw" />
-          <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/80 to-background/40" />
-        </div>
-
+      <section className="min-h-[90vh] flex items-center">
         <div className="container relative z-10 pt-24">
           <motion.div
             initial={{ opacity: 0, y: 32 }}
@@ -83,9 +84,7 @@ export default function LandingPage() {
             </p>
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-display font-extrabold leading-tight mb-6 text-foreground">
               Govori norveški
-              <span className="text-gradient-nordic block"> sa samopouzdanjem
-
-</span>
+              <span className="text-gradient-nordic block"> sa samopouzdanjem</span>
             </h1>
             <p className="text-lg text-muted-foreground max-w-lg mb-8 leading-relaxed">
               Din vei til flytende norsk starter her
@@ -103,7 +102,7 @@ export default function LandingPage() {
       </section>
 
       {/* Features */}
-      <section className="py-24 bg-nordic-warm">
+      <section className="py-24 bg-background/60 backdrop-blur-sm">
         <div className="container">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -128,7 +127,7 @@ export default function LandingPage() {
             <motion.div
               key={f.title}
               variants={item}
-              className="bg-background rounded-xl p-6 shadow-nordic hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+              className="bg-background/80 backdrop-blur-sm rounded-xl p-6 shadow-nordic hover:shadow-lg hover:-translate-y-1 transition-all duration-300 border border-border/30">
               
                 <div className="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center mb-4">
                   <f.icon className="w-6 h-6 text-accent" />
@@ -180,7 +179,7 @@ export default function LandingPage() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-border py-8">
+      <footer className="border-t border-border/30 py-8 bg-background/60 backdrop-blur-sm">
         <div className="container flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
           <span className="font-display font-bold text-foreground">Norskly</span>
           <p>© 2026 Norskly. Sva prava zadržana.</p>
