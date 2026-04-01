@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { AdminLayout } from "@/components/admin/AdminLayout";
 import { supabase } from "@/integrations/supabase/client";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
@@ -8,13 +9,11 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
-import { ArrowLeft, Camera, Plus, X, Save, Loader2 } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { Camera, Plus, X, Save, Loader2 } from "lucide-react";
 import teacherPhotoFallback from "@/assets/teacher-photo.jpg";
 
 export default function AdminTeacherProfilePage() {
   const { toast } = useToast();
-  const navigate = useNavigate();
   const queryClient = useQueryClient();
 
   const [name, setName] = useState("");
@@ -120,32 +119,27 @@ export default function AdminTeacherProfilePage() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <Loader2 className="w-6 h-6 animate-spin text-muted-foreground" />
-      </div>
+      <AdminLayout>
+        <div className="flex items-center justify-center py-20">
+          <Loader2 className="w-6 h-6 animate-spin text-muted-foreground" />
+        </div>
+      </AdminLayout>
     );
   }
 
   const displayPhoto = photoUrl || teacherPhotoFallback;
 
   return (
-    <div className="min-h-screen bg-background">
-      <header className="border-b border-border bg-background/80 backdrop-blur-md sticky top-0 z-50">
-        <div className="container flex items-center justify-between h-14">
-          <div className="flex items-center gap-3">
-            <Button variant="ghost" size="icon" onClick={() => navigate("/admin/lessons")}>
-              <ArrowLeft className="h-5 w-5" />
-            </Button>
-            <span className="font-display font-bold text-lg text-foreground">Uredi profil nastavnika</span>
-          </div>
+    <AdminLayout>
+      <div className="max-w-2xl mx-auto space-y-6">
+        <div className="flex items-center justify-between">
+          <h1 className="text-2xl font-display font-bold text-foreground">Profil nastavnika</h1>
           <Button onClick={() => saveMutation.mutate()} disabled={saveMutation.isPending}>
             {saveMutation.isPending ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : <Save className="w-4 h-4 mr-2" />}
             Sačuvaj
           </Button>
         </div>
-      </header>
 
-      <div className="container max-w-2xl py-8 space-y-6">
         {/* Photo */}
         <Card>
           <CardHeader>
@@ -236,6 +230,6 @@ export default function AdminTeacherProfilePage() {
           </CardContent>
         </Card>
       </div>
-    </div>
+    </AdminLayout>
   );
 }

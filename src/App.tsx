@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ProfileProvider } from "@/context/ProfileContext";
 import { AuthProvider } from "@/context/AuthContext";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
+import { AdminRoute } from "@/components/AdminRoute";
 import LandingPage from "./pages/LandingPage";
 import AuthPage from "./pages/AuthPage";
 import OnboardingPage from "./pages/OnboardingPage";
@@ -14,11 +15,13 @@ import GrammarPage from "./pages/GrammarPage";
 import VocabularyPage from "./pages/VocabularyPage";
 import TalkPage from "./pages/TalkPage";
 import ProgressPage from "./pages/ProgressPage";
-import BookLessonPage from "./pages/BookLessonPage";
 import TeacherProfilePage from "./pages/TeacherProfilePage";
 import MyLessonsPage from "./pages/MyLessonsPage";
-import AdminAvailabilityPage from "./pages/AdminAvailabilityPage";
+import AdminDashboardPage from "./pages/AdminDashboardPage";
+import AdminStudentsPage from "./pages/AdminStudentsPage";
+import AdminStudentDetailPage from "./pages/AdminStudentDetailPage";
 import AdminLessonsPage from "./pages/AdminLessonsPage";
+import AdminAvailabilityPage from "./pages/AdminAvailabilityPage";
 import AdminTeacherProfilePage from "./pages/AdminTeacherProfilePage";
 import NotFound from "./pages/NotFound";
 
@@ -43,9 +46,13 @@ const App = () => (
               <Route path="/progress" element={<ProtectedRoute><ProgressPage /></ProtectedRoute>} />
               <Route path="/book-lesson" element={<ProtectedRoute><TeacherProfilePage /></ProtectedRoute>} />
               <Route path="/my-lessons" element={<ProtectedRoute><MyLessonsPage /></ProtectedRoute>} />
-              <Route path="/admin/availability" element={<ProtectedRoute><AdminAvailabilityPage /></ProtectedRoute>} />
-              <Route path="/admin/lessons" element={<ProtectedRoute><AdminLessonsPage /></ProtectedRoute>} />
-              <Route path="/admin/teacher-profile" element={<ProtectedRoute><AdminTeacherProfilePage /></ProtectedRoute>} />
+              {/* Admin routes */}
+              <Route path="/admin/dashboard" element={<ProtectedRoute><AdminRoute><AdminDashboardPage /></AdminRoute></ProtectedRoute>} />
+              <Route path="/admin/students" element={<ProtectedRoute><AdminRoute><AdminStudentsPage /></AdminRoute></ProtectedRoute>} />
+              <Route path="/admin/students/:userId" element={<ProtectedRoute><AdminRoute><AdminStudentDetailPage /></AdminRoute></ProtectedRoute>} />
+              <Route path="/admin/lessons" element={<ProtectedRoute><AdminRoute><AdminLessonsPage /></AdminRoute></ProtectedRoute>} />
+              <Route path="/admin/availability" element={<ProtectedRoute><AdminRoute><AdminAvailabilityPage /></AdminRoute></ProtectedRoute>} />
+              <Route path="/admin/teacher-profile" element={<ProtectedRoute><AdminRoute><AdminTeacherProfilePage /></AdminRoute></ProtectedRoute>} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
