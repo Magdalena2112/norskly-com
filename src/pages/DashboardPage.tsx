@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { BookOpen, Languages, MessageSquare, TrendingUp, Settings, Zap, GraduationCap, CalendarCheck, Shield, LogOut } from "lucide-react";
+import BackButton from "@/components/BackButton";
 import XpProgressCard from "@/components/XpProgressCard";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
