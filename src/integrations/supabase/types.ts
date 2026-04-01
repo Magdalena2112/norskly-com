@@ -621,34 +621,40 @@ export type Database = {
           antonym: string | null
           created_at: string
           example_sentence: string | null
+          grammar_forms: Json | null
           id: string
           synonym: string | null
           topic: string
           translation: string
           user_id: string
           word: string
+          word_type: string | null
         }
         Insert: {
           antonym?: string | null
           created_at?: string
           example_sentence?: string | null
+          grammar_forms?: Json | null
           id?: string
           synonym?: string | null
           topic?: string
           translation?: string
           user_id: string
           word: string
+          word_type?: string | null
         }
         Update: {
           antonym?: string | null
           created_at?: string
           example_sentence?: string | null
+          grammar_forms?: Json | null
           id?: string
           synonym?: string | null
           topic?: string
           translation?: string
           user_id?: string
           word?: string
+          word_type?: string | null
         }
         Relationships: []
       }
