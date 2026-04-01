@@ -23,6 +23,7 @@ export default function AdminTeacherProfilePage() {
   const [rating, setRating] = useState("4.9");
   const [studentsCount, setStudentsCount] = useState("120");
   const [meetLink, setMeetLink] = useState("");
+  const [email, setEmail] = useState("");
   const [photoUrl, setPhotoUrl] = useState<string | null>(null);
   const [uploading, setUploading] = useState(false);
 
