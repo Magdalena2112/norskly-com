@@ -85,14 +85,34 @@ Odgovori ISKLJUČIVO u JSON formatu, bez markdown-a. Format:
     {
       "word": "norveška reč",
       "translation": "prevod na srpskom",
+      "word_type": "tip reči na srpskom (imenica, glagol, pridev, prilog, zamenica, predlog, veznik, broj, uzvik, izraz, fraza, pomoćni glagol, modalni glagol, nepravilni glagol)",
       "synonym": "sinonim na norveškom ili null",
       "antonym": "antonim na norveškom ili null",
-      "examples": ["primer rečenica 1", "primer rečenica 2"]
+      "examples": ["primer rečenica 1", "primer rečenica 2"],
+      "grammar_forms": {
+        "// Za imenice": "ubestemt_entall, bestemt_entall, ubestemt_flertall, bestemt_flertall, kjonn (en/ei/et)",
+        "// Za glagole": "infinitiv, presens, preteritum, perfektum",
+        "// Za prideve": "grunnform, intetkjonn, flertall_bestemt, komparativ (opciono), superlativ (opciono)",
+        "// Za priloge": "grunnform, komparativ (opciono), superlativ (opciono)",
+        "// Za zamenice": "subjektform, objektform, eiendomsform, refleksiv (opciono)",
+        "// Za predloge": "bruksmonster (tipična upotreba)",
+        "// Za veznike": "funksjon (koordinacioni/subordinacioni + kratko objašnjenje)",
+        "// Za brojeve": "grunntall, rekkefolgetal",
+        "// Za izraze/fraze": "bruksmonster (tipična upotreba)",
+        "// Za modalne/pomoćne/nepravilne glagole": "infinitiv, presens, preteritum, bruksnotat (opciono)"
+      }
     }
   ]
-}` + qualityCheck;
+}
+
+VAŽNO za grammar_forms:
+- NE uključuj komentare (ključeve koji počinju sa "//"). Koristi SAMO odgovarajuće ključeve za tip reči.
+- Prilagodi polja tipu reči. Ako je imenica, koristi: ubestemt_entall, bestemt_entall, ubestemt_flertall, bestemt_flertall, kjonn.
+- Ako je glagol: infinitiv, presens, preteritum, perfektum.
+- Ako oblik nije relevantan za tip reči, NE dodaj ga.
+- Sve vrednosti moraju biti na norveškom (Bokmål).` + qualityCheck;
       const excludeNote = exclude_words?.length ? `\nNE ponavljaj ove reči: ${exclude_words.join(", ")}.` : "";
-      userPrompt = `Generiši 8 reči na temu "${theme}". Nivo: ${level}. Za svaku reč daj prevod na srpskom, sinonim (ako postoji), antonim (ako postoji) i 2 primera korišćenja u rečenici.${excludeNote}`;
+      userPrompt = `Generiši 8 reči na temu "${theme}". Nivo: ${level}. Za svaku reč daj prevod na srpskom, tip reči, sinonim (ako postoji), antonim (ako postoji), 2 primera korišćenja u rečenici, i gramatičke oblike (grammar_forms) prilagođene tipu reči.${excludeNote}`;
     } else if (action === "correct_sentence") {
       systemPrompt = `Ti si nastavnik norveškog jezika (Bokmål). Korisnik pokušava da koristi reč "${word}" u rečenici. Ispravi rečenicu i objasni.
 Odgovori ISKLJUČIVO u JSON formatu, bez markdown-a. Format:
