@@ -37,6 +37,7 @@ function OptionCard({
 export default function OnboardingPage() {
   const navigate = useNavigate();
   const { updateProfile, profile } = useProfile();
+  const { user } = useAuth();
   const [step, setStep] = useState(0);
   const [form, setForm] = useState<Partial<UserProfile>>({
     name: profile.name || "",
