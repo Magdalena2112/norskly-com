@@ -187,7 +187,7 @@ export default function LandingPage() {
       </section>
 
       {/* Gradient transition: CTA → Footer */}
-      <div className="h-16 bg-gradient-to-b from-transparent to-background/60" />
+      <div className="h-20 bg-gradient-to-b from-transparent via-background/40 to-background/70" />
 
       {/* Footer */}
       <footer className="border-t border-border/30 py-8 bg-background/60 backdrop-blur-sm">
