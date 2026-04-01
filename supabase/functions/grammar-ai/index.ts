@@ -124,8 +124,7 @@ Odgovori ISKLJUČIVO u JSON formatu, bez markdown-a. Format:
 ${ERROR_EXTRACT_BLOCK}
 OGRANIČENJE: Maksimalno ${errorLimit} greške u _errors nizu.
 Ako je tačan odgovor, "_errors" mora biti prazan niz.` + qualityCheck;
-      userPrompt = `Vežba: "${text}"\nKorisnikov odgovor: "${topic}"\nTačan odgovor: "${count}"\nNivo: ${level}\nBroj pokušaja: ${(await req.clone().json()).attempt_no || 1}`;
-      // Re-parse to get attempt_no properly
+      userPrompt = `Vežba: "${text}"\nKorisnikov odgovor: "${topic}"\nTačan odgovor: "${count}"\nNivo: ${level}\nBroj pokušaja: ${attempt_no || 1}`;
     } else if (action === "correct_text") {
       errorLimit = 5;
       systemPrompt = `Ti si nastavnik norveškog jezika (Bokmål). Ispravljaš tekst korisnika na nivou ${level}.
