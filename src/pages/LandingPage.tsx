@@ -104,7 +104,7 @@ export default function LandingPage() {
       </section>
 
       {/* Gradient transition: Hero → Features */}
-      <div className="h-24 bg-gradient-to-b from-transparent to-background/60" />
+      <div className="h-32 bg-gradient-to-b from-transparent via-background/30 to-background/70" />
 
       {/* Features */}
       <section className="pb-24 bg-background/60 backdrop-blur-sm">
@@ -158,7 +158,7 @@ export default function LandingPage() {
       </section>
 
       {/* Gradient transition: Features → CTA */}
-      <div className="h-24 bg-gradient-to-b from-background/60 to-transparent" />
+      <div className="h-32 bg-gradient-to-b from-background/70 via-background/30 to-transparent" />
 
       {/* CTA */}
       <section className="pb-24">
@@ -187,7 +187,7 @@ export default function LandingPage() {
       </section>
 
       {/* Gradient transition: CTA → Footer */}
-      <div className="h-16 bg-gradient-to-b from-transparent to-background/60" />
+      <div className="h-20 bg-gradient-to-b from-transparent via-background/40 to-background/70" />
 
       {/* Footer */}
       <footer className="border-t border-border/30 py-8 bg-background/60 backdrop-blur-sm">
