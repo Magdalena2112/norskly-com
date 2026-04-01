@@ -579,8 +579,8 @@ export default function PracticePage() {
   if (viewingSession) {
     const s = viewingSession;
     return (
-      <div className="min-h-screen bg-background flex flex-col">
-        <header className="border-b border-border bg-background/80 backdrop-blur-md sticky top-0 z-50">
+      <div className="min-h-screen bg-aurora flex flex-col">
+        <header className="border-b border-border/20 bg-background/10 backdrop-blur-md sticky top-0 z-50">
           <div className="container flex items-center justify-between h-14">
             <span className="font-display font-bold text-lg text-foreground">Norskly</span>
             <div className="flex items-center gap-2">
