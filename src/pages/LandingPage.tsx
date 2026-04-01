@@ -103,8 +103,11 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* Gradient transition: Hero → Features */}
+      <div className="h-24 bg-gradient-to-b from-transparent to-background/60" />
+
       {/* Features */}
-      <section className="py-24 bg-background/60 backdrop-blur-sm">
+      <section className="pb-24 bg-background/60 backdrop-blur-sm">
         <div className="container">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -154,8 +157,11 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* Gradient transition: Features → CTA */}
+      <div className="h-24 bg-gradient-to-b from-background/60 to-transparent" />
+
       {/* CTA */}
-      <section className="py-24">
+      <section className="pb-24">
         <div className="container">
           <motion.div
             initial={{ opacity: 0, scale: 0.96 }}
@@ -179,6 +185,9 @@ export default function LandingPage() {
           </motion.div>
         </div>
       </section>
+
+      {/* Gradient transition: CTA → Footer */}
+      <div className="h-16 bg-gradient-to-b from-transparent to-background/60" />
 
       {/* Footer */}
       <footer className="border-t border-border/30 py-8 bg-background/60 backdrop-blur-sm">
