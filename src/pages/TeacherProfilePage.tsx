@@ -61,8 +61,22 @@ export default function TeacherProfilePage() {
       if (!user || !selectedSlot) throw new Error("Missing data");
       const startTime = new Date(selectedSlot.start_time);
       const endTime = addMinutes(startTime, 90);
+      const lessonId = crypto.randomUUID();
+
+      // First, claim the slot
+      const { data: updatedSlots, error: slotError } = await supabase
+        .from("availability_slots")
+        .update({ status: "booked" })
+        .eq("id", selectedSlot.id)
+        .eq("status", "open")
+        .select("id");
+      if (slotError) throw slotError;
+      if (!updatedSlots || updatedSlots.length === 0) {
+        throw new Error("Ovaj termin je već zauzet. Izaberi drugi.");
+      }
 
       const { error: lessonError } = await supabase.from("lessons").insert({
+        id: lessonId,
         user_id: user.id,
         slot_id: selectedSlot.id,
         start_time: startTime.toISOString(),
@@ -71,15 +85,60 @@ export default function TeacherProfilePage() {
       });
       if (lessonError) throw lessonError;
 
-      const { error: slotError } = await supabase
-        .from("availability_slots")
-        .update({ status: "booked" })
-        .eq("id", selectedSlot.id);
-      if (slotError) throw slotError;
-
       await logActivity(user.id, "talk", "lesson_scheduled", 5, {
         slot_id: selectedSlot.id,
       });
+
+      // Send confirmation emails
+      const dateStr = format(startTime, "dd.MM.yyyy");
+      const timeStr = `${format(startTime, "HH:mm")} – ${format(endTime, "HH:mm")}`;
+
+      const { data: profile } = await supabase
+        .from("profiles")
+        .select("display_name")
+        .eq("user_id", user.id)
+        .maybeSingle();
+      const studentName = profile?.display_name || user.email || "Učenik";
+
+      // Email to student
+      if (user.email) {
+        try {
+          const { error: studentEmailError } = await supabase.functions.invoke("send-transactional-email", {
+            body: {
+              templateName: "lesson-booked-student",
+              recipientEmail: user.email,
+              idempotencyKey: `lesson-student-${lessonId}`,
+              templateData: { date: dateStr, time: timeStr, note: note || undefined },
+            },
+          });
+          if (studentEmailError) console.error("Student email failed:", studentEmailError);
+        } catch (e) {
+          console.error("Student email failed:", e);
+        }
+      }
+
+      // Email to teacher
+      const { data: teacherData } = await supabase
+        .from("teacher_profile")
+        .select("email")
+        .limit(1)
+        .maybeSingle();
+
+      if (teacherData?.email) {
+        try {
+          const { error: teacherEmailError } = await supabase.functions.invoke("send-transactional-email", {
+            body: {
+              templateName: "lesson-booked-teacher",
+              recipientEmail: teacherData.email,
+              idempotencyKey: `lesson-teacher-${lessonId}`,
+              templateData: { studentName, date: dateStr, time: timeStr, note: note || undefined },
+            },
+          });
+          if (teacherEmailError) console.error("Teacher email failed:", teacherEmailError);
+        } catch (e) {
+          console.error("Teacher email failed:", e);
+        }
+      }
 
       return { startTime, endTime };
     },
