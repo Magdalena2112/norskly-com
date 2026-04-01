@@ -128,7 +128,7 @@ export default function VocabCollections({ userId }: { userId?: string }) {
     // Fetch words in this collection
     const { data } = await supabase
       .from("collection_words" as any)
-      .select("id, word_id, vocabulary_words(id, word, translation, example_sentence, synonym, antonym, topic)")
+      .select("id, word_id, vocabulary_words(id, word, translation, example_sentence, synonym, antonym, topic, word_type, grammar_forms)")
       .eq("collection_id", col.id);
 
     const rows = (data as unknown as any[]) || [];
