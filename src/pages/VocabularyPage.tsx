@@ -254,31 +254,15 @@ function GenerateTab({ level, userId }: { level: string; userId?: string }) {
       {words.length > 0 && (
         <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="space-y-3">
           {words.map((w, i) => (
-            <Card key={i}>
-              <CardContent className="pt-5 pb-5 space-y-2">
-                <div className="flex items-center gap-2">
-                  <p className="text-xl font-display font-bold text-foreground">{w.word} <span className="text-base font-normal text-muted-foreground">— {w.translation}</span></p>
-                  <Button variant="ghost" size="icon" className="h-8 w-8 shrink-0" onClick={() => speakNorwegian(w.word)} title="Izgovor">
-                    <Volume2 className="w-4 h-4 text-accent" />
-                  </Button>
-                </div>
-                <div className="flex flex-wrap gap-3 text-xs">
-                  {w.synonym && (
-                    <span className="bg-accent/10 text-accent px-2 py-1 rounded-full">
-                      Sinonim: {w.synonym}
-                    </span>
-                  )}
-                  {w.antonym && (
-                    <span className="bg-destructive/10 text-destructive px-2 py-1 rounded-full">
-                      Antonim: {w.antonym}
-                    </span>
-                  )}
-                </div>
-                {w.examples?.map((ex, j) => (
-                  <p key={j} className="text-sm text-muted-foreground italic">"{ex}"</p>
-                ))}
-              </CardContent>
-            </Card>
+            <VocabWordCard key={i} data={{
+              word: w.word,
+              translation: w.translation,
+              word_type: w.word_type,
+              synonym: w.synonym,
+              antonym: w.antonym,
+              examples: w.examples,
+              grammar_forms: w.grammar_forms,
+            }} />
           ))}
 
           {collections.length > 0 && !saved && (
