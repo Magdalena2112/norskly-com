@@ -35,7 +35,7 @@ interface Collection {
 }
 
 interface CollectionWord extends VocabWord {
-  cw_id: string; // collection_words.id for removal
+  cw_id: string;
 }
 
 // ─── TTS helper ───
