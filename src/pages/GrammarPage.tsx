@@ -171,7 +171,7 @@ function ExercisesTab({ level, userId, initialTopic, onGoToExplain }: { level: s
     setStates([]);
     setExerciseXpLogged(false);
     try {
-      const data = await callGrammarAI({ action: "generate_exercises", level, topic: topic.trim(), count });
+      const data = await callGrammarAI({ action: "generate_exercises", level, topic: topic.trim(), count, unique_seed: Date.now() });
       const exs = data.exercises || [];
       setExercises(exs);
       setStates(exs.map(() => ({ answer: "", attempts: 0, status: "pending" as const, feedback: "", logged: false })));
