@@ -11,6 +11,7 @@ import {
   ChevronRight, Volume2, ArrowLeft,
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import VocabWordCard, { type GrammarForms } from "@/components/VocabWordCard";
 
 // ─── Types ───
 interface VocabWord {
@@ -21,6 +22,8 @@ interface VocabWord {
   synonym: string | null;
   antonym: string | null;
   topic: string;
+  word_type?: string | null;
+  grammar_forms?: GrammarForms | null;
 }
 
 interface Collection {
@@ -32,7 +35,7 @@ interface Collection {
 }
 
 interface CollectionWord extends VocabWord {
-  cw_id: string; // collection_words.id for removal
+  cw_id: string;
 }
 
 // ─── TTS helper ───
@@ -125,7 +128,7 @@ export default function VocabCollections({ userId }: { userId?: string }) {
     // Fetch words in this collection
     const { data } = await supabase
       .from("collection_words" as any)
-      .select("id, word_id, vocabulary_words(id, word, translation, example_sentence, synonym, antonym, topic)")
+      .select("id, word_id, vocabulary_words(id, word, translation, example_sentence, synonym, antonym, topic, word_type, grammar_forms)")
       .eq("collection_id", col.id);
 
     const rows = (data as unknown as any[]) || [];
@@ -303,22 +306,20 @@ export default function VocabCollections({ userId }: { userId?: string }) {
         ) : (
           <>
             {collectionWords.map((w) => (
-              <Card key={w.cw_id}>
-                <CardContent className="pt-4 pb-4 space-y-1">
-                  <div className="flex items-center gap-2">
-                    <p className="font-display font-bold text-foreground flex-1">{w.word} <span className="font-normal text-muted-foreground">— {w.translation}</span></p>
-                    <Button variant="ghost" size="icon" className="h-8 w-8 shrink-0" onClick={() => speakNorwegian(w.word)}>
-                      <Volume2 className="w-4 h-4 text-accent" />
-                    </Button>
-                    <Button variant="ghost" size="icon" className="h-8 w-8 shrink-0 text-destructive" onClick={() => removeWordFromCollection(w.cw_id)}>
-                      <Trash2 className="w-3 h-3" />
-                    </Button>
-                  </div>
-                  {w.synonym && <span className="text-xs bg-accent/10 text-accent px-2 py-0.5 rounded-full mr-2">Sinonim: {w.synonym}</span>}
-                  {w.antonym && <span className="text-xs bg-destructive/10 text-destructive px-2 py-0.5 rounded-full">Antonim: {w.antonym}</span>}
-                  {w.example_sentence && <p className="text-sm text-muted-foreground italic">"{w.example_sentence}"</p>}
-                </CardContent>
-              </Card>
+              <VocabWordCard
+                key={w.cw_id}
+                data={{
+                  word: w.word,
+                  translation: w.translation,
+                  word_type: w.word_type,
+                  synonym: w.synonym,
+                  antonym: w.antonym,
+                  example_sentence: w.example_sentence,
+                  grammar_forms: w.grammar_forms,
+                }}
+                showRemove
+                onRemove={() => removeWordFromCollection(w.cw_id)}
+              />
             ))}
           </>
         )}
@@ -363,7 +364,7 @@ export function CollectionPicker({
       for (const c of (cols as any[]) || []) {
         const { data: cw } = await supabase
           .from("collection_words" as any)
-          .select("vocabulary_words(id, word, translation, example_sentence, synonym, antonym, topic)")
+          .select("vocabulary_words(id, word, translation, example_sentence, synonym, antonym, topic, word_type, grammar_forms)")
           .eq("collection_id", c.id);
         const cwRows = (cw as unknown as any[]) || [];
         const words = cwRows.filter((r: any) => r.vocabulary_words).map((r: any) => r.vocabulary_words);
