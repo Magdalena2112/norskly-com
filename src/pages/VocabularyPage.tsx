@@ -199,7 +199,7 @@ function GenerateTab({ level, userId }: { level: string; userId?: string }) {
       const { error } = await supabase.from("vocab_items").insert(rows);
       if (error) throw error;
 
-      // Save to vocabulary_words (for collections)
+      // Save to vocabulary_words (for collections) with word_type and grammar_forms
       const vwRows = words.map((w) => ({
         user_id: userId,
         word: w.word,
@@ -208,6 +208,8 @@ function GenerateTab({ level, userId }: { level: string; userId?: string }) {
         synonym: w.synonym || null,
         antonym: w.antonym || null,
         topic: theme.trim(),
+        word_type: w.word_type || null,
+        grammar_forms: w.grammar_forms || null,
       }));
       const { data: insertedWords } = await supabase
         .from("vocabulary_words" as any)
