@@ -68,7 +68,7 @@ const modules = [
 
 export default function DashboardPage() {
   const { profile, loading: profileLoading } = useProfile();
-  const { user } = useAuth();
+  const { user, signOut } = useAuth();
   const { isAdmin } = useUserRole();
   const navigate = useNavigate();
 
