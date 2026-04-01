@@ -78,7 +78,7 @@ export default function MyLessonsPage() {
           <h1 className="text-2xl font-bold text-primary-foreground">Moje lekcije</h1>
         </div>
 
-        <Card>
+        <Card className="bg-background/80 backdrop-blur-sm border-border/30 shadow-nordic">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Calendar className="h-5 w-5 text-accent" />
@@ -117,7 +117,7 @@ export default function MyLessonsPage() {
         </Card>
 
         {past.length > 0 && (
-          <Card>
+          <Card className="bg-background/80 backdrop-blur-sm border-border/30 shadow-nordic">
             <CardHeader>
               <CardTitle className="text-lg">Istorija</CardTitle>
             </CardHeader>

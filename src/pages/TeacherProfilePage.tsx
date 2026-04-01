@@ -206,7 +206,7 @@ export default function TeacherProfilePage() {
 
         <div className="container max-w-lg py-12">
           <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }}>
-            <Card>
+            <Card className="bg-background/80 backdrop-blur-sm border-border/30 shadow-nordic">
               <CardContent className="pt-8 pb-8 text-center space-y-6">
                 <div className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center mx-auto">
                   <CheckCircle className="w-8 h-8 text-accent" />
@@ -293,7 +293,7 @@ export default function TeacherProfilePage() {
       <div className="container max-w-3xl py-8 space-y-8">
         {/* Teacher Profile Card */}
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}>
-          <Card className="overflow-hidden">
+          <Card className="overflow-hidden bg-background/80 backdrop-blur-sm border-border/30">
             <div className="h-24 bg-gradient-to-r from-primary/20 via-accent/20 to-primary/10" />
             <CardContent className="relative pt-0 pb-6">
               {teacherLoading ? (
@@ -365,7 +365,7 @@ export default function TeacherProfilePage() {
           </h2>
 
           <div className="grid md:grid-cols-2 gap-6">
-            <Card>
+            <Card className="bg-background/80 backdrop-blur-sm border-border/30 shadow-nordic">
               <CardContent className="pt-6">
                 <Calendar
                   mode="single"
@@ -379,7 +379,7 @@ export default function TeacherProfilePage() {
               </CardContent>
             </Card>
 
-            <Card>
+            <Card className="bg-background/80 backdrop-blur-sm border-border/30 shadow-nordic">
               <CardContent className="pt-6">
                 <h3 className="font-semibold text-foreground mb-3 flex items-center gap-2">
                   <Clock className="w-4 h-4 text-accent" />

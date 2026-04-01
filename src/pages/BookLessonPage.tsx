@@ -159,7 +159,7 @@ export default function BookLessonPage() {
         </div>
 
         <div className="grid md:grid-cols-2 gap-6">
-          <Card>
+          <Card className="bg-background/80 backdrop-blur-sm border-border/30 shadow-nordic">
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-lg">
                 <CalendarIcon className="h-5 w-5 text-accent" />
@@ -179,7 +179,7 @@ export default function BookLessonPage() {
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className="bg-background/80 backdrop-blur-sm border-border/30 shadow-nordic">
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-lg">
                 <Clock className="h-5 w-5 text-accent" />

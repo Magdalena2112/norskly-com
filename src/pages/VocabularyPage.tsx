@@ -634,7 +634,7 @@ function FlashcardsTab({ userId }: { userId?: string }) {
   if (isDone) {
     return (
       <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }}>
-        <Card className="shadow-nordic text-center">
+        <Card className="shadow-nordic bg-background/80 backdrop-blur-sm border-border/30 text-center">
           <CardContent className="pt-8 pb-8 space-y-4">
             <p className="text-5xl mb-2">🎯</p>
             <h2 className="text-2xl font-display font-bold text-foreground">Sesija završena!</h2>
@@ -708,7 +708,7 @@ function FlashcardsTab({ userId }: { userId?: string }) {
             exit={{ rotateY: -90, opacity: 0 }}
             transition={{ duration: 0.25 }}
           >
-            <Card className="shadow-nordic min-h-[240px] flex items-center justify-center">
+            <Card className="shadow-nordic bg-background/80 backdrop-blur-sm border-border/30 min-h-[240px] flex items-center justify-center">
               <CardContent className="pt-6 text-center space-y-3">
                 {!flipped ? (
                   <>
@@ -946,7 +946,7 @@ function QuizTab({ level, userId }: { level: string; userId?: string }) {
 
       {finished && (
         <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }}>
-          <Card className="shadow-nordic text-center">
+          <Card className="shadow-nordic bg-background/80 backdrop-blur-sm border-border/30 text-center">
             <CardContent className="pt-8 pb-8 space-y-4">
               <p className="text-5xl mb-2">{score / questions.length >= 0.8 ? "🏆" : "📝"}</p>
               <h2 className="text-2xl font-display font-bold text-foreground">Kviz završen!</h2>
