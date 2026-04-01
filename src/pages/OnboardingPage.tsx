@@ -51,14 +51,13 @@ export default function OnboardingPage() {
     lives_in_norway: profile.lives_in_norway || false,
   });
 
-  const next = () => {
+  const next = async () => {
     if (step < steps.length - 1) setStep(step + 1);
     else {
       updateProfile(form);
       localStorage.setItem("norskly_onboarding_done", "true");
-      // Sync to profiles table
       if (user) {
-        supabase
+        await supabase
           .from("profiles")
           .upsert({
             user_id: user.id,
@@ -68,8 +67,8 @@ export default function OnboardingPage() {
             focus_area: form.focus_area || "",
             confidence_level: form.confidence_level ?? 3,
             onboarding_completed: true,
-          }, { onConflict: "user_id" })
-          .then();
+          }, { onConflict: "user_id" });
+        await queryClient.invalidateQueries({ queryKey: ["onboarding-status"] });
       }
       navigate("/practice");
     }
