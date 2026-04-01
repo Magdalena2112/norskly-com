@@ -11,6 +11,7 @@ import {
   ChevronRight, Volume2, ArrowLeft,
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import VocabWordCard, { type GrammarForms } from "@/components/VocabWordCard";
 
 // ─── Types ───
 interface VocabWord {
