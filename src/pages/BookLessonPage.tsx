@@ -44,6 +44,18 @@ export default function BookLessonPage() {
       const endTime = addMinutes(startTime, 90);
       const lessonId = crypto.randomUUID();
 
+      // First, claim the slot — if someone else already booked it, this returns 0 rows
+      const { data: updatedSlots, error: slotError } = await supabase
+        .from("availability_slots")
+        .update({ status: "booked" })
+        .eq("id", selectedSlot.id)
+        .eq("status", "open")
+        .select("id");
+      if (slotError) throw slotError;
+      if (!updatedSlots || updatedSlots.length === 0) {
+        throw new Error("Ovaj termin je već zauzet. Izaberi drugi.");
+      }
+
       const { error: lessonError } = await supabase.from("lessons").insert({
         id: lessonId,
         user_id: user.id,
@@ -53,12 +65,6 @@ export default function BookLessonPage() {
         student_note: note || null,
       });
       if (lessonError) throw lessonError;
-
-      const { error: slotError } = await supabase
-        .from("availability_slots")
-        .update({ status: "booked" })
-        .eq("id", selectedSlot.id);
-      if (slotError) throw slotError;
 
       await logActivity(user.id, "talk", "lesson_scheduled", 5, {
         slot_id: selectedSlot.id,
