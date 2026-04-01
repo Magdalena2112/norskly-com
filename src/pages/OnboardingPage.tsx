@@ -108,7 +108,10 @@ export default function OnboardingPage() {
         <div className="w-full max-w-lg">
           {/* Mobile progress */}
           <div className="md:hidden flex items-center justify-between mb-8">
-            <span className="font-display font-bold text-xl text-foreground">Norskly</span>
+            <div className="flex items-center gap-2">
+              <BackButton />
+              <span className="font-display font-bold text-xl text-foreground">Norskly</span>
+            </div>
             <span className="text-sm text-muted-foreground">{step + 1}/{steps.length}</span>
           </div>
 
