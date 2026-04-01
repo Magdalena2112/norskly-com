@@ -1,26 +1,35 @@
 
 
-## Fix: Onboarding Completion Not Redirecting
+## Popravka: Nivo jezika se resetuje pri svakom loginu
 
 ### Problem
-After completing onboarding, the user gets stuck because:
-1. The `profiles.onboarding_completed` upsert is fire-and-forget (`.then()` with no await)
-2. `ProtectedRoute` caches `onboarding_completed = false` with `staleTime: Infinity`, so even after the DB update, the cached value still says `false`
-3. When `navigate("/practice")` fires, `ProtectedRoute` reads the stale cache and redirects back to `/onboarding`
+`ProfileContext` učitava podatke **isključivo iz localStorage-a**. Kada se korisnik uloguje na drugom uređaju, u drugom pregledaču, ili nakon brisanja keša — localStorage je prazan, pa se profil vraća na podrazumevane vrednosti (A1, itd.). Podaci su sačuvani u bazi (`profiles` tabela), ali se nikada ne čitaju odatle.
 
-### Solution
-In `OnboardingPage.tsx`:
-- **Await** the Supabase upsert so the DB is updated before navigating
-- **Invalidate** the `onboarding-status` React Query cache after the upsert succeeds
-- Then navigate to `/practice`
+### Rešenje
+Prilikom inicijalizacije `ProfileProvider`-a, učitati profil iz baze ako je korisnik ulogovan, i sinhronizovati sa localStorage-om.
 
-### Changes
+### Izmene
 
-**`src/pages/OnboardingPage.tsx`**
-- Import `useQueryClient` from `@tanstack/react-query`
-- Make the `next()` function async
-- Await the upsert call
-- Call `queryClient.invalidateQueries({ queryKey: ["onboarding-status"] })` before navigating
+**`src/context/ProfileContext.tsx`**
+- Dodati `useEffect` koji pri mountovanju (i promeni `user`) poziva `supabase.from("profiles").select(...)` za ulogovanog korisnika
+- Mapirati kolone iz baze (`display_name`, `level`, `learning_goal`, `focus_area`, `confidence_level`) na `UserProfile` tip
+- Ažurirati state i localStorage sa podacima iz baze
+- Dodati `loading` flag da DashboardPage ne prikaže default podatke pre učitavanja
 
-One file, minimal change.
+**`src/context/ProfileContext.tsx` interface**
+- Dodati `loading: boolean` u `ProfileContextType`
+
+**`src/pages/DashboardPage.tsx`**
+- Koristiti `loading` iz `useProfile()` da prikaže loader dok se profil ne učita iz baze
+
+### Tok podataka nakon popravke
+```text
+Korisnik se uloguje
+  → ProfileProvider se mountuje
+  → useEffect učitava profil iz baze
+  → state + localStorage se ažuriraju
+  → Dashboard prikazuje tačan nivo (npr. B1)
+```
+
+3 fajla: `ProfileContext.tsx`, `types/profile.ts` (bez promena), `DashboardPage.tsx` (minor).
 
