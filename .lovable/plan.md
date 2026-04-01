@@ -1,42 +1,23 @@
 
 
-## Saved Explanations Feature — "Sačuvana objašnjenja"
+## Fix: Gramatičke vežbe ponavljaju iste zadatke
 
-### Overview
-Add a database-backed bookmark system for grammar explanations with a sidebar on desktop and collapsible drawer on mobile.
+### Zašto se ponavljaju
+Trenutni pristup koristi `unique_seed: Date.now()` i tekstualnu instrukciju "generiši nove". Ali LLM nema informaciju o prethodnim zadacima — pa generiše iste obrasce. Takođe, `temperature: 0.7` je umerena vrednost.
 
-### Changes
+### Rešenje
 
-**1. Database migration** — new `saved_explanations` table:
-```sql
-CREATE TABLE public.saved_explanations (
-  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
-  user_id uuid NOT NULL,
-  created_at timestamptz NOT NULL DEFAULT now(),
-  title text NOT NULL,
-  query text NOT NULL,
-  explanation_data jsonb NOT NULL DEFAULT '{}'
-);
-ALTER TABLE public.saved_explanations ENABLE ROW LEVEL SECURITY;
--- RLS: users can CRUD own rows
-```
+**1. `src/pages/GrammarPage.tsx` — slanje prethodnih rečenica AI-ju**
+- Pre generisanja, dohvati iz `grammar_sessions` poslednje sesije za istog korisnika i istu temu
+- Izvuci prethodne rečenice (iz `questions` JSONB kolone)
+- Pošalji ih u AI poziv kao novo polje `previous_sentences` (niz stringova, max 30)
 
-**2. `src/pages/GrammarPage.tsx` — ExplainTab changes:**
+**2. `supabase/functions/grammar-ai/index.ts` — korišćenje prethodnih rečenica**
+- Primi novo polje `previous_sentences` iz request body-ja
+- U `generate_exercises` system promptu dodaj eksplicitan blok: "Evo rečenica koje su već korišćene — NE KORISTI ih ponovo i NE pravi slične varijante:" sa listom prethodnih rečenica
+- Povećaj `temperature` sa 0.7 na 0.9 za `generate_exercises` akciju
 
-- Add state for `savedExplanations` list, loaded from DB on mount
-- Add a **Bookmark** button (heart/bookmark icon) next to the explanation title card. Toggles save/unsave. Visually changes when saved.
-- On save: insert row with `title`, `query`, and full `explanation_data` (the JSON result). On unsave: delete row.
-- **Desktop layout**: wrap ExplainTab content in a flex container. Main content on the left (~70%), sidebar on the right (~30%) showing saved list.
-- **Mobile layout**: use `useIsMobile()` hook. On mobile, render a collapsible `Collapsible` section above the search card titled "Sačuvana objašnjenja" instead of a sidebar.
-- **Sidebar content**: list of saved explanations as simple clickable items with title + small remove (X) icon. Clicking loads the saved `explanation_data` directly into `result` state and sets `query`.
-- **Empty state**: "Još nema sačuvanih objašnjenja" message with bookmark icon.
-
-**3. Files affected:**
-- 1 migration (new table + RLS)
-- `src/pages/GrammarPage.tsx` — ExplainTab UI + save logic (~80 lines added)
-
-### Technical details
-- Container width change: the `max-w-2xl` on the grammar page needs to widen to `max-w-5xl` when on the explain tab (to fit sidebar), or the sidebar renders inside the ExplainTab itself with its own flex layout.
-- Save check: compare by `query` field to determine if current explanation is already saved.
-- No edge function changes needed — data is stored/retrieved via Supabase client directly.
+**3. Fajlovi:**
+- `src/pages/GrammarPage.tsx` — dodaj fetch prethodnih rečenica pre generisanja (~15 linija)
+- `supabase/functions/grammar-ai/index.ts` — primi `previous_sentences`, ugradi u prompt, povećaj temperature (~10 linija)
 
