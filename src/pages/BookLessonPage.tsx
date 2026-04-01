@@ -42,32 +42,15 @@ export default function BookLessonPage() {
       if (!user || !selectedSlot) throw new Error("Missing data");
       const startTime = new Date(selectedSlot.start_time);
       const endTime = addMinutes(startTime, 90);
-      const lessonId = crypto.randomUUID();
 
-      // First, insert the lesson so RLS on availability_slots can find it
-      const { error: lessonError } = await supabase.from("lessons").insert({
-        id: lessonId,
-        user_id: user.id,
-        slot_id: selectedSlot.id,
-        start_time: startTime.toISOString(),
-        end_time: endTime.toISOString(),
-        student_note: note || null,
+      // Atomic booking via SECURITY DEFINER function
+      const { data: lessonId, error } = await supabase.rpc("book_lesson", {
+        p_slot_id: selectedSlot.id,
+        p_start: startTime.toISOString(),
+        p_end: endTime.toISOString(),
+        p_note: note || null,
       });
-      if (lessonError) throw lessonError;
-
-      // Now claim the slot — RLS WITH CHECK will find the lesson row
-      const { data: updatedSlots, error: slotError } = await supabase
-        .from("availability_slots")
-        .update({ status: "booked" })
-        .eq("id", selectedSlot.id)
-        .eq("status", "open")
-        .select("id");
-
-      if (slotError || !updatedSlots || updatedSlots.length === 0) {
-        // Rollback: delete the lesson if slot was already taken
-        await supabase.from("lessons").delete().eq("id", lessonId);
-        throw new Error("Ovaj termin je već zauzet. Izaberi drugi.");
-      }
+      if (error) throw new Error(error.message.includes("zauzet") ? error.message : "Greška pri zakazivanju. Pokušaj ponovo.");
 
       await logActivity(user.id, "talk", "lesson_scheduled", 5, {
         slot_id: selectedSlot.id,
