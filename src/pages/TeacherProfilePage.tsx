@@ -34,7 +34,7 @@ export default function TeacherProfilePage() {
     queryFn: async () => {
       const { data, error } = await supabase
         .from("teacher_profile")
-        .select("*")
+        .select("id, name, bio, focus, photo_url, rating, students_count, duration_minutes, meet_link, updated_at")
         .limit(1)
         .maybeSingle();
       if (error) throw error;
