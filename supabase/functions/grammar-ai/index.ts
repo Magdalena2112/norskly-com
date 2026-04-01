@@ -261,7 +261,7 @@ VAŽNA UPUTSTVA:
           { role: "system", content: systemPrompt },
           { role: "user", content: userPrompt },
         ],
-        temperature: 0.7,
+        temperature: action === "generate_exercises" ? 0.9 : 0.7,
       }),
     });
 
