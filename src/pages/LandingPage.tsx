@@ -186,6 +186,9 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* Gradient transition: CTA → Footer */}
+      <div className="h-16 bg-gradient-to-b from-transparent to-background/60" />
+
       {/* Footer */}
       <footer className="border-t border-border/30 py-8 bg-background/60 backdrop-blur-sm">
         <div className="container flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
