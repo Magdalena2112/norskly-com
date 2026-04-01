@@ -158,7 +158,7 @@ export default function LandingPage() {
       </section>
 
       {/* Gradient transition: Features → CTA */}
-      <div className="h-24 bg-gradient-to-b from-background/60 to-transparent" />
+      <div className="h-32 bg-gradient-to-b from-background/70 via-background/30 to-transparent" />
 
       {/* CTA */}
       <section className="pb-24">
