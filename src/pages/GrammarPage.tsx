@@ -61,6 +61,14 @@ export default function GrammarPage() {
   const navState = (location.state as { tab?: string; query?: string; topic?: string }) || {};
   const defaultTab = navState.tab || "exercises";
 
+  const [activeTab, setActiveTab] = useState(defaultTab);
+  const [explainTopic, setExplainTopic] = useState("");
+
+  const goToExplainTab = (topicText: string) => {
+    setExplainTopic(topicText);
+    setActiveTab("explain");
+  };
+
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <header className="border-b border-border bg-background/80 backdrop-blur-md sticky top-0 z-50">
@@ -76,7 +84,7 @@ export default function GrammarPage() {
       </header>
 
       <div className="flex-1 container max-w-2xl py-6">
-        <Tabs defaultValue={defaultTab} className="space-y-6">
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
           <TabsList className="grid w-full grid-cols-6">
             <TabsTrigger value="exercises" className="gap-1 text-xs">
               <BookOpen className="w-3.5 h-3.5" /> Vežbe
@@ -99,13 +107,13 @@ export default function GrammarPage() {
           </TabsList>
 
           <TabsContent value="exercises">
-            <ExercisesTab level={level} userId={user?.id} initialTopic={navState.tab === "exercises" ? navState.topic : undefined} />
+            <ExercisesTab level={level} userId={user?.id} initialTopic={navState.tab === "exercises" ? navState.topic : undefined} onGoToExplain={goToExplainTab} />
           </TabsContent>
           <TabsContent value="correction">
             <CorrectionTab level={level} userId={user?.id} />
           </TabsContent>
           <TabsContent value="explain">
-            <ExplainTab level={level} userId={user?.id} initialQuery={navState.tab === "explain" ? navState.query : undefined} />
+            <ExplainTab level={level} userId={user?.id} initialQuery={explainTopic || (navState.tab === "explain" ? navState.query : undefined)} />
           </TabsContent>
           <TabsContent value="quiz">
             <QuizTab level={level} userId={user?.id} initialTopic={navState.tab === "quiz" ? navState.topic : undefined} />
@@ -148,7 +156,7 @@ function getHint(attempt: number, solution: string, answer: string): string {
   return hints[Math.min(attempt - 1, hints.length - 1)];
 }
 
-function ExercisesTab({ level, userId, initialTopic }: { level: string; userId?: string; initialTopic?: string }) {
+function ExercisesTab({ level, userId, initialTopic, onGoToExplain }: { level: string; userId?: string; initialTopic?: string; onGoToExplain?: (topic: string) => void }) {
   const [topic, setTopic] = useState(initialTopic || "");
   const [count, setCount] = useState(5);
   const [exercises, setExercises] = useState<Exercise[]>([]);
@@ -163,7 +171,7 @@ function ExercisesTab({ level, userId, initialTopic }: { level: string; userId?:
     setStates([]);
     setExerciseXpLogged(false);
     try {
-      const data = await callGrammarAI({ action: "generate_exercises", level, topic: topic.trim(), count });
+      const data = await callGrammarAI({ action: "generate_exercises", level, topic: topic.trim(), count, unique_seed: Date.now() });
       const exs = data.exercises || [];
       setExercises(exs);
       setStates(exs.map(() => ({ answer: "", attempts: 0, status: "pending" as const, feedback: "", logged: false })));
@@ -268,9 +276,9 @@ function ExercisesTab({ level, userId, initialTopic }: { level: string; userId?:
             <Input
               type="number"
               min={1}
-              max={10}
+              max={20}
               value={count}
-              onChange={(e) => setCount(Math.min(10, Math.max(1, parseInt(e.target.value) || 1)))}
+              onChange={(e) => setCount(Math.min(20, Math.max(1, parseInt(e.target.value) || 1)))}
             />
           </div>
           <Button variant="hero" className="w-full" onClick={generate} disabled={loading || !topic.trim()}>
@@ -353,10 +361,15 @@ function ExercisesTab({ level, userId, initialTopic }: { level: string; userId?:
           {allDone && (
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
               <Card className="border-accent/30 bg-accent/5">
-                <CardContent className="pt-5 pb-5 text-center">
+                <CardContent className="pt-5 pb-5 text-center space-y-3">
                   <p className="text-sm font-medium text-accent">
                     ✅ Sve vežbe završene! Tačno: {states.filter((s) => s.status === "correct").length}/{states.length}
                   </p>
+                  {onGoToExplain && topic && (
+                    <Button variant="outline" size="sm" onClick={() => onGoToExplain(topic)}>
+                      <BookOpen className="w-4 h-4 mr-1" /> Objasni: {topic}
+                    </Button>
+                  )}
                 </CardContent>
               </Card>
             </motion.div>

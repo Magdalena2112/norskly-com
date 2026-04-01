@@ -93,8 +93,11 @@ Navedi snage kratko, identifikuj NAJVIŠE 2 oblasti za poboljšanje.`;
     let userPrompt = "";
     let errorLimit = 2;
 
+    const uniqueSeed = (await req.clone().json()).unique_seed || "";
+
     if (action === "generate_exercises") {
       systemPrompt = `Ti si nastavnik norveškog jezika (Bokmål). Generišeš gramatičke vežbe za nivo ${level}.
+VAŽNO: Svaki put generiši potpuno NOVE i RAZNOVRSNE rečenice. Ne ponavljaj prethodne primere. Variraj kontekst, vokabular i strukturu rečenica. Koristi različite životne situacije (posao, porodica, putovanja, hobiji, svakodnevica). Seed: ${uniqueSeed}
 Odgovori ISKLJUČIVO u JSON formatu, bez markdown-a. Format:
 {
   "exercises": [
