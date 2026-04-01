@@ -66,6 +66,8 @@ export default function OnboardingPage() {
             learning_goal: form.learning_goal || "",
             focus_area: form.focus_area || "",
             confidence_level: form.confidence_level ?? 3,
+            preferred_tone: form.preferred_tone || "opušten",
+            lives_in_norway: form.lives_in_norway ?? false,
             onboarding_completed: true,
           }, { onConflict: "user_id" });
         await queryClient.invalidateQueries({ queryKey: ["onboarding-status"] });
