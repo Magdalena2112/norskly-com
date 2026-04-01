@@ -1,22 +1,34 @@
 
 
-## Čuvanje svih onboarding polja u bazi
+## Poboljšanje sekcije Vežbe u Gramatici
 
 ### Problem
-Dva polja iz onboardinga — `preferred_tone` i `lives_in_norway` — se čuvaju samo u localStorage-u. Tabela `profiles` ih nema, pa se gube pri promeni uređaja/pregledača.
+1. AI generiše iste/slične zadatke jer nema instrukcije da varira sadržaj
+2. Maksimalan broj zadataka je ograničen na 10 (treba 20)
+3. Nakon završene sesije nema dugmeta koje vodi na objašnjenje te teme
 
-### Rešenje
+### Izmene
 
-**1. Migracija baze** — dodati 2 kolone u `profiles`:
-```sql
-ALTER TABLE public.profiles
-  ADD COLUMN preferred_tone text DEFAULT 'opušten',
-  ADD COLUMN lives_in_norway boolean DEFAULT false;
+**1. `src/pages/GrammarPage.tsx` — ExercisesTab komponenta**
+- Povećati `max` za broj zadataka sa 10 na 20 (linija 271)
+- Dodati u `generate` funkciju timestamp ili random seed u AI poziv (`unique_seed: Date.now()`) da forsira raznovrsnost
+- Nakon završene sesije (`allDone` blok, linije 353-363), dodati dugme "Objasni ovu temu" koje navigira na tab "explain" sa temom kao parametrom
+
+**2. `supabase/functions/grammar-ai/index.ts` — generate_exercises prompt**
+- Dodati instrukciju u system prompt: "Svaki put generiši potpuno nove i raznovrsne rečenice. Ne ponavljaj prethodne primere. Variraj kontekst, vokabular i strukturu rečenica."
+
+### Detalji
+
+Dugme nakon sesije:
+```tsx
+<Button onClick={() => {/* switch to explain tab with topic */}}>
+  📖 Objasni: {topic}
+</Button>
 ```
 
-**2. `src/pages/OnboardingPage.tsx`** — dodati `preferred_tone` i `lives_in_norway` u upsert poziv (linije 62-70).
+Za prebacivanje na tab koristiću React state (controlled tabs umesto defaultValue) ili `navigate` sa state parametrom.
 
-**3. `src/context/ProfileContext.tsx`** — dodati `preferred_tone` i `lives_in_norway` u SELECT upit i mapiranje iz baze (umesto da koristi localStorage fallback za ta polja).
+Za raznovrsnost, u AI prompt dodajem eksplicitnu instrukciju + šaljem `unique_seed` koji prompt uključuje kao kontekst.
 
-3 izmene: 1 migracija, 2 fajla.
+3 izmene ukupno: GrammarPage.tsx (max 20, dugme za objašnjenja, controlled tabs), grammar-ai/index.ts (prompt za raznovrsnost).
 
