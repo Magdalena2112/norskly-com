@@ -1,31 +1,42 @@
 
 
-## Skip Onboarding for Admin Users
+## Onboarding Only for New Users
 
 ### Problem
-When an admin logs in, `ProtectedRoute` checks `localStorage` for `norskly_onboarding_done` and redirects to `/onboarding` if not set. Admins shouldn't go through the student onboarding flow.
+Currently, onboarding is enforced via `localStorage` (`norskly_onboarding_done`). If a user clears their browser data or switches devices, they're forced through onboarding again. It should only be required for genuinely new users.
 
 ### Solution
-Modify `ProtectedRoute` to use the `useUserRole` hook. If the user has the `admin_teacher` role, skip the onboarding redirect entirely and let them proceed to admin pages.
+Add an `onboarding_completed` boolean column to the `profiles` table (default `false`). Check this column in `ProtectedRoute` instead of localStorage. Set it to `true` when onboarding finishes.
 
-### Changes
+### Database Migration
+```sql
+ALTER TABLE public.profiles ADD COLUMN onboarding_completed boolean NOT NULL DEFAULT false;
 
-**`src/components/ProtectedRoute.tsx`**
-- Import `useUserRole` hook
-- After auth check, if `isAdmin` is true, skip the onboarding redirect
-- Only redirect to `/onboarding` for non-admin users who haven't completed it
-- Handle the role loading state alongside auth loading
-
-### Technical Detail
-```text
-Current flow:
-  Login → ProtectedRoute → onboarding check → redirect to /onboarding (ALL users)
-
-New flow:
-  Login → ProtectedRoute → role check →
-    admin_teacher? → skip onboarding → render children
-    student?       → onboarding check → redirect if needed
+-- Mark existing users as completed (they already went through onboarding)
+UPDATE public.profiles SET onboarding_completed = true WHERE display_name IS NOT NULL AND display_name != '';
 ```
 
-Single file change, minimal and safe.
+### Frontend Changes
+
+**`src/components/ProtectedRoute.tsx`**
+- Replace `localStorage.getItem("norskly_onboarding_done")` with a query to `profiles.onboarding_completed`
+- Use React Query to fetch the profile's `onboarding_completed` flag
+- Only redirect to `/onboarding` if `onboarding_completed` is `false`
+
+**`src/pages/OnboardingPage.tsx`**
+- On completion, update `profiles.onboarding_completed = true` in the database (in addition to existing profile sync)
+- Keep localStorage set as a fallback/cache for faster checks
+
+### Flow
+```text
+New user signs up → trigger creates profile (onboarding_completed=false)
+  → ProtectedRoute sees false → redirect to /onboarding
+  → completes onboarding → sets onboarding_completed=true in DB
+  → never redirected again, regardless of device/browser
+
+Existing user → migration sets onboarding_completed=true
+  → never redirected
+```
+
+3 files touched: 1 migration, `ProtectedRoute.tsx`, `OnboardingPage.tsx`.
 
