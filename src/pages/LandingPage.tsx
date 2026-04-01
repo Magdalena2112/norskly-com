@@ -67,7 +67,7 @@ export default function LandingPage() {
       {/* Hero */}
       <section className="relative min-h-[90vh] flex items-center overflow-hidden">
         <div className="absolute inset-0">
-          <img src={heroBg} alt="" className="w-full h-full object-cover" />
+          <img src={heroBg} alt="" className="w-full h-full object-cover" width={1504} height={846} fetchPriority="high" decoding="async" sizes="100vw" />
           <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/80 to-background/40" />
         </div>
 
