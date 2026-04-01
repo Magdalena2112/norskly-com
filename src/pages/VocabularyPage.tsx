@@ -153,6 +153,42 @@ function GenerateTab({ level, userId }: { level: string; userId?: string }) {
   const [saved, setSaved] = useState(false);
   const [collections, setCollections] = useState<{ id: string; name: string }[]>([]);
   const [selectedCollection, setSelectedCollection] = useState<string>("");
+  const [showCreateDialog, setShowCreateDialog] = useState(false);
+  const [newCollectionName, setNewCollectionName] = useState("");
+  const [newCollectionDesc, setNewCollectionDesc] = useState("");
+  const [creatingCollection, setCreatingCollection] = useState(false);
+
+  const fetchCollections = async () => {
+    if (!userId) return;
+    const { data } = await supabase
+      .from("word_collections" as any)
+      .select("id, name")
+      .eq("user_id", userId)
+      .order("created_at", { ascending: false });
+    setCollections((data as unknown as { id: string; name: string }[]) || []);
+  };
+
+  const createCollection = async () => {
+    if (!userId || !newCollectionName.trim()) return;
+    setCreatingCollection(true);
+    try {
+      const { data, error } = await supabase
+        .from("word_collections" as any)
+        .insert({ user_id: userId, name: newCollectionName.trim(), description: newCollectionDesc.trim() || null } as any)
+        .select("id")
+        .single() as any;
+      if (error) throw error;
+      await fetchCollections();
+      setSelectedCollection(data.id);
+      setShowCreateDialog(false);
+      setNewCollectionName("");
+      setNewCollectionDesc("");
+    } catch (e: any) {
+      console.error(e);
+    } finally {
+      setCreatingCollection(false);
+    }
+  };
 
   // Fetch user collections
   useEffect(() => {
