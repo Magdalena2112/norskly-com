@@ -54,6 +54,20 @@ export default function OnboardingPage() {
     else {
       updateProfile(form);
       localStorage.setItem("norskly_onboarding_done", "true");
+      // Sync to profiles table
+      if (user) {
+        supabase
+          .from("profiles")
+          .upsert({
+            user_id: user.id,
+            display_name: form.name || "",
+            level: form.level || "A1",
+            learning_goal: form.learning_goal || "",
+            focus_area: form.focus_area || "",
+            confidence_level: form.confidence_level ?? 3,
+          }, { onConflict: "user_id" })
+          .then();
+      }
       navigate("/practice");
     }
   };
