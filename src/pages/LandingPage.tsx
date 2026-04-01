@@ -48,8 +48,10 @@ export default function LandingPage() {
   return (
     <div className="min-h-screen relative">
       {/* Full-page background */}
-      <div className="fixed inset-0 -z-10">
-        <img src={heroBg} alt="" className="w-full h-full object-cover" width={1504} height={846} fetchPriority="high" decoding="async" sizes="100vw" />
+      <div
+        className="fixed inset-0 -z-10 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url(${heroBg})`, backgroundAttachment: 'fixed' }}
+      >
         <div className="absolute inset-0 bg-background/60" />
       </div>
 
