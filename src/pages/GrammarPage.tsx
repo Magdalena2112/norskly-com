@@ -1250,7 +1250,7 @@ function QuizTab({ level, userId, initialTopic }: { level: string; userId?: stri
 
       {finished && (
         <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }}>
-          <Card className="shadow-nordic text-center">
+          <Card className="shadow-nordic bg-background/80 backdrop-blur-sm border-border/30 text-center">
             <CardContent className="pt-8 pb-8 space-y-4">
               <div className="w-20 h-20 rounded-full bg-accent/10 flex items-center justify-center mx-auto">
                 <CheckCircle2 className="w-10 h-10 text-accent" />
