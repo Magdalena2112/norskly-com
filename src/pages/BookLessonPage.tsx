@@ -44,7 +44,7 @@ export default function BookLessonPage() {
       const endTime = addMinutes(startTime, 90);
 
       // Atomic booking via SECURITY DEFINER function
-      const { data: lessonId, error } = await supabase.rpc("book_lesson", {
+      const { data: lessonId, error } = await (supabase.rpc as any)("book_lesson", {
         p_slot_id: selectedSlot.id,
         p_start: startTime.toISOString(),
         p_end: endTime.toISOString(),
