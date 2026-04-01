@@ -11,8 +11,9 @@ import { Progress } from "@/components/ui/progress";
 import {
   ArrowLeft, Loader2, BookOpen, PenTool, Brain, Layers,
   CheckCircle2, XCircle, Save, ThumbsUp, ThumbsDown, RotateCcw, Volume2,
-  FolderOpen,
+  FolderOpen, Plus,
 } from "lucide-react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { logActivity } from "@/lib/logActivity";
@@ -152,19 +153,44 @@ function GenerateTab({ level, userId }: { level: string; userId?: string }) {
   const [saved, setSaved] = useState(false);
   const [collections, setCollections] = useState<{ id: string; name: string }[]>([]);
   const [selectedCollection, setSelectedCollection] = useState<string>("");
+  const [showCreateDialog, setShowCreateDialog] = useState(false);
+  const [newCollectionName, setNewCollectionName] = useState("");
+  const [newCollectionDesc, setNewCollectionDesc] = useState("");
+  const [creatingCollection, setCreatingCollection] = useState(false);
 
-  // Fetch user collections
-  useEffect(() => {
+  const fetchCollections = async () => {
     if (!userId) return;
-    (async () => {
-      const { data } = await supabase
+    const { data } = await supabase
+      .from("word_collections" as any)
+      .select("id, name")
+      .eq("user_id", userId)
+      .order("created_at", { ascending: false });
+    setCollections((data as unknown as { id: string; name: string }[]) || []);
+  };
+
+  const createCollection = async () => {
+    if (!userId || !newCollectionName.trim()) return;
+    setCreatingCollection(true);
+    try {
+      const { data, error } = await supabase
         .from("word_collections" as any)
-        .select("id, name")
-        .eq("user_id", userId)
-        .order("created_at", { ascending: false });
-      setCollections((data as unknown as { id: string; name: string }[]) || []);
-    })();
-  }, [userId]);
+        .insert({ user_id: userId, name: newCollectionName.trim(), description: newCollectionDesc.trim() || null } as any)
+        .select("id")
+        .single() as any;
+      if (error) throw error;
+      await fetchCollections();
+      setSelectedCollection(data.id);
+      setShowCreateDialog(false);
+      setNewCollectionName("");
+      setNewCollectionDesc("");
+    } catch (e: any) {
+      console.error(e);
+    } finally {
+      setCreatingCollection(false);
+    }
+  };
+
+  useEffect(() => { fetchCollections(); }, [userId]);
 
   const generate = async (loadMore = false) => {
     if (!theme.trim()) return;
@@ -267,18 +293,61 @@ function GenerateTab({ level, userId }: { level: string; userId?: string }) {
             }} />
           ))}
 
-          {collections.length > 0 && !saved && (
-            <Select value={selectedCollection} onValueChange={setSelectedCollection}>
-              <SelectTrigger>
-                <SelectValue placeholder="Dodaj u kolekciju (opciono)" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="none">Bez kolekcije</SelectItem>
-                {collections.map((c) => (
-                  <SelectItem key={c.id} value={c.id}>{c.name}</SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+          {!saved && (
+            <>
+              <Select value={selectedCollection} onValueChange={(v) => {
+                if (v === "__create__") {
+                  setShowCreateDialog(true);
+                } else {
+                  setSelectedCollection(v);
+                }
+              }}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Dodaj u kolekciju (opciono)" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="none">Bez kolekcije</SelectItem>
+                  <SelectItem value="__create__">
+                    <span className="flex items-center gap-1.5"><Plus className="w-3.5 h-3.5" /> Kreiraj novu kolekciju</span>
+                  </SelectItem>
+                  {collections.map((c) => (
+                    <SelectItem key={c.id} value={c.id}>{c.name}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+
+              <Dialog open={showCreateDialog} onOpenChange={setShowCreateDialog}>
+                <DialogContent className="sm:max-w-md">
+                  <DialogHeader>
+                    <DialogTitle>Nova kolekcija</DialogTitle>
+                  </DialogHeader>
+                  <div className="space-y-3">
+                    <Input
+                      placeholder="Naziv kolekcije"
+                      value={newCollectionName}
+                      onChange={(e) => setNewCollectionName(e.target.value)}
+                      maxLength={60}
+                    />
+                    <Textarea
+                      placeholder="Opis (opciono)"
+                      value={newCollectionDesc}
+                      onChange={(e) => setNewCollectionDesc(e.target.value)}
+                      maxLength={200}
+                      className="min-h-[60px]"
+                    />
+                    <Button
+                      variant="hero"
+                      className="w-full"
+                      onClick={createCollection}
+                      disabled={creatingCollection || !newCollectionName.trim()}
+                    >
+                      {creatingCollection ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : <Plus className="w-4 h-4 mr-2" />}
+                      Kreiraj
+                    </Button>
+                  </div>
+                </DialogContent>
+              </Dialog>
+            </>
           )}
 
           <div className="flex gap-3">
