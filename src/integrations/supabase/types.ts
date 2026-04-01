@@ -684,42 +684,7 @@ export type Database = {
       }
     }
     Views: {
-      teacher_profile_public: {
-        Row: {
-          bio: string | null
-          duration_minutes: number | null
-          focus: string[] | null
-          id: string | null
-          name: string | null
-          photo_url: string | null
-          rating: number | null
-          students_count: number | null
-          updated_at: string | null
-        }
-        Insert: {
-          bio?: string | null
-          duration_minutes?: number | null
-          focus?: string[] | null
-          id?: string | null
-          name?: string | null
-          photo_url?: string | null
-          rating?: number | null
-          students_count?: number | null
-          updated_at?: string | null
-        }
-        Update: {
-          bio?: string | null
-          duration_minutes?: number | null
-          focus?: string[] | null
-          id?: string | null
-          name?: string | null
-          photo_url?: string | null
-          rating?: number | null
-          students_count?: number | null
-          updated_at?: string | null
-        }
-        Relationships: []
-      }
+      [_ in never]: never
     }
     Functions: {
       award_xp: {
@@ -738,6 +703,7 @@ export type Database = {
         Args: { payload: Json; queue_name: string }
         Returns: number
       }
+      get_teacher_email: { Args: never; Returns: string }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
