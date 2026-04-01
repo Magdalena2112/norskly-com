@@ -1,76 +1,42 @@
 
 
-## Redesign: Objašnjenja section — mini-lesson format
+## Saved Explanations Feature — "Sačuvana objašnjenja"
 
 ### Overview
-Expand the grammar explanation system from 5 fields to 10 structured sections, updating both the AI prompt (edge function) and the frontend rendering (GrammarPage.tsx).
+Add a database-backed bookmark system for grammar explanations with a sidebar on desktop and collapsible drawer on mobile.
 
 ### Changes
 
-**1. `supabase/functions/grammar-ai/index.ts` — explain_topic prompt**
-
-Replace the current JSON schema with an expanded one:
-
-```json
-{
-  "naslov": "Short title",
-  "sazetak": "2-3 sentence quick summary",
-  "definicija": "Detailed definition — what, why, when, logic",
-  "formula": {
-    "label": "Grammar pattern name",
-    "pattern": "subject + har + past participle",
-    "examples": ["Jeg har spist", "Hun har lest"]
-  },
-  "kada_se_koristi": ["bullet 1", "bullet 2", ...],
-  "kada_se_ne_koristi": ["contrast/limit 1", ...],
-  "poredjenje": {
-    "title": "e.g. Preterit vs Perfekt",
-    "left_label": "Preterit",
-    "right_label": "Perfekt",
-    "rows": [
-      { "left": "Jeg spiste", "right": "Jeg har spist", "note": "..." }
-    ]
-  },
-  "primeri": {
-    "jednostavni": [{ "no": "...", "sr": "..." }],
-    "iz_zivota": [{ "no": "...", "sr": "...", "kontekst": "..." }],
-    "kontrastni": [{ "pogresno": "...", "tacno": "...", "objasnjenje": "..." }]
-  },
-  "tipicne_greske": [
-    { "pogresno": "...", "tacno": "...", "objasnjenje": "..." }
-  ],
-  "mini_savet": "Memory trick or rule-of-thumb",
-  "povezane_teme": ["topic 1", "topic 2"]
-}
+**1. Database migration** — new `saved_explanations` table:
+```sql
+CREATE TABLE public.saved_explanations (
+  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id uuid NOT NULL,
+  created_at timestamptz NOT NULL DEFAULT now(),
+  title text NOT NULL,
+  query text NOT NULL,
+  explanation_data jsonb NOT NULL DEFAULT '{}'
+);
+ALTER TABLE public.saved_explanations ENABLE ROW LEVEL SECURITY;
+-- RLS: users can CRUD own rows
 ```
 
-Update the prompt instructions to require all 10 sections, with guidance on depth and variety. If no comparison is relevant, AI returns `poredjenje: null`.
+**2. `src/pages/GrammarPage.tsx` — ExplainTab changes:**
 
-**2. `src/pages/GrammarPage.tsx` — ExplainTab UI**
+- Add state for `savedExplanations` list, loaded from DB on mount
+- Add a **Bookmark** button (heart/bookmark icon) next to the explanation title card. Toggles save/unsave. Visually changes when saved.
+- On save: insert row with `title`, `query`, and full `explanation_data` (the JSON result). On unsave: delete row.
+- **Desktop layout**: wrap ExplainTab content in a flex container. Main content on the left (~70%), sidebar on the right (~30%) showing saved list.
+- **Mobile layout**: use `useIsMobile()` hook. On mobile, render a collapsible `Collapsible` section above the search card titled "Sačuvana objašnjenja" instead of a sidebar.
+- **Sidebar content**: list of saved explanations as simple clickable items with title + small remove (X) icon. Clicking loads the saved `explanation_data` directly into `result` state and sets `query`.
+- **Empty state**: "Još nema sačuvanih objašnjenja" message with bookmark icon.
 
-Update `ExplainResult` interface to match the new schema. Redesign the rendering into 10 visually distinct sections:
+**3. Files affected:**
+- 1 migration (new table + RLS)
+- `src/pages/GrammarPage.tsx` — ExplainTab UI + save logic (~80 lines added)
 
-1. **Title card** — accent background, bold title
-2. **Summary** — highlighted card with 2-3 sentence overview (new)
-3. **Detailed definition** — expandable/collapsible card with in-depth explanation
-4. **Formula block** — visually distinct code-like card with grammar pattern (new)
-5. **When used** — bullet list with BookOpen icon (new)
-6. **When NOT used** — bullet list with AlertTriangle icon, different bg (new)
-7. **Comparison table** — side-by-side table/grid layout, only shown when data exists (new)
-8. **Examples** — accordion with 3 sub-sections (simple, real-life, contrastive) (expanded)
-9. **Common mistakes** — improved with wrong/correct/explanation per item (keep + improve)
-10. **Memory tip** — highlighted Lightbulb card (keep)
-11. **Related topics** — clickable chips that trigger a new search (new)
-
-UI approach:
-- Use `Accordion` for longer sections (definition, examples) to keep it scannable
-- Use a table element for comparison block
-- Related topics render as `Button variant="outline"` chips that call `setQuery(topic); search()`
-- Formula block uses `bg-muted font-mono` styling
-- Clean visual hierarchy with numbered section headers and icons
-- Mobile-responsive: comparison table scrolls horizontally on small screens
-
-**3. Files affected**
-- `supabase/functions/grammar-ai/index.ts` — expanded explain_topic prompt + JSON schema
-- `src/pages/GrammarPage.tsx` — new `ExplainResult` interface + redesigned ExplainTab rendering (~100 lines replaced)
+### Technical details
+- Container width change: the `max-w-2xl` on the grammar page needs to widen to `max-w-5xl` when on the explain tab (to fit sidebar), or the sidebar renders inside the ExplainTab itself with its own flex layout.
+- Save check: compare by `query` field to determine if current explanation is already saved.
+- No edge function changes needed — data is stored/retrieved via Supabase client directly.
 
