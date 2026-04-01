@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import { useQueryClient } from "@tanstack/react-query";
 import { useProfile } from "@/context/ProfileContext";
 import { useAuth } from "@/context/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
@@ -38,6 +39,7 @@ export default function OnboardingPage() {
   const navigate = useNavigate();
   const { updateProfile, profile } = useProfile();
   const { user } = useAuth();
+  const queryClient = useQueryClient();
   const [step, setStep] = useState(0);
   const [form, setForm] = useState<Partial<UserProfile>>({
     name: profile.name || "",
@@ -49,14 +51,13 @@ export default function OnboardingPage() {
     lives_in_norway: profile.lives_in_norway || false,
   });
 
-  const next = () => {
+  const next = async () => {
     if (step < steps.length - 1) setStep(step + 1);
     else {
       updateProfile(form);
       localStorage.setItem("norskly_onboarding_done", "true");
-      // Sync to profiles table
       if (user) {
-        supabase
+        await supabase
           .from("profiles")
           .upsert({
             user_id: user.id,
@@ -66,8 +67,8 @@ export default function OnboardingPage() {
             focus_area: form.focus_area || "",
             confidence_level: form.confidence_level ?? 3,
             onboarding_completed: true,
-          }, { onConflict: "user_id" })
-          .then();
+          }, { onConflict: "user_id" });
+        await queryClient.invalidateQueries({ queryKey: ["onboarding-status"] });
       }
       navigate("/practice");
     }
