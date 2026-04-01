@@ -23,6 +23,7 @@ import AdminStudentDetailPage from "./pages/AdminStudentDetailPage";
 import AdminLessonsPage from "./pages/AdminLessonsPage";
 import AdminAvailabilityPage from "./pages/AdminAvailabilityPage";
 import AdminTeacherProfilePage from "./pages/AdminTeacherProfilePage";
+import UnsubscribePage from "./pages/UnsubscribePage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -53,6 +54,7 @@ const App = () => (
               <Route path="/admin/lessons" element={<ProtectedRoute><AdminRoute><AdminLessonsPage /></AdminRoute></ProtectedRoute>} />
               <Route path="/admin/availability" element={<ProtectedRoute><AdminRoute><AdminAvailabilityPage /></AdminRoute></ProtectedRoute>} />
               <Route path="/admin/teacher-profile" element={<ProtectedRoute><AdminRoute><AdminTeacherProfilePage /></AdminRoute></ProtectedRoute>} />
+              <Route path="/unsubscribe" element={<UnsubscribePage />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
