@@ -259,6 +259,42 @@ export type Database = {
           },
         ]
       }
+      profiles: {
+        Row: {
+          confidence_level: number | null
+          created_at: string | null
+          display_name: string | null
+          focus_area: string | null
+          id: string
+          learning_goal: string | null
+          level: string | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          confidence_level?: number | null
+          created_at?: string | null
+          display_name?: string | null
+          focus_area?: string | null
+          id?: string
+          learning_goal?: string | null
+          level?: string | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          confidence_level?: number | null
+          created_at?: string | null
+          display_name?: string | null
+          focus_area?: string | null
+          id?: string
+          learning_goal?: string | null
+          level?: string | null
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
       talk_sessions: {
         Row: {
           created_at: string
