@@ -66,7 +66,7 @@ const modules = [
 ];
 
 export default function DashboardPage() {
-  const { profile } = useProfile();
+  const { profile, loading: profileLoading } = useProfile();
   const { user } = useAuth();
   const { isAdmin } = useUserRole();
   const navigate = useNavigate();
@@ -90,6 +90,14 @@ export default function DashboardPage() {
 
   const xpInLevel = xpData ? xpData.total_xp % 100 : 0;
   const xpForNext = 100;
+
+  if (profileLoading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary" />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
