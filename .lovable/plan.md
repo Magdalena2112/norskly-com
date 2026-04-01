@@ -1,26 +1,27 @@
 
 
-## Plan: Automatski mejl adminu nakon zakazivanja časa
+## Plan: Northern Lights Background for Dashboard
 
-### Problem
-Email adresa nastavnika u `teacher_profile` tabeli je `null`. Zbog toga se mejl nastavniku/adminu nikada ne šalje — kod proverava `if (teacherData?.email)` i preskače slanje.
+### What
+Replace the solid `bg-[#d3e2e9]/[0.64]` background on the dashboard with an animated aurora borealis-inspired gradient.
 
-Student email radi ispravno (status `sent` u logu).
+### How
 
-### Rešenje
+**File: `src/pages/DashboardPage.tsx` (line 103)**
+- Replace the static background class with a CSS gradient that blends deep navy, teal, green, and subtle purple — classic aurora colors
+- Use a subtle animated gradient shift via CSS keyframes for a living aurora feel
 
-**1. Upisati admin email u `teacher_profile` tabelu**
-- Pokrenuti SQL update da se postavi email adresa nastavnika/admina
+**File: `src/index.css`**
+- Add a `@keyframes aurora` animation that slowly shifts a large gradient background position
+- Add a `.bg-aurora` utility class combining the multi-stop gradient with the animation
+- Keep colors muted/pastel to maintain readability and the Nordic aesthetic
 
-**2. Dodati admin stranicu za unos email adrese**
-- Na postojećoj `AdminTeacherProfilePage` proveriti da li postoji polje za email — ako ne, dodati ga kako bi admin mogao da ažurira svoju email adresu bez direktnog pristupa bazi
+**Color palette:**
+- Deep navy base: `#0f1b2d`
+- Teal/cyan: `#1a3a4a`, `#2d6a6a`  
+- Aurora green: `#3a8a6a`, `#4aaa7a`
+- Subtle purple: `#2a2a5a`
+- All blended softly with low opacity overlays to keep text readable
 
-### Koraci
-
-1. **SQL migration**: `UPDATE teacher_profile SET email = 'ADMIN_EMAIL' WHERE email IS NULL` — potrebno da korisnik unese svoju email adresu
-2. **Proveriti AdminTeacherProfilePage** — dodati input polje za email ako nedostaje
-3. Nikakve promene na edge funkcijama nisu potrebne — kod za slanje mejla nastavniku već postoji i radi
-
-### Pitanje za korisnika
-Potrebna mi je email adresa na koju želiš da stižu obaveštenja o zakazanim časovima.
+**Readability:** A semi-transparent warm overlay will sit beneath content to ensure card contrast remains intact.
 
