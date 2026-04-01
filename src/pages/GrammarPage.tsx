@@ -173,7 +173,24 @@ function ExercisesTab({ level, userId, initialTopic, onGoToExplain }: { level: s
     setStates([]);
     setExerciseXpLogged(false);
     try {
-      const data = await callGrammarAI({ action: "generate_exercises", level, topic: topic.trim(), count, unique_seed: Date.now() });
+      // Fetch previous sentences to avoid repetition
+      let previousSentences: string[] = [];
+      if (userId) {
+        const { data: pastSessions } = await supabase
+          .from("grammar_sessions")
+          .select("questions")
+          .eq("user_id", userId)
+          .eq("topic", topic.trim())
+          .order("created_at", { ascending: false })
+          .limit(5);
+        if (pastSessions) {
+          previousSentences = pastSessions.flatMap((s: any) => {
+            const qs = Array.isArray(s.questions) ? s.questions : [];
+            return qs.map((q: any) => q.sentence || q.question || "").filter(Boolean);
+          }).slice(0, 30);
+        }
+      }
+      const data = await callGrammarAI({ action: "generate_exercises", level, topic: topic.trim(), count, unique_seed: Date.now(), previous_sentences: previousSentences });
       const exs = data.exercises || [];
       setExercises(exs);
       setStates(exs.map(() => ({ answer: "", attempts: 0, status: "pending" as const, feedback: "", logged: false })));
