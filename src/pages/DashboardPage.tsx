@@ -154,7 +154,7 @@ export default function DashboardPage() {
               className={"fullWidth" in mod && mod.fullWidth ? "sm:col-span-2" : ""}
             >
               <Card
-                className="cursor-pointer group hover:shadow-nordic transition-all duration-200 hover:-translate-y-0.5 h-full"
+                className="cursor-pointer group hover:shadow-nordic transition-all duration-200 hover:-translate-y-0.5 h-full bg-background/80 backdrop-blur-sm border-border/30"
                 onClick={() => navigate(mod.route)}
               >
                 <CardContent className="pt-6 pb-6 flex items-start gap-4">
