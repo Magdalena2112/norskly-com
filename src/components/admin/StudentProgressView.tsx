@@ -12,8 +12,6 @@ interface Activity {
 }
 
 export function StudentProgressView({ activities, loading }: { activities: Activity[]; loading: boolean }) {
-  if (loading) return <p className="text-muted-foreground">Učitavanje...</p>;
-
   const moduleData = useMemo(() => {
     const counts: Record<string, { count: number; points: number }> = {};
     activities.forEach((a) => {
