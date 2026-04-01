@@ -1,21 +1,22 @@
 
 
-## Plan: Extend Hero Image to Full Page Background
+## Plan: Settings Dropdown with Onboarding & Logout
 
 ### What
-Move the hero background image from the hero `<section>` to the top-level `<div>` so it covers the entire landing page.
+Replace the single Settings icon button (line 122-124) with a dropdown menu that has two options:
+1. **Podešavanja** (Settings/Onboarding) — navigates to `/onboarding`
+2. **Odjavi se** (Logout) — signs out and redirects to `/auth`
 
 ### How
 
-**File: `src/pages/LandingPage.tsx`**
+**File: `src/pages/DashboardPage.tsx`**
 
-1. Move the background image markup (the `<img>` and gradient overlay) from inside the hero `<section>` (around lines 73-77) to just inside the root `<div>` (after line 70), making it a fixed/absolute full-page background.
+1. Import `DropdownMenu`, `DropdownMenuContent`, `DropdownMenuItem`, `DropdownMenuTrigger` from `@/components/ui/dropdown-menu`, and `LogOut` from `lucide-react`.
 
-2. Update the root `<div>` to have `relative` positioning so the background sits behind all sections.
+2. Replace the Settings `<Button>` (lines 122-124) with a `DropdownMenu` containing:
+   - Trigger: the same Settings icon button
+   - Menu item 1: `<Settings icon> Podešavanja` → `navigate("/onboarding")`
+   - Menu item 2: `<LogOut icon> Odjavi se` → `await signOut(); navigate("/auth")`
 
-3. Remove the `relative` and `overflow-hidden` from the hero `<section>` since the image is no longer scoped to it.
-
-4. Adjust the gradient overlay to be more subtle across the full page, ensuring readability for features, CTA, and footer sections.
-
-5. Update `bg-nordic-warm` on the features section and other section backgrounds to be semi-transparent (e.g., `bg-background/60 backdrop-blur-sm`) so the image shows through.
+3. Destructure `signOut` from `useAuth()` (already imported on line 67).
 
