@@ -28,7 +28,7 @@ export default function XpProgressCard({ level, totalXp }: XpProgressCardProps) 
   const title = XP_TITLES[Math.min(level, 10)] || `Level ${level}`;
 
   return (
-    <Card className="mb-6 border-primary/20 bg-gradient-to-br from-primary/8 via-accent/5 to-primary/3 shadow-nordic overflow-hidden relative">
+    <Card className="mb-6 border-border/30 bg-background/80 backdrop-blur-sm shadow-nordic overflow-hidden relative">
       {/* Background decoration */}
       <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-accent/10 to-transparent rounded-bl-full pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-20 h-20 bg-gradient-to-tr from-primary/8 to-transparent rounded-tr-full pointer-events-none" />

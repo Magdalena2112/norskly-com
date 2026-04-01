@@ -110,7 +110,7 @@ export default function WeeklyDigest() {
         exit={{ opacity: 0, y: -12 }}
         transition={{ duration: 0.3 }}
       >
-        <Card className="border-accent/30 bg-accent/5 shadow-nordic">
+        <Card className="border-border/30 bg-background/80 backdrop-blur-sm shadow-nordic">
           <CardHeader className="pb-3">
             <div className="flex items-center justify-between">
               <CardTitle className="text-base flex items-center gap-2">
