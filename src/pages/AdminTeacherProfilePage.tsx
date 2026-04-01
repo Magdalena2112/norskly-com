@@ -23,6 +23,7 @@ export default function AdminTeacherProfilePage() {
   const [rating, setRating] = useState("4.9");
   const [studentsCount, setStudentsCount] = useState("120");
   const [meetLink, setMeetLink] = useState("");
+  const [email, setEmail] = useState("");
   const [photoUrl, setPhotoUrl] = useState<string | null>(null);
   const [uploading, setUploading] = useState(false);
 
@@ -47,6 +48,7 @@ export default function AdminTeacherProfilePage() {
       setRating(String(profile.rating));
       setStudentsCount(String(profile.students_count));
       setMeetLink((profile as any).meet_link || "");
+      setEmail(profile.email || "");
       setPhotoUrl(profile.photo_url);
     }
   }, [profile]);
@@ -63,6 +65,7 @@ export default function AdminTeacherProfilePage() {
           rating: parseFloat(rating),
           students_count: parseInt(studentsCount),
           meet_link: meetLink,
+          email,
           photo_url: photoUrl,
           updated_at: new Date().toISOString(),
         } as any)
@@ -196,6 +199,11 @@ export default function AdminTeacherProfilePage() {
               <label className="text-sm font-medium text-foreground mb-1.5 block">Link za video poziv (Meet/Zoom)</label>
               <Input value={meetLink} onChange={(e) => setMeetLink(e.target.value)} placeholder="https://meet.google.com/..." />
               <p className="text-xs text-muted-foreground mt-1">Ovaj link će biti poslat studentima nakon rezervacije.</p>
+            </div>
+            <div>
+              <label className="text-sm font-medium text-foreground mb-1.5 block">Email za obaveštenja</label>
+              <Input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="admin@example.com" />
+              <p className="text-xs text-muted-foreground mt-1">Na ovaj email stižu obaveštenja o zakazanim časovima.</p>
             </div>
           </CardContent>
         </Card>
