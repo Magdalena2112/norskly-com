@@ -84,7 +84,7 @@ export default function LandingPage() {
             <p className="text-accent font-semibold tracking-wide uppercase text-sm mb-4">
               Adaptivno učenje norveškog
             </p>
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-display font-extrabold leading-tight mb-6 text-foreground">
+            <h1 className="text-3xl md:text-5xl lg:text-7xl font-display font-extrabold leading-tight mb-6 text-foreground">
               Govori norveški
               <span className="text-gradient-nordic block"> sa samopouzdanjem</span>
             </h1>
