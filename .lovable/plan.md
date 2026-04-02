@@ -1,71 +1,44 @@
 
 
-## Plan: Atomsko zakazivanje preko SECURITY DEFINER funkcije
+## Plan: Optimize Application for Mobile View
 
-### Problem
-Booking fails because the client makes two separate calls (insert lesson, then update slot). The RLS `WITH CHECK` on `availability_slots` can't reliably see the just-inserted lesson row, causing persistent "violates row-level security policy" errors.
+### Issues Identified
 
-### Fix
-Replace the two client-side calls with a single atomic `book_lesson` database function that runs as `SECURITY DEFINER`, bypassing RLS internally while still validating the caller via `auth.uid()`.
+1. **Dashboard header overflow**: On 390px screens, the header packs logo + Admin button + XP badge + level badge + settings into one row. These elements overflow or get squeezed.
+
+2. **Landing page hero text too large**: `text-5xl` on mobile makes "samopouzdanjem" overflow the viewport width.
+
+3. **Dashboard header badges not responsive**: XP and level badges take too much horizontal space on small screens.
+
+4. **BookLessonPage calendar overflow**: The Calendar component can be wider than the card on small screens.
+
+5. **MyLessonsPage lesson rows**: Date + time + cancel button cramped on mobile.
+
+6. **CTA section padding**: `p-12` on mobile is excessive for the CTA card on LandingPage.
 
 ### Changes
 
-**1. Database migration — create `book_lesson` function**
+**1. `src/pages/LandingPage.tsx`**
+- Reduce hero heading from `text-5xl` to `text-3xl` on mobile (keep `md:text-5xl lg:text-7xl`)
+- Reduce CTA section padding from `p-12` to `p-6 md:p-12`
 
-```sql
-CREATE OR REPLACE FUNCTION public.book_lesson(
-  p_slot_id uuid,
-  p_start timestamptz,
-  p_end timestamptz,
-  p_note text DEFAULT NULL
-)
-RETURNS uuid
-LANGUAGE plpgsql
-SECURITY DEFINER
-SET search_path = public
-AS $$
-DECLARE
-  v_lesson_id uuid := gen_random_uuid();
-BEGIN
-  -- Claim the slot atomically
-  UPDATE availability_slots
-  SET status = 'booked'
-  WHERE id = p_slot_id AND status = 'open';
+**2. `src/pages/DashboardPage.tsx`**
+- Wrap header items to stack on mobile: hide XP and level text badges on very small screens (show only on `sm:` and up), keep settings dropdown always visible
+- Alternatively, move the XP/level badges below the header on mobile using a second row
+- Reduce main heading from `text-3xl` to `text-2xl` on mobile
 
-  IF NOT FOUND THEN
-    RAISE EXCEPTION 'Ovaj termin je već zauzet. Izaberi drugi.';
-  END IF;
+**3. `src/pages/BookLessonPage.tsx`**
+- Add `overflow-hidden` to the calendar card to prevent horizontal overflow
+- Ensure the calendar scales properly within its container
 
-  -- Create lesson
-  INSERT INTO lessons (id, user_id, slot_id, start_time, end_time, student_note)
-  VALUES (v_lesson_id, auth.uid(), p_slot_id, p_start, p_end, p_note);
+**4. `src/pages/MyLessonsPage.tsx`**
+- Stack lesson date and cancel button vertically on mobile instead of side-by-side
 
-  RETURN v_lesson_id;
-END;
-$$;
+**5. `src/pages/PracticePage.tsx`**
+- Already uses `sm:grid-cols-3` for controls - this is fine
+- No major changes needed
 
-GRANT EXECUTE ON FUNCTION public.book_lesson(uuid, timestamptz, timestamptz, text) TO authenticated;
-```
+### Technical Details
 
-**2. `src/pages/BookLessonPage.tsx` — simplify `bookMutation`**
-
-Replace the insert+update logic with a single RPC call:
-
-```typescript
-const { data: lessonId, error } = await supabase.rpc("book_lesson", {
-  p_slot_id: selectedSlot.id,
-  p_start: startTime.toISOString(),
-  p_end: endTime.toISOString(),
-  p_note: note || null,
-});
-if (error) throw error;
-```
-
-Remove the old insert/update/rollback code. Keep the email sending and activity logging as-is, using `lessonId` from the RPC result.
-
-### Why this works
-- Single database call = atomic (no race condition, no RLS visibility issue)
-- `SECURITY DEFINER` bypasses RLS within the function
-- `auth.uid()` still validates the caller is authenticated
-- Slot is claimed before lesson is created, preventing double-booking
+All changes are CSS/Tailwind class adjustments. No logic changes, no database changes. Approximately 5 files modified with responsive class updates (hiding elements on small screens with `hidden sm:flex`, reducing font sizes, adjusting padding).
 
