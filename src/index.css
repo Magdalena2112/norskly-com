@@ -157,4 +157,13 @@
     background-size: 300% 300%;
     animation: aurora 20s ease-in-out infinite;
   }
+
+  /* Hide scrollbar for tabs */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
 }

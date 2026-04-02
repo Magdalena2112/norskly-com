@@ -383,17 +383,17 @@ export default function ProgressPage() {
         </motion.div>
 
         {/* Stats grid */}
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-2 gap-3 sm:gap-4">
           {stats.map((stat, i) => (
             <motion.div key={stat.label} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.1 }}>
               <Card>
-                <CardContent className="pt-5 pb-5 flex items-center gap-3">
-                  <div className={`w-10 h-10 rounded-lg bg-muted flex items-center justify-center ${stat.color}`}>
-                    <stat.icon className="w-5 h-5" />
+                <CardContent className="pt-4 pb-4 sm:pt-5 sm:pb-5 flex items-center gap-2 sm:gap-3">
+                  <div className={`w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-muted flex items-center justify-center shrink-0 ${stat.color}`}>
+                    <stat.icon className="w-4 h-4 sm:w-5 sm:h-5" />
                   </div>
-                  <div>
+                  <div className="min-w-0">
                     <p className="text-xs text-muted-foreground">{stat.label}</p>
-                    <p className="font-semibold text-foreground capitalize text-sm">{stat.value}</p>
+                    <p className="font-semibold text-foreground capitalize text-xs sm:text-sm truncate">{stat.value}</p>
                   </div>
                 </CardContent>
               </Card>

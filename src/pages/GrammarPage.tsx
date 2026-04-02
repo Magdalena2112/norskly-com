@@ -87,24 +87,24 @@ export default function GrammarPage() {
 
       <div className={`flex-1 container py-6 ${activeTab === "explain" ? "max-w-5xl" : "max-w-2xl"}`}>
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-          <TabsList className="grid w-full grid-cols-6">
-            <TabsTrigger value="exercises" className="gap-1 text-xs">
-              <BookOpen className="w-3.5 h-3.5" /> Vežbe
+          <TabsList className="w-full flex gap-0.5 overflow-x-auto scrollbar-hide">
+            <TabsTrigger value="exercises" className="gap-1 text-[11px] sm:text-xs px-2 sm:px-3">
+              <BookOpen className="w-3.5 h-3.5 shrink-0 hidden sm:block" /> Vežbe
             </TabsTrigger>
-            <TabsTrigger value="correction" className="gap-1 text-xs">
-              <PenTool className="w-3.5 h-3.5" /> Korekcija
+            <TabsTrigger value="correction" className="gap-1 text-[11px] sm:text-xs px-2 sm:px-3">
+              <PenTool className="w-3.5 h-3.5 shrink-0 hidden sm:block" /> Korekcija
             </TabsTrigger>
-            <TabsTrigger value="explain" className="gap-1 text-xs">
-              <Search className="w-3.5 h-3.5" /> Objašnjenja
+            <TabsTrigger value="explain" className="gap-1 text-[11px] sm:text-xs px-2 sm:px-3">
+              <Search className="w-3.5 h-3.5 shrink-0 hidden sm:block" /> Objašnjenja
             </TabsTrigger>
-            <TabsTrigger value="quiz" className="gap-1 text-xs">
-              <Brain className="w-3.5 h-3.5" /> Kviz
+            <TabsTrigger value="quiz" className="gap-1 text-[11px] sm:text-xs px-2 sm:px-3">
+              <Brain className="w-3.5 h-3.5 shrink-0 hidden sm:block" /> Kviz
             </TabsTrigger>
-            <TabsTrigger value="history" className="gap-1 text-xs">
-              <History className="w-3.5 h-3.5" /> Istorija
+            <TabsTrigger value="history" className="gap-1 text-[11px] sm:text-xs px-2 sm:px-3">
+              <History className="w-3.5 h-3.5 shrink-0 hidden sm:block" /> Istorija
             </TabsTrigger>
-            <TabsTrigger value="progress" className="gap-1 text-xs">
-              <TrendingUp className="w-3.5 h-3.5" /> Napredak
+            <TabsTrigger value="progress" className="gap-1 text-[11px] sm:text-xs px-2 sm:px-3">
+              <TrendingUp className="w-3.5 h-3.5 shrink-0 hidden sm:block" /> Napredak
             </TabsTrigger>
           </TabsList>
 
