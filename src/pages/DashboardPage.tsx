@@ -147,7 +147,7 @@ export default function DashboardPage() {
 
       <div className="flex-1 container max-w-3xl py-8">
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}>
-          <h1 className="text-3xl font-display font-bold text-primary-foreground mb-1">
+          <h1 className="text-2xl sm:text-3xl font-display font-bold text-primary-foreground mb-1">
             Hei, {profile.name || "korisniče"}! 👋
           </h1>
           <p className="text-primary-foreground/70 mb-4">Izaberi modul i nastavi sa učenjem norveškog.</p>
