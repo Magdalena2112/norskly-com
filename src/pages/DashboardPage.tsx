@@ -206,14 +206,14 @@ export default function DashboardPage() {
                    <h3 className="font-semibold text-foreground">Moji predstojeći časovi</h3>
                  </div>
                  {upcomingLesson ? (
-                   <div className="flex items-center justify-between">
+                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                      <div>
                        <p className="text-sm font-medium text-foreground">
                          {format(new Date(upcomingLesson.start_time), "dd.MM.yyyy HH:mm")} – {format(new Date(upcomingLesson.end_time), "HH:mm")}
                        </p>
                        <p className="text-xs text-muted-foreground mt-0.5">Zakazano</p>
                     </div>
-                     <Button size="sm" variant="outline" onClick={() => navigate("/my-lessons")}>
+                     <Button size="sm" variant="outline" onClick={() => navigate("/my-lessons")} className="self-start sm:self-auto">
                        Pogledaj detalje
                      </Button>
                    </div>

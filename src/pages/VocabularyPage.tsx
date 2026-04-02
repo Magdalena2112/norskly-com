@@ -101,21 +101,21 @@ export default function VocabularyPage() {
 
       <div className="flex-1 container max-w-2xl py-6">
         <Tabs defaultValue="generate" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-5">
-            <TabsTrigger value="generate" className="gap-1 text-xs sm:text-sm">
-              <BookOpen className="w-4 h-4 hidden sm:block" /> Generiši
+          <TabsList className="w-full flex overflow-x-auto scrollbar-hide">
+            <TabsTrigger value="generate" className="gap-1 text-xs sm:text-sm flex-1 min-w-0">
+              <BookOpen className="w-4 h-4 hidden sm:block shrink-0" /> Generiši
             </TabsTrigger>
-            <TabsTrigger value="collections" className="gap-1 text-xs sm:text-sm">
-              <FolderOpen className="w-4 h-4 hidden sm:block" /> Kolekcije
+            <TabsTrigger value="collections" className="gap-1 text-xs sm:text-sm flex-1 min-w-0">
+              <FolderOpen className="w-4 h-4 hidden sm:block shrink-0" /> Kolekcije
             </TabsTrigger>
-            <TabsTrigger value="sentence" className="gap-1 text-xs sm:text-sm">
-              <PenTool className="w-4 h-4 hidden sm:block" /> Rečenica
+            <TabsTrigger value="sentence" className="gap-1 text-xs sm:text-sm flex-1 min-w-0">
+              <PenTool className="w-4 h-4 hidden sm:block shrink-0" /> Rečenica
             </TabsTrigger>
-            <TabsTrigger value="flashcards" className="gap-1 text-xs sm:text-sm">
-              <Layers className="w-4 h-4 hidden sm:block" /> Kartice
+            <TabsTrigger value="flashcards" className="gap-1 text-xs sm:text-sm flex-1 min-w-0">
+              <Layers className="w-4 h-4 hidden sm:block shrink-0" /> Kartice
             </TabsTrigger>
-            <TabsTrigger value="quiz" className="gap-1 text-xs sm:text-sm">
-              <Brain className="w-4 h-4 hidden sm:block" /> Kviz
+            <TabsTrigger value="quiz" className="gap-1 text-xs sm:text-sm flex-1 min-w-0">
+              <Brain className="w-4 h-4 hidden sm:block shrink-0" /> Kviz
             </TabsTrigger>
           </TabsList>
 
