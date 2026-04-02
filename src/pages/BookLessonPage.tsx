@@ -149,12 +149,12 @@ export default function BookLessonPage() {
                 Izaberi datum
               </CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className="overflow-x-auto">
               <Calendar
                 mode="single"
                 selected={selectedDate}
                 onSelect={setSelectedDate}
-                className="pointer-events-auto"
+                className="pointer-events-auto mx-auto"
                 modifiers={{ hasSlot: datesWithSlots }}
                 modifiersClassNames={{ hasSlot: "bg-accent/20 font-bold" }}
                 disabled={(date) => date < new Date(new Date().setHours(0, 0, 0, 0))}

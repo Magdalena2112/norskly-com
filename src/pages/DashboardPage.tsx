@@ -104,7 +104,7 @@ export default function DashboardPage() {
   return (
     <div className="min-h-screen flex flex-col bg-aurora">
       <header className="border-b border-border/20 bg-background/10 backdrop-blur-md sticky top-0 z-50">
-        <div className="container flex items-center justify-between h-14">
+          <div className="container flex items-center justify-between h-14">
           <div className="flex items-center gap-1">
             <BackButton to="/" />
             <span className="font-display font-bold text-lg text-primary-foreground">Norskly</span>
@@ -113,15 +113,15 @@ export default function DashboardPage() {
             {isAdmin && (
               <Button variant="outline" size="sm" onClick={() => navigate("/admin/dashboard")} className="gap-1.5">
                 <Shield className="w-3.5 h-3.5" />
-                Admin
+                <span className="hidden sm:inline">Admin</span>
               </Button>
             )}
             {xpData && (
-              <span className="text-xs bg-primary/10 text-primary px-2.5 py-1 rounded-full font-semibold flex items-center gap-1">
+              <span className="hidden sm:flex text-xs bg-primary/10 text-primary px-2.5 py-1 rounded-full font-semibold items-center gap-1">
                 <Zap className="w-3 h-3" /> {XP_TITLES[Math.min(xpData.level, 10)] || `Lvl ${xpData.level}`} · {xpData.total_xp} XP
               </span>
             )}
-            <span className="text-xs bg-accent/10 text-accent px-3 py-1 rounded-full font-medium">
+            <span className="hidden sm:inline text-xs bg-accent/10 text-accent px-3 py-1 rounded-full font-medium">
               {profile.level} · {profile.learning_goal}
             </span>
             <DropdownMenu>
@@ -147,7 +147,7 @@ export default function DashboardPage() {
 
       <div className="flex-1 container max-w-3xl py-8">
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}>
-          <h1 className="text-3xl font-display font-bold text-primary-foreground mb-1">
+          <h1 className="text-2xl sm:text-3xl font-display font-bold text-primary-foreground mb-1">
             Hei, {profile.name || "korisniče"}! 👋
           </h1>
           <p className="text-primary-foreground/70 mb-4">Izaberi modul i nastavi sa učenjem norveškog.</p>

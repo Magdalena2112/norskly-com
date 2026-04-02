@@ -84,7 +84,7 @@ export default function LandingPage() {
             <p className="text-accent font-semibold tracking-wide uppercase text-sm mb-4">
               Adaptivno učenje norveškog
             </p>
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-display font-extrabold leading-tight mb-6 text-foreground">
+            <h1 className="text-3xl md:text-5xl lg:text-7xl font-display font-extrabold leading-tight mb-6 text-foreground">
               Govori norveški
               <span className="text-gradient-nordic block"> sa samopouzdanjem</span>
             </h1>
@@ -167,7 +167,7 @@ export default function LandingPage() {
             initial={{ opacity: 0, scale: 0.96 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="bg-nordic-gradient rounded-2xl p-12 md:p-16 text-center">
+            className="bg-nordic-gradient rounded-2xl p-6 md:p-12 lg:p-16 text-center">
             
             <h2 className="text-3xl md:text-4xl font-display font-bold text-primary-foreground mb-4">
               Klar til å lære norsk?

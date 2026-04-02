@@ -93,9 +93,9 @@ export default function MyLessonsPage() {
             ) : (
               <div className="space-y-3">
                 {upcoming.map((l: any) => (
-                  <div key={l.id} className="flex items-center justify-between rounded-lg border border-border p-3">
+                  <div key={l.id} className="flex flex-col sm:flex-row sm:items-center justify-between rounded-lg border border-border p-3 gap-2">
                     <div>
-                      <p className="font-medium text-foreground">
+                      <p className="font-medium text-foreground text-sm sm:text-base">
                         {format(new Date(l.start_time), "dd.MM.yyyy")} · {format(new Date(l.start_time), "HH:mm")} – {format(new Date(l.end_time), "HH:mm")}
                       </p>
                       {l.student_note && <p className="text-sm text-muted-foreground mt-1">{l.student_note}</p>}
@@ -103,7 +103,7 @@ export default function MyLessonsPage() {
                     <Button
                       variant="ghost"
                       size="sm"
-                      className="text-destructive hover:text-destructive"
+                      className="text-destructive hover:text-destructive self-end sm:self-auto"
                       onClick={() => cancelMutation.mutate(l)}
                       disabled={cancelMutation.isPending}
                     >
