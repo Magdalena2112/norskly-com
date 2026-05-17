@@ -464,8 +464,8 @@ export default function LandingPage() {
               </p>
               <div className="relative rounded-3xl overflow-hidden bg-secondary aspect-square max-w-md border border-border">
                 <div className="absolute inset-0 p-8 md:p-10 flex items-center">
-                  <p className="font-marker uppercase text-[clamp(1.75rem,4.5vw,2.75rem)] text-primary/70 leading-[1.05]">
-                    Today is a perfect day to be proud of all the progress you have made!! <span className="text-primary/80">♥</span>
+                  <p className="font-marker uppercase text-[clamp(2rem,5.5vw,3.5rem)] text-primary/70 leading-[1.05]">
+                    Confidence comes with practice. <span className="text-primary/80">♥</span>
                   </p>
                 </div>
               </div>
