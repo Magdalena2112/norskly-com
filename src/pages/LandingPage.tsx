@@ -12,11 +12,6 @@ import {
 } from "@/components/ui/accordion";
 import { FloatingGreetings } from "@/components/FloatingGreetings";
 
-const LANGUAGES = [
-  { code: "no", label: "Norveški", flag: "🇳🇴" },
-  { code: "en", label: "Engleski", flag: "🇬🇧" },
-  { code: "de", label: "Nemački", flag: "🇩🇪" },
-];
 
 const FEATURES = [
   { icon: MessageCircle, title: "Realna komunikacija", desc: "Vežbaj jezik kroz realistične svakodnevne i poslovne razgovore." },
@@ -115,7 +110,6 @@ const FAQ = [
 
 export default function LandingPage() {
   const navigate = useNavigate();
-  const [lang, setLang] = useState("no");
 
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
