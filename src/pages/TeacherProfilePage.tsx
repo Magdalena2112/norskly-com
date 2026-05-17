@@ -135,12 +135,13 @@ export default function TeacherProfilePage() {
 
       return { startTime, endTime };
     },
-    onSuccess: (data) => {
+    onSuccess: async (data) => {
+      const { data: meetLinkData } = await supabase.rpc("get_teacher_meet_link");
       setConfirmationData({
         date: data.startTime,
         endTime: data.endTime,
         teacherName,
-        meetLink: (teacher as any)?.meet_link || "",
+        meetLink: meetLinkData || "",
         duration: teacherDuration,
         userEmail: user?.email,
       });
