@@ -176,7 +176,7 @@ export default function TeacherProfilePage() {
   const teacherStudents = teacher?.students_count || 120;
   const teacherPhoto = teacher?.photo_url || teacherPhotoFallback;
   const initials = teacherName.split(" ").map((n: string) => n[0]).join("");
-  const meetLink = (teacher as any)?.meet_link || "";
+  const meetLink = true; // meet link is fetched after booking via secure RPC
 
   const copyMeetLink = () => {
     if (confirmationData?.meetLink) {
