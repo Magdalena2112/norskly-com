@@ -713,6 +713,21 @@ export type Database = {
         Returns: number
       }
       get_teacher_email: { Args: never; Returns: string }
+      get_teacher_meet_link: { Args: never; Returns: string }
+      get_teacher_profile_public: {
+        Args: never
+        Returns: {
+          bio: string
+          duration_minutes: number
+          focus: string[]
+          id: string
+          name: string
+          photo_url: string
+          rating: number
+          students_count: number
+          updated_at: string
+        }[]
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
