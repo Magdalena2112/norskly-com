@@ -474,7 +474,14 @@ export default function LandingPage() {
               </p>
               <div className="relative rounded-3xl overflow-hidden bg-secondary aspect-square max-w-md border border-border">
                 <div className="absolute inset-0 p-8 md:p-10 flex items-center">
-                  <p className="font-marker uppercase text-[clamp(2rem,5.5vw,3.5rem)] text-primary/70 leading-[1.05]">
+                  <p
+                    className="font-marker uppercase text-primary/70"
+                    style={{
+                      fontSize: `clamp(${QUOTE_CARD_TYPO.fontMin}, ${QUOTE_CARD_TYPO.fontFluid}, ${QUOTE_CARD_TYPO.fontMax})`,
+                      lineHeight: QUOTE_CARD_TYPO.lineHeight,
+                      letterSpacing: QUOTE_CARD_TYPO.letterSpacing,
+                    }}
+                  >
                     Confidence comes with practice. <span className="text-primary/80">♥</span>
                   </p>
                 </div>
