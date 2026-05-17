@@ -113,8 +113,8 @@ export default function ForTeachersPage() {
         <div className="absolute -top-32 -right-32 w-[36rem] h-[36rem] rounded-full bg-primary/10 blur-3xl -z-10" />
         <div className="absolute -bottom-40 -left-20 w-[28rem] h-[28rem] rounded-full bg-accent/10 blur-3xl -z-10" />
 
-        <div className="container max-w-6xl py-20 md:py-28">
-          <div className="grid md:grid-cols-2 gap-10 lg:gap-16 items-center">
+        <div className="container max-w-6xl py-16 md:py-24 lg:py-28">
+          <div className="grid md:grid-cols-[1.1fr_1fr] gap-8 md:gap-10 lg:gap-16 items-center">
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
