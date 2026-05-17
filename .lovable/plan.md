@@ -1,84 +1,35 @@
 
-## Norskly Homepage Redesign — Plan
+## Goal
+Transform the hero of `ForTeachersPage` into a split layout: existing editorial copy on the left, the uploaded AI teacher avatar on the right with a subtle looping wave + idle float animation.
 
-A full visual + structural redesign of `src/pages/LandingPage.tsx`, repositioning Norskly from a Norwegian-only school into a premium, multilingual, AI-powered language learning ecosystem for students and teachers. Inspired (not copied) by the Hot Core Pilates editorial aesthetic.
+## Steps
 
-### 1. Design System Updates
+1. **Add avatar asset**
+   - Copy `user-uploads://Gemini_Generated_Image_bgniuobgniuobgni.png` to `src/assets/teacher-avatar.png`.
+   - Import it as an ES6 module in `ForTeachersPage.tsx`.
 
-Update `src/index.css` and `tailwind.config.ts` with a warm editorial palette as HSL semantic tokens:
+2. **New component `TeacherAvatar.tsx`** (in `src/components/`)
+   - Renders the avatar with a CSS mask / clip approach to isolate the right hand region so only the hand waves, while the body remains still — implemented as two stacked layered images:
+     - **Base layer**: full avatar with the hand area masked out via `mask-image` (radial gradient hiding the hand zone) — keeps body perfectly still.
+     - **Hand layer**: same image, masked to *only* show the right-hand region, with `transform-origin` set near the wrist and animated rotation.
+   - Wave animation: framer-motion keyframes `rotate: [0, -12, 8, -10, 6, 0]` over ~1.8s, then pause ~3s, looping (`repeat: Infinity, repeatDelay: 3, ease: "easeInOut"`).
+   - Idle float on the whole avatar container: `y: [0, -8, 0]` over 5s, infinite easeInOut.
+   - Soft glow: blurred radial accent behind avatar using `bg-primary/10` and `bg-accent/10` blobs for depth, matching existing hero ambient lights.
+   - Respects `prefers-reduced-motion` (motion-reduce variant disables animation, shows static avatar).
 
-- `--background`: cream / off-white
-- `--card` / `--muted`: soft beige
-- `--accent`: pastel pink
-- `--primary`: deep burgundy / plum
-- `--secondary`: muted sage green
-- Add `--shadow-soft`, `--shadow-card` design tokens
-- Add two display fonts via Google Fonts:
-  - Bold condensed display (e.g. Fraunces or Bricolage Grotesque) for oversized headlines
-  - Italic script accent (e.g. Caveat Brush / Instrument Serif italic) for the "the / for / of" connector words seen in references
-- Body remains Inter
-- Add utilities: `text-display`, `text-script`, oversized fluid type scale (`clamp(...)`)
-- Subtle grid background utility for hero
+3. **Update hero layout in `ForTeachersPage.tsx`**
+   - Change the hero container to a 2-column grid at `md`+ (`grid md:grid-cols-2 gap-12 items-center`).
+   - Left column: existing back link, H1, subtitle, CTA, trust line — left-aligned on `md+`, centered on mobile.
+   - Right column: `<TeacherAvatar />`, hidden on `sm` only if needed (keep visible on mobile but scaled down — placed below the text via grid order).
+   - Keep `max-w-5xl` → bump to `max-w-6xl` for breathing room.
+   - Preserve cream background, gradient blobs, typography, font-script accent, and existing CTA styles.
 
-All colors must stay HSL semantic tokens — no hardcoded hex in components.
+4. **Visual polish**
+   - Avatar wrapped in a soft circular ambient halo (`absolute -inset-8 bg-gradient-to-br from-primary/15 to-accent/15 rounded-full blur-3xl`).
+   - Optional small floating "Hei!" speech bubble near the waving hand using existing card style + `motion-reduce:hidden`, fading in/out synced with the wave (`animate={{ opacity: [0,1,1,0] }}`, same `repeatDelay`).
 
-### 2. New Landing Page Sections (single page, top → bottom)
-
-1. **Sticky Nav** — Norskly wordmark, links (Platform, For Teachers, Pricing, FAQ), language pill switcher, Login, "Start free" primary CTA.
-2. **Hero**
-   - Oversized split headline using script italic accent word
-   - Subtitle (1–2 lines, multilingual positioning)
-   - Language pill selector: 🇳🇴 Norwegian, 🇬🇧 English, 🇩🇪 German (active state styled in burgundy)
-   - Two CTAs: `I am a Student` (primary burgundy) / `I am a Teacher` (outline)
-   - Soft grid / dotted background, decorative pastel blobs
-3. **Feature Grid** — 6 large rounded cards (2×3 on desktop, 1 col mobile) with icon, title, description for: Real-life Communication, Personalized Learning, Grammar in Context, Instant AI Feedback, AI Conversation Practice, Smart Progress Tracking.
-4. **Students vs Teachers Split Section** — editorial 2-column split, each side a stacked card stack with bullet list and CTA. Beige card for Students, pink card for Teachers.
-5. **Role Selection Teaser ("Choose your role")** — two oversized cards [Student] / [Teacher] linking into `/auth` with role pre-selected via query param.
-6. **"Is Norskly right for me?"** — two side-by-side editorial cards (beige check-list, pink x-list) mirroring the reference layout.
-7. **Pricing / Membership** — 3 modern pricing cards: Self-learning, Lessons + Platform, Teacher Access. Middle card highlighted ("Most popular") in burgundy.
-8. **FAQ Split** — accordion left, soft illustration / image right (use existing `heroBg` or a new asset).
-9. **Marquee CTA strip** — repeating "START LEARNING \ START TEACHING \" ticker in burgundy.
-10. **Final CTA + Footer** — large editorial CTA card + minimal footer.
-
-### 3. Components Created
-
-Kept inside `src/pages/LandingPage.tsx` initially; extract only if they grow:
-- `LanguagePills` (controlled state, no routing impact yet — purely visual selector)
-- `FeatureCard`, `RoleCard`, `PricingCard`, `ChecklistCard`
-- `FaqAccordion` (uses existing shadcn `accordion`)
-- `MarqueeStrip` (CSS keyframes)
-
-### 4. Routing / Behavior
-
-- Language pills: local state only (no i18n yet) — UI affirms multilingual positioning. Default = Norwegian.
-- Role CTAs: navigate to `/auth?role=student` and `/auth?role=teacher`. `AuthPage` already exists; reading the param is out of scope unless trivially additive (note: no auth-flow logic changes in this pass).
-- All copy in Serbian (Latin) per project localization policy; brand/feature names may stay in English where natural.
-
-### 5. Responsive & Motion
-
-- Fluid type via `clamp()`; oversized headers collapse gracefully on 390px.
-- Grid columns: 1 → 2 → 3 at `md` / `lg`.
-- Framer Motion (already in project) for subtle fade/slide-in on scroll, hover lift on cards (`hover:-translate-y-1`, soft shadow).
-- Respect `prefers-reduced-motion`.
-
-### 6. Out of Scope (explicit)
-
-- No backend, auth, RLS, or edge function changes.
-- No real i18n implementation — language switcher is visual only.
-- No new pricing logic / Paddle wiring.
-- No changes to `DashboardPage`, admin, or learning modules.
-
-### Files Touched
-
-- `src/index.css` — palette + fonts + utilities
-- `tailwind.config.ts` — font family + token extensions
-- `src/pages/LandingPage.tsx` — full rewrite
-- (optional) `src/assets/` — 1 new soft editorial image if existing `hero-bg.jpg` doesn't fit the warm palette
-
-### Acceptance
-
-- Matches reference mood: editorial, warm, oversized type, rounded cards, pastel accents, deep burgundy.
-- All 10 sections present and responsive at 390 / 768 / 1280.
-- Language pills, role CTAs, FAQ accordion all interactive.
-- No hardcoded colors; only semantic tokens.
-- Copy in Serbian Latin, multilingual positioning (not Norwegian-only).
+## Technical notes
+- No backend/RLS changes.
+- Only edits: `src/pages/ForTeachersPage.tsx`, new `src/components/TeacherAvatar.tsx`, new asset in `src/assets/`.
+- Uses existing `framer-motion` dependency. No new packages.
+- All colors via semantic tokens (`primary`, `accent`, `foreground`).
