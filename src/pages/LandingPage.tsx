@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import {
   Accordion, AccordionContent, AccordionItem, AccordionTrigger,
 } from "@/components/ui/accordion";
+import { FloatingGreetings } from "@/components/FloatingGreetings";
 
 const LANGUAGES = [
   { code: "no", label: "Norveški", flag: "🇳🇴" },
