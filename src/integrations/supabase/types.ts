@@ -489,6 +489,7 @@ export type Database = {
       }
       teacher_applications: {
         Row: {
+          admin_notes: string | null
           bio: string
           created_at: string
           cv_path: string | null
@@ -496,10 +497,13 @@ export type Database = {
           full_name: string
           id: string
           languages: string
+          reviewed_at: string | null
+          reviewed_by: string | null
           status: string
           updated_at: string
         }
         Insert: {
+          admin_notes?: string | null
           bio: string
           created_at?: string
           cv_path?: string | null
@@ -507,10 +511,13 @@ export type Database = {
           full_name: string
           id?: string
           languages: string
+          reviewed_at?: string | null
+          reviewed_by?: string | null
           status?: string
           updated_at?: string
         }
         Update: {
+          admin_notes?: string | null
           bio?: string
           created_at?: string
           cv_path?: string | null
@@ -518,6 +525,8 @@ export type Database = {
           full_name?: string
           id?: string
           languages?: string
+          reviewed_at?: string | null
+          reviewed_by?: string | null
           status?: string
           updated_at?: string
         }
@@ -723,6 +732,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      approve_teacher_application: {
+        Args: { _application_id: string; _notes?: string }
+        Returns: Json
+      }
       award_xp: {
         Args: {
           _check_daily_bonus?: boolean
@@ -788,6 +801,10 @@ export type Database = {
           msg_id: number
           read_ct: number
         }[]
+      }
+      reject_teacher_application: {
+        Args: { _application_id: string; _notes?: string }
+        Returns: undefined
       }
     }
     Enums: {

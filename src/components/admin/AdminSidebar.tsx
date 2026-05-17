@@ -1,4 +1,4 @@
-import { LayoutDashboard, Users, CalendarDays, Clock, UserCog, LogOut } from "lucide-react";
+import { LayoutDashboard, Users, CalendarDays, Clock, UserCog, LogOut, GraduationCap } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "@/context/AuthContext";
@@ -22,6 +22,7 @@ const items = [
   { title: "Lekcije", url: "/admin/lessons", icon: CalendarDays },
   { title: "Termini", url: "/admin/availability", icon: Clock },
   { title: "Profil nastavnika", url: "/admin/teacher-profile", icon: UserCog },
+  { title: "Prijave profesora", url: "/admin/teacher-applications", icon: GraduationCap },
 ];
 
 export function AdminSidebar() {
