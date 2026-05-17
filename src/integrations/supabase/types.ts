@@ -487,6 +487,42 @@ export type Database = {
         }
         Relationships: []
       }
+      teacher_applications: {
+        Row: {
+          bio: string
+          created_at: string
+          cv_path: string | null
+          email: string
+          full_name: string
+          id: string
+          languages: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          bio: string
+          created_at?: string
+          cv_path?: string | null
+          email: string
+          full_name: string
+          id?: string
+          languages: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          bio?: string
+          created_at?: string
+          cv_path?: string | null
+          email?: string
+          full_name?: string
+          id?: string
+          languages?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       teacher_profile: {
         Row: {
           bio: string
