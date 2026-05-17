@@ -39,6 +39,7 @@ const App = () => (
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<LandingPage />} />
+              <Route path="/za-profesore" element={<ForTeachersPage />} />
               <Route path="/auth" element={<AuthPage />} />
               <Route path="/onboarding" element={<ProtectedRoute><OnboardingPage /></ProtectedRoute>} />
               <Route path="/practice" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />
