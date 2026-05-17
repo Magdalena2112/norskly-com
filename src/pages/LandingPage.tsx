@@ -63,39 +63,28 @@ const TRIAL_LOCKED = [
   "Pametno praćenje napretka",
 ];
 
-const PRICING = [
+const LEARNING_OPTIONS = [
   {
-    tier: "Self-Learning",
-    price: "22€",
-    per: "/mesec",
-    desc: "Za studente koji žele potpuno samostalno učenje uz punu snagu AI-a.",
+    icon: Sparkles,
+    title: "Samostalno AI učenje",
+    desc: "Za učenike koji žele potpuno samostalno učenje uz AI podršku.",
     items: [
-      "Kompletna AI funkcionalnost",
       "AI razgovori",
       "Personalizovane vežbe",
-      "Praćenje napretka",
       "Gramatika i vokabular",
-      "Neograničen pristup platformi",
+      "Praćenje napretka",
     ],
-    cta: "Počni samostalno",
-    variant: "featured" as const,
-    featured: true,
   },
   {
-    tier: "Learning + Lessons",
-    price: "19€",
-    per: "/mesec",
-    desc: "Za studente koji kombinuju AI učenje sa podrškom profesora.",
+    icon: GraduationCap,
+    title: "AI + podrška profesora",
+    desc: "Kombinuj AI alate sa individualnim časovima i podrškom profesora.",
     items: [
-      "Snižen pristup platformi",
       "Rezervacija časova",
       "Podrška profesora",
       "AI alati tokom učenja",
       "Praćenje napretka",
     ],
-    note: "Časovi se rezervišu i naplaćuju zasebno.",
-    cta: "Uči uz profesore",
-    variant: "soft" as const,
   },
 ];
 
