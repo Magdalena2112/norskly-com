@@ -44,7 +44,42 @@ Deno.serve(async (req) => {
       });
     }
 
-    const { action, messages, profile, settings } = await req.json();
+    const { action, messages: rawMessages, profile, settings } = await req.json();
+
+    // Input validation: cap messages count/size and whitelist roles to prevent
+    // prompt injection (e.g., injected system messages) and cost amplification.
+    const MAX_MESSAGES = 50;
+    const MAX_TOTAL_CHARS = 20000;
+    const MAX_MSG_CHARS = 4000;
+    if (!Array.isArray(rawMessages) || rawMessages.length > MAX_MESSAGES) {
+      return new Response(JSON.stringify({ error: "Invalid messages" }), {
+        status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+    let totalChars = 0;
+    const messages: { role: "user" | "assistant"; content: string }[] = [];
+    for (const m of rawMessages) {
+      if (!m || typeof m !== "object") continue;
+      const role = (m as any).role;
+      const content = (m as any).content;
+      if (role !== "user" && role !== "assistant") {
+        return new Response(JSON.stringify({ error: "Invalid message role" }), {
+          status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" },
+        });
+      }
+      if (typeof content !== "string" || content.length > MAX_MSG_CHARS) {
+        return new Response(JSON.stringify({ error: "Message too large" }), {
+          status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" },
+        });
+      }
+      totalChars += content.length;
+      if (totalChars > MAX_TOTAL_CHARS) {
+        return new Response(JSON.stringify({ error: "Messages exceed total size limit" }), {
+          status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" },
+        });
+      }
+      messages.push({ role, content });
+    }
 
     const userLevel = profile?.level || "A1";
 

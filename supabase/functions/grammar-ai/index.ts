@@ -55,6 +55,22 @@ Deno.serve(async (req) => {
 
     const { action, level, topic, count, text, unique_seed, attempt_no, previous_sentences } = await req.json();
 
+    // Input size limits to prevent cost amplification
+    const MAX_TEXT = 5000;
+    const MAX_FIELD = 500;
+    const isStr = (v: unknown): v is string => typeof v === "string";
+    if (
+      (isStr(text) && text.length > MAX_TEXT) ||
+      (isStr(topic) && topic.length > MAX_FIELD) ||
+      (isStr(level) && level.length > 10) ||
+      (isStr(unique_seed) && unique_seed.length > 100) ||
+      (Array.isArray(previous_sentences) && (previous_sentences.length > 50 || previous_sentences.some((s: unknown) => isStr(s) && s.length > MAX_FIELD)))
+    ) {
+      return new Response(JSON.stringify({ error: "Input too large" }), {
+        status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
     const cefrExpectations: Record<string, string> = {
       A1: "Fokus na osnovnu strukturu rečenice i razumljivost.",
       A2: "Fokus na stabilnost glagolskih vremena i jednostavne veznike.",
