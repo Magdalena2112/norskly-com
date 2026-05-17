@@ -2,7 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import {
   MessageCircle, Sparkles, BookOpen, Target, Mic, BarChart3,
-  Check, X, ArrowRight, GraduationCap, Users,
+  Check, X, ArrowRight, GraduationCap, Users, CalendarCheck,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
@@ -23,6 +23,7 @@ const FEATURES = [
   { icon: Sparkles, title: "Trenutni AI feedback", desc: "Dobij objašnjenja, ispravke i predloge u realnom vremenu." },
   { icon: Mic, title: "AI razgovori", desc: "Vežbaj govor i komunikaciju kroz razgovore sa AI-em." },
   { icon: BarChart3, title: "Pametno praćenje napretka", desc: "Prati napredak i analiziraj greške koje se ponavljaju." },
+  { icon: CalendarCheck, title: "Podrška profesora", desc: "Poveži se sa profesorima i zakaži časove kada želiš dodatnu podršku u učenju." },
 ];
 
 const STUDENT_BENEFITS = [
