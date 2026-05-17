@@ -292,7 +292,7 @@ export default function LandingPage() {
                   </li>
                 ))}
               </ul>
-              <Button onClick={() => navigate("/auth?role=teacher")}
+              <Button onClick={() => navigate("/za-profesore")}
                 variant="outline"
                 className="rounded-full border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground">
                 Predaj uz Norskly <ArrowRight className="ml-1 h-4 w-4" />
