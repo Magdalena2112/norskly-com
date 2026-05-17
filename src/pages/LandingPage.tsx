@@ -27,12 +27,19 @@ const FEATURES = [
 ];
 
 const STUDENT_BENEFITS = [
-  "Personalizovano učenje", "AI razgovorna praksa", "Izgradnja vokabulara",
-  "Podrška u gramatici", "Praćenje napretka",
+  "Personalizovano AI učenje",
+  "Razgovorna praksa kroz realne situacije",
+  "Pametno građenje vokabulara",
+  "Jasna podrška u gramatici",
+  "Praćenje napretka i grešaka",
+  "Mogućnost dodatne podrške profesora jezika",
 ];
 const TEACHER_BENEFITS = [
-  "Upravljanje studentima", "Praćenje napretka studenata", "Organizacija časova",
-  "AI-generisane vežbe", "Analitika i uvid u studente",
+  "Upravljanje studentima i grupama",
+  "Uvid u napredak i tipične greške",
+  "Organizacija časova i materijala",
+  "AI-generisane vežbe i sadržaj",
+  "Analitika i personalizovani uvidi",
 ];
 
 const FIT_YES = [
