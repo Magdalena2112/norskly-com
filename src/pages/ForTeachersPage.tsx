@@ -12,6 +12,7 @@ import { Label } from "@/components/ui/label";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 import { z } from "zod";
+import TeacherAvatar from "@/components/TeacherAvatar";
 
 const STEPS = [
   { icon: GraduationCap, title: "Registruj se na platformi", desc: "Kreiraj nalog i započni proces prijave za predavanje." },
