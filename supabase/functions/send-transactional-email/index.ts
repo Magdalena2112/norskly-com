@@ -124,25 +124,50 @@ Deno.serve(async (req) => {
     )
   }
 
-  // Resolve effective recipient: template-level `to` takes precedence over
-  // the caller-provided recipientEmail. This allows notification templates
-  // to always send to a fixed address (e.g., site owner from env var).
-  const effectiveRecipient = template.to || recipientEmail
+  // Create Supabase client with service role (bypasses RLS)
+  const supabase = createClient(supabaseUrl, supabaseServiceKey)
+
+  // Server-side authorization per template — prevents abuse where any
+  // authenticated user could send branded emails to arbitrary recipients.
+  // The caller-supplied recipientEmail is IGNORED; we resolve it server-side.
+  let enforcedRecipient: string | null = null
+  switch (templateName) {
+    case 'lesson-booked-student': {
+      // Student confirmation must go to the caller's own email only.
+      enforcedRecipient = authUser.email ?? null
+      break
+    }
+    case 'lesson-booked-teacher': {
+      // Teacher email is resolved server-side; caller cannot override it.
+      const { data: teacherEmail, error: teacherErr } = await supabase.rpc('get_teacher_email')
+      if (teacherErr || !teacherEmail) {
+        console.error('Teacher email lookup failed', { error: teacherErr })
+        return new Response(
+          JSON.stringify({ error: 'Teacher email unavailable' }),
+          { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        )
+      }
+      enforcedRecipient = teacherEmail as string
+      break
+    }
+    default: {
+      console.warn('Template not allowed for caller', { templateName, userId: authUser.id })
+      return new Response(
+        JSON.stringify({ error: `Template '${templateName}' is not allowed` }),
+        { status: 403, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      )
+    }
+  }
+
+  // Template-level fixed `to` still wins (for notification-style templates).
+  const effectiveRecipient = template.to || enforcedRecipient
 
   if (!effectiveRecipient) {
     return new Response(
-      JSON.stringify({
-        error: 'recipientEmail is required (unless the template defines a fixed recipient)',
-      }),
-      {
-        status: 400,
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-      }
+      JSON.stringify({ error: 'Recipient could not be resolved' }),
+      { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     )
   }
-
-  // Create Supabase client with service role (bypasses RLS)
-  const supabase = createClient(supabaseUrl, supabaseServiceKey)
 
   // 2. Check suppression list (fail-closed: if we can't verify, don't send)
   const { data: suppressed, error: suppressionError } = await supabase
