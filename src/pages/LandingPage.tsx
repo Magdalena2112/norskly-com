@@ -5,7 +5,8 @@ import {
   Check, X, ArrowRight, GraduationCap, Users, CalendarCheck, Lock,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import { LANGUAGES as LANGUAGE_CONFIGS } from "@/lib/languages";
 import {
   Accordion, AccordionContent, AccordionItem, AccordionTrigger,
 } from "@/components/ui/accordion";
@@ -163,20 +164,21 @@ export default function LandingPage() {
               sa personalizovanom podrškom, vežbama i praćenjem napretka.
             </p>
 
-            {/* language pills */}
+            {/* language pills — entry to per-language onboarding */}
+            <p className="text-xs font-semibold uppercase tracking-widest text-primary/70 mb-3">
+              Izaberi jezik koji želiš da učiš
+            </p>
             <div className="flex flex-wrap justify-center gap-2 mb-10">
-              {LANGUAGES.map((l) => (
-                <button
-                  key={l.code}
-                  onClick={() => setLang(l.code)}
-                  className={`px-5 py-2.5 rounded-full text-sm font-medium border transition-all ${
-                    lang === l.code
-                      ? "bg-primary text-primary-foreground border-primary shadow-card-soft"
-                      : "bg-background text-foreground border-border hover:border-primary/40 hover:bg-secondary/40"
-                  }`}
+              {LANGUAGE_CONFIGS.map((l) => (
+                <Link
+                  key={l.slug}
+                  to={`/jezici/${l.slug}`}
+                  className="group px-5 py-2.5 rounded-full text-sm font-medium border bg-background text-foreground border-border hover:border-primary hover:bg-secondary/40 hover:-translate-y-0.5 hover:shadow-card-soft transition-all inline-flex items-center gap-2"
                 >
-                  <span className="mr-2">{l.flag}</span>{l.label}
-                </button>
+                  <span>{l.flag}</span>
+                  <span>{l.label}</span>
+                  <ArrowRight className="w-3.5 h-3.5 opacity-0 -ml-1 group-hover:opacity-100 group-hover:ml-0 transition-all" />
+                </Link>
               ))}
             </div>
 
