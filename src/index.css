@@ -99,6 +99,20 @@
   }
 }
 
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter', sans-serif;
+  }
+  h1, h2, h3 {
+    font-family: 'Fraunces', 'Playfair Display', serif;
+    letter-spacing: -0.02em;
+  }
+}
+
 @keyframes aurora {
   0%, 100% { background-position: 0% 50%; }
   25% { background-position: 50% 100%; }
