@@ -84,7 +84,7 @@ export default function ForTeachersPage() {
 
       const { error } = await supabase
         .from("teacher_applications")
-        .insert({ ...parsed.data, cv_path });
+        .insert([{ ...parsed.data, cv_path }]);
       if (error) throw error;
 
       setSubmitted(true);
