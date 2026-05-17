@@ -96,6 +96,16 @@ const FAQ = [
   { q: "Mogu li da predajem na Norskly?", a: "Da. Kreiraj profesorski nalog i počni da gradiš svoju bazu studenata." },
 ];
 
+// Fine-tune the decorative FAQ quote card's responsive typography here.
+// fontMin/fontMax use rem; fluid scales with viewport width (vw).
+const QUOTE_CARD_TYPO = {
+  fontMin: "2rem",       // smallest size (mobile)
+  fontFluid: "5.5vw",    // grows with viewport width
+  fontMax: "3.5rem",     // largest size (desktop)
+  lineHeight: "1.05",    // tighter = more poster-like
+  letterSpacing: "0.01em", // negative = condensed, positive = airy
+};
+
 export default function LandingPage() {
   const navigate = useNavigate();
 
