@@ -113,39 +113,50 @@ export default function ForTeachersPage() {
         <div className="absolute -top-32 -right-32 w-[36rem] h-[36rem] rounded-full bg-primary/10 blur-3xl -z-10" />
         <div className="absolute -bottom-40 -left-20 w-[28rem] h-[28rem] rounded-full bg-accent/10 blur-3xl -z-10" />
 
-        <div className="container max-w-5xl py-24 md:py-32">
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            className="text-center"
-          >
-            <button
-              onClick={() => navigate("/")}
-              className="text-xs font-semibold uppercase tracking-widest text-primary/70 hover:text-primary transition-colors mb-6"
+        <div className="container max-w-6xl py-20 md:py-28">
+          <div className="grid md:grid-cols-2 gap-10 lg:gap-16 items-center">
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              className="text-center md:text-left order-2 md:order-1"
             >
-              ← Norskly za profesore
-            </button>
-            <h1 className="text-display text-[clamp(2.25rem,6vw,5rem)] leading-[1.05] text-primary">
-              Postani predavač na <span className="font-script text-primary/80">Norskly</span> platformi.
-            </h1>
-            <p className="mt-6 text-lg md:text-xl text-foreground/70 max-w-2xl mx-auto leading-relaxed">
-              Pridruži se platformi koja povezuje profesore jezika sa učenicima i pruža moderne AI alate
-              za organizaciju nastave, praćenje napretka i kreiranje vežbi.
-            </p>
-            <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-              <Button
-                onClick={scrollToForm}
-                className="rounded-full bg-primary text-primary-foreground hover:bg-primary/90 h-12 px-7 text-base"
+              <button
+                onClick={() => navigate("/")}
+                className="text-xs font-semibold uppercase tracking-widest text-primary/70 hover:text-primary transition-colors mb-6"
               >
-                Apliciraj za predavanje <ArrowRight className="ml-1 h-4 w-4" />
-              </Button>
-              <div className="inline-flex items-center gap-2 text-xs text-foreground/60">
-                <ShieldCheck className="w-4 h-4 text-primary/70" />
-                Manuelna verifikacija od strane administratora
+                ← Norskly za profesore
+              </button>
+              <h1 className="text-display text-[clamp(2.25rem,5.5vw,4.5rem)] leading-[1.05] text-primary">
+                Postani predavač na <span className="font-script text-primary/80">Norskly</span> platformi.
+              </h1>
+              <p className="mt-6 text-lg md:text-xl text-foreground/70 max-w-xl mx-auto md:mx-0 leading-relaxed">
+                Pridruži se platformi koja povezuje profesore jezika sa učenicima i pruža moderne AI alate
+                za organizaciju nastave, praćenje napretka i kreiranje vežbi.
+              </p>
+              <div className="mt-10 flex flex-wrap items-center justify-center md:justify-start gap-4">
+                <Button
+                  onClick={scrollToForm}
+                  className="rounded-full bg-primary text-primary-foreground hover:bg-primary/90 h-12 px-7 text-base"
+                >
+                  Apliciraj za predavanje <ArrowRight className="ml-1 h-4 w-4" />
+                </Button>
+                <div className="inline-flex items-center gap-2 text-xs text-foreground/60">
+                  <ShieldCheck className="w-4 h-4 text-primary/70" />
+                  Manuelna verifikacija od strane administratora
+                </div>
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+              className="order-1 md:order-2 flex justify-center md:justify-end"
+            >
+              <TeacherAvatar />
+            </motion.div>
+          </div>
         </div>
       </section>
 
