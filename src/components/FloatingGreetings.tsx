@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { motion, MotionValue, useMotionValue, useSpring, useTransform } from "framer-motion";
 
 type Bubble = {
   text: string;
@@ -43,17 +43,57 @@ const fontClasses = {
   sans:    "font-sans font-semibold",
 };
 
-// Max pixel offset for a bubble at depth=1 when cursor reaches edge
 const MAX_PARALLAX = 40;
+
+const BubbleItem = ({ b, smx, smy }: { b: Bubble; smx: MotionValue<number>; smy: MotionValue<number> }) => {
+  const tx = useTransform(smx, (v) => -v * MAX_PARALLAX * b.depth);
+  const ty = useTransform(smy, (v) => -v * MAX_PARALLAX * b.depth);
+
+  const opacity = 0.55 + b.depth * 0.4;
+  const blurPx = Math.max(0, (1.0 - b.depth) * 1.6);
+
+  return (
+    <motion.div
+      className="absolute will-change-transform"
+      style={{
+        top: b.top,
+        left: b.left,
+        x: tx,
+        y: ty,
+        opacity,
+        filter: `blur(${blurPx}px)`,
+      }}
+      initial={{ opacity: 0, scale: 0.6 }}
+      animate={{ opacity, scale: 1 }}
+      transition={{ delay: b.delay, duration: 0.8, ease: "easeOut" }}
+    >
+      <motion.div
+        animate={{
+          y: [0, -14, 0],
+          rotate: [b.rotate, b.rotate + (b.rotate > 0 ? 2 : -2), b.rotate],
+        }}
+        transition={{ duration: b.duration, repeat: Infinity, ease: "easeInOut", delay: b.delay }}
+        style={{ transform: `scale(${b.scale})` }}
+        className={`relative inline-flex items-center px-5 py-2.5 rounded-full border shadow-card-soft ${variantClasses[b.variant]}`}
+      >
+        <span className={`text-base md:text-xl ${fontClasses[b.font ?? "display"]} tracking-tight whitespace-nowrap`}>
+          {b.text}
+        </span>
+        <span
+          className={`absolute -bottom-1.5 left-6 h-3 w-3 rotate-45 border-r border-b ${variantClasses[b.variant]}`}
+        />
+      </motion.div>
+    </motion.div>
+  );
+};
 
 export const FloatingGreetings = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // -1 → 1 normalized cursor position relative to container center
   const mx = useMotionValue(0);
   const my = useMotionValue(0);
 
-  // smooth spring for lag effect
+  // Soft, lagging spring for elegant parallax
   const smx = useSpring(mx, { stiffness: 60, damping: 18, mass: 0.6 });
   const smy = useSpring(my, { stiffness: 60, damping: 18, mass: 0.6 });
 
@@ -67,8 +107,8 @@ export const FloatingGreetings = () => {
       const rect = el.getBoundingClientRect();
       const cx = rect.left + rect.width / 2;
       const cy = rect.top + rect.height / 2;
-      mx.set(((e.clientX - cx) / (rect.width / 2)));
-      my.set(((e.clientY - cy) / (rect.height / 2)));
+      mx.set((e.clientX - cx) / (rect.width / 2));
+      my.set((e.clientY - cy) / (rect.height / 2));
     };
     const handleLeave = () => {
       mx.set(0);
@@ -88,49 +128,9 @@ export const FloatingGreetings = () => {
       aria-hidden
       className="pointer-events-none absolute inset-0 overflow-hidden motion-reduce:hidden"
     >
-      {BUBBLES.map((b, i) => {
-        // each bubble parallaxes inversely-ish: deeper (low depth) = subtler lag
-        // eslint-disable-next-line react-hooks/rules-of-hooks
-        const tx = useTransform(smx, (v) => -v * MAX_PARALLAX * b.depth);
-        // eslint-disable-next-line react-hooks/rules-of-hooks
-        const ty = useTransform(smy, (v) => -v * MAX_PARALLAX * b.depth);
-
-        // Depth → opacity & blur to enhance perceived depth
-        const opacity = 0.55 + b.depth * 0.4;
-        const blurPx = Math.max(0, (1.0 - b.depth) * 1.6);
-
-        return (
-          <motion.div
-            key={i}
-            className="absolute will-change-transform"
-            style={{
-              top: b.top,
-              left: b.left,
-              x: tx,
-              y: ty,
-              opacity,
-              filter: `blur(${blurPx}px)`,
-            }}
-            initial={{ opacity: 0, scale: 0.6 }}
-            animate={{ opacity, scale: 1 }}
-            transition={{ delay: b.delay, duration: 0.8, ease: "easeOut" }}
-          >
-            <motion.div
-              animate={{ y: [0, -14, 0], rotate: [b.rotate, b.rotate + (b.rotate > 0 ? 2 : -2), b.rotate] }}
-              transition={{ duration: b.duration, repeat: Infinity, ease: "easeInOut", delay: b.delay }}
-              style={{ transform: `scale(${b.scale})` }}
-              className={`relative inline-flex items-center px-5 py-2.5 rounded-full border shadow-card-soft ${variantClasses[b.variant]}`}
-            >
-              <span className={`text-base md:text-xl ${fontClasses[b.font ?? "display"]} tracking-tight whitespace-nowrap`}>
-                {b.text}
-              </span>
-              <span
-                className={`absolute -bottom-1.5 left-6 h-3 w-3 rotate-45 border-r border-b ${variantClasses[b.variant]}`}
-              />
-            </motion.div>
-          </motion.div>
-        );
-      })}
+      {BUBBLES.map((b, i) => (
+        <BubbleItem key={i} b={b} smx={smx} smy={smy} />
+      ))}
     </div>
   );
 };
