@@ -10,6 +10,7 @@ import { Input } from "@/components/ui/input";
 import { UserProfile } from "@/types/profile";
 import { ChevronRight, ChevronLeft, User, Target, MessageSquare, BookOpen, Gauge } from "lucide-react";
 import BackButton from "@/components/BackButton";
+import JourneyStepper from "@/components/onboarding/JourneyStepper";
 
 const steps = ["Ime", "Nivo", "Cilj", "Stil", "Fokus", "Samopouzdanje", "Norveška"];
 
