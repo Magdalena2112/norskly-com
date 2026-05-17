@@ -60,7 +60,10 @@ export default function LanguagePage() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (lang) document.title = `${lang.label} · Norskly`;
+    if (lang) {
+      document.title = `${lang.label} · Norskly`;
+      localStorage.setItem("norskly_selected_language", lang.slug);
+    }
   }, [lang]);
 
   if (!lang) return <Navigate to="/" replace />;
@@ -76,6 +79,7 @@ export default function LanguagePage() {
   });
 
   const goAuth = (extra: Record<string, string> = {}) => {
+    if (extra.plan) localStorage.setItem("norskly_selected_plan", extra.plan);
     const params = new URLSearchParams({ lang: lang.slug, ...extra });
     navigate(`/auth?${params.toString()}`);
   };
@@ -119,7 +123,7 @@ export default function LanguagePage() {
 
         <div className="container relative">
           <div className="max-w-3xl">
-            <JourneyStepper current="explore" className="mb-8" />
+            <JourneyStepper current="explore" className="mb-8" selectedLanguage={lang.slug} />
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
