@@ -123,7 +123,7 @@ export default function LanguagePage() {
 
         <div className="container relative">
           <div className="max-w-3xl">
-            <JourneyStepper current="explore" className="mb-8" />
+            <JourneyStepper current="explore" className="mb-8" selectedLanguage={lang.slug} />
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
