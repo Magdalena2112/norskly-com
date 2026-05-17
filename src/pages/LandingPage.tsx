@@ -157,15 +157,19 @@ export default function LandingPage() {
             {FEATURES.map((f, i) => (
               <motion.div
                 key={f.title}
-                initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }} transition={{ delay: i * 0.05 }}
-                className="group h-full flex flex-col bg-background border border-border rounded-3xl p-6 sm:p-8 hover:-translate-y-1 hover:shadow-soft transition-all [&:last-child]:sm:col-span-2 [&:last-child]:lg:col-span-3"
+                initial={{ opacity: 0, y: 24, scale: 0.97 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.5, delay: i * 0.07, ease: [0.22, 1, 0.36, 1] }}
+                whileHover={{ y: -6 }}
+                className="group h-full flex flex-col bg-background border border-border rounded-3xl p-6 sm:p-8 transition-all duration-300 hover:border-primary/30 hover:shadow-soft hover:bg-card/40 [&:last-child]:sm:col-span-2 [&:last-child]:lg:col-span-3"
               >
-                <div className="w-12 h-12 rounded-2xl bg-secondary flex items-center justify-center mb-5 group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
-                  <f.icon className="w-5 h-5 text-primary group-hover:text-primary-foreground transition-colors" />
+                <div className="w-12 h-12 rounded-2xl bg-secondary flex items-center justify-center mb-5 transition-all duration-300 group-hover:bg-primary group-hover:scale-110 group-hover:rotate-[-4deg]">
+                  <f.icon className="w-5 h-5 text-primary transition-colors duration-300 group-hover:text-primary-foreground" />
                 </div>
-                <h3 className="font-display text-2xl font-bold text-primary mb-2">{f.title}</h3>
+                <h3 className="font-display text-2xl font-bold text-primary mb-2 transition-colors duration-300 group-hover:text-primary/90">{f.title}</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">{f.desc}</p>
+                <span className="mt-4 h-px w-0 bg-gradient-to-r from-primary/40 to-transparent transition-all duration-500 group-hover:w-2/3" />
               </motion.div>
             ))}
           </div>
