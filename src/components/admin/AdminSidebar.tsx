@@ -1,4 +1,4 @@
-import { LayoutDashboard, Users, CalendarDays, Clock, UserCog, LogOut } from "lucide-react";
+import { LayoutDashboard, Users, CalendarDays, Clock, UserCog, LogOut, GraduationCap } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "@/context/AuthContext";
