@@ -60,7 +60,10 @@ export default function LanguagePage() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (lang) document.title = `${lang.label} · Norskly`;
+    if (lang) {
+      document.title = `${lang.label} · Norskly`;
+      localStorage.setItem("norskly_selected_language", lang.slug);
+    }
   }, [lang]);
 
   if (!lang) return <Navigate to="/" replace />;
@@ -76,6 +79,7 @@ export default function LanguagePage() {
   });
 
   const goAuth = (extra: Record<string, string> = {}) => {
+    if (extra.plan) localStorage.setItem("norskly_selected_plan", extra.plan);
     const params = new URLSearchParams({ lang: lang.slug, ...extra });
     navigate(`/auth?${params.toString()}`);
   };
