@@ -32,13 +32,9 @@ export default function TeacherProfilePage() {
   const { data: teacher, isLoading: teacherLoading } = useQuery({
     queryKey: ["teacher-profile"],
     queryFn: async () => {
-      const { data, error } = await supabase
-        .from("teacher_profile")
-        .select("id, name, bio, focus, photo_url, rating, students_count, duration_minutes, meet_link, updated_at")
-        .limit(1)
-        .maybeSingle();
+      const { data, error } = await supabase.rpc("get_teacher_profile_public");
       if (error) throw error;
-      return data;
+      return (data && data[0]) || null;
     },
   });
 
