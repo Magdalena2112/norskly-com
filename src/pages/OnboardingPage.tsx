@@ -116,6 +116,11 @@ export default function OnboardingPage() {
             <span className="text-sm text-muted-foreground">{step + 1}/{steps.length}</span>
           </div>
 
+          {/* Macro journey stepper */}
+          <div className="mb-8">
+            <JourneyStepper current="trial" />
+          </div>
+
           <AnimatePresence mode="wait">
             <motion.div
               key={step}
