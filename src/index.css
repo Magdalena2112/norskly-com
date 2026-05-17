@@ -170,4 +170,36 @@
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
+
+  .font-script {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-weight: 400;
+  }
+
+  .text-display {
+    font-family: 'Fraunces', 'Playfair Display', serif;
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    line-height: 0.95;
+  }
+
+  .bg-grid-soft {
+    background-image:
+      linear-gradient(hsl(var(--primary) / 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--primary) / 0.06) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  .bg-dots-soft {
+    background-image: radial-gradient(hsl(var(--primary) / 0.12) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+
+  .shadow-soft {
+    box-shadow: var(--shadow-soft);
+  }
+  .shadow-card-soft {
+    box-shadow: var(--shadow-card);
+  }
 }
