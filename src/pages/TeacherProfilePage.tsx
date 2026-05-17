@@ -32,13 +32,9 @@ export default function TeacherProfilePage() {
   const { data: teacher, isLoading: teacherLoading } = useQuery({
     queryKey: ["teacher-profile"],
     queryFn: async () => {
-      const { data, error } = await supabase
-        .from("teacher_profile")
-        .select("id, name, bio, focus, photo_url, rating, students_count, duration_minutes, meet_link, updated_at")
-        .limit(1)
-        .maybeSingle();
+      const { data, error } = await supabase.rpc("get_teacher_profile_public");
       if (error) throw error;
-      return data;
+      return (data && data[0]) || null;
     },
   });
 
@@ -139,12 +135,13 @@ export default function TeacherProfilePage() {
 
       return { startTime, endTime };
     },
-    onSuccess: (data) => {
+    onSuccess: async (data) => {
+      const { data: meetLinkData } = await supabase.rpc("get_teacher_meet_link");
       setConfirmationData({
         date: data.startTime,
         endTime: data.endTime,
         teacherName,
-        meetLink: (teacher as any)?.meet_link || "",
+        meetLink: meetLinkData || "",
         duration: teacherDuration,
         userEmail: user?.email,
       });
@@ -179,7 +176,7 @@ export default function TeacherProfilePage() {
   const teacherStudents = teacher?.students_count || 120;
   const teacherPhoto = teacher?.photo_url || teacherPhotoFallback;
   const initials = teacherName.split(" ").map((n: string) => n[0]).join("");
-  const meetLink = (teacher as any)?.meet_link || "";
+  const meetLink = true; // meet link is fetched after booking via secure RPC
 
   const copyMeetLink = () => {
     if (confirmationData?.meetLink) {
