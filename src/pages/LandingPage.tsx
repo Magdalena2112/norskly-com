@@ -463,8 +463,24 @@ export default function LandingPage() {
                 Sve što treba da znaš pre nego što kreneš.
               </p>
               <div className="relative rounded-3xl overflow-hidden bg-secondary aspect-square max-w-md bg-dots-soft border border-border">
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="font-script text-primary text-7xl md:text-9xl">norsk.</span>
+                <Sparkles className="absolute top-6 right-6 w-5 h-5 text-primary/40" aria-hidden="true" />
+                <div className="absolute inset-0 p-8 md:p-10 flex flex-col justify-between text-left">
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-widest text-primary/60 mb-6">
+                      Norskly note
+                    </p>
+                    <blockquote className="text-display text-primary leading-[0.95]">
+                      <span className="block text-[clamp(2.25rem,6vw,4.5rem)]">Confidence</span>
+                      <span className="block text-[clamp(2rem,5.5vw,4rem)] text-primary/85">comes with</span>
+                      <span className="block font-script not-italic text-primary text-[clamp(2.75rem,7vw,5.5rem)] mt-1">
+                        practice.
+                      </span>
+                    </blockquote>
+                  </div>
+                  <div>
+                    <div className="h-px w-12 bg-primary/30 mb-3" />
+                    <cite className="font-script text-primary/50 text-xl not-italic">— norsk.</cite>
+                  </div>
                 </div>
               </div>
             </div>
