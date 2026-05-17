@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { motion } from "framer-motion";
 import {
   MessageCircle, Sparkles, BookOpen, Target, Mic, BarChart3,
