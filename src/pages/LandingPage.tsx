@@ -119,7 +119,7 @@ export default function LandingPage() {
           <div className="hidden md:flex items-center gap-8 text-sm font-medium text-foreground/80">
             <a href="#features" className="hover:text-primary transition-colors">Platforma</a>
             <a href="#teachers" className="hover:text-primary transition-colors">Za profesore</a>
-            <a href="#pricing" className="hover:text-primary transition-colors">Cene</a>
+            <a href="#pricing" className="hover:text-primary transition-colors">Kako učiš</a>
             <a href="#faq" className="hover:text-primary transition-colors">FAQ</a>
           </div>
           <div className="flex items-center gap-2">
