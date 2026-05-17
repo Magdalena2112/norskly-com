@@ -1,63 +1,63 @@
-# Onboarding & Navigation Redesign
+# Redesign homepage pricing → informational onboarding section
 
-Restructure the user journey so language selection becomes step 1, each language has its own premium landing page (hero + teachers + plans), and registration leads into a clean stepped onboarding ending in a free trial.
+## Goal
+Replace the checkout-style pricing block on `LandingPage.tsx` with an informational, onboarding-focused section. Real plan selection stays on `/jezici/:slug`.
 
-## 1. Routing changes (`src/App.tsx`)
+## Scope
+Only `src/pages/LandingPage.tsx`. No new components, no route or data changes.
 
-Add three new routes pointing to a single dynamic component:
-- `/jezici/norveski`
-- `/jezici/engleski`
-- `/jezici/nemacki`
+## Changes
 
-Implemented as `/jezici/:slug` → `LanguagePage.tsx`, with a lookup table mapping slug → language config (name, native title, hero copy, color accent, available flag).
+### 1. Section header
+- Section id stays `pricing` (nav link `#pricing` still works), but visually labeled as "Kako učiš na Norskly?".
+- Eyebrow: `Fleksibilno učenje` (replaces "Cene za studente").
+- Title: `Uči svojim` <span script>tempom</span>. (replaces "Izaberi svoj plan.")
+- Subtitle: `Istraži kako Norskly funkcioniše i koje opcije učenja te čekaju.`
+- Remove "7 dana besplatno" pill at top (the free-trial block below already communicates it).
 
-Only Norwegian is "available" initially; English/German render the same layout with a "Uskoro" badge and disabled CTAs (keeps scope tight, preserves the structure for later).
+### 2. Free trial block — reframe as onboarding intro
+- Add a heading inside the card:
+  - Title: `Započni besplatno.`
+  - Subtitle: `Istraži platformu i upoznaj način učenja pre izbora pretplate.`
+- Keep two-column layout: `TRIAL_INCLUDED` (gramatika, vokabular, probna rezervacija, upoznavanje) on the left, `TRIAL_LOCKED` on the right with Lock icons — visually separated as today.
+- Remove the "Bez kartice" microcopy chip / keep it subtle in the heading area.
+- No CTA button in this card (informational only).
 
-## 2. Homepage language buttons (`src/pages/LandingPage.tsx`)
+### 3. Replace 2 pricing cards with 2 informational cards
+Drop the `PRICING` constant. New `LEARNING_OPTIONS` array, rendered in the same `md:grid-cols-2` layout but without:
+- price block
+- "Preporučeno" badge
+- featured/primary background treatment
+- purchase Button
 
-Convert the existing static language buttons into `<Link>`s to the three new routes. Keep current styling (cream bg, burgundy accents, pastel pink). Add a subtle hover lift.
+Both cards: equal weight, `bg-background border border-border rounded-3xl`, soft hover shadow, burgundy accent icon at top.
 
-## 3. New `LanguagePage.tsx`
+Card 1
+- Icon: `Sparkles` (or `Bot`) in pastel pink circle
+- Title: `Samostalno AI učenje`
+- Description: `Za učenike koji žele potpuno samostalno učenje uz AI podršku.`
+- Features (Check list):
+  - AI razgovori
+  - Personalizovane vežbe
+  - Gramatika i vokabular
+  - Praćenje napretka
 
-Premium editorial layout, sections in order:
+Card 2
+- Icon: `GraduationCap` in pastel pink circle
+- Title: `AI + podrška profesora`
+- Description: `Kombinuj AI alate sa individualnim časovima i podrškom profesora.`
+- Features:
+  - Rezervacija časova
+  - Podrška profesora
+  - AI alati tokom učenja
+  - Praćenje napretka
 
-1. **Hero** — language-specific Serbian headline (e.g. "Uči norveški uz AI i podršku profesora."), short subtitle, primary CTA "Započni besplatno" → `/auth?lang=<slug>&plan=trial`, secondary CTA "Pogledaj planove" scrolling to plans.
-2. **Teachers** — for Norwegian, fetch from existing `teacher_profiles` table (reuse pattern from `TeacherProfilePage`). Card grid: photo, name, short bio, lesson types (badges), price, rating placeholder (★ 5.0 · novo), CTA "Rezerviši čas" → `/auth?next=/book-lesson`. For unavailable languages, show 3 placeholder cards with "Uskoro" overlay.
-3. **Plans** — three-card pricing section:
-   - **7-day free trial** — highlighted, "Probaj besplatno"
-   - **Self-Learning** — monthly price, AI modules only
-   - **Learning + Lessons** — monthly price, AI + live lessons
-   Each card: name, price, feature list, CTA → `/auth?plan=<id>&lang=<slug>`.
-4. **Registration CTA** — full-width band, single CTA "Kreiraj nalog i počni" → `/auth?lang=<slug>`.
+### 4. Soft bottom CTA
+Below the two cards, centered:
+- Copy: `Izaberi jezik da vidiš dostupne profesore i opcije učenja.`
+- Button (outline/ghost, rounded-full): `Izaberi jezik` → scrolls to the language selection in the hero (existing `#languages` anchor, or `document.getElementById('languages')?.scrollIntoView({behavior:'smooth'})` — confirm hero section id while implementing and reuse or add it).
 
-Styling: reuse existing tokens (warm cream bg, burgundy primary, accent pinks, rounded-2xl cards, subtle shadows, framer-motion fade-in-up on scroll).
-
-## 4. Onboarding flow updates (`src/pages/OnboardingPage.tsx`)
-
-Add a **stepper header** showing the full journey:
-```
-1 Jezik  →  2 Istraži  →  3 Nalog  →  4 Probna verzija  →  5 Učenje
-```
-Current step (post-registration) = "Probna verzija / Profil". The existing in-component steps (name, level, goal, etc.) become sub-steps under the "Profil" macro-step. The left-rail sidebar keeps its existing detailed step list, but a new horizontal macro-stepper sits above it/the content showing the 5-stage journey with the current stage highlighted.
-
-On completion, redirect remains `/practice` but with a one-time "Tvoj 7-dnevni probni period je počeo" toast.
-
-Read `?lang=<slug>` and `?plan=<id>` from the URL on mount and persist into the profile as `preferred_language` (string) and `selected_plan` (string) — stored only in localStorage for now (no DB migration this iteration; can be promoted later).
-
-## 5. Auth page passthrough (`src/pages/AuthPage.tsx`)
-
-Preserve `?lang` and `?plan` query params through the signup→onboarding redirect so the onboarding macro-stepper can show the correct context.
-
-## Technical notes
-
-- New files: `src/pages/LanguagePage.tsx`, `src/components/onboarding/JourneyStepper.tsx`, `src/lib/languages.ts` (slug→config map).
-- Reuse: `Button`, `Card`, existing motion patterns, `BackButton`.
-- No database migration needed for this iteration.
-- Mobile: stack hero/teachers/plans vertically, horizontal scroll for stepper on <640px (per project mobile-responsiveness memory).
-- All UI copy in Serbian (Latin); Norwegian-only where it's learning material.
-
-## Out of scope (call out for follow-up)
-
-- Real Stripe/Paddle payment wiring for plans (CTAs route to auth+trial only).
-- Teacher availability for English/German (placeholder until teachers onboarded).
-- Persisting `preferred_language` / `selected_plan` to `profiles` table.
+## Notes
+- Keep current visual language: cream background (`bg-card/60`), burgundy primary, pastel pink accents, `rounded-3xl`, `shadow-card-soft`, editorial display/script typography mix.
+- Remove the unused `PRICING` constant and any imports that become unused (e.g. ArrowRight if no longer needed there — verify).
+- Nav "Cene" link: rename label to `Kako učiš` pointing to `#pricing` so the anchor keeps working without route churn.

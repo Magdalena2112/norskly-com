@@ -63,39 +63,28 @@ const TRIAL_LOCKED = [
   "Pametno praćenje napretka",
 ];
 
-const PRICING = [
+const LEARNING_OPTIONS = [
   {
-    tier: "Self-Learning",
-    price: "22€",
-    per: "/mesec",
-    desc: "Za studente koji žele potpuno samostalno učenje uz punu snagu AI-a.",
+    icon: Sparkles,
+    title: "Samostalno AI učenje",
+    desc: "Za učenike koji žele potpuno samostalno učenje uz AI podršku.",
     items: [
-      "Kompletna AI funkcionalnost",
       "AI razgovori",
       "Personalizovane vežbe",
-      "Praćenje napretka",
       "Gramatika i vokabular",
-      "Neograničen pristup platformi",
+      "Praćenje napretka",
     ],
-    cta: "Počni samostalno",
-    variant: "featured" as const,
-    featured: true,
   },
   {
-    tier: "Learning + Lessons",
-    price: "19€",
-    per: "/mesec",
-    desc: "Za studente koji kombinuju AI učenje sa podrškom profesora.",
+    icon: GraduationCap,
+    title: "AI + podrška profesora",
+    desc: "Kombinuj AI alate sa individualnim časovima i podrškom profesora.",
     items: [
-      "Snižen pristup platformi",
       "Rezervacija časova",
       "Podrška profesora",
       "AI alati tokom učenja",
       "Praćenje napretka",
     ],
-    note: "Časovi se rezervišu i naplaćuju zasebno.",
-    cta: "Uči uz profesore",
-    variant: "soft" as const,
   },
 ];
 
@@ -119,7 +108,7 @@ export default function LandingPage() {
           <div className="hidden md:flex items-center gap-8 text-sm font-medium text-foreground/80">
             <a href="#features" className="hover:text-primary transition-colors">Platforma</a>
             <a href="#teachers" className="hover:text-primary transition-colors">Za profesore</a>
-            <a href="#pricing" className="hover:text-primary transition-colors">Cene</a>
+            <a href="#pricing" className="hover:text-primary transition-colors">Kako učiš</a>
             <a href="#faq" className="hover:text-primary transition-colors">FAQ</a>
           </div>
           <div className="flex items-center gap-2">
@@ -158,7 +147,7 @@ export default function LandingPage() {
             </p>
 
             {/* language pills — entry to per-language onboarding */}
-            <p className="text-xs font-semibold uppercase tracking-widest text-primary/70 mb-3">
+            <p id="languages" className="text-xs font-semibold uppercase tracking-widest text-primary/70 mb-3 scroll-mt-24">
               Izaberi jezik koji želiš da učiš
             </p>
             <div className="flex flex-wrap justify-center gap-2 mb-10">
@@ -361,30 +350,34 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ============== PRICING ============== */}
+      {/* ============== HOW IT WORKS ============== */}
       <section id="pricing" className="py-20 md:py-28 bg-card/60">
         <div className="container">
           <div className="text-center mb-12 max-w-2xl mx-auto">
-            <span className="inline-block px-4 py-1.5 rounded-full bg-accent/40 text-primary text-xs font-semibold tracking-widest uppercase mb-5">
-              7 dana besplatno
-            </span>
-            <p className="text-xs font-semibold uppercase tracking-widest text-primary/70 mb-3">Cene za studente</p>
+            <p className="text-xs font-semibold uppercase tracking-widest text-primary/70 mb-3">
+              Fleksibilno učenje
+            </p>
             <h2 className="text-display text-[clamp(2rem,5vw,4rem)] text-primary mb-4">
-              Izaberi svoj <span className="font-script text-primary/70">plan</span>.
+              Uči svojim <span className="font-script text-primary/70">tempom</span>.
             </h2>
             <p className="text-muted-foreground">
-              Isprobaj platformu besplatno pre nego što izabereš plan.
+              Istraži kako Norskly funkcioniše i koje opcije učenja te čekaju.
             </p>
           </div>
 
-          {/* Free trial card */}
+          {/* Free trial / onboarding intro card */}
           <div className="max-w-4xl mx-auto mb-10">
             <div className="relative rounded-3xl p-8 md:p-10 bg-background border border-border shadow-card-soft">
-              <div className="flex flex-wrap items-center gap-3 mb-6">
-                <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold tracking-widest uppercase">
-                  <Sparkles className="w-3.5 h-3.5" /> Besplatan probni period
+              <div className="mb-7">
+                <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold tracking-widest uppercase mb-4">
+                  <Sparkles className="w-3.5 h-3.5" /> 7 dana besplatno
                 </span>
-                <span className="text-sm text-muted-foreground">Prvih 7 dana — bez kartice</span>
+                <h3 className="text-display text-3xl md:text-4xl text-primary mb-2">
+                  Započni <span className="font-script text-primary/70">besplatno</span>.
+                </h3>
+                <p className="text-muted-foreground text-sm md:text-base max-w-xl">
+                  Istraži platformu i upoznaj način učenja pre izbora pretplate.
+                </p>
               </div>
               <div className="grid md:grid-cols-2 gap-8">
                 <div>
@@ -411,53 +404,48 @@ export default function LandingPage() {
             </div>
           </div>
 
-          {/* Plans */}
+          {/* Learning options (informational, no pricing) */}
           <div className="grid md:grid-cols-2 gap-5 max-w-4xl mx-auto">
-            {PRICING.map((p) => {
-              const isFeatured = p.variant === "featured";
-              return (
-                <div key={p.tier}
-                  className={`relative rounded-3xl p-8 md:p-10 border flex flex-col transition-all ${
-                    isFeatured
-                      ? "bg-primary text-primary-foreground border-primary shadow-soft md:scale-[1.02]"
-                      : "bg-background text-foreground border-border hover:shadow-card-soft"
-                  }`}
-                >
-                  {p.featured && (
-                    <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-accent text-primary text-xs font-semibold tracking-wide">
-                      Preporučeno
-                    </span>
-                  )}
-                  <p className={`text-xs font-semibold uppercase tracking-widest mb-3 ${isFeatured ? "opacity-80" : "text-primary/70"}`}>{p.tier}</p>
-                  <div className="flex items-baseline gap-1 mb-2">
-                    <span className="text-display text-6xl">{p.price}</span>
-                    <span className={`text-sm ${isFeatured ? "opacity-70" : "text-muted-foreground"}`}>{p.per}</span>
-                  </div>
-                  <p className={`text-sm mb-6 leading-relaxed ${isFeatured ? "opacity-85" : "text-muted-foreground"}`}>{p.desc}</p>
-                  <ul className="space-y-2.5 mb-6 flex-1">
-                    {p.items.map((it) => (
-                      <li key={it} className="flex gap-2.5 text-sm">
-                        <Check className={`w-4 h-4 shrink-0 mt-0.5 ${isFeatured ? "opacity-90" : "text-primary"}`} /> {it}
-                      </li>
-                    ))}
-                  </ul>
-                  {p.note && (
-                    <p className={`text-xs mb-5 italic ${isFeatured ? "opacity-75" : "text-muted-foreground"}`}>
-                      {p.note}
-                    </p>
-                  )}
-                  <Button onClick={() => navigate("/auth?role=student")}
-                    className={`rounded-full w-full h-12 ${
-                      isFeatured
-                        ? "bg-primary-foreground text-primary hover:bg-primary-foreground/90"
-                        : "bg-primary text-primary-foreground hover:bg-primary/90"
-                    }`}
-                  >
-                    {p.cta} <ArrowRight className="ml-1 h-4 w-4" />
-                  </Button>
+            {LEARNING_OPTIONS.map((opt, i) => (
+              <motion.div
+                key={opt.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.45, delay: i * 0.07 }}
+                className="rounded-3xl p-8 md:p-10 bg-background border border-border hover:border-primary/30 hover:shadow-card-soft transition-all flex flex-col"
+              >
+                <div className="w-12 h-12 rounded-2xl bg-accent/40 flex items-center justify-center mb-5">
+                  <opt.icon className="w-5 h-5 text-primary" />
                 </div>
-              );
-            })}
+                <h3 className="font-display text-2xl md:text-3xl font-bold text-primary mb-2">{opt.title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed mb-6">{opt.desc}</p>
+                <ul className="space-y-2.5">
+                  {opt.items.map((it) => (
+                    <li key={it} className="flex gap-2.5 text-sm text-foreground/85">
+                      <Check className="w-4 h-4 text-primary shrink-0 mt-0.5" /> {it}
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Soft onboarding CTA */}
+          <div className="mt-14 text-center max-w-xl mx-auto">
+            <p className="text-muted-foreground mb-5 text-sm md:text-base">
+              Izaberi jezik da vidiš dostupne profesore i opcije učenja.
+            </p>
+            <Button
+              variant="outline"
+              size="lg"
+              className="rounded-full h-12 px-7 border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+              onClick={() =>
+                document.getElementById("languages")?.scrollIntoView({ behavior: "smooth", block: "start" })
+              }
+            >
+              Izaberi jezik <ArrowRight className="ml-1 h-4 w-4" />
+            </Button>
           </div>
         </div>
       </section>
