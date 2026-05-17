@@ -96,6 +96,16 @@ const FAQ = [
   { q: "Mogu li da predajem na Norskly?", a: "Da. Kreiraj profesorski nalog i počni da gradiš svoju bazu studenata." },
 ];
 
+// Fine-tune the decorative FAQ quote card's responsive typography here.
+// fontMin/fontMax use rem; fluid scales with viewport width (vw).
+const QUOTE_CARD_TYPO = {
+  fontMin: "2rem",       // smallest size (mobile)
+  fontFluid: "5.5vw",    // grows with viewport width
+  fontMax: "3.5rem",     // largest size (desktop)
+  lineHeight: "1.05",    // tighter = more poster-like
+  letterSpacing: "0.01em", // negative = condensed, positive = airy
+};
+
 export default function LandingPage() {
   const navigate = useNavigate();
 
@@ -464,7 +474,14 @@ export default function LandingPage() {
               </p>
               <div className="relative rounded-3xl overflow-hidden bg-secondary aspect-square max-w-md border border-border">
                 <div className="absolute inset-0 p-8 md:p-10 flex items-center">
-                  <p className="font-marker uppercase text-[clamp(2rem,5.5vw,3.5rem)] text-primary/70 leading-[1.05]">
+                  <p
+                    className="font-marker uppercase text-primary/70"
+                    style={{
+                      fontSize: `clamp(${QUOTE_CARD_TYPO.fontMin}, ${QUOTE_CARD_TYPO.fontFluid}, ${QUOTE_CARD_TYPO.fontMax})`,
+                      lineHeight: QUOTE_CARD_TYPO.lineHeight,
+                      letterSpacing: QUOTE_CARD_TYPO.letterSpacing,
+                    }}
+                  >
                     Confidence comes with practice. <span className="text-primary/80">♥</span>
                   </p>
                 </div>
