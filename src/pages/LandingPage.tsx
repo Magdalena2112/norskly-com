@@ -158,7 +158,7 @@ export default function LandingPage() {
             </p>
 
             {/* language pills — entry to per-language onboarding */}
-            <p className="text-xs font-semibold uppercase tracking-widest text-primary/70 mb-3">
+            <p id="languages" className="text-xs font-semibold uppercase tracking-widest text-primary/70 mb-3 scroll-mt-24">
               Izaberi jezik koji želiš da učiš
             </p>
             <div className="flex flex-wrap justify-center gap-2 mb-10">
