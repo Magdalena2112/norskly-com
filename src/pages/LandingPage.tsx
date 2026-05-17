@@ -462,18 +462,11 @@ export default function LandingPage() {
               <p className="text-muted-foreground mb-8">
                 Sve što treba da znaš pre nego što kreneš.
               </p>
-              <div className="relative rounded-3xl overflow-hidden bg-secondary aspect-square max-w-md bg-dots-soft border border-border">
-                <Sparkles className="absolute top-6 right-6 w-5 h-5 text-primary/40" aria-hidden="true" />
-                <div className="absolute inset-0 p-8 md:p-10 flex flex-col justify-between text-left">
-                  <div>
-                    <blockquote className="text-display text-primary leading-[0.95]">
-                      <span className="block text-[clamp(2.25rem,6vw,4.5rem)]">Confidence</span>
-                      <span className="block text-[clamp(2rem,5.5vw,4rem)] text-primary/85">comes with</span>
-                      <span className="block font-script not-italic text-primary text-[clamp(2.75rem,7vw,5.5rem)] mt-1">
-                        practice.
-                      </span>
-                    </blockquote>
-                  </div>
+              <div className="relative rounded-3xl overflow-hidden bg-secondary aspect-square max-w-md border border-border">
+                <div className="absolute inset-0 p-8 md:p-10 flex items-center">
+                  <p className="font-marker uppercase text-[clamp(1.75rem,4.5vw,2.75rem)] text-primary/70 leading-[1.05]">
+                    Today is a perfect day to be proud of all the progress you have made!! <span className="text-primary/80">♥</span>
+                  </p>
                 </div>
               </div>
             </div>
