@@ -2,7 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import {
   MessageCircle, Sparkles, BookOpen, Target, Mic, BarChart3,
-  Check, X, ArrowRight, GraduationCap, Users, CalendarCheck,
+  Check, X, ArrowRight, GraduationCap, Users, CalendarCheck, Lock,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
@@ -54,10 +54,53 @@ const FIT_NO = [
   "Preferiraš učenje samo iz udžbenika",
 ];
 
+const TRIAL_INCLUDED = [
+  "Gramatičke vežbe i alati",
+  "Vokabular i ordsamlinger",
+  "Probna rezervacija časa",
+  "Osnovno upoznavanje sa platformom",
+];
+const TRIAL_LOCKED = [
+  "AI razgovori",
+  "Kompletan AI feedback",
+  "Personalizovana analitika",
+  "Pametno praćenje napretka",
+];
+
 const PRICING = [
-  { tier: "Samostalno", price: "€9", per: "/mesec", desc: "Pristup AI platformi", items: ["Sve AI lekcije", "Vežbe vokabulara", "Praćenje napretka"], variant: "dark" as const },
-  { tier: "Časovi + Platforma", price: "€39", per: "/mesec", desc: "Najpopularnije", items: ["Sve sa Samostalnog", "4 individualna časa", "Direktan kontakt sa profesorom", "Prioritetna podrška"], variant: "pink" as const, featured: true },
-  { tier: "Za profesore", price: "€19", per: "/mesec", desc: "Alati za predavače", items: ["Upravljanje studentima", "AI-generisane vežbe", "Analitika i izveštaji", "Organizacija časova"], variant: "beige" as const },
+  {
+    tier: "Self-Learning",
+    price: "22€",
+    per: "/mesec",
+    desc: "Za studente koji žele potpuno samostalno učenje uz punu snagu AI-a.",
+    items: [
+      "Kompletna AI funkcionalnost",
+      "AI razgovori",
+      "Personalizovane vežbe",
+      "Praćenje napretka",
+      "Gramatika i vokabular",
+      "Neograničen pristup platformi",
+    ],
+    cta: "Počni samostalno",
+    variant: "featured" as const,
+    featured: true,
+  },
+  {
+    tier: "Learning + Lessons",
+    price: "19€",
+    per: "/mesec",
+    desc: "Za studente koji kombinuju AI učenje sa podrškom profesora.",
+    items: [
+      "Snižen pristup platformi",
+      "Rezervacija časova",
+      "Podrška profesora",
+      "AI alati tokom učenja",
+      "Praćenje napretka",
+    ],
+    note: "Časovi se rezervišu i naplaćuju zasebno.",
+    cta: "Uči uz profesore",
+    variant: "soft" as const,
+  },
 ];
 
 const FAQ = [
@@ -323,49 +366,96 @@ export default function LandingPage() {
       {/* ============== PRICING ============== */}
       <section id="pricing" className="py-20 md:py-28 bg-card/60">
         <div className="container">
-          <div className="text-center mb-16 max-w-2xl mx-auto">
-            <p className="text-xs font-semibold uppercase tracking-widest text-primary/70 mb-3">Cene</p>
-            <h2 className="text-display text-[clamp(2rem,5vw,4rem)] text-primary">
+          <div className="text-center mb-12 max-w-2xl mx-auto">
+            <span className="inline-block px-4 py-1.5 rounded-full bg-accent/40 text-primary text-xs font-semibold tracking-widest uppercase mb-5">
+              7 dana besplatno
+            </span>
+            <p className="text-xs font-semibold uppercase tracking-widest text-primary/70 mb-3">Cene za studente</p>
+            <h2 className="text-display text-[clamp(2rem,5vw,4rem)] text-primary mb-4">
               Izaberi svoj <span className="font-script text-primary/70">plan</span>.
             </h2>
+            <p className="text-muted-foreground">
+              Isprobaj platformu besplatno pre nego što izabereš plan.
+            </p>
           </div>
-          <div className="grid md:grid-cols-3 gap-5">
-            {PRICING.map((p) => {
-              const isDark = p.variant === "dark";
-              const isPink = p.variant === "pink";
-              return (
-                <div key={p.tier}
-                  className={`relative rounded-3xl p-8 border flex flex-col ${
-                    isDark ? "bg-primary text-primary-foreground border-primary"
-                    : isPink ? "bg-secondary text-foreground border-border md:scale-105 shadow-soft"
-                    : "bg-card text-foreground border-border"
-                  }`}
-                >
-                  {p.featured && (
-                    <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-primary text-primary-foreground text-xs font-semibold">
-                      Najpopularnije
-                    </span>
-                  )}
-                  <p className={`text-xs font-semibold uppercase tracking-widest mb-2 ${isDark ? "opacity-80" : "text-primary/70"}`}>{p.tier}</p>
-                  <div className="flex items-baseline gap-1 mb-1">
-                    <span className="text-display text-5xl">{p.price}</span>
-                    <span className={`text-sm ${isDark ? "opacity-70" : "text-muted-foreground"}`}>{p.per}</span>
-                  </div>
-                  <p className={`text-sm mb-6 ${isDark ? "opacity-80" : "text-muted-foreground"}`}>{p.desc}</p>
-                  <ul className="space-y-2.5 mb-8 flex-1">
-                    {p.items.map((it) => (
-                      <li key={it} className="flex gap-2.5 text-sm">
-                        <Check className={`w-4 h-4 shrink-0 mt-0.5 ${isDark ? "opacity-80" : "text-primary"}`} /> {it}
+
+          {/* Free trial card */}
+          <div className="max-w-4xl mx-auto mb-10">
+            <div className="relative rounded-3xl p-8 md:p-10 bg-background border border-border shadow-card-soft">
+              <div className="flex flex-wrap items-center gap-3 mb-6">
+                <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold tracking-widest uppercase">
+                  <Sparkles className="w-3.5 h-3.5" /> Besplatan probni period
+                </span>
+                <span className="text-sm text-muted-foreground">Prvih 7 dana — bez kartice</span>
+              </div>
+              <div className="grid md:grid-cols-2 gap-8">
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-widest text-primary mb-4">Uključeno odmah</p>
+                  <ul className="space-y-2.5">
+                    {TRIAL_INCLUDED.map((t) => (
+                      <li key={t} className="flex gap-2.5 text-sm text-foreground/85">
+                        <Check className="w-4 h-4 text-primary shrink-0 mt-0.5" /> {t}
                       </li>
                     ))}
                   </ul>
-                  <Button onClick={() => navigate("/auth")}
-                    className={`rounded-full w-full ${
-                      isDark ? "bg-primary-foreground text-primary hover:bg-primary-foreground/90"
-                      : "bg-primary text-primary-foreground hover:bg-primary/90"
+                </div>
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-4">Otključava se uz pretplatu</p>
+                  <ul className="space-y-2.5">
+                    {TRIAL_LOCKED.map((t) => (
+                      <li key={t} className="flex gap-2.5 text-sm text-muted-foreground">
+                        <Lock className="w-4 h-4 shrink-0 mt-0.5 opacity-70" /> {t}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Plans */}
+          <div className="grid md:grid-cols-2 gap-5 max-w-4xl mx-auto">
+            {PRICING.map((p) => {
+              const isFeatured = p.variant === "featured";
+              return (
+                <div key={p.tier}
+                  className={`relative rounded-3xl p-8 md:p-10 border flex flex-col transition-all ${
+                    isFeatured
+                      ? "bg-primary text-primary-foreground border-primary shadow-soft md:scale-[1.02]"
+                      : "bg-background text-foreground border-border hover:shadow-card-soft"
+                  }`}
+                >
+                  {p.featured && (
+                    <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-accent text-primary text-xs font-semibold tracking-wide">
+                      Preporučeno
+                    </span>
+                  )}
+                  <p className={`text-xs font-semibold uppercase tracking-widest mb-3 ${isFeatured ? "opacity-80" : "text-primary/70"}`}>{p.tier}</p>
+                  <div className="flex items-baseline gap-1 mb-2">
+                    <span className="text-display text-6xl">{p.price}</span>
+                    <span className={`text-sm ${isFeatured ? "opacity-70" : "text-muted-foreground"}`}>{p.per}</span>
+                  </div>
+                  <p className={`text-sm mb-6 leading-relaxed ${isFeatured ? "opacity-85" : "text-muted-foreground"}`}>{p.desc}</p>
+                  <ul className="space-y-2.5 mb-6 flex-1">
+                    {p.items.map((it) => (
+                      <li key={it} className="flex gap-2.5 text-sm">
+                        <Check className={`w-4 h-4 shrink-0 mt-0.5 ${isFeatured ? "opacity-90" : "text-primary"}`} /> {it}
+                      </li>
+                    ))}
+                  </ul>
+                  {p.note && (
+                    <p className={`text-xs mb-5 italic ${isFeatured ? "opacity-75" : "text-muted-foreground"}`}>
+                      {p.note}
+                    </p>
+                  )}
+                  <Button onClick={() => navigate("/auth?role=student")}
+                    className={`rounded-full w-full h-12 ${
+                      isFeatured
+                        ? "bg-primary-foreground text-primary hover:bg-primary-foreground/90"
+                        : "bg-primary text-primary-foreground hover:bg-primary/90"
                     }`}
                   >
-                    Započni
+                    {p.cta} <ArrowRight className="ml-1 h-4 w-4" />
                   </Button>
                 </div>
               );
