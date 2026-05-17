@@ -218,7 +218,7 @@ export default function LandingPage() {
                 <GraduationCap className="w-5 h-5 text-primary" />
                 <span className="text-xs font-semibold uppercase tracking-widest text-primary/70">Za studente</span>
               </div>
-              <h3 className="text-display text-4xl text-primary mb-6">Uči pametnije, govori brže.</h3>
+              <h3 className="text-display text-4xl text-primary mb-6">Uči pametnije. Govori sa <span className="font-script text-primary/70">samopouzdanjem</span>.</h3>
               <ul className="space-y-3 mb-8">
                 {STUDENT_BENEFITS.map((b) => (
                   <li key={b} className="flex items-center gap-3 text-foreground/80">
@@ -228,7 +228,7 @@ export default function LandingPage() {
               </ul>
               <Button onClick={() => navigate("/auth?role=student")}
                 className="rounded-full bg-primary hover:bg-primary/90">
-                Započni kao student <ArrowRight className="ml-1 h-4 w-4" />
+                Počni sa učenjem <ArrowRight className="ml-1 h-4 w-4" />
               </Button>
             </motion.div>
 
@@ -241,7 +241,7 @@ export default function LandingPage() {
                 <Users className="w-5 h-5 text-primary" />
                 <span className="text-xs font-semibold uppercase tracking-widest text-primary/70">Za profesore</span>
               </div>
-              <h3 className="text-display text-4xl text-primary mb-6">Predavaj uz moderne alate.</h3>
+              <h3 className="text-display text-4xl text-primary mb-6">Predavaj modernije. Organizuj <span className="font-script text-primary/70">jednostavnije</span>.</h3>
               <ul className="space-y-3 mb-8">
                 {TEACHER_BENEFITS.map((b) => (
                   <li key={b} className="flex items-center gap-3 text-foreground/80">
@@ -252,7 +252,7 @@ export default function LandingPage() {
               <Button onClick={() => navigate("/auth?role=teacher")}
                 variant="outline"
                 className="rounded-full border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground">
-                Predaj na Norskly <ArrowRight className="ml-1 h-4 w-4" />
+                Predaj uz Norskly <ArrowRight className="ml-1 h-4 w-4" />
               </Button>
             </motion.div>
           </div>
