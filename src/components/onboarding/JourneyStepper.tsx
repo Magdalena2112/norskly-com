@@ -22,7 +22,7 @@ export default function JourneyStepper({ current, className }: Props) {
   return (
     <div
       className={cn(
-        "w-full overflow-x-auto no-scrollbar -mx-2 px-2",
+        "w-full overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden -mx-2 px-2",
         className,
       )}
     >
