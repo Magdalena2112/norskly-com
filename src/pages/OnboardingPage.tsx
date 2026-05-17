@@ -10,6 +10,7 @@ import { Input } from "@/components/ui/input";
 import { UserProfile } from "@/types/profile";
 import { ChevronRight, ChevronLeft, User, Target, MessageSquare, BookOpen, Gauge } from "lucide-react";
 import BackButton from "@/components/BackButton";
+import JourneyStepper from "@/components/onboarding/JourneyStepper";
 
 const steps = ["Ime", "Nivo", "Cilj", "Stil", "Fokus", "Samopouzdanje", "Norveška"];
 
@@ -113,6 +114,11 @@ export default function OnboardingPage() {
               <span className="font-display font-bold text-xl text-foreground">Norskly</span>
             </div>
             <span className="text-sm text-muted-foreground">{step + 1}/{steps.length}</span>
+          </div>
+
+          {/* Macro journey stepper */}
+          <div className="mb-8">
+            <JourneyStepper current="trial" />
           </div>
 
           <AnimatePresence mode="wait">
