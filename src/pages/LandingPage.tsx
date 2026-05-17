@@ -166,6 +166,7 @@ export default function LandingPage() {
                 <Link
                   key={l.slug}
                   to={`/jezici/${l.slug}`}
+                  onClick={() => localStorage.setItem("norskly_selected_language", l.slug)}
                   className="group px-5 py-2.5 rounded-full text-sm font-medium border bg-background text-foreground border-border hover:border-primary hover:bg-secondary/40 hover:-translate-y-0.5 hover:shadow-card-soft transition-all inline-flex items-center gap-2"
                 >
                   <span>{l.flag}</span>
