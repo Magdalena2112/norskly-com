@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import {
   Accordion, AccordionContent, AccordionItem, AccordionTrigger,
 } from "@/components/ui/accordion";
+import { FloatingGreetings } from "@/components/FloatingGreetings";
 
 const LANGUAGES = [
   { code: "no", label: "Norveški", flag: "🇳🇴" },
@@ -141,6 +142,7 @@ export default function LandingPage() {
         <div className="absolute inset-0 bg-grid-soft opacity-60 [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_75%)]" />
         <div className="absolute top-24 -right-20 w-96 h-96 rounded-full bg-secondary/60 blur-3xl opacity-70" />
         <div className="absolute bottom-0 -left-20 w-80 h-80 rounded-full bg-accent/40 blur-3xl opacity-60" />
+        <FloatingGreetings />
 
         <div className="container relative">
           <motion.div
