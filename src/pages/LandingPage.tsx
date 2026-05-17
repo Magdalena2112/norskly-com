@@ -130,12 +130,12 @@ export default function LandingPage() {
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Button size="lg" className="rounded-full h-14 px-8 text-base bg-primary hover:bg-primary/90 shadow-soft"
                 onClick={() => navigate("/auth?role=student")}>
-                Ja sam student <ArrowRight className="ml-1 h-4 w-4" />
+                Učim jezik <ArrowRight className="ml-1 h-4 w-4" />
               </Button>
               <Button size="lg" variant="outline"
                 className="rounded-full h-14 px-8 text-base border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground"
                 onClick={() => navigate("/auth?role=teacher")}>
-                Ja sam profesor
+                Predajem jezik
               </Button>
             </div>
           </motion.div>
