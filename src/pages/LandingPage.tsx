@@ -474,10 +474,6 @@ export default function LandingPage() {
                       </span>
                     </blockquote>
                   </div>
-                  <div>
-                    <div className="h-px w-12 bg-primary/30 mb-3" />
-                    <cite className="font-script text-primary/50 text-xl not-italic">— norsk.</cite>
-                  </div>
                 </div>
               </div>
             </div>
