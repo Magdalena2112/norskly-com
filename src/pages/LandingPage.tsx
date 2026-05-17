@@ -98,17 +98,16 @@ export default function LandingPage() {
             className="max-w-5xl mx-auto text-center"
           >
             <span className="inline-block px-4 py-1.5 rounded-full bg-secondary/70 text-primary text-xs font-semibold tracking-widest uppercase mb-6">
-              AI-pokretana platforma za učenje jezika
+              AI platforma za učenje jezika
             </span>
 
             <h1 className="text-display text-[clamp(2.8rem,9vw,7rem)] text-primary mb-6">
-              Govori bilo koji jezik <br className="hidden sm:block" />
-              <span className="font-script text-accent-foreground/80">sa</span> samopouzdanjem.
+              Uči jezike sigurnije, <span className="font-script text-accent-foreground/80">pametnije</span> i svojim tempom.
             </h1>
 
             <p className="text-base md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed">
-              Norskly je AI-pokretani ekosistem za učenje jezika — za studente koji žele da napreduju
-              i profesore koji žele moderne alate.
+              Norskly povezuje učenike i profesore u jednom AI ekosistemu za učenje jezika —
+              sa personalizovanom podrškom, vežbama i praćenjem napretka.
             </p>
 
             {/* language pills */}
