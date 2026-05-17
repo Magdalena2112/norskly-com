@@ -177,6 +177,13 @@
     font-weight: 400;
   }
 
+  .font-marker {
+    font-family: 'Mali', 'Comic Sans MS', cursive;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    line-height: 1.05;
+  }
+
   .text-display {
     font-family: 'Fraunces', 'Playfair Display', serif;
     font-weight: 900;
