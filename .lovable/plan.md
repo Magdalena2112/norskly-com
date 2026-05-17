@@ -1,35 +1,63 @@
+# Onboarding & Navigation Redesign
 
-## Goal
-Transform the hero of `ForTeachersPage` into a split layout: existing editorial copy on the left, the uploaded AI teacher avatar on the right with a subtle looping wave + idle float animation.
+Restructure the user journey so language selection becomes step 1, each language has its own premium landing page (hero + teachers + plans), and registration leads into a clean stepped onboarding ending in a free trial.
 
-## Steps
+## 1. Routing changes (`src/App.tsx`)
 
-1. **Add avatar asset**
-   - Copy `user-uploads://Gemini_Generated_Image_bgniuobgniuobgni.png` to `src/assets/teacher-avatar.png`.
-   - Import it as an ES6 module in `ForTeachersPage.tsx`.
+Add three new routes pointing to a single dynamic component:
+- `/jezici/norveski`
+- `/jezici/engleski`
+- `/jezici/nemacki`
 
-2. **New component `TeacherAvatar.tsx`** (in `src/components/`)
-   - Renders the avatar with a CSS mask / clip approach to isolate the right hand region so only the hand waves, while the body remains still — implemented as two stacked layered images:
-     - **Base layer**: full avatar with the hand area masked out via `mask-image` (radial gradient hiding the hand zone) — keeps body perfectly still.
-     - **Hand layer**: same image, masked to *only* show the right-hand region, with `transform-origin` set near the wrist and animated rotation.
-   - Wave animation: framer-motion keyframes `rotate: [0, -12, 8, -10, 6, 0]` over ~1.8s, then pause ~3s, looping (`repeat: Infinity, repeatDelay: 3, ease: "easeInOut"`).
-   - Idle float on the whole avatar container: `y: [0, -8, 0]` over 5s, infinite easeInOut.
-   - Soft glow: blurred radial accent behind avatar using `bg-primary/10` and `bg-accent/10` blobs for depth, matching existing hero ambient lights.
-   - Respects `prefers-reduced-motion` (motion-reduce variant disables animation, shows static avatar).
+Implemented as `/jezici/:slug` → `LanguagePage.tsx`, with a lookup table mapping slug → language config (name, native title, hero copy, color accent, available flag).
 
-3. **Update hero layout in `ForTeachersPage.tsx`**
-   - Change the hero container to a 2-column grid at `md`+ (`grid md:grid-cols-2 gap-12 items-center`).
-   - Left column: existing back link, H1, subtitle, CTA, trust line — left-aligned on `md+`, centered on mobile.
-   - Right column: `<TeacherAvatar />`, hidden on `sm` only if needed (keep visible on mobile but scaled down — placed below the text via grid order).
-   - Keep `max-w-5xl` → bump to `max-w-6xl` for breathing room.
-   - Preserve cream background, gradient blobs, typography, font-script accent, and existing CTA styles.
+Only Norwegian is "available" initially; English/German render the same layout with a "Uskoro" badge and disabled CTAs (keeps scope tight, preserves the structure for later).
 
-4. **Visual polish**
-   - Avatar wrapped in a soft circular ambient halo (`absolute -inset-8 bg-gradient-to-br from-primary/15 to-accent/15 rounded-full blur-3xl`).
-   - Optional small floating "Hei!" speech bubble near the waving hand using existing card style + `motion-reduce:hidden`, fading in/out synced with the wave (`animate={{ opacity: [0,1,1,0] }}`, same `repeatDelay`).
+## 2. Homepage language buttons (`src/pages/LandingPage.tsx`)
+
+Convert the existing static language buttons into `<Link>`s to the three new routes. Keep current styling (cream bg, burgundy accents, pastel pink). Add a subtle hover lift.
+
+## 3. New `LanguagePage.tsx`
+
+Premium editorial layout, sections in order:
+
+1. **Hero** — language-specific Serbian headline (e.g. "Uči norveški uz AI i podršku profesora."), short subtitle, primary CTA "Započni besplatno" → `/auth?lang=<slug>&plan=trial`, secondary CTA "Pogledaj planove" scrolling to plans.
+2. **Teachers** — for Norwegian, fetch from existing `teacher_profiles` table (reuse pattern from `TeacherProfilePage`). Card grid: photo, name, short bio, lesson types (badges), price, rating placeholder (★ 5.0 · novo), CTA "Rezerviši čas" → `/auth?next=/book-lesson`. For unavailable languages, show 3 placeholder cards with "Uskoro" overlay.
+3. **Plans** — three-card pricing section:
+   - **7-day free trial** — highlighted, "Probaj besplatno"
+   - **Self-Learning** — monthly price, AI modules only
+   - **Learning + Lessons** — monthly price, AI + live lessons
+   Each card: name, price, feature list, CTA → `/auth?plan=<id>&lang=<slug>`.
+4. **Registration CTA** — full-width band, single CTA "Kreiraj nalog i počni" → `/auth?lang=<slug>`.
+
+Styling: reuse existing tokens (warm cream bg, burgundy primary, accent pinks, rounded-2xl cards, subtle shadows, framer-motion fade-in-up on scroll).
+
+## 4. Onboarding flow updates (`src/pages/OnboardingPage.tsx`)
+
+Add a **stepper header** showing the full journey:
+```
+1 Jezik  →  2 Istraži  →  3 Nalog  →  4 Probna verzija  →  5 Učenje
+```
+Current step (post-registration) = "Probna verzija / Profil". The existing in-component steps (name, level, goal, etc.) become sub-steps under the "Profil" macro-step. The left-rail sidebar keeps its existing detailed step list, but a new horizontal macro-stepper sits above it/the content showing the 5-stage journey with the current stage highlighted.
+
+On completion, redirect remains `/practice` but with a one-time "Tvoj 7-dnevni probni period je počeo" toast.
+
+Read `?lang=<slug>` and `?plan=<id>` from the URL on mount and persist into the profile as `preferred_language` (string) and `selected_plan` (string) — stored only in localStorage for now (no DB migration this iteration; can be promoted later).
+
+## 5. Auth page passthrough (`src/pages/AuthPage.tsx`)
+
+Preserve `?lang` and `?plan` query params through the signup→onboarding redirect so the onboarding macro-stepper can show the correct context.
 
 ## Technical notes
-- No backend/RLS changes.
-- Only edits: `src/pages/ForTeachersPage.tsx`, new `src/components/TeacherAvatar.tsx`, new asset in `src/assets/`.
-- Uses existing `framer-motion` dependency. No new packages.
-- All colors via semantic tokens (`primary`, `accent`, `foreground`).
+
+- New files: `src/pages/LanguagePage.tsx`, `src/components/onboarding/JourneyStepper.tsx`, `src/lib/languages.ts` (slug→config map).
+- Reuse: `Button`, `Card`, existing motion patterns, `BackButton`.
+- No database migration needed for this iteration.
+- Mobile: stack hero/teachers/plans vertically, horizontal scroll for stepper on <640px (per project mobile-responsiveness memory).
+- All UI copy in Serbian (Latin); Norwegian-only where it's learning material.
+
+## Out of scope (call out for follow-up)
+
+- Real Stripe/Paddle payment wiring for plans (CTAs route to auth+trial only).
+- Teacher availability for English/German (placeholder until teachers onboarded).
+- Persisting `preferred_language` / `selected_plan` to `profiles` table.
