@@ -2,7 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import {
   MessageCircle, Sparkles, BookOpen, Target, Mic, BarChart3,
-  Check, X, ArrowRight, GraduationCap, Users, CalendarCheck,
+  Check, X, ArrowRight, GraduationCap, Users, CalendarCheck, Lock,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
@@ -54,10 +54,53 @@ const FIT_NO = [
   "Preferiraš učenje samo iz udžbenika",
 ];
 
+const TRIAL_INCLUDED = [
+  "Gramatičke vežbe i alati",
+  "Vokabular i ordsamlinger",
+  "Probna rezervacija časa",
+  "Osnovno upoznavanje sa platformom",
+];
+const TRIAL_LOCKED = [
+  "AI razgovori",
+  "Kompletan AI feedback",
+  "Personalizovana analitika",
+  "Pametno praćenje napretka",
+];
+
 const PRICING = [
-  { tier: "Samostalno", price: "€9", per: "/mesec", desc: "Pristup AI platformi", items: ["Sve AI lekcije", "Vežbe vokabulara", "Praćenje napretka"], variant: "dark" as const },
-  { tier: "Časovi + Platforma", price: "€39", per: "/mesec", desc: "Najpopularnije", items: ["Sve sa Samostalnog", "4 individualna časa", "Direktan kontakt sa profesorom", "Prioritetna podrška"], variant: "pink" as const, featured: true },
-  { tier: "Za profesore", price: "€19", per: "/mesec", desc: "Alati za predavače", items: ["Upravljanje studentima", "AI-generisane vežbe", "Analitika i izveštaji", "Organizacija časova"], variant: "beige" as const },
+  {
+    tier: "Self-Learning",
+    price: "22€",
+    per: "/mesec",
+    desc: "Za studente koji žele potpuno samostalno učenje uz punu snagu AI-a.",
+    items: [
+      "Kompletna AI funkcionalnost",
+      "AI razgovori",
+      "Personalizovane vežbe",
+      "Praćenje napretka",
+      "Gramatika i vokabular",
+      "Neograničen pristup platformi",
+    ],
+    cta: "Počni samostalno",
+    variant: "featured" as const,
+    featured: true,
+  },
+  {
+    tier: "Learning + Lessons",
+    price: "19€",
+    per: "/mesec",
+    desc: "Za studente koji kombinuju AI učenje sa podrškom profesora.",
+    items: [
+      "Snižen pristup platformi",
+      "Rezervacija časova",
+      "Podrška profesora",
+      "AI alati tokom učenja",
+      "Praćenje napretka",
+    ],
+    note: "Časovi se rezervišu i naplaćuju zasebno.",
+    cta: "Uči uz profesore",
+    variant: "soft" as const,
+  },
 ];
 
 const FAQ = [
