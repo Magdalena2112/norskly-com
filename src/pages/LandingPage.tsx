@@ -153,13 +153,13 @@ export default function LandingPage() {
             </h2>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
             {FEATURES.map((f, i) => (
               <motion.div
                 key={f.title}
                 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }} transition={{ delay: i * 0.05 }}
-                className="group bg-background border border-border rounded-3xl p-8 hover:-translate-y-1 hover:shadow-soft transition-all"
+                className="group h-full flex flex-col bg-background border border-border rounded-3xl p-6 sm:p-8 hover:-translate-y-1 hover:shadow-soft transition-all [&:last-child]:sm:col-span-2 [&:last-child]:lg:col-span-3"
               >
                 <div className="w-12 h-12 rounded-2xl bg-secondary flex items-center justify-center mb-5 group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
                   <f.icon className="w-5 h-5 text-primary group-hover:text-primary-foreground transition-colors" />
