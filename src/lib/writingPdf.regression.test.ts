@@ -57,6 +57,9 @@ vi.mock("jspdf", () => {
     circle = recorder("circle");
     line = recorder("line");
     addImage = recorder("addImage");
+    addFileToVFS = recorder("addFileToVFS");
+    addFont = recorder("addFont");
+    getFontList = () => ({});
     addPage = () => { shared.calls.push({ method: "addPage", args: [] }); };
     text = (...args: unknown[]) => {
       shared.calls.push({
