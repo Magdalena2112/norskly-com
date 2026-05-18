@@ -10,7 +10,7 @@ export interface ErrorEvent {
 
 export async function logErrors(
   userId: string,
-  module: "grammar" | "vocabulary" | "talk",
+  module: "grammar" | "vocabulary" | "talk" | "writing",
   sourceType: string,
   errors: ErrorEvent[],
   context?: string,
