@@ -73,10 +73,12 @@ export default function VocabCollections({ userId }: { userId?: string }) {
   const fetchCollections = async () => {
     if (!userId) return;
     setLoading(true);
+    const { getCurrentLanguageCode } = await import("@/lib/currentLanguage");
     const { data: cols } = await supabase
       .from("word_collections" as any)
       .select("*")
       .eq("user_id", userId)
+      .eq("language", getCurrentLanguageCode())
       .order("created_at", { ascending: false });
 
     if (cols) {
@@ -99,10 +101,12 @@ export default function VocabCollections({ userId }: { userId?: string }) {
   const createCollection = async () => {
     if (!userId || !newName.trim()) return;
     setCreating(true);
+    const { getCurrentLanguageCode } = await import("@/lib/currentLanguage");
     const { error } = await supabase.from("word_collections" as any).insert({
       user_id: userId,
       name: newName.trim(),
       description: newDesc.trim() || null,
+      language: getCurrentLanguageCode(),
     } as any);
     if (!error) {
       setNewName("");
@@ -151,10 +155,12 @@ export default function VocabCollections({ userId }: { userId?: string }) {
     setView("add-words");
     setLoadingWords(true);
     setSelectedWordIds(new Set());
+    const { getCurrentLanguageCode } = await import("@/lib/currentLanguage");
     const { data } = await supabase
       .from("vocabulary_words" as any)
       .select("*")
       .eq("user_id", userId)
+      .eq("language", getCurrentLanguageCode())
       .order("created_at", { ascending: false });
     setAllWords((data as unknown as VocabWord[]) || []);
     setLoadingWords(false);
