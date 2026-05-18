@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
 import { ArrowLeft, Calendar, XCircle } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useSelectedLanguage } from "@/hooks/useSelectedLanguage";
 
 const STATUS_LABELS: Record<string, string> = {
   scheduled: "Zakazano",
@@ -24,16 +25,18 @@ const STATUS_VARIANTS: Record<string, "default" | "secondary" | "destructive"> =
 export default function MyLessonsPage() {
   const { user } = useAuth();
   const { toast } = useToast();
+  const { code } = useSelectedLanguage();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
   const { data: lessons = [], isLoading } = useQuery({
-    queryKey: ["my-lessons", user?.id],
+    queryKey: ["my-lessons", user?.id, code],
     queryFn: async () => {
       const { data, error } = await supabase
         .from("lessons")
         .select("*, teachers(name), lesson_types(title, duration_minutes)")
         .eq("user_id", user!.id)
+        .eq("language", code)
         .order("start_time", { ascending: true });
       if (error) throw error;
       return data;

@@ -9,6 +9,7 @@ import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Skeleton } from "@/components/ui/skeleton";
 import BackButton from "@/components/BackButton";
 import { Star, Languages, GraduationCap, Sparkles } from "lucide-react";
+import { useSelectedLanguage } from "@/hooks/useSelectedLanguage";
 import teacherPhotoFallback from "@/assets/teacher-photo.jpg";
 
 type Teacher = {
@@ -27,13 +28,21 @@ type PriceInfo = { min: number; currency: string } | null;
 
 export default function SelectTeacherPage() {
   const navigate = useNavigate();
+  const { code, labelSr } = useSelectedLanguage();
 
   const { data: teachers = [], isLoading } = useQuery({
-    queryKey: ["teachers-list"],
+    queryKey: ["teachers-list", code],
     queryFn: async () => {
       const { data, error } = await supabase.rpc("get_active_teachers");
       if (error) throw error;
-      return (data || []) as Teacher[];
+      // Filter by current language (rpc returns all; we narrow client-side)
+      const { data: langRows } = await supabase
+        .from("teachers")
+        .select("id")
+        .eq("language", code)
+        .eq("is_active", true);
+      const allowed = new Set((langRows || []).map((r: any) => r.id));
+      return ((data || []) as Teacher[]).filter((t) => allowed.has(t.id));
     },
   });
 
@@ -87,7 +96,7 @@ export default function SelectTeacherPage() {
         ) : teachers.length === 0 ? (
           <Card className="bg-background/80 backdrop-blur-sm border-border/30">
             <CardContent className="py-12 text-center text-muted-foreground">
-              Trenutno nema dostupnih nastavnika.
+              Trenutno nema dostupnih nastavnika za jezik: <strong>{labelSr}</strong>.
             </CardContent>
           </Card>
         ) : (
