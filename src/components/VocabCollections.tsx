@@ -360,10 +360,12 @@ export function CollectionPicker({
     if (!userId) return;
     (async () => {
       setLoading(true);
+      const { getCurrentLanguageCode } = await import("@/lib/currentLanguage");
       const { data: cols } = await supabase
         .from("word_collections" as any)
         .select("*")
         .eq("user_id", userId)
+        .eq("language", getCurrentLanguageCode())
         .order("created_at", { ascending: false });
 
       const result: (Collection & { words: VocabWord[] })[] = [];
