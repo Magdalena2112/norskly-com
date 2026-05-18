@@ -8,6 +8,7 @@ import { useUserRole } from "@/hooks/useUserRole";
 import { useAuth } from "@/context/AuthContext";
 import { useProfile } from "@/context/ProfileContext";
 import { supabase } from "@/integrations/supabase/client";
+import { useSelectedLanguage } from "@/hooks/useSelectedLanguage";
 
 
 const XP_TITLES: Record<number, string> = {
@@ -26,6 +27,7 @@ export default function StudentLayout({ children, title }: StudentLayoutProps) {
   const { isAdmin } = useUserRole();
   const navigate = useNavigate();
   const [xp, setXp] = useState<{ total_xp: number; level: number } | null>(null);
+  const { code: langCode } = useSelectedLanguage();
 
   useEffect(() => {
     if (!user) return;
@@ -33,9 +35,10 @@ export default function StudentLayout({ children, title }: StudentLayoutProps) {
       .from("user_xp")
       .select("total_xp, level")
       .eq("user_id", user.id)
+      .eq("language", langCode)
       .maybeSingle()
       .then(({ data }) => setXp(data || { total_xp: 0, level: 1 }));
-  }, [user]);
+  }, [user, langCode]);
 
   return (
     <SidebarProvider defaultOpen>
