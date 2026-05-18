@@ -16,7 +16,6 @@ const modules = [
   { title: "Gramatika", description: "Vežbaj gramatiku kroz kvizove prilagođene tvom nivou.", icon: BookOpen, route: "/grammar", gradient: "from-primary to-primary/70" },
   { title: "Vokabular", description: "Uči nove reči sa flashcard sistemom.", icon: Languages, route: "/vocabulary", gradient: "from-accent to-accent/70" },
   { title: "Razgovor", description: "Vežbaj pisanje poruka u realnim situacijama.", icon: MessageSquare, route: "/talk", gradient: "from-primary to-accent" },
-  { title: "Napredak", description: "Prati svoj napredak i postignuća.", icon: TrendingUp, route: "/progress", gradient: "from-accent to-primary" },
   { title: "Razgovor sa profesorom", description: "Rezerviši 90-minutni čas sa profesorom norveškog.", icon: GraduationCap, route: "/book-lesson", gradient: "from-accent to-primary/80", buttonLabel: "Rezerviši čas", fullWidth: true },
 ];
 
