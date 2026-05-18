@@ -137,6 +137,8 @@ export default function TeacherDashboardPage() {
             </div>
           </CardContent>
         </Card>
+
+        {teacher?.id && <TeacherOfferManager teacherId={teacher.id} />}
       </div>
     </div>
   );
