@@ -119,11 +119,11 @@ export default function DashboardPage() {
 
         {lessonLoaded && (
           <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}>
-            <Card className="mt-6 border-accent/20 bg-background/80 backdrop-blur-sm">
+            <Card className="mt-8 border-border/50 bg-cream/85 backdrop-blur-sm shadow-card-soft">
               <CardContent className="pt-5 pb-5">
                 <div className="flex items-center gap-2 mb-3">
-                  <CalendarCheck className="w-5 h-5 text-accent" />
-                  <h3 className="font-semibold text-foreground">Moji predstojeći časovi</h3>
+                  <CalendarCheck className="w-5 h-5 text-fjord" />
+                  <h3 className="font-display font-semibold text-primary">Moji predstojeći časovi</h3>
                 </div>
                 {upcomingLesson ? (
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
