@@ -326,8 +326,9 @@ export default function LandingPage() {
       </section>
 
       {/* ============== IS IT RIGHT FOR ME ============== */}
-      <section className="py-20 md:py-28">
-        <div className="container max-w-5xl">
+      <section className="relative overflow-hidden py-20 md:py-28">
+        <FloatingQuestionMarks />
+        <div className="container max-w-5xl relative z-10">
           <div className="text-center mb-12">
             <h2 className="text-display text-[clamp(2rem,5vw,4rem)] text-primary">
               Da li je Norskly <span className="font-script text-primary/70">pravi</span> za tebe?
