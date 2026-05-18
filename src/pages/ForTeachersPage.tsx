@@ -91,12 +91,13 @@ export default function ForTeachersPage() {
           email: parsed.data.email,
           languages: parsed.data.languages,
           bio: parsed.data.bio,
+          experience: parsed.data.experience || null,
           cv_path,
         });
       if (error) throw error;
 
       setSubmitted(true);
-      setForm({ full_name: "", email: "", languages: "", bio: "" });
+      setForm({ full_name: "", email: "", languages: "", bio: "", experience: "" });
       setCvFile(null);
       toast({ title: "Prijava poslata", description: "Hvala! Javljamo se u roku od 5 radnih dana." });
     } catch (err: any) {
