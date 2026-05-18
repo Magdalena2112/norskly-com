@@ -87,7 +87,7 @@ export default function XpProgressCard({ level, totalXp }: XpProgressCardProps) 
               initial={{ width: 0 }}
               animate={{ width: `${percent}%` }}
               transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
-              className="h-full rounded-full bg-gradient-to-r from-primary via-accent to-accent relative"
+              className="h-full rounded-full bg-gradient-to-r from-primary via-sunset to-fjord relative"
             >
               {/* Shimmer effect */}
               <motion.div
