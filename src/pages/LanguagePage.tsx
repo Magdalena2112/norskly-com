@@ -3,6 +3,7 @@ import { Navigate, useNavigate, useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
+import { useAuth } from "@/context/AuthContext";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -58,11 +59,13 @@ export default function LanguagePage() {
   const { slug } = useParams<{ slug: string }>();
   const lang = getLanguageBySlug(slug);
   const navigate = useNavigate();
+  const { user } = useAuth();
 
   useEffect(() => {
     if (lang) {
       document.title = `${lang.label} · Norskly`;
       localStorage.setItem("norskly_selected_language", lang.slug);
+      window.dispatchEvent(new Event("language-changed"));
     }
   }, [lang]);
 
@@ -80,6 +83,11 @@ export default function LanguagePage() {
 
   const goAuth = (extra: Record<string, string> = {}) => {
     if (extra.plan) localStorage.setItem("norskly_selected_plan", extra.plan);
+    // Already logged-in users go straight to their dashboard with the new language selected.
+    if (user) {
+      navigate(extra.next || "/practice");
+      return;
+    }
     const params = new URLSearchParams({ lang: lang.slug, ...extra });
     navigate(`/auth?${params.toString()}`);
   };
