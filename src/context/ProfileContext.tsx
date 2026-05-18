@@ -30,7 +30,7 @@ export function ProfileProvider({ children }: { children: ReactNode }) {
       try {
         const { data } = await supabase
           .from("profiles")
-          .select("display_name, level, learning_goal, focus_area, confidence_level, preferred_tone, lives_in_norway")
+          .select("display_name, level, learning_goal, focus_area, confidence_level, preferred_tone, lives_in_norway, preferred_language")
           .eq("user_id", user.id)
           .maybeSingle();
 
@@ -46,6 +46,9 @@ export function ProfileProvider({ children }: { children: ReactNode }) {
           };
           setProfile(dbProfile);
           localStorage.setItem("norskly_profile", JSON.stringify(dbProfile));
+          if (data.preferred_language) {
+            localStorage.setItem("norskly_selected_language", data.preferred_language);
+          }
         }
       } catch (e) {
         console.error("Failed to fetch profile from DB", e);

@@ -1,40 +1,39 @@
-# Replace "norsk." card with motivational editorial quote
+## Cilj
 
-## Scope
-Only `src/pages/LandingPage.tsx`, lines 465–469 (the decorative square card in the FAQ section). No new components, no new data, no route changes.
+Sačuvati izabrani jezik učenika u bazi tako da posle odjave/ponovne prijave ostane aktivan (umesto da zavisi samo od `localStorage`, koji se gubi po uređaju/pregledaču).
 
-## New card design
+## Promene
 
-Keep the same wrapper position and aspect (square, `max-w-md`, pastel pink `bg-secondary`, soft dotted texture, rounded-3xl, subtle border). Replace the centered `norsk.` script with an editorial-style motivational quote.
+### 1) Baza — dodati `preferred_language` na `profiles`
 
-### Content
-- Eyebrow (small, uppercase, tracked): `Norskly note`
-- Main quote, oversized editorial typography, mixed display + script:
-  - Line 1: `Confidence` (display serif, ultra-large)
-  - Line 2: `comes with` (display serif, slightly smaller)
-  - Line 3: `practice.` (script italic, primary color, oversized for emphasis)
-- Bottom-left signature mark: small `— norsk.` in script, low opacity
+- Nova kolona `preferred_language text` na `public.profiles` (nullable, bez default-a da postojeći korisnici ostanu netaknuti).
+- Nije potrebna nova RLS politika — postojeća "Users can update own profile" / "view own" pokriva.
 
-### Layout
-- Replace the centered absolute `flex items-center justify-center` with a padded inner layout: `absolute inset-0 p-8 md:p-10 flex flex-col justify-between text-left`.
-- Quote block top-left; signature bottom-left; small decorative element top-right.
+### 2) Registracija (`AuthPage.tsx`)
 
-### Typography
-- Eyebrow: `text-xs font-semibold uppercase tracking-widest text-primary/60`
-- Quote container: `text-display text-primary leading-[0.95]`
-  - Line 1: `text-[clamp(2.25rem,6vw,4.5rem)]`
-  - Line 2: `text-[clamp(2rem,5.5vw,4rem)] text-primary/85`
-  - Line 3 (script): `font-script not-italic text-primary text-[clamp(2.75rem,7vw,5.5rem)] block mt-1`
-- Signature: `font-script text-primary/50 text-xl`
+- Pri signup-u već dolazi `?lang=...` iz URL-a (postavlja ga `LanguagePage`/landing). Posle uspešnog `signUp`:
+  - Upisati `preferred_language` u `profiles` za novog korisnika (upsert po `user_id`).
+- Pri login-u (`signInWithPassword`):
+  - Nakon uspeha, pročitati `preferred_language` iz `profiles` i upisati u `localStorage` kao `norskly_selected_language` da UI (stepper, landing) odmah pokazuju izabrani jezik.
+  - Ako je prisutan, redirect ide na `/jezici/<slug>` umesto generičkog `/practice` (samo kada korisnik dolazi sa stranice jezika, tj. kad nema drugu nameru). Alternativa: uvek `/practice`, ali postaviti localStorage — predlažem `/practice` kao i sada, samo sa popunjenim jezikom.
 
-### Subtle decorative elements
-- Keep existing `bg-dots-soft` on the wrapper.
-- Add a small top-right accent: a tiny `Sparkles` icon (already imported from lucide-react in this file — verify; if not, add to existing lucide-react import) at `text-primary/40 w-5 h-5`.
-- Add a thin horizontal divider (`h-px w-12 bg-primary/30`) between the quote block and the signature for editorial rhythm.
+### 3) `ProfileContext.tsx`
 
-### Accessibility
-- Wrap the quote in a `<blockquote>` with `<cite>` for the signature.
+- Proširiti SELECT da uključi `preferred_language`.
+- Kad se učita profil, ako postoji `preferred_language`, sinhronizovati u `localStorage` (`norskly_selected_language`). Ovo pokriva ponovne posete na drugom uređaju.
 
-## Out of scope
-- FAQ list, headings, surrounding section spacing — unchanged.
-- No color token changes; reuse existing `secondary`, `primary`, `border`.
+### 4) `LanguagePage.tsx` / `LandingPage.tsx`
+
+- Bez izmena u ponašanju izbora; postojeći upis u localStorage ostaje (radi za neprijavljene korisnike).
+- Po prijavljivanju, vrednost iz baze nadjačava localStorage (tačka 3).
+
+## Tehnički detalji
+
+- Upis u `profiles` posle signup-a: koristiti `supabase.from("profiles").update({ preferred_language }).eq("user_id", user.id)` — red profila već kreira trigger `handle_new_user_profile`.
+- Upis posle login-a u `localStorage` događa se i u `AuthPage` (brzi UX) i u `ProfileContext` (kanonski izvor).
+- Tip `UserProfile` proširiti opcionim poljem `preferred_language?: string` (opciono — može i bez, ali korisno za buduće reference).
+
+## Šta NIJE u opsegu
+
+- Promena jezika iz podešavanja naloga (možemo dodati kasnije).
+- Migracija postojećih korisnika (kolona ostaje NULL dok je sami ne postave).
