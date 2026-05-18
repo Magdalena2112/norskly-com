@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
+import { useSelectedLanguage } from "@/hooks/useSelectedLanguage";
 
 const CEFR_ORDER = ["A1", "A2", "B1", "B2", "C1"] as const;
 
@@ -46,6 +47,7 @@ const SEVERITY_LABELS: Record<number, string> = {
 export default function ProgressPage() {
   const { profile, updateProfile } = useProfile();
   const { user } = useAuth();
+  const { code } = useSelectedLanguage();
   const navigate = useNavigate();
 
   const [errorStats, setErrorStats] = useState<ErrorTopicStat[]>([]);
@@ -80,6 +82,7 @@ export default function ProgressPage() {
           .from("activities")
           .select("module, type, points, payload, created_at")
           .eq("user_id", user.id)
+          .eq("language", code)
           .gte("created_at", isoDate)
           .order("created_at", { ascending: false })
           .limit(200),
@@ -87,11 +90,13 @@ export default function ProgressPage() {
           .from("error_events")
           .select("module, severity, category")
           .eq("user_id", user.id)
+          .eq("language", code)
           .gte("created_at", isoDate),
         supabase
           .from("vocab_items")
           .select("status")
-          .eq("user_id", user.id),
+          .eq("user_id", user.id)
+          .eq("language", code),
       ]);
 
       const activities = activitiesRes.data || [];
@@ -167,7 +172,7 @@ export default function ProgressPage() {
       });
       setLoadingReadiness(false);
     })();
-  }, [user]);
+  }, [user, code]);
 
   // Fetch error stats
   useEffect(() => {
@@ -181,6 +186,7 @@ export default function ProgressPage() {
         .from("error_events")
         .select("topic, category, severity, module")
         .eq("user_id", user.id)
+        .eq("language", code)
         .gte("created_at", thirtyDaysAgo.toISOString());
 
       if (error) {
@@ -214,7 +220,7 @@ export default function ProgressPage() {
       setErrorStats(stats);
       setLoadingErrors(false);
     })();
-  }, [user]);
+  }, [user, code]);
 
   const topRecommendations = useMemo(() => errorStats.slice(0, 3), [errorStats]);
 
