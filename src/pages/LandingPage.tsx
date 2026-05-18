@@ -326,30 +326,30 @@ export default function LandingPage() {
       </section>
 
       {/* ============== IS IT RIGHT FOR ME ============== */}
-      <section className="relative overflow-hidden py-20 md:py-28">
+      <section className="relative overflow-hidden py-14 md:py-28">
         <FloatingQuestionMarks />
         <div className="container max-w-5xl relative z-10">
-          <div className="text-center mb-12">
-            <h2 className="text-display text-[clamp(2rem,5vw,4rem)] text-primary">
+          <div className="text-center mb-10 sm:mb-12">
+            <h2 className="text-display text-[clamp(1.75rem,5vw,4rem)] text-primary">
               Da li je Norskly <span className="font-script text-primary/70">pravi</span> za tebe?
             </h2>
           </div>
-          <div className="grid md:grid-cols-2 gap-5">
-            <div className="bg-card rounded-3xl p-8 border border-border">
-              <p className="text-xs font-semibold uppercase tracking-widest text-primary mb-4">Savršeno za tebe ako:</p>
-              <ul className="space-y-4">
+          <div className="grid md:grid-cols-2 gap-4 sm:gap-5">
+            <div className="bg-card rounded-3xl p-6 md:p-8 border border-border">
+              <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-widest text-primary mb-4">Savršeno za tebe ako:</p>
+              <ul className="space-y-3 sm:space-y-4">
                 {FIT_YES.map((t) => (
-                  <li key={t} className="flex gap-3 text-foreground/85">
+                  <li key={t} className="flex gap-3 text-sm sm:text-base text-foreground/85">
                     <Check className="w-5 h-5 text-primary shrink-0 mt-0.5" /> {t}
                   </li>
                 ))}
               </ul>
             </div>
-            <div className="bg-secondary rounded-3xl p-8 border border-border">
-              <p className="text-xs font-semibold uppercase tracking-widest text-primary mb-4">Možda nije za tebe ako:</p>
-              <ul className="space-y-4">
+            <div className="bg-secondary rounded-3xl p-6 md:p-8 border border-border">
+              <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-widest text-primary mb-4">Možda nije za tebe ako:</p>
+              <ul className="space-y-3 sm:space-y-4">
                 {FIT_NO.map((t) => (
-                  <li key={t} className="flex gap-3 text-foreground/85">
+                  <li key={t} className="flex gap-3 text-sm sm:text-base text-foreground/85">
                     <X className="w-5 h-5 text-primary shrink-0 mt-0.5" /> {t}
                   </li>
                 ))}
