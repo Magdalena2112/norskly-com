@@ -38,14 +38,14 @@ export default function StudentLayout({ children, title }: StudentLayoutProps) {
 
   return (
     <SidebarProvider defaultOpen>
-      <div className="min-h-screen flex w-full bg-aurora">
+      <div className="min-h-screen flex w-full bg-fjord-soft relative">
         <StudentSidebar />
-        <div className="flex-1 flex flex-col min-w-0">
-          <header className="h-14 border-b border-primary-foreground/10 bg-background/10 backdrop-blur-md sticky top-0 z-40 flex items-center justify-between px-3 sm:px-6">
+        <div className="flex-1 flex flex-col min-w-0 relative">
+          <header className="h-14 border-b border-border/40 bg-cream/70 backdrop-blur-md sticky top-0 z-40 flex items-center justify-between px-3 sm:px-6">
             <div className="flex items-center gap-2 min-w-0">
-              <SidebarTrigger className="text-primary-foreground hover:bg-primary-foreground/10" />
+              <SidebarTrigger className="text-primary hover:bg-primary/10" />
               {title && (
-                <h1 className="font-display font-semibold text-primary-foreground text-base sm:text-lg truncate">
+                <h1 className="font-display font-semibold text-primary text-base sm:text-lg truncate">
                   {title}
                 </h1>
               )}
@@ -58,16 +58,16 @@ export default function StudentLayout({ children, title }: StudentLayoutProps) {
                 </Button>
               )}
               {xp && (
-                <span className="hidden sm:flex text-xs bg-primary/10 text-primary-foreground px-2.5 py-1 rounded-full font-semibold items-center gap-1 border border-primary-foreground/10">
+                <span className="hidden sm:flex text-xs bg-primary/10 text-primary px-2.5 py-1 rounded-full font-semibold items-center gap-1 border border-primary/15">
                   <Zap className="w-3 h-3" /> {XP_TITLES[Math.min(xp.level, 10)] || `Lvl ${xp.level}`} · {xp.total_xp} XP
                 </span>
               )}
-              <span className="hidden md:inline text-xs bg-accent/20 text-primary-foreground px-3 py-1 rounded-full font-medium border border-primary-foreground/10">
+              <span className="hidden md:inline text-xs bg-accent/30 text-primary px-3 py-1 rounded-full font-medium border border-accent/30">
                 {profile.level} · {profile.learning_goal}
               </span>
             </div>
           </header>
-          <main className="flex-1">{children}</main>
+          <main className="flex-1 relative">{children}</main>
         </div>
       </div>
     </SidebarProvider>
