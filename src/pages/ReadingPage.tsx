@@ -340,16 +340,39 @@ export default function ReadingPage() {
                                       disabled={!!result}
                                     />
                                   )}
-                                  {r && (
-                                    <div className={`mt-3 rounded-xl p-3 text-sm ${r.is_correct ? "bg-emerald-50 border border-emerald-200" : "bg-rose-50 border border-rose-200"}`}>
-                                      <div className="flex items-center gap-1.5 font-medium">
-                                        {r.is_correct ? <CheckCircle2 className="w-4 h-4 text-emerald-600" /> : <XCircle className="w-4 h-4 text-rose-600" />}
-                                        {r.is_correct ? (isAdvanced ? "Riktig" : "Tačno") : (isAdvanced ? "Feil" : "Netačno")}
+                                  {r && (() => {
+                                    const verdict = r.verdict || (r.is_correct ? "correct" : "incorrect");
+                                    const styles = verdict === "correct"
+                                      ? "bg-emerald-50 border-emerald-200"
+                                      : verdict === "partial"
+                                        ? "bg-amber-50 border-amber-200"
+                                        : "bg-rose-50 border-rose-200";
+                                    const label = verdict === "correct"
+                                      ? (isAdvanced ? "Riktig" : "Tačno")
+                                      : verdict === "partial"
+                                        ? (isAdvanced ? "Delvis riktig" : "Delimično tačno")
+                                        : (isAdvanced ? "Feil" : "Netačno");
+                                    const Icon = verdict === "correct" ? CheckCircle2 : XCircle;
+                                    const iconColor = verdict === "correct" ? "text-emerald-600" : verdict === "partial" ? "text-amber-600" : "text-rose-600";
+                                    return (
+                                      <div className={`mt-3 rounded-xl p-3 text-sm border ${styles}`}>
+                                        <div className="flex items-center gap-1.5 font-medium">
+                                          <Icon className={`w-4 h-4 ${iconColor}`} />
+                                          {label}
+                                        </div>
+                                        {verdict !== "correct" && r.correct_answer && (
+                                          <div className="text-xs mt-1"><b>{isAdvanced ? "Eksempel på riktig svar:" : "Primer tačnog odgovora:"}</b> {r.correct_answer}</div>
+                                        )}
+                                        {r.suggested_answer && r.suggested_answer !== r.correct_answer && (
+                                          <div className="text-xs mt-1"><b>{isAdvanced ? "Forslag:" : "Predlog:"}</b> {r.suggested_answer}</div>
+                                        )}
+                                        {r.language_correction && (
+                                          <div className="text-xs mt-1"><b>{isAdvanced ? "Språkkorrigering:" : "Jezička ispravka:"}</b> {r.language_correction}</div>
+                                        )}
+                                        {r.explanation && <div className="text-xs mt-1 text-muted-foreground">{r.explanation}</div>}
                                       </div>
-                                      {!r.is_correct && <div className="text-xs mt-1"><b>{isAdvanced ? "Riktig svar:" : "Tačan odgovor:"}</b> {r.correct_answer}</div>}
-                                      {r.explanation && <div className="text-xs mt-1 text-muted-foreground">{r.explanation}</div>}
-                                    </div>
-                                  )}
+                                    );
+                                  })()}
                                 </div>
                               );
                             })}
