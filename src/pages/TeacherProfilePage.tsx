@@ -179,25 +179,22 @@ export default function TeacherProfilePage() {
         }).catch((e) => console.error("Student email failed:", e));
       }
 
-      // Email to teacher
-      if (teacher?.email) {
-        supabase.functions.invoke("send-transactional-email", {
-          body: {
-            templateName: "lesson-booked-teacher",
-            recipientEmail: teacher.email,
-            idempotencyKey: `lesson-teacher-${lessonId}`,
-            templateData: {
-              studentName,
-              studentLanguage,
-              lessonType: `${selectedType.title} (${selectedType.duration_minutes} min)`,
-              date: dateStr,
-              time: timeStr,
-              note: note || undefined,
-              analyticsShared: shareAnalytics,
-            },
+      // Email to teacher — recipient is resolved server-side, no client email needed
+      supabase.functions.invoke("send-transactional-email", {
+        body: {
+          templateName: "lesson-booked-teacher",
+          idempotencyKey: `lesson-teacher-${lessonId}`,
+          templateData: {
+            studentName,
+            studentLanguage,
+            lessonType: `${selectedType.title} (${selectedType.duration_minutes} min)`,
+            date: dateStr,
+            time: timeStr,
+            note: note || undefined,
+            analyticsShared: shareAnalytics,
           },
-        }).catch((e) => console.error("Teacher email failed:", e));
-      }
+        },
+      }).catch((e) => console.error("Teacher email failed:", e));
 
       return lessonId as string;
     },
