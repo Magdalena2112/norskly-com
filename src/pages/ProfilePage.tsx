@@ -98,11 +98,30 @@ export default function ProfilePage() {
       <div className="container max-w-3xl py-8 space-y-6">
         <Card className="bg-background/90 backdrop-blur-sm border-border/30">
           <CardContent className="pt-6 flex items-center gap-4">
-            <Avatar className="w-16 h-16 ring-2 ring-accent">
-              <AvatarFallback className="bg-primary text-primary-foreground font-display text-xl">
-                {initials}
-              </AvatarFallback>
-            </Avatar>
+            <div className="relative">
+              <Avatar className="w-16 h-16 ring-2 ring-accent">
+                {avatarUrl && <AvatarImage src={avatarUrl} alt={profile.name || "avatar"} />}
+                <AvatarFallback className="bg-primary text-primary-foreground font-display text-xl">
+                  {initials}
+                </AvatarFallback>
+              </Avatar>
+              <button
+                type="button"
+                onClick={() => fileRef.current?.click()}
+                disabled={uploading}
+                className="absolute -bottom-1 -right-1 w-7 h-7 rounded-full bg-accent text-accent-foreground flex items-center justify-center shadow-md hover:scale-110 transition-transform disabled:opacity-60"
+                aria-label="Promeni profilnu sliku"
+              >
+                {uploading ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Camera className="w-3.5 h-3.5" />}
+              </button>
+              <input
+                ref={fileRef}
+                type="file"
+                accept="image/*"
+                className="hidden"
+                onChange={handleUpload}
+              />
+            </div>
             <div className="flex-1 min-w-0">
               <h2 className="text-xl font-display font-bold text-foreground truncate">
                 {profile.name || "Bez imena"}
