@@ -364,10 +364,9 @@ export function generateWritingPdf(payload: WritingPdfPayload, filename = "norsk
     const innerW = contentWidth - 36;
     // Measure each mistake block
     const mistakeBlocks = payload.mistakes.map((m, i) => {
-      doc.setFont("helvetica", "bold");
-      const wrong = doc.splitTextToSize(m.original, innerW - 36) as string[];
-      const right = doc.splitTextToSize(`→ ${m.corrected}`, innerW - 36) as string[];
-      const expl = doc.splitTextToSize(m.explanation, innerW - 36) as string[];
+      const wrong = wrap(m.original, innerW - 36, 10.5, "bold");
+      const right = wrap(`→ ${m.corrected}`, innerW - 36, 10.5, "bold");
+      const expl = wrap(m.explanation || "", innerW - 36, 9.5, "normal");
       const h = 6 + wrong.length * 14 + right.length * 14 + (m.explanation ? expl.length * 13 + 4 : 0) + 12;
       return { i, m, wrong, right, expl, h };
     });
