@@ -13,10 +13,10 @@ import { format } from "date-fns";
 import StudentLayout from "@/components/student/StudentLayout";
 
 const modules = [
-  { title: "Gramatika", description: "Vežbaj gramatiku kroz kvizove prilagođene tvom nivou.", icon: BookOpen, route: "/grammar", gradient: "from-primary to-primary/70" },
-  { title: "Vokabular", description: "Uči nove reči sa flashcard sistemom.", icon: Languages, route: "/vocabulary", gradient: "from-accent to-accent/70" },
-  { title: "Razgovor", description: "Vežbaj pisanje poruka u realnim situacijama.", icon: MessageSquare, route: "/talk", gradient: "from-primary to-accent" },
-  { title: "Razgovor sa profesorom", description: "Rezerviši 90-minutni čas sa profesorom norveškog.", icon: GraduationCap, route: "/book-lesson", gradient: "from-accent to-primary/80", buttonLabel: "Rezerviši čas", fullWidth: true },
+  { title: "Gramatika", subtitle: "Norsk grammatikk", description: "Vežbaj gramatiku kroz kvizove prilagođene tvom nivou.", icon: BookOpen, route: "/grammar", tint: "from-secondary to-secondary/40", iconBg: "bg-primary/90", accent: "primary" },
+  { title: "Vokabular", subtitle: "Ord & uttrykk", description: "Uči nove reči sa flashcard sistemom.", icon: Languages, route: "/vocabulary", tint: "from-sunset/40 to-secondary/30", iconBg: "bg-sunset", accent: "sunset" },
+  { title: "Razgovor", subtitle: "Snakk med AI", description: "Vežbaj pisanje poruka u realnim situacijama.", icon: MessageSquare, route: "/talk", tint: "from-fjord/30 to-mist", iconBg: "bg-fjord", accent: "fjord" },
+  { title: "Razgovor sa profesorom", subtitle: "Lærer-time · 90 min", description: "Rezerviši 90-minutni čas sa profesorom norveškog.", icon: GraduationCap, route: "/book-lesson", tint: "from-forest/25 to-secondary/30", iconBg: "bg-forest", accent: "forest", buttonLabel: "Rezerviši čas", fullWidth: true },
 ];
 
 export default function DashboardPage() {
