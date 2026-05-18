@@ -449,6 +449,7 @@ export type Database = {
           onboarding_completed: boolean
           preferred_language: string | null
           preferred_tone: string | null
+          subscription_type: string | null
           updated_at: string | null
           user_id: string
         }
@@ -464,6 +465,7 @@ export type Database = {
           onboarding_completed?: boolean
           preferred_language?: string | null
           preferred_tone?: string | null
+          subscription_type?: string | null
           updated_at?: string | null
           user_id: string
         }
@@ -479,6 +481,7 @@ export type Database = {
           onboarding_completed?: boolean
           preferred_language?: string | null
           preferred_tone?: string | null
+          subscription_type?: string | null
           updated_at?: string | null
           user_id?: string
         }
