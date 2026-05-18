@@ -422,6 +422,9 @@ function CorrectionTab({ level }: { level: string }) {
       overall_feedback: result.overall_feedback,
       sledeci_korak: result.sledeci_korak,
       cefr_assessment: result.cefr_assessment,
+      naturalness_score: result.naturalness_score,
+      complexity_score: result.complexity_score,
+      nivo_analiza: result.nivo_analiza,
     }, `korekcija-${Date.now()}.pdf`);
   };
 
