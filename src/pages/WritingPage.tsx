@@ -228,7 +228,11 @@ function BildebeskrivelseTab({ level }: { level: string }) {
       overall_feedback: result.overall_feedback,
       sledeci_korak: result.sledeci_korak,
       vocabulary_helper: helper?.vocabulary,
+      vocabulary_helper_groups: helper?.vocabulary_groups,
       cefr_assessment: result.cefr_assessment,
+      naturalness_score: result.naturalness_score,
+      complexity_score: result.complexity_score,
+      nivo_analiza: result.nivo_analiza,
     }, `bildebeskrivelse-${Date.now()}.pdf`);
   };
 
