@@ -45,11 +45,12 @@ const applicationSchema = z.object({
   email: z.string().trim().email("Neispravna email adresa").max(255),
   languages: z.string().trim().min(2, "Navedite jezike koje predajete").max(200),
   bio: z.string().trim().min(20, "Biografija mora imati bar 20 karaktera").max(2000),
+  experience: z.string().trim().max(2000).optional().or(z.literal("")),
 });
 
 export default function ForTeachersPage() {
   const navigate = useNavigate();
-  const [form, setForm] = useState({ full_name: "", email: "", languages: "", bio: "" });
+  const [form, setForm] = useState({ full_name: "", email: "", languages: "", bio: "", experience: "" });
   const [cvFile, setCvFile] = useState<File | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -90,12 +91,13 @@ export default function ForTeachersPage() {
           email: parsed.data.email,
           languages: parsed.data.languages,
           bio: parsed.data.bio,
+          experience: parsed.data.experience || null,
           cv_path,
         });
       if (error) throw error;
 
       setSubmitted(true);
-      setForm({ full_name: "", email: "", languages: "", bio: "" });
+      setForm({ full_name: "", email: "", languages: "", bio: "", experience: "" });
       setCvFile(null);
       toast({ title: "Prijava poslata", description: "Hvala! Javljamo se u roku od 5 radnih dana." });
     } catch (err: any) {
@@ -341,12 +343,25 @@ export default function ForTeachersPage() {
                   id="bio"
                   value={form.bio}
                   onChange={(e) => setForm({ ...form, bio: e.target.value })}
-                  placeholder="Iskustvo, obrazovanje, pristup u radu..."
+                  placeholder="Obrazovanje, sertifikati, jezici, pristup u radu..."
                   required
                   maxLength={2000}
-                  rows={5}
+                  rows={4}
                   className="rounded-xl resize-none"
                 />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="experience">Iskustvo u nastavi (opciono)</Label>
+                <Textarea
+                  id="experience"
+                  value={form.experience}
+                  onChange={(e) => setForm({ ...form, experience: e.target.value })}
+                  placeholder="Koliko godina predaješ, tipovi učenika, online/uživo, prethodne škole/platforme..."
+                  maxLength={2000}
+                  rows={4}
+                  className="rounded-xl resize-none"
+                />
+                <p className="text-xs text-foreground/55">Cene i tipovi časova se podešavaju kasnije u tvom dashboard-u, nakon verifikacije.</p>
               </div>
               <div className="space-y-2">
                 <Label htmlFor="cv">CV (PDF, DOC, DOCX — do 10MB)</Label>

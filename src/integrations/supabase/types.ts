@@ -631,6 +631,7 @@ export type Database = {
           created_at: string
           cv_path: string | null
           email: string
+          experience: string | null
           full_name: string
           id: string
           languages: string
@@ -645,6 +646,7 @@ export type Database = {
           created_at?: string
           cv_path?: string | null
           email: string
+          experience?: string | null
           full_name: string
           id?: string
           languages: string
@@ -659,6 +661,7 @@ export type Database = {
           created_at?: string
           cv_path?: string | null
           email?: string
+          experience?: string | null
           full_name?: string
           id?: string
           languages?: string
