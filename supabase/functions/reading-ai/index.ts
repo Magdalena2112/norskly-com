@@ -62,10 +62,10 @@ Deno.serve(async (req) => {
     if (action === "generate") {
       systemPrompt = `Ti si nastavnik norveškog jezika (Bokmål). Pravi tekst za čitanje prilagođen CEFR nivou ${level}. ${cefr}
 ${instrLang}
-Odgovori ISKLJUČIVO u JSON formatu, bez markdown-a. STRUKTURA VEŽBI MORA BITI TAČNO OVIM REDOSLEDOM:
-1) Najpre TAČNO 5 vežbi tipa "true_false" (ids 1–5)
-2) Zatim 3–5 vežbi tipa "open" (pitanja razumevanja teksta)
-3) Na kraju vokabularne vežbe: redom barem po jedna "synonym", "antonym" i "vocab" (ukupno 3–5)
+Odgovori ISKLJUČIVO u JSON formatu, bez markdown-a. STRUKTURA VEŽBI MORA BITI TAČNO OVIM REDOSLEDOM I BROJEM (ukupno TAČNO 15 vežbi):
+1) TAČNO 5 vežbi tipa "true_false" (ids 1–5)
+2) TAČNO 5 vežbi tipa "open" — pitanja razumevanja teksta (ids 6–10)
+3) TAČNO 5 vokabularnih vežbi (ids 11–15): kombinacija "synonym", "antonym" i "vocab" — obavezno bar po jedna od svakog tipa, ostatak rasporedi po potrebi
 
 {
   "title": "Naslov teksta na norveškom",
@@ -81,8 +81,8 @@ Odgovori ISKLJUČIVO u JSON formatu, bez markdown-a. STRUKTURA VEŽBI MORA BITI 
     { "id": 12, "type": "vocab", "question": "${isAdvanced ? "Forklar betydningen av uttrykket 'Z' i denne sammenhengen." : "Objasni značenje izraza 'Z' u datom kontekstu."}", "word": "Z", "answer": "kratko objašnjenje (${isAdvanced ? "na norveškom" : "na srpskom"})", "explanation": "" }
   ]
 }
-Vokabular: 6–10 ključnih reči iz teksta. Sve vežbe MORAJU biti generisane navedenim redosledom (true_false → open → synonym/antonym/vocab).`;
-      userPrompt = `Tema: "${topic}". Nivo: ${level}. Dužina: ${lenDesc}. Generiši tekst i vežbe po zadatoj strukturi.`;
+Vokabular: 6–10 ključnih reči iz teksta. Vežbe MORAJU biti TAČNO 15 (5 + 5 + 5) navedenim redosledom (true_false → open → synonym/antonym/vocab).`;
+      userPrompt = `Tema: "${topic}". Nivo: ${level}. Dužina: ${lenDesc}. Generiši tekst i TAČNO 15 vežbi (5 true/false, 5 open, 5 vokabular) po zadatoj strukturi.`;
     } else if (action === "evaluate") {
       const exercises = body.exercises || [];
       const answers = body.answers || {};
