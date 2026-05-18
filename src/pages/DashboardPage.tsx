@@ -12,12 +12,28 @@ import WeeklyDigest from "@/components/WeeklyDigest";
 import { format } from "date-fns";
 import StudentLayout from "@/components/student/StudentLayout";
 import NordicBackdrop from "@/components/student/NordicBackdrop";
+import FjordHero from "@/components/student/FjordHero";
+import PostcardVignette from "@/components/student/PostcardVignette";
 
-const modules = [
-  { title: "Gramatika", subtitle: "Norsk grammatikk", description: "Vežbaj gramatiku kroz kvizove prilagođene tvom nivou.", icon: BookOpen, route: "/grammar", tint: "from-secondary to-secondary/40", iconBg: "bg-primary/90", accent: "primary" },
-  { title: "Vokabular", subtitle: "Ord & uttrykk", description: "Uči nove reči sa flashcard sistemom.", icon: Languages, route: "/vocabulary", tint: "from-sunset/40 to-secondary/30", iconBg: "bg-sunset", accent: "sunset" },
-  { title: "Razgovor", subtitle: "Snakk med AI", description: "Vežbaj pisanje poruka u realnim situacijama.", icon: MessageSquare, route: "/talk", tint: "from-fjord/30 to-mist", iconBg: "bg-fjord", accent: "fjord" },
-  { title: "Razgovor sa profesorom", subtitle: "Lærer-time · 90 min", description: "Rezerviši 90-minutni čas sa profesorom norveškog.", icon: GraduationCap, route: "/book-lesson", tint: "from-forest/25 to-secondary/30", iconBg: "bg-forest", accent: "forest", buttonLabel: "Rezerviši čas", fullWidth: true },
+type ModuleDef = {
+  title: string;
+  subtitle: string;
+  description: string;
+  icon: typeof BookOpen;
+  route: string;
+  vignette: "book" | "stamp" | "speech" | "cabins";
+  iconBg: string;
+  rotation: string;
+  buttonLabel?: string;
+  fullWidth?: boolean;
+  stamp?: boolean;
+};
+
+const modules: ModuleDef[] = [
+  { title: "Gramatika", subtitle: "Norsk grammatikk", description: "Vežbaj gramatiku kroz kvizove prilagođene tvom nivou.", icon: BookOpen, route: "/grammar", vignette: "book", iconBg: "bg-primary", rotation: "rotate-card-1" },
+  { title: "Vokabular", subtitle: "Ord & uttrykk", description: "Uči nove reči sa flashcard sistemom.", icon: Languages, route: "/vocabulary", vignette: "stamp", iconBg: "bg-sunset", rotation: "rotate-card-2", stamp: true },
+  { title: "Razgovor", subtitle: "Snakk med AI", description: "Vežbaj pisanje poruka u realnim situacijama.", icon: MessageSquare, route: "/talk", vignette: "speech", iconBg: "bg-fjord", rotation: "rotate-card-3" },
+  { title: "Razgovor sa profesorom", subtitle: "Lærer-time · 90 min", description: "Rezerviši 90-minutni čas sa profesorom norveškog.", icon: GraduationCap, route: "/book-lesson", vignette: "cabins", iconBg: "bg-forest", rotation: "rotate-card-4", buttonLabel: "Rezerviši čas", fullWidth: true },
 ];
 
 export default function DashboardPage() {
