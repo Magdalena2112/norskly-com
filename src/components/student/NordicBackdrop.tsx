@@ -75,29 +75,6 @@ export default function NordicBackdrop() {
         }}
       />
 
-      {/* Floating postcard stickers */}
-      <Sticker className="top-[6%] right-[5%] rotate-[6deg] hidden md:flex" delay="0s" label="Lofoten" tint="from-sunset/50 via-secondary to-fjord/40" />
-      <Sticker className="top-[26%] left-[3%] -rotate-[8deg] hidden lg:flex" delay="1.2s" label="Bergen" tint="from-forest/40 to-fjord/40" />
-      <Sticker className="top-[58%] right-[3%] rotate-[4deg] hidden lg:flex" delay="2.4s" label="Tromsø" tint="from-fjord/50 to-secondary/60" small />
-
-      {/* Tiny stamp */}
-      <div
-        className="absolute top-[44%] right-[8%] w-14 h-16 bg-cream rounded-sm shadow-card-soft rotate-[12deg] border-2 border-dashed border-primary/25 p-1 animate-float-slow hidden lg:flex items-center justify-center"
-        style={{ animationDelay: "1.6s" }}
-      >
-        <div className="text-center">
-          <div className="font-display text-[8px] font-bold text-primary/80 leading-none">45 KR</div>
-          <div className="font-script text-[7px] text-primary/60 italic mt-0.5">Norge</div>
-        </div>
-      </div>
-
-      {/* Speech bubbles */}
-      <div className="absolute top-[12%] left-[36%] hidden xl:block animate-float-slow" style={{ animationDelay: "0.6s" }}>
-        <SpeechBubble text="Hei!" big />
-      </div>
-      <div className="absolute bottom-[38%] left-[6%] hidden xl:block animate-float-slow" style={{ animationDelay: "1.8s" }}>
-        <SpeechBubble text="Hvordan går det?" />
-      </div>
     </div>
   );
 }
