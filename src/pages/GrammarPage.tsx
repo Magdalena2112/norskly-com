@@ -655,6 +655,7 @@ function ExplainTab({ level, userId, initialQuery }: { level: string; userId?: s
       .from("saved_explanations")
       .select("*")
       .eq("user_id", userId)
+      .eq("language", currentLanguageCode())
       .order("created_at", { ascending: false });
     if (data) setSavedExplanations(data.map((d: any) => ({ ...d, explanation_data: d.explanation_data as ExplainResult })));
   }, [userId]);
@@ -678,6 +679,7 @@ function ExplainTab({ level, userId, initialQuery }: { level: string; userId?: s
         title: result.naslov || query.trim(),
         query: normalizedQuery,
         explanation_data: result as any,
+        language: currentLanguageCode(),
       });
       await fetchSaved();
     }
