@@ -4,7 +4,7 @@ import { useProfile } from "@/context/ProfileContext";
 import { useAuth } from "@/context/AuthContext";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { BookOpen, Languages, MessageSquare, TrendingUp, GraduationCap, CalendarCheck } from "lucide-react";
+import { BookOpen, Languages, MessageSquare, GraduationCap, CalendarCheck } from "lucide-react";
 import XpProgressCard from "@/components/XpProgressCard";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
