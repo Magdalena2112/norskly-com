@@ -12,24 +12,27 @@ import { useToast } from "@/hooks/use-toast";
 import { CalendarIcon, Clock, ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { logActivity } from "@/lib/logActivity";
+import { useSelectedLanguage } from "@/hooks/useSelectedLanguage";
 
 export default function BookLessonPage() {
   const { user } = useAuth();
   const { toast } = useToast();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const { code: langCode } = useSelectedLanguage();
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
   const [selectedSlot, setSelectedSlot] = useState<any>(null);
   const [note, setNote] = useState("");
   const [dialogOpen, setDialogOpen] = useState(false);
 
   const { data: slots = [], isLoading } = useQuery({
-    queryKey: ["open-slots"],
+    queryKey: ["open-slots", langCode],
     queryFn: async () => {
       const { data, error } = await supabase
         .from("availability_slots")
         .select("*")
         .eq("status", "open")
+        .eq("language", langCode)
         .gte("start_time", new Date().toISOString())
         .order("start_time", { ascending: true });
       if (error) throw error;
