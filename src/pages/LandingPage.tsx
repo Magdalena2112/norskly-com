@@ -123,7 +123,7 @@ export default function LandingPage() {
           </div>
           <div className="flex items-center gap-2">
             <Button variant="ghost" size="sm" onClick={() => navigate("/auth")}>Prijava</Button>
-            <Button size="sm" className="rounded-full bg-primary hover:bg-primary/90" onClick={() => navigate("/auth")}>
+            <Button size="sm" className="rounded-full bg-primary hover:bg-primary/90" onClick={() => document.getElementById("languages")?.scrollIntoView({ behavior: "smooth" })}>
               Započni besplatno
             </Button>
           </div>
