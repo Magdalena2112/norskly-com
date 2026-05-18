@@ -231,35 +231,35 @@ export default function LandingPage() {
       </section>
 
       {/* ============== STUDENTS vs TEACHERS ============== */}
-      <section id="teachers" className="relative py-20 md:py-28 overflow-hidden">
+      <section id="teachers" className="relative py-14 md:py-28 overflow-hidden">
         <div
           aria-hidden
           className="absolute inset-0 bg-center bg-cover [mask-image:radial-gradient(ellipse_at_center,black_50%,transparent_85%)]"
           style={{ backgroundImage: `url(${ecosystemCollage})`, opacity: 0.45, filter: "blur(3px) saturate(0.8)" }}
         />
-        <div aria-hidden className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/40 to-background/70 opacity-20" />
+        <div aria-hidden className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/60 to-background/85 md:from-background/60 md:via-background/40 md:to-background/70 md:opacity-20" />
         <div className="container relative z-10">
-          <div className="text-center mb-16 max-w-2xl mx-auto">
-            <p className="text-xs font-semibold uppercase tracking-widest text-primary/70 mb-3">Ekosistem</p>
-            <h2 className="text-display text-[clamp(2rem,5vw,4rem)] text-primary">
+          <div className="text-center mb-10 sm:mb-16 max-w-2xl mx-auto">
+            <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-widest text-primary/70 mb-3">Ekosistem</p>
+            <h2 className="text-display text-[clamp(1.75rem,5vw,4rem)] text-primary">
               Za studente <span className="font-script text-primary/70">i</span> profesore.
             </h2>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid md:grid-cols-2 gap-5 sm:gap-6">
             <motion.div
               initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="bg-card rounded-3xl p-10 border border-border relative overflow-hidden"
+              className="bg-card rounded-3xl p-6 sm:p-10 border border-border relative overflow-hidden"
             >
               <div className="flex items-center gap-3 mb-2">
                 <GraduationCap className="w-5 h-5 text-primary" />
-                <span className="text-xs font-semibold uppercase tracking-widest text-primary/70">Za studente</span>
+                <span className="text-[10px] sm:text-xs font-semibold uppercase tracking-widest text-primary/70">Za studente</span>
               </div>
-              <h3 className="text-display text-4xl text-primary mb-6">Uči pametnije. Govori sa <span className="font-script text-primary/70">samopouzdanjem</span>.</h3>
-              <ul className="space-y-3 mb-8">
+              <h3 className="text-display text-3xl md:text-4xl text-primary mb-5 sm:mb-6">Uči pametnije. Govori sa <span className="font-script text-primary/70">samopouzdanjem</span>.</h3>
+              <ul className="space-y-3 mb-7 sm:mb-8">
                 {STUDENT_BENEFITS.map((b) => (
-                  <li key={b} className="flex items-center gap-3 text-foreground/80">
+                  <li key={b} className="flex items-center gap-3 text-sm sm:text-base text-foreground/80">
                     <Check className="w-4 h-4 text-primary shrink-0" /> {b}
                   </li>
                 ))}
@@ -273,16 +273,16 @@ export default function LandingPage() {
             <motion.div
               initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="bg-secondary rounded-3xl p-10 border border-border relative overflow-hidden"
+              className="bg-secondary rounded-3xl p-6 sm:p-10 border border-border relative overflow-hidden"
             >
               <div className="flex items-center gap-3 mb-2">
                 <Users className="w-5 h-5 text-primary" />
-                <span className="text-xs font-semibold uppercase tracking-widest text-primary/70">Za profesore</span>
+                <span className="text-[10px] sm:text-xs font-semibold uppercase tracking-widest text-primary/70">Za profesore</span>
               </div>
-              <h3 className="text-display text-4xl text-primary mb-6">Predavaj modernije. Organizuj <span className="font-script text-primary/70">jednostavnije</span>.</h3>
-              <ul className="space-y-3 mb-8">
+              <h3 className="text-display text-3xl md:text-4xl text-primary mb-5 sm:mb-6">Predavaj modernije. Organizuj <span className="font-script text-primary/70">jednostavnije</span>.</h3>
+              <ul className="space-y-3 mb-7 sm:mb-8">
                 {TEACHER_BENEFITS.map((b) => (
-                  <li key={b} className="flex items-center gap-3 text-foreground/80">
+                  <li key={b} className="flex items-center gap-3 text-sm sm:text-base text-foreground/80">
                     <Check className="w-4 h-4 text-primary shrink-0" /> {b}
                   </li>
                 ))}
