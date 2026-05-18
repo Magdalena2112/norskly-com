@@ -45,11 +45,12 @@ const applicationSchema = z.object({
   email: z.string().trim().email("Neispravna email adresa").max(255),
   languages: z.string().trim().min(2, "Navedite jezike koje predajete").max(200),
   bio: z.string().trim().min(20, "Biografija mora imati bar 20 karaktera").max(2000),
+  experience: z.string().trim().max(2000).optional().or(z.literal("")),
 });
 
 export default function ForTeachersPage() {
   const navigate = useNavigate();
-  const [form, setForm] = useState({ full_name: "", email: "", languages: "", bio: "" });
+  const [form, setForm] = useState({ full_name: "", email: "", languages: "", bio: "", experience: "" });
   const [cvFile, setCvFile] = useState<File | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
