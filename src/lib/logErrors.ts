@@ -1,4 +1,5 @@
 import { supabase } from "@/integrations/supabase/client";
+import { getCurrentLanguageCode } from "@/lib/currentLanguage";
 
 export interface ErrorEvent {
   category: string;
@@ -14,9 +15,11 @@ export async function logErrors(
   sourceType: string,
   errors: ErrorEvent[],
   context?: string,
-  attemptNo?: number
+  attemptNo?: number,
+  language?: "no" | "en" | "de",
 ) {
   if (!errors || errors.length === 0) return;
+  const langCode = language || getCurrentLanguageCode();
 
   const rows = errors.map((e) => ({
     user_id: userId,
@@ -29,6 +32,7 @@ export async function logErrors(
     example_correct: e.example_correct,
     context: context || null,
     attempt_no: attemptNo || null,
+    language: langCode,
   }));
 
   const { error } = await supabase.from("error_events").insert(rows);
