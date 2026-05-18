@@ -2,23 +2,17 @@ import { Navigate, useLocation } from "react-router-dom";
 import { useAuth } from "@/context/AuthContext";
 import { useUserRole } from "@/hooks/useUserRole";
 import { useQuery } from "@tanstack/react-query";
-import { supabase } from "@/integrations/supabase/client";
+import { getActiveLanguageCode, isLanguageOnboarded } from "@/lib/onboardingStatus";
 
 export function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const { user, loading } = useAuth();
   const { isAdmin, loading: roleLoading } = useUserRole();
   const location = useLocation();
+  const activeLang = getActiveLanguageCode(location.pathname);
 
   const { data: onboardingCompleted, isLoading: onboardingLoading } = useQuery({
-    queryKey: ["onboarding-status", user?.id],
-    queryFn: async () => {
-      const { data } = await supabase
-        .from("profiles")
-        .select("onboarding_completed")
-        .eq("user_id", user!.id)
-        .maybeSingle();
-      return data?.onboarding_completed ?? false;
-    },
+    queryKey: ["onboarding-status", user?.id, activeLang],
+    queryFn: async () => (user ? isLanguageOnboarded(user.id, activeLang) : false),
     enabled: !!user && !isAdmin,
     staleTime: Infinity,
   });
