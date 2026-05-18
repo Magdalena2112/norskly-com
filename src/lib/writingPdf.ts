@@ -501,12 +501,12 @@ export function generateWritingPdf(payload: WritingPdfPayload, filename = "norsk
             let cy = y;
             arr.forEach((v) => {
               const line = `• ${v.word} — ${v.translation}`;
-              const wrapped = doc.splitTextToSize(line, colW) as string[];
+              const wrapped = wrap(line, colW, 9.5);
               wrapped.forEach((l, idx) => {
-                // Bold the word portion is non-trivial across wrap; keep uniform but use ink color
                 doc.setTextColor(...(idx === 0 ? INK : MUTED));
+                doc.setCharSpace(0);
                 doc.text(l, x, cy);
-                cy += 12;
+                cy += 13;
               });
             });
             return cy;
