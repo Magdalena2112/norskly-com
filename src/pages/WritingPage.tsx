@@ -282,67 +282,113 @@ function BildebeskrivelseTab({ level }: { level: string }) {
             {helperLoading ? <><Loader2 className="w-4 h-4 animate-spin mr-1" /> Analiziram sliku...</> : <><Sparkles className="w-4 h-4 mr-1" /> Analiziraj sliku</>}
           </Button>
 
-          {helper && (
-            <Collapsible open={helperOpen} onOpenChange={setHelperOpen} className="rounded-2xl bg-secondary/40 border border-border/40">
-              <CollapsibleTrigger className="w-full flex items-center justify-between px-4 py-3 text-left">
-                <span className="font-display text-sm text-primary">Pomoć pri opisu</span>
-                <ChevronDown className={`w-4 h-4 transition-transform ${helperOpen ? "rotate-180" : ""}`} />
-              </CollapsibleTrigger>
-              <CollapsibleContent className="px-4 pb-4 space-y-4 text-sm">
-                {helper.description_hint && (
-                  <p className="italic text-primary/80">{helper.description_hint}</p>
-                )}
-                {(() => {
-                  const groups = helper.vocabulary_groups
-                    || (helper.vocabulary ? helper.vocabulary.reduce<Record<string, VocabItem[]>>((acc, v) => {
-                        const k = v.type && VOCAB_GROUP_LABELS[v.type] ? v.type : "korisni_izrazi";
-                        (acc[k] ||= []).push(v);
-                        return acc;
-                      }, {}) : null);
-                  if (!groups) return null;
-                  const keys = [...VOCAB_GROUP_ORDER.filter((k) => groups[k]?.length), ...Object.keys(groups).filter((k) => !VOCAB_GROUP_ORDER.includes(k) && groups[k]?.length)];
-                  return (
-                    <div className="space-y-3">
-                      {keys.map((k) => (
-                        <div key={k}>
-                          <p className="font-semibold text-primary mb-1.5 text-xs uppercase tracking-wider">
-                            {VOCAB_GROUP_LABELS[k] || k}
-                          </p>
-                          <ul className="space-y-0.5">
-                            {groups[k].map((v, i) => (
-                              <li key={i} className="text-sm">
-                                <span className="font-medium text-primary">{v.word}</span>
-                                <span className="text-muted-foreground"> — {v.translation}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      ))}
-                    </div>
-                  );
-                })()}
-                {helper.expressions && helper.expressions.length > 0 && (
-                  <div>
-                    <p className="font-semibold text-primary mb-1 text-xs uppercase tracking-wider">Uttrykk</p>
-                    <ul className="space-y-1">
-                      {helper.expressions.map((e, i) => (
-                        <li key={i}><span className="font-medium">{e.no}</span> <span className="text-muted-foreground">— {e.sr}</span></li>
-                      ))}
+          {helper && (() => {
+            const groups = helper.vocabulary_groups
+              || (helper.vocabulary ? helper.vocabulary.reduce<Record<string, VocabItem[]>>((acc, v) => {
+                  const k = v.type && VOCAB_GROUP_LABELS[v.type] ? v.type : "korisni_izrazi";
+                  (acc[k] ||= []).push(v);
+                  return acc;
+                }, {}) : null);
+            // Vocabulary keys EXCLUDING korisni_izrazi (shown in its own section)
+            const vocabKeys = groups
+              ? [...VOCAB_GROUP_ORDER.filter((k) => k !== "korisni_izrazi" && groups[k]?.length),
+                 ...Object.keys(groups).filter((k) => !VOCAB_GROUP_ORDER.includes(k) && groups[k]?.length)]
+              : [];
+            const expressions = groups?.korisni_izrazi || [];
+            const starters = helper.sentence_starters || [];
+
+            const sections: { id: string; title: string; available: boolean; render: () => JSX.Element }[] = [
+              {
+                id: "vocab",
+                title: "Vokabular sa slike",
+                available: vocabKeys.length > 0,
+                render: () => (
+                  <div className="space-y-3">
+                    {helper.description_hint && (
+                      <p className="italic text-primary/80 text-sm">{helper.description_hint}</p>
+                    )}
+                    {vocabKeys.map((k) => (
+                      <div key={k}>
+                        <p className="font-semibold text-primary mb-1.5 text-xs uppercase tracking-wider">
+                          {VOCAB_GROUP_LABELS[k] || k}
+                        </p>
+                        <ul className="space-y-0.5">
+                          {groups![k].map((v, i) => (
+                            <li key={i} className="text-sm">
+                              <span className="font-medium text-primary">{v.word}</span>
+                              <span className="text-muted-foreground"> — {v.translation}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
+                  </div>
+                ),
+              },
+              {
+                id: "expr",
+                title: "Korisni izrazi",
+                available: expressions.length > 0 || (helper.expressions?.length ?? 0) > 0,
+                render: () => (
+                  <ul className="space-y-1 text-sm">
+                    {expressions.map((e, i) => (
+                      <li key={`g-${i}`}>
+                        <span className="font-medium text-primary">{e.word}</span>
+                        <span className="text-muted-foreground"> — {e.translation}</span>
+                      </li>
+                    ))}
+                    {helper.expressions?.map((e, i) => (
+                      <li key={`e-${i}`}>
+                        <span className="font-medium text-primary">{e.no}</span>
+                        <span className="text-muted-foreground"> — {e.sr}</span>
+                      </li>
+                    ))}
+                  </ul>
+                ),
+              },
+              {
+                id: "starters",
+                title: "Počeci rečenica",
+                available: starters.length > 0,
+                render: () => (
+                  <div className="space-y-1.5">
+                    <p className="text-xs text-muted-foreground">Dovrši rečenice svojim rečima.</p>
+                    <ul className="space-y-1 text-sm text-primary/80">
+                      {starters.map((s, i) => <li key={i}>· {s}</li>)}
                     </ul>
                   </div>
-                )}
-                {helper.sentence_starters && helper.sentence_starters.length > 0 && (
-                  <div>
-                    <p className="font-semibold text-primary mb-1 text-xs uppercase tracking-wider">Počeci rečenica</p>
-                    <p className="text-xs text-muted-foreground mb-1.5">Dovrši rečenice svojim rečima.</p>
-                    <ul className="space-y-1 text-primary/80">
-                      {helper.sentence_starters.map((s, i) => <li key={i}>· {s}</li>)}
-                    </ul>
-                  </div>
-                )}
-              </CollapsibleContent>
-            </Collapsible>
-          )}
+                ),
+              },
+            ];
+
+            return (
+              <div className="rounded-2xl bg-secondary/40 border border-border/40 overflow-hidden">
+                <div className="px-4 py-3 border-b border-border/30">
+                  <span className="font-display text-sm text-primary">Pomoć pri opisu</span>
+                </div>
+                <div className="divide-y divide-border/30">
+                  {sections.filter((s) => s.available).map((s) => {
+                    const open = openHelperSections[s.id] ?? false;
+                    return (
+                      <Collapsible
+                        key={s.id}
+                        open={open}
+                        onOpenChange={(v) => setOpenHelperSections((prev) => ({ ...prev, [s.id]: v }))}
+                      >
+                        <CollapsibleTrigger className="w-full flex items-center justify-between px-4 py-3 text-left hover:bg-secondary/60 transition-colors">
+                          <span className="font-display text-sm text-primary">{s.title}</span>
+                          <ChevronDown className={`w-4 h-4 text-primary/70 transition-transform ${open ? "rotate-180" : ""}`} />
+                        </CollapsibleTrigger>
+                        <CollapsibleContent className="overflow-hidden data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down">
+                          <div className="px-4 pb-4 pt-1">{s.render()}</div>
+                        </CollapsibleContent>
+                      </Collapsible>
+                    );
+                  })}
+                </div>
+              </div>
+            );
+          })()}
         </CardContent>
       </Card>
 
