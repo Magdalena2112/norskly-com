@@ -84,6 +84,11 @@ Deno.serve(async (req) => {
     const text: string = (body.text || "").toString();
     const level: string = (body.level || "A1").toString().slice(0, 4);
     const hasImage: boolean = !!body.has_image;
+    const langCode = (["no", "en", "de"].includes(String(body.language)) ? String(body.language) : "no") as LangCode;
+    const personalization = buildPersonalizationLines(langCode, body.focus_area, body.life_context);
+    const personalizationLine = personalization.serbianLine
+      ? `PERSONALIZACIJA: ${personalization.serbianLine}`
+      : "";
 
     if (!text.trim()) {
       return new Response(JSON.stringify({ error: "Tekst je obavezan" }), {
