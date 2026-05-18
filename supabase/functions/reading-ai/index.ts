@@ -86,19 +86,45 @@ Vokabular: 6–10 ključnih reči iz teksta. Sve vežbe MORAJU biti generisane n
     } else if (action === "evaluate") {
       const exercises = body.exercises || [];
       const answers = body.answers || {};
-      systemPrompt = `Ti si nastavnik norveškog jezika. Ocenjuješ odgovore studenta na nivou ${level}.
+      const feedbackLang = isAdvanced ? "norveškom (Bokmål)" : "srpskom (latinica)";
+      systemPrompt = `Ti si iskusan nastavnik norveškog (Bokmål). Ocenjuješ studenta nivoa ${level}.
+
+CILJ: Procena razumevanja teksta i sposobnosti izražavanja na norveškom — NE doslovno poklapanje reči.
+
+PRAVILA OCENJIVANJA:
+• true_false: tačno samo ako se boolean poklapa.
+• open (razumevanje teksta) i vocab/synonym/antonym: student MORA odgovoriti na norveškom. Ocenjuj FLEKSIBILNO po sledećim kriterijumima:
+  - da li je odgovor povezan sa pitanjem
+  - da li se značenjski poklapa sa tekstom
+  - da li student razume kontekst
+  - da li je odgovor razumljiv na norveškom
+  Prihvati različite formulacije ako je značenje tačno. Manje gramatičke ili pravopisne greške NE čine odgovor netačnim — zabeleži ih u "language_correction".
+
+Za svaki open/vocab/synonym/antonym koristi "verdict": "correct" | "partial" | "incorrect".
+- "correct" → is_correct = true
+- "partial" → is_correct = false ali se računa kao 0.5 u score (zaokruži score na kraju)
+- "incorrect" → is_correct = false
+
 Odgovori ISKLJUČIVO u JSON formatu, bez markdown-a:
 {
   "results": [
-    { "id": 1, "is_correct": true/false, "user_answer": "...", "correct_answer": "...", "explanation": "objašnjenje na srpskom", "feedback": "kratak komentar" }
+    {
+      "id": 1,
+      "is_correct": true,
+      "verdict": "correct|partial|incorrect",
+      "user_answer": "...",
+      "correct_answer": "primer dobrog odgovora na norveškom",
+      "suggested_answer": "predlog poboljšanog odgovora na norveškom (za open/vocab)",
+      "language_correction": "ispravka jezičkih grešaka na norveškom ili prazno",
+      "explanation": "kratko objašnjenje na ${feedbackLang}",
+      "feedback": "kratak komentar na ${feedbackLang}"
+    }
   ],
-  "score": broj_tačnih,
+  "score": broj_tačnih_zaokružen,
   "total": ukupno,
-  "overall_feedback": "kratak opšti komentar na srpskom",
-  "vocabulary_feedback": "saveti za vokabular na srpskom"
-}
-Za true_false: tačno ako se boolean poklapa.
-Za open/synonym/antonym/vocab: budi tolerantan na sinonime i parafraze; ocenjuj značenjski, ne doslovno.`;
+  "overall_feedback": "kratak opšti komentar na ${feedbackLang}",
+  "vocabulary_feedback": "saveti za vokabular i izražavanje na ${feedbackLang}"
+}`;
       userPrompt = `Vežbe i odgovori studenta:\n${JSON.stringify({ exercises, answers }, null, 2)}`;
     } else {
       return new Response(JSON.stringify({ error: "Invalid action" }), {
