@@ -134,10 +134,10 @@ export default function LandingPage() {
       </nav>
 
       {/* ============== HERO ============== */}
-      <section className="relative pt-32 pb-20 md:pt-40 md:pb-28">
+      <section className="relative pt-24 pb-12 md:pt-40 md:pb-28">
         <div className="absolute inset-0 bg-grid-soft opacity-60 [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_75%)]" />
-        <div className="absolute top-24 -right-20 w-96 h-96 rounded-full bg-secondary/60 blur-3xl opacity-70" />
-        <div className="absolute bottom-0 -left-20 w-80 h-80 rounded-full bg-accent/40 blur-3xl opacity-60" />
+        <div className="absolute top-24 -right-20 w-56 h-56 md:w-96 md:h-96 rounded-full bg-secondary/60 blur-3xl opacity-70" />
+        <div className="absolute bottom-0 -left-20 w-48 h-48 md:w-80 md:h-80 rounded-full bg-accent/40 blur-3xl opacity-60" />
         <FloatingGreetings />
 
         <div className="container relative">
@@ -146,32 +146,32 @@ export default function LandingPage() {
             transition={{ duration: 0.6 }}
             className="max-w-5xl mx-auto text-center"
           >
-            <span className="inline-block px-4 py-1.5 rounded-full bg-secondary/70 text-primary text-xs font-semibold tracking-widest uppercase mb-6">
+            <span className="inline-block px-3 py-1 sm:px-4 sm:py-1.5 rounded-full bg-secondary/70 text-primary text-[10px] sm:text-xs font-semibold tracking-widest uppercase mb-5 sm:mb-6">
               AI platforma za učenje jezika
             </span>
 
-            <h1 className="text-display text-[clamp(2.8rem,9vw,7rem)] text-primary mb-6">
+            <h1 className="text-display text-[clamp(2rem,9vw,7rem)] text-primary mb-5 sm:mb-6">
               Uči jezike sigurnije, <span className="font-script text-accent-foreground/80">pametnije</span> i svojim tempom.
             </h1>
 
-            <p className="text-base md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed">
+            <p className="text-sm sm:text-base md:text-xl text-muted-foreground max-w-2xl mx-auto mb-8 sm:mb-10 leading-relaxed">
               Norskly povezuje učenike i profesore u jednom AI ekosistemu za učenje jezika —
               sa personalizovanom podrškom, vežbama i praćenjem napretka.
             </p>
 
             {/* language pills — entry to per-language onboarding */}
-            <p id="languages" className="text-xs font-semibold uppercase tracking-widest text-primary/70 mb-3 scroll-mt-24">
+            <p id="languages" className="text-[10px] sm:text-xs font-semibold uppercase tracking-widest text-primary/70 mb-3 scroll-mt-24">
               Izaberi jezik koji želiš da učiš
             </p>
-            <div className="flex flex-wrap justify-center gap-3 mb-10">
+            <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-8 sm:mb-10">
               {LANGUAGE_CONFIGS.map((l) => (
                 <Link
                   key={l.slug}
                   to={`/jezici/${l.slug}`}
                   onClick={() => localStorage.setItem("norskly_selected_language", l.slug)}
-                  className="group px-7 py-4 rounded-full text-base md:text-lg font-semibold border bg-background text-foreground border-border hover:border-primary hover:bg-secondary/40 hover:-translate-y-0.5 hover:shadow-card-soft transition-all inline-flex items-center gap-2"
+                  className="group px-5 py-3 sm:px-7 sm:py-4 rounded-full text-sm sm:text-base md:text-lg font-semibold border bg-background text-foreground border-border hover:border-primary hover:bg-secondary/40 hover:-translate-y-0.5 hover:shadow-card-soft transition-all inline-flex items-center gap-2"
                 >
-                  <span className="text-xl">{l.flag}</span>
+                  <span className="text-lg sm:text-xl">{l.flag}</span>
                   <span>{l.label}</span>
                   <ArrowRight className="w-4 h-4 opacity-0 -ml-1 group-hover:opacity-100 group-hover:ml-0 transition-all" />
                 </Link>
