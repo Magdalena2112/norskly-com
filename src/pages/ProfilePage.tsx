@@ -34,21 +34,28 @@ export default function ProfilePage() {
   useEffect(() => {
     if (!user) return;
     (async () => {
-      const [{ data: p }, { data: x }] = await Promise.all([
+      const [{ data: p }, { data: lp }, { data: x }] = await Promise.all([
         supabase
           .from("profiles")
-          .select("created_at, preferred_language, subscription_type, avatar_url")
+          .select("created_at, preferred_language, avatar_url")
           .eq("user_id", user.id)
+          .maybeSingle(),
+        supabase
+          .from("language_profiles")
+          .select("subscription_type")
+          .eq("user_id", user.id)
+          .eq("language", langCode)
           .maybeSingle(),
         supabase.from("user_xp").select("total_xp, level").eq("user_id", user.id).eq("language", langCode).maybeSingle(),
       ]);
       setRegisteredAt(p?.created_at || user.created_at || null);
       setPreferredLanguage(p?.preferred_language || localStorage.getItem("norskly_selected_language"));
-      setSubscription(p?.subscription_type || localStorage.getItem("norskly_selected_plan"));
+      setSubscription(lp?.subscription_type || localStorage.getItem("norskly_selected_plan"));
       setAvatarUrl((p as any)?.avatar_url || null);
       setXp(x || { total_xp: 0, level: 1 });
     })();
   }, [user, langCode]);
+
 
 
 
