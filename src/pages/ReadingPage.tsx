@@ -279,73 +279,107 @@ export default function ReadingPage() {
                   </Card>
                 )}
 
-                <Card className="bg-cream/90 border-border/60 shadow-postcard rounded-3xl">
-                  <CardContent className="pt-5 space-y-4">
-                    <h3 className="font-display font-semibold text-primary">Vežbe</h3>
-                    {reading.exercises.map((ex, idx) => {
-                      const r = result?.results?.find(x => x.id === ex.id);
-                      return (
-                        <div key={ex.id} className="rounded-2xl border border-border/50 bg-background/60 p-4">
-                          <div className="flex items-start gap-2 mb-2">
-                            <Badge variant="outline" className="text-[10px] uppercase tracking-wide">{ex.type.replace("_", " ")}</Badge>
-                            <p className="text-sm text-foreground flex-1">{idx + 1}. {ex.question}</p>
-                          </div>
-                          {ex.type === "true_false" ? (
-                            <div className="flex gap-2">
-                              {[true, false].map(v => (
-                                <Button
-                                  key={String(v)}
-                                  size="sm"
-                                  variant={answers[ex.id] === v ? "default" : "outline"}
-                                  onClick={() => setAnswers(a => ({ ...a, [ex.id]: v }))}
-                                  disabled={!!result}
-                                >
-                                  {v ? "Tačno" : "Netačno"}
-                                </Button>
-                              ))}
-                            </div>
-                          ) : (
-                            <Textarea
-                              value={(answers[ex.id] as string) || ""}
-                              onChange={(e) => setAnswers(a => ({ ...a, [ex.id]: e.target.value }))}
-                              placeholder="Tvoj odgovor…"
-                              rows={2}
-                              disabled={!!result}
-                            />
-                          )}
-                          {r && (
-                            <div className={`mt-3 rounded-xl p-3 text-sm ${r.is_correct ? "bg-emerald-50 border border-emerald-200" : "bg-rose-50 border border-rose-200"}`}>
-                              <div className="flex items-center gap-1.5 font-medium">
-                                {r.is_correct ? <CheckCircle2 className="w-4 h-4 text-emerald-600" /> : <XCircle className="w-4 h-4 text-rose-600" />}
-                                {r.is_correct ? "Tačno" : "Netačno"}
-                              </div>
-                              {!r.is_correct && <div className="text-xs mt-1"><b>Tačan odgovor:</b> {r.correct_answer}</div>}
-                              {r.explanation && <div className="text-xs mt-1 text-muted-foreground">{r.explanation}</div>}
-                            </div>
-                          )}
-                        </div>
-                      );
-                    })}
+                {(() => {
+                  const isAdvanced = level === "B1" || level === "B2" || level === "C1";
+                  const L = isAdvanced
+                    ? {
+                        tf: { title: "1. Sant eller usant", instr: "Les påstandene og velg om de er sanne eller usanne." },
+                        open: { title: "2. Leseforståelse", instr: "Svar på spørsmålene basert på teksten." },
+                        vocab: { title: "3. Ordforråd", instr: "Finn synonymer, antonymer og forklar betydningen av ordene." },
+                        yes: "Sant", no: "Usant", placeholder: "Ditt svar…", submit: "Send svar", checking: "Sjekker…",
+                      }
+                    : {
+                        tf: { title: "1. Tačno ili netačno", instr: "Pročitaj tvrdnje i označi da li su tačne ili netačne." },
+                        open: { title: "2. Razumevanje teksta", instr: "Odgovori na pitanja na osnovu teksta." },
+                        vocab: { title: "3. Vokabular", instr: "Pronađi sinonime, antonime i objasni značenje izraza." },
+                        yes: "Tačno", no: "Netačno", placeholder: "Tvoj odgovor…", submit: "Pošalji odgovore", checking: "Proveravam…",
+                      };
 
-                    {!result ? (
-                      <Button onClick={submitAnswers} disabled={evaluating} variant="hero" className="w-full">
-                        {evaluating ? <><Loader2 className="w-4 h-4 mr-2 animate-spin" />Proveravam…</> : "Pošalji odgovore"}
-                      </Button>
-                    ) : (
-                      <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="rounded-2xl bg-primary/5 border border-primary/20 p-4 space-y-2">
-                        <div className="flex items-center justify-between">
-                          <div className="font-display text-lg text-primary">Rezultat: {result.score} / {result.total}</div>
-                          <Badge className="bg-sunset text-cream">+{xpEarned} XP</Badge>
-                        </div>
-                        {result.overall_feedback && <p className="text-sm text-foreground">{result.overall_feedback}</p>}
-                        {result.vocabulary_feedback && <p className="text-xs text-muted-foreground italic">{result.vocabulary_feedback}</p>}
-                        <Button variant="outline" size="sm" onClick={() => { setReading(null); setResult(null); setAnswers({}); }}>
-                          Novi tekst
-                        </Button>
-                      </motion.div>
-                    )}
-                  </CardContent>
-                </Card>
+                  const groups: Array<{ key: string; title: string; instr: string; items: Exercise[] }> = [
+                    { key: "tf", title: L.tf.title, instr: L.tf.instr, items: reading.exercises.filter(e => e.type === "true_false") },
+                    { key: "open", title: L.open.title, instr: L.open.instr, items: reading.exercises.filter(e => e.type === "open") },
+                    { key: "vocab", title: L.vocab.title, instr: L.vocab.instr, items: reading.exercises.filter(e => ["synonym", "antonym", "vocab"].includes(e.type)) },
+                  ];
+
+                  let globalIdx = 0;
+                  return (
+                    <>
+                      {groups.map(g => g.items.length > 0 && (
+                        <Card key={g.key} className="bg-cream/90 border-border/60 shadow-postcard rounded-3xl">
+                          <CardContent className="pt-5 space-y-3">
+                            <div>
+                              <h3 className="font-display font-semibold text-primary">{g.title}</h3>
+                              <p className="text-xs text-muted-foreground italic mt-0.5">{g.instr}</p>
+                            </div>
+                            {g.items.map((ex) => {
+                              globalIdx += 1;
+                              const r = result?.results?.find(x => x.id === ex.id);
+                              return (
+                                <div key={ex.id} className="rounded-2xl border border-border/50 bg-background/60 p-4">
+                                  <p className="text-sm text-foreground mb-2">{globalIdx}. {ex.question}</p>
+                                  {ex.type === "true_false" ? (
+                                    <div className="flex gap-2">
+                                      {[true, false].map(v => (
+                                        <Button key={String(v)} size="sm"
+                                          variant={answers[ex.id] === v ? "default" : "outline"}
+                                          onClick={() => setAnswers(a => ({ ...a, [ex.id]: v }))}
+                                          disabled={!!result}>
+                                          {v ? L.yes : L.no}
+                                        </Button>
+                                      ))}
+                                    </div>
+                                  ) : (
+                                    <Textarea
+                                      value={(answers[ex.id] as string) || ""}
+                                      onChange={(e) => setAnswers(a => ({ ...a, [ex.id]: e.target.value }))}
+                                      placeholder={L.placeholder}
+                                      rows={2}
+                                      disabled={!!result}
+                                    />
+                                  )}
+                                  {r && (
+                                    <div className={`mt-3 rounded-xl p-3 text-sm ${r.is_correct ? "bg-emerald-50 border border-emerald-200" : "bg-rose-50 border border-rose-200"}`}>
+                                      <div className="flex items-center gap-1.5 font-medium">
+                                        {r.is_correct ? <CheckCircle2 className="w-4 h-4 text-emerald-600" /> : <XCircle className="w-4 h-4 text-rose-600" />}
+                                        {r.is_correct ? (isAdvanced ? "Riktig" : "Tačno") : (isAdvanced ? "Feil" : "Netačno")}
+                                      </div>
+                                      {!r.is_correct && <div className="text-xs mt-1"><b>{isAdvanced ? "Riktig svar:" : "Tačan odgovor:"}</b> {r.correct_answer}</div>}
+                                      {r.explanation && <div className="text-xs mt-1 text-muted-foreground">{r.explanation}</div>}
+                                    </div>
+                                  )}
+                                </div>
+                              );
+                            })}
+                          </CardContent>
+                        </Card>
+                      ))}
+
+                      <Card className="bg-cream/90 border-border/60 shadow-postcard rounded-3xl">
+                        <CardContent className="pt-5 space-y-4">
+                          {!result ? (
+                            <Button onClick={submitAnswers} disabled={evaluating} variant="hero" className="w-full">
+                              {evaluating ? <><Loader2 className="w-4 h-4 mr-2 animate-spin" />{L.checking}</> : L.submit}
+                            </Button>
+                          ) : null}
+                        </CardContent>
+                      </Card>
+                    </>
+                  );
+                })()}
+
+                {result && (
+                  <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="rounded-2xl bg-primary/5 border border-primary/20 p-4 space-y-2">
+                    <div className="flex items-center justify-between">
+                      <div className="font-display text-lg text-primary">Rezultat: {result.score} / {result.total}</div>
+                      <Badge className="bg-sunset text-cream">+{xpEarned} XP</Badge>
+                    </div>
+                    {result.overall_feedback && <p className="text-sm text-foreground">{result.overall_feedback}</p>}
+                    {result.vocabulary_feedback && <p className="text-xs text-muted-foreground italic">{result.vocabulary_feedback}</p>}
+                    <Button variant="outline" size="sm" onClick={() => { setReading(null); setResult(null); setAnswers({}); }}>
+                      Novi tekst
+                    </Button>
+                  </motion.div>
+                )}
               </>
             )}
           </TabsContent>

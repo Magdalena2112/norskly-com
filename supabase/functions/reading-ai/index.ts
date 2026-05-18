@@ -51,12 +51,22 @@ Deno.serve(async (req) => {
     const cefr = cefrSpec[level] || cefrSpec.A1;
     const lenDesc = lengthSpec[length] || lengthSpec.kratak;
 
+    const isAdvanced = level === "B1" || level === "B2" || level === "C1";
+    const instrLang = isAdvanced
+      ? "Sva pitanja i tekstovi zadataka MORAJU biti na norveškom (Bokmål)."
+      : "Sva pitanja i tekstovi zadataka MORAJU biti na srpskom (latinica). Reči/izrazi koje student treba da analizira ostaju na norveškom.";
+
     let systemPrompt = "";
     let userPrompt = "";
 
     if (action === "generate") {
       systemPrompt = `Ti si nastavnik norveškog jezika (Bokmål). Pravi tekst za čitanje prilagođen CEFR nivou ${level}. ${cefr}
-Odgovori ISKLJUČIVO u JSON formatu, bez markdown-a:
+${instrLang}
+Odgovori ISKLJUČIVO u JSON formatu, bez markdown-a. STRUKTURA VEŽBI MORA BITI TAČNO OVIM REDOSLEDOM:
+1) Najpre TAČNO 5 vežbi tipa "true_false" (ids 1–5)
+2) Zatim 3–5 vežbi tipa "open" (pitanja razumevanja teksta)
+3) Na kraju vokabularne vežbe: redom barem po jedna "synonym", "antonym" i "vocab" (ukupno 3–5)
+
 {
   "title": "Naslov teksta na norveškom",
   "text": "Tekst na norveškom (${lenDesc}). Koristi paragrafe odvojene praznim redom.",
@@ -64,15 +74,15 @@ Odgovori ISKLJUČIVO u JSON formatu, bez markdown-a:
     { "word": "norveška reč", "translation": "prevod na srpski", "explanation": "kratko objašnjenje na srpskom" }
   ],
   "exercises": [
-    { "id": 1, "type": "true_false", "question": "Tvrdnja na srpskom", "answer": true, "explanation": "kratko objašnjenje na srpskom" },
-    { "id": 2, "type": "open", "question": "Otvoreno pitanje na srpskom o tekstu", "answer": "očekivani sažet odgovor na norveškom", "explanation": "objašnjenje" },
-    { "id": 3, "type": "synonym", "question": "Pronađi sinonim za reč 'X' iz teksta", "word": "X", "answer": "sinonim na norveškom", "explanation": "" },
-    { "id": 4, "type": "antonym", "question": "Pronađi antonim za reč 'Y'", "word": "Y", "answer": "antonim na norveškom", "explanation": "" },
-    { "id": 5, "type": "vocab", "question": "Objasni značenje reči 'Z' u kontekstu teksta", "word": "Z", "answer": "kratko objašnjenje na srpskom", "explanation": "" }
+    { "id": 1, "type": "true_false", "question": "${isAdvanced ? "Tvrdnja na norveškom" : "Tvrdnja na srpskom"}", "answer": true, "explanation": "${isAdvanced ? "objašnjenje na norveškom" : "objašnjenje na srpskom"}" },
+    { "id": 6, "type": "open", "question": "${isAdvanced ? "Svar på spørsmålet …" : "Odgovori na pitanje …"}", "answer": "očekivani sažet odgovor na norveškom", "explanation": "" },
+    { "id": 10, "type": "synonym", "question": "${isAdvanced ? "Finn et synonym for ordet 'X'." : "Pronađi sinonim za reč 'X'."}", "word": "X", "answer": "sinonim na norveškom", "explanation": "" },
+    { "id": 11, "type": "antonym", "question": "${isAdvanced ? "Finn et antonym for ordet 'Y'." : "Pronađi antonim za reč 'Y'."}", "word": "Y", "answer": "antonim na norveškom", "explanation": "" },
+    { "id": 12, "type": "vocab", "question": "${isAdvanced ? "Forklar betydningen av uttrykket 'Z' i denne sammenhengen." : "Objasni značenje izraza 'Z' u datom kontekstu."}", "word": "Z", "answer": "kratko objašnjenje (${isAdvanced ? "na norveškom" : "na srpskom"})", "explanation": "" }
   ]
 }
-Generiši 6–8 vežbi mešovitog tipa (uključi sve tipove: true_false, open, synonym, antonym, vocab). Vokabular 6–10 ključnih reči iz teksta.`;
-      userPrompt = `Tema: "${topic}". Nivo: ${level}. Dužina: ${lenDesc}. Generiši tekst i vežbe.`;
+Vokabular: 6–10 ključnih reči iz teksta. Sve vežbe MORAJU biti generisane navedenim redosledom (true_false → open → synonym/antonym/vocab).`;
+      userPrompt = `Tema: "${topic}". Nivo: ${level}. Dužina: ${lenDesc}. Generiši tekst i vežbe po zadatoj strukturi.`;
     } else if (action === "evaluate") {
       const exercises = body.exercises || [];
       const answers = body.answers || {};
