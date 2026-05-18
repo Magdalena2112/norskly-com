@@ -91,9 +91,6 @@ export default function GrammarPage() {
             <TabsTrigger value="exercises" className="gap-1 text-[11px] sm:text-xs px-2 sm:px-3">
               <BookOpen className="w-3.5 h-3.5 shrink-0 hidden sm:block" /> Vežbe
             </TabsTrigger>
-            <TabsTrigger value="correction" className="gap-1 text-[11px] sm:text-xs px-2 sm:px-3">
-              <PenTool className="w-3.5 h-3.5 shrink-0 hidden sm:block" /> Korekcija
-            </TabsTrigger>
             <TabsTrigger value="explain" className="gap-1 text-[11px] sm:text-xs px-2 sm:px-3">
               <Search className="w-3.5 h-3.5 shrink-0 hidden sm:block" /> Objašnjenja
             </TabsTrigger>
@@ -110,9 +107,6 @@ export default function GrammarPage() {
 
           <TabsContent value="exercises">
             <ExercisesTab level={level} userId={user?.id} initialTopic={navState.tab === "exercises" ? navState.topic : undefined} onGoToExplain={goToExplainTab} />
-          </TabsContent>
-          <TabsContent value="correction">
-            <CorrectionTab level={level} userId={user?.id} />
           </TabsContent>
           <TabsContent value="explain">
             <ExplainTab level={level} userId={user?.id} initialQuery={explainTopic || (navState.tab === "explain" ? navState.query : undefined)} />

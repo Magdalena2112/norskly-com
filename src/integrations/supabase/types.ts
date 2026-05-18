@@ -924,6 +924,48 @@ export type Database = {
         }
         Relationships: []
       }
+      writing_exercises: {
+        Row: {
+          analysis: Json
+          corrected_text: string | null
+          created_at: string
+          exercise_type: string
+          id: string
+          image_path: string | null
+          level: string | null
+          original_text: string
+          updated_at: string
+          user_id: string
+          vocabulary: Json
+        }
+        Insert: {
+          analysis?: Json
+          corrected_text?: string | null
+          created_at?: string
+          exercise_type: string
+          id?: string
+          image_path?: string | null
+          level?: string | null
+          original_text?: string
+          updated_at?: string
+          user_id: string
+          vocabulary?: Json
+        }
+        Update: {
+          analysis?: Json
+          corrected_text?: string | null
+          created_at?: string
+          exercise_type?: string
+          id?: string
+          image_path?: string | null
+          level?: string | null
+          original_text?: string
+          updated_at?: string
+          user_id?: string
+          vocabulary?: Json
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

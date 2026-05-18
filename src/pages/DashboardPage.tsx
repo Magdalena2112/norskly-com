@@ -4,7 +4,7 @@ import { useProfile } from "@/context/ProfileContext";
 import { useAuth } from "@/context/AuthContext";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { BookOpen, Languages, MessageSquare, GraduationCap, CalendarCheck } from "lucide-react";
+import { BookOpen, Languages, MessageSquare, GraduationCap, CalendarCheck, PenLine } from "lucide-react";
 import XpProgressCard from "@/components/XpProgressCard";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
@@ -30,10 +30,11 @@ type ModuleDef = {
 };
 
 const modules: ModuleDef[] = [
-  { title: "Gramatika", subtitle: "Norsk grammatikk", description: "Vežbaj gramatiku kroz kvizove prilagođene tvom nivou.", icon: BookOpen, route: "/grammar", vignette: "book", iconBg: "bg-primary", rotation: "rotate-card-1" },
+  { title: "Gramatika", subtitle: "Norsk grammatikk", description: "Vežbaj gramatiku kroz kvizove i objašnjenja prilagođena tvom nivou.", icon: BookOpen, route: "/grammar", vignette: "book", iconBg: "bg-primary", rotation: "rotate-card-1" },
   { title: "Vokabular", subtitle: "Ord & uttrykk", description: "Uči nove reči sa flashcard sistemom.", icon: Languages, route: "/vocabulary", vignette: "stamp", iconBg: "bg-sunset", rotation: "rotate-card-2" },
   { title: "Razgovor", subtitle: "Snakk med AI", description: "Vežbaj pisanje poruka u realnim situacijama.", icon: MessageSquare, route: "/talk", vignette: "speech", iconBg: "bg-fjord", rotation: "rotate-card-3" },
-  { title: "Razgovor sa profesorom", subtitle: "Lærer-time · 90 min", description: "Rezerviši 90-minutni čas sa profesorom norveškog.", icon: GraduationCap, route: "/book-lesson", vignette: "cabins", iconBg: "bg-forest", rotation: "rotate-card-4", buttonLabel: "Rezerviši čas", fullWidth: true },
+  { title: "Pisanje", subtitle: "Skriving & bildebeskrivelse", description: "Vežbaj pisanje, bildebeskrivelse i dobij detaljan feedback.", icon: PenLine, route: "/writing", vignette: "book", iconBg: "bg-accent", rotation: "rotate-card-4" },
+  { title: "Razgovor sa profesorom", subtitle: "Lærer-time · 90 min", description: "Rezerviši 90-minutni čas sa profesorom norveškog.", icon: GraduationCap, route: "/book-lesson", vignette: "cabins", iconBg: "bg-forest", rotation: "rotate-card-1", buttonLabel: "Rezerviši čas", fullWidth: true },
 ];
 
 export default function DashboardPage() {
