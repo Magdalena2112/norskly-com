@@ -52,8 +52,20 @@ function currentLanguageCode(): "no" | "en" | "de" {
 }
 async function callGrammarAI(body: Record<string, unknown>) {
   const { data: { session } } = await supabase.auth.getSession();
+  const personalization = (() => {
+    try {
+      const raw = typeof window !== "undefined" ? localStorage.getItem("norskly_profile") : null;
+      const p = raw ? JSON.parse(raw) : {};
+      return { focus_area: p?.focus_area || "", life_context: p?.life_context || "" };
+    } catch { return { focus_area: "", life_context: "" }; }
+  })();
   const res = await supabase.functions.invoke("grammar-ai", {
-    body: { ...body, language: (body as any).language ?? currentLanguageCode() },
+    body: {
+      ...body,
+      language: (body as any).language ?? currentLanguageCode(),
+      focus_area: (body as any).focus_area ?? personalization.focus_area,
+      life_context: (body as any).life_context ?? personalization.life_context,
+    },
     headers: { Authorization: `Bearer ${session?.access_token}` },
   });
   if (res.error) throw new Error(res.error.message || "AI request failed");

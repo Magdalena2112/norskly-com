@@ -18,7 +18,7 @@ import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { logActivity } from "@/lib/logActivity";
 import { logErrors } from "@/lib/logErrors";
-import { getCurrentLanguageCode } from "@/lib/currentLanguage";
+import { getCurrentLanguageCode, getCurrentPersonalization } from "@/lib/currentLanguage";
 import { useSelectedLanguage } from "@/hooks/useSelectedLanguage";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import VocabCollections from "@/components/VocabCollections";
@@ -73,8 +73,9 @@ function speakNorwegian(text: string) {
 // ─── AI call helper ───
 async function callVocabAI(body: Record<string, unknown>) {
   const { data: { session } } = await supabase.auth.getSession();
+  const personalization = getCurrentPersonalization();
   const res = await supabase.functions.invoke("vocabulary-ai", {
-    body: { ...body, language: getCurrentLanguageCode() },
+    body: { ...body, language: getCurrentLanguageCode(), focus_area: personalization.focus_area, life_context: personalization.life_context },
     headers: { Authorization: `Bearer ${session?.access_token}` },
   });
   if (res.error) throw new Error(res.error.message || "AI request failed");
