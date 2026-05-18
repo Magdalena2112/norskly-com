@@ -71,20 +71,72 @@ export function generateWritingPdf(payload: WritingPdfPayload, filename = "norsk
   doc.setCharSpace(0);
   doc.setLineHeightFactor(1.35);
 
-  // Safe wrapper around splitTextToSize that ALWAYS sets the font/size first
-  // so the wrapping width matches the actually-rendered glyph widths.
+  // Sigurni helperi: font/size/charSpace se UVEK postavljaju pre merenja i pre svakog
+  // text() poziva. Ako jsPDF vrati liniju koja je i dalje šira od dozvoljene širine
+  // (npr. neprelomljiva reč), liniju dodatno secamo karakter po karakter.
+  const applyFont = (
+    size: number,
+    style: "normal" | "bold" | "italic" | "bolditalic" = "normal",
+  ) => {
+    doc.setFont("helvetica", style);
+    doc.setFontSize(size);
+    doc.setCharSpace(0);
+  };
+
+  const hardBreak = (line: string, maxW: number): string[] => {
+    if (doc.getTextWidth(line) <= maxW) return [line];
+    const out: string[] = [];
+    let buf = "";
+    for (const ch of line) {
+      const next = buf + ch;
+      if (doc.getTextWidth(next) > maxW && buf) {
+        out.push(buf);
+        buf = ch;
+      } else {
+        buf = next;
+      }
+    }
+    if (buf) out.push(buf);
+    return out;
+  };
+
   const wrap = (
     text: string,
     width: number,
     size: number,
     style: "normal" | "bold" | "italic" | "bolditalic" = "normal",
   ): string[] => {
-    doc.setFont("helvetica", style);
-    doc.setFontSize(size);
-    doc.setCharSpace(0);
-    // Trim slightly so we never butt right against the card edge
-    const safeW = Math.max(20, width - 2);
-    return doc.splitTextToSize(text || "", safeW) as string[];
+    applyFont(size, style);
+    // Dodatna sigurnosna margina da nikad ne dodirnemo desnu ivicu kartice
+    const safeW = Math.max(20, width - 4);
+    const lines = (doc.splitTextToSize(text || "", safeW) as string[]) || [];
+    // Bezbedan presek: ako neka linija ipak prelazi širinu (dugačka neprelomljiva reč),
+    // sečemo je karakter po karakter dok ne stane.
+    const safe: string[] = [];
+    for (const l of lines) safe.push(...hardBreak(l, safeW));
+    return safe.length ? safe : [""];
+  };
+
+  // Renderuje jednu liniju teksta sa BEZBEDNIM postavkama (font, size, charSpace, boja).
+  // NIKAD ne koristi maxWidth/justify u doc.text() jer to istegne glifove.
+  const safeText = (
+    line: string,
+    x: number,
+    yPos: number,
+    opts: {
+      size: number;
+      style?: "normal" | "bold" | "italic" | "bolditalic";
+      color?: [number, number, number];
+      align?: "left" | "center" | "right";
+    },
+  ) => {
+    applyFont(opts.size, opts.style ?? "normal");
+    if (opts.color) doc.setTextColor(...opts.color);
+    if (opts.align && opts.align !== "left") {
+      doc.text(line, x, yPos, { align: opts.align });
+    } else {
+      doc.text(line, x, yPos);
+    }
   };
 
   // ─── Page background (cream paper) ───
