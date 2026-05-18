@@ -33,20 +33,23 @@ export default function AuthPage() {
 
     try {
       const selectedLang = localStorage.getItem("norskly_selected_language");
+      const selectedPlan = localStorage.getItem("norskly_selected_plan");
 
       if (isLogin) {
         const { data, error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw error;
-        // Učitaj jezik + napredak onboarding-a i preusmeri korisnika
+        // Učitaj jezik, plan i napredak onboarding-a i preusmeri korisnika
         if (data.user) {
           const { data: prof } = await supabase
             .from("profiles")
-            .select("preferred_language, onboarding_completed, display_name")
+            .select("preferred_language, subscription_type, onboarding_completed, display_name")
             .eq("user_id", data.user.id)
             .maybeSingle();
 
           const lang = prof?.preferred_language || selectedLang;
+          const plan = prof?.subscription_type || selectedPlan;
           if (lang) localStorage.setItem("norskly_selected_language", lang);
+          if (plan) localStorage.setItem("norskly_selected_plan", plan);
 
           const name = prof?.display_name?.trim();
           toast({
@@ -58,11 +61,12 @@ export default function AuthPage() {
             navigate("/onboarding");
             return;
           }
+          const qs = plan ? `?plan=${plan}` : "";
           if (lang) {
-            navigate(`/ucenje/${lang}`);
+            navigate(`/ucenje/${lang}${qs}`);
             return;
           }
-          navigate("/practice");
+          navigate(`/practice${qs}`);
           return;
         }
         navigate("/practice");
