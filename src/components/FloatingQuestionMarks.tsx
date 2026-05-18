@@ -48,6 +48,42 @@ const QuestionGlyph = ({ m }: { m: Mark }) => {
   return <span style={style}>?</span>;
 };
 
+const MarkItem = ({ m, progress }: { m: Mark; progress: MotionValue<number> }) => {
+  const y = useTransform(progress, [0, 1], [60 * m.parallax, -60 * m.parallax]);
+  return (
+    <motion.div
+      className="absolute will-change-transform"
+      style={{
+        top: m.top,
+        left: m.left,
+        translateX: "-50%",
+        y,
+        filter: `blur(${m.blur}px)`,
+        opacity: m.opacity,
+      }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: m.opacity }}
+      transition={{ duration: 1.2, delay: m.delay }}
+    >
+      <motion.div
+        animate={{
+          y: [0, -m.drift, 0],
+          rotate: [m.rotate, m.rotate + (m.rotate > 0 ? 3 : -3), m.rotate],
+          opacity: [m.opacity, m.opacity * 1.35, m.opacity],
+        }}
+        transition={{
+          duration: m.duration,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: m.delay,
+        }}
+      >
+        <QuestionGlyph m={m} />
+      </motion.div>
+    </motion.div>
+  );
+};
+
 export const FloatingQuestionMarks = () => {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
@@ -61,7 +97,6 @@ export const FloatingQuestionMarks = () => {
       aria-hidden
       className="pointer-events-none absolute inset-0 overflow-hidden motion-reduce:hidden"
     >
-      {/* Soft grain overlay */}
       <div
         className="absolute inset-0 opacity-[0.07] mix-blend-multiply"
         style={{
@@ -70,43 +105,9 @@ export const FloatingQuestionMarks = () => {
           backgroundSize: "3px 3px",
         }}
       />
-      {MARKS.map((m, i) => {
-        // parallax: each mark gets its own transform tied to scroll progress
-        const y = useTransform(scrollYProgress, [0, 1], [60 * m.parallax, -60 * m.parallax]);
-        return (
-          <motion.div
-            key={i}
-            className="absolute will-change-transform"
-            style={{
-              top: m.top,
-              left: m.left,
-              translateX: "-50%",
-              y,
-              filter: `blur(${m.blur}px)`,
-              opacity: m.opacity,
-            }}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: m.opacity }}
-            transition={{ duration: 1.2, delay: m.delay }}
-          >
-            <motion.div
-              animate={{
-                y: [0, -m.drift, 0],
-                rotate: [m.rotate, m.rotate + (m.rotate > 0 ? 3 : -3), m.rotate],
-                opacity: [m.opacity, m.opacity * 1.35, m.opacity],
-              }}
-              transition={{
-                duration: m.duration,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: m.delay,
-              }}
-            >
-              <QuestionGlyph m={m} />
-            </motion.div>
-          </motion.div>
-        );
-      })}
+      {MARKS.map((m, i) => (
+        <MarkItem key={i} m={m} progress={scrollYProgress} />
+      ))}
     </div>
   );
 };
