@@ -42,14 +42,23 @@ export default function AuthPage() {
         if (data.user) {
           const { data: prof } = await supabase
             .from("profiles")
-            .select("preferred_language, subscription_type, onboarding_completed, display_name")
+            .select("preferred_language, subscription_type, display_name")
             .eq("user_id", data.user.id)
             .maybeSingle();
 
-          const lang = prof?.preferred_language || selectedLang;
+          const lang = prof?.preferred_language || selectedLang || "norveski";
           const plan = prof?.subscription_type || selectedPlan;
-          if (lang) localStorage.setItem("norskly_selected_language", lang);
+          localStorage.setItem("norskly_selected_language", lang);
           if (plan) localStorage.setItem("norskly_selected_plan", plan);
+
+          const code: "no" | "en" | "de" =
+            lang === "engleski" ? "en" : lang === "nemacki" ? "de" : "no";
+          const { data: langProf } = await supabase
+            .from("language_profiles")
+            .select("onboarding_completed")
+            .eq("user_id", data.user.id)
+            .eq("language", code)
+            .maybeSingle();
 
           const name = prof?.display_name?.trim();
           toast({
@@ -57,19 +66,16 @@ export default function AuthPage() {
             description: "Drago nam je što te ponovo vidimo.",
           });
 
-          if (!prof?.onboarding_completed) {
+          if (!langProf?.onboarding_completed) {
             navigate("/onboarding");
             return;
           }
           const qs = plan ? `?plan=${plan}` : "";
-          if (lang) {
-            navigate(`/ucenje/${lang}${qs}`);
-            return;
-          }
-          navigate(`/practice${qs}`);
+          navigate(`/ucenje/${lang}${qs}`);
           return;
         }
         navigate("/practice");
+
       } else {
         const { data, error } = await supabase.auth.signUp({
           email,
