@@ -53,6 +53,7 @@ const App = () => (
               <Route path="/auth" element={<AuthPage />} />
               <Route path="/onboarding" element={<ProtectedRoute><OnboardingPage /></ProtectedRoute>} />
               <Route path="/practice" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />
+              <Route path="/ucenje/:slug" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />
               <Route path="/grammar" element={<ProtectedRoute><GrammarPage /></ProtectedRoute>} />
               <Route path="/vocabulary" element={<ProtectedRoute><VocabularyPage /></ProtectedRoute>} />
               <Route path="/talk" element={<ProtectedRoute><TalkPage /></ProtectedRoute>} />

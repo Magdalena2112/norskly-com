@@ -37,16 +37,33 @@ export default function AuthPage() {
       if (isLogin) {
         const { data, error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw error;
-        // Učitaj sačuvani jezik iz baze i sinhronizuj localStorage
+        // Učitaj jezik + napredak onboarding-a i preusmeri korisnika
         if (data.user) {
           const { data: prof } = await supabase
             .from("profiles")
-            .select("preferred_language")
+            .select("preferred_language, onboarding_completed, display_name")
             .eq("user_id", data.user.id)
             .maybeSingle();
-          if (prof?.preferred_language) {
-            localStorage.setItem("norskly_selected_language", prof.preferred_language);
+
+          const lang = prof?.preferred_language || selectedLang;
+          if (lang) localStorage.setItem("norskly_selected_language", lang);
+
+          const name = prof?.display_name?.trim();
+          toast({
+            title: name ? `Dobrodošao nazad, ${name} 👋` : "Dobrodošao nazad 👋",
+            description: "Drago nam je što te ponovo vidimo.",
+          });
+
+          if (!prof?.onboarding_completed) {
+            navigate("/onboarding");
+            return;
           }
+          if (lang) {
+            navigate(`/ucenje/${lang}`);
+            return;
+          }
+          navigate("/practice");
+          return;
         }
         navigate("/practice");
       } else {
