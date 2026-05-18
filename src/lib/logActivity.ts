@@ -1,4 +1,5 @@
 import { supabase } from "@/integrations/supabase/client";
+import { getCurrentLanguageCode } from "@/lib/currentLanguage";
 
 type ActivityModule = "grammar" | "vocabulary" | "talk" | "quiz";
 
@@ -7,13 +8,13 @@ interface LogActivityOptions {
   dedupKey?: string;
   /** Whether to check and award daily first-activity bonus (+5 XP) */
   checkDailyBonus?: boolean;
+  /** Override the active learning language (defaults to localStorage). */
+  language?: "no" | "en" | "de";
 }
 
 /**
- * Log an activity and award XP.
- * - dedupKey prevents duplicate rewards for the same action
- * - checkDailyBonus awards +5 XP for first activity of the day
- * Returns the XP result or null on failure.
+ * Log an activity and award XP, scoped to the current learning language.
+ * Norwegian and English XP/progress are tracked completely independently.
  */
 export async function logActivity(
   userId: string,
@@ -23,9 +24,9 @@ export async function logActivity(
   payload: Record<string, unknown> = {},
   options: LogActivityOptions = {}
 ): Promise<{ total_xp: number; level: number; daily_bonus: number; points_awarded: number } | null> {
-  const { dedupKey, checkDailyBonus = false } = options;
+  const { dedupKey, checkDailyBonus = false, language } = options;
+  const langCode = language || getCurrentLanguageCode();
 
-  // Insert activity with optional dedup key
   const insertData = {
     user_id: userId,
     module,
@@ -33,12 +34,12 @@ export async function logActivity(
     points,
     payload: payload as any,
     dedup_key: dedupKey || null,
+    language: langCode,
   };
 
   const { error: actError } = await supabase.from("activities").insert([insertData] as any);
 
   if (actError) {
-    // Duplicate key = already rewarded, skip silently
     if (actError.code === "23505") {
       console.log("Activity already logged (dedup):", dedupKey);
       return null;
@@ -47,12 +48,12 @@ export async function logActivity(
     return null;
   }
 
-  // Award XP via DB function
   const { data, error: xpError } = await supabase.rpc("award_xp", {
     _user_id: userId,
     _points: points,
     _check_daily_bonus: checkDailyBonus,
-  });
+    _language: langCode,
+  } as any);
 
   if (xpError) {
     console.error("Failed to award XP:", xpError.message);

@@ -13,6 +13,7 @@ import { ArrowLeft, ImagePlus, Loader2, PenLine, FileDown, History, Sparkles, Ch
 import StudentLayout from "@/components/student/StudentLayout";
 import NordicBackdrop from "@/components/student/NordicBackdrop";
 import { logErrors } from "@/lib/logErrors";
+import { getCurrentLanguageCode } from "@/lib/currentLanguage";
 import { generateWritingPdf } from "@/lib/writingPdf";
 import { format } from "date-fns";
 
@@ -208,6 +209,7 @@ function BildebeskrivelseTab({ level }: { level: string }) {
         analysis: data as any,
         vocabulary: (helper || {}) as any,
         level,
+        language: getCurrentLanguageCode(),
       });
     } catch (e) {
       console.error(e);
@@ -451,6 +453,7 @@ function CorrectionTab({ level }: { level: string }) {
         corrected_text: data.corrected_text,
         analysis: data as any,
         level,
+        language: getCurrentLanguageCode(),
       });
     } catch (e) {
       console.error(e);
@@ -595,6 +598,7 @@ function HistoryTab({ onReopen }: { onReopen: (tab: string) => void }) {
       .from("writing_exercises")
       .select("*")
       .eq("user_id", user.id)
+      .eq("language", getCurrentLanguageCode())
       .order("created_at", { ascending: false })
       .limit(50);
     setItems((data as any) || []);

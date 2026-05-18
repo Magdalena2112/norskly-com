@@ -1,57 +1,95 @@
-## Šta je problem
+## Cilj
 
-Faza 1 je dodala "nevidljivu" infrastrukturu (kolona `language`, hook `useSelectedLanguage`, parametrizovani `reading-ai`/`grammar-ai`), ali **u UI nigde ne vidiš da postoji engleski**:
+Englesko okruženje treba da bude **potpuno nezavisno** od norveškog: progres, greške, XP, istorija vežbi, vokabular i nastavnička istorija — sve po jeziku. Struktura i UX ostaju identični.
 
-- `/practice` i `/ucenje/:slug` renderuju **isti** `DashboardPage`, koji je hardkodovan na norveški (npr. "Velkommen tilbake til fjordene", "Norsk grammatikk", "Snakk med AI", "Lærer-time").
-- Ne postoji **switcher** za promenu jezika unutar studentskog dela.
-- Ne postoji vidljiv ulaz iz landing-a u engleski dashboard (samo preko `/jezici/engleski` → trial flow).
+Faza 1 je već dodala `language` kolonu u 15 tabela i parametrizovala Reading/Grammar. Ova faza zatvara preostale rupe.
 
-Zato deluje kao da engleski "ne postoji".
+---
 
-## Plan – učiniti engleski vidljivim (samo frontend, bez nove logike)
+## 1. Baza: XP i progres po jeziku
 
-### 1. Centralizovati prevode po jeziku
-Proširiti `src/lib/languages.ts` mapom UI stringova po `code` (`no` | `en`):
-- hero pozdrav i podnaslov dashboard-a
-- podnaslovi modula (Gramatika → "Norsk grammatikk" / "English grammar", Razgovor → "Snakk med AI" / "Talk with AI", Pisanje → "Skriving & bildebeskrivelse" / "Writing & picture description", Čitanje → "Lesing & forståelse" / "Reading & comprehension", Profesor → "Lærer-time" / "Teacher session")
-- mali "stamp" na hero kartici (LOFOTEN → LONDON za EN)
-- script linija ("Velkommen tilbake til fjordene" → "Welcome back")
+Trenutno `user_xp` ima **jedan red po korisniku** — to znači da je XP deljen između jezika. Treba ga raščlaniti po jeziku.
 
-Sav primarni UI tekst (Gramatika, Vokabular, dugmad, opisi na srpskom) ostaje **na srpskom** — menja se samo deo koji je već bio na norveškom.
+**Migracija:**
+- `user_xp`: dodati kolonu `language text not null default 'no'`, promeniti unique constraint na `(user_id, language)`.
+- `award_xp` RPC funkcija: dodati parametar `_language text default 'no'` i koristiti ga u `INSERT/UPDATE/WHERE`.
+- `last_daily_bonus_date` se računa po (user, language).
 
-### 2. `DashboardPage` čita aktivan jezik
-- `useSelectedLanguage()` u `DashboardPage`, pa `modules[]` i hero kopiju računati iz mape iz koraka 1.
-- Ako je ruta `/ucenje/:slug`, sinhronizovati `localStorage` jezik iz `slug`-a pre rendera (slično kao u `LanguagePage`).
+**Postojeći redovi:** ostaju kao `language = 'no'` (norveški progres se čuva).
 
-### 3. Vidljiv language switcher u `StudentLayout`
-Mali dropdown pored avatara/menija sa zastavicama (🇳🇴 Norveški / 🇬🇧 Engleski; nemački disabled "Uskoro"):
-- menja `localStorage` + dispečuje `language-changed`
-- redirektuje na `/ucenje/<slug>` da se ruta i stanje poklope
-- vidljiv na svakoj studentskoj stranici (Dashboard, Grammar, Reading, Progress, …)
+---
 
-### 4. Onboarding upisuje izabrani jezik
-U `OnboardingPage` (i `LanguagePage` flow) — kada user izabere jezik na landing-u, on se već čuva u `localStorage`. Dodati: po završetku onboarding-a redirect na `/ucenje/<slug>` umesto `/practice`, da prvi utisak bude "vidim engleski dashboard".
+## 2. Frontend: prosleđivati `language` svuda
 
-### 5. Hero/postcard vizuelni hint po jeziku
-- Za EN, hero pozadinski stamp prikazuje "LONDON · 1909" umesto "LOFOTEN · 1909" (samo tekst u istom postojećem stilu, bez novih asseta).
-- Script linija prevedena (vidi korak 1).
+Svaka tačka koja čita/piše podatke vezane za napredak mora da koristi `useSelectedLanguage().code`:
 
-## Šta NE radimo u ovoj iteraciji
-- Ne diramo `talk-ai`, `vocabulary-ai`, `writing-correct` (to je Faza 2 prema dogovoru).
-- Ne menjamo postojeće UI stringove na srpskom.
-- Ne dodajemo nove module ni profesore.
+**Filtriranje po jeziku (`.eq("language", langCode)`):**
+- `src/pages/VocabularyPage.tsx` — lista reči, kolekcije
+- `src/pages/TalkPage.tsx` — istorija razgovora
+- `src/pages/WritingPage.tsx` — istorija vežbi
+- `src/pages/ProgressPage.tsx` — sve agregacije (activities, error_events, grammar_sessions, reading_sessions, talk_sessions, writing_exercises)
+- `src/components/WeeklyDigest.tsx` — top error topics
+- `src/components/XpProgressCard.tsx` — čitanje XP po aktivnom jeziku
+- `src/components/grammar/GrammarHistoryTab.tsx`, `GrammarProgressTab.tsx`
+- `src/pages/DashboardPage.tsx` — XP widget, brze metrike
 
-## Fajlovi koji se menjaju
-- `src/lib/languages.ts` — dodati `ui` mapu (hero + module subtitles po jeziku)
-- `src/pages/DashboardPage.tsx` — dinamični tekstovi + sync iz `:slug`
-- `src/components/student/StudentLayout.tsx` — dodati `LanguageSwitcher`
-- `src/components/student/LanguageSwitcher.tsx` — nova komponenta (dropdown sa zastavicama)
-- `src/pages/OnboardingPage.tsx` — redirect na `/ucenje/<slug>` na kraju
+**Upis (svako `insert` koje već nema language):**
+- `logActivity` (src/lib/logActivity.ts) — prihvata `language` arg, upisuje ga.
+- `logErrors` (src/lib/logErrors.ts) — isto.
+- Svi pozivi gore-navedenih funkcija prosleđuju trenutni `langCode`.
+- Insert-i u: vocabulary_words, vocab_items, word_collections, talk_sessions, writing_exercises, grammar_sessions, grammar_submissions, reading_sessions, saved_explanations — postaviti `language: langCode` u svaki `.insert()`.
 
-## Rezultat
-Kad user odabere "Engleski" (sa landinga, switcher-a u dashbordu ili završi onboarding sa EN), odmah vidi:
-- URL `/ucenje/engleski`
-- hero "Welcome back" + EN stamp
-- module subtitles na engleskom (English grammar, Reading & comprehension…)
-- Reading i Grammar module već prave EN sadržaj (Faza 1 već urađeno)
-- istoriju filtriranu na EN sesije
+**Edge functions:** `talk-ai`, `vocabulary-ai`, `writing-correct` već primaju `language` (Faza 1 plan) — proveriti i parametrizovati ako nedostaje (sistem prompt + jezik odgovora/korekcije).
+
+---
+
+## 3. Nastavnici po jeziku
+
+`teachers.language` već postoji. `SelectTeacherPage` i `BookLessonPage` filtriraju po aktivnom jeziku. `MyLessonsPage` prikazuje samo časove u trenutnom jeziku.
+
+Engleski nastavnici trenutno **ne postoje** (samo arhitektura) — to je u redu, lista će biti prazna sa porukom "Uskoro dolaze nastavnici engleskog".
+
+---
+
+## 4. Onboarding i auto-redirect
+
+**Novi korisnici** (već radi): LanguagePage → plan → register → onboarding → `/ucenje/{slug}`.
+
+**Vraćeni korisnici (LOGIN):**
+- U `AuthPage.tsx` posle uspešnog login-a: pročitati `profiles.preferred_language` i redirect na `/ucenje/{preferred_language}`. Fallback: `norveski`.
+- `Index.tsx` / root: ako je ulogovan i ima preferred_language, redirect na taj dashboard umesto landing.
+- `useSelectedLanguage`: pri loginu sinhronizovati localStorage sa `profiles.preferred_language` (već radi u `ProfileContext`).
+
+**Onboarding state:** `profiles.onboarding_completed` je global (jednom po korisniku) — ne radi se ponovo pri promeni jezika. To je OK, onboarding skuplja CEFR/cilj koji nije vezan za jezik (može se kasnije proširiti per-language ako bude potrebno).
+
+---
+
+## 5. Dashboard
+
+`DashboardPage` već čita aktivni jezik. Dodatno:
+- XP kartica čita iz novog `user_xp` filtriranog po language.
+- "Brze metrike" (završene vežbe, dan u nizu) — računati iz activities filtriranih po language.
+
+---
+
+## Tehnički sažetak izmena
+
+**Baza (1 migracija):**
+- ALTER `user_xp` add language + nov composite unique.
+- DROP/CREATE `award_xp(_user_id, _points, _check_daily_bonus, _language)`.
+
+**Frontend (~12 fajlova):**
+- Hookovi: `logActivity.ts`, `logErrors.ts` (signatura + insert).
+- Stranice: VocabularyPage, TalkPage, WritingPage, ProgressPage, DashboardPage, AuthPage, Index, SelectTeacherPage, MyLessonsPage.
+- Komponente: WeeklyDigest, XpProgressCard, GrammarHistoryTab, GrammarProgressTab.
+
+**Edge functions:** provera/dopuna `language` parametra u `talk-ai`, `vocabulary-ai`, `writing-correct`.
+
+---
+
+## Šta NIJE u obimu
+
+- Prevod kompletnog UI-ja na engleski (UI ostaje srpski po dosadašnjoj politici).
+- Seed engleskih nastavnika.
+- Per-language onboarding (CEFR po jeziku).
+- Migracija postojećih norveških podataka (ostaju kao `'no'`).

@@ -18,6 +18,8 @@ import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { logActivity } from "@/lib/logActivity";
 import { logErrors } from "@/lib/logErrors";
+import { getCurrentLanguageCode } from "@/lib/currentLanguage";
+import { useSelectedLanguage } from "@/hooks/useSelectedLanguage";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import VocabCollections from "@/components/VocabCollections";
 import CollectionSelector from "@/components/CollectionSelector";
@@ -72,7 +74,7 @@ function speakNorwegian(text: string) {
 async function callVocabAI(body: Record<string, unknown>) {
   const { data: { session } } = await supabase.auth.getSession();
   const res = await supabase.functions.invoke("vocabulary-ai", {
-    body,
+    body: { ...body, language: getCurrentLanguageCode() },
     headers: { Authorization: `Bearer ${session?.access_token}` },
   });
   if (res.error) throw new Error(res.error.message || "AI request failed");
@@ -164,6 +166,7 @@ function GenerateTab({ level, userId }: { level: string; userId?: string }) {
       .from("word_collections" as any)
       .select("id, name")
       .eq("user_id", userId)
+      .eq("language", getCurrentLanguageCode())
       .order("created_at", { ascending: false });
     setCollections((data as unknown as { id: string; name: string }[]) || []);
   };
@@ -174,7 +177,7 @@ function GenerateTab({ level, userId }: { level: string; userId?: string }) {
     try {
       const { data, error } = await supabase
         .from("word_collections" as any)
-        .insert({ user_id: userId, name: newCollectionName.trim(), description: newCollectionDesc.trim() || null } as any)
+        .insert({ user_id: userId, name: newCollectionName.trim(), description: newCollectionDesc.trim() || null, language: getCurrentLanguageCode() } as any)
         .select("id")
         .single() as any;
       if (error) throw error;
@@ -212,6 +215,7 @@ function GenerateTab({ level, userId }: { level: string; userId?: string }) {
     if (!userId || words.length === 0) return;
     setSaving(true);
     try {
+      const langCode = getCurrentLanguageCode();
       // Save to vocab_items (legacy)
       const rows = words.map((w) => ({
         user_id: userId,
@@ -221,6 +225,7 @@ function GenerateTab({ level, userId }: { level: string; userId?: string }) {
         examples: w.examples as any,
         theme: theme.trim(),
         status: "new",
+        language: langCode,
       }));
       const { error } = await supabase.from("vocab_items").insert(rows);
       if (error) throw error;
@@ -236,6 +241,7 @@ function GenerateTab({ level, userId }: { level: string; userId?: string }) {
         topic: theme.trim(),
         word_type: w.word_type || null,
         grammar_forms: w.grammar_forms || null,
+        language: langCode,
       }));
       const { data: insertedWords } = await supabase
         .from("vocabulary_words" as any)
@@ -400,6 +406,7 @@ function SentenceTab({ level, userId }: { level: string; userId?: string }) {
         .from("vocab_items")
         .select("*")
         .eq("user_id", userId)
+        .eq("language", getCurrentLanguageCode())
         .order("created_at", { ascending: false });
       setSavedWords((data || []).map((d: any) => ({ ...d, translation: d.translation || "" })) as SavedWord[]);
       setLoadingWords(false);

@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Loader2, TrendingUp, AlertTriangle, BarChart3, Target, Calendar } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { useSelectedLanguage } from "@/hooks/useSelectedLanguage";
 import { useNavigate } from "react-router-dom";
 
 interface TopicProgress {
@@ -33,12 +34,14 @@ export default function GrammarProgressTab({ userId }: { userId?: string }) {
   const [weeklySummary, setWeeklySummary] = useState<WeeklySummary | null>(null);
   const [recommendations, setRecommendations] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
+  const { code } = useSelectedLanguage();
   const navigate = useNavigate();
 
   useEffect(() => {
     if (!userId) return;
     loadData();
-  }, [userId]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userId, code]);
 
   const loadData = async () => {
     setLoading(true);
@@ -47,11 +50,13 @@ export default function GrammarProgressTab({ userId }: { userId?: string }) {
         .from("grammar_sessions")
         .select("*")
         .eq("user_id", userId!)
+        .eq("language", code)
         .order("created_at", { ascending: false }),
       supabase
         .from("error_events")
         .select("*")
         .eq("user_id", userId!)
+        .eq("language", code)
         .eq("module", "grammar")
         .gte("created_at", new Date(Date.now() - 30 * 86400000).toISOString())
         .order("created_at", { ascending: false }),
