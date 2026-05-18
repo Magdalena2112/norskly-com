@@ -1,5 +1,35 @@
 import { motion, MotionValue, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+
+// Adaptive scale by viewport width: smaller screens → more blur, lower opacity,
+// smaller glyphs so marks remain decorative and never overwhelm the content.
+type Tier = { opacityMul: number; blurAdd: number; sizeMul: number };
+const tierFor = (w: number): Tier => {
+  if (w < 480) return { opacityMul: 0.45, blurAdd: 1.5, sizeMul: 0.55 };  // mobile
+  if (w < 768) return { opacityMul: 0.6,  blurAdd: 1.0, sizeMul: 0.7 };   // large mobile
+  if (w < 1024) return { opacityMul: 0.8, blurAdd: 0.5, sizeMul: 0.85 };  // tablet
+  if (w < 1440) return { opacityMul: 1.0, blurAdd: 0,   sizeMul: 1.0 };   // desktop
+  return { opacityMul: 1.1, blurAdd: 0, sizeMul: 1.1 };                   // wide
+};
+
+const useViewportTier = (): Tier => {
+  const [tier, setTier] = useState<Tier>(() =>
+    typeof window === "undefined" ? tierFor(1280) : tierFor(window.innerWidth)
+  );
+  useEffect(() => {
+    let raf = 0;
+    const onResize = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => setTier(tierFor(window.innerWidth)));
+    };
+    window.addEventListener("resize", onResize);
+    return () => {
+      window.removeEventListener("resize", onResize);
+      cancelAnimationFrame(raf);
+    };
+  }, []);
+  return tier;
+};
 
 type Mark = {
   top: string;
@@ -28,12 +58,12 @@ const MARKS: Mark[] = [
 const toneColor = (t: Mark["tone"]) =>
   t === "plum" ? "hsl(var(--primary))" : t === "pink" ? "hsl(var(--accent))" : "hsl(var(--sage))";
 
-const QuestionGlyph = ({ m }: { m: Mark }) => {
+const QuestionGlyph = ({ m, sizeMul }: { m: Mark; sizeMul: number }) => {
   const color = toneColor(m.tone);
   const style: React.CSSProperties = {
     fontFamily: "'Fraunces', 'Playfair Display', serif",
     fontWeight: 900,
-    fontSize: `${m.size}rem`,
+    fontSize: `${m.size * sizeMul}rem`,
     lineHeight: 1,
     color: m.variant === "filled" ? color : "transparent",
     WebkitTextStroke: m.variant === "outline" ? `2px ${color}` : undefined,
@@ -42,8 +72,18 @@ const QuestionGlyph = ({ m }: { m: Mark }) => {
   return <span style={style}>?</span>;
 };
 
-const MarkItem = ({ m, progress }: { m: Mark; progress: MotionValue<number> }) => {
+const MarkItem = ({
+  m,
+  progress,
+  tier,
+}: {
+  m: Mark;
+  progress: MotionValue<number>;
+  tier: Tier;
+}) => {
   const y = useTransform(progress, [0, 1], [60 * m.parallax, -60 * m.parallax]);
+  const effOpacity = Math.min(1, m.opacity * tier.opacityMul);
+  const effBlur = m.blur + tier.blurAdd;
   return (
     <motion.div
       className="absolute will-change-transform"
@@ -52,18 +92,18 @@ const MarkItem = ({ m, progress }: { m: Mark; progress: MotionValue<number> }) =
         left: m.left,
         translateX: "-50%",
         y,
-        filter: `blur(${m.blur}px)`,
-        opacity: m.opacity,
+        filter: `blur(${effBlur}px)`,
+        opacity: effOpacity,
       }}
       initial={{ opacity: 0 }}
-      animate={{ opacity: m.opacity }}
+      animate={{ opacity: effOpacity }}
       transition={{ duration: 1.2, delay: m.delay }}
     >
       <motion.div
         animate={{
           y: [0, -m.drift, 0],
           rotate: [m.rotate, m.rotate + (m.rotate > 0 ? 3 : -3), m.rotate],
-          opacity: [m.opacity, m.opacity * 1.35, m.opacity],
+          opacity: [effOpacity, Math.min(1, effOpacity * 1.35), effOpacity],
         }}
         transition={{
           duration: m.duration,
@@ -72,7 +112,7 @@ const MarkItem = ({ m, progress }: { m: Mark; progress: MotionValue<number> }) =
           delay: m.delay,
         }}
       >
-        <QuestionGlyph m={m} />
+        <QuestionGlyph m={m} sizeMul={tier.sizeMul} />
       </motion.div>
     </motion.div>
   );
@@ -80,6 +120,7 @@ const MarkItem = ({ m, progress }: { m: Mark; progress: MotionValue<number> }) =
 
 export const FloatingQuestionMarks = () => {
   const ref = useRef<HTMLDivElement>(null);
+  const tier = useViewportTier();
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"],
@@ -100,7 +141,7 @@ export const FloatingQuestionMarks = () => {
         }}
       />
       {MARKS.map((m, i) => (
-        <MarkItem key={i} m={m} progress={scrollYProgress} />
+        <MarkItem key={i} m={m} progress={scrollYProgress} tier={tier} />
       ))}
     </div>
   );
