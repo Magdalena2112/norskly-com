@@ -178,12 +178,12 @@ function ExercisesTab({ level, userId, initialTopic, onGoToExplain }: { level: s
       // Fetch previous sentences to avoid repetition
       let previousSentences: string[] = [];
       if (userId) {
-        const { data: pastSessions } = await supabase
+        const { data: pastSessions } = await (supabase
           .from("grammar_sessions")
           .select("questions")
           .eq("user_id", userId)
-          .eq("topic", topic.trim())
-          .eq("language" as any, currentLanguageCode())
+          .eq("topic", topic.trim()) as any)
+          .eq("language", currentLanguageCode())
           .order("created_at", { ascending: false })
           .limit(5);
         if (pastSessions) {
