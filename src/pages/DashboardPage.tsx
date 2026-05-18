@@ -105,12 +105,12 @@ export default function DashboardPage() {
         >
           <div className="rounded-3xl border border-border/50 bg-cream/90 backdrop-blur-md shadow-postcard overflow-hidden grid md:grid-cols-5">
             <div className="md:col-span-3 p-6 sm:p-8 flex flex-col justify-center">
-              <p className="font-script italic text-primary/60 text-sm mb-1">Velkommen tilbake til fjordene</p>
+              <p className="font-script italic text-primary/60 text-sm mb-1">{ui.heroScript}</p>
               <h1 className="text-display text-3xl sm:text-4xl text-primary mb-3 leading-[0.95]">
                 Hei, {profile.name || "korisniče"}.
               </h1>
               <p className="text-muted-foreground text-sm sm:text-base max-w-md leading-relaxed">
-                Tih dan među norveškim fjordovima. Udobno se smesti, izaberi modul i nastavi sa učenjem — korak po korak.
+                {ui.heroBody}
               </p>
               <div className="mt-4 flex items-center gap-2 text-xs">
                 <span className="bg-secondary/60 text-primary px-2.5 py-1 rounded-full border border-border/50 font-medium">
@@ -124,7 +124,7 @@ export default function DashboardPage() {
               <FjordHero className="absolute inset-0 w-full h-full" />
               {/* Tiny stamp on hero */}
               <div className="absolute top-3 right-3 bg-cream/90 backdrop-blur rounded-sm border-2 border-dashed border-primary/40 px-1.5 py-1 rotate-[6deg] shadow-card-soft">
-                <div className="font-display text-[8px] font-bold text-primary leading-none">LOFOTEN</div>
+                <div className="font-display text-[8px] font-bold text-primary leading-none">{ui.stampCity}</div>
                 <div className="font-script italic text-[8px] text-primary/70 text-center">·1909·</div>
               </div>
             </div>
@@ -143,7 +143,7 @@ export default function DashboardPage() {
           <span className="h-px flex-1 bg-border" />
           <span className="font-script italic text-sm text-primary/70 flex items-center gap-2">
             <span className="text-primary/40">✦</span>
-            Læringsmoduler
+            {ui.modulesDivider}
             <span className="text-primary/40">✦</span>
           </span>
           <span className="h-px flex-1 bg-border" />
