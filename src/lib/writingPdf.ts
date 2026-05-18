@@ -77,6 +77,8 @@ const NIVO_LABELS: Record<string, string> = {
 
 export function generateWritingPdf(payload: WritingPdfPayload, filename = "norskly-pisanje.pdf") {
   const doc = new jsPDF({ unit: "pt", format: "a4" });
+  ensureRobotoRegistered(doc);
+  doc.setFont(PDF_FONT, "normal");
   const pageWidth = doc.internal.pageSize.getWidth();
   const pageHeight = doc.internal.pageSize.getHeight();
   const margin = 48;
