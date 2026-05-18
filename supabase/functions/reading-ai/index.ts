@@ -1,5 +1,6 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "jsr:@supabase/supabase-js@2";
+import { buildPersonalizationLines } from "../_shared/personalization.ts";
 
 const GATEWAY_URL = "https://ai.gateway.lovable.dev/v1/chat/completions";
 
@@ -103,6 +104,10 @@ Deno.serve(async (req) => {
     const lang = LANG[langCode] || LANG.no;
     const cefr = cefrSpec[level] || cefrSpec.A1;
     const lenDesc = lengthSpec[length] || lengthSpec.kratak;
+    const personalization = buildPersonalizationLines(langCode, body.focus_area, body.life_context);
+    const personalizationLine = personalization.serbianLine
+      ? `\nPERSONALIZACIJA: ${personalization.serbianLine}`
+      : "";
 
     const isAdvanced = level === "B1" || level === "B2" || level === "C1";
     const phrases = exampleQuestionPhrases(lang.code);
