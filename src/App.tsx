@@ -34,6 +34,8 @@ import AdminTeacherProfilePage from "./pages/AdminTeacherProfilePage";
 import AdminTeacherApplicationsPage from "./pages/AdminTeacherApplicationsPage";
 import AdminTeacherApplicationDetailPage from "./pages/AdminTeacherApplicationDetailPage";
 import UnsubscribePage from "./pages/UnsubscribePage";
+import ProfilePage from "./pages/ProfilePage";
+import SettingsPage from "./pages/SettingsPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
