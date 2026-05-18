@@ -266,7 +266,7 @@ export default function LandingPage() {
                   </li>
                 ))}
               </ul>
-              <Button onClick={() => navigate("/auth?role=student")}
+              <Button onClick={() => document.getElementById("languages")?.scrollIntoView({ behavior: "smooth" })}
                 className="rounded-full bg-primary hover:bg-primary/90">
                 Počni sa učenjem <ArrowRight className="ml-1 h-4 w-4" />
               </Button>
