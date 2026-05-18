@@ -1,20 +1,18 @@
 ## Cilj
 
-Povećati dugmad za izbor jezika ("Norveški / Engleski / Nemački") u hero sekciji landing stranice tako da budu vizuelno istaknutija.
+U gornjoj navigaciji dodati link "Za učenike" pored postojećeg "Za profesore" i da vodi na sekciju ekosistema (gde se nalaze obe kartice: Za studente / Za profesore).
 
 ## Izmena
 
-U `src/pages/LandingPage.tsx`, na pill linkovima za jezike (mapa `LANGUAGE_CONFIGS`):
+U `src/pages/LandingPage.tsx` (NAV, oko linije 119–122):
 
-- Padding: sa `px-5 py-2.5` na `px-7 py-4` (veće dodirno polje).
-- Font: sa `text-sm` na `text-base md:text-lg` i `font-semibold`.
-- Zastavica/ikona veća: `text-xl` na flag span.
-- Razmak između pill-ova: `gap-2` → `gap-3`.
-- Donja margina celog reda: ostaje `mb-10`.
+- Dodati nov `<a>` link **"Za učenike"** ispred "Za profesore".
+- Oba linka vode na istu sekciju (`#teachers`), jer ona već sadrži obe strane ekosistema. Anchor ostaje `#teachers` da ne pravimo dvostruke id-jeve i postojeći link nastavlja da radi.
+- Redosled u navu: Platforma · **Za učenike** · Za profesore · Kako učiš · FAQ.
 
-Bez izmena u logici (i dalje vodi na `/jezici/:slug` i upisuje izbor u localStorage).
+Bez dodatnih izmena u sekciji ili stilovima — koristi se isti `text-sm font-medium hover:text-primary` stil kao ostali nav linkovi.
 
 ## Šta NIJE u opsegu
 
-- Promena boja, oblika (ostaje pill/rounded-full) ili animacija.
-- Druga dugmad na stranici.
+- Razdvajanje ekosistem sekcije na dva odvojena bloka/anchora.
+- Promene u mobilnom meniju (ne postoji eksplicitan mobile menu trenutno; linkovi su `hidden md:flex`).
