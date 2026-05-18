@@ -141,6 +141,7 @@ function BildebeskrivelseTab({ level }: { level: string }) {
   const [helper, setHelper] = useState<ImageHelper | null>(null);
   const [helperLoading, setHelperLoading] = useState(false);
   const [helperOpen, setHelperOpen] = useState(true);
+  const [openHelperSections, setOpenHelperSections] = useState<Record<string, boolean>>({ vocab: true, expr: false, starters: false });
   const [text, setText] = useState("");
   const [result, setResult] = useState<CorrectionResult | null>(null);
   const [correctLoading, setCorrectLoading] = useState(false);
