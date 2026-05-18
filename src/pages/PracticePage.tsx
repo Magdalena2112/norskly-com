@@ -44,6 +44,8 @@ import { logErrors } from "@/lib/logErrors";
 import { toast } from "sonner";
 import { formatDistanceToNow } from "date-fns";
 import { sr } from "date-fns/locale";
+import { useSelectedLanguage } from "@/hooks/useSelectedLanguage";
+import { getCurrentLanguageCode } from "@/lib/currentLanguage";
 
 interface Message {
   role: "user" | "assistant";
@@ -234,6 +236,7 @@ function StructuredAssistantMessage({ content }: { content: string }) {
 export default function PracticePage() {
   const { profile } = useProfile();
   const { user } = useAuth();
+  const { code: langCode } = useSelectedLanguage();
   const navigate = useNavigate();
 
   const [messages, setMessages] = useState<Message[]>([]);
@@ -321,6 +324,7 @@ export default function PracticePage() {
           message_count: updatedMessages.length,
           title,
           points: 0,
+          language: langCode,
         } as any)
         .select("id")
         .single();
@@ -378,6 +382,7 @@ export default function PracticePage() {
         },
         body: JSON.stringify({
           action: "chat",
+          language: langCode,
           messages: updatedMessages,
           profile: {
             name: profile.name,
@@ -484,6 +489,7 @@ export default function PracticePage() {
         },
         body: JSON.stringify({
           action: "recap",
+          language: langCode,
           messages,
           profile: {
             name: profile.name,
