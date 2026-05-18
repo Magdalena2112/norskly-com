@@ -223,12 +223,12 @@ export function generateWritingPdf(payload: WritingPdfPayload, filename = "norsk
     const size = opts.size ?? 10.5;
     const color = opts.color ?? INK;
     const style = opts.bold ? (opts.italic ? "bolditalic" : "bold") : opts.italic ? "italic" : "normal";
-    const lh = opts.lineHeight ?? size + 4;
-    doc.setFont("helvetica", style);
-    doc.setFontSize(size);
+    const lh = opts.lineHeight ?? Math.round(size * 1.45);
+    const lines = wrap(text, maxW, size, style as "normal" | "bold" | "italic" | "bolditalic");
     doc.setTextColor(...color);
-    const lines = doc.splitTextToSize(text || "", maxW) as string[];
     lines.forEach((line) => {
+      // Always render with default (untracked) spacing and no maxWidth/align (which can stretch)
+      doc.setCharSpace(0);
       doc.text(line, x, y);
       y += lh;
     });
