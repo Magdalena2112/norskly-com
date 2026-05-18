@@ -552,14 +552,13 @@ export function generateWritingPdf(payload: WritingPdfPayload, filename = "norsk
         const half = Math.ceil(expressionItems.length / 2);
         const drawCol = (arr: typeof expressionItems, x: number) => {
           let cy = y;
-          doc.setFont("helvetica", "normal");
-          doc.setFontSize(9.5);
           arr.forEach((it) => {
-            const wrapped = doc.splitTextToSize(`• ${it.left} — ${it.right}`, colW) as string[];
+            const wrapped = wrap(`• ${it.left} — ${it.right}`, colW, 9.5);
             wrapped.forEach((l, idx) => {
               doc.setTextColor(...(idx === 0 ? INK : MUTED));
+              doc.setCharSpace(0);
               doc.text(l, x, cy);
-              cy += 12;
+              cy += 13;
             });
           });
           return cy;
