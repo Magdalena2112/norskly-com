@@ -32,17 +32,37 @@ export default function AuthPage() {
     setLoading(true);
 
     try {
+      const selectedLang = localStorage.getItem("norskly_selected_language");
+
       if (isLogin) {
-        const { error } = await supabase.auth.signInWithPassword({ email, password });
+        const { data, error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw error;
+        // Učitaj sačuvani jezik iz baze i sinhronizuj localStorage
+        if (data.user) {
+          const { data: prof } = await supabase
+            .from("profiles")
+            .select("preferred_language")
+            .eq("user_id", data.user.id)
+            .maybeSingle();
+          if (prof?.preferred_language) {
+            localStorage.setItem("norskly_selected_language", prof.preferred_language);
+          }
+        }
         navigate("/practice");
       } else {
-        const { error } = await supabase.auth.signUp({
+        const { data, error } = await supabase.auth.signUp({
           email,
           password,
           options: { emailRedirectTo: window.location.origin },
         });
         if (error) throw error;
+        // Sačuvaj izabrani jezik na profil novog korisnika
+        if (data.user && selectedLang) {
+          await supabase
+            .from("profiles")
+            .update({ preferred_language: selectedLang })
+            .eq("user_id", data.user.id);
+        }
         toast({
           title: "Registracija uspešna!",
           description: "Proverite email za potvrdu naloga.",
