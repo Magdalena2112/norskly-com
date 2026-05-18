@@ -880,6 +880,7 @@ export type Database = {
         Row: {
           created_at: string
           id: string
+          language: string
           last_daily_bonus_date: string | null
           level: number
           total_xp: number
@@ -889,6 +890,7 @@ export type Database = {
         Insert: {
           created_at?: string
           id?: string
+          language?: string
           last_daily_bonus_date?: string | null
           level?: number
           total_xp?: number
@@ -898,6 +900,7 @@ export type Database = {
         Update: {
           created_at?: string
           id?: string
+          language?: string
           last_daily_bonus_date?: string | null
           level?: number
           total_xp?: number
@@ -1077,6 +1080,7 @@ export type Database = {
       award_xp: {
         Args: {
           _check_daily_bonus?: boolean
+          _language?: string
           _points: number
           _user_id: string
         }
