@@ -22,89 +22,80 @@ import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 
 // ─── jsPDF mock that records calls ──────────────────────────────────────────
-type Call = { method: string; args: unknown[] };
-const calls: Call[] = [];
-let currentFontSize = 12;
-let currentCharSpace = 0;
+type Call = { method: string; args: unknown[]; _fontSize?: number; _charSpace?: number };
 
-const recorder = (name: string) =>
-  vi.fn((...args: unknown[]) => {
-    calls.push({ method: name, args });
-    if (name === "setFontSize") currentFontSize = args[0] as number;
-    if (name === "setCharSpace") currentCharSpace = args[0] as number;
-    return undefined;
-  });
-
-class FakeJsPDF {
-  internal = {
-    pageSize: {
-      getWidth: () => 595,
-      getHeight: () => 842,
-    },
+const shared = vi.hoisted(() => {
+  const state = {
+    calls: [] as Array<{ method: string; args: unknown[]; _fontSize?: number; _charSpace?: number }>,
+    currentFontSize: 12,
+    currentCharSpace: 0,
   };
-  // Drawing / state
-  setFillColor = recorder("setFillColor");
-  setDrawColor = recorder("setDrawColor");
-  setTextColor = recorder("setTextColor");
-  setLineWidth = recorder("setLineWidth");
-  setFont = recorder("setFont");
-  setFontSize = recorder("setFontSize");
-  setCharSpace = recorder("setCharSpace");
-  setLineHeightFactor = recorder("setLineHeightFactor");
-  setPage = recorder("setPage");
+  return state;
+});
 
-  rect = recorder("rect");
-  roundedRect = recorder("roundedRect");
-  circle = recorder("circle");
-  line = recorder("line");
-  addImage = recorder("addImage");
-  addPage = vi.fn(() => {
-    calls.push({ method: "addPage", args: [] });
-  });
+vi.mock("jspdf", () => {
+  const recorder = (name: string) =>
+    (...args: unknown[]) => {
+      shared.calls.push({ method: name, args });
+      if (name === "setFontSize") shared.currentFontSize = args[0] as number;
+      if (name === "setCharSpace") shared.currentCharSpace = args[0] as number;
+    };
 
-  // Text — capture font size + char space at moment of draw
-  text = vi.fn((...args: unknown[]) => {
-    const c = {
-      method: "text",
-      args,
-      _fontSize: currentFontSize,
-      _charSpace: currentCharSpace,
-    } as Call & { _fontSize: number; _charSpace: number };
-    calls.push(c);
-  });
-
-  // Width / wrap helpers — return reasonable approximations so the
-  // production code can compute geometry without blowing up.
-  getTextWidth = vi.fn((s: string) => (s?.length ?? 0) * (currentFontSize * 0.5));
-  splitTextToSize = vi.fn((text: string, width: number) => {
-    const str = String(text ?? "");
-    if (!str) return [""];
-    const approxCharWidth = Math.max(2, currentFontSize * 0.5);
-    const maxChars = Math.max(4, Math.floor(width / approxCharWidth));
-    const out: string[] = [];
-    const words = str.split(/\s+/);
-    let line = "";
-    for (const w of words) {
-      const next = line ? `${line} ${w}` : w;
-      if (next.length > maxChars) {
-        if (line) out.push(line);
-        line = w;
-      } else {
-        line = next;
+  class FakeJsPDF {
+    internal = { pageSize: { getWidth: () => 595, getHeight: () => 842 } };
+    setFillColor = recorder("setFillColor");
+    setDrawColor = recorder("setDrawColor");
+    setTextColor = recorder("setTextColor");
+    setLineWidth = recorder("setLineWidth");
+    setFont = recorder("setFont");
+    setFontSize = recorder("setFontSize");
+    setCharSpace = recorder("setCharSpace");
+    setLineHeightFactor = recorder("setLineHeightFactor");
+    setPage = recorder("setPage");
+    rect = recorder("rect");
+    roundedRect = recorder("roundedRect");
+    circle = recorder("circle");
+    line = recorder("line");
+    addImage = recorder("addImage");
+    addPage = () => { shared.calls.push({ method: "addPage", args: [] }); };
+    text = (...args: unknown[]) => {
+      shared.calls.push({
+        method: "text",
+        args,
+        _fontSize: shared.currentFontSize,
+        _charSpace: shared.currentCharSpace,
+      });
+    };
+    getTextWidth = (s: string) => (s?.length ?? 0) * (shared.currentFontSize * 0.5);
+    splitTextToSize = (text: string, width: number) => {
+      const str = String(text ?? "");
+      if (!str) return [""];
+      const approxCharWidth = Math.max(2, shared.currentFontSize * 0.5);
+      const maxChars = Math.max(4, Math.floor(width / approxCharWidth));
+      const out: string[] = [];
+      const words = str.split(/\s+/);
+      let line = "";
+      for (const w of words) {
+        const next = line ? `${line} ${w}` : w;
+        if (next.length > maxChars) {
+          if (line) out.push(line);
+          line = w;
+        } else {
+          line = next;
+        }
       }
-    }
-    if (line) out.push(line);
-    return out;
-  });
+      if (line) out.push(line);
+      return out;
+    };
+    getImageProperties = () => ({ width: 1200, height: 800 });
+    getNumberOfPages = () => 1;
+    save = () => {};
+  }
 
-  getImageProperties = vi.fn(() => ({ width: 1200, height: 800 }));
-  getNumberOfPages = vi.fn(() => 1);
-  save = vi.fn();
-}
+  return { default: FakeJsPDF };
+});
 
-vi.mock("jspdf", () => ({
-  default: FakeJsPDF,
-}));
+const calls = shared.calls;
 
 // Import AFTER mock is registered.
 import { generateWritingPdf, type WritingPdfPayload } from "./writingPdf";
