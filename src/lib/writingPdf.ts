@@ -535,12 +535,12 @@ export function generateWritingPdf(payload: WritingPdfPayload, filename = "norsk
       const half = Math.ceil(expressionItems.length / 2);
       let leftH = 0, rightH = 0;
       expressionItems.slice(0, half).forEach((it) => {
-        const w = doc.splitTextToSize(`• ${it.left} — ${it.right}`, colW) as string[];
-        leftH += w.length * 12;
+        const w = wrap(`• ${it.left} — ${it.right}`, colW, 9.5);
+        leftH += w.length * 13;
       });
       expressionItems.slice(half).forEach((it) => {
-        const w = doc.splitTextToSize(`• ${it.left} — ${it.right}`, colW) as string[];
-        rightH += w.length * 12;
+        const w = wrap(`• ${it.left} — ${it.right}`, colW, 9.5);
+        rightH += w.length * 13;
       });
       return Math.max(leftH, rightH) + 4;
     };
