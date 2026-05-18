@@ -10,29 +10,44 @@ const corsHeaders = {
 
 function buildSystem(level: string) {
   return `Ti si nastavnik norveškog (Bokmål) za studenta na nivou ${level}.
-Student će ti dati sliku da bi vežbao bildebeskrivelse (opis slike).
+Student je učitao sliku da bi vežbao bildebeskrivelse (opis slike).
 
-Pažljivo pogledaj sliku i vrati ISKLJUČIVO JSON:
+Pažljivo analiziraj sliku i izvuci ŠTO VIŠE korisnog vokabulara koji student može
+koristiti da je opiše — i jednostavne i nešto naprednije reči kada su relevantne.
+
+Vrati ISKLJUČIVO JSON u sledećem formatu:
 {
-  "vocabulary": [
-    { "word": "norveška reč (sa članom za imenice, npr. 'et hus')", "translation": "srpski prevod", "type": "imenica|glagol|pridev|prilog" }
-  ],
-  "expressions": [
-    { "no": "korisni izraz na norveškom", "sr": "prevod na srpski" }
-  ],
+  "vocabulary_groups": {
+    "imenice":        [ { "word": "en park", "translation": "park" } ],
+    "glagoli":        [ { "word": "å sitte", "translation": "sedeti" } ],
+    "pridevi":        [ { "word": "grønn", "translation": "zelen" } ],
+    "mesta_objekti":  [ { "word": "et tre", "translation": "drvo" } ],
+    "ljudi_radnje":   [ { "word": "et barn som leker", "translation": "dete koje se igra" } ],
+    "korisni_izrazi": [ { "word": "å gå tur", "translation": "šetati" } ]
+  },
   "sentence_starters": [
-    "Na bildet ser jeg ...",
-    "I forgrunnen ...",
-    "I bakgrunnen ..."
-  ],
-  "phrases_by_level": [
-    { "no": "rečenica na ${level} nivou", "sr": "srpski prevod" }
+    "På bildet ser jeg ...",
+    "I forgrunnen er det ...",
+    "I bakgrunnen kan man se ...",
+    "Til høyre/venstre ser vi ...",
+    "Personen ser ut til å ...",
+    "Det virker som om ...",
+    "Bildet viser ...",
+    "Stemningen virker ..."
   ],
   "description_hint": "kratak savet (1-2 rečenice) na srpskom kako da student strukturira opis"
 }
 
-Vraćaj 8-12 vokabular reči i 4-6 izraza, sve striktno relevantno za sliku.
-Sav norveški jezik na Bokmålu, korektno gramatički. Nemoj izmišljati objekte koji nisu na slici.`;
+PRAVILA:
+- Imenice MORAJU imati član (en/ei/et) ispred — npr. "en park", "et tre".
+- Glagoli moraju biti u infinitivu sa "å" — npr. "å sitte", "å gå tur".
+- Pridevi u osnovnom obliku — npr. "grønn", "stor".
+- Svaka grupa treba 6-12 stavki (ukupno 30-60 reči/izraza) ako slika to dozvoljava.
+- Sve striktno relevantno za sliku. Ne izmišljaj objekte koji nisu na slici.
+- Bokmål, korektno gramatički. Srpski prevodi kratki i precizni.
+- "sentence_starters" su KRATKI POČECI/FRAGMENTI rečenica koje student sam dovršava.
+  NE pisati pune primere rečenica — samo počeci sa "..." na kraju.
+- NE vraćaj polje "phrases_by_level" ni pune primere rečenica.`;
 }
 
 Deno.serve(async (req) => {
@@ -78,7 +93,7 @@ Deno.serve(async (req) => {
         messages: [
           { role: "system", content: buildSystem(level) },
           { role: "user", content: [
-            { type: "text", text: "Analiziraj sliku i pomozi studentu da je opiše na norveškom." },
+            { type: "text", text: "Analiziraj sliku i izvuci što više relevantnog vokabulara po grupama, plus kratke početke rečenica." },
             imagePart,
           ]},
         ],
@@ -108,6 +123,22 @@ Deno.serve(async (req) => {
     const content = data.choices?.[0]?.message?.content || "{}";
     let parsed: Record<string, unknown> = {};
     try { parsed = JSON.parse(content); } catch { parsed = {}; }
+
+    // Backward-compat: flatten groups into vocabulary array as well
+    const groups = (parsed.vocabulary_groups || {}) as Record<string, { word: string; translation: string }[]>;
+    if (groups && typeof groups === "object") {
+      const flat: { word: string; translation: string; type?: string }[] = [];
+      for (const [g, items] of Object.entries(groups)) {
+        if (Array.isArray(items)) {
+          for (const it of items) {
+            if (it?.word) flat.push({ word: it.word, translation: it.translation, type: g });
+          }
+        }
+      }
+      if (!parsed.vocabulary) parsed.vocabulary = flat;
+    }
+    // Strip full example phrases per new spec
+    delete (parsed as Record<string, unknown>).phrases_by_level;
 
     return new Response(JSON.stringify(parsed), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },

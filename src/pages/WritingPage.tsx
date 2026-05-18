@@ -32,13 +32,24 @@ interface CorrectionResult {
   _errors?: { category: string; topic: string; severity: number; example_wrong: string; example_correct: string }[];
 }
 
+interface VocabItem { word: string; translation: string; type?: string }
 interface ImageHelper {
-  vocabulary?: { word: string; translation: string; type?: string }[];
+  vocabulary?: VocabItem[];
+  vocabulary_groups?: Record<string, VocabItem[]>;
   expressions?: { no: string; sr: string }[];
   sentence_starters?: string[];
-  phrases_by_level?: { no: string; sr: string }[];
   description_hint?: string;
 }
+
+const VOCAB_GROUP_LABELS: Record<string, string> = {
+  imenice: "Imenice",
+  glagoli: "Glagoli",
+  pridevi: "Pridevi",
+  mesta_objekti: "Mesta i objekti",
+  ljudi_radnje: "Ljudi i radnje",
+  korisni_izrazi: "Korisni izrazi",
+};
+const VOCAB_GROUP_ORDER = ["imenice", "glagoli", "pridevi", "mesta_objekti", "ljudi_radnje", "korisni_izrazi"];
 
 interface WritingExercise {
   id: string;
@@ -277,22 +288,38 @@ function BildebeskrivelseTab({ level }: { level: string }) {
                 {helper.description_hint && (
                   <p className="italic text-primary/80">{helper.description_hint}</p>
                 )}
-                {helper.vocabulary && helper.vocabulary.length > 0 && (
-                  <div>
-                    <p className="font-semibold text-primary mb-1">Ord</p>
-                    <div className="flex flex-wrap gap-1.5">
-                      {helper.vocabulary.map((v, i) => (
-                        <span key={i} className="px-2 py-1 rounded-full bg-cream border border-border/60 text-xs">
-                          <span className="font-medium text-primary">{v.word}</span>
-                          <span className="text-muted-foreground"> — {v.translation}</span>
-                        </span>
+                {(() => {
+                  const groups = helper.vocabulary_groups
+                    || (helper.vocabulary ? helper.vocabulary.reduce<Record<string, VocabItem[]>>((acc, v) => {
+                        const k = v.type && VOCAB_GROUP_LABELS[v.type] ? v.type : "korisni_izrazi";
+                        (acc[k] ||= []).push(v);
+                        return acc;
+                      }, {}) : null);
+                  if (!groups) return null;
+                  const keys = [...VOCAB_GROUP_ORDER.filter((k) => groups[k]?.length), ...Object.keys(groups).filter((k) => !VOCAB_GROUP_ORDER.includes(k) && groups[k]?.length)];
+                  return (
+                    <div className="space-y-3">
+                      {keys.map((k) => (
+                        <div key={k}>
+                          <p className="font-semibold text-primary mb-1.5 text-xs uppercase tracking-wider">
+                            {VOCAB_GROUP_LABELS[k] || k}
+                          </p>
+                          <ul className="space-y-0.5">
+                            {groups[k].map((v, i) => (
+                              <li key={i} className="text-sm">
+                                <span className="font-medium text-primary">{v.word}</span>
+                                <span className="text-muted-foreground"> — {v.translation}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
                       ))}
                     </div>
-                  </div>
-                )}
+                  );
+                })()}
                 {helper.expressions && helper.expressions.length > 0 && (
                   <div>
-                    <p className="font-semibold text-primary mb-1">Uttrykk</p>
+                    <p className="font-semibold text-primary mb-1 text-xs uppercase tracking-wider">Uttrykk</p>
                     <ul className="space-y-1">
                       {helper.expressions.map((e, i) => (
                         <li key={i}><span className="font-medium">{e.no}</span> <span className="text-muted-foreground">— {e.sr}</span></li>
@@ -302,19 +329,10 @@ function BildebeskrivelseTab({ level }: { level: string }) {
                 )}
                 {helper.sentence_starters && helper.sentence_starters.length > 0 && (
                   <div>
-                    <p className="font-semibold text-primary mb-1">Početci rečenica</p>
+                    <p className="font-semibold text-primary mb-1 text-xs uppercase tracking-wider">Počeci rečenica</p>
+                    <p className="text-xs text-muted-foreground mb-1.5">Dovrši rečenice svojim rečima.</p>
                     <ul className="space-y-1 text-primary/80">
                       {helper.sentence_starters.map((s, i) => <li key={i}>· {s}</li>)}
-                    </ul>
-                  </div>
-                )}
-                {helper.phrases_by_level && helper.phrases_by_level.length > 0 && (
-                  <div>
-                    <p className="font-semibold text-primary mb-1">Primeri na {level}</p>
-                    <ul className="space-y-1">
-                      {helper.phrases_by_level.map((p, i) => (
-                        <li key={i}><span className="font-medium">{p.no}</span> <span className="text-muted-foreground">— {p.sr}</span></li>
-                      ))}
                     </ul>
                   </div>
                 )}
