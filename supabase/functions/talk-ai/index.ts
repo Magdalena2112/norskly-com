@@ -297,8 +297,12 @@ ${qualityCheck}`;
 
     // ── RECAP action ──
     if (action === "recap") {
-      const systemPrompt = `Ti si nastavnik norveškog jezika. Analiziraj sledeći razgovor i napravi rezime sesije.
+      const recapLangLabel = language === "en" ? "engleskog" : language === "de" ? "nemačkog" : "norveškog";
+      const systemPrompt = `Ti si nastavnik ${recapLangLabel} jezika. Analiziraj sledeći razgovor i napravi rezime sesije.
 Korisnik se zove ${profile?.name || "korisnik"}, nivo je ${userLevel}. ${cefrFocus}
+${focusArea ? `Fokusna oblast korisnika: ${focusArea}. Istakni napredak i preporuke u toj oblasti.` : ""}
+${lifeContext ? `Stvarni kontekst korisnika: ${lifeContext}. Vezuj korisne fraze i sledeće korake za ovaj kontekst.` : ""}
+
 
 Odgovori ISKLJUČIVO u JSON formatu, bez markdown-a. Format:
 {
