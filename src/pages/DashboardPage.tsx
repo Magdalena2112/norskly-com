@@ -2,75 +2,27 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useProfile } from "@/context/ProfileContext";
 import { useAuth } from "@/context/AuthContext";
-import { useUserRole } from "@/hooks/useUserRole";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { BookOpen, Languages, MessageSquare, TrendingUp, Settings, Zap, GraduationCap, CalendarCheck, Shield, LogOut } from "lucide-react";
-import BackButton from "@/components/BackButton";
+import { BookOpen, Languages, MessageSquare, TrendingUp, GraduationCap, CalendarCheck } from "lucide-react";
 import XpProgressCard from "@/components/XpProgressCard";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import WeeklyDigest from "@/components/WeeklyDigest";
 import { format } from "date-fns";
-
-const XP_TITLES: Record<number, string> = {
-  1: "Utforsker",
-  2: "Lærling",
-  3: "Kommunikatør",
-  4: "Taler",
-  5: "Trygg taler",
-  6: "Avansert kommunikatør",
-  7: "Flytende",
-  8: "Dyktig",
-  9: "Ekspert",
-  10: "Norskly-mester",
-};
+import StudentLayout from "@/components/student/StudentLayout";
 
 const modules = [
-  {
-    title: "Gramatika",
-    description: "Vežbaj gramatiku kroz kvizove prilagođene tvom nivou.",
-    icon: BookOpen,
-    route: "/grammar",
-    gradient: "from-primary to-primary/70",
-  },
-  {
-    title: "Vokabular",
-    description: "Uči nove reči sa flashcard sistemom.",
-    icon: Languages,
-    route: "/vocabulary",
-    gradient: "from-accent to-accent/70",
-  },
-  {
-    title: "Razgovor",
-    description: "Vežbaj pisanje poruka u realnim situacijama.",
-    icon: MessageSquare,
-    route: "/talk",
-    gradient: "from-primary to-accent",
-  },
-  {
-    title: "Napredak",
-    description: "Prati svoj napredak i postignuća.",
-    icon: TrendingUp,
-    route: "/progress",
-    gradient: "from-accent to-primary",
-  },
-  {
-    title: "Razgovor sa profesorom",
-    description: "Rezerviši 90-minutni čas sa profesorom norveškog.",
-    icon: GraduationCap,
-    route: "/book-lesson",
-    gradient: "from-accent to-primary/80",
-    buttonLabel: "Rezerviši čas",
-    fullWidth: true,
-  },
+  { title: "Gramatika", description: "Vežbaj gramatiku kroz kvizove prilagođene tvom nivou.", icon: BookOpen, route: "/grammar", gradient: "from-primary to-primary/70" },
+  { title: "Vokabular", description: "Uči nove reči sa flashcard sistemom.", icon: Languages, route: "/vocabulary", gradient: "from-accent to-accent/70" },
+  { title: "Razgovor", description: "Vežbaj pisanje poruka u realnim situacijama.", icon: MessageSquare, route: "/talk", gradient: "from-primary to-accent" },
+  { title: "Napredak", description: "Prati svoj napredak i postignuća.", icon: TrendingUp, route: "/progress", gradient: "from-accent to-primary" },
+  { title: "Razgovor sa profesorom", description: "Rezerviši 90-minutni čas sa profesorom norveškog.", icon: GraduationCap, route: "/book-lesson", gradient: "from-accent to-primary/80", buttonLabel: "Rezerviši čas", fullWidth: true },
 ];
 
 export default function DashboardPage() {
   const { profile, loading: profileLoading } = useProfile();
-  const { user, signOut } = useAuth();
-  const { isAdmin } = useUserRole();
+  const { user } = useAuth();
   const navigate = useNavigate();
 
   const [xpData, setXpData] = useState<{ total_xp: number; level: number } | null>(null);
@@ -90,9 +42,6 @@ export default function DashboardPage() {
     })();
   }, [user]);
 
-  const xpInLevel = xpData ? xpData.total_xp % 100 : 0;
-  const xpForNext = 100;
-
   if (profileLoading) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
@@ -102,50 +51,8 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-aurora">
-      <header className="border-b border-border/20 bg-background/10 backdrop-blur-md sticky top-0 z-50">
-          <div className="container flex items-center justify-between h-14">
-          <div className="flex items-center gap-1">
-            <BackButton to="/" />
-            <span className="font-display font-bold text-lg text-primary-foreground">Norskly</span>
-          </div>
-          <div className="flex items-center gap-2">
-            {isAdmin && (
-              <Button variant="outline" size="sm" onClick={() => navigate("/admin/dashboard")} className="gap-1.5">
-                <Shield className="w-3.5 h-3.5" />
-                <span className="hidden sm:inline">Admin</span>
-              </Button>
-            )}
-            {xpData && (
-              <span className="hidden sm:flex text-xs bg-primary/10 text-primary px-2.5 py-1 rounded-full font-semibold items-center gap-1">
-                <Zap className="w-3 h-3" /> {XP_TITLES[Math.min(xpData.level, 10)] || `Lvl ${xpData.level}`} · {xpData.total_xp} XP
-              </span>
-            )}
-            <span className="hidden sm:inline text-xs bg-accent/10 text-accent px-3 py-1 rounded-full font-medium">
-              {profile.level} · {profile.learning_goal}
-            </span>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="icon">
-                  <Settings className="w-4 h-4" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-48">
-                <DropdownMenuItem onClick={() => navigate("/onboarding")} className="cursor-pointer gap-2">
-                  <Settings className="w-4 h-4" />
-                  Podešavanja
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={async () => { await signOut(); navigate("/auth"); }} className="cursor-pointer gap-2 text-destructive focus:text-destructive">
-                  <LogOut className="w-4 h-4" />
-                  Odjavi se
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </div>
-        </div>
-      </header>
-
-      <div className="flex-1 container max-w-3xl py-8">
+    <StudentLayout>
+      <div className="container max-w-3xl py-8">
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}>
           <h1 className="text-2xl sm:text-3xl font-display font-bold text-primary-foreground mb-1">
             Hei, {profile.name || "korisniče"}! 👋
@@ -203,25 +110,25 @@ export default function DashboardPage() {
               <CardContent className="pt-5 pb-5">
                 <div className="flex items-center gap-2 mb-3">
                   <CalendarCheck className="w-5 h-5 text-accent" />
-                   <h3 className="font-semibold text-foreground">Moji predstojeći časovi</h3>
-                 </div>
-                 {upcomingLesson ? (
-                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                     <div>
-                       <p className="text-sm font-medium text-foreground">
-                         {format(new Date(upcomingLesson.start_time), "dd.MM.yyyy HH:mm")} – {format(new Date(upcomingLesson.end_time), "HH:mm")}
-                       </p>
-                       <p className="text-xs text-muted-foreground mt-0.5">Zakazano</p>
+                  <h3 className="font-semibold text-foreground">Moji predstojeći časovi</h3>
+                </div>
+                {upcomingLesson ? (
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                    <div>
+                      <p className="text-sm font-medium text-foreground">
+                        {format(new Date(upcomingLesson.start_time), "dd.MM.yyyy HH:mm")} – {format(new Date(upcomingLesson.end_time), "HH:mm")}
+                      </p>
+                      <p className="text-xs text-muted-foreground mt-0.5">Zakazano</p>
                     </div>
-                     <Button size="sm" variant="outline" onClick={() => navigate("/my-lessons")} className="self-start sm:self-auto">
-                       Pogledaj detalje
-                     </Button>
-                   </div>
-                 ) : (
-                   <div className="flex items-center justify-between">
-                     <p className="text-sm text-muted-foreground">Nema zakazanih časova.</p>
-                     <Button size="sm" variant="hero" onClick={() => navigate("/book-lesson")}>
-                       Rezerviši sada
+                    <Button size="sm" variant="outline" onClick={() => navigate("/my-lessons")} className="self-start sm:self-auto">
+                      Pogledaj detalje
+                    </Button>
+                  </div>
+                ) : (
+                  <div className="flex items-center justify-between">
+                    <p className="text-sm text-muted-foreground">Nema zakazanih časova.</p>
+                    <Button size="sm" variant="hero" onClick={() => navigate("/book-lesson")}>
+                      Rezerviši sada
                     </Button>
                   </div>
                 )}
@@ -230,6 +137,6 @@ export default function DashboardPage() {
           </motion.div>
         )}
       </div>
-    </div>
+    </StudentLayout>
   );
 }
