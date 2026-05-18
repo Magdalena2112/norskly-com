@@ -11,6 +11,7 @@ import { supabase } from "@/integrations/supabase/client";
 import WeeklyDigest from "@/components/WeeklyDigest";
 import { format } from "date-fns";
 import StudentLayout from "@/components/student/StudentLayout";
+import NordicBackdrop from "@/components/student/NordicBackdrop";
 
 const modules = [
   { title: "Gramatika", subtitle: "Norsk grammatikk", description: "Vežbaj gramatiku kroz kvizove prilagođene tvom nivou.", icon: BookOpen, route: "/grammar", tint: "from-secondary to-secondary/40", iconBg: "bg-primary/90", accent: "primary" },
