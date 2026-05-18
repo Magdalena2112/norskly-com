@@ -2,11 +2,14 @@ import { useEffect } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useAuth } from "@/context/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
+import { isLanguageOnboarded } from "@/lib/onboardingStatus";
 
-/**
- * Root entry. If the user is logged in and has a preferred learning language,
- * send them straight to that dashboard. Otherwise fall back to the landing page.
- */
+const SLUG_TO_CODE: Record<string, "no" | "en" | "de"> = {
+  norveski: "no",
+  engleski: "en",
+  nemacki: "de",
+};
+
 const Index = () => {
   const { user, loading } = useAuth();
   const navigate = useNavigate();
@@ -16,16 +19,23 @@ const Index = () => {
     (async () => {
       const { data: prof } = await supabase
         .from("profiles")
-        .select("preferred_language, onboarding_completed")
+        .select("preferred_language")
         .eq("user_id", user.id)
         .maybeSingle();
 
-      if (!prof?.onboarding_completed) {
+      const slug =
+        prof?.preferred_language ||
+        localStorage.getItem("norskly_selected_language") ||
+        "norveski";
+      localStorage.setItem("norskly_selected_language", slug);
+      const code = SLUG_TO_CODE[slug] || "no";
+
+      const done = await isLanguageOnboarded(user.id, code);
+      if (!done) {
         navigate("/onboarding", { replace: true });
         return;
       }
-      const lang = prof?.preferred_language || localStorage.getItem("norskly_selected_language") || "norveski";
-      navigate(`/ucenje/${lang}`, { replace: true });
+      navigate(`/ucenje/${slug}`, { replace: true });
     })();
   }, [user, loading, navigate]);
 
@@ -37,7 +47,7 @@ const Index = () => {
     );
   }
 
-  if (user) return null; // redirect in effect
+  if (user) return null;
   return <Navigate to="/" replace />;
 };
 
