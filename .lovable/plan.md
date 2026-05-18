@@ -1,95 +1,64 @@
-## Cilj
 
-Englesko okruženje treba da bude **potpuno nezavisno** od norveškog: progres, greške, XP, istorija vežbi, vokabular i nastavnička istorija — sve po jeziku. Struktura i UX ostaju identični.
+## Goal
 
-Faza 1 je već dodala `language` kolonu u 15 tabela i parametrizovala Reading/Grammar. Ova faza zatvara preostale rupe.
+When a student is learning **English**, the AI conversational tutor (`talk-ai`) should adapt its replies, vocabulary, and example situations to that learner's **focus_area** (speaking / writing / grammar / vocabulary / pronunciation) and **life_context** (travel, business English, job interviews, movies & series, everyday, social media, studies abroad) chosen during onboarding and stored in `language_profiles`.
 
----
+Today the prompt only mentions name, level, and learning_goal — and is hardcoded for Norwegian.
 
-## 1. Baza: XP i progres po jeziku
+## Changes
 
-Trenutno `user_xp` ima **jedan red po korisniku** — to znači da je XP deljen između jezika. Treba ga raščlaniti po jeziku.
+### 1. Load `life_context` and `focus_area` per active language
+File: `src/context/ProfileContext.tsx`
+- Add `life_context` to the `language_profiles` `select(...)` and to the `UserProfile` shape (optional string).
+- `focus_area` is already loaded — no change needed.
 
-**Migracija:**
-- `user_xp`: dodati kolonu `language text not null default 'no'`, promeniti unique constraint na `(user_id, language)`.
-- `award_xp` RPC funkcija: dodati parametar `_language text default 'no'` i koristiti ga u `INSERT/UPDATE/WHERE`.
-- `last_daily_bonus_date` se računa po (user, language).
+File: `src/types/profile.ts`
+- Add `life_context?: string` to `UserProfile`.
 
-**Postojeći redovi:** ostaju kao `language = 'no'` (norveški progres se čuva).
+### 2. Send the new fields to talk-ai
+File: `src/pages/PracticePage.tsx` (Talk)
+- Extend the `profile` payload in both chat and recap fetch calls to include:
+  - `focus_area: profile.focus_area`
+  - `life_context: profile.life_context`
+- Also pass `language: langCode` (already present per current code — verify).
 
----
+### 3. Make talk-ai language-aware and inject the new context
+File: `supabase/functions/talk-ai/index.ts`
+- Destructure `language` from the request body (default `"no"`).
+- Read `focus_area` and `life_context` from `profile`.
+- Build the system prompt with a small language switch:
 
-## 2. Frontend: prosleđivati `language` svuda
+  **English branch** (language === `"en"`):
+  - Persona: "You are an AI English tutor having a natural conversation with {name}, CEFR {level}."
+  - Focus-area emphasis line, e.g.:
+    - speaking → prioritize natural spoken phrasing, fillers, contractions
+    - writing → favor written register, punctuation, paragraph structure
+    - grammar → weave one targeted grammar reminder into each correction
+    - vocabulary → introduce 1–2 fresh on-topic words per reply
+    - pronunciation → flag tricky sounds / stress patterns when relevant
+  - Life-context flavoring line, e.g.:
+    - travel → airports, hotels, directions, ordering food
+    - business English → meetings, email phrasing, polite assertiveness
+    - job interviews → STAR answers, professional self-introduction
+    - movies and series → idioms, slang, pop-culture references
+    - everyday communication → small talk, daily routines
+    - social media and internet → casual tone, abbreviations, online etiquette
+    - studies abroad → academic vocabulary, campus life, registration
+  - Keep the same section format as today, but translate the structural labels:
+    `[RESPONSE]`, `[VOCABULARY]`, `[CORRECTIONS]`, `[FEEDBACK]`, `[NEXT STEP]`.
+  - Response text must be in English; explanations and feedback remain in Serbian (per project localization policy).
 
-Svaka tačka koja čita/piše podatke vezane za napredak mora da koristi `useSelectedLanguage().code`:
+  **Norwegian branch** (language === `"no"`, default):
+  - Keep the existing Bokmål prompt, but also append focus_area + life_context lines when present so Norwegian learners benefit too (non-breaking — fields are simply ignored if blank).
 
-**Filtriranje po jeziku (`.eq("language", langCode)`):**
-- `src/pages/VocabularyPage.tsx` — lista reči, kolekcije
-- `src/pages/TalkPage.tsx` — istorija razgovora
-- `src/pages/WritingPage.tsx` — istorija vežbi
-- `src/pages/ProgressPage.tsx` — sve agregacije (activities, error_events, grammar_sessions, reading_sessions, talk_sessions, writing_exercises)
-- `src/components/WeeklyDigest.tsx` — top error topics
-- `src/components/XpProgressCard.tsx` — čitanje XP po aktivnom jeziku
-- `src/components/grammar/GrammarHistoryTab.tsx`, `GrammarProgressTab.tsx`
-- `src/pages/DashboardPage.tsx` — XP widget, brze metrike
+- Apply the same focus_area + life_context lines to the `recap` system prompt so the end-of-session summary highlights progress against the learner's chosen real-life context.
 
-**Upis (svako `insert` koje već nema language):**
-- `logActivity` (src/lib/logActivity.ts) — prihvata `language` arg, upisuje ga.
-- `logErrors` (src/lib/logErrors.ts) — isto.
-- Svi pozivi gore-navedenih funkcija prosleđuju trenutni `langCode`.
-- Insert-i u: vocabulary_words, vocab_items, word_collections, talk_sessions, writing_exercises, grammar_sessions, grammar_submissions, reading_sessions, saved_explanations — postaviti `language: langCode` u svaki `.insert()`.
+### 4. Sanity checks
+- Confirm `langCode` is already sent from `PracticePage` and accepted server-side (currently the body sends `language: langCode` but the function never reads it — this plan fixes that).
+- No DB migration needed — `life_context` column already exists on `language_profiles`.
+- No change to grammar-ai / writing-correct / reading-ai / vocabulary-ai in this pass (they take only `level`); the user asked specifically for the tutoring prompt.
 
-**Edge functions:** `talk-ai`, `vocabulary-ai`, `writing-correct` već primaju `language` (Faza 1 plan) — proveriti i parametrizovati ako nedostaje (sistem prompt + jezik odgovora/korekcije).
-
----
-
-## 3. Nastavnici po jeziku
-
-`teachers.language` već postoji. `SelectTeacherPage` i `BookLessonPage` filtriraju po aktivnom jeziku. `MyLessonsPage` prikazuje samo časove u trenutnom jeziku.
-
-Engleski nastavnici trenutno **ne postoje** (samo arhitektura) — to je u redu, lista će biti prazna sa porukom "Uskoro dolaze nastavnici engleskog".
-
----
-
-## 4. Onboarding i auto-redirect
-
-**Novi korisnici** (već radi): LanguagePage → plan → register → onboarding → `/ucenje/{slug}`.
-
-**Vraćeni korisnici (LOGIN):**
-- U `AuthPage.tsx` posle uspešnog login-a: pročitati `profiles.preferred_language` i redirect na `/ucenje/{preferred_language}`. Fallback: `norveski`.
-- `Index.tsx` / root: ako je ulogovan i ima preferred_language, redirect na taj dashboard umesto landing.
-- `useSelectedLanguage`: pri loginu sinhronizovati localStorage sa `profiles.preferred_language` (već radi u `ProfileContext`).
-
-**Onboarding state:** `profiles.onboarding_completed` je global (jednom po korisniku) — ne radi se ponovo pri promeni jezika. To je OK, onboarding skuplja CEFR/cilj koji nije vezan za jezik (može se kasnije proširiti per-language ako bude potrebno).
-
----
-
-## 5. Dashboard
-
-`DashboardPage` već čita aktivni jezik. Dodatno:
-- XP kartica čita iz novog `user_xp` filtriranog po language.
-- "Brze metrike" (završene vežbe, dan u nizu) — računati iz activities filtriranih po language.
-
----
-
-## Tehnički sažetak izmena
-
-**Baza (1 migracija):**
-- ALTER `user_xp` add language + nov composite unique.
-- DROP/CREATE `award_xp(_user_id, _points, _check_daily_bonus, _language)`.
-
-**Frontend (~12 fajlova):**
-- Hookovi: `logActivity.ts`, `logErrors.ts` (signatura + insert).
-- Stranice: VocabularyPage, TalkPage, WritingPage, ProgressPage, DashboardPage, AuthPage, Index, SelectTeacherPage, MyLessonsPage.
-- Komponente: WeeklyDigest, XpProgressCard, GrammarHistoryTab, GrammarProgressTab.
-
-**Edge functions:** provera/dopuna `language` parametra u `talk-ai`, `vocabulary-ai`, `writing-correct`.
-
----
-
-## Šta NIJE u obimu
-
-- Prevod kompletnog UI-ja na engleski (UI ostaje srpski po dosadašnjoj politici).
-- Seed engleskih nastavnika.
-- Per-language onboarding (CEFR po jeziku).
-- Migracija postojećih norveških podataka (ostaju kao `'no'`).
+## Out of scope
+- Re-localizing UI labels in the Talk page.
+- Adding life_context / focus_area to grammar / writing / reading / vocabulary edge functions (can follow as a separate pass if you want).
+- Multi-select life_context — onboarding stores a single value today.

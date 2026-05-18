@@ -389,6 +389,8 @@ export default function PracticePage() {
             name: profile.name,
             level: profile.level,
             learning_goal: profile.learning_goal,
+            focus_area: profile.focus_area,
+            life_context: profile.life_context,
           },
           settings: {
             situation: situationPresets.find((s) => s.value === situation)?.label,
@@ -496,6 +498,8 @@ export default function PracticePage() {
             name: profile.name,
             level: profile.level,
             learning_goal: profile.learning_goal,
+            focus_area: profile.focus_area,
+            life_context: profile.life_context,
           },
         }),
       });

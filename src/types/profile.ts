@@ -6,6 +6,7 @@ export interface UserProfile {
   focus_area: string;
   confidence_level: number;
   lives_in_norway: boolean;
+  life_context?: string;
 }
 
 export const defaultProfile: UserProfile = {
@@ -16,4 +17,5 @@ export const defaultProfile: UserProfile = {
   focus_area: "govor",
   confidence_level: 3,
   lives_in_norway: false,
+  life_context: "",
 };

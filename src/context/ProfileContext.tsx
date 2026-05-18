@@ -38,7 +38,7 @@ export function ProfileProvider({ children }: { children: ReactNode }) {
             .maybeSingle(),
           supabase
             .from("language_profiles")
-            .select("level, learning_goal, focus_area, confidence_level, preferred_tone, lives_in_norway")
+            .select("level, learning_goal, focus_area, confidence_level, preferred_tone, lives_in_norway, life_context")
             .eq("user_id", user.id)
             .eq("language", code)
             .maybeSingle(),
@@ -52,6 +52,7 @@ export function ProfileProvider({ children }: { children: ReactNode }) {
           focus_area: lp?.focus_area || defaultProfile.focus_area,
           confidence_level: lp?.confidence_level ?? defaultProfile.confidence_level,
           lives_in_norway: lp?.lives_in_norway ?? defaultProfile.lives_in_norway,
+          life_context: lp?.life_context || "",
         };
         setProfile(dbProfile);
         localStorage.setItem("norskly_profile", JSON.stringify(dbProfile));

@@ -44,7 +44,8 @@ Deno.serve(async (req) => {
       });
     }
 
-    const { action, messages: rawMessages, profile, settings } = await req.json();
+    const { action, messages: rawMessages, profile, settings, language: rawLanguage } = await req.json();
+    const language = (typeof rawLanguage === "string" && ["no", "en", "de"].includes(rawLanguage)) ? rawLanguage : "no";
 
     // Input validation: cap messages count/size and whitelist roles to prevent
     // prompt injection (e.g., injected system messages) and cost amplification.
@@ -133,15 +134,97 @@ PRAVILA za povratnu informaciju:
 
 Objašnjenja piši jednostavno na srpskom, bez lingvističkog žargona.`;
 
+    // ── Personalization helpers (focus_area + life_context) ──
+    const focusArea = (profile?.focus_area || "").toString().toLowerCase().trim();
+    const lifeContext = (profile?.life_context || "").toString().toLowerCase().trim();
+
+    const enFocusMap: Record<string, string> = {
+      "govor": "prioritize natural spoken phrasing, contractions, and conversational fillers",
+      "speaking": "prioritize natural spoken phrasing, contractions, and conversational fillers",
+      "pisanje": "favor a written register, full sentences, punctuation and paragraph flow",
+      "writing": "favor a written register, full sentences, punctuation and paragraph flow",
+      "gramatika": "weave one targeted grammar reminder into each correction",
+      "grammar": "weave one targeted grammar reminder into each correction",
+      "vokabular": "introduce 1–2 fresh on-topic words per reply and reuse them in context",
+      "vocabulary": "introduce 1–2 fresh on-topic words per reply and reuse them in context",
+      "izgovor": "flag tricky sounds, stress patterns and intonation when relevant",
+      "pronunciation": "flag tricky sounds, stress patterns and intonation when relevant",
+    };
+    const enLifeMap: Record<string, string> = {
+      "travel": "airports, hotels, directions, ordering food, sightseeing",
+      "business english": "meetings, email phrasing, polite assertiveness, negotiation",
+      "business": "meetings, email phrasing, polite assertiveness, negotiation",
+      "job interviews": "STAR answers, professional self-introduction, common interview questions",
+      "interviews": "STAR answers, professional self-introduction, common interview questions",
+      "movies and series": "idioms, slang, pop-culture references",
+      "movies": "idioms, slang, pop-culture references",
+      "everyday communication": "small talk, daily routines, casual conversations",
+      "everyday": "small talk, daily routines, casual conversations",
+      "social media and internet": "casual tone, common abbreviations, online etiquette",
+      "social media": "casual tone, common abbreviations, online etiquette",
+      "studies abroad": "academic vocabulary, campus life, course registration",
+      "studies": "academic vocabulary, campus life, course registration",
+    };
+
+    const enFocusLine = focusArea && enFocusMap[focusArea]
+      ? `Learner's focus area is "${focusArea}" — ${enFocusMap[focusArea]}.`
+      : focusArea ? `Learner's focus area is "${focusArea}" — adapt examples and corrections accordingly.` : "";
+    const enLifeLine = lifeContext && enLifeMap[lifeContext]
+      ? `Anchor scenarios and vocabulary in the learner's real-life context: ${lifeContext} (${enLifeMap[lifeContext]}).`
+      : lifeContext ? `Anchor scenarios and vocabulary in the learner's real-life context: ${lifeContext}.` : "";
+
+    const noFocusLine = focusArea ? `Korisnikova fokusna oblast je "${focusArea}" — prilagodi primere i ispravke tome.` : "";
+    const noLifeLine = lifeContext ? `Vezuj situacije i vokabular za stvarni kontekst korisnika: ${lifeContext}.` : "";
+
     // ── CHAT action ──
     if (action === "chat") {
       const situationCtx = settings?.situation ? `Situacija: ${settings.situation}.` : "";
       const formalityCtx = settings?.formality ? `Formalnost: ${settings.formality}.` : "";
       const roleCtx = settings?.role ? `Tvoja uloga u razgovoru: ${settings.role}.` : "";
 
-      const systemPrompt = `Ti si AI sagovornik za vežbanje norveškog jezika (Bokmål).
+      const enSituation = settings?.situation ? `Situation: ${settings.situation}.` : "";
+      const enFormality = settings?.formality ? `Formality: ${settings.formality}.` : "";
+      const enRole = settings?.role ? `Your role in the conversation: ${settings.role}.` : "";
+
+      const englishPrompt = `You are an AI English tutor having a natural conversation with ${profile?.name || "the learner"} at CEFR level ${profile?.level || "A1"}. Learning goal: ${profile?.learning_goal || "everyday communication"}.
+${enSituation} ${enFormality} ${enRole}
+${enFocusLine}
+${enLifeLine}
+
+RULES:
+1. Reply using EXACTLY the section format below. Each section starts with its tag on a new line.
+2. Stay inside the requested situation, formality and role.
+3. Be natural, warm and encouraging.
+4. The student's UI language is Serbian — write explanations, corrections and feedback in Serbian. Only the [RESPONSE] section and the English example words/phrases are in English.
+
+RESPONSE FORMAT (use these tags EXACTLY):
+
+[ODGOVOR]
+A natural English reply suitable for CEFR ${profile?.level || "A1"}. No explanations, just English text. Keep it 1–3 sentences.
+
+[VOKABULAR]
+List 3–5 useful words or phrases from your reply, each anchored in the learner's life context when possible. Format:
+- **english word/phrase** — srpski prevod
+
+[ISPRAVKE]
+If the user made mistakes, correct them briefly. Format:
+- ❌ wrong → ✅ correct (kratko objašnjenje na srpskom)
+If no mistakes: "Nema grešaka, odlično! ✓"
+
+[POVRATNA INFORMACIJA]
+1–2 rečenice na srpskom: gramatika, jasnoća, prirodnost.
+
+[SLEDEĆI KORAK]
+Jedan konkretan predlog na srpskom za nastavak razgovora, vezan za izabrani kontekst (${lifeContext || "opšti"}).
+
+IMPORTANT: Always include all 5 sections. Keep each section short.
+${qualityCheck}`;
+
+      const norwegianPrompt = `Ti si AI sagovornik za vežbanje norveškog jezika (Bokmål).
 Korisnik se zove ${profile?.name || "korisnik"}, nivo je ${profile?.level || "A1"}, cilj učenja: ${profile?.learning_goal || "svakodnevna komunikacija"}.
 ${situationCtx} ${formalityCtx} ${roleCtx}
+${noFocusLine}
+${noLifeLine}
 
 PRAVILA:
 1. Odgovaraj koristeći TAČNO ovaj format sa sekcijama. Svaka sekcija počinje oznakom na novom redu.
@@ -170,6 +253,8 @@ Jedan konkretan predlog za nastavak razgovora na srpskom (npr. "Probaj da pitaš
 
 VAŽNO: Uvek koristi sve 5 sekcija. Drži svaku sekciju kratkom.
 ${qualityCheck}`;
+
+      const systemPrompt = language === "en" ? englishPrompt : norwegianPrompt;
 
       const response = await fetch(GATEWAY_URL, {
         method: "POST",
@@ -212,8 +297,12 @@ ${qualityCheck}`;
 
     // ── RECAP action ──
     if (action === "recap") {
-      const systemPrompt = `Ti si nastavnik norveškog jezika. Analiziraj sledeći razgovor i napravi rezime sesije.
+      const recapLangLabel = language === "en" ? "engleskog" : language === "de" ? "nemačkog" : "norveškog";
+      const systemPrompt = `Ti si nastavnik ${recapLangLabel} jezika. Analiziraj sledeći razgovor i napravi rezime sesije.
 Korisnik se zove ${profile?.name || "korisnik"}, nivo je ${userLevel}. ${cefrFocus}
+${focusArea ? `Fokusna oblast korisnika: ${focusArea}. Istakni napredak i preporuke u toj oblasti.` : ""}
+${lifeContext ? `Stvarni kontekst korisnika: ${lifeContext}. Vezuj korisne fraze i sledeće korake za ovaj kontekst.` : ""}
+
 
 Odgovori ISKLJUČIVO u JSON formatu, bez markdown-a. Format:
 {
