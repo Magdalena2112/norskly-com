@@ -29,7 +29,7 @@ export const LANGUAGES: LanguageConfig[] = [
     heroTitle: "Uči engleski uz AI i podršku profesora.",
     heroSubtitle:
       "Vežbaj engleski kroz realne razgovore, pametne lekcije i podršku iskusnih profesora.",
-    available: false,
+    available: true,
   },
   {
     slug: "nemacki",

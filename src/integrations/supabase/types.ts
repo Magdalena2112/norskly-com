@@ -19,6 +19,7 @@ export type Database = {
           created_at: string
           dedup_key: string | null
           id: string
+          language: string
           module: string
           payload: Json | null
           points: number
@@ -29,6 +30,7 @@ export type Database = {
           created_at?: string
           dedup_key?: string | null
           id?: string
+          language?: string
           module: string
           payload?: Json | null
           points?: number
@@ -39,6 +41,7 @@ export type Database = {
           created_at?: string
           dedup_key?: string | null
           id?: string
+          language?: string
           module?: string
           payload?: Json | null
           points?: number
@@ -52,6 +55,7 @@ export type Database = {
           created_at: string
           duration_minutes: number
           id: string
+          language: string
           start_time: string
           status: string
           teacher_id: string | null
@@ -60,6 +64,7 @@ export type Database = {
           created_at?: string
           duration_minutes?: number
           id?: string
+          language?: string
           start_time: string
           status?: string
           teacher_id?: string | null
@@ -68,6 +73,7 @@ export type Database = {
           created_at?: string
           duration_minutes?: number
           id?: string
+          language?: string
           start_time?: string
           status?: string
           teacher_id?: string | null
@@ -211,6 +217,7 @@ export type Database = {
           example_correct: string
           example_wrong: string
           id: string
+          language: string
           module: string
           severity: number
           source_type: string
@@ -225,6 +232,7 @@ export type Database = {
           example_correct: string
           example_wrong: string
           id?: string
+          language?: string
           module: string
           severity?: number
           source_type: string
@@ -239,6 +247,7 @@ export type Database = {
           example_correct?: string
           example_wrong?: string
           id?: string
+          language?: string
           module?: string
           severity?: number
           source_type?: string
@@ -252,6 +261,7 @@ export type Database = {
           correct_answers: Json
           created_at: string
           id: string
+          language: string
           questions: Json
           score: number
           session_type: string
@@ -264,6 +274,7 @@ export type Database = {
           correct_answers?: Json
           created_at?: string
           id?: string
+          language?: string
           questions?: Json
           score?: number
           session_type?: string
@@ -276,6 +287,7 @@ export type Database = {
           correct_answers?: Json
           created_at?: string
           id?: string
+          language?: string
           questions?: Json
           score?: number
           session_type?: string
@@ -292,6 +304,7 @@ export type Database = {
           created_at: string
           explanations: string | null
           id: string
+          language: string
           topic: string
           user_id: string
           user_text: string
@@ -301,6 +314,7 @@ export type Database = {
           created_at?: string
           explanations?: string | null
           id?: string
+          language?: string
           topic: string
           user_id: string
           user_text: string
@@ -310,6 +324,7 @@ export type Database = {
           created_at?: string
           explanations?: string | null
           id?: string
+          language?: string
           topic?: string
           user_id?: string
           user_text?: string
@@ -377,6 +392,7 @@ export type Database = {
           created_at: string
           end_time: string
           id: string
+          language: string
           lesson_type_id: string | null
           share_analytics: boolean
           slot_id: string
@@ -390,6 +406,7 @@ export type Database = {
           created_at?: string
           end_time: string
           id?: string
+          language?: string
           lesson_type_id?: string | null
           share_analytics?: boolean
           slot_id: string
@@ -403,6 +420,7 @@ export type Database = {
           created_at?: string
           end_time?: string
           id?: string
+          language?: string
           lesson_type_id?: string | null
           share_analytics?: boolean
           slot_id?: string
@@ -497,6 +515,7 @@ export type Database = {
           exercises: Json
           feedback: Json
           id: string
+          language: string
           length: string
           level: string
           score: number
@@ -515,6 +534,7 @@ export type Database = {
           exercises?: Json
           feedback?: Json
           id?: string
+          language?: string
           length: string
           level: string
           score?: number
@@ -533,6 +553,7 @@ export type Database = {
           exercises?: Json
           feedback?: Json
           id?: string
+          language?: string
           length?: string
           level?: string
           score?: number
@@ -552,6 +573,7 @@ export type Database = {
           created_at: string
           explanation_data: Json
           id: string
+          language: string
           query: string
           title: string
           user_id: string
@@ -560,6 +582,7 @@ export type Database = {
           created_at?: string
           explanation_data?: Json
           id?: string
+          language?: string
           query: string
           title: string
           user_id: string
@@ -568,6 +591,7 @@ export type Database = {
           created_at?: string
           explanation_data?: Json
           id?: string
+          language?: string
           query?: string
           title?: string
           user_id?: string
@@ -644,6 +668,7 @@ export type Database = {
           created_at: string
           formality: string
           id: string
+          language: string
           message_count: number
           messages: Json
           points: number
@@ -658,6 +683,7 @@ export type Database = {
           created_at?: string
           formality?: string
           id?: string
+          language?: string
           message_count?: number
           messages?: Json
           points?: number
@@ -672,6 +698,7 @@ export type Database = {
           created_at?: string
           formality?: string
           id?: string
+          language?: string
           message_count?: number
           messages?: Json
           points?: number
@@ -783,6 +810,7 @@ export type Database = {
           id: string
           is_active: boolean
           is_verified: boolean
+          language: string
           meet_link: string | null
           name: string
           photo_url: string | null
@@ -800,6 +828,7 @@ export type Database = {
           id?: string
           is_active?: boolean
           is_verified?: boolean
+          language?: string
           meet_link?: string | null
           name: string
           photo_url?: string | null
@@ -817,6 +846,7 @@ export type Database = {
           id?: string
           is_active?: boolean
           is_verified?: boolean
+          language?: string
           meet_link?: string | null
           name?: string
           photo_url?: string | null
@@ -882,6 +912,7 @@ export type Database = {
           created_at: string
           examples: Json | null
           id: string
+          language: string
           status: string
           synonym: string | null
           theme: string
@@ -894,6 +925,7 @@ export type Database = {
           created_at?: string
           examples?: Json | null
           id?: string
+          language?: string
           status?: string
           synonym?: string | null
           theme: string
@@ -906,6 +938,7 @@ export type Database = {
           created_at?: string
           examples?: Json | null
           id?: string
+          language?: string
           status?: string
           synonym?: string | null
           theme?: string
@@ -922,6 +955,7 @@ export type Database = {
           example_sentence: string | null
           grammar_forms: Json | null
           id: string
+          language: string
           synonym: string | null
           topic: string
           translation: string
@@ -935,6 +969,7 @@ export type Database = {
           example_sentence?: string | null
           grammar_forms?: Json | null
           id?: string
+          language?: string
           synonym?: string | null
           topic?: string
           translation?: string
@@ -948,6 +983,7 @@ export type Database = {
           example_sentence?: string | null
           grammar_forms?: Json | null
           id?: string
+          language?: string
           synonym?: string | null
           topic?: string
           translation?: string
@@ -962,6 +998,7 @@ export type Database = {
           created_at: string
           description: string | null
           id: string
+          language: string
           name: string
           user_id: string
         }
@@ -969,6 +1006,7 @@ export type Database = {
           created_at?: string
           description?: string | null
           id?: string
+          language?: string
           name: string
           user_id: string
         }
@@ -976,6 +1014,7 @@ export type Database = {
           created_at?: string
           description?: string | null
           id?: string
+          language?: string
           name?: string
           user_id?: string
         }
@@ -989,6 +1028,7 @@ export type Database = {
           exercise_type: string
           id: string
           image_path: string | null
+          language: string
           level: string | null
           original_text: string
           updated_at: string
@@ -1002,6 +1042,7 @@ export type Database = {
           exercise_type: string
           id?: string
           image_path?: string | null
+          language?: string
           level?: string | null
           original_text?: string
           updated_at?: string
@@ -1015,6 +1056,7 @@ export type Database = {
           exercise_type?: string
           id?: string
           image_path?: string | null
+          language?: string
           level?: string | null
           original_text?: string
           updated_at?: string

@@ -42,10 +42,18 @@ interface QuizQuestion {
 }
 
 // ─── AI call helper ───
+// Reads the user's currently selected learning language from localStorage and
+// forwards it to the grammar-ai edge function so prompts adapt automatically.
+function currentLanguageCode(): "no" | "en" | "de" {
+  const slug = typeof window !== "undefined" ? localStorage.getItem("norskly_selected_language") : null;
+  if (slug === "engleski") return "en";
+  if (slug === "nemacki") return "de";
+  return "no";
+}
 async function callGrammarAI(body: Record<string, unknown>) {
   const { data: { session } } = await supabase.auth.getSession();
   const res = await supabase.functions.invoke("grammar-ai", {
-    body,
+    body: { ...body, language: (body as any).language ?? currentLanguageCode() },
     headers: { Authorization: `Bearer ${session?.access_token}` },
   });
   if (res.error) throw new Error(res.error.message || "AI request failed");
@@ -170,11 +178,12 @@ function ExercisesTab({ level, userId, initialTopic, onGoToExplain }: { level: s
       // Fetch previous sentences to avoid repetition
       let previousSentences: string[] = [];
       if (userId) {
-        const { data: pastSessions } = await supabase
+        const { data: pastSessions } = await (supabase
           .from("grammar_sessions")
           .select("questions")
           .eq("user_id", userId)
-          .eq("topic", topic.trim())
+          .eq("topic", topic.trim()) as any)
+          .eq("language", currentLanguageCode())
           .order("created_at", { ascending: false })
           .limit(5);
         if (pastSessions) {
@@ -262,6 +271,7 @@ function ExercisesTab({ level, userId, initialTopic, onGoToExplain }: { level: s
         correct_answers: exercises.map((e) => e.solution),
         score: correctCount,
         total: states.length,
+        language: currentLanguageCode(),
       } as any).then(() => {});
       setExerciseXpLogged(true);
     }
@@ -1149,6 +1159,7 @@ function QuizTab({ level, userId, initialTopic }: { level: string; userId?: stri
           correct_answers: questions.map((q) => q.options[q.correct]),
           score: finalScore,
           total: questions.length,
+          language: currentLanguageCode(),
         } as any);
         setLogged(true);
       }
