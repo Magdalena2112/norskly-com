@@ -55,8 +55,11 @@ type EvalResult = {
   results: Array<{
     id: number;
     is_correct: boolean;
+    verdict?: "correct" | "partial" | "incorrect";
     user_answer: string;
     correct_answer: string;
+    suggested_answer?: string;
+    language_correction?: string;
     explanation: string;
     feedback: string;
   }>;
