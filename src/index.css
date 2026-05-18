@@ -45,8 +45,16 @@
     --cream: 36 45% 95%;
     --beige: 32 35% 88%;
 
+    /* Norwegian atmosphere accents */
+    --fjord: 205 35% 52%;            /* muted fjord blue */
+    --fjord-deep: 210 40% 32%;
+    --forest: 145 22% 42%;           /* soft forest green */
+    --sunset: 18 75% 78%;            /* warm sunset peach */
+    --mist: 200 25% 88%;
+
     --shadow-soft: 0 10px 40px -15px hsl(350 40% 20% / 0.15);
     --shadow-card: 0 4px 24px -8px hsl(350 40% 20% / 0.10);
+    --shadow-postcard: 0 12px 36px -10px hsl(350 40% 20% / 0.18), 0 2px 6px -2px hsl(350 40% 20% / 0.12);
 
     /* Legacy nordic tokens (kept for other pages) */
     --nordic-warm: 32 35% 92%;
