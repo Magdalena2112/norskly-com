@@ -57,7 +57,7 @@ Vrati ISKLJUČIVO JSON sa sledećim poljima:
   ]
 }
 
-Sva objašnjenja na srpskom (latinica). Sav norveški tekst na Bokmålu. Nemoj izmišljati greške ako ih nema.`;
+Sva objašnjenja na srpskom (latinica). Sav tekst u "corrected_text" na ${targetNative}. Nemoj izmišljati greške ako ih nema.`;
 }
 
 Deno.serve(async (req) => {
