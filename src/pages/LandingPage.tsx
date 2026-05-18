@@ -115,8 +115,8 @@ export default function LandingPage() {
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
       {/* ============== NAV ============== */}
       <nav className="fixed top-0 inset-x-0 z-50 backdrop-blur-md bg-background/80 border-b border-border/60">
-        <div className="container flex items-center justify-between h-16">
-          <span className="text-2xl font-display font-black tracking-tight text-primary">Norskly</span>
+        <div className="container flex items-center justify-between h-14 sm:h-16">
+          <span className="text-xl sm:text-2xl font-display font-black tracking-tight text-primary">Norskly</span>
           <div className="hidden md:flex items-center gap-8 text-sm font-medium text-foreground/80">
             <a href="#features" className="hover:text-primary transition-colors">Platforma</a>
             <a href="#teachers" className="hover:text-primary transition-colors">Za učenike</a>
@@ -124,9 +124,9 @@ export default function LandingPage() {
             <a href="#pricing" className="hover:text-primary transition-colors">Kako učiš</a>
             <a href="#faq" className="hover:text-primary transition-colors">FAQ</a>
           </div>
-          <div className="flex items-center gap-2">
-            <Button variant="ghost" size="sm" onClick={() => navigate("/auth")}>Prijava</Button>
-            <Button size="sm" className="rounded-full bg-primary hover:bg-primary/90" onClick={() => document.getElementById("languages")?.scrollIntoView({ behavior: "smooth" })}>
+          <div className="flex items-center gap-1.5 sm:gap-2">
+            <Button variant="ghost" size="sm" className="hidden sm:inline-flex" onClick={() => navigate("/auth")}>Prijava</Button>
+            <Button size="sm" className="rounded-full bg-primary hover:bg-primary/90 px-3 sm:px-4 text-xs sm:text-sm" onClick={() => document.getElementById("languages")?.scrollIntoView({ behavior: "smooth" })}>
               Započni besplatno
             </Button>
           </div>
