@@ -15,6 +15,7 @@ import OnboardingPage from "./pages/OnboardingPage";
 import DashboardPage from "./pages/DashboardPage";
 import GrammarPage from "./pages/GrammarPage";
 import VocabularyPage from "./pages/VocabularyPage";
+import WritingPage from "./pages/WritingPage";
 import TalkPage from "./pages/TalkPage";
 import ProgressPage from "./pages/ProgressPage";
 import TeacherProfilePage from "./pages/TeacherProfilePage";
@@ -58,6 +59,7 @@ const App = () => (
               <Route path="/ucenje/:slug" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />
               <Route path="/grammar" element={<ProtectedRoute><GrammarPage /></ProtectedRoute>} />
               <Route path="/vocabulary" element={<ProtectedRoute><VocabularyPage /></ProtectedRoute>} />
+              <Route path="/writing" element={<ProtectedRoute><WritingPage /></ProtectedRoute>} />
               <Route path="/talk" element={<ProtectedRoute><TalkPage /></ProtectedRoute>} />
               <Route path="/progress" element={<ProtectedRoute><ProgressPage /></ProtectedRoute>} />
               <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
