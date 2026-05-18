@@ -367,29 +367,19 @@ export default function ReadingPage() {
                   );
                 })()}
 
-                <Card className="hidden">
-                  <CardContent className="pt-5 space-y-4">
-                    {reading.exercises.map((ex, idx) => null)}
-
-                    {!result ? (
-                      <Button onClick={submitAnswers} disabled={evaluating} variant="hero" className="w-full">
-                        {evaluating ? <><Loader2 className="w-4 h-4 mr-2 animate-spin" />Proveravam…</> : "Pošalji odgovore"}
-                      </Button>
-                    ) : (
-                      <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="rounded-2xl bg-primary/5 border border-primary/20 p-4 space-y-2">
-                        <div className="flex items-center justify-between">
-                          <div className="font-display text-lg text-primary">Rezultat: {result.score} / {result.total}</div>
-                          <Badge className="bg-sunset text-cream">+{xpEarned} XP</Badge>
-                        </div>
-                        {result.overall_feedback && <p className="text-sm text-foreground">{result.overall_feedback}</p>}
-                        {result.vocabulary_feedback && <p className="text-xs text-muted-foreground italic">{result.vocabulary_feedback}</p>}
-                        <Button variant="outline" size="sm" onClick={() => { setReading(null); setResult(null); setAnswers({}); }}>
-                          Novi tekst
-                        </Button>
-                      </motion.div>
-                    )}
-                  </CardContent>
-                </Card>
+                {result && (
+                  <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="rounded-2xl bg-primary/5 border border-primary/20 p-4 space-y-2">
+                    <div className="flex items-center justify-between">
+                      <div className="font-display text-lg text-primary">Rezultat: {result.score} / {result.total}</div>
+                      <Badge className="bg-sunset text-cream">+{xpEarned} XP</Badge>
+                    </div>
+                    {result.overall_feedback && <p className="text-sm text-foreground">{result.overall_feedback}</p>}
+                    {result.vocabulary_feedback && <p className="text-xs text-muted-foreground italic">{result.vocabulary_feedback}</p>}
+                    <Button variant="outline" size="sm" onClick={() => { setReading(null); setResult(null); setAnswers({}); }}>
+                      Novi tekst
+                    </Button>
+                  </motion.div>
+                )}
               </>
             )}
           </TabsContent>
