@@ -107,7 +107,7 @@ Deno.serve(async (req) => {
       body: JSON.stringify({
         model: "google/gemini-2.5-flash",
         messages: [
-          { role: "system", content: buildSystem(level, hasImage) },
+          { role: "system", content: buildSystem(level, hasImage, langCode, personalizationLine) },
           { role: "user", content: `Analiziraj ovaj tekst:\n\n${text}` },
         ],
         response_format: { type: "json_object" },
