@@ -1,0 +1,124 @@
+import { useEffect, useState } from "react";
+import StudentLayout from "@/components/student/StudentLayout";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
+import { useAuth } from "@/context/AuthContext";
+import { useProfile } from "@/context/ProfileContext";
+import { supabase } from "@/integrations/supabase/client";
+import { format } from "date-fns";
+import { Mail, Calendar, Languages, CreditCard, Target, GraduationCap, Zap } from "lucide-react";
+
+const PLAN_LABELS: Record<string, string> = {
+  self: "Samostalno učenje",
+  guided: "Učenje sa profesorom",
+  premium: "Premium",
+  free: "Besplatno",
+};
+
+export default function ProfilePage() {
+  const { user } = useAuth();
+  const { profile } = useProfile();
+  const [registeredAt, setRegisteredAt] = useState<string | null>(null);
+  const [preferredLanguage, setPreferredLanguage] = useState<string | null>(null);
+  const [subscription, setSubscription] = useState<string | null>(null);
+  const [xp, setXp] = useState<{ total_xp: number; level: number } | null>(null);
+
+  useEffect(() => {
+    if (!user) return;
+    (async () => {
+      const [{ data: p }, { data: x }] = await Promise.all([
+        supabase
+          .from("profiles")
+          .select("created_at, preferred_language, subscription_type")
+          .eq("user_id", user.id)
+          .maybeSingle(),
+        supabase.from("user_xp").select("total_xp, level").eq("user_id", user.id).maybeSingle(),
+      ]);
+      setRegisteredAt(p?.created_at || user.created_at || null);
+      setPreferredLanguage(p?.preferred_language || localStorage.getItem("norskly_selected_language"));
+      setSubscription(p?.subscription_type || localStorage.getItem("norskly_selected_plan"));
+      setXp(x || { total_xp: 0, level: 1 });
+    })();
+  }, [user]);
+
+  const initials = (profile.name || user?.email || "U")
+    .split(" ")
+    .map((s) => s[0])
+    .slice(0, 2)
+    .join("")
+    .toUpperCase();
+
+  const Row = ({ icon: Icon, label, value }: { icon: any; label: string; value: React.ReactNode }) => (
+    <div className="flex items-start gap-3 py-3 border-b border-border/40 last:border-0">
+      <Icon className="w-4 h-4 mt-0.5 text-muted-foreground shrink-0" />
+      <div className="flex-1 min-w-0">
+        <p className="text-xs text-muted-foreground">{label}</p>
+        <p className="text-sm font-medium text-foreground break-words">{value || "—"}</p>
+      </div>
+    </div>
+  );
+
+  return (
+    <StudentLayout title="Profil">
+      <div className="container max-w-3xl py-8 space-y-6">
+        <Card className="bg-background/90 backdrop-blur-sm border-border/30">
+          <CardContent className="pt-6 flex items-center gap-4">
+            <Avatar className="w-16 h-16 ring-2 ring-accent">
+              <AvatarFallback className="bg-primary text-primary-foreground font-display text-xl">
+                {initials}
+              </AvatarFallback>
+            </Avatar>
+            <div className="flex-1 min-w-0">
+              <h2 className="text-xl font-display font-bold text-foreground truncate">
+                {profile.name || "Bez imena"}
+              </h2>
+              <p className="text-sm text-muted-foreground truncate">{user?.email}</p>
+              <div className="flex flex-wrap gap-2 mt-2">
+                <Badge variant="secondary">{profile.level}</Badge>
+                {subscription && <Badge variant="outline">{PLAN_LABELS[subscription] || subscription}</Badge>}
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className="bg-background/90 backdrop-blur-sm border-border/30">
+          <CardHeader>
+            <CardTitle className="text-base">Osnovne informacije</CardTitle>
+            <CardDescription>Detalji o tvom Norskly nalogu.</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Row icon={Mail} label="Email" value={user?.email} />
+            <Row
+              icon={Calendar}
+              label="Datum registracije"
+              value={registeredAt ? format(new Date(registeredAt), "dd.MM.yyyy") : "—"}
+            />
+            <Row icon={Languages} label="Jezik koji učiš" value={preferredLanguage || "norveški"} />
+            <Row
+              icon={CreditCard}
+              label="Aktuelni plan"
+              value={subscription ? PLAN_LABELS[subscription] || subscription : "—"}
+            />
+          </CardContent>
+        </Card>
+
+        <Card className="bg-background/90 backdrop-blur-sm border-border/30">
+          <CardHeader>
+            <CardTitle className="text-base">Učenje</CardTitle>
+            <CardDescription>Ciljevi i napredak iz onboarding-a.</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Row icon={Target} label="Cilj učenja" value={profile.learning_goal} />
+            <Row icon={GraduationCap} label="Trenutni nivo" value={profile.level} />
+            <Row
+              icon={Zap}
+              label="XP sažetak"
+              value={xp ? `Nivo ${xp.level} · ${xp.total_xp} XP` : "—"}
+            />
+          </CardContent>
+        </Card>
+      </div>
+    </StudentLayout>
+  );
+}
