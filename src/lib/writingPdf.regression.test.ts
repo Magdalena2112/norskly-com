@@ -101,9 +101,9 @@ const calls = shared.calls;
 import { generateWritingPdf, type WritingPdfPayload } from "./writingPdf";
 
 beforeEach(() => {
-  calls.length = 0;
-  currentFontSize = 12;
-  currentCharSpace = 0;
+  shared.calls.length = 0;
+  shared.currentFontSize = 12;
+  shared.currentCharSpace = 0;
 });
 
 const SAMPLE_PAYLOAD: WritingPdfPayload = {
