@@ -32,13 +32,24 @@ interface CorrectionResult {
   _errors?: { category: string; topic: string; severity: number; example_wrong: string; example_correct: string }[];
 }
 
+interface VocabItem { word: string; translation: string; type?: string }
 interface ImageHelper {
-  vocabulary?: { word: string; translation: string; type?: string }[];
+  vocabulary?: VocabItem[];
+  vocabulary_groups?: Record<string, VocabItem[]>;
   expressions?: { no: string; sr: string }[];
   sentence_starters?: string[];
-  phrases_by_level?: { no: string; sr: string }[];
   description_hint?: string;
 }
+
+const VOCAB_GROUP_LABELS: Record<string, string> = {
+  imenice: "Imenice",
+  glagoli: "Glagoli",
+  pridevi: "Pridevi",
+  mesta_objekti: "Mesta i objekti",
+  ljudi_radnje: "Ljudi i radnje",
+  korisni_izrazi: "Korisni izrazi",
+};
+const VOCAB_GROUP_ORDER = ["imenice", "glagoli", "pridevi", "mesta_objekti", "ljudi_radnje", "korisni_izrazi"];
 
 interface WritingExercise {
   id: string;
