@@ -64,14 +64,13 @@ class FakeJsPDF {
 
   // Text — capture font size + char space at moment of draw
   text = vi.fn((...args: unknown[]) => {
-    calls.push({
+    const c = {
       method: "text",
       args,
-      // @ts-expect-error attaching for assertions
       _fontSize: currentFontSize,
-      // @ts-expect-error attaching for assertions
       _charSpace: currentCharSpace,
-    } as Call);
+    } as Call & { _fontSize: number; _charSpace: number };
+    calls.push(c);
   });
 
   // Width / wrap helpers — return reasonable approximations so the
