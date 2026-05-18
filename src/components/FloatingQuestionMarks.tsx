@@ -1,5 +1,35 @@
 import { motion, MotionValue, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+
+// Adaptive scale by viewport width: smaller screens → more blur, lower opacity,
+// smaller glyphs so marks remain decorative and never overwhelm the content.
+type Tier = { opacityMul: number; blurAdd: number; sizeMul: number };
+const tierFor = (w: number): Tier => {
+  if (w < 480) return { opacityMul: 0.45, blurAdd: 1.5, sizeMul: 0.55 };  // mobile
+  if (w < 768) return { opacityMul: 0.6,  blurAdd: 1.0, sizeMul: 0.7 };   // large mobile
+  if (w < 1024) return { opacityMul: 0.8, blurAdd: 0.5, sizeMul: 0.85 };  // tablet
+  if (w < 1440) return { opacityMul: 1.0, blurAdd: 0,   sizeMul: 1.0 };   // desktop
+  return { opacityMul: 1.1, blurAdd: 0, sizeMul: 1.1 };                   // wide
+};
+
+const useViewportTier = (): Tier => {
+  const [tier, setTier] = useState<Tier>(() =>
+    typeof window === "undefined" ? tierFor(1280) : tierFor(window.innerWidth)
+  );
+  useEffect(() => {
+    let raf = 0;
+    const onResize = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => setTier(tierFor(window.innerWidth)));
+    };
+    window.addEventListener("resize", onResize);
+    return () => {
+      window.removeEventListener("resize", onResize);
+      cancelAnimationFrame(raf);
+    };
+  }, []);
+  return tier;
+};
 
 type Mark = {
   top: string;
