@@ -667,8 +667,8 @@ export function generateWritingPdf(payload: WritingPdfPayload, filename = "norsk
     const entries = Object.entries(payload.nivo_analiza);
     const innerW = contentWidth - 36;
     const measure = () => entries.reduce((acc, [, v]) => {
-      const w = doc.splitTextToSize(String(v), innerW) as string[];
-      return acc + 16 + w.length * 12 + 6;
+      const w = wrap(String(v), innerW, 10);
+      return acc + 16 + w.length * 13 + 6;
     }, 0);
     renderCard(
       "Analiza po dimenzijama",
@@ -677,16 +677,15 @@ export function generateWritingPdf(payload: WritingPdfPayload, filename = "norsk
         const startY = y;
         entries.forEach(([k, v]) => {
           if (y + 28 > pageHeight - FOOTER_H - 10) newPage();
+          doc.setCharSpace(0);
           doc.setFont("helvetica", "bold");
           doc.setFontSize(10);
           doc.setTextColor(...PRIMARY);
           doc.text(NIVO_LABELS[k] || k.replace(/_/g, " "), margin + 18, y);
           y += 14;
-          doc.setFont("helvetica", "normal");
-          doc.setFontSize(10);
           doc.setTextColor(...INK);
-          const w = doc.splitTextToSize(String(v), innerW) as string[];
-          w.forEach((l) => { doc.text(l, margin + 18, y); y += 12; });
+          const w = wrap(String(v), innerW, 10);
+          w.forEach((l) => { doc.setCharSpace(0); doc.text(l, margin + 18, y); y += 13; });
           y += 6;
         });
         return y - startY;
