@@ -216,13 +216,13 @@ export default function LandingPage() {
       </section>
 
       {/* ============== MARQUEE ============== */}
-      <section className="py-6 bg-primary text-primary-foreground overflow-hidden border-y border-primary/20">
+      <section className="py-4 sm:py-6 bg-primary text-primary-foreground overflow-hidden border-y border-primary/20">
         <div className="flex whitespace-nowrap animate-marquee">
           {Array.from({ length: 2 }).map((_, j) => (
-            <div key={j} className="flex items-center gap-10 px-5">
+            <div key={j} className="flex items-center gap-6 sm:gap-10 px-4 sm:px-5">
               {Array.from({ length: 8 }).map((_, i) => (
-                <span key={i} className="text-display text-3xl md:text-4xl">
-                  Započni danas <span className="font-script mx-3 opacity-70">/</span>
+                <span key={i} className="text-display text-2xl md:text-4xl">
+                  Započni danas <span className="font-script mx-2 sm:mx-3 opacity-70">/</span>
                 </span>
               ))}
             </div>
