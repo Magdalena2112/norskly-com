@@ -575,12 +575,12 @@ export function generateWritingPdf(payload: WritingPdfPayload, filename = "norsk
   if (payload.sentence_starters && payload.sentence_starters.length) {
     const starters = payload.sentence_starters;
     const innerW = contentWidth - 36;
-    const lineH = 16;
+    const lineH = 15;
     const measureStarters = () => {
-      let h = 14; // hint line
+      let h = 16; // hint line
       starters.forEach((s) => {
-        const wrapped = doc.splitTextToSize(s, innerW - 18) as string[];
-        h += wrapped.length * lineH;
+        const wrapped = wrap(s, innerW - 18, 10.5);
+        h += wrapped.length * lineH + 2;
       });
       return h;
     };
@@ -589,24 +589,26 @@ export function generateWritingPdf(payload: WritingPdfPayload, filename = "norsk
       () => measureStarters(),
       (innerWidth) => {
         const startY = y;
-        doc.setFont("helvetica", "italic");
-        doc.setFontSize(9);
+        // hint
+        const hintLines = wrap("Dovrši rečenice svojim rečima.", innerW, 9, "italic");
         doc.setTextColor(...MUTED);
-        doc.text("Dovrši rečenice svojim rečima.", margin + 18, y);
-        y += 14;
-        doc.setFont("helvetica", "normal");
-        doc.setFontSize(10.5);
-        doc.setTextColor(...INK);
+        hintLines.forEach((l) => { doc.setCharSpace(0); doc.text(l, margin + 18, y); y += 12; });
+        y += 4;
         starters.forEach((s) => {
-          // bullet dash
+          const wrapped = wrap(s, innerW - 18, 10.5);
+          // bullet dash on first line
           doc.setTextColor(...PRIMARY);
+          doc.setFont("helvetica", "bold");
+          doc.setFontSize(10.5);
+          doc.setCharSpace(0);
           doc.text("—", margin + 18, y);
+          doc.setFont("helvetica", "normal");
           doc.setTextColor(...INK);
-          const wrapped = doc.splitTextToSize(s, innerW - 18) as string[];
           wrapped.forEach((l, idx) => {
+            doc.setCharSpace(0);
             doc.text(l, margin + 18 + 14, y + idx * lineH);
           });
-          y += wrapped.length * lineH;
+          y += wrapped.length * lineH + 2;
         });
         return y - startY;
       },
