@@ -60,6 +60,8 @@ const App = () => (
               <Route path="/vocabulary" element={<ProtectedRoute><VocabularyPage /></ProtectedRoute>} />
               <Route path="/talk" element={<ProtectedRoute><TalkPage /></ProtectedRoute>} />
               <Route path="/progress" element={<ProtectedRoute><ProgressPage /></ProtectedRoute>} />
+              <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
+              <Route path="/settings" element={<ProtectedRoute><SettingsPage /></ProtectedRoute>} />
               <Route path="/select-teacher" element={<ProtectedRoute><SelectTeacherPage /></ProtectedRoute>} />
               <Route path="/book-lesson" element={<ProtectedRoute><SelectTeacherPage /></ProtectedRoute>} />
               <Route path="/book-lesson/:teacherId" element={<ProtectedRoute><TeacherProfilePage /></ProtectedRoute>} />
