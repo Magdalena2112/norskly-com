@@ -1,18 +1,27 @@
 ## Cilj
 
-U gornjoj navigaciji dodati link "Za učenike" pored postojećeg "Za profesore" i da vodi na sekciju ekosistema (gde se nalaze obe kartice: Za studente / Za profesore).
+U sekciji "Ekosistem" (`#teachers`) dodati suptilnu pozadinsku ilustraciju inspirisanu priloženom slikom (kolaž profila glava sa šarama), ali u **warm editorial** paleti stranice — krem pozadina, duboka burgundy/plum, pastelna roze, sage zelena, blagi peach/terracotta akcenti. Bez fokusa na bilo koji konkretan jezik.
 
 ## Izmena
 
-U `src/pages/LandingPage.tsx` (NAV, oko linije 119–122):
+1. **Generisanje slike** (`imagegen--generate_image`, premium):
+   - Prompt: kolaž ljudskih siluetnih profila — različitih veličina i orijentacija, layered/overlapping, sa apstraktnim šarama (tačkice, talasi, mreže, kratke linije). Bez teksta i bez bilo kakvih zastava/jezičkih oznaka.
+   - Paleta: krem, duboka plum/burgundy, pastel roze, sage zelena, blagi terracotta — usklađeno sa postojećim warm editorial tokenima.
+   - Stil: editorial collage / cut-paper, papirna tekstura, smireno i sofisticirano (ne kičasto). Dobar kontrast u glavnim oblicima ali sa "vazduhom" oko ivica, pogodno za pozadinu.
+   - Format: `src/assets/ecosystem-collage.jpg`, široki format (1920×1024).
 
-- Dodati nov `<a>` link **"Za učenike"** ispred "Za profesore".
-- Oba linka vode na istu sekciju (`#teachers`), jer ona već sadrži obe strane ekosistema. Anchor ostaje `#teachers` da ne pravimo dvostruke id-jeve i postojeći link nastavlja da radi.
-- Redosled u navu: Platforma · **Za učenike** · Za profesore · Kako učiš · FAQ.
+2. **Integracija** u `src/pages/LandingPage.tsx`, u sekciji `<section id="teachers">`:
+   - Import slike na vrhu fajla.
+   - Sekcija dobija `relative overflow-hidden`.
+   - Dodati apsolutno pozicioniran `<div>` sa `background-image` (cover, center) iza sadržaja:
+     - `opacity` ~18–22% da bude suptilno.
+     - Soft mask: `[mask-image:radial-gradient(ellipse_at_center,black_55%,transparent_90%)]` za blagi vignette.
+     - Iznad slike dodatni overlay `bg-background/55` za čitljivost.
+   - `container` postaviti na `relative z-10`.
 
-Bez dodatnih izmena u sekciji ili stilovima — koristi se isti `text-sm font-medium hover:text-primary` stil kao ostali nav linkovi.
+3. Bez promene sadržaja kartica ili kopija.
 
 ## Šta NIJE u opsegu
 
-- Razdvajanje ekosistem sekcije na dva odvojena bloka/anchora.
-- Promene u mobilnom meniju (ne postoji eksplicitan mobile menu trenutno; linkovi su `hidden md:flex`).
+- Promena boja same sekcije, kartica ili tipografije.
+- Animacije pozadine ili parallax.
