@@ -173,6 +173,16 @@ export default function AdminTeacherApplicationDetailPage() {
           </p>
         </div>
 
+        {/* Experience */}
+        {app.experience && (
+          <div className="rounded-3xl border border-border bg-card p-6 md:p-8">
+            <h2 className="font-semibold text-foreground mb-3">Iskustvo u nastavi</h2>
+            <p className="text-sm text-foreground/80 whitespace-pre-wrap leading-relaxed">
+              {app.experience}
+            </p>
+          </div>
+        )}
+
         {/* CV */}
         <div className="rounded-3xl border border-border bg-card p-6 md:p-8">
           <h2 className="font-semibold text-foreground mb-3 inline-flex items-center gap-2">
