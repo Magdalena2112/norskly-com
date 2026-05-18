@@ -66,6 +66,27 @@ export function generateWritingPdf(payload: WritingPdfPayload, filename = "norsk
   const topY = HEADER_H + 26;
   let y = topY;
 
+  // Reset any tracking/letter-spacing globally — jsPDF can carry over charSpace which causes
+  // text to appear stretched. Keep at 0 for all paragraph rendering.
+  doc.setCharSpace(0);
+  doc.setLineHeightFactor(1.35);
+
+  // Safe wrapper around splitTextToSize that ALWAYS sets the font/size first
+  // so the wrapping width matches the actually-rendered glyph widths.
+  const wrap = (
+    text: string,
+    width: number,
+    size: number,
+    style: "normal" | "bold" | "italic" | "bolditalic" = "normal",
+  ): string[] => {
+    doc.setFont("helvetica", style);
+    doc.setFontSize(size);
+    doc.setCharSpace(0);
+    // Trim slightly so we never butt right against the card edge
+    const safeW = Math.max(20, width - 2);
+    return doc.splitTextToSize(text || "", safeW) as string[];
+  };
+
   // ─── Page background (cream paper) ───
   const paintBackground = () => {
     doc.setFillColor(...PAPER);
@@ -148,8 +169,7 @@ export function generateWritingPdf(payload: WritingPdfPayload, filename = "norsk
 
   // Measure helpers (don't mutate y)
   const measureWrapped = (text: string, width: number, fontSize: number, lineHeight: number) => {
-    doc.setFontSize(fontSize);
-    const lines = doc.splitTextToSize(text || "", width) as string[];
+    const lines = wrap(text, width, fontSize);
     return { lines, height: lines.length * lineHeight };
   };
 
@@ -203,12 +223,12 @@ export function generateWritingPdf(payload: WritingPdfPayload, filename = "norsk
     const size = opts.size ?? 10.5;
     const color = opts.color ?? INK;
     const style = opts.bold ? (opts.italic ? "bolditalic" : "bold") : opts.italic ? "italic" : "normal";
-    const lh = opts.lineHeight ?? size + 4;
-    doc.setFont("helvetica", style);
-    doc.setFontSize(size);
+    const lh = opts.lineHeight ?? Math.round(size * 1.45);
+    const lines = wrap(text, maxW, size, style as "normal" | "bold" | "italic" | "bolditalic");
     doc.setTextColor(...color);
-    const lines = doc.splitTextToSize(text || "", maxW) as string[];
     lines.forEach((line) => {
+      // Always render with default (untracked) spacing and no maxWidth/align (which can stretch)
+      doc.setCharSpace(0);
       doc.text(line, x, y);
       y += lh;
     });
@@ -344,10 +364,9 @@ export function generateWritingPdf(payload: WritingPdfPayload, filename = "norsk
     const innerW = contentWidth - 36;
     // Measure each mistake block
     const mistakeBlocks = payload.mistakes.map((m, i) => {
-      doc.setFont("helvetica", "bold");
-      const wrong = doc.splitTextToSize(m.original, innerW - 36) as string[];
-      const right = doc.splitTextToSize(`→ ${m.corrected}`, innerW - 36) as string[];
-      const expl = doc.splitTextToSize(m.explanation, innerW - 36) as string[];
+      const wrong = wrap(m.original, innerW - 36, 10.5, "bold");
+      const right = wrap(`→ ${m.corrected}`, innerW - 36, 10.5, "bold");
+      const expl = wrap(m.explanation || "", innerW - 36, 9.5, "normal");
       const h = 6 + wrong.length * 14 + right.length * 14 + (m.explanation ? expl.length * 13 + 4 : 0) + 12;
       return { i, m, wrong, right, expl, h };
     });
@@ -437,12 +456,12 @@ export function generateWritingPdf(payload: WritingPdfPayload, filename = "norsk
       let leftH = 0, rightH = 0;
       const half = Math.ceil(items.length / 2);
       lines.slice(0, half).forEach((l) => {
-        const w = doc.splitTextToSize(l, colW) as string[];
-        leftH += w.length * 12;
+        const w = wrap(l, colW, 9.5);
+        leftH += w.length * 13;
       });
       lines.slice(half).forEach((l) => {
-        const w = doc.splitTextToSize(l, colW) as string[];
-        rightH += w.length * 12;
+        const w = wrap(l, colW, 9.5);
+        rightH += w.length * 13;
       });
       return 18 + Math.max(leftH, rightH) + 8; // group header + body
     };
@@ -482,12 +501,12 @@ export function generateWritingPdf(payload: WritingPdfPayload, filename = "norsk
             let cy = y;
             arr.forEach((v) => {
               const line = `• ${v.word} — ${v.translation}`;
-              const wrapped = doc.splitTextToSize(line, colW) as string[];
+              const wrapped = wrap(line, colW, 9.5);
               wrapped.forEach((l, idx) => {
-                // Bold the word portion is non-trivial across wrap; keep uniform but use ink color
                 doc.setTextColor(...(idx === 0 ? INK : MUTED));
+                doc.setCharSpace(0);
                 doc.text(l, x, cy);
-                cy += 12;
+                cy += 13;
               });
             });
             return cy;
@@ -516,12 +535,12 @@ export function generateWritingPdf(payload: WritingPdfPayload, filename = "norsk
       const half = Math.ceil(expressionItems.length / 2);
       let leftH = 0, rightH = 0;
       expressionItems.slice(0, half).forEach((it) => {
-        const w = doc.splitTextToSize(`• ${it.left} — ${it.right}`, colW) as string[];
-        leftH += w.length * 12;
+        const w = wrap(`• ${it.left} — ${it.right}`, colW, 9.5);
+        leftH += w.length * 13;
       });
       expressionItems.slice(half).forEach((it) => {
-        const w = doc.splitTextToSize(`• ${it.left} — ${it.right}`, colW) as string[];
-        rightH += w.length * 12;
+        const w = wrap(`• ${it.left} — ${it.right}`, colW, 9.5);
+        rightH += w.length * 13;
       });
       return Math.max(leftH, rightH) + 4;
     };
@@ -533,14 +552,13 @@ export function generateWritingPdf(payload: WritingPdfPayload, filename = "norsk
         const half = Math.ceil(expressionItems.length / 2);
         const drawCol = (arr: typeof expressionItems, x: number) => {
           let cy = y;
-          doc.setFont("helvetica", "normal");
-          doc.setFontSize(9.5);
           arr.forEach((it) => {
-            const wrapped = doc.splitTextToSize(`• ${it.left} — ${it.right}`, colW) as string[];
+            const wrapped = wrap(`• ${it.left} — ${it.right}`, colW, 9.5);
             wrapped.forEach((l, idx) => {
               doc.setTextColor(...(idx === 0 ? INK : MUTED));
+              doc.setCharSpace(0);
               doc.text(l, x, cy);
-              cy += 12;
+              cy += 13;
             });
           });
           return cy;
@@ -557,12 +575,12 @@ export function generateWritingPdf(payload: WritingPdfPayload, filename = "norsk
   if (payload.sentence_starters && payload.sentence_starters.length) {
     const starters = payload.sentence_starters;
     const innerW = contentWidth - 36;
-    const lineH = 16;
+    const lineH = 15;
     const measureStarters = () => {
-      let h = 14; // hint line
+      let h = 16; // hint line
       starters.forEach((s) => {
-        const wrapped = doc.splitTextToSize(s, innerW - 18) as string[];
-        h += wrapped.length * lineH;
+        const wrapped = wrap(s, innerW - 18, 10.5);
+        h += wrapped.length * lineH + 2;
       });
       return h;
     };
@@ -571,24 +589,26 @@ export function generateWritingPdf(payload: WritingPdfPayload, filename = "norsk
       () => measureStarters(),
       (innerWidth) => {
         const startY = y;
-        doc.setFont("helvetica", "italic");
-        doc.setFontSize(9);
+        // hint
+        const hintLines = wrap("Dovrši rečenice svojim rečima.", innerW, 9, "italic");
         doc.setTextColor(...MUTED);
-        doc.text("Dovrši rečenice svojim rečima.", margin + 18, y);
-        y += 14;
-        doc.setFont("helvetica", "normal");
-        doc.setFontSize(10.5);
-        doc.setTextColor(...INK);
+        hintLines.forEach((l) => { doc.setCharSpace(0); doc.text(l, margin + 18, y); y += 12; });
+        y += 4;
         starters.forEach((s) => {
-          // bullet dash
+          const wrapped = wrap(s, innerW - 18, 10.5);
+          // bullet dash on first line
           doc.setTextColor(...PRIMARY);
+          doc.setFont("helvetica", "bold");
+          doc.setFontSize(10.5);
+          doc.setCharSpace(0);
           doc.text("—", margin + 18, y);
+          doc.setFont("helvetica", "normal");
           doc.setTextColor(...INK);
-          const wrapped = doc.splitTextToSize(s, innerW - 18) as string[];
           wrapped.forEach((l, idx) => {
+            doc.setCharSpace(0);
             doc.text(l, margin + 18 + 14, y + idx * lineH);
           });
-          y += wrapped.length * lineH;
+          y += wrapped.length * lineH + 2;
         });
         return y - startY;
       },
@@ -603,8 +623,8 @@ export function generateWritingPdf(payload: WritingPdfPayload, filename = "norsk
       payload.vocabulary_suggestions!.forEach((v) => {
         h += 16; // weak → better line
         if (v.why) {
-          const w = doc.splitTextToSize(v.why, innerW) as string[];
-          h += w.length * 12 + 4;
+          const w = wrap(v.why, innerW, 9.5, "italic");
+          h += w.length * 13 + 4;
         }
         h += 8;
       });
@@ -617,6 +637,7 @@ export function generateWritingPdf(payload: WritingPdfPayload, filename = "norsk
         const startY = y;
         payload.vocabulary_suggestions!.forEach((v) => {
           if (y + 30 > pageHeight - FOOTER_H - 10) newPage();
+          doc.setCharSpace(0);
           doc.setFont("helvetica", "bold");
           doc.setFontSize(10.5);
           doc.setTextColor(...DANGER);
@@ -630,11 +651,9 @@ export function generateWritingPdf(payload: WritingPdfPayload, filename = "norsk
           doc.text(v.better, margin + 18 + ww + 22, y);
           y += 14;
           if (v.why) {
-            doc.setFont("helvetica", "italic");
-            doc.setFontSize(9.5);
             doc.setTextColor(...MUTED);
-            const w = doc.splitTextToSize(v.why, innerW) as string[];
-            w.forEach((l) => { doc.text(l, margin + 18, y); y += 12; });
+            const w = wrap(v.why, innerW, 9.5, "italic");
+            w.forEach((l) => { doc.setCharSpace(0); doc.text(l, margin + 18, y); y += 13; });
           }
           y += 8;
         });
@@ -648,8 +667,8 @@ export function generateWritingPdf(payload: WritingPdfPayload, filename = "norsk
     const entries = Object.entries(payload.nivo_analiza);
     const innerW = contentWidth - 36;
     const measure = () => entries.reduce((acc, [, v]) => {
-      const w = doc.splitTextToSize(String(v), innerW) as string[];
-      return acc + 16 + w.length * 12 + 6;
+      const w = wrap(String(v), innerW, 10);
+      return acc + 16 + w.length * 13 + 6;
     }, 0);
     renderCard(
       "Analiza po dimenzijama",
@@ -658,16 +677,15 @@ export function generateWritingPdf(payload: WritingPdfPayload, filename = "norsk
         const startY = y;
         entries.forEach(([k, v]) => {
           if (y + 28 > pageHeight - FOOTER_H - 10) newPage();
+          doc.setCharSpace(0);
           doc.setFont("helvetica", "bold");
           doc.setFontSize(10);
           doc.setTextColor(...PRIMARY);
           doc.text(NIVO_LABELS[k] || k.replace(/_/g, " "), margin + 18, y);
           y += 14;
-          doc.setFont("helvetica", "normal");
-          doc.setFontSize(10);
           doc.setTextColor(...INK);
-          const w = doc.splitTextToSize(String(v), innerW) as string[];
-          w.forEach((l) => { doc.text(l, margin + 18, y); y += 12; });
+          const w = wrap(String(v), innerW, 10);
+          w.forEach((l) => { doc.setCharSpace(0); doc.text(l, margin + 18, y); y += 13; });
           y += 6;
         });
         return y - startY;
@@ -692,8 +710,8 @@ export function generateWritingPdf(payload: WritingPdfPayload, filename = "norsk
   if (payload.sledeci_korak && payload.sledeci_korak.length) {
     const innerW = contentWidth - 36;
     const measure = () => payload.sledeci_korak!.reduce((acc, s) => {
-      const w = doc.splitTextToSize(s, innerW - 24) as string[];
-      return acc + w.length * 14 + 6;
+      const w = wrap(s, innerW - 24, 10.5);
+      return acc + w.length * 15 + 6;
     }, 0);
     renderCard(
       "Sledeći koraci",
@@ -702,15 +720,15 @@ export function generateWritingPdf(payload: WritingPdfPayload, filename = "norsk
         const startY = y;
         payload.sledeci_korak!.forEach((s, i) => {
           if (y + 20 > pageHeight - FOOTER_H - 10) newPage();
+          doc.setCharSpace(0);
           doc.setFont("helvetica", "bold");
           doc.setFontSize(10.5);
           doc.setTextColor(...PRIMARY);
           doc.text(`${i + 1}.`, margin + 18, y);
-          doc.setFont("helvetica", "normal");
           doc.setTextColor(...INK);
-          const w = doc.splitTextToSize(s, innerW - 24) as string[];
-          w.forEach((l, idx) => { doc.text(l, margin + 18 + 20, y + idx * 14); });
-          y += w.length * 14 + 6;
+          const w = wrap(s, innerW - 24, 10.5);
+          w.forEach((l, idx) => { doc.setCharSpace(0); doc.text(l, margin + 18 + 20, y + idx * 15); });
+          y += w.length * 15 + 6;
         });
         return y - startY;
       },
