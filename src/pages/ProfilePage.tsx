@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { useAuth } from "@/context/AuthContext";
 import { useProfile } from "@/context/ProfileContext";
 import { supabase } from "@/integrations/supabase/client";
+import { useSelectedLanguage } from "@/hooks/useSelectedLanguage";
 import { format } from "date-fns";
 import { Mail, Calendar, Languages, CreditCard, Target, GraduationCap, Zap, Camera, Loader2 } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
@@ -28,6 +29,7 @@ export default function ProfilePage() {
   const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
   const [uploading, setUploading] = useState(false);
   const fileRef = useRef<HTMLInputElement>(null);
+  const { code: langCode } = useSelectedLanguage();
 
   useEffect(() => {
     if (!user) return;
@@ -38,7 +40,7 @@ export default function ProfilePage() {
           .select("created_at, preferred_language, subscription_type, avatar_url")
           .eq("user_id", user.id)
           .maybeSingle(),
-        supabase.from("user_xp").select("total_xp, level").eq("user_id", user.id).maybeSingle(),
+        supabase.from("user_xp").select("total_xp, level").eq("user_id", user.id).eq("language", langCode).maybeSingle(),
       ]);
       setRegisteredAt(p?.created_at || user.created_at || null);
       setPreferredLanguage(p?.preferred_language || localStorage.getItem("norskly_selected_language"));
@@ -46,7 +48,9 @@ export default function ProfilePage() {
       setAvatarUrl((p as any)?.avatar_url || null);
       setXp(x || { total_xp: 0, level: 1 });
     })();
-  }, [user]);
+  }, [user, langCode]);
+
+
 
   const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
