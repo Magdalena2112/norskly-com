@@ -57,6 +57,9 @@ vi.mock("jspdf", () => {
     circle = recorder("circle");
     line = recorder("line");
     addImage = recorder("addImage");
+    addFileToVFS = recorder("addFileToVFS");
+    addFont = recorder("addFont");
+    getFontList = () => ({});
     addPage = () => { shared.calls.push({ method: "addPage", args: [] }); };
     text = (...args: unknown[]) => {
       shared.calls.push({
@@ -290,5 +293,54 @@ describe("writingPdf — source-level guards", () => {
   it("explicitly resets charSpace and line-height at start", () => {
     expect(source).toMatch(/setCharSpace\(0\)/);
     expect(source).toMatch(/setLineHeightFactor\(/);
+  });
+
+  it("uses a Unicode-capable font (Roboto), not the WinAnsi-limited helvetica", () => {
+    expect(source).not.toMatch(/["']helvetica["']/);
+    expect(source).toMatch(/setFont\(PDF_FONT/);
+  });
+});
+
+describe("writingPdf — Unicode + extreme content", () => {
+  it("registers Roboto font with the document", () => {
+    generateWritingPdf(SAMPLE_PAYLOAD, "test.pdf");
+    const addFont = calls.filter((c) => c.method === "addFont");
+    expect(addFont.length).toBeGreaterThanOrEqual(2);
+    // Sve registracije moraju ciljati Roboto, ne helvetica
+    for (const c of addFont) expect(c.args[1]).toBe("Roboto");
+  });
+
+  it("never falls back to helvetica via setFont (would break Serbian diacritics)", () => {
+    generateWritingPdf(SAMPLE_PAYLOAD, "test.pdf");
+    const setFontCalls = calls.filter((c) => c.method === "setFont");
+    expect(setFontCalls.length).toBeGreaterThan(0);
+    for (const c of setFontCalls) expect(c.args[0]).toBe("Roboto");
+  });
+
+  it("renders Serbian text with diacritics without overflowing the page", () => {
+    const serbian: WritingPdfPayload = {
+      ...SAMPLE_PAYLOAD,
+      overall_feedback:
+        "Student je započeo dobar opis, ali ima nekoliko pravopisnih i gramatičkih grešaka. " +
+        "Naročito u konstrukciji 'ser ut' i izboru veznika. Potrebno je poraditi na prirodnosti izraza " +
+        "i standardnom vokabularu. Red reči (V2) je uglavnom ispoštovan, što je odlično.",
+    };
+    expect(() => generateWritingPdf(serbian, "test.pdf")).not.toThrow();
+    const PAGE_W = 595;
+    for (const c of calls.filter((c) => c.method === "text")) {
+      const x = c.args[1] as number;
+      expect(x).toBeLessThan(PAGE_W - 8);
+    }
+  });
+
+  it("handles extremely long unbreakable strings without throwing", () => {
+    const long = "abcdefghij".repeat(80); // 800 chars with no spaces
+    const heavy: WritingPdfPayload = {
+      ...SAMPLE_PAYLOAD,
+      original_text: long,
+      corrected_text: long,
+      overall_feedback: long,
+    };
+    expect(() => generateWritingPdf(heavy, "test.pdf")).not.toThrow();
   });
 });

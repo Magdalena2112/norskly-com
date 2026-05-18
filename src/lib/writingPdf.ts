@@ -1,4 +1,24 @@
 import jsPDF from "jspdf";
+import { ROBOTO_REGULAR_B64, ROBOTO_BOLD_B64 } from "./pdfFonts";
+
+// Naziv fonta koji koristimo svuda u PDF generatoru. Roboto ima podršku za
+// srpsku latinicu (č, š, ž, đ, ć) i norvešku (å, æ, ø), za razliku od
+// ugrađenog helvetica/WinAnsi enkodinga u jsPDF.
+const PDF_FONT = "Roboto";
+
+function ensureRobotoRegistered(doc: jsPDF) {
+  // Registruj font samo jednom po dokumentu; jsPDF instance pamti dodate fontove.
+  const list = (doc as unknown as { getFontList?: () => Record<string, string[]> }).getFontList?.();
+  if (list && list[PDF_FONT]) return;
+  doc.addFileToVFS("Roboto-Regular.ttf", ROBOTO_REGULAR_B64);
+  doc.addFont("Roboto-Regular.ttf", PDF_FONT, "normal");
+  doc.addFileToVFS("Roboto-Bold.ttf", ROBOTO_BOLD_B64);
+  doc.addFont("Roboto-Bold.ttf", PDF_FONT, "bold");
+  // Font subset nema italic. Mapiramo "italic" → normal i "bolditalic" → bold
+  // da bismo izbegli fallback na helvetica (koji ne podržava srpsku latinicu).
+  doc.addFont("Roboto-Regular.ttf", PDF_FONT, "italic");
+  doc.addFont("Roboto-Bold.ttf", PDF_FONT, "bolditalic");
+}
 
 export interface WritingPdfPayload {
   type: "image" | "text";
@@ -57,6 +77,8 @@ const NIVO_LABELS: Record<string, string> = {
 
 export function generateWritingPdf(payload: WritingPdfPayload, filename = "norskly-pisanje.pdf") {
   const doc = new jsPDF({ unit: "pt", format: "a4" });
+  ensureRobotoRegistered(doc);
+  doc.setFont(PDF_FONT, "normal");
   const pageWidth = doc.internal.pageSize.getWidth();
   const pageHeight = doc.internal.pageSize.getHeight();
   const margin = 48;
@@ -71,20 +93,72 @@ export function generateWritingPdf(payload: WritingPdfPayload, filename = "norsk
   doc.setCharSpace(0);
   doc.setLineHeightFactor(1.35);
 
-  // Safe wrapper around splitTextToSize that ALWAYS sets the font/size first
-  // so the wrapping width matches the actually-rendered glyph widths.
+  // Sigurni helperi: font/size/charSpace se UVEK postavljaju pre merenja i pre svakog
+  // text() poziva. Ako jsPDF vrati liniju koja je i dalje šira od dozvoljene širine
+  // (npr. neprelomljiva reč), liniju dodatno secamo karakter po karakter.
+  const applyFont = (
+    size: number,
+    style: "normal" | "bold" | "italic" | "bolditalic" = "normal",
+  ) => {
+    doc.setFont(PDF_FONT, style);
+    doc.setFontSize(size);
+    doc.setCharSpace(0);
+  };
+
+  const hardBreak = (line: string, maxW: number): string[] => {
+    if (doc.getTextWidth(line) <= maxW) return [line];
+    const out: string[] = [];
+    let buf = "";
+    for (const ch of line) {
+      const next = buf + ch;
+      if (doc.getTextWidth(next) > maxW && buf) {
+        out.push(buf);
+        buf = ch;
+      } else {
+        buf = next;
+      }
+    }
+    if (buf) out.push(buf);
+    return out;
+  };
+
   const wrap = (
     text: string,
     width: number,
     size: number,
     style: "normal" | "bold" | "italic" | "bolditalic" = "normal",
   ): string[] => {
-    doc.setFont("helvetica", style);
-    doc.setFontSize(size);
-    doc.setCharSpace(0);
-    // Trim slightly so we never butt right against the card edge
-    const safeW = Math.max(20, width - 2);
-    return doc.splitTextToSize(text || "", safeW) as string[];
+    applyFont(size, style);
+    // Dodatna sigurnosna margina da nikad ne dodirnemo desnu ivicu kartice
+    const safeW = Math.max(20, width - 4);
+    const lines = (doc.splitTextToSize(text || "", safeW) as string[]) || [];
+    // Bezbedan presek: ako neka linija ipak prelazi širinu (dugačka neprelomljiva reč),
+    // sečemo je karakter po karakter dok ne stane.
+    const safe: string[] = [];
+    for (const l of lines) safe.push(...hardBreak(l, safeW));
+    return safe.length ? safe : [""];
+  };
+
+  // Renderuje jednu liniju teksta sa BEZBEDNIM postavkama (font, size, charSpace, boja).
+  // NIKAD ne koristi maxWidth/justify u doc.text() jer to istegne glifove.
+  const safeText = (
+    line: string,
+    x: number,
+    yPos: number,
+    opts: {
+      size: number;
+      style?: "normal" | "bold" | "italic" | "bolditalic";
+      color?: [number, number, number];
+      align?: "left" | "center" | "right";
+    },
+  ) => {
+    applyFont(opts.size, opts.style ?? "normal");
+    if (opts.color) doc.setTextColor(...opts.color);
+    if (opts.align && opts.align !== "left") {
+      doc.text(line, x, yPos, { align: opts.align });
+    } else {
+      doc.text(line, x, yPos);
+    }
   };
 
   // ─── Page background (cream paper) ───
@@ -98,11 +172,11 @@ export function generateWritingPdf(payload: WritingPdfPayload, filename = "norsk
     doc.setFillColor(...PRIMARY);
     doc.rect(0, 0, pageWidth, HEADER_H, "F");
     // wordmark
-    doc.setFont("helvetica", "bold");
+    doc.setFont(PDF_FONT, "bold");
     doc.setFontSize(20);
     doc.setTextColor(...CREAM);
     doc.text("Norskly", margin, 38);
-    doc.setFont("helvetica", "normal");
+    doc.setFont(PDF_FONT, "normal");
     doc.setFontSize(10);
     doc.setTextColor(...ACCENT);
     doc.text("Pisanje · Feedback rapport", margin, 54);
@@ -113,10 +187,10 @@ export function generateWritingPdf(payload: WritingPdfPayload, filename = "norsk
     const metaRight = pageWidth - margin;
 
     doc.setTextColor(...CREAM);
-    doc.setFont("helvetica", "bold");
+    doc.setFont(PDF_FONT, "bold");
     doc.setFontSize(10);
     doc.text(typeStr, metaRight, 38, { align: "right" });
-    doc.setFont("helvetica", "normal");
+    doc.setFont(PDF_FONT, "normal");
     doc.setFontSize(9);
     doc.setTextColor(...ACCENT);
     doc.text(dateStr, metaRight, 52, { align: "right" });
@@ -124,7 +198,7 @@ export function generateWritingPdf(payload: WritingPdfPayload, filename = "norsk
     if (payload.level) {
       // pill background
       const pillText = `Nivo ${payload.level}`;
-      doc.setFont("helvetica", "bold");
+      doc.setFont(PDF_FONT, "bold");
       doc.setFontSize(9);
       const tw = doc.getTextWidth(pillText) + 14;
       doc.setFillColor(...CREAM);
@@ -203,7 +277,7 @@ export function generateWritingPdf(payload: WritingPdfPayload, filename = "norsk
       // small accent square + title
       doc.setFillColor(...accent);
       doc.roundedRect(margin + innerPadX, cy - 2, 4, 14, 1, 1, "F");
-      doc.setFont("helvetica", "bold");
+      doc.setFont(PDF_FONT, "bold");
       doc.setFontSize(12);
       doc.setTextColor(...accent);
       doc.text(title.toUpperCase(), margin + innerPadX + 12, cy + 9);
@@ -225,11 +299,10 @@ export function generateWritingPdf(payload: WritingPdfPayload, filename = "norsk
     const style = opts.bold ? (opts.italic ? "bolditalic" : "bold") : opts.italic ? "italic" : "normal";
     const lh = opts.lineHeight ?? Math.round(size * 1.45);
     const lines = wrap(text, maxW, size, style as "normal" | "bold" | "italic" | "bolditalic");
-    doc.setTextColor(...color);
     lines.forEach((line) => {
-      // Always render with default (untracked) spacing and no maxWidth/align (which can stretch)
-      doc.setCharSpace(0);
-      doc.text(line, x, y);
+      // Pre svake linije ponovo postavi font/size/charSpace/boju da spreči
+      // bilo kakav „nasleđeni" tracking ili promenu fonta iz druge sekcije.
+      safeText(line, x, y, { size, style: style as "normal" | "bold" | "italic" | "bolditalic", color });
       y += lh;
     });
   };
@@ -299,11 +372,11 @@ export function generateWritingPdf(payload: WritingPdfPayload, filename = "norsk
           const tx = startX + i * (tileW + gap);
           doc.setFillColor(...SOFT);
           doc.roundedRect(tx, y, tileW, tileH, 8, 8, "F");
-          doc.setFont("helvetica", "bold");
+          doc.setFont(PDF_FONT, "bold");
           doc.setFontSize(18);
           doc.setTextColor(...PRIMARY);
           doc.text(s.value, tx + tileW / 2, y + 30, { align: "center" });
-          doc.setFont("helvetica", "normal");
+          doc.setFont(PDF_FONT, "normal");
           doc.setFontSize(8.5);
           doc.setTextColor(...MUTED);
           doc.text(s.label.toUpperCase(), tx + tileW / 2, y + 50, { align: "center" });
@@ -321,7 +394,7 @@ export function generateWritingPdf(payload: WritingPdfPayload, filename = "norsk
       (innerWidth) => measureWrapped(payload.overall_feedback!, innerWidth, 10.5, 15).height,
       (innerWidth) => {
         const startY = y;
-        drawParagraph(payload.overall_feedback!, margin + 18, innerWidth, { italic: true, color: PRIMARY_SOFT });
+        drawParagraph(payload.overall_feedback!, margin + 18, innerWidth, { color: PRIMARY_SOFT });
         return y - startY;
       },
     );
@@ -387,13 +460,13 @@ export function generateWritingPdf(payload: WritingPdfPayload, filename = "norsk
           doc.setFillColor(...PRIMARY);
           doc.circle(margin + 18 + 9, y + 5, 9, "F");
           doc.setTextColor(...CREAM);
-          doc.setFont("helvetica", "bold");
+          doc.setFont(PDF_FONT, "bold");
           doc.setFontSize(9);
           doc.text(String(i + 1), margin + 18 + 9, y + 8, { align: "center" });
 
           const textX = margin + 18 + 28;
           // Wrong
-          doc.setFont("helvetica", "bold");
+          doc.setFont(PDF_FONT, "bold");
           doc.setFontSize(10.5);
           doc.setTextColor(...DANGER);
           wrong.forEach((l, idx) => {
@@ -410,7 +483,7 @@ export function generateWritingPdf(payload: WritingPdfPayload, filename = "norsk
 
           // Explanation
           if (m.explanation) {
-            doc.setFont("helvetica", "normal");
+            doc.setFont(PDF_FONT, "normal");
             doc.setFontSize(9.5);
             doc.setTextColor(...MUTED);
             y += 2;
@@ -478,7 +551,7 @@ export function generateWritingPdf(payload: WritingPdfPayload, filename = "norsk
           const gH = measureGroup(k);
           if (y + gH > pageHeight - FOOTER_H - 10) newPage();
           // Group header
-          doc.setFont("helvetica", "bold");
+          doc.setFont(PDF_FONT, "bold");
           doc.setFontSize(9.5);
           doc.setTextColor(...PRIMARY);
           doc.text((GROUP_LABELS[k] || k).toUpperCase(), margin + 18, y);
@@ -494,7 +567,7 @@ export function generateWritingPdf(payload: WritingPdfPayload, filename = "norsk
           const left = items.slice(0, half);
           const right = items.slice(half);
 
-          doc.setFont("helvetica", "normal");
+          doc.setFont(PDF_FONT, "normal");
           doc.setFontSize(9.5);
 
           const drawCol = (arr: { word: string; translation: string }[], x: number) => {
@@ -598,11 +671,11 @@ export function generateWritingPdf(payload: WritingPdfPayload, filename = "norsk
           const wrapped = wrap(s, innerW - 18, 10.5);
           // bullet dash on first line
           doc.setTextColor(...PRIMARY);
-          doc.setFont("helvetica", "bold");
+          doc.setFont(PDF_FONT, "bold");
           doc.setFontSize(10.5);
           doc.setCharSpace(0);
           doc.text("—", margin + 18, y);
-          doc.setFont("helvetica", "normal");
+          doc.setFont(PDF_FONT, "normal");
           doc.setTextColor(...INK);
           wrapped.forEach((l, idx) => {
             doc.setCharSpace(0);
@@ -638,15 +711,15 @@ export function generateWritingPdf(payload: WritingPdfPayload, filename = "norsk
         payload.vocabulary_suggestions!.forEach((v) => {
           if (y + 30 > pageHeight - FOOTER_H - 10) newPage();
           doc.setCharSpace(0);
-          doc.setFont("helvetica", "bold");
+          doc.setFont(PDF_FONT, "bold");
           doc.setFontSize(10.5);
           doc.setTextColor(...DANGER);
           doc.text(v.weak, margin + 18, y);
           const ww = doc.getTextWidth(v.weak);
-          doc.setFont("helvetica", "normal");
+          doc.setFont(PDF_FONT, "normal");
           doc.setTextColor(...MUTED);
           doc.text("  →  ", margin + 18 + ww, y);
-          doc.setFont("helvetica", "bold");
+          doc.setFont(PDF_FONT, "bold");
           doc.setTextColor(...SUCCESS);
           doc.text(v.better, margin + 18 + ww + 22, y);
           y += 14;
@@ -678,7 +751,7 @@ export function generateWritingPdf(payload: WritingPdfPayload, filename = "norsk
         entries.forEach(([k, v]) => {
           if (y + 28 > pageHeight - FOOTER_H - 10) newPage();
           doc.setCharSpace(0);
-          doc.setFont("helvetica", "bold");
+          doc.setFont(PDF_FONT, "bold");
           doc.setFontSize(10);
           doc.setTextColor(...PRIMARY);
           doc.text(NIVO_LABELS[k] || k.replace(/_/g, " "), margin + 18, y);
@@ -721,7 +794,7 @@ export function generateWritingPdf(payload: WritingPdfPayload, filename = "norsk
         payload.sledeci_korak!.forEach((s, i) => {
           if (y + 20 > pageHeight - FOOTER_H - 10) newPage();
           doc.setCharSpace(0);
-          doc.setFont("helvetica", "bold");
+          doc.setFont(PDF_FONT, "bold");
           doc.setFontSize(10.5);
           doc.setTextColor(...PRIMARY);
           doc.text(`${i + 1}.`, margin + 18, y);
