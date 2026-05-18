@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Loader2, Trash2, ChevronDown, BookOpen, Brain, CheckCircle2, XCircle } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { useSelectedLanguage } from "@/hooks/useSelectedLanguage";
 import { format } from "date-fns";
 
 interface GrammarSession {
@@ -23,6 +24,7 @@ export default function GrammarHistoryTab({ userId }: { userId?: string }) {
   const [sessions, setSessions] = useState<GrammarSession[]>([]);
   const [loading, setLoading] = useState(true);
   const [expandedId, setExpandedId] = useState<string | null>(null);
+  const { code } = useSelectedLanguage();
 
   useEffect(() => {
     if (!userId) return;
@@ -31,12 +33,13 @@ export default function GrammarHistoryTab({ userId }: { userId?: string }) {
         .from("grammar_sessions")
         .select("*")
         .eq("user_id", userId)
+        .eq("language", code)
         .order("created_at", { ascending: false })
         .limit(50);
       setSessions((data as any[]) || []);
       setLoading(false);
     })();
-  }, [userId]);
+  }, [userId, code]);
 
   const deleteSession = async (id: string) => {
     await supabase.from("grammar_sessions").delete().eq("id", id);
