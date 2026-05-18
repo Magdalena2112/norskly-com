@@ -32,7 +32,7 @@ export default function MyLessonsPage() {
     queryFn: async () => {
       const { data, error } = await supabase
         .from("lessons")
-        .select("*")
+        .select("*, teachers(name), lesson_types(title, duration_minutes)")
         .eq("user_id", user!.id)
         .order("start_time", { ascending: true });
       if (error) throw error;
@@ -97,6 +97,9 @@ export default function MyLessonsPage() {
                     <div>
                       <p className="font-medium text-foreground text-sm sm:text-base">
                         {format(new Date(l.start_time), "dd.MM.yyyy")} · {format(new Date(l.start_time), "HH:mm")} – {format(new Date(l.end_time), "HH:mm")}
+                      </p>
+                      <p className="text-xs text-muted-foreground mt-0.5">
+                        {l.teachers?.name || "Nastavnik"}{l.lesson_types?.title ? ` · ${l.lesson_types.title}` : ""}
                       </p>
                       {l.student_note && <p className="text-sm text-muted-foreground mt-1">{l.student_note}</p>}
                     </div>

@@ -54,6 +54,7 @@ export type Database = {
           id: string
           start_time: string
           status: string
+          teacher_id: string | null
         }
         Insert: {
           created_at?: string
@@ -61,6 +62,7 @@ export type Database = {
           id?: string
           start_time: string
           status?: string
+          teacher_id?: string | null
         }
         Update: {
           created_at?: string
@@ -68,8 +70,17 @@ export type Database = {
           id?: string
           start_time?: string
           status?: string
+          teacher_id?: string | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "availability_slots_teacher_id_fkey"
+            columns: ["teacher_id"]
+            isOneToOne: false
+            referencedRelation: "teachers"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       collection_words: {
         Row: {
@@ -305,43 +316,122 @@ export type Database = {
         }
         Relationships: []
       }
+      lesson_types: {
+        Row: {
+          capacity: number
+          created_at: string
+          currency: string
+          description: string
+          duration_minutes: number
+          id: string
+          is_active: boolean
+          kind: Database["public"]["Enums"]["lesson_kind"]
+          language: string
+          price_cents: number
+          teacher_id: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          capacity?: number
+          created_at?: string
+          currency?: string
+          description?: string
+          duration_minutes?: number
+          id?: string
+          is_active?: boolean
+          kind?: Database["public"]["Enums"]["lesson_kind"]
+          language?: string
+          price_cents?: number
+          teacher_id: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          capacity?: number
+          created_at?: string
+          currency?: string
+          description?: string
+          duration_minutes?: number
+          id?: string
+          is_active?: boolean
+          kind?: Database["public"]["Enums"]["lesson_kind"]
+          language?: string
+          price_cents?: number
+          teacher_id?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lesson_types_teacher_id_fkey"
+            columns: ["teacher_id"]
+            isOneToOne: false
+            referencedRelation: "teachers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       lessons: {
         Row: {
           created_at: string
           end_time: string
           id: string
+          lesson_type_id: string | null
+          share_analytics: boolean
           slot_id: string
           start_time: string
           status: string
           student_note: string | null
+          teacher_id: string | null
           user_id: string
         }
         Insert: {
           created_at?: string
           end_time: string
           id?: string
+          lesson_type_id?: string | null
+          share_analytics?: boolean
           slot_id: string
           start_time: string
           status?: string
           student_note?: string | null
+          teacher_id?: string | null
           user_id: string
         }
         Update: {
           created_at?: string
           end_time?: string
           id?: string
+          lesson_type_id?: string | null
+          share_analytics?: boolean
           slot_id?: string
           start_time?: string
           status?: string
           student_note?: string | null
+          teacher_id?: string | null
           user_id?: string
         }
         Relationships: [
+          {
+            foreignKeyName: "lessons_lesson_type_id_fkey"
+            columns: ["lesson_type_id"]
+            isOneToOne: false
+            referencedRelation: "lesson_types"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "lessons_slot_id_fkey"
             columns: ["slot_id"]
             isOneToOne: false
             referencedRelation: "availability_slots"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "lessons_teacher_id_fkey"
+            columns: ["teacher_id"]
+            isOneToOne: false
+            referencedRelation: "teachers"
             referencedColumns: ["id"]
           },
         ]
@@ -420,6 +510,47 @@ export type Database = {
           user_id?: string
         }
         Relationships: []
+      }
+      student_teacher_consents: {
+        Row: {
+          consent_granted: boolean
+          created_at: string
+          granted_at: string | null
+          id: string
+          revoked_at: string | null
+          student_id: string
+          teacher_id: string
+          updated_at: string
+        }
+        Insert: {
+          consent_granted?: boolean
+          created_at?: string
+          granted_at?: string | null
+          id?: string
+          revoked_at?: string | null
+          student_id: string
+          teacher_id: string
+          updated_at?: string
+        }
+        Update: {
+          consent_granted?: boolean
+          created_at?: string
+          granted_at?: string | null
+          id?: string
+          revoked_at?: string | null
+          student_id?: string
+          teacher_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "student_teacher_consents_teacher_id_fkey"
+            columns: ["teacher_id"]
+            isOneToOne: false
+            referencedRelation: "teachers"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       suppressed_emails: {
         Row: {
@@ -574,6 +705,60 @@ export type Database = {
           rating?: number
           students_count?: number
           updated_at?: string
+        }
+        Relationships: []
+      }
+      teachers: {
+        Row: {
+          bio: string
+          created_at: string
+          email: string | null
+          focus: string[]
+          id: string
+          is_active: boolean
+          is_verified: boolean
+          meet_link: string | null
+          name: string
+          photo_url: string | null
+          rating: number
+          spoken_languages: string[]
+          students_count: number
+          updated_at: string
+          user_id: string | null
+        }
+        Insert: {
+          bio?: string
+          created_at?: string
+          email?: string | null
+          focus?: string[]
+          id?: string
+          is_active?: boolean
+          is_verified?: boolean
+          meet_link?: string | null
+          name: string
+          photo_url?: string | null
+          rating?: number
+          spoken_languages?: string[]
+          students_count?: number
+          updated_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          bio?: string
+          created_at?: string
+          email?: string | null
+          focus?: string[]
+          id?: string
+          is_active?: boolean
+          is_verified?: boolean
+          meet_link?: string | null
+          name?: string
+          photo_url?: string | null
+          rating?: number
+          spoken_languages?: string[]
+          students_count?: number
+          updated_at?: string
+          user_id?: string | null
         }
         Relationships: []
       }
@@ -756,6 +941,18 @@ export type Database = {
         }
         Returns: string
       }
+      book_lesson_v2: {
+        Args: {
+          p_end: string
+          p_lesson_type_id: string
+          p_note?: string
+          p_share_analytics?: boolean
+          p_slot_id: string
+          p_start: string
+          p_teacher_id: string
+        }
+        Returns: string
+      }
       delete_email: {
         Args: { message_id: number; queue_name: string }
         Returns: boolean
@@ -788,6 +985,7 @@ export type Database = {
         Returns: boolean
       }
       is_strict_admin: { Args: { _user_id: string }; Returns: boolean }
+      is_teacher_of_student: { Args: { _student_id: string }; Returns: boolean }
       move_to_dlq: {
         Args: {
           dlq_name: string
@@ -812,6 +1010,7 @@ export type Database = {
     }
     Enums: {
       app_role: "admin" | "moderator" | "user" | "admin_teacher" | "student"
+      lesson_kind: "individual" | "group" | "course"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -940,6 +1139,7 @@ export const Constants = {
   public: {
     Enums: {
       app_role: ["admin", "moderator", "user", "admin_teacher", "student"],
+      lesson_kind: ["individual", "group", "course"],
     },
   },
 } as const
