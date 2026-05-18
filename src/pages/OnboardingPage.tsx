@@ -58,30 +58,45 @@ export default function OnboardingPage() {
     else {
       updateProfile(form);
       localStorage.setItem("norskly_onboarding_done", "true");
-      const selectedLang = localStorage.getItem("norskly_selected_language");
+      const selectedLang = localStorage.getItem("norskly_selected_language") || "norveski";
       const selectedPlan = localStorage.getItem("norskly_selected_plan");
+      const langCode: "no" | "en" | "de" =
+        selectedLang === "engleski" ? "en" : selectedLang === "nemacki" ? "de" : "no";
       if (user) {
+        // Keep display_name and preferred_language on the global profile
+        // (used as a router hint), but DO NOT mark onboarding completed there.
         await supabase
           .from("profiles")
           .upsert({
             user_id: user.id,
             display_name: form.name || "",
+            preferred_language: selectedLang,
+            ...(selectedPlan ? { subscription_type: selectedPlan } : {}),
+          }, { onConflict: "user_id" });
+
+        // Per-language onboarding row — this is what gates dashboard access.
+        await supabase
+          .from("language_profiles")
+          .upsert({
+            user_id: user.id,
+            language: langCode,
             level: form.level || "A1",
             learning_goal: form.learning_goal || "",
             focus_area: form.focus_area || "",
             confidence_level: form.confidence_level ?? 3,
             preferred_tone: form.preferred_tone || "opušten",
             lives_in_norway: form.lives_in_norway ?? false,
+            subscription_type: selectedPlan,
             onboarding_completed: true,
-            ...(selectedLang ? { preferred_language: selectedLang } : {}),
-            ...(selectedPlan ? { subscription_type: selectedPlan } : {}),
-          }, { onConflict: "user_id" });
+          }, { onConflict: "user_id,language" });
+
         await queryClient.invalidateQueries({ queryKey: ["onboarding-status"] });
       }
-      const target = selectedLang ? `/ucenje/${selectedLang}` : "/practice";
+      const target = `/ucenje/${selectedLang}`;
       const qs = selectedPlan ? `?plan=${selectedPlan}` : "";
       navigate(`${target}${qs}`);
     }
+
   };
   const prev = () => step > 0 && setStep(step - 1);
 

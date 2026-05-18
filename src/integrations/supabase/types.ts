@@ -331,6 +331,54 @@ export type Database = {
         }
         Relationships: []
       }
+      language_profiles: {
+        Row: {
+          confidence_level: number | null
+          created_at: string
+          focus_area: string | null
+          id: string
+          language: string
+          learning_goal: string | null
+          level: string | null
+          lives_in_norway: boolean | null
+          onboarding_completed: boolean
+          preferred_tone: string | null
+          subscription_type: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          confidence_level?: number | null
+          created_at?: string
+          focus_area?: string | null
+          id?: string
+          language?: string
+          learning_goal?: string | null
+          level?: string | null
+          lives_in_norway?: boolean | null
+          onboarding_completed?: boolean
+          preferred_tone?: string | null
+          subscription_type?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          confidence_level?: number | null
+          created_at?: string
+          focus_area?: string | null
+          id?: string
+          language?: string
+          learning_goal?: string | null
+          level?: string | null
+          lives_in_norway?: boolean | null
+          onboarding_completed?: boolean
+          preferred_tone?: string | null
+          subscription_type?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       lesson_types: {
         Row: {
           capacity: number
