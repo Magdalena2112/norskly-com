@@ -236,7 +236,7 @@ export default function LandingPage() {
           className="absolute inset-0 bg-center bg-cover [mask-image:radial-gradient(ellipse_at_center,black_50%,transparent_85%)]"
           style={{ backgroundImage: `url(${ecosystemCollage})`, opacity: 0.45, filter: "blur(3px) saturate(0.8)" }}
         />
-        <div aria-hidden className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/40 to-background/70" />
+        <div aria-hidden className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/40 to-background/70 opacity-20" />
         <div className="container relative z-10">
           <div className="text-center mb-16 max-w-2xl mx-auto">
             <p className="text-xs font-semibold uppercase tracking-widest text-primary/70 mb-3">Ekosistem</p>
