@@ -98,7 +98,7 @@ export function generateWritingPdf(payload: WritingPdfPayload, filename = "norsk
     size: number,
     style: "normal" | "bold" | "italic" | "bolditalic" = "normal",
   ) => {
-    doc.setFont("helvetica", style);
+    doc.setFont(PDF_FONT, style);
     doc.setFontSize(size);
     doc.setCharSpace(0);
   };
@@ -170,11 +170,11 @@ export function generateWritingPdf(payload: WritingPdfPayload, filename = "norsk
     doc.setFillColor(...PRIMARY);
     doc.rect(0, 0, pageWidth, HEADER_H, "F");
     // wordmark
-    doc.setFont("helvetica", "bold");
+    doc.setFont(PDF_FONT, "bold");
     doc.setFontSize(20);
     doc.setTextColor(...CREAM);
     doc.text("Norskly", margin, 38);
-    doc.setFont("helvetica", "normal");
+    doc.setFont(PDF_FONT, "normal");
     doc.setFontSize(10);
     doc.setTextColor(...ACCENT);
     doc.text("Pisanje · Feedback rapport", margin, 54);
@@ -185,10 +185,10 @@ export function generateWritingPdf(payload: WritingPdfPayload, filename = "norsk
     const metaRight = pageWidth - margin;
 
     doc.setTextColor(...CREAM);
-    doc.setFont("helvetica", "bold");
+    doc.setFont(PDF_FONT, "bold");
     doc.setFontSize(10);
     doc.text(typeStr, metaRight, 38, { align: "right" });
-    doc.setFont("helvetica", "normal");
+    doc.setFont(PDF_FONT, "normal");
     doc.setFontSize(9);
     doc.setTextColor(...ACCENT);
     doc.text(dateStr, metaRight, 52, { align: "right" });
@@ -196,7 +196,7 @@ export function generateWritingPdf(payload: WritingPdfPayload, filename = "norsk
     if (payload.level) {
       // pill background
       const pillText = `Nivo ${payload.level}`;
-      doc.setFont("helvetica", "bold");
+      doc.setFont(PDF_FONT, "bold");
       doc.setFontSize(9);
       const tw = doc.getTextWidth(pillText) + 14;
       doc.setFillColor(...CREAM);
@@ -275,7 +275,7 @@ export function generateWritingPdf(payload: WritingPdfPayload, filename = "norsk
       // small accent square + title
       doc.setFillColor(...accent);
       doc.roundedRect(margin + innerPadX, cy - 2, 4, 14, 1, 1, "F");
-      doc.setFont("helvetica", "bold");
+      doc.setFont(PDF_FONT, "bold");
       doc.setFontSize(12);
       doc.setTextColor(...accent);
       doc.text(title.toUpperCase(), margin + innerPadX + 12, cy + 9);
@@ -370,11 +370,11 @@ export function generateWritingPdf(payload: WritingPdfPayload, filename = "norsk
           const tx = startX + i * (tileW + gap);
           doc.setFillColor(...SOFT);
           doc.roundedRect(tx, y, tileW, tileH, 8, 8, "F");
-          doc.setFont("helvetica", "bold");
+          doc.setFont(PDF_FONT, "bold");
           doc.setFontSize(18);
           doc.setTextColor(...PRIMARY);
           doc.text(s.value, tx + tileW / 2, y + 30, { align: "center" });
-          doc.setFont("helvetica", "normal");
+          doc.setFont(PDF_FONT, "normal");
           doc.setFontSize(8.5);
           doc.setTextColor(...MUTED);
           doc.text(s.label.toUpperCase(), tx + tileW / 2, y + 50, { align: "center" });
@@ -458,13 +458,13 @@ export function generateWritingPdf(payload: WritingPdfPayload, filename = "norsk
           doc.setFillColor(...PRIMARY);
           doc.circle(margin + 18 + 9, y + 5, 9, "F");
           doc.setTextColor(...CREAM);
-          doc.setFont("helvetica", "bold");
+          doc.setFont(PDF_FONT, "bold");
           doc.setFontSize(9);
           doc.text(String(i + 1), margin + 18 + 9, y + 8, { align: "center" });
 
           const textX = margin + 18 + 28;
           // Wrong
-          doc.setFont("helvetica", "bold");
+          doc.setFont(PDF_FONT, "bold");
           doc.setFontSize(10.5);
           doc.setTextColor(...DANGER);
           wrong.forEach((l, idx) => {
@@ -481,7 +481,7 @@ export function generateWritingPdf(payload: WritingPdfPayload, filename = "norsk
 
           // Explanation
           if (m.explanation) {
-            doc.setFont("helvetica", "normal");
+            doc.setFont(PDF_FONT, "normal");
             doc.setFontSize(9.5);
             doc.setTextColor(...MUTED);
             y += 2;
@@ -549,7 +549,7 @@ export function generateWritingPdf(payload: WritingPdfPayload, filename = "norsk
           const gH = measureGroup(k);
           if (y + gH > pageHeight - FOOTER_H - 10) newPage();
           // Group header
-          doc.setFont("helvetica", "bold");
+          doc.setFont(PDF_FONT, "bold");
           doc.setFontSize(9.5);
           doc.setTextColor(...PRIMARY);
           doc.text((GROUP_LABELS[k] || k).toUpperCase(), margin + 18, y);
@@ -565,7 +565,7 @@ export function generateWritingPdf(payload: WritingPdfPayload, filename = "norsk
           const left = items.slice(0, half);
           const right = items.slice(half);
 
-          doc.setFont("helvetica", "normal");
+          doc.setFont(PDF_FONT, "normal");
           doc.setFontSize(9.5);
 
           const drawCol = (arr: { word: string; translation: string }[], x: number) => {
@@ -669,11 +669,11 @@ export function generateWritingPdf(payload: WritingPdfPayload, filename = "norsk
           const wrapped = wrap(s, innerW - 18, 10.5);
           // bullet dash on first line
           doc.setTextColor(...PRIMARY);
-          doc.setFont("helvetica", "bold");
+          doc.setFont(PDF_FONT, "bold");
           doc.setFontSize(10.5);
           doc.setCharSpace(0);
           doc.text("—", margin + 18, y);
-          doc.setFont("helvetica", "normal");
+          doc.setFont(PDF_FONT, "normal");
           doc.setTextColor(...INK);
           wrapped.forEach((l, idx) => {
             doc.setCharSpace(0);
@@ -709,15 +709,15 @@ export function generateWritingPdf(payload: WritingPdfPayload, filename = "norsk
         payload.vocabulary_suggestions!.forEach((v) => {
           if (y + 30 > pageHeight - FOOTER_H - 10) newPage();
           doc.setCharSpace(0);
-          doc.setFont("helvetica", "bold");
+          doc.setFont(PDF_FONT, "bold");
           doc.setFontSize(10.5);
           doc.setTextColor(...DANGER);
           doc.text(v.weak, margin + 18, y);
           const ww = doc.getTextWidth(v.weak);
-          doc.setFont("helvetica", "normal");
+          doc.setFont(PDF_FONT, "normal");
           doc.setTextColor(...MUTED);
           doc.text("  →  ", margin + 18 + ww, y);
-          doc.setFont("helvetica", "bold");
+          doc.setFont(PDF_FONT, "bold");
           doc.setTextColor(...SUCCESS);
           doc.text(v.better, margin + 18 + ww + 22, y);
           y += 14;
@@ -749,7 +749,7 @@ export function generateWritingPdf(payload: WritingPdfPayload, filename = "norsk
         entries.forEach(([k, v]) => {
           if (y + 28 > pageHeight - FOOTER_H - 10) newPage();
           doc.setCharSpace(0);
-          doc.setFont("helvetica", "bold");
+          doc.setFont(PDF_FONT, "bold");
           doc.setFontSize(10);
           doc.setTextColor(...PRIMARY);
           doc.text(NIVO_LABELS[k] || k.replace(/_/g, " "), margin + 18, y);
@@ -792,7 +792,7 @@ export function generateWritingPdf(payload: WritingPdfPayload, filename = "norsk
         payload.sledeci_korak!.forEach((s, i) => {
           if (y + 20 > pageHeight - FOOTER_H - 10) newPage();
           doc.setCharSpace(0);
-          doc.setFont("helvetica", "bold");
+          doc.setFont(PDF_FONT, "bold");
           doc.setFontSize(10.5);
           doc.setTextColor(...PRIMARY);
           doc.text(`${i + 1}.`, margin + 18, y);
