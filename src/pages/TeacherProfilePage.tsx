@@ -45,13 +45,11 @@ export default function TeacherProfilePage() {
   const { data: teacher, isLoading: teacherLoading } = useQuery({
     queryKey: ["teacher", teacherId],
     queryFn: async () => {
-      const { data, error } = await supabase
-        .from("teachers")
-        .select("*")
-        .eq("id", teacherId)
-        .maybeSingle();
+      const { data, error } = await supabase.rpc("get_teacher_public_by_id", {
+        p_teacher_id: teacherId,
+      });
       if (error) throw error;
-      return data;
+      return (data && data[0]) || null;
     },
   });
 
