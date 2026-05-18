@@ -1,92 +1,56 @@
+## Pisanje (Writing) Module — Implementation Plan
 
-# Dashboard inspired by Lofoten sunsets & Norwegian postcards
+A new student learning module dedicated to writing practice, image description (bildebeskrivelse), text correction, and writing analytics — visually consistent with the existing Fjord/Scandinavian Norskly design.
 
-Use the two reference images as the visual soul:
-1. **Lofoten sunset** → atmosphere, palette, mood (peach / lilac sky, slate mountains, red rorbuer cabins, mirror-calm fjord)
-2. **Sticker collage** → composition language (hand-illustrated stickers, watercolor postcards, vintage stamps, script labels, gentle rotations)
+### 1. Dashboard card
+- Add new module entry on `DashboardPage.tsx`: title "Pisanje", subtitle "Skriving & bildebeskrivelse", description "Vežbaj pisanje, bildebeskrivelse i dobij detaljan feedback.", icon (PenLine), route `/writing`, vignette `book` variant tinted pink, `bg-sunset` medallion, rotation slot.
+- Update the existing Grammar card subtitle/description to remove "free text correction" wording (functionality moves to Pisanje).
 
-The current dashboard already moved to cream + burgundy + fjord silhouettes. This plan deepens the atmosphere and adds the postcard/sticker character.
+### 2. Route & page shell
+- New route `/writing` in `App.tsx` (protected).
+- New page `src/pages/WritingPage.tsx` using `StudentLayout` + `NordicBackdrop`, BackButton, postcard header.
+- Tabs (horizontal-scroll on mobile, consistent with Tabs pattern): **Bildebeskrivelse · Korekcija teksta · Istorija**.
 
----
+### 3. Bildebeskrivelse flow
+- Upload image (Supabase Storage bucket `writing-images`, private, per-user folder).
+- Image preview + "Analiziraj sliku" CTA → calls new edge function `writing-image-helper` returning:
+  - `vocabulary` (word + translation by CEFR level)
+  - `expressions`
+  - `sentence_starters`
+  - `phrases`
+- Expandable side panel (desktop split, stacked on mobile) showing helper content.
+- Text editor (Textarea) for the user description.
+- "Proveri tekst" → calls `writing-correct` edge function returning corrected text + per-error highlights, vocabulary suggestions, naturalness notes, CEFR evaluation, error categories.
+- Render corrections with the same highlight style used in Grammar module.
 
-## 1. Hero band — "a window onto the fjord"
+### 4. Korekcija teksta (moved from Grammar)
+- Identify and remove the free-text correction tab/section in `GrammarPage.tsx` (uses `grammar_submissions` + `grammar-ai` submission path). Keep grammar quizzes/lessons intact.
+- Reuse the same edge function `writing-correct` here without image context.
 
-Replace the plain greeting block with a wide hero card sitting above XP:
+### 5. PDF export
+- "Preuzmi PDF analizu" button on both Bildebeskrivelse and Korekcija results.
+- Client-side generation with `jspdf` (lightweight, already common): original text, corrected version, grammar feedback, vocabulary, common mistakes, recommendations, date, Norskly header.
 
-- Rounded `rounded-3xl` container, cream paper background, thin burgundy border, `shadow-postcard`.
-- Inside, a **left text column** (greeting "Hei, {name}", script subtitle "Velkommen tilbake til fjordene", short Serbian intro) and a **right illustrated panel** that mimics the Lofoten photo using pure SVG/CSS — no raster images required:
-  - peach→lilac gradient sky
-  - layered slate mountain silhouettes (3 ridges, parallax depth)
-  - mirrored water with a subtle reflection band
-  - 3–4 tiny rorbuer (red/ochre house shapes) along the shore
-  - one small sailboat dot
-- Above the panel, a torn-paper / washi-tape strip (CSS pseudo-element) so it reads as a pinned postcard.
-- Hidden below `md` (mobile gets text + a compact mountain strip only).
+### 6. History
+- New table `writing_exercises` (id, user_id, type [`image`|`text`], image_path, original_text, corrected_text, analysis jsonb, vocabulary jsonb, created_at) with RLS (owner + admin_teacher + teachers-with-consent SELECT).
+- Save on successful analysis.
+- Istorija tab: list with date + type filters and mistake-category filter (from analysis), reopen exercise into editor, regenerate PDF.
 
-## 2. Module cards as postcards
+### 7. Edge functions (Lovable AI gateway, `google/gemini-3-flash-preview`; image helper uses `google/gemini-2.5-flash` for multimodal)
+- `supabase/functions/writing-image-helper/index.ts` — accepts signed image URL + CEFR level, returns structured JSON.
+- `supabase/functions/writing-correct/index.ts` — accepts text (+ optional image context), returns corrections, errors, CEFR feedback.
+- JWT verification in code, CORS, Zod validation, error logging into `error_events`.
 
-Restyle the four module cards to feel like the collage stickers:
+### 8. Storage
+- Migration: create `writing-images` bucket (private) + RLS policies (`auth.uid()` in folder path), and the `writing_exercises` table.
 
-- Each card becomes a **postcard**: cream body, thin border, slight individual rotation (`-rotate-1`, `rotate-[0.5deg]`, etc., reset to 0 on hover), `shadow-postcard`, hover lifts and straightens.
-- Top half of each card: a tiny watercolor-style SVG vignette themed to the module:
-  - Gramatika → open book + ink swirl on a soft pink wash
-  - Vokabular → stylised stamp ("ORD · 45 KR") on peach wash
-  - Razgovor → speech bubble with "Hei!" on fjord-blue wash
-  - Razgovor sa profesorom (full width) → a wider scene of cabins + mountain on sunset wash, with a teacher avatar chip
-- Bottom half: script subtitle (Norwegian), serif title (Serbian), one-line description, optional CTA.
-- A small **dashed-border "stamp" corner** (e.g. `27 KR NORGE`) tucked on one card for collage flavor.
+### 9. Styling
+- Reuse `bg-cream`, `border-border/50`, `shadow-postcard`, `font-display`, `font-script`, burgundy primary. Pink/peach accents via existing `bg-sunset` token.
+- Editor card: rounded-3xl cream surface, washi-tape header, soft pastel chips for vocabulary helper.
+- Responsive: `lg:grid-cols-2` split for image+editor, stacked below `lg`.
 
-## 3. Background atmosphere
-
-Keep `NordicBackdrop` but evolve it:
-
-- Replace the abstract fjord SVG with a softer, multi-layer ridge silhouette using the same slate/forest palette as the Lofoten photo, lowered opacity so it whispers behind content.
-- Sky wash shifts from sunset peach (top) → dusty lilac → cream → mist blue near the ridges (matches photo's vertical gradient).
-- Floating decorations become **postcard stickers** with script labels: "Lofoten", "Bergen", "Tromsø", "45 KR" stamp, "Hei!" / "Hvordan går det?" speech bubbles. Each with gentle 6s float, varied rotations, hidden progressively on smaller breakpoints so mobile stays clean.
-- Add 2–3 tiny watercolor "ink dots" (radial gradients) as paper-texture accents.
-
-## 4. XP & upcoming-lesson cards
-
-- XP card: keep structure, but swap the gradient progress bar to **burgundy → sunset peach → fjord blue** (echoes sky-to-water), add a small dashed "stamp" frame around the level number to tie into the postcard motif.
-- Upcoming lesson card: add a tiny SVG cabin icon in the corner; CTA color stays burgundy.
-
-## 5. Typography polish
-
-- Greeting H1: `text-display` (Fraunces 900) in burgundy, with a small `font-script` italic kicker above it ("Velkommen tilbake").
-- Section divider before the cards already says "Læringsmoduler" in script — keep, but center a tiny ✦ glyph between the two hairlines.
-- Body remains Inter; all Norwegian flourishes use Instrument Serif italic.
-
-## 6. Motion (subtle only)
-
-- Hero illustration: mountains do a 600ms ease-out fade/slide-in on mount; water reflection gently shimmers (3s ease-in-out infinite, opacity 0.6↔0.9).
-- Module cards: rotation resets + 4px lift + shadow grow on hover, 300ms.
-- Stickers: existing 6s float, varied delays.
-- No parallax, no scroll-jank, no AI/futuristic glows.
-
-## 7. Files to touch
-
-```text
-src/index.css                              # add sunset/lilac sky gradient utility, washi-tape, postcard rotation helpers
-src/components/student/NordicBackdrop.tsx  # refine ridges, palette, sticker labels
-src/components/student/FjordHero.tsx       # NEW — SVG Lofoten-style hero illustration
-src/components/student/PostcardVignette.tsx# NEW — small per-module SVG vignettes
-src/pages/DashboardPage.tsx                # wire hero, restyle module cards as postcards
-src/components/XpProgressCard.tsx          # progress bar gradient + tiny stamp frame
-```
-
-No backend, no schema, no auth changes. UI/presentation only.
-
-## What stays exactly as-is
-
-- Sidebar (Profil / Napredak / Podešavanja), header chips, routes.
-- The four modules and their destinations.
-- WeeklyDigest widget.
-- Serbian copy everywhere except the small Norwegian flourishes ("Hei", "Velkommen tilbake", "Læringsmoduler", postcard labels).
-
----
-
-### One clarification before I build
-
-Do you want the hero illustration to be **pure SVG** (matches the sticker/postcard collage style, infinitely crisp, free, lightweight) or should I generate a **watercolor Lofoten illustration as an actual image asset** (closer to the photo, but heavier and slightly less "editorial sticker")?
-
-Default if you don't answer: **pure SVG postcard illustration** — it fits the collage reference better and keeps load time small.
+### Technical notes
+- Use `react-dropzone` (or native `<input type="file">`) — prefer native to avoid new deps.
+- PDF: add `jspdf` dependency.
+- All UI copy in Serbian Latin; learning material in Norwegian (Bokmål).
+- Memory rules respected (V2 word order, level-aware AI, no hallucinations).
