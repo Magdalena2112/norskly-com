@@ -66,6 +66,27 @@ export function generateWritingPdf(payload: WritingPdfPayload, filename = "norsk
   const topY = HEADER_H + 26;
   let y = topY;
 
+  // Reset any tracking/letter-spacing globally — jsPDF can carry over charSpace which causes
+  // text to appear stretched. Keep at 0 for all paragraph rendering.
+  doc.setCharSpace(0);
+  doc.setLineHeightFactor(1.35);
+
+  // Safe wrapper around splitTextToSize that ALWAYS sets the font/size first
+  // so the wrapping width matches the actually-rendered glyph widths.
+  const wrap = (
+    text: string,
+    width: number,
+    size: number,
+    style: "normal" | "bold" | "italic" | "bolditalic" = "normal",
+  ): string[] => {
+    doc.setFont("helvetica", style);
+    doc.setFontSize(size);
+    doc.setCharSpace(0);
+    // Trim slightly so we never butt right against the card edge
+    const safeW = Math.max(20, width - 2);
+    return doc.splitTextToSize(text || "", safeW) as string[];
+  };
+
   // ─── Page background (cream paper) ───
   const paintBackground = () => {
     doc.setFillColor(...PAPER);
