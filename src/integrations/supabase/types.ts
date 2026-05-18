@@ -490,6 +490,63 @@ export type Database = {
         }
         Relationships: []
       }
+      reading_sessions: {
+        Row: {
+          completed: boolean
+          created_at: string
+          exercises: Json
+          feedback: Json
+          id: string
+          length: string
+          level: string
+          score: number
+          text: string
+          title: string
+          topic: string
+          total: number
+          updated_at: string
+          user_answers: Json
+          user_id: string
+          vocabulary: Json
+        }
+        Insert: {
+          completed?: boolean
+          created_at?: string
+          exercises?: Json
+          feedback?: Json
+          id?: string
+          length: string
+          level: string
+          score?: number
+          text?: string
+          title?: string
+          topic: string
+          total?: number
+          updated_at?: string
+          user_answers?: Json
+          user_id: string
+          vocabulary?: Json
+        }
+        Update: {
+          completed?: boolean
+          created_at?: string
+          exercises?: Json
+          feedback?: Json
+          id?: string
+          length?: string
+          level?: string
+          score?: number
+          text?: string
+          title?: string
+          topic?: string
+          total?: number
+          updated_at?: string
+          user_answers?: Json
+          user_id?: string
+          vocabulary?: Json
+        }
+        Relationships: []
+      }
       saved_explanations: {
         Row: {
           created_at: string
