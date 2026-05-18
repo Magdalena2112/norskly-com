@@ -27,11 +27,11 @@ export default function BookingSuccessPage() {
   });
 
   return (
-    <div className="min-h-screen bg-aurora">
-      <header className="border-b border-border/20 bg-background/10 backdrop-blur-md sticky top-0 z-50">
+    <div className="min-h-screen bg-fjord-soft">
+      <header className="border-b border-border/50 bg-cream/80 backdrop-blur-md sticky top-0 z-50">
         <div className="container flex items-center gap-3 h-14">
           <BackButton to="/my-lessons" />
-          <span className="font-display font-bold text-lg text-primary-foreground">Potvrda rezervacije</span>
+          <span className="font-display font-bold text-lg text-primary">Potvrda rezervacije</span>
         </div>
       </header>
 

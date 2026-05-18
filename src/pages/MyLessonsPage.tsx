@@ -69,13 +69,13 @@ export default function MyLessonsPage() {
   const past = lessons.filter((l: any) => l.status !== "scheduled" || new Date(l.start_time) < new Date());
 
   return (
-    <div className="min-h-screen bg-aurora p-4 md:p-8">
+    <div className="min-h-screen bg-fjord-soft p-4 md:p-8">
       <div className="max-w-2xl mx-auto space-y-6">
         <div className="flex items-center gap-3">
-          <Button variant="ghost" size="icon" onClick={() => navigate("/practice")} className="text-primary-foreground hover:text-primary-foreground/80">
+          <Button variant="ghost" size="icon" onClick={() => navigate("/practice")} className="text-primary hover:text-primary/80">
             <ArrowLeft className="h-5 w-5" />
           </Button>
-          <h1 className="text-2xl font-bold text-primary-foreground">Moje lekcije</h1>
+          <h1 className="text-2xl font-bold text-primary">Moje lekcije</h1>
         </div>
 
         <Card className="bg-background/80 backdrop-blur-sm border-border/30 shadow-nordic">
