@@ -11,6 +11,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { toast } from "sonner";
 import { useAuth } from "@/context/AuthContext";
 import { useProfile } from "@/context/ProfileContext";
+import { useSelectedLanguage } from "@/hooks/useSelectedLanguage";
 import { supabase } from "@/integrations/supabase/client";
 import { logActivity } from "@/lib/logActivity";
 import StudentLayout from "@/components/student/StudentLayout";
@@ -72,6 +73,7 @@ type EvalResult = {
 export default function ReadingPage() {
   const { user } = useAuth();
   const { profile } = useProfile();
+  const { code: langCode, labelSr: langLabel } = useSelectedLanguage();
   const navigate = useNavigate();
 
   const [tab, setTab] = useState("generate");
@@ -90,14 +92,15 @@ export default function ReadingPage() {
 
   useEffect(() => {
     if (!user) return;
-    supabase
+    (supabase
       .from("reading_sessions" as any)
       .select("id, title, topic, length, level, score, total, created_at, completed")
-      .eq("user_id", user.id)
+      .eq("user_id", user.id) as any)
+      .eq("language", langCode)
       .order("created_at", { ascending: false })
       .limit(30)
-      .then(({ data }) => setHistory(data || []));
-  }, [user, result]);
+      .then(({ data }: { data: any[] | null }) => setHistory(data || []));
+  }, [user, result, langCode]);
 
   const generateReading = async () => {
     if (!user) return;
@@ -109,7 +112,7 @@ export default function ReadingPage() {
     try {
       const { data: { session } } = await supabase.auth.getSession();
       const res = await supabase.functions.invoke("reading-ai", {
-        body: { action: "generate", level, topic, length },
+        body: { action: "generate", level, topic, length, language: langCode },
         headers: { Authorization: `Bearer ${session?.access_token}` },
       });
       if (res.error) throw new Error(res.error.message);
@@ -127,7 +130,8 @@ export default function ReadingPage() {
           text: data.text,
           vocabulary: data.vocabulary as any,
           exercises: data.exercises as any,
-        })
+          language: langCode,
+        } as any)
         .select("id")
         .single();
       if (inserted) setSessionId((inserted as any).id);
@@ -144,7 +148,7 @@ export default function ReadingPage() {
     try {
       const { data: { session } } = await supabase.auth.getSession();
       const res = await supabase.functions.invoke("reading-ai", {
-        body: { action: "evaluate", level, exercises: reading.exercises, answers },
+        body: { action: "evaluate", level, exercises: reading.exercises, answers, language: langCode },
         headers: { Authorization: `Bearer ${session?.access_token}` },
       });
       if (res.error) throw new Error(res.error.message);
