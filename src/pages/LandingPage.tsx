@@ -233,10 +233,11 @@ export default function LandingPage() {
       <section id="teachers" className="relative py-20 md:py-28 overflow-hidden">
         <div
           aria-hidden
-          className="absolute inset-0 bg-center bg-cover opacity-20 [mask-image:radial-gradient(ellipse_at_center,black_55%,transparent_90%)]"
-          style={{ backgroundImage: `url(${ecosystemCollage})` }}
+          className="absolute inset-0 bg-center bg-cover opacity-[0.12] blur-2xl saturate-[0.45] [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_85%)]"
+          style={{ backgroundImage: `url(${ecosystemCollage})`, filter: "blur(28px) saturate(0.5)" }}
         />
-        <div aria-hidden className="absolute inset-0 bg-background/55" />
+        <div aria-hidden className="absolute inset-0 bg-gradient-to-b from-background via-background/80 to-background" />
+        <div aria-hidden className="absolute inset-0 bg-background/40" />
         <div className="container relative z-10">
           <div className="text-center mb-16 max-w-2xl mx-auto">
             <p className="text-xs font-semibold uppercase tracking-widest text-primary/70 mb-3">Ekosistem</p>
