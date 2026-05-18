@@ -58,6 +58,7 @@ export default function OnboardingPage() {
     else {
       updateProfile(form);
       localStorage.setItem("norskly_onboarding_done", "true");
+      const selectedLang = localStorage.getItem("norskly_selected_language");
       if (user) {
         await supabase
           .from("profiles")
@@ -71,10 +72,11 @@ export default function OnboardingPage() {
             preferred_tone: form.preferred_tone || "opušten",
             lives_in_norway: form.lives_in_norway ?? false,
             onboarding_completed: true,
+            ...(selectedLang ? { preferred_language: selectedLang } : {}),
           }, { onConflict: "user_id" });
         await queryClient.invalidateQueries({ queryKey: ["onboarding-status"] });
       }
-      navigate("/practice");
+      navigate(selectedLang ? `/ucenje/${selectedLang}` : "/practice");
     }
   };
   const prev = () => step > 0 && setStep(step - 1);
