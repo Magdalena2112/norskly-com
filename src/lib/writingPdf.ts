@@ -623,8 +623,8 @@ export function generateWritingPdf(payload: WritingPdfPayload, filename = "norsk
       payload.vocabulary_suggestions!.forEach((v) => {
         h += 16; // weak → better line
         if (v.why) {
-          const w = doc.splitTextToSize(v.why, innerW) as string[];
-          h += w.length * 12 + 4;
+          const w = wrap(v.why, innerW, 9.5, "italic");
+          h += w.length * 13 + 4;
         }
         h += 8;
       });
@@ -637,6 +637,7 @@ export function generateWritingPdf(payload: WritingPdfPayload, filename = "norsk
         const startY = y;
         payload.vocabulary_suggestions!.forEach((v) => {
           if (y + 30 > pageHeight - FOOTER_H - 10) newPage();
+          doc.setCharSpace(0);
           doc.setFont("helvetica", "bold");
           doc.setFontSize(10.5);
           doc.setTextColor(...DANGER);
@@ -650,11 +651,9 @@ export function generateWritingPdf(payload: WritingPdfPayload, filename = "norsk
           doc.text(v.better, margin + 18 + ww + 22, y);
           y += 14;
           if (v.why) {
-            doc.setFont("helvetica", "italic");
-            doc.setFontSize(9.5);
             doc.setTextColor(...MUTED);
-            const w = doc.splitTextToSize(v.why, innerW) as string[];
-            w.forEach((l) => { doc.text(l, margin + 18, y); y += 12; });
+            const w = wrap(v.why, innerW, 9.5, "italic");
+            w.forEach((l) => { doc.setCharSpace(0); doc.text(l, margin + 18, y); y += 13; });
           }
           y += 8;
         });
