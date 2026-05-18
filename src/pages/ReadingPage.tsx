@@ -148,7 +148,7 @@ export default function ReadingPage() {
     try {
       const { data: { session } } = await supabase.auth.getSession();
       const res = await supabase.functions.invoke("reading-ai", {
-        body: { action: "evaluate", level, exercises: reading.exercises, answers, language: langCode },
+        body: { action: "evaluate", level, exercises: reading.exercises, answers, language: langCode, focus_area: profile.focus_area, life_context: profile.life_context },
         headers: { Authorization: `Bearer ${session?.access_token}` },
       });
       if (res.error) throw new Error(res.error.message);
