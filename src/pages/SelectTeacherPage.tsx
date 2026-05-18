@@ -47,12 +47,13 @@ export default function SelectTeacherPage() {
   });
 
   const { data: prices = {} } = useQuery({
-    queryKey: ["teachers-min-prices"],
+    queryKey: ["teachers-min-prices", code],
     queryFn: async () => {
       const { data, error } = await supabase
         .from("lesson_types")
         .select("teacher_id,price_cents,currency")
-        .eq("is_active", true);
+        .eq("is_active", true)
+        .eq("language", code);
       if (error) throw error;
       const map: Record<string, PriceInfo> = {};
       for (const lt of data || []) {
