@@ -8,7 +8,7 @@ import { useUserRole } from "@/hooks/useUserRole";
 import { useAuth } from "@/context/AuthContext";
 import { useProfile } from "@/context/ProfileContext";
 import { supabase } from "@/integrations/supabase/client";
-import LanguageSwitcher from "./LanguageSwitcher";
+
 
 const XP_TITLES: Record<number, string> = {
   1: "Utforsker", 2: "Lærling", 3: "Kommunikatør", 4: "Taler", 5: "Trygg taler",
@@ -52,7 +52,6 @@ export default function StudentLayout({ children, title }: StudentLayoutProps) {
               )}
             </div>
             <div className="flex items-center gap-2">
-              <LanguageSwitcher />
               {isAdmin && (
                 <Button variant="outline" size="sm" onClick={() => navigate("/admin/dashboard")} className="gap-1.5">
                   <Shield className="w-3.5 h-3.5" />
