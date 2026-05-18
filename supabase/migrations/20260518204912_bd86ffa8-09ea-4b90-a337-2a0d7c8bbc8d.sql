@@ -1,0 +1,1 @@
+ALTER TABLE public.language_profiles ADD COLUMN IF NOT EXISTS life_context text;

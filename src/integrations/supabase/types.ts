@@ -340,6 +340,7 @@ export type Database = {
           language: string
           learning_goal: string | null
           level: string | null
+          life_context: string | null
           lives_in_norway: boolean | null
           onboarding_completed: boolean
           preferred_tone: string | null
@@ -355,6 +356,7 @@ export type Database = {
           language?: string
           learning_goal?: string | null
           level?: string | null
+          life_context?: string | null
           lives_in_norway?: boolean | null
           onboarding_completed?: boolean
           preferred_tone?: string | null
@@ -370,6 +372,7 @@ export type Database = {
           language?: string
           learning_goal?: string | null
           level?: string | null
+          life_context?: string | null
           lives_in_norway?: boolean | null
           onboarding_completed?: boolean
           preferred_tone?: string | null
