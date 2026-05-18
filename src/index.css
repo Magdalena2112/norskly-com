@@ -217,4 +217,32 @@
   .shadow-card-soft {
     box-shadow: var(--shadow-card);
   }
+  .shadow-postcard {
+    box-shadow: var(--shadow-postcard);
+  }
+
+  /* Warm cream + paper texture for the cozy Nordic dashboard */
+  .bg-cream-paper {
+    background-color: hsl(var(--cream));
+    background-image:
+      radial-gradient(hsl(var(--primary) / 0.04) 1px, transparent 1px),
+      radial-gradient(hsl(var(--accent) / 0.05) 1px, transparent 1px);
+    background-size: 28px 28px, 36px 36px;
+    background-position: 0 0, 14px 18px;
+  }
+
+  .bg-fjord-soft {
+    background: linear-gradient(180deg,
+      hsl(var(--cream)) 0%,
+      hsl(36 45% 94%) 40%,
+      hsl(200 30% 90%) 100%);
+  }
+
+  @keyframes float-slow {
+    0%, 100% { transform: translateY(0) rotate(var(--tw-rotate, 0)); }
+    50% { transform: translateY(-6px) rotate(var(--tw-rotate, 0)); }
+  }
+  .animate-float-slow {
+    animation: float-slow 6s ease-in-out infinite;
+  }
 }
