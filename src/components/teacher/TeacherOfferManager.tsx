@@ -226,13 +226,26 @@ export default function TeacherOfferManager({ teacherId }: Props) {
               <div className="space-y-1.5">
                 <Label htmlFor="price">Cena</Label>
                 <div className="flex gap-2">
-                  <Input
-                    id="price"
-                    type="number"
-                    min={0}
-                    value={form.price_cents / 100}
-                    onChange={(e) => setForm({ ...form, price_cents: Math.round(Number(e.target.value) * 100) })}
-                  />
+                  <div className="relative flex-1">
+                    <Input
+                      id="price"
+                      type="text"
+                      inputMode="decimal"
+                      placeholder="0"
+                      value={form.price_cents === 0 ? "" : (form.price_cents / 100).toString()}
+                      onChange={(e) => {
+                        const cleaned = e.target.value.replace(/[^\d.,]/g, "").replace(",", ".");
+                        const num = cleaned === "" ? 0 : Number(cleaned);
+                        if (!Number.isNaN(num)) {
+                          setForm({ ...form, price_cents: Math.round(num * 100) });
+                        }
+                      }}
+                      className="pr-14 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                    />
+                    <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-muted-foreground pointer-events-none">
+                      {form.currency}
+                    </span>
+                  </div>
                   <Select value={form.currency} onValueChange={(v) => setForm({ ...form, currency: v })}>
                     <SelectTrigger className="w-24"><SelectValue /></SelectTrigger>
                     <SelectContent>
