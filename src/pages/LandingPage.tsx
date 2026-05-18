@@ -360,37 +360,37 @@ export default function LandingPage() {
       </section>
 
       {/* ============== HOW IT WORKS ============== */}
-      <section id="pricing" className="py-20 md:py-28 bg-card/60">
+      <section id="pricing" className="py-14 md:py-28 bg-card/60">
         <div className="container">
-          <div className="text-center mb-12 max-w-2xl mx-auto">
-            <p className="text-xs font-semibold uppercase tracking-widest text-primary/70 mb-3">
+          <div className="text-center mb-10 sm:mb-12 max-w-2xl mx-auto">
+            <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-widest text-primary/70 mb-3">
               Fleksibilno učenje
             </p>
-            <h2 className="text-display text-[clamp(2rem,5vw,4rem)] text-primary mb-4">
+            <h2 className="text-display text-[clamp(1.75rem,5vw,4rem)] text-primary mb-3 sm:mb-4">
               Uči svojim <span className="font-script text-primary/70">tempom</span>.
             </h2>
-            <p className="text-muted-foreground">
+            <p className="text-sm sm:text-base text-muted-foreground">
               Istraži kako Norskly funkcioniše i koje opcije učenja te čekaju.
             </p>
           </div>
 
           {/* Free trial / onboarding intro card */}
-          <div className="max-w-4xl mx-auto mb-10">
-            <div className="relative rounded-3xl p-8 md:p-10 bg-background border border-border shadow-card-soft">
-              <div className="mb-7">
-                <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold tracking-widest uppercase mb-4">
+          <div className="max-w-4xl mx-auto mb-8 sm:mb-10">
+            <div className="relative rounded-3xl p-6 sm:p-8 md:p-10 bg-background border border-border shadow-card-soft">
+              <div className="mb-6 sm:mb-7">
+                <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-[10px] sm:text-xs font-semibold tracking-widest uppercase mb-3 sm:mb-4">
                   <Sparkles className="w-3.5 h-3.5" /> 7 dana besplatno
                 </span>
-                <h3 className="text-display text-3xl md:text-4xl text-primary mb-2">
+                <h3 className="text-display text-2xl sm:text-3xl md:text-4xl text-primary mb-2">
                   Započni <span className="font-script text-primary/70">besplatno</span>.
                 </h3>
                 <p className="text-muted-foreground text-sm md:text-base max-w-xl">
                   Istraži platformu i upoznaj način učenja pre izbora pretplate.
                 </p>
               </div>
-              <div className="grid md:grid-cols-2 gap-8">
+              <div className="grid md:grid-cols-2 gap-6 md:gap-8">
                 <div>
-                  <p className="text-xs font-semibold uppercase tracking-widest text-primary mb-4">Uključeno odmah</p>
+                  <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-widest text-primary mb-3 sm:mb-4">Uključeno odmah</p>
                   <ul className="space-y-2.5">
                     {TRIAL_INCLUDED.map((t) => (
                       <li key={t} className="flex gap-2.5 text-sm text-foreground/85">
@@ -400,7 +400,7 @@ export default function LandingPage() {
                   </ul>
                 </div>
                 <div>
-                  <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-4">Otključava se uz pretplatu</p>
+                  <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-3 sm:mb-4">Otključava se uz pretplatu</p>
                   <ul className="space-y-2.5">
                     {TRIAL_LOCKED.map((t) => (
                       <li key={t} className="flex gap-2.5 text-sm text-muted-foreground">
@@ -414,7 +414,7 @@ export default function LandingPage() {
           </div>
 
           {/* Learning options (informational, no pricing) */}
-          <div className="grid md:grid-cols-2 gap-5 max-w-4xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-4 sm:gap-5 max-w-4xl mx-auto">
             {LEARNING_OPTIONS.map((opt, i) => (
               <motion.div
                 key={opt.title}
@@ -422,13 +422,13 @@ export default function LandingPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ duration: 0.45, delay: i * 0.07 }}
-                className="rounded-3xl p-8 md:p-10 bg-background border border-border hover:border-primary/30 hover:shadow-card-soft transition-all flex flex-col"
+                className="rounded-3xl p-6 sm:p-8 md:p-10 bg-background border border-border hover:border-primary/30 hover:shadow-card-soft transition-all flex flex-col"
               >
-                <div className="w-12 h-12 rounded-2xl bg-accent/40 flex items-center justify-center mb-5">
+                <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-accent/40 flex items-center justify-center mb-4 sm:mb-5">
                   <opt.icon className="w-5 h-5 text-primary" />
                 </div>
-                <h3 className="font-display text-2xl md:text-3xl font-bold text-primary mb-2">{opt.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed mb-6">{opt.desc}</p>
+                <h3 className="font-display text-xl sm:text-2xl md:text-3xl font-bold text-primary mb-2">{opt.title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed mb-5 sm:mb-6">{opt.desc}</p>
                 <ul className="space-y-2.5">
                   {opt.items.map((it) => (
                     <li key={it} className="flex gap-2.5 text-sm text-foreground/85">
@@ -441,14 +441,14 @@ export default function LandingPage() {
           </div>
 
           {/* Soft onboarding CTA */}
-          <div className="mt-14 text-center max-w-xl mx-auto">
-            <p className="text-muted-foreground mb-5 text-sm md:text-base">
+          <div className="mt-10 sm:mt-14 text-center max-w-xl mx-auto">
+            <p className="text-muted-foreground mb-4 sm:mb-5 text-sm md:text-base">
               Izaberi jezik da vidiš dostupne profesore i opcije učenja.
             </p>
             <Button
               variant="outline"
               size="lg"
-              className="rounded-full h-12 px-7 border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+              className="rounded-full h-11 sm:h-12 px-5 sm:px-7 border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground"
               onClick={() =>
                 document.getElementById("languages")?.scrollIntoView({ behavior: "smooth", block: "start" })
               }
