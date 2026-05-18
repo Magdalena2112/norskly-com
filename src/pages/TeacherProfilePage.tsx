@@ -90,6 +90,39 @@ export default function TeacherProfilePage() {
     enabled: !!teacherId,
   });
 
+  // Real-time: osluškuj promene termina za ovog nastavnika i automatski osvežavaj listu.
+  // Ako je trenutno selektovani slot zauzet od strane drugog korisnika, deselektuj ga i obavesti.
+  useEffect(() => {
+    if (!teacherId) return;
+    const channel = supabase
+      .channel(`availability-${teacherId}`)
+      .on(
+        "postgres_changes",
+        { event: "*", schema: "public", table: "availability_slots", filter: `teacher_id=eq.${teacherId}` },
+        (payload: any) => {
+          queryClient.invalidateQueries({ queryKey: ["open-slots", teacherId] });
+          const changed = payload.new ?? payload.old;
+          if (
+            selectedSlot &&
+            changed?.id === selectedSlot.id &&
+            payload.new?.status &&
+            payload.new.status !== "open"
+          ) {
+            setSelectedSlot(null);
+            toast({
+              title: "Termin više nije dostupan",
+              description: "Neko drugi je upravo rezervisao ovaj termin. Izaberi drugi.",
+              variant: "destructive",
+            });
+          }
+        },
+      )
+      .subscribe();
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [teacherId, selectedSlot, queryClient, toast]);
+
   const bookMutation = useMutation({
     mutationFn: async () => {
       if (!user || !selectedSlot || !selectedType) throw new Error("Nedostaju podaci");
