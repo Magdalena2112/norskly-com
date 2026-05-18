@@ -198,8 +198,7 @@ describe("writingPdf — letter spacing regression", () => {
     generateWritingPdf(SAMPLE_PAYLOAD, "test.pdf");
     const textCalls = calls.filter((c) => c.method === "text");
     expect(textCalls.length).toBeGreaterThan(0);
-    for (const t of textCalls) {
-      // @ts-expect-error attached in mock
+    for (const t of textCalls as Array<Call & { _charSpace?: number }>) {
       expect(t._charSpace, `text() rendered with non-zero charSpace: ${JSON.stringify(t.args[0])}`).toBe(0);
     }
   });
