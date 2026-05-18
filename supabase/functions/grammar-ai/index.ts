@@ -319,6 +319,10 @@ VAŽNA UPUTSTVA:
       });
     }
 
+    systemPrompt = systemPrompt + personalizationLine;
+
+
+
     const aiResponse = await fetch(GATEWAY_URL, {
       method: "POST",
       headers: {
