@@ -970,6 +970,20 @@ export type Database = {
         Args: { payload: Json; queue_name: string }
         Returns: number
       }
+      get_active_teachers: {
+        Args: never
+        Returns: {
+          bio: string
+          focus: string[]
+          id: string
+          is_verified: boolean
+          name: string
+          photo_url: string
+          rating: number
+          spoken_languages: string[]
+          students_count: number
+        }[]
+      }
       get_teacher_email: { Args: never; Returns: string }
       get_teacher_meet_link: { Args: never; Returns: string }
       get_teacher_profile_public: {
@@ -984,6 +998,21 @@ export type Database = {
           rating: number
           students_count: number
           updated_at: string
+        }[]
+      }
+      get_teacher_public_by_id: {
+        Args: { p_teacher_id: string }
+        Returns: {
+          bio: string
+          focus: string[]
+          id: string
+          is_active: boolean
+          is_verified: boolean
+          name: string
+          photo_url: string
+          rating: number
+          spoken_languages: string[]
+          students_count: number
         }[]
       }
       has_role: {
