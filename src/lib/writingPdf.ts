@@ -1,4 +1,24 @@
 import jsPDF from "jspdf";
+import { ROBOTO_REGULAR_B64, ROBOTO_BOLD_B64 } from "./pdfFonts";
+
+// Naziv fonta koji koristimo svuda u PDF generatoru. Roboto ima podršku za
+// srpsku latinicu (č, š, ž, đ, ć) i norvešku (å, æ, ø), za razliku od
+// ugrađenog helvetica/WinAnsi enkodinga u jsPDF.
+const PDF_FONT = "Roboto";
+
+function ensureRobotoRegistered(doc: jsPDF) {
+  // Registruj font samo jednom po dokumentu; jsPDF instance pamti dodate fontove.
+  const list = (doc as unknown as { getFontList?: () => Record<string, string[]> }).getFontList?.();
+  if (list && list[PDF_FONT]) return;
+  doc.addFileToVFS("Roboto-Regular.ttf", ROBOTO_REGULAR_B64);
+  doc.addFont("Roboto-Regular.ttf", PDF_FONT, "normal");
+  doc.addFileToVFS("Roboto-Bold.ttf", ROBOTO_BOLD_B64);
+  doc.addFont("Roboto-Bold.ttf", PDF_FONT, "bold");
+  // Font subset nema italic. Mapiramo "italic" → normal i "bolditalic" → bold
+  // da bismo izbegli fallback na helvetica (koji ne podržava srpsku latinicu).
+  doc.addFont("Roboto-Regular.ttf", PDF_FONT, "italic");
+  doc.addFont("Roboto-Bold.ttf", PDF_FONT, "bolditalic");
+}
 
 export interface WritingPdfPayload {
   type: "image" | "text";
