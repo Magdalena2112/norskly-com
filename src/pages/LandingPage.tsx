@@ -298,24 +298,24 @@ export default function LandingPage() {
       </section>
 
       {/* ============== ROLE CHOICE ============== */}
-      <section className="py-20 md:py-28 bg-card/60">
+      <section className="py-14 md:py-28 bg-card/60">
         <div className="container max-w-5xl">
-          <div className="text-center mb-12">
-            <p className="text-xs font-semibold uppercase tracking-widest text-primary/70 mb-3">Izaberi svoju ulogu</p>
-            <h2 className="text-display text-[clamp(2rem,5vw,4rem)] text-primary">
+          <div className="text-center mb-10 sm:mb-12">
+            <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-widest text-primary/70 mb-3">Izaberi svoju ulogu</p>
+            <h2 className="text-display text-[clamp(1.75rem,5vw,4rem)] text-primary">
               Kako želiš <span className="font-script text-primary/70">da</span> kreneš?
             </h2>
           </div>
-          <div className="grid sm:grid-cols-2 gap-5">
+          <div className="grid sm:grid-cols-2 gap-4 sm:gap-5">
             {[
               { label: "Student", desc: "Uči, vežbaj i napreduj svaki dan.", role: "student", bg: "bg-background" },
               { label: "Profesor", desc: "Predavaj, organizuj i prati studente.", role: "teacher", bg: "bg-secondary" },
             ].map((r) => (
               <button key={r.role} onClick={() => navigate(`/auth?role=${r.role}`)}
-                className={`${r.bg} group rounded-3xl p-10 text-left border border-border hover:-translate-y-1 hover:shadow-soft transition-all`}
+                className={`${r.bg} group rounded-3xl p-6 sm:p-10 text-left border border-border hover:-translate-y-1 hover:shadow-soft transition-all`}
               >
-                <h3 className="text-display text-5xl text-primary mb-3">{r.label}</h3>
-                <p className="text-muted-foreground mb-6">{r.desc}</p>
+                <h3 className="text-display text-4xl sm:text-5xl text-primary mb-2 sm:mb-3">{r.label}</h3>
+                <p className="text-sm sm:text-base text-muted-foreground mb-5 sm:mb-6">{r.desc}</p>
                 <span className="inline-flex items-center gap-2 text-primary font-semibold">
                   Izaberi <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </span>
