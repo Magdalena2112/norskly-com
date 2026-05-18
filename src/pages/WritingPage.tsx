@@ -230,10 +230,13 @@ function BildebeskrivelseTab({ level }: { level: string }) {
       sledeci_korak: result.sledeci_korak,
       vocabulary_helper: helper?.vocabulary,
       vocabulary_helper_groups: helper?.vocabulary_groups,
+      expressions: helper?.expressions,
+      sentence_starters: helper?.sentence_starters,
       cefr_assessment: result.cefr_assessment,
       naturalness_score: result.naturalness_score,
       complexity_score: result.complexity_score,
       nivo_analiza: result.nivo_analiza,
+      image_data_url: imageDataUrl || undefined,
     }, `bildebeskrivelse-${Date.now()}.pdf`);
   };
 
