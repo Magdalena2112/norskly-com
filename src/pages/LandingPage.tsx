@@ -10,6 +10,7 @@ import {
   Accordion, AccordionContent, AccordionItem, AccordionTrigger,
 } from "@/components/ui/accordion";
 import { FloatingGreetings } from "@/components/FloatingGreetings";
+import ecosystemCollage from "@/assets/ecosystem-collage.jpg";
 
 
 const FEATURES = [
