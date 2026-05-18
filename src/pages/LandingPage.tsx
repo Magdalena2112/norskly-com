@@ -460,19 +460,19 @@ export default function LandingPage() {
       </section>
 
       {/* ============== FAQ ============== */}
-      <section id="faq" className="py-20 md:py-28">
+      <section id="faq" className="py-14 md:py-28">
         <div className="container">
-          <div className="grid md:grid-cols-2 gap-12 items-start">
+          <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-start">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-widest text-primary/70 mb-3">FAQ</p>
-              <h2 className="text-display text-[clamp(2rem,5vw,4rem)] text-primary mb-6">
+              <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-widest text-primary/70 mb-3">FAQ</p>
+              <h2 className="text-display text-[clamp(1.75rem,5vw,4rem)] text-primary mb-5 sm:mb-6">
                 Pitanja? <span className="font-script text-primary/70">Odgovori.</span>
               </h2>
-              <p className="text-muted-foreground mb-8">
+              <p className="text-sm sm:text-base text-muted-foreground mb-8">
                 Sve što treba da znaš pre nego što kreneš.
               </p>
-              <div className="relative rounded-3xl overflow-hidden bg-secondary aspect-square max-w-md border border-border">
-                <div className="absolute inset-0 p-8 md:p-10 flex items-center">
+              <div className="relative rounded-3xl overflow-hidden bg-secondary aspect-[4/3] sm:aspect-square max-w-md border border-border">
+                <div className="absolute inset-0 p-6 sm:p-8 md:p-10 flex items-center">
                   <p
                     className="font-marker uppercase text-primary/70"
                     style={{
@@ -489,11 +489,11 @@ export default function LandingPage() {
             <div>
               <Accordion type="single" collapsible className="bg-card rounded-3xl p-2 border border-border">
                 {FAQ.map((item, i) => (
-                  <AccordionItem key={i} value={`item-${i}`} className="border-border last:border-0 px-4">
-                    <AccordionTrigger className="text-left font-display text-lg text-primary hover:no-underline">
+                  <AccordionItem key={i} value={`item-${i}`} className="border-border last:border-0 px-3 sm:px-4">
+                    <AccordionTrigger className="text-left font-display text-base sm:text-lg text-primary hover:no-underline">
                       {item.q}
                     </AccordionTrigger>
-                    <AccordionContent className="text-muted-foreground leading-relaxed">
+                    <AccordionContent className="text-sm sm:text-base text-muted-foreground leading-relaxed">
                       {item.a}
                     </AccordionContent>
                   </AccordionItem>
@@ -505,23 +505,23 @@ export default function LandingPage() {
       </section>
 
       {/* ============== FINAL CTA ============== */}
-      <section className="py-20 md:py-28">
+      <section className="py-14 md:py-28">
         <div className="container">
           <motion.div
             initial={{ opacity: 0, scale: 0.97 }} whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="relative rounded-[2.5rem] bg-primary text-primary-foreground p-10 md:p-20 text-center overflow-hidden"
+            className="relative rounded-3xl md:rounded-[2.5rem] bg-primary text-primary-foreground p-8 sm:p-10 md:p-20 text-center overflow-hidden"
           >
             <div className="absolute inset-0 bg-dots-soft opacity-20" />
             <div className="relative">
-              <h2 className="text-display text-[clamp(2.2rem,6vw,5rem)] mb-6">
+              <h2 className="text-display text-[clamp(1.8rem,6vw,5rem)] mb-5 sm:mb-6">
                 Spreman <span className="font-script opacity-80">da</span> progovoriš?
               </h2>
-              <p className="opacity-80 max-w-md mx-auto mb-8">
+              <p className="opacity-80 max-w-md mx-auto mb-7 sm:mb-8 text-sm sm:text-base">
                 Kreiraj profil za 2 minuta i počni da učiš na način koji odgovara tebi.
               </p>
               <Button size="lg" onClick={() => document.getElementById("languages")?.scrollIntoView({ behavior: "smooth" })}
-                className="rounded-full h-14 px-10 bg-primary-foreground text-primary hover:bg-primary-foreground/90">
+                className="rounded-full h-12 sm:h-14 px-7 sm:px-10 bg-primary-foreground text-primary hover:bg-primary-foreground/90">
                 Započni besplatno <ArrowRight className="ml-1 h-4 w-4" />
               </Button>
             </div>
@@ -530,8 +530,8 @@ export default function LandingPage() {
       </section>
 
       {/* ============== FOOTER ============== */}
-      <footer className="border-t border-border/60 py-10">
-        <div className="container flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
+      <footer className="border-t border-border/60 py-8 md:py-10">
+        <div className="container flex flex-col md:flex-row items-center justify-between gap-3 md:gap-4 text-xs sm:text-sm text-muted-foreground text-center md:text-left">
           <span className="text-display text-2xl font-black text-primary">Norskly</span>
           <p>© 2026 Norskly. Sva prava zadržana.</p>
         </div>
