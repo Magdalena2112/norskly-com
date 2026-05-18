@@ -44,7 +44,8 @@ Deno.serve(async (req) => {
       });
     }
 
-    const { action, messages: rawMessages, profile, settings } = await req.json();
+    const { action, messages: rawMessages, profile, settings, language: rawLanguage } = await req.json();
+    const language = (typeof rawLanguage === "string" && ["no", "en", "de"].includes(rawLanguage)) ? rawLanguage : "no";
 
     // Input validation: cap messages count/size and whitelist roles to prevent
     // prompt injection (e.g., injected system messages) and cost amplification.
