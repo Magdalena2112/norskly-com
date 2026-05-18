@@ -160,17 +160,17 @@ export default function LandingPage() {
             <p id="languages" className="text-xs font-semibold uppercase tracking-widest text-primary/70 mb-3 scroll-mt-24">
               Izaberi jezik koji želiš da učiš
             </p>
-            <div className="flex flex-wrap justify-center gap-2 mb-10">
+            <div className="flex flex-wrap justify-center gap-3 mb-10">
               {LANGUAGE_CONFIGS.map((l) => (
                 <Link
                   key={l.slug}
                   to={`/jezici/${l.slug}`}
                   onClick={() => localStorage.setItem("norskly_selected_language", l.slug)}
-                  className="group px-5 py-2.5 rounded-full text-sm font-medium border bg-background text-foreground border-border hover:border-primary hover:bg-secondary/40 hover:-translate-y-0.5 hover:shadow-card-soft transition-all inline-flex items-center gap-2"
+                  className="group px-7 py-4 rounded-full text-base md:text-lg font-semibold border bg-background text-foreground border-border hover:border-primary hover:bg-secondary/40 hover:-translate-y-0.5 hover:shadow-card-soft transition-all inline-flex items-center gap-2"
                 >
-                  <span>{l.flag}</span>
+                  <span className="text-xl">{l.flag}</span>
                   <span>{l.label}</span>
-                  <ArrowRight className="w-3.5 h-3.5 opacity-0 -ml-1 group-hover:opacity-100 group-hover:ml-0 transition-all" />
+                  <ArrowRight className="w-4 h-4 opacity-0 -ml-1 group-hover:opacity-100 group-hover:ml-0 transition-all" />
                 </Link>
               ))}
             </div>
