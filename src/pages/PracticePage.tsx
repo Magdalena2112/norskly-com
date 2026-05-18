@@ -270,6 +270,7 @@ export default function PracticePage() {
       .from("talk_sessions")
       .select("*")
       .eq("user_id", user.id)
+      .eq("language", langCode)
       .order("created_at", { ascending: false })
       .limit(30);
 
@@ -279,7 +280,7 @@ export default function PracticePage() {
       setPastSessions((data as unknown as TalkSession[]) || []);
     }
     setHistoryLoading(false);
-  }, [user]);
+  }, [user, langCode]);
 
   useEffect(() => {
     if (showHistory) fetchHistory();
