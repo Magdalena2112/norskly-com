@@ -1,13 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import StudentLayout from "@/components/student/StudentLayout";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
+
 import { useAuth } from "@/context/AuthContext";
 import { useProfile } from "@/context/ProfileContext";
 import { supabase } from "@/integrations/supabase/client";
 import { format } from "date-fns";
-import { Mail, Calendar, Languages, CreditCard, Target, GraduationCap, Zap } from "lucide-react";
+import { Mail, Calendar, Languages, CreditCard, Target, GraduationCap, Zap, Camera, Loader2 } from "lucide-react";
+import { toast } from "@/hooks/use-toast";
 
 const PLAN_LABELS: Record<string, string> = {
   self: "Samostalno učenje",
@@ -23,6 +25,9 @@ export default function ProfilePage() {
   const [preferredLanguage, setPreferredLanguage] = useState<string | null>(null);
   const [subscription, setSubscription] = useState<string | null>(null);
   const [xp, setXp] = useState<{ total_xp: number; level: number } | null>(null);
+  const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
+  const [uploading, setUploading] = useState(false);
+  const fileRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (!user) return;
@@ -30,7 +35,7 @@ export default function ProfilePage() {
       const [{ data: p }, { data: x }] = await Promise.all([
         supabase
           .from("profiles")
-          .select("created_at, preferred_language, subscription_type")
+          .select("created_at, preferred_language, subscription_type, avatar_url")
           .eq("user_id", user.id)
           .maybeSingle(),
         supabase.from("user_xp").select("total_xp, level").eq("user_id", user.id).maybeSingle(),
@@ -38,9 +43,38 @@ export default function ProfilePage() {
       setRegisteredAt(p?.created_at || user.created_at || null);
       setPreferredLanguage(p?.preferred_language || localStorage.getItem("norskly_selected_language"));
       setSubscription(p?.subscription_type || localStorage.getItem("norskly_selected_plan"));
+      setAvatarUrl((p as any)?.avatar_url || null);
       setXp(x || { total_xp: 0, level: 1 });
     })();
   }, [user]);
+
+  const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file || !user) return;
+    if (file.size > 5 * 1024 * 1024) {
+      toast({ title: "Fajl prevelik", description: "Maksimum 5MB.", variant: "destructive" });
+      return;
+    }
+    setUploading(true);
+    const ext = file.name.split(".").pop() || "jpg";
+    const path = `${user.id}/avatar-${Date.now()}.${ext}`;
+    const { error: upErr } = await supabase.storage.from("avatars").upload(path, file, { upsert: true });
+    if (upErr) {
+      toast({ title: "Greška", description: upErr.message, variant: "destructive" });
+      setUploading(false);
+      return;
+    }
+    const { data: pub } = supabase.storage.from("avatars").getPublicUrl(path);
+    const url = pub.publicUrl;
+    const { error: dbErr } = await supabase.from("profiles").update({ avatar_url: url }).eq("user_id", user.id);
+    setUploading(false);
+    if (dbErr) {
+      toast({ title: "Greška", description: dbErr.message, variant: "destructive" });
+      return;
+    }
+    setAvatarUrl(url);
+    toast({ title: "Profilna slika ažurirana" });
+  };
 
   const initials = (profile.name || user?.email || "U")
     .split(" ")
@@ -64,11 +98,30 @@ export default function ProfilePage() {
       <div className="container max-w-3xl py-8 space-y-6">
         <Card className="bg-background/90 backdrop-blur-sm border-border/30">
           <CardContent className="pt-6 flex items-center gap-4">
-            <Avatar className="w-16 h-16 ring-2 ring-accent">
-              <AvatarFallback className="bg-primary text-primary-foreground font-display text-xl">
-                {initials}
-              </AvatarFallback>
-            </Avatar>
+            <div className="relative">
+              <Avatar className="w-16 h-16 ring-2 ring-accent">
+                {avatarUrl && <AvatarImage src={avatarUrl} alt={profile.name || "avatar"} />}
+                <AvatarFallback className="bg-primary text-primary-foreground font-display text-xl">
+                  {initials}
+                </AvatarFallback>
+              </Avatar>
+              <button
+                type="button"
+                onClick={() => fileRef.current?.click()}
+                disabled={uploading}
+                className="absolute -bottom-1 -right-1 w-7 h-7 rounded-full bg-accent text-accent-foreground flex items-center justify-center shadow-md hover:scale-110 transition-transform disabled:opacity-60"
+                aria-label="Promeni profilnu sliku"
+              >
+                {uploading ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Camera className="w-3.5 h-3.5" />}
+              </button>
+              <input
+                ref={fileRef}
+                type="file"
+                accept="image/*"
+                className="hidden"
+                onChange={handleUpload}
+              />
+            </div>
             <div className="flex-1 min-w-0">
               <h2 className="text-xl font-display font-bold text-foreground truncate">
                 {profile.name || "Bez imena"}
