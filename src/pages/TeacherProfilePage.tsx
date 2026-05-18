@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { useAuth } from "@/context/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
@@ -90,11 +90,59 @@ export default function TeacherProfilePage() {
     enabled: !!teacherId,
   });
 
+  // Real-time: osluškuj promene termina za ovog nastavnika i automatski osvežavaj listu.
+  // Ako je trenutno selektovani slot zauzet od strane drugog korisnika, deselektuj ga i obavesti.
+  useEffect(() => {
+    if (!teacherId) return;
+    const channel = supabase
+      .channel(`availability-${teacherId}`)
+      .on(
+        "postgres_changes",
+        { event: "*", schema: "public", table: "availability_slots", filter: `teacher_id=eq.${teacherId}` },
+        (payload: any) => {
+          queryClient.invalidateQueries({ queryKey: ["open-slots", teacherId] });
+          const changed = payload.new ?? payload.old;
+          if (
+            selectedSlot &&
+            changed?.id === selectedSlot.id &&
+            payload.new?.status &&
+            payload.new.status !== "open"
+          ) {
+            setSelectedSlot(null);
+            toast({
+              title: "Termin više nije dostupan",
+              description: "Neko drugi je upravo rezervisao ovaj termin. Izaberi drugi.",
+              variant: "destructive",
+            });
+          }
+        },
+      )
+      .subscribe();
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [teacherId, selectedSlot, queryClient, toast]);
+
   const bookMutation = useMutation({
     mutationFn: async () => {
       if (!user || !selectedSlot || !selectedType) throw new Error("Nedostaju podaci");
       const startTime = new Date(selectedSlot.start_time);
       const endTime = addMinutes(startTime, selectedType.duration_minutes || 90);
+
+      // Preflight: provera dostupnosti u realnom vremenu pre RPC poziva.
+      // Atomski guard u book_lesson_v2 RPC-u svakako sprečava duple booking-e,
+      // ali ovo daje brži i prijateljskiji UX kad je termin već zauzet.
+      const { data: liveSlot, error: liveErr } = await supabase
+        .from("availability_slots")
+        .select("id, status")
+        .eq("id", selectedSlot.id)
+        .maybeSingle();
+      if (liveErr) throw liveErr;
+      if (!liveSlot || liveSlot.status !== "open") {
+        queryClient.invalidateQueries({ queryKey: ["open-slots", teacherId] });
+        setSelectedSlot(null);
+        throw new Error("Ovaj termin je upravo rezervisan. Izaberi drugi slobodan termin.");
+      }
 
       const { data: lessonId, error } = await supabase.rpc("book_lesson_v2", {
         p_slot_id: selectedSlot.id,
