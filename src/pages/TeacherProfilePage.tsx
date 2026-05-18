@@ -45,13 +45,11 @@ export default function TeacherProfilePage() {
   const { data: teacher, isLoading: teacherLoading } = useQuery({
     queryKey: ["teacher", teacherId],
     queryFn: async () => {
-      const { data, error } = await supabase
-        .from("teachers")
-        .select("*")
-        .eq("id", teacherId)
-        .maybeSingle();
+      const { data, error } = await supabase.rpc("get_teacher_public_by_id", {
+        p_teacher_id: teacherId,
+      });
       if (error) throw error;
-      return data;
+      return (data && data[0]) || null;
     },
   });
 
@@ -181,25 +179,22 @@ export default function TeacherProfilePage() {
         }).catch((e) => console.error("Student email failed:", e));
       }
 
-      // Email to teacher
-      if (teacher?.email) {
-        supabase.functions.invoke("send-transactional-email", {
-          body: {
-            templateName: "lesson-booked-teacher",
-            recipientEmail: teacher.email,
-            idempotencyKey: `lesson-teacher-${lessonId}`,
-            templateData: {
-              studentName,
-              studentLanguage,
-              lessonType: `${selectedType.title} (${selectedType.duration_minutes} min)`,
-              date: dateStr,
-              time: timeStr,
-              note: note || undefined,
-              analyticsShared: shareAnalytics,
-            },
+      // Email to teacher — recipient is resolved server-side, no client email needed
+      supabase.functions.invoke("send-transactional-email", {
+        body: {
+          templateName: "lesson-booked-teacher",
+          idempotencyKey: `lesson-teacher-${lessonId}`,
+          templateData: {
+            studentName,
+            studentLanguage,
+            lessonType: `${selectedType.title} (${selectedType.duration_minutes} min)`,
+            date: dateStr,
+            time: timeStr,
+            note: note || undefined,
+            analyticsShared: shareAnalytics,
           },
-        }).catch((e) => console.error("Teacher email failed:", e));
-      }
+        },
+      }).catch((e) => console.error("Teacher email failed:", e));
 
       return lessonId as string;
     },

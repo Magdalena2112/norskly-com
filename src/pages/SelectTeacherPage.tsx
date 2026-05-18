@@ -31,11 +31,7 @@ export default function SelectTeacherPage() {
   const { data: teachers = [], isLoading } = useQuery({
     queryKey: ["teachers-list"],
     queryFn: async () => {
-      const { data, error } = await supabase
-        .from("teachers")
-        .select("id,name,bio,photo_url,spoken_languages,focus,rating,students_count,is_verified")
-        .eq("is_active", true)
-        .order("rating", { ascending: false });
+      const { data, error } = await supabase.rpc("get_active_teachers");
       if (error) throw error;
       return (data || []) as Teacher[];
     },

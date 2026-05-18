@@ -76,7 +76,7 @@ export default function ForTeachersPage() {
       let cv_path: string | null = null;
       if (cvFile) {
         const ext = cvFile.name.split(".").pop() || "pdf";
-        const path = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
+        const path = `applications/${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
         const { error: upErr } = await supabase.storage
           .from("teacher-cvs")
           .upload(path, cvFile, { contentType: cvFile.type || "application/pdf" });
