@@ -25,6 +25,9 @@ export default function ProfilePage() {
   const [preferredLanguage, setPreferredLanguage] = useState<string | null>(null);
   const [subscription, setSubscription] = useState<string | null>(null);
   const [xp, setXp] = useState<{ total_xp: number; level: number } | null>(null);
+  const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
+  const [uploading, setUploading] = useState(false);
+  const fileRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (!user) return;
@@ -32,7 +35,7 @@ export default function ProfilePage() {
       const [{ data: p }, { data: x }] = await Promise.all([
         supabase
           .from("profiles")
-          .select("created_at, preferred_language, subscription_type")
+          .select("created_at, preferred_language, subscription_type, avatar_url")
           .eq("user_id", user.id)
           .maybeSingle(),
         supabase.from("user_xp").select("total_xp, level").eq("user_id", user.id).maybeSingle(),
@@ -40,9 +43,38 @@ export default function ProfilePage() {
       setRegisteredAt(p?.created_at || user.created_at || null);
       setPreferredLanguage(p?.preferred_language || localStorage.getItem("norskly_selected_language"));
       setSubscription(p?.subscription_type || localStorage.getItem("norskly_selected_plan"));
+      setAvatarUrl((p as any)?.avatar_url || null);
       setXp(x || { total_xp: 0, level: 1 });
     })();
   }, [user]);
+
+  const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file || !user) return;
+    if (file.size > 5 * 1024 * 1024) {
+      toast({ title: "Fajl prevelik", description: "Maksimum 5MB.", variant: "destructive" });
+      return;
+    }
+    setUploading(true);
+    const ext = file.name.split(".").pop() || "jpg";
+    const path = `${user.id}/avatar-${Date.now()}.${ext}`;
+    const { error: upErr } = await supabase.storage.from("avatars").upload(path, file, { upsert: true });
+    if (upErr) {
+      toast({ title: "Greška", description: upErr.message, variant: "destructive" });
+      setUploading(false);
+      return;
+    }
+    const { data: pub } = supabase.storage.from("avatars").getPublicUrl(path);
+    const url = pub.publicUrl;
+    const { error: dbErr } = await supabase.from("profiles").update({ avatar_url: url }).eq("user_id", user.id);
+    setUploading(false);
+    if (dbErr) {
+      toast({ title: "Greška", description: dbErr.message, variant: "destructive" });
+      return;
+    }
+    setAvatarUrl(url);
+    toast({ title: "Profilna slika ažurirana" });
+  };
 
   const initials = (profile.name || user?.email || "U")
     .split(" ")
