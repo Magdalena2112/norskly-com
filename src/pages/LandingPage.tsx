@@ -123,7 +123,7 @@ export default function LandingPage() {
           </div>
           <div className="flex items-center gap-2">
             <Button variant="ghost" size="sm" onClick={() => navigate("/auth")}>Prijava</Button>
-            <Button size="sm" className="rounded-full bg-primary hover:bg-primary/90" onClick={() => navigate("/auth")}>
+            <Button size="sm" className="rounded-full bg-primary hover:bg-primary/90" onClick={() => document.getElementById("languages")?.scrollIntoView({ behavior: "smooth" })}>
               Započni besplatno
             </Button>
           </div>
@@ -266,7 +266,7 @@ export default function LandingPage() {
                   </li>
                 ))}
               </ul>
-              <Button onClick={() => navigate("/auth?role=student")}
+              <Button onClick={() => document.getElementById("languages")?.scrollIntoView({ behavior: "smooth" })}
                 className="rounded-full bg-primary hover:bg-primary/90">
                 Počni sa učenjem <ArrowRight className="ml-1 h-4 w-4" />
               </Button>
@@ -521,7 +521,7 @@ export default function LandingPage() {
               <p className="opacity-80 max-w-md mx-auto mb-8">
                 Kreiraj profil za 2 minuta i počni da učiš na način koji odgovara tebi.
               </p>
-              <Button size="lg" onClick={() => navigate("/auth")}
+              <Button size="lg" onClick={() => document.getElementById("languages")?.scrollIntoView({ behavior: "smooth" })}
                 className="rounded-full h-14 px-10 bg-primary-foreground text-primary hover:bg-primary-foreground/90">
                 Započni besplatno <ArrowRight className="ml-1 h-4 w-4" />
               </Button>
