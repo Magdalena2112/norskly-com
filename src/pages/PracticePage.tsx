@@ -581,12 +581,12 @@ export default function PracticePage() {
   if (viewingSession) {
     const s = viewingSession;
     return (
-      <div className="min-h-screen bg-aurora flex flex-col">
-        <header className="border-b border-border/20 bg-background/10 backdrop-blur-md sticky top-0 z-50">
+      <div className="min-h-screen bg-fjord-soft flex flex-col">
+        <header className="border-b border-border/50 bg-cream/80 backdrop-blur-md sticky top-0 z-50">
           <div className="container flex items-center justify-between h-14">
             <div className="flex items-center gap-1">
               <BackButton to="/practice" />
-              <span className="font-display font-bold text-lg text-primary-foreground">Norskly</span>
+              <span className="font-display font-bold text-lg text-primary">Norskly</span>
             </div>
             <div className="flex items-center gap-2">
               {!s.recap && (
@@ -650,12 +650,12 @@ export default function PracticePage() {
   // ── Recap screen ──
   if (recap) {
     return (
-      <div className="min-h-screen bg-aurora flex flex-col">
-        <header className="border-b border-border/20 bg-background/10 backdrop-blur-md sticky top-0 z-50">
+      <div className="min-h-screen bg-fjord-soft flex flex-col">
+        <header className="border-b border-border/50 bg-cream/80 backdrop-blur-md sticky top-0 z-50">
           <div className="container flex items-center justify-between h-14">
             <div className="flex items-center gap-1">
               <BackButton to="/practice" />
-              <span className="font-display font-bold text-lg text-primary-foreground">Norskly</span>
+              <span className="font-display font-bold text-lg text-primary">Norskly</span>
             </div>
           </div>
         </header>
@@ -682,13 +682,13 @@ export default function PracticePage() {
 
   // ── Chat screen ──
   return (
-    <div className="min-h-screen bg-aurora flex flex-col">
+    <div className="min-h-screen bg-fjord-soft flex flex-col">
       {/* Header */}
-      <header className="border-b border-border/20 bg-background/10 backdrop-blur-md sticky top-0 z-50">
+      <header className="border-b border-border/50 bg-cream/80 backdrop-blur-md sticky top-0 z-50">
         <div className="container flex items-center justify-between h-14">
             <div className="flex items-center gap-1">
               <BackButton to="/practice" />
-              <span className="font-display font-bold text-lg text-primary-foreground">Norskly</span>
+              <span className="font-display font-bold text-lg text-primary">Norskly</span>
             </div>
           <div className="flex items-center gap-2">
             <Button

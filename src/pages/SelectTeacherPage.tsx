@@ -57,11 +57,11 @@ export default function SelectTeacherPage() {
   });
 
   return (
-    <div className="min-h-screen bg-aurora">
-      <header className="border-b border-border/20 bg-background/10 backdrop-blur-md sticky top-0 z-50">
+    <div className="min-h-screen bg-fjord-soft">
+      <header className="border-b border-border/50 bg-cream/80 backdrop-blur-md sticky top-0 z-50">
         <div className="container flex items-center gap-3 h-14">
           <BackButton to="/practice" />
-          <span className="font-display font-bold text-lg text-primary-foreground">Izaberi nastavnika</span>
+          <span className="font-display font-bold text-lg text-primary">Izaberi nastavnika</span>
         </div>
       </header>
 
@@ -70,10 +70,10 @@ export default function SelectTeacherPage() {
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/15 border border-accent/30 text-xs font-semibold text-accent">
             <Sparkles className="w-3.5 h-3.5" /> AI + ljudska podrška
           </div>
-          <h1 className="text-3xl sm:text-4xl font-display font-bold text-primary-foreground">
+          <h1 className="text-3xl sm:text-4xl font-display font-bold text-primary">
             Odaberi svog nastavnika
           </h1>
-          <p className="text-primary-foreground/80 max-w-xl mx-auto">
+          <p className="text-primary/80 max-w-xl mx-auto">
             Verifikovani profesori norveškog jezika. Izaberi tip časa, termin i odluči da li želiš da deliš svoj napredak za personalizovanije vođenje.
           </p>
         </motion.div>

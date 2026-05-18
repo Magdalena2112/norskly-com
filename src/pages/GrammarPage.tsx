@@ -72,14 +72,14 @@ export default function GrammarPage() {
   };
 
   return (
-    <div className="min-h-screen bg-aurora flex flex-col">
-      <header className="border-b border-border/20 bg-background/10 backdrop-blur-md sticky top-0 z-50">
+    <div className="min-h-screen bg-fjord-soft flex flex-col">
+      <header className="border-b border-border/50 bg-cream/80 backdrop-blur-md sticky top-0 z-50">
         <div className="container flex items-center gap-3 h-14">
-          <Button variant="ghost" size="icon" onClick={() => navigate("/practice")} className="text-primary-foreground hover:text-primary-foreground/80">
+          <Button variant="ghost" size="icon" onClick={() => navigate("/practice")} className="text-primary hover:text-primary/80">
             <ArrowLeft className="w-4 h-4" />
           </Button>
-          <span className="font-display font-bold text-lg text-primary-foreground">Gramatika</span>
-          <span className="ml-auto text-xs bg-primary-foreground/15 text-primary-foreground px-3 py-1 rounded-full font-medium">
+          <span className="font-display font-bold text-lg text-primary">Gramatika</span>
+          <span className="ml-auto text-xs bg-primary/10 text-primary px-3 py-1 rounded-full font-medium">
             Nivo {level}
           </span>
         </div>

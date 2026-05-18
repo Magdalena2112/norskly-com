@@ -223,11 +223,11 @@ export default function TeacherProfilePage() {
   const initials = (teacher?.name || "??").split(" ").map((n: string) => n[0]).join("").slice(0, 2);
 
   return (
-    <div className="min-h-screen bg-aurora">
-      <header className="border-b border-border/20 bg-background/10 backdrop-blur-md sticky top-0 z-50">
+    <div className="min-h-screen bg-fjord-soft">
+      <header className="border-b border-border/50 bg-cream/80 backdrop-blur-md sticky top-0 z-50">
         <div className="container flex items-center gap-3 h-14">
           <BackButton to="/select-teacher" />
-          <span className="font-display font-bold text-lg text-primary-foreground">Profil nastavnika</span>
+          <span className="font-display font-bold text-lg text-primary">Profil nastavnika</span>
         </div>
       </header>
 
@@ -297,7 +297,7 @@ export default function TeacherProfilePage() {
 
         {/* Lesson types */}
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.05 }}>
-          <h2 className="text-xl font-display font-bold text-primary-foreground mb-3">1. Izaberi tip časa</h2>
+          <h2 className="text-xl font-display font-bold text-primary mb-3">1. Izaberi tip časa</h2>
           <div className="grid sm:grid-cols-3 gap-3">
             {lessonTypes.map((lt: any) => {
               const meta = KIND_LABELS[lt.kind] || KIND_LABELS.individual;
@@ -334,7 +334,7 @@ export default function TeacherProfilePage() {
 
         {/* Calendar + slots */}
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
-          <h2 className="text-xl font-display font-bold text-primary-foreground mb-3 flex items-center gap-2">
+          <h2 className="text-xl font-display font-bold text-primary mb-3 flex items-center gap-2">
             <CalendarIcon className="w-5 h-5" /> 2. Izaberi termin
           </h2>
           <div className="grid md:grid-cols-2 gap-4">
@@ -394,7 +394,7 @@ export default function TeacherProfilePage() {
 
         {/* Note */}
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15 }}>
-          <h2 className="text-xl font-display font-bold text-primary-foreground mb-3">3. Napomena (opciono)</h2>
+          <h2 className="text-xl font-display font-bold text-primary mb-3">3. Napomena (opciono)</h2>
           <Card className="bg-background/85 backdrop-blur-sm border-border/30 rounded-3xl">
             <CardContent className="pt-6">
               <Textarea
@@ -409,7 +409,7 @@ export default function TeacherProfilePage() {
 
         {/* Consent */}
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
-          <h2 className="text-xl font-display font-bold text-primary-foreground mb-3 flex items-center gap-2">
+          <h2 className="text-xl font-display font-bold text-primary mb-3 flex items-center gap-2">
             <Shield className="w-5 h-5" /> 4. Privatnost
           </h2>
           <Card className="bg-background/85 backdrop-blur-sm border-accent/30 rounded-3xl">
