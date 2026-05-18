@@ -372,7 +372,7 @@ export function generateWritingPdf(payload: WritingPdfPayload, filename = "norsk
       (innerWidth) => measureWrapped(payload.overall_feedback!, innerWidth, 10.5, 15).height,
       (innerWidth) => {
         const startY = y;
-        drawParagraph(payload.overall_feedback!, margin + 18, innerWidth, { italic: true, color: PRIMARY_SOFT });
+        drawParagraph(payload.overall_feedback!, margin + 18, innerWidth, { color: PRIMARY_SOFT });
         return y - startY;
       },
     );
