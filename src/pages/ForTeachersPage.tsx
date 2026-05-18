@@ -343,12 +343,25 @@ export default function ForTeachersPage() {
                   id="bio"
                   value={form.bio}
                   onChange={(e) => setForm({ ...form, bio: e.target.value })}
-                  placeholder="Iskustvo, obrazovanje, pristup u radu..."
+                  placeholder="Obrazovanje, sertifikati, jezici, pristup u radu..."
                   required
                   maxLength={2000}
-                  rows={5}
+                  rows={4}
                   className="rounded-xl resize-none"
                 />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="experience">Iskustvo u nastavi (opciono)</Label>
+                <Textarea
+                  id="experience"
+                  value={form.experience}
+                  onChange={(e) => setForm({ ...form, experience: e.target.value })}
+                  placeholder="Koliko godina predaješ, tipovi učenika, online/uživo, prethodne škole/platforme..."
+                  maxLength={2000}
+                  rows={4}
+                  className="rounded-xl resize-none"
+                />
+                <p className="text-xs text-foreground/55">Cene i tipovi časova se podešavaju kasnije u tvom dashboard-u, nakon verifikacije.</p>
               </div>
               <div className="space-y-2">
                 <Label htmlFor="cv">CV (PDF, DOC, DOCX — do 10MB)</Label>
