@@ -18,6 +18,12 @@ import VocabularyPage from "./pages/VocabularyPage";
 import TalkPage from "./pages/TalkPage";
 import ProgressPage from "./pages/ProgressPage";
 import TeacherProfilePage from "./pages/TeacherProfilePage";
+import SelectTeacherPage from "./pages/SelectTeacherPage";
+import BookingSuccessPage from "./pages/BookingSuccessPage";
+import TeacherDashboardPage from "./pages/TeacherDashboardPage";
+import TeacherStudentsPage from "./pages/TeacherStudentsPage";
+import TeacherStudentDetailPage from "./pages/TeacherStudentDetailPage";
+import { TeacherRoute } from "@/components/TeacherRoute";
 import MyLessonsPage from "./pages/MyLessonsPage";
 import AdminDashboardPage from "./pages/AdminDashboardPage";
 import AdminStudentsPage from "./pages/AdminStudentsPage";
@@ -51,7 +57,13 @@ const App = () => (
               <Route path="/vocabulary" element={<ProtectedRoute><VocabularyPage /></ProtectedRoute>} />
               <Route path="/talk" element={<ProtectedRoute><TalkPage /></ProtectedRoute>} />
               <Route path="/progress" element={<ProtectedRoute><ProgressPage /></ProtectedRoute>} />
-              <Route path="/book-lesson" element={<ProtectedRoute><TeacherProfilePage /></ProtectedRoute>} />
+              <Route path="/select-teacher" element={<ProtectedRoute><SelectTeacherPage /></ProtectedRoute>} />
+              <Route path="/book-lesson" element={<ProtectedRoute><SelectTeacherPage /></ProtectedRoute>} />
+              <Route path="/book-lesson/:teacherId" element={<ProtectedRoute><TeacherProfilePage /></ProtectedRoute>} />
+              <Route path="/booking/success/:lessonId" element={<ProtectedRoute><BookingSuccessPage /></ProtectedRoute>} />
+              <Route path="/teacher/dashboard" element={<ProtectedRoute><TeacherRoute><TeacherDashboardPage /></TeacherRoute></ProtectedRoute>} />
+              <Route path="/teacher/students" element={<ProtectedRoute><TeacherRoute><TeacherStudentsPage /></TeacherRoute></ProtectedRoute>} />
+              <Route path="/teacher/students/:studentId" element={<ProtectedRoute><TeacherRoute><TeacherStudentDetailPage /></TeacherRoute></ProtectedRoute>} />
               <Route path="/my-lessons" element={<ProtectedRoute><MyLessonsPage /></ProtectedRoute>} />
               {/* Admin routes */}
               <Route path="/admin" element={<Navigate to="/admin/dashboard" replace />} />
