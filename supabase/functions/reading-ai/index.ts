@@ -8,6 +8,24 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
+type LangCode = "no" | "en" | "de";
+
+interface LangMeta {
+  code: LangCode;
+  /** What to call the target language inside the prompt (Serbian) */
+  promptName: string;
+  /** Native name */
+  native: string;
+  /** Bokmål-style notation tag (for UI labels) */
+  variantTag: string;
+}
+
+const LANG: Record<LangCode, LangMeta> = {
+  no: { code: "no", promptName: "norveškog jezika (Bokmål)", native: "norsk (Bokmål)", variantTag: "Bokmål" },
+  en: { code: "en", promptName: "engleskog jezika",          native: "English",         variantTag: "English" },
+  de: { code: "de", promptName: "nemačkog jezika",           native: "Deutsch",         variantTag: "Deutsch" },
+};
+
 const lengthSpec: Record<string, string> = {
   kratak: "kratak tekst (80–130 reči)",
   srednji: "srednji tekst (180–260 reči)",
@@ -21,6 +39,39 @@ const cefrSpec: Record<string, string> = {
   B2: "Složenije strukture, apstraktnije teme, nijansiraniji izrazi.",
   C1: "Bogat vokabular, idiomatski izrazi, složene argumentacije.",
 };
+
+/** Localized question-prompt phrases used in instructions per language */
+function exampleQuestionPhrases(code: LangCode) {
+  switch (code) {
+    case "en":
+      return {
+        statement: "Statement in English",
+        answer: "Answer the question …",
+        synonym: "Find a synonym for the word 'X'.",
+        antonym: "Find an antonym for the word 'Y'.",
+        vocab: "Explain the meaning of the expression 'Z' in this context.",
+        explanation: "explanation in English",
+      };
+    case "de":
+      return {
+        statement: "Aussage auf Deutsch",
+        answer: "Beantworte die Frage …",
+        synonym: "Finde ein Synonym für das Wort 'X'.",
+        antonym: "Finde ein Antonym für das Wort 'Y'.",
+        vocab: "Erkläre die Bedeutung des Ausdrucks 'Z' in diesem Kontext.",
+        explanation: "Erklärung auf Deutsch",
+      };
+    default:
+      return {
+        statement: "Tvrdnja na norveškom",
+        answer: "Svar på spørsmålet …",
+        synonym: "Finn et synonym for ordet 'X'.",
+        antonym: "Finn et antonym for ordet 'Y'.",
+        vocab: "Forklar betydningen av uttrykket 'Z' i denne sammenhengen.",
+        explanation: "objašnjenje na norveškom",
+      };
+  }
+}
 
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response("ok", { headers: corsHeaders });
@@ -48,19 +99,24 @@ Deno.serve(async (req) => {
     const level = String(body.level || "A1");
     const topic = String(body.topic || "svakodnevni život").slice(0, 200);
     const length = String(body.length || "kratak");
+    const langCode = (String(body.language || "no").toLowerCase() as LangCode);
+    const lang = LANG[langCode] || LANG.no;
     const cefr = cefrSpec[level] || cefrSpec.A1;
     const lenDesc = lengthSpec[length] || lengthSpec.kratak;
 
     const isAdvanced = level === "B1" || level === "B2" || level === "C1";
+    const phrases = exampleQuestionPhrases(lang.code);
+
+    // UI instruction language: advanced learners read instructions in the target language; A1/A2 in Serbian
     const instrLang = isAdvanced
-      ? "Sva pitanja i tekstovi zadataka MORAJU biti na norveškom (Bokmål)."
-      : "Sva pitanja i tekstovi zadataka MORAJU biti na srpskom (latinica). Reči/izrazi koje student treba da analizira ostaju na norveškom.";
+      ? `Sva pitanja i tekstovi zadataka MORAJU biti na ${lang.native}.`
+      : `Sva pitanja i tekstovi zadataka MORAJU biti na srpskom (latinica). Reči/izrazi koje student treba da analizira ostaju na ${lang.native}.`;
 
     let systemPrompt = "";
     let userPrompt = "";
 
     if (action === "generate") {
-      systemPrompt = `Ti si nastavnik norveškog jezika (Bokmål). Pravi tekst za čitanje prilagođen CEFR nivou ${level}. ${cefr}
+      systemPrompt = `Ti si nastavnik ${lang.promptName}. Pravi tekst za čitanje prilagođen CEFR nivou ${level}. ${cefr}
 ${instrLang}
 Odgovori ISKLJUČIVO u JSON formatu, bez markdown-a. STRUKTURA VEŽBI MORA BITI TAČNO OVIM REDOSLEDOM I BROJEM (ukupno TAČNO 15 vežbi):
 1) TAČNO 5 vežbi tipa "true_false" (ids 1–5)
@@ -68,36 +124,36 @@ Odgovori ISKLJUČIVO u JSON formatu, bez markdown-a. STRUKTURA VEŽBI MORA BITI 
 3) TAČNO 5 vokabularnih vežbi (ids 11–15): kombinacija "synonym", "antonym" i "vocab" — obavezno bar po jedna od svakog tipa, ostatak rasporedi po potrebi
 
 {
-  "title": "Naslov teksta na norveškom",
-  "text": "Tekst na norveškom (${lenDesc}). Koristi paragrafe odvojene praznim redom.",
+  "title": "Naslov teksta na ${lang.native}",
+  "text": "Tekst na ${lang.native} (${lenDesc}). Koristi paragrafe odvojene praznim redom.",
   "vocabulary": [
-    { "word": "norveška reč", "translation": "prevod na srpski", "explanation": "kratko objašnjenje na srpskom" }
+    { "word": "reč na ${lang.native}", "translation": "prevod na srpski", "explanation": "kratko objašnjenje na srpskom" }
   ],
   "exercises": [
-    { "id": 1, "type": "true_false", "question": "${isAdvanced ? "Tvrdnja na norveškom" : "Tvrdnja na srpskom"}", "answer": true, "explanation": "${isAdvanced ? "objašnjenje na norveškom" : "objašnjenje na srpskom"}" },
-    { "id": 6, "type": "open", "question": "${isAdvanced ? "Svar på spørsmålet …" : "Odgovori na pitanje …"}", "answer": "očekivani sažet odgovor na norveškom", "explanation": "" },
-    { "id": 10, "type": "synonym", "question": "${isAdvanced ? "Finn et synonym for ordet 'X'." : "Pronađi sinonim za reč 'X'."}", "word": "X", "answer": "sinonim na norveškom", "explanation": "" },
-    { "id": 11, "type": "antonym", "question": "${isAdvanced ? "Finn et antonym for ordet 'Y'." : "Pronađi antonim za reč 'Y'."}", "word": "Y", "answer": "antonim na norveškom", "explanation": "" },
-    { "id": 12, "type": "vocab", "question": "${isAdvanced ? "Forklar betydningen av uttrykket 'Z' i denne sammenhengen." : "Objasni značenje izraza 'Z' u datom kontekstu."}", "word": "Z", "answer": "kratko objašnjenje (${isAdvanced ? "na norveškom" : "na srpskom"})", "explanation": "" }
+    { "id": 1, "type": "true_false", "question": "${isAdvanced ? phrases.statement : "Tvrdnja na srpskom"}", "answer": true, "explanation": "${isAdvanced ? phrases.explanation : "objašnjenje na srpskom"}" },
+    { "id": 6, "type": "open", "question": "${isAdvanced ? phrases.answer : "Odgovori na pitanje …"}", "answer": "očekivani sažet odgovor na ${lang.native}", "explanation": "" },
+    { "id": 10, "type": "synonym", "question": "${isAdvanced ? phrases.synonym : "Pronađi sinonim za reč 'X'."}", "word": "X", "answer": "sinonim na ${lang.native}", "explanation": "" },
+    { "id": 11, "type": "antonym", "question": "${isAdvanced ? phrases.antonym : "Pronađi antonim za reč 'Y'."}", "word": "Y", "answer": "antonim na ${lang.native}", "explanation": "" },
+    { "id": 12, "type": "vocab", "question": "${isAdvanced ? phrases.vocab : "Objasni značenje izraza 'Z' u datom kontekstu."}", "word": "Z", "answer": "kratko objašnjenje (${isAdvanced ? `na ${lang.native}` : "na srpskom"})", "explanation": "" }
   ]
 }
 Vokabular: 6–10 ključnih reči iz teksta. Vežbe MORAJU biti TAČNO 15 (5 + 5 + 5) navedenim redosledom (true_false → open → synonym/antonym/vocab).`;
-      userPrompt = `Tema: "${topic}". Nivo: ${level}. Dužina: ${lenDesc}. Generiši tekst i TAČNO 15 vežbi (5 true/false, 5 open, 5 vokabular) po zadatoj strukturi.`;
+      userPrompt = `Tema: "${topic}". Nivo: ${level}. Dužina: ${lenDesc}. Generiši tekst na ${lang.native} i TAČNO 15 vežbi (5 true/false, 5 open, 5 vokabular) po zadatoj strukturi.`;
     } else if (action === "evaluate") {
       const exercises = body.exercises || [];
       const answers = body.answers || {};
-      const feedbackLang = isAdvanced ? "norveškom (Bokmål)" : "srpskom (latinica)";
-      systemPrompt = `Ti si iskusan nastavnik norveškog (Bokmål). Ocenjuješ studenta nivoa ${level}.
+      const feedbackLang = isAdvanced ? `${lang.native}` : "srpskom (latinica)";
+      systemPrompt = `Ti si iskusan nastavnik ${lang.promptName}. Ocenjuješ studenta nivoa ${level}.
 
-CILJ: Procena razumevanja teksta i sposobnosti izražavanja na norveškom — NE doslovno poklapanje reči.
+CILJ: Procena razumevanja teksta i sposobnosti izražavanja na ${lang.native} — NE doslovno poklapanje reči.
 
 PRAVILA OCENJIVANJA:
 • true_false: tačno samo ako se boolean poklapa.
-• open (razumevanje teksta) i vocab/synonym/antonym: student MORA odgovoriti na norveškom. Ocenjuj FLEKSIBILNO po sledećim kriterijumima:
+• open (razumevanje teksta) i vocab/synonym/antonym: student MORA odgovoriti na ${lang.native}. Ocenjuj FLEKSIBILNO po sledećim kriterijumima:
   - da li je odgovor povezan sa pitanjem
   - da li se značenjski poklapa sa tekstom
   - da li student razume kontekst
-  - da li je odgovor razumljiv na norveškom
+  - da li je odgovor razumljiv na ${lang.native}
   Prihvati različite formulacije ako je značenje tačno. Manje gramatičke ili pravopisne greške NE čine odgovor netačnim — zabeleži ih u "language_correction".
 
 Za svaki open/vocab/synonym/antonym koristi "verdict": "correct" | "partial" | "incorrect".
@@ -113,9 +169,9 @@ Odgovori ISKLJUČIVO u JSON formatu, bez markdown-a:
       "is_correct": true,
       "verdict": "correct|partial|incorrect",
       "user_answer": "...",
-      "correct_answer": "primer dobrog odgovora na norveškom",
-      "suggested_answer": "predlog poboljšanog odgovora na norveškom (za open/vocab)",
-      "language_correction": "ispravka jezičkih grešaka na norveškom ili prazno",
+      "correct_answer": "primer dobrog odgovora na ${lang.native}",
+      "suggested_answer": "predlog poboljšanog odgovora na ${lang.native} (za open/vocab)",
+      "language_correction": "ispravka jezičkih grešaka na ${lang.native} ili prazno",
       "explanation": "kratko objašnjenje na ${feedbackLang}",
       "feedback": "kratak komentar na ${feedbackLang}"
     }
