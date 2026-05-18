@@ -1,5 +1,6 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "jsr:@supabase/supabase-js@2";
+import { buildPersonalizationLines, type LangCode } from "../_shared/personalization.ts";
 
 const GATEWAY_URL = "https://ai.gateway.lovable.dev/v1/chat/completions";
 
@@ -16,11 +17,19 @@ const CEFR_FOCUS: Record<string, string> = {
   C1: "Fokus na nijanse, idiomatski jezik i preciznost.",
 };
 
-function buildSystem(level: string, hasImage: boolean) {
-  return `Ti si stručni nastavnik norveškog (Bokmål). Student je na nivou ${level}. ${CEFR_FOCUS[level] || ""}
+function buildSystem(level: string, hasImage: boolean, langCode: LangCode, personalizationLine: string) {
+  const langName = langCode === "en" ? "engleskog" : langCode === "de" ? "nemačkog" : "norveškog (Bokmål)";
+  const targetNative = langCode === "en" ? "English" : langCode === "de" ? "Deutsch" : "norsk (Bokmål)";
+  const v2Note = langCode === "no"
+    ? "STROGO se drži V2 reda reči, prirodnih predloga i pravilnih oblika."
+    : langCode === "de"
+      ? "STROGO se drži Verbposition (V2 u glavnoj, Verbendstellung u zavisnoj rečenici), padeža i rodova."
+      : "STROGO se drži slaganja subjekta i glagola, tačnih vremena, članova i prirodnih predloga.";
+  return `Ti si stručni nastavnik ${langName}. Student je na nivou ${level}. ${CEFR_FOCUS[level] || ""}
 ${hasImage ? "Student opisuje sliku (bildebeskrivelse). Komentariši i prirodnost opisa slike." : ""}
+${personalizationLine}
 
-ZADATAK: Ispravi tekst i daj detaljnu pedagošku analizu. STROGO se drži V2 reda reči, prirodnih predloga i pravilnih oblika.
+ZADATAK: Ispravi tekst na ${targetNative} i daj detaljnu pedagošku analizu. ${v2Note}
 
 Vrati ISKLJUČIVO JSON sa sledećim poljima:
 {
