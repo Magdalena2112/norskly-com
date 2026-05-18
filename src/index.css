@@ -45,8 +45,16 @@
     --cream: 36 45% 95%;
     --beige: 32 35% 88%;
 
+    /* Norwegian atmosphere accents */
+    --fjord: 205 35% 52%;            /* muted fjord blue */
+    --fjord-deep: 210 40% 32%;
+    --forest: 145 22% 42%;           /* soft forest green */
+    --sunset: 18 75% 78%;            /* warm sunset peach */
+    --mist: 200 25% 88%;
+
     --shadow-soft: 0 10px 40px -15px hsl(350 40% 20% / 0.15);
     --shadow-card: 0 4px 24px -8px hsl(350 40% 20% / 0.10);
+    --shadow-postcard: 0 12px 36px -10px hsl(350 40% 20% / 0.18), 0 2px 6px -2px hsl(350 40% 20% / 0.12);
 
     /* Legacy nordic tokens (kept for other pages) */
     --nordic-warm: 32 35% 92%;
@@ -208,5 +216,33 @@
   }
   .shadow-card-soft {
     box-shadow: var(--shadow-card);
+  }
+  .shadow-postcard {
+    box-shadow: var(--shadow-postcard);
+  }
+
+  /* Warm cream + paper texture for the cozy Nordic dashboard */
+  .bg-cream-paper {
+    background-color: hsl(var(--cream));
+    background-image:
+      radial-gradient(hsl(var(--primary) / 0.04) 1px, transparent 1px),
+      radial-gradient(hsl(var(--accent) / 0.05) 1px, transparent 1px);
+    background-size: 28px 28px, 36px 36px;
+    background-position: 0 0, 14px 18px;
+  }
+
+  .bg-fjord-soft {
+    background: linear-gradient(180deg,
+      hsl(var(--cream)) 0%,
+      hsl(36 45% 94%) 40%,
+      hsl(200 30% 90%) 100%);
+  }
+
+  @keyframes float-slow {
+    0%, 100% { transform: translateY(0) rotate(var(--tw-rotate, 0)); }
+    50% { transform: translateY(-6px) rotate(var(--tw-rotate, 0)); }
+  }
+  .animate-float-slow {
+    animation: float-slow 6s ease-in-out infinite;
   }
 }

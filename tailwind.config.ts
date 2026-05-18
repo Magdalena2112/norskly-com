@@ -58,6 +58,14 @@ export default {
           glow: "hsl(var(--nordic-glow))",
           deep: "hsl(var(--nordic-deep))",
         },
+        fjord: {
+          DEFAULT: "hsl(var(--fjord))",
+          deep: "hsl(var(--fjord-deep))",
+        },
+        forest: "hsl(var(--forest))",
+        sunset: "hsl(var(--sunset))",
+        mist: "hsl(var(--mist))",
+        cream: "hsl(var(--cream))",
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
