@@ -13,7 +13,7 @@ import { ArrowLeft, ImagePlus, Loader2, PenLine, FileDown, History, Sparkles, Ch
 import StudentLayout from "@/components/student/StudentLayout";
 import NordicBackdrop from "@/components/student/NordicBackdrop";
 import { logErrors } from "@/lib/logErrors";
-import { getCurrentLanguageCode } from "@/lib/currentLanguage";
+import { getCurrentLanguageCode, getCurrentPersonalization } from "@/lib/currentLanguage";
 import { generateWritingPdf } from "@/lib/writingPdf";
 import { format } from "date-fns";
 
@@ -193,8 +193,9 @@ function BildebeskrivelseTab({ level }: { level: string }) {
     setCorrectLoading(true);
     setResult(null);
     try {
+      const _p1 = getCurrentPersonalization();
       const data = await callFn<CorrectionResult>("writing-correct", {
-        text: text.trim(), level, has_image: !!helper,
+        text: text.trim(), level, has_image: !!helper, language: getCurrentLanguageCode(), focus_area: _p1.focus_area, life_context: _p1.life_context,
       });
       setResult(data);
       if (data._errors?.length) {
@@ -441,7 +442,8 @@ function CorrectionTab({ level }: { level: string }) {
     setLoading(true);
     setResult(null);
     try {
-      const data = await callFn<CorrectionResult>("writing-correct", { text: text.trim(), level });
+      const _p2 = getCurrentPersonalization();
+      const data = await callFn<CorrectionResult>("writing-correct", { text: text.trim(), level, language: getCurrentLanguageCode(), focus_area: _p2.focus_area, life_context: _p2.life_context });
       setResult(data);
       if (data._errors?.length) {
         await logErrors(user.id, "writing", "text_correction", data._errors.slice(0, 5));
