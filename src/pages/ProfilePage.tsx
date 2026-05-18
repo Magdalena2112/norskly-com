@@ -1,13 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import StudentLayout from "@/components/student/StudentLayout";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { useAuth } from "@/context/AuthContext";
 import { useProfile } from "@/context/ProfileContext";
 import { supabase } from "@/integrations/supabase/client";
 import { format } from "date-fns";
-import { Mail, Calendar, Languages, CreditCard, Target, GraduationCap, Zap } from "lucide-react";
+import { Mail, Calendar, Languages, CreditCard, Target, GraduationCap, Zap, Camera, Loader2 } from "lucide-react";
+import { toast } from "@/hooks/use-toast";
 
 const PLAN_LABELS: Record<string, string> = {
   self: "Samostalno učenje",
