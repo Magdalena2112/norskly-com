@@ -710,8 +710,8 @@ export function generateWritingPdf(payload: WritingPdfPayload, filename = "norsk
   if (payload.sledeci_korak && payload.sledeci_korak.length) {
     const innerW = contentWidth - 36;
     const measure = () => payload.sledeci_korak!.reduce((acc, s) => {
-      const w = doc.splitTextToSize(s, innerW - 24) as string[];
-      return acc + w.length * 14 + 6;
+      const w = wrap(s, innerW - 24, 10.5);
+      return acc + w.length * 15 + 6;
     }, 0);
     renderCard(
       "Sledeći koraci",
@@ -720,15 +720,15 @@ export function generateWritingPdf(payload: WritingPdfPayload, filename = "norsk
         const startY = y;
         payload.sledeci_korak!.forEach((s, i) => {
           if (y + 20 > pageHeight - FOOTER_H - 10) newPage();
+          doc.setCharSpace(0);
           doc.setFont("helvetica", "bold");
           doc.setFontSize(10.5);
           doc.setTextColor(...PRIMARY);
           doc.text(`${i + 1}.`, margin + 18, y);
-          doc.setFont("helvetica", "normal");
           doc.setTextColor(...INK);
-          const w = doc.splitTextToSize(s, innerW - 24) as string[];
-          w.forEach((l, idx) => { doc.text(l, margin + 18 + 20, y + idx * 14); });
-          y += w.length * 14 + 6;
+          const w = wrap(s, innerW - 24, 10.5);
+          w.forEach((l, idx) => { doc.setCharSpace(0); doc.text(l, margin + 18 + 20, y + idx * 15); });
+          y += w.length * 15 + 6;
         });
         return y - startY;
       },
