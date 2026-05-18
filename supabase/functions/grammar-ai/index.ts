@@ -1,5 +1,7 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "jsr:@supabase/supabase-js@2";
+import { buildPersonalizationLines } from "../_shared/personalization.ts";
+
 
 const GATEWAY_URL = "https://ai.gateway.lovable.dev/v1/chat/completions";
 
@@ -106,9 +108,14 @@ Deno.serve(async (req) => {
       });
     }
 
-    const { action, level, topic, count, text, unique_seed, attempt_no, previous_sentences, language } = await req.json();
+    const { action, level, topic, count, text, unique_seed, attempt_no, previous_sentences, language, focus_area, life_context } = await req.json();
     const langCode = (String(language || "no").toLowerCase() as LangCode);
     const lang = LANG[langCode] || LANG.no;
+    const personalization = buildPersonalizationLines(langCode, focus_area, life_context);
+    // For grammar-ai system prompts (Serbian-language instructions), use the Serbian line.
+    const personalizationLine = personalization.serbianLine
+      ? `\n\nPERSONALIZACIJA: ${personalization.serbianLine}`
+      : "";
 
     // Input size limits to prevent cost amplification
     const MAX_TEXT = 5000;
@@ -311,6 +318,10 @@ VAŽNA UPUTSTVA:
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }
+
+    systemPrompt = systemPrompt + personalizationLine;
+
+
 
     const aiResponse = await fetch(GATEWAY_URL, {
       method: "POST",

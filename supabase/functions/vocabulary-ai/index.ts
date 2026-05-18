@@ -1,5 +1,6 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "jsr:@supabase/supabase-js@2";
+import { buildPersonalizationLines } from "../_shared/personalization.ts";
 
 const GATEWAY_URL = "https://ai.gateway.lovable.dev/v1/chat/completions";
 
@@ -52,7 +53,12 @@ Deno.serve(async (req) => {
       });
     }
 
-    const { action, level, theme, word, sentence, exclude_words } = await req.json();
+    const { action, level, theme, word, sentence, exclude_words, language, focus_area, life_context } = await req.json();
+    const langCode = (["no", "en", "de"].includes(String(language)) ? String(language) : "no") as "no" | "en" | "de";
+    const personalization = buildPersonalizationLines(langCode, focus_area, life_context);
+    const personalizationLine = personalization.serbianLine
+      ? `\n\nPERSONALIZACIJA: ${personalization.serbianLine}`
+      : "";
 
     // Input size limits to prevent cost amplification
     const MAX_FIELD = 500;
@@ -176,6 +182,9 @@ Odgovori ISKLJUČIVO u JSON formatu, bez markdown-a. Format:
         status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }
+
+    systemPrompt = systemPrompt + personalizationLine;
+
 
     const aiResponse = await fetch(GATEWAY_URL, {
       method: "POST",
