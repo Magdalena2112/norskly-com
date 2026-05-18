@@ -6,6 +6,8 @@ import { Sparkles, AlertTriangle, ChevronRight, X, Loader2 } from "lucide-react"
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/context/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
+import { useSelectedLanguage } from "@/hooks/useSelectedLanguage";
+
 
 interface TopicStat {
   topic: string;
@@ -24,6 +26,7 @@ const MODULE_LABELS: Record<string, string> = {
 
 export default function WeeklyDigest() {
   const { user } = useAuth();
+  const { code } = useSelectedLanguage();
   const navigate = useNavigate();
   const [stats, setStats] = useState<TopicStat[]>([]);
   const [loading, setLoading] = useState(true);
@@ -32,7 +35,7 @@ export default function WeeklyDigest() {
   useEffect(() => {
     if (!user) return;
 
-    const dismissKey = `weekly_digest_dismissed_${user.id}`;
+    const dismissKey = `weekly_digest_dismissed_${user.id}_${code}`;
     const stored = localStorage.getItem(dismissKey);
     if (stored) {
       const parsed = JSON.parse(stored);
@@ -52,7 +55,9 @@ export default function WeeklyDigest() {
         .from("error_events")
         .select("topic, category, severity, module")
         .eq("user_id", user.id)
+        .eq("language", code)
         .gte("created_at", sevenDaysAgo.toISOString());
+
 
       if (error) {
         console.error("Weekly digest fetch error:", error);
@@ -86,12 +91,12 @@ export default function WeeklyDigest() {
       setStats(results);
       setLoading(false);
     })();
-  }, [user]);
+  }, [user, code]);
 
   const handleDismiss = () => {
     if (user) {
       localStorage.setItem(
-        `weekly_digest_dismissed_${user.id}`,
+        `weekly_digest_dismissed_${user.id}_${code}`,
         JSON.stringify({ timestamp: Date.now() })
       );
     }

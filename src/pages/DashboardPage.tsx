@@ -75,14 +75,14 @@ export default function DashboardPage() {
     if (!user) return;
     (async () => {
       const [{ data: xp }, { data: lesson }] = await Promise.all([
-        supabase.from("user_xp").select("total_xp, level").eq("user_id", user.id).maybeSingle(),
-        supabase.from("lessons").select("start_time, end_time, status").eq("user_id", user.id).eq("status", "scheduled").gte("start_time", new Date().toISOString()).order("start_time", { ascending: true }).limit(1).maybeSingle(),
+        supabase.from("user_xp").select("total_xp, level").eq("user_id", user.id).eq("language", code).maybeSingle(),
+        supabase.from("lessons").select("start_time, end_time, status").eq("user_id", user.id).eq("language", code).eq("status", "scheduled").gte("start_time", new Date().toISOString()).order("start_time", { ascending: true }).limit(1).maybeSingle(),
       ]);
       setXpData(xp || { total_xp: 0, level: 1 });
       setUpcomingLesson(lesson);
       setLessonLoaded(true);
     })();
-  }, [user]);
+  }, [user, code]);
 
   if (profileLoading) {
     return (
