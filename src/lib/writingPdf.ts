@@ -456,12 +456,12 @@ export function generateWritingPdf(payload: WritingPdfPayload, filename = "norsk
       let leftH = 0, rightH = 0;
       const half = Math.ceil(items.length / 2);
       lines.slice(0, half).forEach((l) => {
-        const w = doc.splitTextToSize(l, colW) as string[];
-        leftH += w.length * 12;
+        const w = wrap(l, colW, 9.5);
+        leftH += w.length * 13;
       });
       lines.slice(half).forEach((l) => {
-        const w = doc.splitTextToSize(l, colW) as string[];
-        rightH += w.length * 12;
+        const w = wrap(l, colW, 9.5);
+        rightH += w.length * 13;
       });
       return 18 + Math.max(leftH, rightH) + 8; // group header + body
     };
