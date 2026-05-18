@@ -69,64 +69,98 @@ export default function DashboardPage() {
   return (
     <StudentLayout>
       <NordicBackdrop />
-      <div className="container max-w-3xl py-10 relative z-10">
-        <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="mb-6">
-          <p className="font-script italic text-accent-foreground/70 text-sm mb-1">Velkommen tilbake</p>
-          <h1 className="text-3xl sm:text-4xl text-display text-primary mb-2">
-            Hei, {profile.name || "korisniče"}.
-          </h1>
-          <p className="text-muted-foreground max-w-xl">
-            Izaberi modul i nastavi sa učenjem norveškog — uz prizor norveških fjordova i mirne nordijske atmosfere.
-          </p>
+      <div className="container max-w-4xl py-8 sm:py-10 relative z-10">
+        {/* HERO POSTCARD */}
+        <motion.div
+          initial={{ opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="relative mb-8 washi-tape"
+        >
+          <div className="rounded-3xl border border-border/50 bg-cream/90 backdrop-blur-md shadow-postcard overflow-hidden grid md:grid-cols-5">
+            <div className="md:col-span-3 p-6 sm:p-8 flex flex-col justify-center">
+              <p className="font-script italic text-primary/60 text-sm mb-1">Velkommen tilbake til fjordene</p>
+              <h1 className="text-display text-3xl sm:text-4xl text-primary mb-3 leading-[0.95]">
+                Hei, {profile.name || "korisniče"}.
+              </h1>
+              <p className="text-muted-foreground text-sm sm:text-base max-w-md leading-relaxed">
+                Tih dan među norveškim fjordovima. Udobno se smesti, izaberi modul i nastavi sa učenjem — korak po korak.
+              </p>
+              <div className="mt-4 flex items-center gap-2 text-xs">
+                <span className="bg-secondary/60 text-primary px-2.5 py-1 rounded-full border border-border/50 font-medium">
+                  {profile.level}
+                </span>
+                <span className="text-primary/50 font-script italic">·</span>
+                <span className="text-primary/70">{profile.learning_goal}</span>
+              </div>
+            </div>
+            <div className="md:col-span-2 relative min-h-[160px] md:min-h-[240px] border-t md:border-t-0 md:border-l border-border/40">
+              <FjordHero className="absolute inset-0 w-full h-full" />
+              {/* Tiny stamp on hero */}
+              <div className="absolute top-3 right-3 bg-cream/90 backdrop-blur rounded-sm border-2 border-dashed border-primary/40 px-1.5 py-1 rotate-[6deg] shadow-card-soft">
+                <div className="font-display text-[8px] font-bold text-primary leading-none">LOFOTEN</div>
+                <div className="font-script italic text-[8px] text-primary/70 text-center">·1909·</div>
+              </div>
+            </div>
+          </div>
         </motion.div>
 
         {xpData && (
-          <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.05 }}>
+          <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
             <XpProgressCard level={xpData.level} totalXp={xpData.total_xp} />
           </motion.div>
         )}
 
         <WeeklyDigest />
 
-        <div className="mt-8 mb-3 flex items-center gap-3">
+        <div className="mt-10 mb-5 flex items-center gap-3">
           <span className="h-px flex-1 bg-border" />
-          <span className="font-script italic text-sm text-primary/70">Læringsmoduler</span>
+          <span className="font-script italic text-sm text-primary/70 flex items-center gap-2">
+            <span className="text-primary/40">✦</span>
+            Læringsmoduler
+            <span className="text-primary/40">✦</span>
+          </span>
           <span className="h-px flex-1 bg-border" />
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           {modules.map((mod, i) => (
             <motion.div
               key={mod.route}
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.08 }}
-              className={"fullWidth" in mod && mod.fullWidth ? "sm:col-span-2" : ""}
+              transition={{ delay: i * 0.08 + 0.15 }}
+              className={mod.fullWidth ? "sm:col-span-2" : ""}
             >
               <Card
-                className="cursor-pointer group transition-all duration-300 hover:-translate-y-1 hover:shadow-postcard h-full bg-cream/85 backdrop-blur-sm border border-border/50 shadow-card-soft overflow-hidden relative"
+                className={`cursor-pointer group h-full bg-cream border border-border/60 shadow-postcard overflow-hidden relative ${mod.rotation} transition-all duration-500 ease-out hover:rotate-0 hover:-translate-y-1.5 hover:shadow-[0_18px_44px_-12px_hsl(350_40%_20%_/_0.25)]`}
                 onClick={() => navigate(mod.route)}
               >
-                {/* subtle Nordic tint corner */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${mod.tint} opacity-60 pointer-events-none`} />
-                <div className="absolute top-0 right-0 w-24 h-24 rounded-bl-full bg-gradient-to-bl from-cream/70 to-transparent pointer-events-none" />
+                {/* Vignette top */}
+                <div className={`relative w-full ${mod.fullWidth ? "h-32 sm:h-36" : "h-28"} overflow-hidden border-b border-border/40`}>
+                  <PostcardVignette variant={mod.vignette} className="absolute inset-0 w-full h-full" />
+                  {/* Icon medallion */}
+                  <div className={`absolute -bottom-5 left-5 w-12 h-12 rounded-2xl ${mod.iconBg} flex items-center justify-center shadow-card-soft ring-2 ring-cream transition-transform duration-300 group-hover:scale-105`}>
+                    <mod.icon className="w-5 h-5 text-cream" />
+                  </div>
+                  {mod.stamp && (
+                    <div className="absolute top-2 right-2 bg-cream/95 rounded-sm border-2 border-dashed border-primary/40 px-1.5 py-0.5 rotate-[8deg] shadow-card-soft">
+                      <span className="font-display text-[7px] font-bold text-primary tracking-wider">27 KR</span>
+                    </div>
+                  )}
+                </div>
 
-                <CardContent className="pt-6 pb-6 flex items-start gap-4 relative z-10">
-                  <div className={`w-14 h-14 rounded-2xl ${mod.iconBg} flex items-center justify-center shrink-0 shadow-card-soft ring-1 ring-cream/50 transition-transform duration-300 group-hover:scale-105 group-hover:rotate-[-3deg]`}>
-                    <mod.icon className="w-6 h-6 text-cream" />
-                  </div>
-                  <div className="min-w-0">
-                    <p className="font-script italic text-xs text-primary/60 mb-0.5">{mod.subtitle}</p>
-                    <h3 className="font-display font-semibold text-lg text-primary group-hover:text-primary/80 transition-colors">
-                      {mod.title}
-                    </h3>
-                    <p className="text-sm text-muted-foreground mt-1 leading-relaxed">{mod.description}</p>
-                    {"buttonLabel" in mod && (
-                      <Button size="sm" variant="hero" className="mt-3">
-                        {(mod as any).buttonLabel}
-                      </Button>
-                    )}
-                  </div>
+                <CardContent className="pt-8 pb-5 px-5">
+                  <p className="font-script italic text-xs text-primary/55 mb-0.5">{mod.subtitle}</p>
+                  <h3 className="font-display font-semibold text-lg text-primary leading-tight">
+                    {mod.title}
+                  </h3>
+                  <p className="text-sm text-muted-foreground mt-1.5 leading-relaxed">{mod.description}</p>
+                  {mod.buttonLabel && (
+                    <Button size="sm" variant="hero" className="mt-3">
+                      {mod.buttonLabel}
+                    </Button>
+                  )}
                 </CardContent>
               </Card>
             </motion.div>
