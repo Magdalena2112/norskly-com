@@ -10,6 +10,7 @@ import {
   Accordion, AccordionContent, AccordionItem, AccordionTrigger,
 } from "@/components/ui/accordion";
 import { FloatingGreetings } from "@/components/FloatingGreetings";
+import ecosystemCollage from "@/assets/ecosystem-collage.jpg";
 
 
 const FEATURES = [
@@ -229,8 +230,14 @@ export default function LandingPage() {
       </section>
 
       {/* ============== STUDENTS vs TEACHERS ============== */}
-      <section id="teachers" className="py-20 md:py-28">
-        <div className="container">
+      <section id="teachers" className="relative py-20 md:py-28 overflow-hidden">
+        <div
+          aria-hidden
+          className="absolute inset-0 bg-center bg-cover opacity-20 [mask-image:radial-gradient(ellipse_at_center,black_55%,transparent_90%)]"
+          style={{ backgroundImage: `url(${ecosystemCollage})` }}
+        />
+        <div aria-hidden className="absolute inset-0 bg-background/55" />
+        <div className="container relative z-10">
           <div className="text-center mb-16 max-w-2xl mx-auto">
             <p className="text-xs font-semibold uppercase tracking-widest text-primary/70 mb-3">Ekosistem</p>
             <h2 className="text-display text-[clamp(2rem,5vw,4rem)] text-primary">
