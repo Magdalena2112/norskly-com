@@ -169,8 +169,7 @@ export function generateWritingPdf(payload: WritingPdfPayload, filename = "norsk
 
   // Measure helpers (don't mutate y)
   const measureWrapped = (text: string, width: number, fontSize: number, lineHeight: number) => {
-    doc.setFontSize(fontSize);
-    const lines = doc.splitTextToSize(text || "", width) as string[];
+    const lines = wrap(text, width, fontSize);
     return { lines, height: lines.length * lineHeight };
   };
 
