@@ -277,11 +277,10 @@ export function generateWritingPdf(payload: WritingPdfPayload, filename = "norsk
     const style = opts.bold ? (opts.italic ? "bolditalic" : "bold") : opts.italic ? "italic" : "normal";
     const lh = opts.lineHeight ?? Math.round(size * 1.45);
     const lines = wrap(text, maxW, size, style as "normal" | "bold" | "italic" | "bolditalic");
-    doc.setTextColor(...color);
     lines.forEach((line) => {
-      // Always render with default (untracked) spacing and no maxWidth/align (which can stretch)
-      doc.setCharSpace(0);
-      doc.text(line, x, y);
+      // Pre svake linije ponovo postavi font/size/charSpace/boju da spreči
+      // bilo kakav „nasleđeni" tracking ili promenu fonta iz druge sekcije.
+      safeText(line, x, y, { size, style: style as "normal" | "bold" | "italic" | "bolditalic", color });
       y += lh;
     });
   };
