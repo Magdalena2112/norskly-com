@@ -8,6 +8,20 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
+type LangCode = "no" | "en" | "de";
+
+interface LangMeta {
+  code: LangCode;
+  promptName: string;   // for Serbian-language system prompts
+  native: string;       // native name for in-text instructions
+}
+
+const LANG: Record<LangCode, LangMeta> = {
+  no: { code: "no", promptName: "norveškog jezika (Bokmål)", native: "norsk (Bokmål)" },
+  en: { code: "en", promptName: "engleskog jezika",          native: "English" },
+  de: { code: "de", promptName: "nemačkog jezika",           native: "Deutsch" },
+};
+
 const ERROR_EXTRACT_BLOCK = `
 
 Takođe, u odgovor OBAVEZNO dodaj polje "_errors" koje sadrži strukturirane greške korisnika.
@@ -15,7 +29,7 @@ Format:
 "_errors": [
   {
     "category": "kratka kategorija greške (npr. word_order, verb_form, preposition, article, spelling)",
-    "topic": "specifična tema (npr. V2 pravilo, presens vs perfektum)",
+    "topic": "specifična tema (npr. V2 pravilo, presens vs perfektum, English tense usage, German Verbposition)",
     "severity": 1-3 (1=mala, 2=srednja, 3=velika),
     "example_wrong": "pogrešan deo",
     "example_correct": "tačan deo"
@@ -23,6 +37,45 @@ Format:
 ]
 Ako nema grešaka, vrati prazan niz: "_errors": []
 `;
+
+/**
+ * Language-specific quality checks. The Norwegian prompt mentions V2 word order;
+ * English/German prompts mention their own typical structural pitfalls.
+ */
+function qualityChecks(lang: LangMeta, level: string): string {
+  if (lang.code === "en") {
+    return `
+
+OBAVEZNA SAMOPROVERA pre slanja odgovora:
+- Engleski tekst nema gramatičke greške.
+- Slaganje subjekta i glagola, pravilna upotreba vremena (Simple/Continuous/Perfect).
+- Članovi (a/an/the) su tačni; predlozi su prirodni (ne doslovno sa srpskog).
+- Korišćen je nivo ${level} (ne pretežak vokabular).
+- Značenje je isto kao cilj; nema izmišljenih detalja, nema kontradikcija.
+Ako bilo šta nije sigurno: pojednostavi rečenicu. Ne dodaj nove informacije.`;
+  }
+  if (lang.code === "de") {
+    return `
+
+OBAVEZNA SAMOPROVERA pre slanja odgovora:
+- Nemački tekst nema gramatičke greške.
+- Verbposition (V2 u glavnoj, Verbendstellung u zavisnoj rečenici).
+- Padeži (Nominativ/Akkusativ/Dativ/Genitiv) i rod imenica su tačni.
+- Korišćen je nivo ${level} (ne pretežak vokabular).
+- Značenje je isto kao cilj; nema izmišljenih detalja.
+Ako bilo šta nije sigurno: pojednostavi rečenicu.`;
+  }
+  return `
+
+OBAVEZNA SAMOPROVERA pre slanja odgovora:
+- Norveški tekst nema gramatičke greške.
+- Red reči u rečenicama je ispravan (V2 pravilo u glavnoj rečenici).
+- Prepozicije su prirodne (ne doslovno sa srpskog).
+- Korišćen je nivo ${level} (ne pretežak vokabular).
+- Značenje je isto kao cilj; nema izmišljenih detalja.
+- Nema kontradikcija i nema "čudnih" formulacija.
+Ako bilo šta nije sigurno: pojednostavi rečenicu. Ne dodaj nove informacije.`;
+}
 
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") {
@@ -53,7 +106,9 @@ Deno.serve(async (req) => {
       });
     }
 
-    const { action, level, topic, count, text, unique_seed, attempt_no, previous_sentences } = await req.json();
+    const { action, level, topic, count, text, unique_seed, attempt_no, previous_sentences, language } = await req.json();
+    const langCode = (String(language || "no").toLowerCase() as LangCode);
+    const lang = LANG[langCode] || LANG.no;
 
     // Input size limits to prevent cost amplification
     const MAX_TEXT = 5000;
@@ -80,16 +135,7 @@ Deno.serve(async (req) => {
     };
     const cefrFocus = cefrExpectations[level] || cefrExpectations["A1"];
 
-    const qualityCheck = `
-
-OBAVEZNA SAMOPROVERA pre slanja odgovora:
-- Norveški tekst nema gramatičke greške.
-- Red reči u rečenicama je ispravan (V2 pravilo u glavnoj rečenici).
-- Prepozicije su prirodne (ne doslovno sa srpskog).
-- Korišćen je nivo ${level} (ne pretežak vokabular).
-- Značenje je isto kao cilj; nema izmišljenih detalja.
-- Nema kontradikcija i nema "čudnih" formulacija.
-Ako bilo šta nije sigurno: pojednostavi rečenicu. Ne dodaj nove informacije.`;
+    const qualityCheck = qualityChecks(lang, level);
 
     const cefrEvalBlock = `
 
@@ -115,7 +161,7 @@ Navedi snage kratko, identifikuj NAJVIŠE 2 oblasti za poboljšanje.`;
       const prevBlock = Array.isArray(previous_sentences) && previous_sentences.length > 0
         ? `\n\nEvo rečenica koje su VEĆ KORIŠĆENE u prethodnim vežbama — NE KORISTI ih ponovo i NE pravi slične varijante:\n${previous_sentences.map((s: string, i: number) => `${i + 1}. ${s}`).join("\n")}\n`
         : "";
-      systemPrompt = `Ti si nastavnik norveškog jezika (Bokmål). Generišeš gramatičke vežbe za nivo ${level}.
+      systemPrompt = `Ti si nastavnik ${lang.promptName}. Generišeš gramatičke vežbe za nivo ${level}.
 VAŽNO: Svaki put generiši potpuno NOVE i RAZNOVRSNE rečenice. Ne ponavljaj prethodne primere. Variraj kontekst, vokabular i strukturu rečenica. Koristi različite životne situacije (posao, porodica, putovanja, hobiji, svakodnevica). Seed: ${uniqueSeed}${prevBlock}
 Odgovori ISKLJUČIVO u JSON formatu, bez markdown-a. Format:
 {
@@ -123,16 +169,16 @@ Odgovori ISKLJUČIVO u JSON formatu, bez markdown-a. Format:
     {
       "id": 1,
       "instruction": "Instrukcija na srpskom",
-      "sentence": "Rečenica sa _____ na mestu gde treba popuniti",
-      "solution": "Tačan odgovor",
+      "sentence": "Rečenica na ${lang.native} sa _____ na mestu gde treba popuniti",
+      "solution": "Tačan odgovor na ${lang.native}",
       "hint": "Kratak hint na srpskom"
     }
   ]
 }` + qualityCheck;
-      userPrompt = `Generiši ${count || 5} vežbi na temu "${topic}". Nivo: ${level}. Svaka vežba treba da ima rečenicu sa blankom i rešenje.`;
+      userPrompt = `Generiši ${count || 5} vežbi na temu "${topic}". Jezik: ${lang.native}. Nivo: ${level}. Svaka vežba treba da ima rečenicu sa blankom i rešenje.`;
     } else if (action === "check_exercise") {
       errorLimit = 2;
-      systemPrompt = `Ti si nastavnik norveškog jezika (Bokmål). Korisnik pokušava da reši gramatičku vežbu.
+      systemPrompt = `Ti si nastavnik ${lang.promptName}. Korisnik pokušava da reši gramatičku vežbu.
 Odgovori ISKLJUČIVO u JSON formatu, bez markdown-a. Format:
 {
   "is_correct": true/false,
@@ -143,13 +189,13 @@ Odgovori ISKLJUČIVO u JSON formatu, bez markdown-a. Format:
 ${ERROR_EXTRACT_BLOCK}
 OGRANIČENJE: Maksimalno ${errorLimit} greške u _errors nizu.
 Ako je tačan odgovor, "_errors" mora biti prazan niz.` + qualityCheck;
-      userPrompt = `Vežba: "${text}"\nKorisnikov odgovor: "${topic}"\nTačan odgovor: "${count}"\nNivo: ${level}\nBroj pokušaja: ${attempt_no || 1}`;
+      userPrompt = `Vežba: "${text}"\nKorisnikov odgovor: "${topic}"\nTačan odgovor: "${count}"\nJezik: ${lang.native}\nNivo: ${level}\nBroj pokušaja: ${attempt_no || 1}`;
     } else if (action === "correct_text") {
       errorLimit = 5;
-      systemPrompt = `Ti si nastavnik norveškog jezika (Bokmål). Ispravljaš tekst korisnika na nivou ${level}.
+      systemPrompt = `Ti si nastavnik ${lang.promptName}. Ispravljaš tekst korisnika na nivou ${level}.
 Odgovori ISKLJUČIVO u JSON formatu, bez markdown-a. Format:
 {
-  "corrected_text": "Ispravljena verzija teksta",
+  "corrected_text": "Ispravljena verzija teksta na ${lang.native}",
   "mistakes": [
     {
       "original": "Pogrešan deo",
@@ -171,15 +217,15 @@ Odgovori ISKLJUČIVO u JSON formatu, bez markdown-a. Format:
 ${ERROR_EXTRACT_BLOCK}
 OGRANIČENJE: Maksimalno ${errorLimit} grešaka u _errors nizu.
 ${cefrEvalBlock}` + qualityCheck;
-      userPrompt = `Ispravi sledeći tekst na norveškom i objasni greške:\n\n"${text}"`;
+      userPrompt = `Ispravi sledeći tekst na ${lang.native} i objasni greške:\n\n"${text}"`;
     } else if (action === "generate_quiz") {
-      systemPrompt = `Ti si nastavnik norveškog jezika (Bokmål). Generišeš kviz pitanja za nivo ${level}.
+      systemPrompt = `Ti si nastavnik ${lang.promptName}. Generišeš kviz pitanja za nivo ${level}.
 Odgovori ISKLJUČIVO u JSON formatu, bez markdown-a. Format:
 {
   "questions": [
     {
       "id": 1,
-      "question": "Pitanje na srpskom",
+      "question": "Pitanje na srpskom (sa primerima na ${lang.native} ako je relevantno)",
       "options": ["opcija1", "opcija2", "opcija3", "opcija4"],
       "correct": 0,
       "explanation": "Objašnjenje na srpskom",
@@ -193,12 +239,12 @@ Odgovori ISKLJUČIVO u JSON formatu, bez markdown-a. Format:
     }
   ]
 }` + qualityCheck;
-      userPrompt = `Generiši 5 kviz pitanja na temu "${topic}". Nivo: ${level}. Svako pitanje ima 4 opcije i jedno tačno rešenje. Za svako pitanje dodaj _error objekat sa kategorijom greške.`;
+      userPrompt = `Generiši 5 kviz pitanja na temu "${topic}" iz ${lang.native}. Nivo: ${level}. Svako pitanje ima 4 opcije i jedno tačno rešenje. Za svako pitanje dodaj _error objekat sa kategorijom greške.`;
     } else if (action === "explain_topic") {
-      systemPrompt = `Ti si nastavnik norveškog jezika (Bokmål). Objašnjavaš gramatičke teme za nivo ${level}.
+      systemPrompt = `Ti si nastavnik ${lang.promptName}. Objašnjavaš gramatičke teme za nivo ${level}.
 ${cefrFocus}
 
-Korisnik može postaviti pitanje na srpskom, norveškom ili mešovito. Protumači nameru čak i ako je formulacija neformalna.
+Korisnik može postaviti pitanje na srpskom, na ${lang.native} ili mešovito. Protumači nameru čak i ako je formulacija neformalna.
 Ako je tema preširoka, automatski je suzi na najkorisniji aspekt za nivo ${level}.
 Ako je tema napredna za nivo korisnika, pojednostavi objašnjenje.
 
@@ -210,9 +256,9 @@ Odgovori ISKLJUČIVO u JSON formatu, bez markdown-a. Format:
   "sazetak": "Kratak rezime od 2–3 rečenice koji daje brz i jednostavan odgovor pre detaljnih sekcija.",
   "definicija": "Detaljno objašnjenje gramatičke teme: šta je, koja je funkcija, kada se koristi, koja je logika iza pravila. Ovo treba da bude dublje od prostog opisa — objasni ZAŠTO pravilo postoji i kako funkcioniše u jeziku. Prilagodi dubinu nivou ${level}.",
   "formula": {
-    "label": "Naziv gramatičkog obrasca (npr. Perfektum, Preteritum, Leddsetning)",
-    "pattern": "Obrazac/formula (npr. subjekt + har/er + perfektum particip)",
-    "examples": ["Primer 1 na norveškom", "Primer 2 na norveškom"]
+    "label": "Naziv gramatičkog obrasca",
+    "pattern": "Obrazac/formula",
+    "examples": ["Primer 1 na ${lang.native}", "Primer 2 na ${lang.native}"]
   },
   "kada_se_koristi": [
     "Situacija 1 kada se koristi (na srpskom)",
@@ -223,19 +269,19 @@ Odgovori ISKLJUČIVO u JSON formatu, bez markdown-a. Format:
     "Kontrast sa sličnom strukturom"
   ],
   "poredjenje": {
-    "title": "Naslov poređenja (npr. Preteritum vs Perfektum)",
-    "left_label": "Leva strana (npr. Preteritum)",
-    "right_label": "Desna strana (npr. Perfektum)",
+    "title": "Naslov poređenja",
+    "left_label": "Leva strana",
+    "right_label": "Desna strana",
     "rows": [
-      { "left": "Primer levo (norveški)", "right": "Primer desno (norveški)", "note": "Kratko objašnjenje razlike (srpski)" }
+      { "left": "Primer levo (${lang.native})", "right": "Primer desno (${lang.native})", "note": "Kratko objašnjenje razlike (srpski)" }
     ]
   },
   "primeri": {
     "jednostavni": [
-      { "no": "Jednostavan primer na norveškom", "sr": "Prevod na srpski" }
+      { "no": "Jednostavan primer na ${lang.native}", "sr": "Prevod na srpski" }
     ],
     "iz_zivota": [
-      { "no": "Primer iz svakodnevnog života", "sr": "Prevod", "kontekst": "Kratko objašnjenje konteksta" }
+      { "no": "Primer iz svakodnevnog života na ${lang.native}", "sr": "Prevod", "kontekst": "Kratko objašnjenje konteksta" }
     ],
     "kontrastni": [
       { "pogresno": "Pogrešna upotreba", "tacno": "Tačna upotreba", "objasnjenje": "Zašto je pogrešno" }
@@ -244,7 +290,7 @@ Odgovori ISKLJUČIVO u JSON formatu, bez markdown-a. Format:
   "tipicne_greske": [
     { "pogresno": "Pogrešan primer", "tacno": "Tačan primer", "objasnjenje": "Detaljno objašnjenje zašto je pogrešno i koje pravilo je prekršeno" }
   ],
-  "mini_savet": "Kratak praktičan savet ili trik za pamćenje — pravilo palca koje pomaže studentu da zapamti koncept",
+  "mini_savet": "Kratak praktičan savet ili trik za pamćenje",
   "povezane_teme": ["Povezana tema 1", "Povezana tema 2"]
 }
 
@@ -253,11 +299,12 @@ VAŽNA UPUTSTVA:
 - Navedi 2–4 tipične greške specifične za nivo, sa detaljnim objašnjenjima.
 - Za "kada_se_koristi" navedi 3–5 stavki.
 - Za "kada_se_ne_koristi" navedi 2–3 stavki sa jasnim kontrastima.
-- Ako tema uključuje dva srodna koncepta (npr. preteritum vs perfektum, bestemt vs ubestemt), OBAVEZNO popuni "poredjenje" sa 3–5 redova. Ako nema prirodnog poređenja, vrati "poredjenje": null.
-- Za "povezane_teme" navedi 2–4 povezane gramatičke teme koje bi student mogao da istraži dalje.
-- Objašnjenja piši na srpskom, primere na norveškom.
-- Formulu piši jednostavno i jasno, sa 2–3 primera primene.` + qualityCheck;
-      userPrompt = `Objasni sledeću gramatičku temu za nivo ${level}:\n\n"${text || topic}"`;
+- Ako tema uključuje dva srodna koncepta, OBAVEZNO popuni "poredjenje" sa 3–5 redova. Ako nema prirodnog poređenja, vrati "poredjenje": null.
+- Za "povezane_teme" navedi 2–4 povezane gramatičke teme.
+- Objašnjenja piši na srpskom, primere na ${lang.native}.
+- Formulu piši jednostavno i jasno, sa 2–3 primera primene.
+- Polje "no" u primerima koristi se generički za "primer u ciljnom jeziku" (${lang.native}) — uvek popuni primerom na ${lang.native}, nezavisno od koda jezika.` + qualityCheck;
+      userPrompt = `Objasni sledeću gramatičku temu iz ${lang.native} za nivo ${level}:\n\n"${text || topic}"`;
     } else {
       return new Response(JSON.stringify({ error: "Invalid action" }), {
         status: 400,
@@ -310,7 +357,7 @@ VAŽNA UPUTSTVA:
       }
     }
 
-    // Save correction to grammar_submissions
+    // Save correction to grammar_submissions (now language-aware)
     if (action === "correct_text") {
       await supabase.from("grammar_submissions").insert({
         user_id: user.id,
@@ -318,7 +365,8 @@ VAŽNA UPUTSTVA:
         user_text: text,
         corrected_text: parsed.corrected_text || "",
         explanations: JSON.stringify(parsed.mistakes || []),
-      });
+        language: lang.code,
+      } as any);
     }
 
     return new Response(JSON.stringify(parsed), {
