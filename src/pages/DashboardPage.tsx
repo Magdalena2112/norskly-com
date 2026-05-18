@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { motion } from "framer-motion";
 import { useProfile } from "@/context/ProfileContext";
 import { useAuth } from "@/context/AuthContext";
@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { BookOpen, Languages, MessageSquare, GraduationCap, CalendarCheck, PenLine, BookOpenText } from "lucide-react";
 import XpProgressCard from "@/components/XpProgressCard";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import WeeklyDigest from "@/components/WeeklyDigest";
 import { format } from "date-fns";
@@ -14,6 +14,8 @@ import StudentLayout from "@/components/student/StudentLayout";
 import NordicBackdrop from "@/components/student/NordicBackdrop";
 import FjordHero from "@/components/student/FjordHero";
 import PostcardVignette from "@/components/student/PostcardVignette";
+import { useSelectedLanguage } from "@/hooks/useSelectedLanguage";
+import { getLanguageBySlug, getLanguageByCode, type LanguageSlug } from "@/lib/languages";
 
 type ModuleDef = {
   title: string;
@@ -29,23 +31,45 @@ type ModuleDef = {
   stamp?: boolean;
 };
 
-const modules: ModuleDef[] = [
-  { title: "Gramatika", subtitle: "Norsk grammatikk", description: "Vežbaj gramatiku kroz kvizove i objašnjenja prilagođena tvom nivou.", icon: BookOpen, route: "/grammar", vignette: "book", iconBg: "bg-primary", rotation: "rotate-card-1" },
-  { title: "Vokabular", subtitle: "Ord & uttrykk", description: "Uči nove reči sa flashcard sistemom.", icon: Languages, route: "/vocabulary", vignette: "stamp", iconBg: "bg-sunset", rotation: "rotate-card-2" },
-  { title: "Razgovor", subtitle: "Snakk med AI", description: "Vežbaj pisanje poruka u realnim situacijama.", icon: MessageSquare, route: "/talk", vignette: "speech", iconBg: "bg-fjord", rotation: "rotate-card-3" },
-  { title: "Pisanje", subtitle: "Skriving & bildebeskrivelse", description: "Vežbaj pisanje, bildebeskrivelse i dobij detaljan feedback.", icon: PenLine, route: "/writing", vignette: "book", iconBg: "bg-accent", rotation: "rotate-card-4" },
-  { title: "Čitanje", subtitle: "Lesing & forståelse", description: "Čitaj tekstove prilagođene tvom nivou i reši vežbe razumevanja.", icon: BookOpenText, route: "/reading", vignette: "stamp", iconBg: "bg-fjord", rotation: "rotate-card-2" },
-  { title: "Razgovor sa profesorom", subtitle: "Lærer-time · 90 min", description: "Rezerviši 90-minutni čas sa profesorom norveškog.", icon: GraduationCap, route: "/book-lesson", vignette: "cabins", iconBg: "bg-forest", rotation: "rotate-card-1", buttonLabel: "Rezerviši čas", fullWidth: true },
-];
 
 export default function DashboardPage() {
   const { profile, loading: profileLoading } = useProfile();
   const { user } = useAuth();
   const navigate = useNavigate();
+  const { slug: routeSlug } = useParams<{ slug: string }>();
+  const { slug: storedSlug, code, setLanguage } = useSelectedLanguage();
+
+  // If the URL carries /ucenje/:slug, make it the active language.
+  useEffect(() => {
+    if (!routeSlug) return;
+    const fromUrl = getLanguageBySlug(routeSlug);
+    if (fromUrl && fromUrl.slug !== storedSlug) {
+      setLanguage(fromUrl.slug as LanguageSlug);
+    }
+  }, [routeSlug, storedSlug, setLanguage]);
+
+  const activeLang = useMemo(
+    () => (routeSlug ? getLanguageBySlug(routeSlug) : undefined) || getLanguageByCode(code),
+    [routeSlug, code],
+  );
+  const ui = activeLang.ui;
+
+  const modules: ModuleDef[] = useMemo(
+    () => [
+      { title: "Gramatika", subtitle: ui.module.grammar, description: "Vežbaj gramatiku kroz kvizove i objašnjenja prilagođena tvom nivou.", icon: BookOpen, route: "/grammar", vignette: "book", iconBg: "bg-primary", rotation: "rotate-card-1" },
+      { title: "Vokabular", subtitle: ui.module.vocabulary, description: "Uči nove reči sa flashcard sistemom.", icon: Languages, route: "/vocabulary", vignette: "stamp", iconBg: "bg-sunset", rotation: "rotate-card-2" },
+      { title: "Razgovor", subtitle: ui.module.talk, description: "Vežbaj pisanje poruka u realnim situacijama.", icon: MessageSquare, route: "/talk", vignette: "speech", iconBg: "bg-fjord", rotation: "rotate-card-3" },
+      { title: "Pisanje", subtitle: ui.module.writing, description: "Vežbaj pisanje, bildebeskrivelse i dobij detaljan feedback.", icon: PenLine, route: "/writing", vignette: "book", iconBg: "bg-accent", rotation: "rotate-card-4" },
+      { title: "Čitanje", subtitle: ui.module.reading, description: "Čitaj tekstove prilagođene tvom nivou i reši vežbe razumevanja.", icon: BookOpenText, route: "/reading", vignette: "stamp", iconBg: "bg-fjord", rotation: "rotate-card-2" },
+      { title: "Razgovor sa profesorom", subtitle: ui.module.teacher, description: `Rezerviši 90-minutni čas sa profesorom ${activeLang.label.toLowerCase()}.`, icon: GraduationCap, route: "/book-lesson", vignette: "cabins", iconBg: "bg-forest", rotation: "rotate-card-1", buttonLabel: "Rezerviši čas", fullWidth: true },
+    ],
+    [ui, activeLang.label],
+  );
 
   const [xpData, setXpData] = useState<{ total_xp: number; level: number } | null>(null);
   const [upcomingLesson, setUpcomingLesson] = useState<{ start_time: string; end_time: string; status: string } | null>(null);
   const [lessonLoaded, setLessonLoaded] = useState(false);
+
 
   useEffect(() => {
     if (!user) return;
