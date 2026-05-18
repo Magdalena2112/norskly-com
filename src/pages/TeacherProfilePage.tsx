@@ -129,6 +129,21 @@ export default function TeacherProfilePage() {
       const startTime = new Date(selectedSlot.start_time);
       const endTime = addMinutes(startTime, selectedType.duration_minutes || 90);
 
+      // Preflight: provera dostupnosti u realnom vremenu pre RPC poziva.
+      // Atomski guard u book_lesson_v2 RPC-u svakako sprečava duple booking-e,
+      // ali ovo daje brži i prijateljskiji UX kad je termin već zauzet.
+      const { data: liveSlot, error: liveErr } = await supabase
+        .from("availability_slots")
+        .select("id, status")
+        .eq("id", selectedSlot.id)
+        .maybeSingle();
+      if (liveErr) throw liveErr;
+      if (!liveSlot || liveSlot.status !== "open") {
+        queryClient.invalidateQueries({ queryKey: ["open-slots", teacherId] });
+        setSelectedSlot(null);
+        throw new Error("Ovaj termin je upravo rezervisan. Izaberi drugi slobodan termin.");
+      }
+
       const { data: lessonId, error } = await supabase.rpc("book_lesson_v2", {
         p_slot_id: selectedSlot.id,
         p_teacher_id: teacherId,
