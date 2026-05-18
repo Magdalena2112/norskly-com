@@ -17,18 +17,12 @@ type Mark = {
 };
 
 const MARKS: Mark[] = [
-  // Large one behind the title
-  { top: "-2%",  left: "50%", size: 18, rotate: -6,  variant: "filled",  tone: "pink", opacity: 0.10, blur: 1.5, duration: 14, delay: 0,   drift: 18, parallax: -0.25 },
-  // Behind left card
-  { top: "42%",  left: "8%",  size: 11, rotate: 10,  variant: "outline", tone: "plum", opacity: 0.16, blur: 0.5, duration: 11, delay: 1.2, drift: 14, parallax: 0.15 },
-  // Behind right card
-  { top: "48%",  left: "82%", size: 13, rotate: -14, variant: "filled",  tone: "plum", opacity: 0.09, blur: 1.0, duration: 13, delay: 0.6, drift: 16, parallax: 0.2 },
-  // Small accent top-right
-  { top: "8%",   left: "82%", size: 5,  rotate: 18,  variant: "outline", tone: "sage", opacity: 0.22, blur: 0,   duration: 9,  delay: 0.4, drift: 10, parallax: -0.1 },
-  // Small accent bottom-left
-  { top: "78%",  left: "18%", size: 6,  rotate: -22, variant: "filled",  tone: "pink", opacity: 0.18, blur: 0.3, duration: 10, delay: 1.8, drift: 12, parallax: -0.15 },
-  // Tiny mid-top
-  { top: "4%",   left: "14%", size: 4,  rotate: 8,   variant: "outline", tone: "plum", opacity: 0.18, blur: 0,   duration: 8,  delay: 0.9, drift: 8,  parallax: 0.1 },
+  { top: "-2%",  left: "50%", size: 20, rotate: -6,  variant: "filled",  tone: "pink", opacity: 0.32, blur: 0.5, duration: 14, delay: 0,   drift: 18, parallax: -0.25 },
+  { top: "42%",  left: "8%",  size: 12, rotate: 10,  variant: "outline", tone: "plum", opacity: 0.45, blur: 0,   duration: 11, delay: 1.2, drift: 14, parallax: 0.15 },
+  { top: "48%",  left: "82%", size: 14, rotate: -14, variant: "filled",  tone: "plum", opacity: 0.28, blur: 0.3, duration: 13, delay: 0.6, drift: 16, parallax: 0.2 },
+  { top: "8%",   left: "82%", size: 6,  rotate: 18,  variant: "outline", tone: "sage", opacity: 0.55, blur: 0,   duration: 9,  delay: 0.4, drift: 10, parallax: -0.1 },
+  { top: "78%",  left: "18%", size: 7,  rotate: -22, variant: "filled",  tone: "pink", opacity: 0.5,  blur: 0,   duration: 10, delay: 1.8, drift: 12, parallax: -0.15 },
+  { top: "4%",   left: "14%", size: 5,  rotate: 8,   variant: "outline", tone: "plum", opacity: 0.5,  blur: 0,   duration: 8,  delay: 0.9, drift: 8,  parallax: 0.1 },
 ];
 
 const toneColor = (t: Mark["tone"]) =>
