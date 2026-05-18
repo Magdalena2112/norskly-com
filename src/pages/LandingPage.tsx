@@ -521,7 +521,7 @@ export default function LandingPage() {
               <p className="opacity-80 max-w-md mx-auto mb-8">
                 Kreiraj profil za 2 minuta i počni da učiš na način koji odgovara tebi.
               </p>
-              <Button size="lg" onClick={() => navigate("/auth")}
+              <Button size="lg" onClick={() => document.getElementById("languages")?.scrollIntoView({ behavior: "smooth" })}
                 className="rounded-full h-14 px-10 bg-primary-foreground text-primary hover:bg-primary-foreground/90">
                 Započni besplatno <ArrowRight className="ml-1 h-4 w-4" />
               </Button>
