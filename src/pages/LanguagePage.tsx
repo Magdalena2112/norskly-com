@@ -81,11 +81,25 @@ export default function LanguagePage() {
     },
   });
 
-  const goAuth = (extra: Record<string, string> = {}) => {
+  const goAuth = async (extra: Record<string, string> = {}) => {
     if (extra.plan) localStorage.setItem("norskly_selected_plan", extra.plan);
-    // Already logged-in users go straight to their dashboard with the new language selected.
-    if (user) {
-      navigate(extra.next || "/practice");
+    // Ulogovan korisnik: proveri da li već ima onboarding za ovaj jezik.
+    if (user && lang) {
+      if (extra.next) {
+        navigate(extra.next);
+        return;
+      }
+      const { data: langProf } = await supabase
+        .from("language_profiles")
+        .select("onboarding_completed")
+        .eq("user_id", user.id)
+        .eq("language", lang.code)
+        .maybeSingle();
+      if (langProf?.onboarding_completed) {
+        navigate(`/ucenje/${lang.slug}`);
+      } else {
+        navigate("/onboarding");
+      }
       return;
     }
     const params = new URLSearchParams({ lang: lang.slug, ...extra });
