@@ -1,64 +1,64 @@
+## Cilj
 
-## Goal
+Svaki put kada učenik klikne na jezik (Norveški / Engleski / Nemački), taj izbor se prenosi kroz prijavu/registraciju i vodi ga na učenje baš tog jezika — sa zasebnim onboardingom po jeziku, ali u okviru istog naloga.
 
-When a student is learning **English**, the AI conversational tutor (`talk-ai`) should adapt its replies, vocabulary, and example situations to that learner's **focus_area** (speaking / writing / grammar / vocabulary / pronunciation) and **life_context** (travel, business English, job interviews, movies & series, everyday, social media, studies abroad) chosen during onboarding and stored in `language_profiles`.
+## Trenutno ponašanje (problem)
 
-Today the prompt only mentions name, level, and learning_goal — and is hardcoded for Norwegian.
+- `LanguagePage` upisuje `norskly_selected_language` i prosleđuje `?lang=` u `/auth`.
+- **AuthPage (login)** prepisuje izbor sa `profiles.preferred_language` i vodi korisnika na njegov *stari* jezik, ignorišući novi klik.
+- **Index.tsx** isto čita `profiles.preferred_language` i redirektuje pre nego što se URL/local izbor primeni.
+- `ProtectedRoute` već pravilno proverava onboarding po jeziku iz URL-a (`/ucenje/:slug`), to ostavljamo.
 
-## Changes
+## Šta menjamo
 
-### 1. Load `life_context` and `focus_area` per active language
-File: `src/context/ProfileContext.tsx`
-- Add `life_context` to the `language_profiles` `select(...)` and to the `UserProfile` shape (optional string).
-- `focus_area` is already loaded — no change needed.
+### 1. `src/pages/AuthPage.tsx`
+- Pročitaj `lang` iz query stringa **prvi** (`searchParams.get("lang")`) i tretiraj ga kao "namera korisnika u ovoj sesiji".
+- **Login flow**:
+  - Ako postoji `lang` iz URL-a (ili `norskly_selected_language` postavljen u ovoj sesiji), koristi ga kao ciljni jezik *umesto* `profiles.preferred_language`.
+  - Mapiraj slug → code (`no`/`en`/`de`) i proveri `language_profiles.onboarding_completed` za baš taj jezik.
+  - Ako nije onboarded → `navigate("/onboarding")` (OnboardingPage već čita `norskly_selected_language`).
+  - Ako jeste → `navigate("/ucenje/<slug>")`.
+  - Samo kad nema URL `lang`-a niti svežeg izbora, padaj nazad na `profiles.preferred_language`.
+- **Signup flow**:
+  - Posle uspešne registracije upiši `preferred_language = selectedLang` u `profiles` (već radi).
+  - Dodaj redirect na `/onboarding` (umesto samo toast-a) kada je email auto-potvrđen i sesija postoji; ako nema sesije (treba potvrda emaila), zadrži postojeću poruku.
 
-File: `src/types/profile.ts`
-- Add `life_context?: string` to `UserProfile`.
+### 2. `src/pages/Index.tsx`
+- Ako je u localStorage postavljen `norskly_selected_language` koji se razlikuje od `profiles.preferred_language`, **prednost daj localStorage izboru** (to je sveža namera klikom na jezik).
+- Provera onboardinga već radi po `code` izvedenom iz slug-a — samo treba da koristimo "svež" slug.
 
-### 2. Send the new fields to talk-ai
-File: `src/pages/PracticePage.tsx` (Talk)
-- Extend the `profile` payload in both chat and recap fetch calls to include:
-  - `focus_area: profile.focus_area`
-  - `life_context: profile.life_context`
-- Also pass `language: langCode` (already present per current code — verify).
+### 3. `src/pages/LanguagePage.tsx`
+- `goAuth()` za već **ulogovanog** korisnika: umesto `navigate("/practice")`, proveri `language_profiles` za izabrani jezik:
+  - ako `onboarding_completed = true` → `/ucenje/<slug>`,
+  - inače → `/onboarding` (sa već postavljenim `norskly_selected_language`).
+- Ovo pokriva slučaj "već prijavljen korisnik klikne drugi jezik" → ide pravo na onboarding tog jezika.
 
-### 3. Make talk-ai language-aware and inject the new context
-File: `supabase/functions/talk-ai/index.ts`
-- Destructure `language` from the request body (default `"no"`).
-- Read `focus_area` and `life_context` from `profile`.
-- Build the system prompt with a small language switch:
+### 4. (bez izmena, samo potvrda)
+- `OnboardingPage` već koristi `norskly_selected_language`, upisuje `language_profiles` sa `language = langCode` i radi `upsert` po `(user_id, language)` — i podržava engleski tekst. Posle završetka invalidira keš onboarding statusa i redirektuje na `/ucenje/<slug>`.
+- `ProtectedRoute` već čita aktivan jezik iz URL-a i traži `onboarding_completed` po tom jeziku — bez izmena.
 
-  **English branch** (language === `"en"`):
-  - Persona: "You are an AI English tutor having a natural conversation with {name}, CEFR {level}."
-  - Focus-area emphasis line, e.g.:
-    - speaking → prioritize natural spoken phrasing, fillers, contractions
-    - writing → favor written register, punctuation, paragraph structure
-    - grammar → weave one targeted grammar reminder into each correction
-    - vocabulary → introduce 1–2 fresh on-topic words per reply
-    - pronunciation → flag tricky sounds / stress patterns when relevant
-  - Life-context flavoring line, e.g.:
-    - travel → airports, hotels, directions, ordering food
-    - business English → meetings, email phrasing, polite assertiveness
-    - job interviews → STAR answers, professional self-introduction
-    - movies and series → idioms, slang, pop-culture references
-    - everyday communication → small talk, daily routines
-    - social media and internet → casual tone, abbreviations, online etiquette
-    - studies abroad → academic vocabulary, campus life, registration
-  - Keep the same section format as today, but translate the structural labels:
-    `[RESPONSE]`, `[VOCABULARY]`, `[CORRECTIONS]`, `[FEEDBACK]`, `[NEXT STEP]`.
-  - Response text must be in English; explanations and feedback remain in Serbian (per project localization policy).
+## Bez izmena baze
 
-  **Norwegian branch** (language === `"no"`, default):
-  - Keep the existing Bokmål prompt, but also append focus_area + life_context lines when present so Norwegian learners benefit too (non-breaking — fields are simply ignored if blank).
+Šema je već spremna: `language_profiles` ima `(user_id, language)` sa `onboarding_completed` po jeziku. Nikakva migracija nije potrebna.
 
-- Apply the same focus_area + life_context lines to the `recap` system prompt so the end-of-session summary highlights progress against the learner's chosen real-life context.
+## Tok korisnika (posle izmena)
 
-### 4. Sanity checks
-- Confirm `langCode` is already sent from `PracticePage` and accepted server-side (currently the body sends `language: langCode` but the function never reads it — this plan fixes that).
-- No DB migration needed — `life_context` column already exists on `language_profiles`.
-- No change to grammar-ai / writing-correct / reading-ai / vocabulary-ai in this pass (they take only `level`); the user asked specifically for the tutoring prompt.
+```text
+[Landing] → klik "Engleski"
+  → LanguagePage (postavlja norskly_selected_language=engleski)
+  → /auth?lang=engleski
+      ├── Nov korisnik: Registracija → profiles.preferred_language=engleski
+      │     → /onboarding (engleski tekstovi i koraci)
+      │     → /ucenje/engleski
+      └── Postojeći korisnik (već imao norveški):
+            Login → ignoriše profiles.preferred_language
+                  → proverava language_profiles za 'en'
+                  → nema → /onboarding (engleski)
+                  → /ucenje/engleski
+```
 
-## Out of scope
-- Re-localizing UI labels in the Talk page.
-- Adding life_context / focus_area to grammar / writing / reading / vocabulary edge functions (can follow as a separate pass if you want).
-- Multi-select life_context — onboarding stores a single value today.
+## Edge slučajevi
+
+- Korisnik ide direktno na `/auth` bez `?lang=`: ponašanje kao i sada (koristi `profiles.preferred_language`).
+- Već ulogovan korisnik koji ima završen onboarding za izabrani jezik: ide direktno na `/ucenje/<slug>` bez ponovnog onboardinga.
+- `profiles.preferred_language` se ažurira pri *registraciji* da odražava poslednji izabrani jezik, ali login-flow više ne dozvoljava da on "prepiše" svež klik na drugi jezik.
