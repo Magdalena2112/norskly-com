@@ -32,13 +32,18 @@ export default function AuthPage() {
     setLoading(true);
 
     try {
-      const selectedLang = localStorage.getItem("norskly_selected_language");
+      // Jezik koji je korisnik izabrao klikom u ovoj sesiji (URL ima prednost).
+      const urlLang = searchParams.get("lang");
+      const storedLang = localStorage.getItem("norskly_selected_language");
+      const intentLang = urlLang || storedLang || null;
       const selectedPlan = localStorage.getItem("norskly_selected_plan");
+
+      const slugToCode = (slug: string): "no" | "en" | "de" =>
+        slug === "engleski" ? "en" : slug === "nemacki" ? "de" : "no";
 
       if (isLogin) {
         const { data, error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw error;
-        // Učitaj jezik, plan i napredak onboarding-a i preusmeri korisnika
         if (data.user) {
           const { data: prof } = await supabase
             .from("profiles")
@@ -46,13 +51,13 @@ export default function AuthPage() {
             .eq("user_id", data.user.id)
             .maybeSingle();
 
-          const lang = prof?.preferred_language || selectedLang || "norveski";
+          // Sveža namera (URL/localStorage izbor) pobeđuje sačuvani preferred_language.
+          const lang = intentLang || prof?.preferred_language || "norveski";
           const plan = prof?.subscription_type || selectedPlan;
           localStorage.setItem("norskly_selected_language", lang);
           if (plan) localStorage.setItem("norskly_selected_plan", plan);
 
-          const code: "no" | "en" | "de" =
-            lang === "engleski" ? "en" : lang === "nemacki" ? "de" : "no";
+          const code = slugToCode(lang);
           const { data: langProf } = await supabase
             .from("language_profiles")
             .select("onboarding_completed")
@@ -77,6 +82,8 @@ export default function AuthPage() {
         navigate("/practice");
 
       } else {
+        const signupLang = intentLang || "norveski";
+        localStorage.setItem("norskly_selected_language", signupLang);
         const { data, error } = await supabase.auth.signUp({
           email,
           password,
@@ -84,11 +91,20 @@ export default function AuthPage() {
         });
         if (error) throw error;
         // Sačuvaj izabrani jezik na profil novog korisnika
-        if (data.user && selectedLang) {
+        if (data.user) {
           await supabase
             .from("profiles")
-            .update({ preferred_language: selectedLang })
+            .update({ preferred_language: signupLang })
             .eq("user_id", data.user.id);
+        }
+        // Ako je sesija odmah dostupna (auto-confirm) — idi na onboarding za izabrani jezik.
+        if (data.session) {
+          toast({
+            title: "Dobrodošao 👋",
+            description: "Hajde da podesimo tvoj profil za ovaj jezik.",
+          });
+          navigate("/onboarding");
+          return;
         }
         toast({
           title: "Registracija uspešna!",
