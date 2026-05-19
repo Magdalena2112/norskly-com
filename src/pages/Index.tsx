@@ -23,10 +23,9 @@ const Index = () => {
         .eq("user_id", user.id)
         .maybeSingle();
 
-      const slug =
-        prof?.preferred_language ||
-        localStorage.getItem("norskly_selected_language") ||
-        "norveski";
+      // Sveža namera (klik na jezik) pobeđuje istorijski preferred_language.
+      const storedSlug = localStorage.getItem("norskly_selected_language");
+      const slug = storedSlug || prof?.preferred_language || "norveski";
       localStorage.setItem("norskly_selected_language", slug);
       const code = SLUG_TO_CODE[slug] || "no";
 
