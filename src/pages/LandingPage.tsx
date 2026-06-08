@@ -533,7 +533,7 @@ export default function LandingPage() {
       {/* ============== FOOTER ============== */}
       <footer className="border-t border-border/60 py-8 md:py-10">
         <div className="container flex flex-col md:flex-row items-center justify-between gap-3 md:gap-4 text-xs sm:text-sm text-muted-foreground text-center md:text-left">
-          <img src={norsklyLogo.url} alt="Norskly" className="h-10 w-auto select-none" draggable={false} />
+          <img src={norsklyLogo.url} alt="Norskly" className="h-12 w-auto select-none" draggable={false} />
           <p>© 2026 Norskly. Sva prava zadržana.</p>
         </div>
       </footer>
