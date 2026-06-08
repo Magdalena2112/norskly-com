@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import norsklyLogo from "@/assets/norskly-logo.png.asset.json";
 import { motion } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
@@ -129,7 +130,7 @@ export default function AuthPage() {
       </div>
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="w-full max-w-md">
         <div className="text-center mb-6">
-          <span className="font-display font-bold text-2xl text-foreground">Norskly</span>
+          <img src={norsklyLogo.url} alt="Norskly" className="h-12 w-auto mx-auto select-none" draggable={false} />
           <p className="text-muted-foreground text-sm mt-1">Adaptivno učenje jezika</p>
         </div>
 
