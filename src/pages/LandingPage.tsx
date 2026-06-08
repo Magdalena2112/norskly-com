@@ -117,7 +117,7 @@ export default function LandingPage() {
       {/* ============== NAV ============== */}
       <nav className="fixed top-0 inset-x-0 z-50 backdrop-blur-md bg-background/80 border-b border-border/60">
         <div className="container flex items-center justify-between h-14 sm:h-16">
-          <img src={norsklyLogo.url} alt="Norskly" className="h-8 sm:h-10 w-auto select-none" draggable={false} />
+          <img src={norsklyLogo.url} alt="Norskly" className="h-10 sm:h-12 w-auto select-none" draggable={false} />
           <div className="hidden md:flex items-center gap-8 text-sm font-medium text-foreground/80">
             <a href="#features" className="hover:text-primary transition-colors">Platforma</a>
             <a href="#teachers" className="hover:text-primary transition-colors">Za učenike</a>
@@ -533,7 +533,7 @@ export default function LandingPage() {
       {/* ============== FOOTER ============== */}
       <footer className="border-t border-border/60 py-8 md:py-10">
         <div className="container flex flex-col md:flex-row items-center justify-between gap-3 md:gap-4 text-xs sm:text-sm text-muted-foreground text-center md:text-left">
-          <img src={norsklyLogo.url} alt="Norskly" className="h-10 w-auto select-none" draggable={false} />
+          <img src={norsklyLogo.url} alt="Norskly" className="h-12 w-auto select-none" draggable={false} />
           <p>© 2026 Norskly. Sva prava zadržana.</p>
         </div>
       </footer>
