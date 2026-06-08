@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import norsklyLogo from "@/assets/norskly-logo.png.asset.json";
 import {
   MessageCircle, Sparkles, BookOpen, Target, Mic, BarChart3,
   Check, X, ArrowRight, GraduationCap, Users, CalendarCheck, Lock,
