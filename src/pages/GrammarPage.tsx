@@ -17,6 +17,7 @@ import { logErrors } from "@/lib/logErrors";
 import { useIsMobile } from "@/hooks/use-mobile";
 import GrammarHistoryTab from "@/components/grammar/GrammarHistoryTab";
 import GrammarProgressTab from "@/components/grammar/GrammarProgressTab";
+import { getCurrentLanguageCode, getCurrentPersonalization } from "@/lib/currentLanguage";
 
 // ─── Types ───
 interface Exercise {
