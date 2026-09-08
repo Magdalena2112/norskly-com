@@ -63,10 +63,7 @@ export function ProfileProvider({ children }: { children: ReactNode }) {
           life_context: lp?.life_context || "",
         };
         setProfile(dbProfile);
-        localStorage.setItem("norskly_profile", JSON.stringify(dbProfile));
-        if (prof?.preferred_language) {
-          localStorage.setItem("norskly_selected_language", prof.preferred_language);
-        }
+        localStorage.setItem(profileCacheKey(code), JSON.stringify(dbProfile));
       } catch (e) {
         console.error("Failed to fetch profile from DB", e);
       } finally {
