@@ -33,16 +33,11 @@ export default function SelectTeacherPage() {
   const { data: teachers = [], isLoading } = useQuery({
     queryKey: ["teachers-list", code],
     queryFn: async () => {
-      const { data, error } = await supabase.rpc("get_active_teachers");
+      const { data, error } = await (supabase.rpc as any)("get_active_teachers_by_language", {
+        p_language: code,
+      });
       if (error) throw error;
-      // Filter by current language (rpc returns all; we narrow client-side)
-      const { data: langRows } = await supabase
-        .from("teachers")
-        .select("id")
-        .eq("language", code)
-        .eq("is_active", true);
-      const allowed = new Set((langRows || []).map((r: any) => r.id));
-      return ((data || []) as Teacher[]).filter((t) => allowed.has(t.id));
+      return (data || []) as Teacher[];
     },
   });
 
