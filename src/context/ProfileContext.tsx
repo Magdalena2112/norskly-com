@@ -75,13 +75,13 @@ export function ProfileProvider({ children }: { children: ReactNode }) {
   const updateProfile = (partial: Partial<UserProfile>) => {
     setProfile((prev) => {
       const next = { ...prev, ...partial };
-      localStorage.setItem("norskly_profile", JSON.stringify(next));
+      localStorage.setItem(profileCacheKey(code), JSON.stringify(next));
       return next;
     });
   };
 
   const setFullProfile = (p: UserProfile) => {
-    localStorage.setItem("norskly_profile", JSON.stringify(p));
+    localStorage.setItem(profileCacheKey(code), JSON.stringify(p));
     setProfile(p);
   };
 
