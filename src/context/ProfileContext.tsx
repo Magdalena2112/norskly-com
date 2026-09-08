@@ -3,6 +3,7 @@ import { UserProfile, defaultProfile } from "@/types/profile";
 import { useAuth } from "@/context/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
 import { useSelectedLanguage } from "@/hooks/useSelectedLanguage";
+import { profileCacheKey } from "@/lib/currentLanguage";
 
 interface ProfileContextType {
   profile: UserProfile;
