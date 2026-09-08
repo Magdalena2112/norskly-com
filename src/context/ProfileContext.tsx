@@ -19,9 +19,16 @@ export function ProfileProvider({ children }: { children: ReactNode }) {
   const { code } = useSelectedLanguage();
   const [loading, setLoading] = useState(true);
   const [profile, setProfile] = useState<UserProfile>(() => {
-    const saved = localStorage.getItem("norskly_profile");
+    const saved = localStorage.getItem(profileCacheKey());
     return saved ? JSON.parse(saved) : defaultProfile;
   });
+
+  // Kada se jezik promeni, odmah prikaži keš tog jezika (ili prazan profil),
+  // nikad profil prethodnog jezika.
+  useEffect(() => {
+    const saved = localStorage.getItem(profileCacheKey(code));
+    setProfile(saved ? JSON.parse(saved) : defaultProfile);
+  }, [code]);
 
   useEffect(() => {
     if (!user) {

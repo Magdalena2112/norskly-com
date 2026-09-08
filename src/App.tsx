@@ -7,6 +7,7 @@ import { ProfileProvider } from "@/context/ProfileContext";
 import { AuthProvider } from "@/context/AuthContext";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
 import { AdminRoute } from "@/components/AdminRoute";
+import LanguageSync from "@/components/LanguageSync";
 import LandingPage from "./pages/LandingPage";
 import ForTeachersPage from "./pages/ForTeachersPage";
 import LanguagePage from "./pages/LanguagePage";
@@ -50,6 +51,7 @@ const App = () => (
           <Toaster />
           <Sonner />
           <BrowserRouter>
+            <LanguageSync />
             <Routes>
               <Route path="/" element={<LandingPage />} />
               <Route path="/za-profesore" element={<ForTeachersPage />} />
