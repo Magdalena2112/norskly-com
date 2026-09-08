@@ -1181,6 +1181,20 @@ export type Database = {
           students_count: number
         }[]
       }
+      get_active_teachers_by_language: {
+        Args: { p_language: string }
+        Returns: {
+          bio: string
+          focus: string[]
+          id: string
+          is_verified: boolean
+          name: string
+          photo_url: string
+          rating: number
+          spoken_languages: string[]
+          students_count: number
+        }[]
+      }
       get_teacher_email: { Args: never; Returns: string }
       get_teacher_meet_link: { Args: never; Returns: string }
       get_teacher_profile_public: {
