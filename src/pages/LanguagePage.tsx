@@ -66,6 +66,9 @@ export default function LanguagePage() {
     if (lang) {
       document.title = `${lang.label} · Norskly`;
       localStorage.setItem("norskly_selected_language", lang.slug);
+      try {
+        sessionStorage.setItem("norskly_language_intent", lang.slug);
+      } catch { /* ignore */ }
       window.dispatchEvent(new Event("language-changed"));
     }
   }, [lang]);

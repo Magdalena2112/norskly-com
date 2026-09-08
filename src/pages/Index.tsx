@@ -23,9 +23,12 @@ const Index = () => {
         .eq("user_id", user.id)
         .maybeSingle();
 
-      // Sveža namera (klik na jezik) pobeđuje istorijski preferred_language.
-      const storedSlug = localStorage.getItem("norskly_selected_language");
-      const slug = storedSlug || prof?.preferred_language || "norveski";
+      // Namera važi samo ako je korisnik u ovoj sesiji kliknuo na jezik.
+      let intentSlug: string | null = null;
+      try {
+        intentSlug = sessionStorage.getItem("norskly_language_intent");
+      } catch { /* ignore */ }
+      const slug = intentSlug || prof?.preferred_language || "norveski";
       localStorage.setItem("norskly_selected_language", slug);
       const code = SLUG_TO_CODE[slug] || "no";
 
