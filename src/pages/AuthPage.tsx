@@ -33,10 +33,10 @@ export default function AuthPage() {
     setLoading(true);
 
     try {
-      // Jezik koji je korisnik izabrao klikom u ovoj sesiji (URL ima prednost).
+      // Namera važi SAMO ako je jezik došao iz URL-a (klik na jezik u ovoj prijavi).
+      // Stari zapamćeni izbor ne sme da pregazi profil iz baze.
       const urlLang = searchParams.get("lang");
-      const storedLang = localStorage.getItem("norskly_selected_language");
-      const intentLang = urlLang || storedLang || null;
+      const intentLang = urlLang || null;
       const selectedPlan = localStorage.getItem("norskly_selected_plan");
 
       const slugToCode = (slug: string): "no" | "en" | "de" =>
@@ -52,10 +52,11 @@ export default function AuthPage() {
             .eq("user_id", data.user.id)
             .maybeSingle();
 
-          // Sveža namera (URL/localStorage izbor) pobeđuje sačuvani preferred_language.
+          // Namera iz URL-a pobeđuje sačuvani preferred_language; inače baza.
           const lang = intentLang || prof?.preferred_language || "norveski";
           const plan = prof?.subscription_type || selectedPlan;
           localStorage.setItem("norskly_selected_language", lang);
+          try { sessionStorage.setItem("norskly_language_intent", lang); } catch { /* ignore */ }
           if (plan) localStorage.setItem("norskly_selected_plan", plan);
 
           const code = slugToCode(lang);

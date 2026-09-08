@@ -169,7 +169,10 @@ export default function LandingPage() {
                 <Link
                   key={l.slug}
                   to={`/jezici/${l.slug}`}
-                  onClick={() => localStorage.setItem("norskly_selected_language", l.slug)}
+                  onClick={() => {
+                    localStorage.setItem("norskly_selected_language", l.slug);
+                    try { sessionStorage.setItem("norskly_language_intent", l.slug); } catch { /* ignore */ }
+                  }}
                   className="group px-5 py-3 sm:px-7 sm:py-4 rounded-full text-sm sm:text-base md:text-lg font-semibold border bg-background text-foreground border-border hover:border-primary hover:bg-secondary/40 hover:-translate-y-0.5 hover:shadow-card-soft transition-all inline-flex items-center gap-2"
                 >
                   <span className="text-lg sm:text-xl">{l.flag}</span>

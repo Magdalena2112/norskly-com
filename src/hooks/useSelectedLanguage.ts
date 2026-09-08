@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { LANGUAGES, type LanguageSlug } from "@/lib/languages";
+import { LANG_STORAGE_KEY, getCurrentLanguageSlug } from "@/lib/currentLanguage";
 
-const STORAGE_KEY = "norskly_selected_language";
+const STORAGE_KEY = LANG_STORAGE_KEY;
 
 /**
  * Metadata used for AI prompts and labels.
@@ -30,7 +31,9 @@ export function getLanguageMetaByCode(code: string) {
 }
 
 function readStoredSlug(): LanguageSlug {
-  const v = (typeof window !== "undefined" && localStorage.getItem(STORAGE_KEY)) || "norveski";
+  // Route wins over stored value so a language area never shows another
+  // language's data.
+  const v = getCurrentLanguageSlug();
   return (LANGUAGES.find((l) => l.slug === v)?.slug as LanguageSlug) || "norveski";
 }
 

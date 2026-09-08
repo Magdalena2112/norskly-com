@@ -3,6 +3,7 @@ import { UserProfile, defaultProfile } from "@/types/profile";
 import { useAuth } from "@/context/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
 import { useSelectedLanguage } from "@/hooks/useSelectedLanguage";
+import { profileCacheKey } from "@/lib/currentLanguage";
 
 interface ProfileContextType {
   profile: UserProfile;
@@ -18,9 +19,16 @@ export function ProfileProvider({ children }: { children: ReactNode }) {
   const { code } = useSelectedLanguage();
   const [loading, setLoading] = useState(true);
   const [profile, setProfile] = useState<UserProfile>(() => {
-    const saved = localStorage.getItem("norskly_profile");
+    const saved = localStorage.getItem(profileCacheKey());
     return saved ? JSON.parse(saved) : defaultProfile;
   });
+
+  // Kada se jezik promeni, odmah prikaži keš tog jezika (ili prazan profil),
+  // nikad profil prethodnog jezika.
+  useEffect(() => {
+    const saved = localStorage.getItem(profileCacheKey(code));
+    setProfile(saved ? JSON.parse(saved) : defaultProfile);
+  }, [code]);
 
   useEffect(() => {
     if (!user) {
@@ -55,10 +63,7 @@ export function ProfileProvider({ children }: { children: ReactNode }) {
           life_context: lp?.life_context || "",
         };
         setProfile(dbProfile);
-        localStorage.setItem("norskly_profile", JSON.stringify(dbProfile));
-        if (prof?.preferred_language) {
-          localStorage.setItem("norskly_selected_language", prof.preferred_language);
-        }
+        localStorage.setItem(profileCacheKey(code), JSON.stringify(dbProfile));
       } catch (e) {
         console.error("Failed to fetch profile from DB", e);
       } finally {
@@ -70,13 +75,13 @@ export function ProfileProvider({ children }: { children: ReactNode }) {
   const updateProfile = (partial: Partial<UserProfile>) => {
     setProfile((prev) => {
       const next = { ...prev, ...partial };
-      localStorage.setItem("norskly_profile", JSON.stringify(next));
+      localStorage.setItem(profileCacheKey(code), JSON.stringify(next));
       return next;
     });
   };
 
   const setFullProfile = (p: UserProfile) => {
-    localStorage.setItem("norskly_profile", JSON.stringify(p));
+    localStorage.setItem(profileCacheKey(code), JSON.stringify(p));
     setProfile(p);
   };
 

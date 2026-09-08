@@ -17,6 +17,7 @@ import { logErrors } from "@/lib/logErrors";
 import { useIsMobile } from "@/hooks/use-mobile";
 import GrammarHistoryTab from "@/components/grammar/GrammarHistoryTab";
 import GrammarProgressTab from "@/components/grammar/GrammarProgressTab";
+import { getCurrentLanguageCode, getCurrentPersonalization } from "@/lib/currentLanguage";
 
 // ─── Types ───
 interface Exercise {
@@ -45,20 +46,11 @@ interface QuizQuestion {
 // Reads the user's currently selected learning language from localStorage and
 // forwards it to the grammar-ai edge function so prompts adapt automatically.
 function currentLanguageCode(): "no" | "en" | "de" {
-  const slug = typeof window !== "undefined" ? localStorage.getItem("norskly_selected_language") : null;
-  if (slug === "engleski") return "en";
-  if (slug === "nemacki") return "de";
-  return "no";
+  return getCurrentLanguageCode();
 }
 async function callGrammarAI(body: Record<string, unknown>) {
   const { data: { session } } = await supabase.auth.getSession();
-  const personalization = (() => {
-    try {
-      const raw = typeof window !== "undefined" ? localStorage.getItem("norskly_profile") : null;
-      const p = raw ? JSON.parse(raw) : {};
-      return { focus_area: p?.focus_area || "", life_context: p?.life_context || "" };
-    } catch { return { focus_area: "", life_context: "" }; }
-  })();
+  const personalization = getCurrentPersonalization();
   const res = await supabase.functions.invoke("grammar-ai", {
     body: {
       ...body,
