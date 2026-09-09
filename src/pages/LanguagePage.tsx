@@ -64,14 +64,15 @@ export default function LanguagePage() {
   const { user } = useAuth();
 
   useEffect(() => {
-    if (lang) {
+    if (!lang) return;
+    if (lang.slug !== "norveski") {
       document.title = `${lang.label} · Norskly`;
-      localStorage.setItem("norskly_selected_language", lang.slug);
-      try {
-        sessionStorage.setItem("norskly_language_intent", lang.slug);
-      } catch { /* ignore */ }
-      window.dispatchEvent(new Event("language-changed"));
     }
+    localStorage.setItem("norskly_selected_language", lang.slug);
+    try {
+      sessionStorage.setItem("norskly_language_intent", lang.slug);
+    } catch { /* ignore */ }
+    window.dispatchEvent(new Event("language-changed"));
   }, [lang]);
 
   if (!lang) return <Navigate to="/" replace />;
