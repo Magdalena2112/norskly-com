@@ -12,6 +12,7 @@ import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { ArrowRight, Check, Sparkles, Star, GraduationCap, Clock } from "lucide-react";
 import { getLanguageBySlug } from "@/lib/languages";
 import JourneyStepper from "@/components/onboarding/JourneyStepper";
+import { Helmet } from "react-helmet-async";
 import teacherPhotoFallback from "@/assets/teacher-photo.jpg";
 
 const PLANS = [
