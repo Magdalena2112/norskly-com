@@ -129,6 +129,21 @@ export default function LanguagePage() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
+      {lang.slug === "norveski" && (
+        <Helmet>
+          <title>Uči norveški online uz personalizovanu podršku | Norskly</title>
+          <meta
+            name="description"
+            content="Uči norveški online kroz personalizovane vežbe, gramatiku, vokabular, čitanje, pisanje i podršku profesora na platformi Norskly."
+          />
+          <link rel="canonical" href="https://norskly.com/jezici/norveski" />
+          <meta property="og:title" content="Uči norveški online uz personalizovanu podršku | Norskly" />
+          <meta property="og:description" content="Personalizovano učenje norveškog, praktične vežbe i podrška profesora — sve na jednom mestu." />
+          <meta property="og:url" content="https://norskly.com/jezici/norveski" />
+          <meta name="twitter:title" content="Uči norveški online uz personalizovanu podršku | Norskly" />
+          <meta name="twitter:description" content="Personalizovano učenje norveškog, praktične vežbe i podrška profesora — sve na jednom mestu." />
+        </Helmet>
+      )}
       {/* NAV */}
       <nav className="fixed top-0 inset-x-0 z-50 backdrop-blur-md bg-background/80 border-b border-border/60">
         <div className="container flex items-center justify-between h-16">
