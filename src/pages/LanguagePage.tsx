@@ -12,6 +12,7 @@ import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { ArrowRight, Check, Sparkles, Star, GraduationCap, Clock } from "lucide-react";
 import { getLanguageBySlug } from "@/lib/languages";
 import JourneyStepper from "@/components/onboarding/JourneyStepper";
+import { Helmet } from "react-helmet-async";
 import teacherPhotoFallback from "@/assets/teacher-photo.jpg";
 
 const PLANS = [
@@ -63,14 +64,15 @@ export default function LanguagePage() {
   const { user } = useAuth();
 
   useEffect(() => {
-    if (lang) {
+    if (!lang) return;
+    if (lang.slug !== "norveski") {
       document.title = `${lang.label} · Norskly`;
-      localStorage.setItem("norskly_selected_language", lang.slug);
-      try {
-        sessionStorage.setItem("norskly_language_intent", lang.slug);
-      } catch { /* ignore */ }
-      window.dispatchEvent(new Event("language-changed"));
     }
+    localStorage.setItem("norskly_selected_language", lang.slug);
+    try {
+      sessionStorage.setItem("norskly_language_intent", lang.slug);
+    } catch { /* ignore */ }
+    window.dispatchEvent(new Event("language-changed"));
   }, [lang]);
 
   if (!lang) return <Navigate to="/" replace />;
@@ -127,6 +129,21 @@ export default function LanguagePage() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
+      {lang.slug === "norveski" && (
+        <Helmet>
+          <title>Uči norveški online uz personalizovanu podršku | Norskly</title>
+          <meta
+            name="description"
+            content="Uči norveški online kroz personalizovane vežbe, gramatiku, vokabular, čitanje, pisanje i podršku profesora na platformi Norskly."
+          />
+          <link rel="canonical" href="https://norskly.com/jezici/norveski" />
+          <meta property="og:title" content="Uči norveški online uz personalizovanu podršku | Norskly" />
+          <meta property="og:description" content="Personalizovano učenje norveškog, praktične vežbe i podrška profesora — sve na jednom mestu." />
+          <meta property="og:url" content="https://norskly.com/jezici/norveski" />
+          <meta name="twitter:title" content="Uči norveški online uz personalizovanu podršku | Norskly" />
+          <meta name="twitter:description" content="Personalizovano učenje norveškog, praktične vežbe i podrška profesora — sve na jednom mestu." />
+        </Helmet>
+      )}
       {/* NAV */}
       <nav className="fixed top-0 inset-x-0 z-50 backdrop-blur-md bg-background/80 border-b border-border/60">
         <div className="container flex items-center justify-between h-16">
@@ -164,7 +181,9 @@ export default function LanguagePage() {
               </span>
 
               <h1 className="text-display text-[clamp(2.4rem,7vw,5.5rem)] text-primary mb-6 leading-[1.05]">
-                {lang.heroTitle}
+                {lang.slug === "norveski"
+                  ? "Uči norveški online uz podršku koja se prilagođava tebi."
+                  : lang.heroTitle}
               </h1>
 
               <p className="text-base md:text-xl text-muted-foreground max-w-2xl mb-10 leading-relaxed">
