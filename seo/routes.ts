@@ -21,12 +21,12 @@ export interface RouteSeo {
 export const SEO_ROUTES: RouteSeo[] = [
   {
     path: "/",
-    title: "Norskly — Online učenje norveškog, engleskog i nemačkog jezika",
+    title: "Norskly - Uči jezike na svoj način",
     description:
-      "Uči norveški, engleski i nemački online kroz personalizovane vežbe, praktičan razgovor i podršku profesora. Norskly se prilagođava tvom nivou i ciljevima.",
-    ogTitle: "Norskly — Pametniji način da naučiš jezike",
+      "Uči norveški, engleski i nemački svojim tempom na Norskly platformi. Personalizovane vežbe, praktičan razgovor i podrška profesora kad ti zatreba.",
+    ogTitle: "Norskly - Uči jezike na svoj način",
     ogDescription:
-      "Uči norveški, engleski i nemački online kroz personalizovane vežbe, praktičan razgovor i podršku profesora — sve na jednom mestu.",
+      "Uči norveški, engleski i nemački svojim tempom na Norskly platformi. Personalizovane vežbe, praktičan razgovor i podrška profesora kad ti zatreba.",
     structuredData: buildFaqPageSchema(SITE_URL),
   },
   {
