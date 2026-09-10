@@ -213,7 +213,11 @@ export default function LanguagePage() {
               <h1 className="text-display text-[clamp(2.4rem,7vw,5.5rem)] text-primary mb-6 leading-[1.05]">
                 {lang.slug === "norveski"
                   ? "Uči norveški online uz podršku koja se prilagođava tebi."
-                  : lang.heroTitle}
+                  : lang.slug === "engleski"
+                    ? "Uči engleski online uz podršku koja se prilagođava tebi."
+                    : lang.slug === "nemacki"
+                      ? "Uči nemački online uz podršku koja se prilagođava tebi."
+                      : lang.heroTitle}
               </h1>
 
               <p className="text-base md:text-xl text-muted-foreground max-w-2xl mb-10 leading-relaxed">
