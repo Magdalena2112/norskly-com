@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Helmet } from "react-helmet-async";
 import norsklyLogo from "@/assets/norskly-logo.png.asset.json";
 import {
   MessageCircle, Sparkles, BookOpen, Target, Mic, BarChart3,
@@ -7,6 +8,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { useNavigate, Link } from "react-router-dom";
 import { LANGUAGES as LANGUAGE_CONFIGS } from "@/lib/languages";
+import { FAQ } from "@/lib/faqData";
 import {
   Accordion, AccordionContent, AccordionItem, AccordionTrigger,
 } from "@/components/ui/accordion";
@@ -90,13 +92,6 @@ const LEARNING_OPTIONS = [
   },
 ];
 
-const FAQ = [
-  { q: "Da li mi je potrebno predznanje?", a: "Ne. Norskly počinje od tvog tačnog nivoa — od potpunog početnika do naprednog." },
-  { q: "Koje jezike mogu da učim?", a: "Trenutno norveški, engleski i nemački. Uskoro dodajemo i druge jezike." },
-  { q: "Kako se sadržaj prilagođava mom nivou?", a: "Norskly prati tvoj nivo, aktivnosti i napredak kako bi ti ponudio sadržaj i vežbe koje odgovaraju tvojim potrebama. U pojedinim funkcionalnostima koristi se AI kako bi povratne informacije i preporuke bile prilagođenije korisniku." },
-  { q: "Mogu li da rezervišem časove sa profesorom?", a: "Da. Uz Časovi + Platforma plan dobijaš 4 individualna časa mesečno." },
-  { q: "Mogu li da predajem na Norskly?", a: "Da. Kreiraj profesorski nalog i počni da gradiš svoju bazu učenika." },
-];
 
 // Fine-tune the decorative FAQ quote card's responsive typography here.
 // fontMin/fontMax use rem; fluid scales with viewport width (vw).
