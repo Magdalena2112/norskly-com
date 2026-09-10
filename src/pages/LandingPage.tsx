@@ -128,11 +128,11 @@ export default function LandingPage() {
           content="Uči norveški, engleski i nemački online kroz personalizovane vežbe, praktičan razgovor i podršku profesora. Norskly se prilagođava tvom nivou i ciljevima."
         />
         <link rel="canonical" href="https://norskly.com/" />
-        <meta property="og:title" content="Norskly — Online učenje norveškog, engleskog i nemačkog jezika" />
-        <meta property="og:description" content="Personalizovane vežbe, praktičan razgovor i podrška profesora — uči jezike online svojim tempom na Norskly platformi." />
+        <meta property="og:title" content="Norskly — Pametniji način da naučiš jezike" />
+        <meta property="og:description" content="Uči norveški, engleski i nemački online kroz personalizovane vežbe, praktičan razgovor i podršku profesora — sve na jednom mestu." />
         <meta property="og:url" content="https://norskly.com/" />
-        <meta name="twitter:title" content="Norskly — Online učenje norveškog, engleskog i nemačkog jezika" />
-        <meta name="twitter:description" content="Personalizovane vežbe, praktičan razgovor i podrška profesora — uči jezike online svojim tempom na Norskly platformi." />
+        <meta name="twitter:title" content="Norskly — Pametniji način da naučiš jezike" />
+        <meta name="twitter:description" content="Uči norveški, engleski i nemački online kroz personalizovane vežbe, praktičan razgovor i podršku profesora — sve na jednom mestu." />
         <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
       </Helmet>
       {/* ============== NAV ============== */}
