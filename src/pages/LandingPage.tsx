@@ -148,7 +148,7 @@ export default function LandingPage() {
             className="max-w-5xl mx-auto text-center"
           >
             <span className="inline-block px-3 py-1 sm:px-4 sm:py-1.5 rounded-full bg-secondary/70 text-primary text-[10px] sm:text-xs font-semibold tracking-widest uppercase mb-5 sm:mb-6">
-              AI platforma za učenje jezika
+              Učenje koje se prilagođava tebi
             </span>
 
             <h1 className="text-display text-[clamp(2rem,9vw,7rem)] text-primary mb-5 sm:mb-6">
@@ -156,8 +156,7 @@ export default function LandingPage() {
             </h1>
 
             <p className="text-sm sm:text-base md:text-xl text-muted-foreground max-w-2xl mx-auto mb-8 sm:mb-10 leading-relaxed">
-              Norskly povezuje učenike i profesore u jednom AI ekosistemu za učenje jezika —
-              sa personalizovanom podrškom, vežbama i praćenjem napretka.
+              Vežbaj kroz praktične situacije, prati svoj napredak i poveži se sa profesorom kada ti je potrebna dodatna podrška.
             </p>
 
             {/* language pills — entry to per-language onboarding */}
@@ -246,7 +245,7 @@ export default function LandingPage() {
           <div className="text-center mb-10 sm:mb-16 max-w-2xl mx-auto">
             <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-widest text-primary/70 mb-3">Ekosistem</p>
             <h2 className="text-display text-[clamp(1.75rem,5vw,4rem)] text-primary">
-              Za studente <span className="font-script text-primary/70">i</span> profesore.
+              Za učenike <span className="font-script text-primary/70">i</span> profesore.
             </h2>
           </div>
 
@@ -258,9 +257,9 @@ export default function LandingPage() {
             >
               <div className="flex items-center gap-3 mb-2">
                 <GraduationCap className="w-5 h-5 text-primary" />
-                <span className="text-[10px] sm:text-xs font-semibold uppercase tracking-widest text-primary/70">Za studente</span>
+                <span className="text-[10px] sm:text-xs font-semibold uppercase tracking-widest text-primary/70">Za učenike</span>
               </div>
-              <h3 className="text-display text-3xl md:text-4xl text-primary mb-5 sm:mb-6">Uči pametnije. Govori sa <span className="font-script text-primary/70">samopouzdanjem</span>.</h3>
+              <h3 className="text-display text-3xl md:text-4xl text-primary mb-5 sm:mb-6">Uči efikasnije. Govori sa <span className="font-script text-primary/70">samopouzdanjem</span>.</h3>
               <ul className="space-y-3 mb-7 sm:mb-8">
                 {STUDENT_BENEFITS.map((b) => (
                   <li key={b} className="flex items-center gap-3 text-sm sm:text-base text-foreground/80">
@@ -312,8 +311,8 @@ export default function LandingPage() {
           </div>
           <div className="grid sm:grid-cols-2 gap-4 sm:gap-5">
             {[
-              { label: "Student", desc: "Uči, vežbaj i napreduj svaki dan.", role: "student", bg: "bg-background" },
-              { label: "Profesor", desc: "Predavaj, organizuj i prati studente.", role: "teacher", bg: "bg-secondary" },
+              { label: "Učenik", desc: "Uči, vežbaj i napreduj svaki dan.", role: "student", bg: "bg-background" },
+              { label: "Profesor", desc: "Predavaj, organizuj i prati učenike.", role: "teacher", bg: "bg-secondary" },
             ].map((r) => (
               <button key={r.role} onClick={() => navigate(`/auth?role=${r.role}`)}
                 className={`${r.bg} group rounded-3xl p-6 sm:p-10 text-left border border-border hover:-translate-y-1 hover:shadow-soft transition-all`}
