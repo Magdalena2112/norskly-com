@@ -16,36 +16,36 @@ import ecosystemCollage from "@/assets/ecosystem-collage.jpg";
 
 
 const FEATURES = [
-  { icon: MessageCircle, title: "Realna komunikacija", desc: "Vežbaj jezik kroz realistične svakodnevne i poslovne razgovore." },
-  { icon: Target, title: "Personalizovano učenje", desc: "AI prilagođava lekcije tvom nivou, ciljevima i tempu." },
+  { icon: MessageCircle, title: "Praktična komunikacija", desc: "Vežbaj jezik kroz realistične svakodnevne i poslovne razgovore." },
+  { icon: Target, title: "Vežbe prilagođene tebi", desc: "Vežbe i sadržaj prilagođavaju se tvom nivou, ciljevima i tempu učenja." },
   { icon: BookOpen, title: "Gramatika u kontekstu", desc: "Uči gramatiku kroz primere, dijaloge i stvarnu komunikaciju." },
-  { icon: Sparkles, title: "Trenutni AI feedback", desc: "Dobij objašnjenja, ispravke i predloge u realnom vremenu." },
-  { icon: Mic, title: "AI razgovori", desc: "Vežbaj govor i komunikaciju kroz razgovore sa AI-em." },
-  { icon: BarChart3, title: "Pametno praćenje napretka", desc: "Prati napredak i analiziraj greške koje se ponavljaju." },
+  { icon: Sparkles, title: "Povratna informacija odmah", desc: "Dobij jasna objašnjenja, ispravke i predloge dok vežbaš." },
+  { icon: Mic, title: "Vežbanje razgovora", desc: "Vežbaj komunikaciju kroz svakodnevne i praktične situacije, bez pritiska i svojim tempom." },
+  { icon: BarChart3, title: "Praćenje napretka", desc: "Prati šta si savladao, na čemu još treba da radiš i kako napreduješ kroz vreme." },
   { icon: CalendarCheck, title: "Podrška profesora", desc: "Poveži se sa profesorima i zakaži časove kada želiš dodatnu podršku u učenju." },
 ];
 
 const STUDENT_BENEFITS = [
-  "Personalizovano AI učenje",
+  "Personalizovano učenje",
   "Razgovorna praksa kroz realne situacije",
-  "Pametno građenje vokabulara",
+  "Građenje vokabulara",
   "Jasna podrška u gramatici",
   "Praćenje napretka i grešaka",
   "Mogućnost dodatne podrške profesora jezika",
 ];
 const TEACHER_BENEFITS = [
-  "Upravljanje studentima i grupama",
+  "Upravljanje učenicima i grupama",
   "Uvid u napredak i tipične greške",
   "Organizacija časova i materijala",
-  "AI-generisane vežbe i sadržaj",
-  "Analitika i personalizovani uvidi",
+  "Vežbe i sadržaj prilagođeni učenicima",
+  "Analitika i uvidi u napredak",
 ];
 
 const FIT_YES = [
   "Želiš strukturisano učenje jezika",
   "Uživaš u interaktivnoj praksi",
-  "Želiš podršku zasnovanu na AI-u",
-  "Želiš personalizovan feedback",
+  "Želiš da se učenje prilagođava tvom nivou i ciljevima",
+  "Želiš konkretne povratne informacije o svom radu",
 ];
 const FIT_NO = [
   "Želiš samo pasivno učenje",
@@ -60,19 +60,19 @@ const TRIAL_INCLUDED = [
   "Osnovno upoznavanje sa platformom",
 ];
 const TRIAL_LOCKED = [
-  "AI razgovori",
-  "Kompletan AI feedback",
-  "Personalizovana analitika",
-  "Pametno praćenje napretka",
+  "Vežbanje razgovora",
+  "Detaljne povratne informacije i ispravke",
+  "Detaljan pregled napretka",
+  "Praćenje napretka",
 ];
 
 const LEARNING_OPTIONS = [
   {
     icon: Sparkles,
-    title: "Samostalno AI učenje",
-    desc: "Za učenike koji žele potpuno samostalno učenje uz AI podršku.",
+    title: "Samostalno učenje",
+    desc: "Za učenike koji žele fleksibilno da vežbaju i napreduju svojim tempom.",
     items: [
-      "AI razgovori",
+      "Vežbanje razgovora",
       "Personalizovane vežbe",
       "Gramatika i vokabular",
       "Praćenje napretka",
@@ -80,12 +80,12 @@ const LEARNING_OPTIONS = [
   },
   {
     icon: GraduationCap,
-    title: "AI + podrška profesora",
-    desc: "Kombinuj AI alate sa individualnim časovima i podrškom profesora.",
+    title: "Samostalno učenje + podrška profesora",
+    desc: "Kombinuj samostalno vežbanje sa individualnim časovima i podrškom profesora.",
     items: [
       "Rezervacija časova",
       "Podrška profesora",
-      "AI alati tokom učenja",
+      "Alati za samostalno vežbanje",
       "Praćenje napretka",
     ],
   },
@@ -94,9 +94,9 @@ const LEARNING_OPTIONS = [
 const FAQ = [
   { q: "Da li mi je potrebno predznanje?", a: "Ne. Norskly počinje od tvog tačnog nivoa — od potpunog početnika do naprednog." },
   { q: "Koje jezike mogu da učim?", a: "Trenutno norveški, engleski i nemački. Uskoro dodajemo i druge jezike." },
-  { q: "Kako AI prilagođava lekcije?", a: "AI analizira tvoje odgovore, greške i tempo, pa kreira sledeći zadatak baš za tebe." },
+  { q: "Kako se sadržaj prilagođava mom nivou?", a: "Norskly prati tvoj nivo, aktivnosti i napredak kako bi ti ponudio sadržaj i vežbe koje odgovaraju tvojim potrebama. U pojedinim funkcionalnostima koristi se AI kako bi povratne informacije i preporuke bile prilagođenije korisniku." },
   { q: "Mogu li da rezervišem časove sa profesorom?", a: "Da. Uz Časovi + Platforma plan dobijaš 4 individualna časa mesečno." },
-  { q: "Mogu li da predajem na Norskly?", a: "Da. Kreiraj profesorski nalog i počni da gradiš svoju bazu studenata." },
+  { q: "Mogu li da predajem na Norskly?", a: "Da. Kreiraj profesorski nalog i počni da gradiš svoju bazu učenika." },
 ];
 
 // Fine-tune the decorative FAQ quote card's responsive typography here.
