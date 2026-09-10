@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import {
@@ -109,6 +110,19 @@ export default function ForTeachersPage() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <Helmet>
+        <title>Postani predavač na Norskly platformi | Norskly</title>
+        <meta
+          name="description"
+          content="Predaji jezike online preko Norskly platforme: prijava, verifikacija, individualni i grupni časovi, kursevi i alati za organizaciju nastave."
+        />
+        <link rel="canonical" href="https://norskly.com/za-profesore" />
+        <meta property="og:title" content="Postani predavač na Norskly platformi | Norskly" />
+        <meta property="og:description" content="Prijavi se za predavanje na Norskly platformi i organizuj časove, kurseve i praćenje učenika na jednom mestu." />
+        <meta property="og:url" content="https://norskly.com/za-profesore" />
+        <meta name="twitter:title" content="Postani predavač na Norskly platformi | Norskly" />
+        <meta name="twitter:description" content="Prijavi se za predavanje na Norskly platformi i organizuj časove, kurseve i praćenje učenika na jednom mestu." />
+      </Helmet>
       {/* HERO */}
       <section className="relative overflow-hidden border-b border-border/50">
         <div className="absolute inset-0 -z-10 bg-gradient-to-br from-secondary/60 via-background to-background" />
