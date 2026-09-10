@@ -46,7 +46,7 @@ export const SEO_ROUTES: RouteSeo[] = [
     path: "/jezici/nemacki",
     title: "Uči nemački online uz personalizovanu podršku | Norskly",
     description:
-      "Otkrij strukturisan način učenja nemačkog — personalizovane vežbe, praktičan razgovor i podrška profesora na platformi Norskly.",
+      "Uči nemački online kroz personalizovane vežbe, gramatiku, vokabular, čitanje, pisanje i podršku profesora na platformi Norskly.",
     ogTitle: "Uči nemački online uz personalizovanu podršku | Norskly",
     ogDescription:
       "Personalizovano učenje nemačkog, praktične vežbe i podrška profesora — sve na jednom mestu.",
