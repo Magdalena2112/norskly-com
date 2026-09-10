@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import norsklyLogo from "@/assets/norskly-logo.png.asset.json";
+import norsklyLogo from "@/assets/norskly-logo.webp.asset.json";
 import { Navigate, useNavigate, useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
@@ -178,7 +178,7 @@ export default function LanguagePage() {
       <nav className="fixed top-0 inset-x-0 z-50 backdrop-blur-md bg-background/80 border-b border-border/60">
         <div className="container flex items-center justify-between h-16">
           <Link to="/" className="flex items-center">
-            <img src={norsklyLogo.url} alt="Norskly" className="h-12 w-auto select-none" draggable={false} />
+            <img src={norsklyLogo.url} alt="Norskly" width={370} height={144} fetchPriority="high" decoding="async" className="h-12 w-auto select-none" draggable={false} />
           </Link>
           <div className="flex items-center gap-2">
             <Button variant="ghost" size="sm" onClick={() => navigate("/auth")}>Prijava</Button>
