@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
-import norsklyLogo from "@/assets/norskly-logo.png.asset.json";
+import norsklyLogo from "@/assets/norskly-logo.webp.asset.json";
 import {
   MessageCircle, Sparkles, BookOpen, Target, Mic, BarChart3,
   Check, X, ArrowRight, GraduationCap, Users, CalendarCheck, Lock,
@@ -14,7 +14,8 @@ import {
 } from "@/components/ui/accordion";
 import { FloatingGreetings } from "@/components/FloatingGreetings";
 import { FloatingQuestionMarks } from "@/components/FloatingQuestionMarks";
-import ecosystemCollage from "@/assets/ecosystem-collage.jpg";
+import ecosystemCollageAsset from "@/assets/ecosystem-collage.webp.asset.json";
+const ecosystemCollage = ecosystemCollageAsset.url;
 
 
 const FEATURES = [
