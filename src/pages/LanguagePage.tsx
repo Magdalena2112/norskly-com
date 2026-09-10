@@ -136,7 +136,7 @@ export default function LanguagePage() {
             name="description"
             content="Uči norveški online kroz personalizovane vežbe, gramatiku, vokabular, čitanje, pisanje i podršku profesora na platformi Norskly."
           />
-          <link rel="canonical" href="https://norskly.com/jezici/norveski" />
+          
           <meta property="og:title" content="Uči norveški online uz personalizovanu podršku | Norskly" />
           <meta property="og:description" content="Personalizovano učenje norveškog, praktične vežbe i podrška profesora — sve na jednom mestu." />
           <meta property="og:url" content="https://norskly.com/jezici/norveski" />
