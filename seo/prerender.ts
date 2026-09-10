@@ -38,6 +38,40 @@ export function buildRouteHtml(baseHtml: string, route: RouteSeo): string {
   return html.replace(/<\/head>/i, `${tags}\n  </head>`);
 }
 
+/** Legacy paths that should send visitors to a current URL. */
+export const LEGACY_REDIRECTS: { from: string; to: string }[] = [
+  { from: "/home", to: "/" },
+];
+
+/**
+ * Build a redirect document from the base index.html shell:
+ * instant meta refresh + self-canonical pointing at the target URL,
+ * plus a visible link so users without JS/meta-refresh can continue.
+ */
+export function buildRedirectHtml(baseHtml: string, targetUrl: string): string {
+  let html = baseHtml;
+
+  html = html
+    .replace(/[ \t]*<link\s+rel="canonical"[^>]*>\s*\n?/gi, "")
+    .replace(/[ \t]*<meta\s+http-equiv="refresh"[^>]*>\s*\n?/gi, "");
+
+  const head = [
+    `<meta http-equiv="refresh" content="0; url=${escapeAttr(targetUrl)}">`,
+    `<link rel="canonical" href="${escapeAttr(targetUrl)}">`,
+  ]
+    .map((t) => `    ${t}`)
+    .join("\n");
+
+  html = html.replace(/<\/head>/i, `${head}\n  </head>`);
+
+  const fallback =
+    `<p style="font-family:system-ui,sans-serif;padding:2rem;text-align:center">` +
+    `Ova stranica je premeštena. ` +
+    `<a href="${escapeAttr(targetUrl)}">Idi na početnu stranicu</a>.</p>`;
+
+  return html.replace(/<div id="root"><\/div>/i, `${fallback}\n    <div id="root"></div>`);
+}
+
 /**
  * Emits a static HTML file per public route (dist/<route>/index.html) with
  * route-specific metadata baked into the initial HTML response.
@@ -62,8 +96,17 @@ export function seoPrerender(): Plugin {
         fs.mkdirSync(path.dirname(target), { recursive: true });
         fs.writeFileSync(target, html, "utf8");
       }
+      for (const redirect of LEGACY_REDIRECTS) {
+        const targetUrl = SITE_URL + (redirect.to === "/" ? "/" : redirect.to);
+        const html = buildRedirectHtml(baseHtml, targetUrl);
+        const target = path.join(outDir, redirect.from.replace(/^\//, ""), "index.html");
+        fs.mkdirSync(path.dirname(target), { recursive: true });
+        fs.writeFileSync(target, html, "utf8");
+      }
       // eslint-disable-next-line no-console
-      console.log(`[seo-prerender] wrote ${SEO_ROUTES.length} route HTML files`);
+      console.log(
+        `[seo-prerender] wrote ${SEO_ROUTES.length} route HTML files and ${LEGACY_REDIRECTS.length} redirect files`
+      );
     },
   };
 }
