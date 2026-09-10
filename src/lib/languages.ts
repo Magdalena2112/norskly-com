@@ -39,7 +39,7 @@ export const LANGUAGES: LanguageConfig[] = [
     flag: "🇳🇴",
     heroTitle: "Uči norveški uz AI i podršku profesora.",
     heroSubtitle:
-      "Personalizovane lekcije, razgovori sa AI-em i živi časovi sa profesorom — sve na jednom mestu.",
+      "Personalizovane vežbe, praktičan razgovor i podrška profesora — sve na jednom mestu.",
     available: true,
     ui: {
       heroScript: "Velkommen tilbake til fjordene",
