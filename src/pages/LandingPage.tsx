@@ -38,7 +38,7 @@ const TEACHER_BENEFITS = [
   "Uvid u napredak i tipične greške",
   "Organizacija časova i materijala",
   "Vežbe i sadržaj prilagođeni učenicima",
-  "Analitika i uvidi u napredak",
+  "Pregled napretka učenika",
 ];
 
 const FIT_YES = [
@@ -57,12 +57,11 @@ const TRIAL_INCLUDED = [
   "Gramatičke vežbe i alati",
   "Vokabular i ordsamlinger",
   "Probna rezervacija časa",
-  "Osnovno upoznavanje sa platformom",
+  "Isprobavanje osnovnih funkcionalnosti",
 ];
 const TRIAL_LOCKED = [
   "Vežbanje razgovora",
   "Detaljne povratne informacije i ispravke",
-  "Detaljan pregled napretka",
   "Praćenje napretka",
 ];
 
@@ -243,7 +242,7 @@ export default function LandingPage() {
         <div aria-hidden className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/60 to-background/85 md:from-background/60 md:via-background/40 md:to-background/70 md:opacity-20" />
         <div className="container relative z-10">
           <div className="text-center mb-10 sm:mb-16 max-w-2xl mx-auto">
-            <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-widest text-primary/70 mb-3">Ekosistem</p>
+            <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-widest text-primary/70 mb-3">Jedna platforma, dva načina učenja</p>
             <h2 className="text-display text-[clamp(1.75rem,5vw,4rem)] text-primary">
               Za učenike <span className="font-script text-primary/70">i</span> profesore.
             </h2>
@@ -282,7 +281,7 @@ export default function LandingPage() {
                 <Users className="w-5 h-5 text-primary" />
                 <span className="text-[10px] sm:text-xs font-semibold uppercase tracking-widest text-primary/70">Za profesore</span>
               </div>
-              <h3 className="text-display text-3xl md:text-4xl text-primary mb-5 sm:mb-6">Predavaj modernije. Organizuj <span className="font-script text-primary/70">jednostavnije</span>.</h3>
+              <h3 className="text-display text-3xl md:text-4xl text-primary mb-5 sm:mb-6">Više vremena za predavanje. Manje za <span className="font-script text-primary/70">organizaciju</span>.</h3>
               <ul className="space-y-3 mb-7 sm:mb-8">
                 {TEACHER_BENEFITS.map((b) => (
                   <li key={b} className="flex items-center gap-3 text-sm sm:text-base text-foreground/80">
@@ -339,7 +338,7 @@ export default function LandingPage() {
           </div>
           <div className="grid md:grid-cols-2 gap-4 sm:gap-5">
             <div className="bg-card rounded-3xl p-6 md:p-8 border border-border">
-              <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-widest text-primary mb-4">Savršeno za tebe ako:</p>
+              <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-widest text-primary mb-4">Norskly je za tebe ako:</p>
               <ul className="space-y-3 sm:space-y-4">
                 {FIT_YES.map((t) => (
                   <li key={t} className="flex gap-3 text-sm sm:text-base text-foreground/85">
@@ -370,7 +369,7 @@ export default function LandingPage() {
               Fleksibilno učenje
             </p>
             <h2 className="text-display text-[clamp(1.75rem,5vw,4rem)] text-primary mb-3 sm:mb-4">
-              Uči svojim <span className="font-script text-primary/70">tempom</span>.
+              Izaberi način učenja koji ti <span className="font-script text-primary/70">odgovara</span>.
             </h2>
             <p className="text-sm sm:text-base text-muted-foreground">
               Istraži kako Norskly funkcioniše i koje opcije učenja te čekaju.
