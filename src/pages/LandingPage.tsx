@@ -123,17 +123,17 @@ export default function LandingPage() {
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
       <Helmet>
-        <title>Norskly — Online učenje norveškog, engleskog i nemačkog jezika</title>
+        <title>Norskly - Uči jezike na svoj način</title>
         <meta
           name="description"
-          content="Uči norveški, engleski i nemački online kroz personalizovane vežbe, praktičan razgovor i podršku profesora. Norskly se prilagođava tvom nivou i ciljevima."
+          content="Uči norveški, engleski i nemački svojim tempom na Norskly platformi. Personalizovane vežbe, praktičan razgovor i podrška profesora kad ti zatreba."
         />
         <link rel="canonical" href="https://norskly.com/" />
-        <meta property="og:title" content="Norskly — Pametniji način da naučiš jezike" />
-        <meta property="og:description" content="Uči norveški, engleski i nemački online kroz personalizovane vežbe, praktičan razgovor i podršku profesora — sve na jednom mestu." />
+        <meta property="og:title" content="Norskly - Uči jezike na svoj način" />
+        <meta property="og:description" content="Uči norveški, engleski i nemački svojim tempom na Norskly platformi. Personalizovane vežbe, praktičan razgovor i podrška profesora kad ti zatreba." />
         <meta property="og:url" content="https://norskly.com/" />
-        <meta name="twitter:title" content="Norskly — Pametniji način da naučiš jezike" />
-        <meta name="twitter:description" content="Uči norveški, engleski i nemački online kroz personalizovane vežbe, praktičan razgovor i podršku profesora — sve na jednom mestu." />
+        <meta name="twitter:title" content="Norskly - Uči jezike na svoj način" />
+        <meta name="twitter:description" content="Uči norveški, engleski i nemački svojim tempom na Norskly platformi. Personalizovane vežbe, praktičan razgovor i podršku profesora kad ti zatreba." />
         <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
       </Helmet>
       {/* ============== NAV ============== */}
