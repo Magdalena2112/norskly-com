@@ -9,6 +9,13 @@ const escapeAttr = (v: string) =>
 const escapeHtml = (v: string) =>
   v.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
+/** Serialize JSON-LD so it is safe to embed inside a <script> tag. */
+function serializeJsonLd(value: object): string {
+  return JSON.stringify(value)
+    .replace(/</g, "\\u003C")
+    .replace(/>/g, "\\u003E");
+}
+
 /** Rewrite the head of the built index.html with route-specific metadata. */
 export function buildRouteHtml(baseHtml: string, route: RouteSeo): string {
   const url = SITE_URL + (route.path === "/" ? "/" : route.path);
@@ -22,7 +29,7 @@ export function buildRouteHtml(baseHtml: string, route: RouteSeo): string {
     .replace(/[ \t]*<meta\s+name="twitter:(title|description)"[^>]*>\s*\n?/gi, "")
     .replace(/[ \t]*<link\s+rel="canonical"[^>]*>\s*\n?/gi, "");
 
-  const tags = [
+  const tags: string[] = [
     `<title>${escapeHtml(route.title)}</title>`,
     `<meta name="description" content="${escapeAttr(route.description)}" data-rh="true">`,
     `<link rel="canonical" href="${escapeAttr(url)}">`,
@@ -31,11 +38,18 @@ export function buildRouteHtml(baseHtml: string, route: RouteSeo): string {
     `<meta property="og:url" content="${escapeAttr(url)}" data-rh="true">`,
     `<meta name="twitter:title" content="${escapeAttr(route.ogTitle)}" data-rh="true">`,
     `<meta name="twitter:description" content="${escapeAttr(route.ogDescription)}" data-rh="true">`,
-  ]
-    .map((t) => `    ${t}`)
-    .join("\n");
+  ];
 
-  return html.replace(/<\/head>/i, `${tags}\n  </head>`);
+  if (route.structuredData) {
+    const schemaWithUrl = { ...route.structuredData, url: url };
+    tags.push(
+      `<script type="application/ld+json">${serializeJsonLd(schemaWithUrl)}</script>`
+    );
+  }
+
+  const tagsBlock = tags.map((t) => `    ${t}`).join("\n");
+
+  return html.replace(/<\/head>/i, `${tagsBlock}\n  </head>`);
 }
 
 /** Legacy paths that should send visitors to a current URL. */
