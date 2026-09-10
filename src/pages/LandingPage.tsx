@@ -152,7 +152,7 @@ export default function LandingPage() {
             </span>
 
             <h1 className="text-display text-[clamp(2rem,9vw,7rem)] text-primary mb-5 sm:mb-6">
-              Uči jezike sigurnije, <span className="font-script text-accent-foreground/80">pametnije</span> i svojim tempom.
+              Uči jezike online svojim tempom, uz podršku koja se prilagođava tebi.
             </h1>
 
             <p className="text-sm sm:text-base md:text-xl text-muted-foreground max-w-2xl mx-auto mb-8 sm:mb-10 leading-relaxed">

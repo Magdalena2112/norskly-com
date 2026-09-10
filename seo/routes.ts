@@ -17,12 +17,12 @@ export interface RouteSeo {
 export const SEO_ROUTES: RouteSeo[] = [
   {
     path: "/",
-    title: "Norskly — Pametniji način da naučiš norveški",
+    title: "Online učenje jezika po tvom tempu | Norskly",
     description:
-      "Norskly je platforma za učenje jezika kroz realne situacije, personalizovane lekcije i individualne časove sa profesorom.",
-    ogTitle: "Norskly — Pametniji način da naučiš norveški",
+      "Uči norveški, engleski i nemački kroz personalizovane vežbe, praktičan razgovor i podršku profesora. Norskly ti pomaže da napreduješ svojim tempom.",
+    ogTitle: "Uči jezike online svojim tempom | Norskly",
     ogDescription:
-      "Personalizovane vežbe, praktičan razgovor i podrška profesora — sve na jednom mestu.",
+      "Personalizovane vežbe, praktičan razgovor i podrška profesora — za učenje jezika koje se prilagođava tebi.",
   },
   {
     path: "/jezici/norveski",
