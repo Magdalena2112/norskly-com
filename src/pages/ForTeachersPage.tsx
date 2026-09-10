@@ -121,6 +121,7 @@ export default function ForTeachersPage() {
         <meta property="og:url" content="https://norskly.com/za-profesore" />
         <meta name="twitter:title" content="Postani predavač na Norskly platformi | Norskly" />
         <meta name="twitter:description" content="Prijavi se za predavanje na Norskly platformi i organizuj časove, kurseve i praćenje učenika na jednom mestu." />
+      </Helmet>
       {/* HERO */}
       <section className="relative overflow-hidden border-b border-border/50">
         <div className="absolute inset-0 -z-10 bg-gradient-to-br from-secondary/60 via-background to-background" />
