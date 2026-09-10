@@ -74,4 +74,13 @@ export const SEO_ROUTES: RouteSeo[] = [
     ogDescription:
       "Prijavi se na Norskly ili napravi nalog i nastavi učenje svojim tempom.",
   },
+  {
+    path: "/unsubscribe",
+    title: "Odjava od obaveštenja | Norskly",
+    description:
+      "Upravljaj svojim mejl obaveštenjima i odjavi se od Norskly obaveštenja.",
+    ogTitle: "Odjava od obaveštenja | Norskly",
+    ogDescription:
+      "Upravljaj svojim mejl obaveštenjima i odjavi se od Norskly obaveštenja.",
+  },
 ];
