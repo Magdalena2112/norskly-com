@@ -145,7 +145,7 @@ export default function AuthPage() {
       </div>
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="w-full max-w-md">
         <div className="text-center mb-6">
-          <img src={norsklyLogo.url} alt="Norskly" className="h-12 w-auto mx-auto select-none" draggable={false} />
+          <img src={norsklyLogo.url} alt="Norskly" width={370} height={144} fetchPriority="high" decoding="async" className="h-12 w-auto mx-auto select-none" draggable={false} />
           <p className="text-muted-foreground text-sm mt-1">Adaptivno učenje jezika</p>
         </div>
 
