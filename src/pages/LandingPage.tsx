@@ -16,36 +16,36 @@ import ecosystemCollage from "@/assets/ecosystem-collage.jpg";
 
 
 const FEATURES = [
-  { icon: MessageCircle, title: "Realna komunikacija", desc: "Vežbaj jezik kroz realistične svakodnevne i poslovne razgovore." },
-  { icon: Target, title: "Personalizovano učenje", desc: "AI prilagođava lekcije tvom nivou, ciljevima i tempu." },
+  { icon: MessageCircle, title: "Praktična komunikacija", desc: "Vežbaj jezik kroz realistične svakodnevne i poslovne razgovore." },
+  { icon: Target, title: "Vežbe prilagođene tebi", desc: "Vežbe i sadržaj prilagođavaju se tvom nivou, ciljevima i tempu učenja." },
   { icon: BookOpen, title: "Gramatika u kontekstu", desc: "Uči gramatiku kroz primere, dijaloge i stvarnu komunikaciju." },
-  { icon: Sparkles, title: "Trenutni AI feedback", desc: "Dobij objašnjenja, ispravke i predloge u realnom vremenu." },
-  { icon: Mic, title: "AI razgovori", desc: "Vežbaj govor i komunikaciju kroz razgovore sa AI-em." },
-  { icon: BarChart3, title: "Pametno praćenje napretka", desc: "Prati napredak i analiziraj greške koje se ponavljaju." },
+  { icon: Sparkles, title: "Povratna informacija odmah", desc: "Dobij jasna objašnjenja, ispravke i predloge dok vežbaš." },
+  { icon: Mic, title: "Vežbanje razgovora", desc: "Vežbaj komunikaciju kroz svakodnevne i praktične situacije, bez pritiska i svojim tempom." },
+  { icon: BarChart3, title: "Praćenje napretka", desc: "Prati šta si savladao, na čemu još treba da radiš i kako napreduješ kroz vreme." },
   { icon: CalendarCheck, title: "Podrška profesora", desc: "Poveži se sa profesorima i zakaži časove kada želiš dodatnu podršku u učenju." },
 ];
 
 const STUDENT_BENEFITS = [
-  "Personalizovano AI učenje",
+  "Personalizovano učenje",
   "Razgovorna praksa kroz realne situacije",
-  "Pametno građenje vokabulara",
+  "Građenje vokabulara",
   "Jasna podrška u gramatici",
   "Praćenje napretka i grešaka",
   "Mogućnost dodatne podrške profesora jezika",
 ];
 const TEACHER_BENEFITS = [
-  "Upravljanje studentima i grupama",
+  "Upravljanje učenicima i grupama",
   "Uvid u napredak i tipične greške",
   "Organizacija časova i materijala",
-  "AI-generisane vežbe i sadržaj",
-  "Analitika i personalizovani uvidi",
+  "Vežbe i sadržaj prilagođeni učenicima",
+  "Analitika i uvidi u napredak",
 ];
 
 const FIT_YES = [
   "Želiš strukturisano učenje jezika",
   "Uživaš u interaktivnoj praksi",
-  "Želiš podršku zasnovanu na AI-u",
-  "Želiš personalizovan feedback",
+  "Želiš da se učenje prilagođava tvom nivou i ciljevima",
+  "Želiš konkretne povratne informacije o svom radu",
 ];
 const FIT_NO = [
   "Želiš samo pasivno učenje",
@@ -60,19 +60,19 @@ const TRIAL_INCLUDED = [
   "Osnovno upoznavanje sa platformom",
 ];
 const TRIAL_LOCKED = [
-  "AI razgovori",
-  "Kompletan AI feedback",
-  "Personalizovana analitika",
-  "Pametno praćenje napretka",
+  "Vežbanje razgovora",
+  "Detaljne povratne informacije i ispravke",
+  "Detaljan pregled napretka",
+  "Praćenje napretka",
 ];
 
 const LEARNING_OPTIONS = [
   {
     icon: Sparkles,
-    title: "Samostalno AI učenje",
-    desc: "Za učenike koji žele potpuno samostalno učenje uz AI podršku.",
+    title: "Samostalno učenje",
+    desc: "Za učenike koji žele fleksibilno da vežbaju i napreduju svojim tempom.",
     items: [
-      "AI razgovori",
+      "Vežbanje razgovora",
       "Personalizovane vežbe",
       "Gramatika i vokabular",
       "Praćenje napretka",
@@ -80,12 +80,12 @@ const LEARNING_OPTIONS = [
   },
   {
     icon: GraduationCap,
-    title: "AI + podrška profesora",
-    desc: "Kombinuj AI alate sa individualnim časovima i podrškom profesora.",
+    title: "Samostalno učenje + podrška profesora",
+    desc: "Kombinuj samostalno vežbanje sa individualnim časovima i podrškom profesora.",
     items: [
       "Rezervacija časova",
       "Podrška profesora",
-      "AI alati tokom učenja",
+      "Alati za samostalno vežbanje",
       "Praćenje napretka",
     ],
   },
@@ -94,9 +94,9 @@ const LEARNING_OPTIONS = [
 const FAQ = [
   { q: "Da li mi je potrebno predznanje?", a: "Ne. Norskly počinje od tvog tačnog nivoa — od potpunog početnika do naprednog." },
   { q: "Koje jezike mogu da učim?", a: "Trenutno norveški, engleski i nemački. Uskoro dodajemo i druge jezike." },
-  { q: "Kako AI prilagođava lekcije?", a: "AI analizira tvoje odgovore, greške i tempo, pa kreira sledeći zadatak baš za tebe." },
+  { q: "Kako se sadržaj prilagođava mom nivou?", a: "Norskly prati tvoj nivo, aktivnosti i napredak kako bi ti ponudio sadržaj i vežbe koje odgovaraju tvojim potrebama. U pojedinim funkcionalnostima koristi se AI kako bi povratne informacije i preporuke bile prilagođenije korisniku." },
   { q: "Mogu li da rezervišem časove sa profesorom?", a: "Da. Uz Časovi + Platforma plan dobijaš 4 individualna časa mesečno." },
-  { q: "Mogu li da predajem na Norskly?", a: "Da. Kreiraj profesorski nalog i počni da gradiš svoju bazu studenata." },
+  { q: "Mogu li da predajem na Norskly?", a: "Da. Kreiraj profesorski nalog i počni da gradiš svoju bazu učenika." },
 ];
 
 // Fine-tune the decorative FAQ quote card's responsive typography here.
@@ -148,7 +148,7 @@ export default function LandingPage() {
             className="max-w-5xl mx-auto text-center"
           >
             <span className="inline-block px-3 py-1 sm:px-4 sm:py-1.5 rounded-full bg-secondary/70 text-primary text-[10px] sm:text-xs font-semibold tracking-widest uppercase mb-5 sm:mb-6">
-              AI platforma za učenje jezika
+              Učenje koje se prilagođava tebi
             </span>
 
             <h1 className="text-display text-[clamp(2rem,9vw,7rem)] text-primary mb-5 sm:mb-6">
@@ -156,8 +156,7 @@ export default function LandingPage() {
             </h1>
 
             <p className="text-sm sm:text-base md:text-xl text-muted-foreground max-w-2xl mx-auto mb-8 sm:mb-10 leading-relaxed">
-              Norskly povezuje učenike i profesore u jednom AI ekosistemu za učenje jezika —
-              sa personalizovanom podrškom, vežbama i praćenjem napretka.
+              Vežbaj kroz praktične situacije, prati svoj napredak i poveži se sa profesorom kada ti je potrebna dodatna podrška.
             </p>
 
             {/* language pills — entry to per-language onboarding */}
@@ -246,7 +245,7 @@ export default function LandingPage() {
           <div className="text-center mb-10 sm:mb-16 max-w-2xl mx-auto">
             <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-widest text-primary/70 mb-3">Ekosistem</p>
             <h2 className="text-display text-[clamp(1.75rem,5vw,4rem)] text-primary">
-              Za studente <span className="font-script text-primary/70">i</span> profesore.
+              Za učenike <span className="font-script text-primary/70">i</span> profesore.
             </h2>
           </div>
 
@@ -258,9 +257,9 @@ export default function LandingPage() {
             >
               <div className="flex items-center gap-3 mb-2">
                 <GraduationCap className="w-5 h-5 text-primary" />
-                <span className="text-[10px] sm:text-xs font-semibold uppercase tracking-widest text-primary/70">Za studente</span>
+                <span className="text-[10px] sm:text-xs font-semibold uppercase tracking-widest text-primary/70">Za učenike</span>
               </div>
-              <h3 className="text-display text-3xl md:text-4xl text-primary mb-5 sm:mb-6">Uči pametnije. Govori sa <span className="font-script text-primary/70">samopouzdanjem</span>.</h3>
+              <h3 className="text-display text-3xl md:text-4xl text-primary mb-5 sm:mb-6">Uči efikasnije. Govori sa <span className="font-script text-primary/70">samopouzdanjem</span>.</h3>
               <ul className="space-y-3 mb-7 sm:mb-8">
                 {STUDENT_BENEFITS.map((b) => (
                   <li key={b} className="flex items-center gap-3 text-sm sm:text-base text-foreground/80">
@@ -312,8 +311,8 @@ export default function LandingPage() {
           </div>
           <div className="grid sm:grid-cols-2 gap-4 sm:gap-5">
             {[
-              { label: "Student", desc: "Uči, vežbaj i napreduj svaki dan.", role: "student", bg: "bg-background" },
-              { label: "Profesor", desc: "Predavaj, organizuj i prati studente.", role: "teacher", bg: "bg-secondary" },
+              { label: "Učenik", desc: "Uči, vežbaj i napreduj svaki dan.", role: "student", bg: "bg-background" },
+              { label: "Profesor", desc: "Predavaj, organizuj i prati učenike.", role: "teacher", bg: "bg-secondary" },
             ].map((r) => (
               <button key={r.role} onClick={() => navigate(`/auth?role=${r.role}`)}
                 className={`${r.bg} group rounded-3xl p-6 sm:p-10 text-left border border-border hover:-translate-y-1 hover:shadow-soft transition-all`}
