@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Helmet } from "react-helmet-async";
 import norsklyLogo from "@/assets/norskly-logo.png.asset.json";
 import {
   MessageCircle, Sparkles, BookOpen, Target, Mic, BarChart3,
@@ -7,6 +8,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { useNavigate, Link } from "react-router-dom";
 import { LANGUAGES as LANGUAGE_CONFIGS } from "@/lib/languages";
+import { FAQ } from "@/lib/faqData";
 import {
   Accordion, AccordionContent, AccordionItem, AccordionTrigger,
 } from "@/components/ui/accordion";
@@ -90,13 +92,6 @@ const LEARNING_OPTIONS = [
   },
 ];
 
-const FAQ = [
-  { q: "Da li mi je potrebno predznanje?", a: "Ne. Norskly počinje od tvog tačnog nivoa — od potpunog početnika do naprednog." },
-  { q: "Koje jezike mogu da učim?", a: "Trenutno norveški, engleski i nemački. Uskoro dodajemo i druge jezike." },
-  { q: "Kako se sadržaj prilagođava mom nivou?", a: "Norskly prati tvoj nivo, aktivnosti i napredak kako bi ti ponudio sadržaj i vežbe koje odgovaraju tvojim potrebama. U pojedinim funkcionalnostima koristi se AI kako bi povratne informacije i preporuke bile prilagođenije korisniku." },
-  { q: "Mogu li da rezervišem časove sa profesorom?", a: "Da. Uz Časovi + Platforma plan dobijaš 4 individualna časa mesečno." },
-  { q: "Mogu li da predajem na Norskly?", a: "Da. Kreiraj profesorski nalog i počni da gradiš svoju bazu učenika." },
-];
 
 // Fine-tune the decorative FAQ quote card's responsive typography here.
 // fontMin/fontMax use rem; fluid scales with viewport width (vw).
@@ -111,8 +106,24 @@ const QUOTE_CARD_TYPO = {
 export default function LandingPage() {
   const navigate = useNavigate();
 
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: FAQ.map((item) => ({
+      "@type": "Question",
+      name: item.q,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.a,
+      },
+    })),
+  };
+
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
+      <Helmet>
+        <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
+      </Helmet>
       {/* ============== NAV ============== */}
       <nav className="fixed top-0 inset-x-0 z-50 backdrop-blur-md bg-background/80 border-b border-border/60">
         <div className="container flex items-center justify-between h-14 sm:h-16">

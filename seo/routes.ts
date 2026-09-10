@@ -3,6 +3,8 @@
  * files for public routes. Keep values in sync with the <Helmet> blocks
  * rendered by the matching page components.
  */
+import { buildFaqPageSchema } from "../src/lib/faqData";
+
 export const SITE_URL = "https://norskly.com";
 
 export interface RouteSeo {
@@ -12,6 +14,8 @@ export interface RouteSeo {
   description: string;
   ogTitle: string;
   ogDescription: string;
+  /** Optional JSON-LD structured data object injected as application/ld+json. */
+  structuredData?: object;
 }
 
 export const SEO_ROUTES: RouteSeo[] = [
@@ -23,6 +27,7 @@ export const SEO_ROUTES: RouteSeo[] = [
     ogTitle: "Uči jezike online svojim tempom | Norskly",
     ogDescription:
       "Personalizovane vežbe, praktičan razgovor i podrška profesora — za učenje jezika koje se prilagođava tebi.",
+    structuredData: buildFaqPageSchema(SITE_URL),
   },
   {
     path: "/jezici/norveski",
