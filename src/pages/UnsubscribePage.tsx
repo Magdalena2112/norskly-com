@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -49,6 +50,16 @@ export default function UnsubscribePage() {
 
   return (
     <div className="min-h-screen bg-background flex items-center justify-center p-4">
+      <Helmet>
+        <title>Odjava od obaveštenja | Norskly</title>
+        <meta name="description" content="Upravljaj svojim mejl obaveštenjima i odjavi se od Norskly obaveštenja." />
+        <link rel="canonical" href="https://norskly.com/unsubscribe" />
+        <meta property="og:title" content="Odjava od obaveštenja | Norskly" />
+        <meta property="og:description" content="Upravljaj svojim mejl obaveštenjima i odjavi se od Norskly obaveštenja." />
+        <meta property="og:url" content="https://norskly.com/unsubscribe" />
+        <meta name="twitter:title" content="Odjava od obaveštenja | Norskly" />
+        <meta name="twitter:description" content="Upravljaj svojim mejl obaveštenjima i odjavi se od Norskly obaveštenja." />
+      </Helmet>
       <Card className="max-w-md w-full">
         <CardHeader className="text-center">
           <CardTitle className="flex flex-col items-center gap-3">
