@@ -24,9 +24,9 @@ export const SEO_ROUTES: RouteSeo[] = [
     title: "Norskly — Online učenje norveškog, engleskog i nemačkog jezika",
     description:
       "Uči norveški, engleski i nemački online kroz personalizovane vežbe, praktičan razgovor i podršku profesora. Norskly se prilagođava tvom nivou i ciljevima.",
-    ogTitle: "Norskly — Online učenje norveškog, engleskog i nemačkog jezika",
+    ogTitle: "Norskly — Pametniji način da naučiš jezike",
     ogDescription:
-      "Personalizovane vežbe, praktičan razgovor i podrška profesora — uči jezike online svojim tempom na Norskly platformi.",
+      "Uči norveški, engleski i nemački online kroz personalizovane vežbe, praktičan razgovor i podršku profesora — sve na jednom mestu.",
     structuredData: buildFaqPageSchema(SITE_URL),
   },
   {
