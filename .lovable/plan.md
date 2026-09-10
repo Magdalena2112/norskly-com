@@ -1,45 +1,32 @@
-# Plan: Redirect `/home` → `/`
+# Plan: Redirect `/home` → `/` (Option A)
 
-## Current situation
-The live production site `https://norskly.com/` is deployed on Lovable hosting. The previous homepage path `/home` is still indexed by Google but is no longer used.
+## Goal
+Handle the old public URL `/home` by sending users and search engines to `/` using the best available mechanism within Lovable hosting constraints.
 
-## Platform limitation
-Lovable hosting does **not** support server/deployment-level HTTP 301 redirects or redirect configuration files such as `_redirects`, `netlify.toml`, or `vercel.json`. Lovable's hosting is built around SPA fallback routing, so only client-side/React Router navigation is natively available.
+## Platform reality
+Lovable hosting does not support true HTTP 301 redirects, `_redirects`, `netlify.toml`, or `vercel.json`. The only native redirect mechanism is client-side React Router navigation.
 
-## What this means for SEO
-A client-side redirect alone sends an HTTP 200 OK for `/home` and only changes the URL via JavaScript. Search engines may eventually follow it, but it is weaker than a real 301 for passing link equity and removing the old URL from the index.
+## Implementation
+1. Create `src/components/HomeRedirect.tsx`
+   - Use `useEffect` + `useNavigate` to redirect to `/` immediately.
+   - Render `<Helmet>` with:
+     - `<link rel="canonical" href="https://norskly.com/" />`
+     - `<meta name="robots" content="noindex, follow" />`
+   - Render a small visible message so non-JS users still see a link to `/`.
 
-## Options to proceed
+2. Register `/home` route in `src/App.tsx`
+   - Add `<Route path="/home" element={<HomeRedirect />} />` near the public routes.
+   - Do not change any other route.
 
-### Option A: Client-side redirect with SEO helpers (recommended within Lovable constraints)
-Add a `/home` route that:
-1. Returns a proper React Router `<Navigate to="/" replace />` so users land on `/`.
-2. Injects a `<link rel="canonical" href="https://norskly.com/" />` and `<meta name="robots" content="noindex, follow" />` via `react-helmet-async` on `/home`.
-3. Keeps `/home` out of `sitemap.xml` (it already is not listed).
+3. Verify
+   - `bun run build` passes.
+   - `/home` remains absent from `public/sitemap.xml` and is not added.
+   - No other public/private page content, SEO metadata, sitemap, robots.txt, prerendering, design, or functionality is changed.
 
-This is the best available solution while staying on Lovable hosting, but it is **not** a true 301.
+## Expected behavior
+- Browser request to `https://norskly.com/home` returns HTTP 200 and loads `index.html` (SPA fallback).
+- JavaScript immediately navigates to `/` and replaces history.
+- Search engines see `<link rel="canonical" href="https://norskly.com/" />` and `<meta name="robots" content="noindex, follow" />` on `/home`, signaling the canonical URL is `/` and the page should not be indexed.
 
-### Option B: True 301 via external CDN/proxy (requires leaving Lovable hosting for redirects)
-If a real 301 is mandatory, the redirect must be configured outside Lovable, for example:
-- Cloudflare Page Rules / Redirect Rules on `norskly.com`
-- A reverse proxy in front of the Lovable deployment
-- Vercel/Netlify/etc. with `vercel.json` / `_redirects`
-
-This is outside the Lovable project code and would need to be done in DNS/CDN settings, not in this repository.
-
-### Option C: Do nothing
-Leave `/home` returning the app/404 and let Google naturally re-index `/` through canonical tags and sitemap priorities.
-
-## Proposed implementation
-If you approve **Option A**, I will:
-1. Add a `/home` route in `src/App.tsx` that renders a redirect component.
-2. Create a small `HomeRedirect` component that:
-   - Performs the client-side navigation to `/`.
-   - Renders the canonical/noindex meta tags for `/home`.
-3. Verify the build still passes and that `/home` is not in the sitemap (it is not currently).
-4. Confirm the expected behavior: `/home` returns HTTP 200 from the server, then the browser navigates to `/` client-side; the canonical tag points to `/`.
-
-I will not change any other routes, page content, design, SEO metadata for other pages, sitemap, robots.txt, or prerendering.
-
-## Decision needed
-Please confirm which option you want. If you require a true HTTP 301 status, that cannot be done from within the Lovable project and would need external CDN/DNS configuration.
+## What this is not
+This is **not** a true server-level 301 redirect. The initial HTTP response for `/home` will be 200 OK. A real 301 would require external CDN/DNS configuration outside Lovable.
