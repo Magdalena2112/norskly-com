@@ -144,6 +144,36 @@ export default function LanguagePage() {
           <meta name="twitter:description" content="Personalizovano učenje norveškog, praktične vežbe i podrška profesora — sve na jednom mestu." />
         </Helmet>
       )}
+      {lang.slug === "engleski" && (
+        <Helmet>
+          <title>Uči engleski online uz personalizovanu podršku | Norskly</title>
+          <meta
+            name="description"
+            content="Uči engleski online kroz personalizovane vežbe, gramatiku, vokabular, čitanje, pisanje i podršku profesora na platformi Norskly."
+          />
+          
+          <meta property="og:title" content="Uči engleski online uz personalizovanu podršku | Norskly" />
+          <meta property="og:description" content="Personalizovano učenje engleskog, praktične vežbe i podrška profesora — sve na jednom mestu." />
+          <meta property="og:url" content="https://norskly.com/jezici/engleski" />
+          <meta name="twitter:title" content="Uči engleski online uz personalizovanu podršku | Norskly" />
+          <meta name="twitter:description" content="Personalizovano učenje engleskog, praktične vežbe i podrška profesora — sve na jednom mestu." />
+        </Helmet>
+      )}
+      {lang.slug === "nemacki" && (
+        <Helmet>
+          <title>Uči nemački online uz personalizovanu podršku | Norskly</title>
+          <meta
+            name="description"
+            content="Uči nemački online kroz personalizovane vežbe, gramatiku, vokabular, čitanje, pisanje i podršku profesora na platformi Norskly."
+          />
+          
+          <meta property="og:title" content="Uči nemački online uz personalizovanu podršku | Norskly" />
+          <meta property="og:description" content="Personalizovano učenje nemačkog, praktične vežbe i podrška profesora — sve na jednom mestu." />
+          <meta property="og:url" content="https://norskly.com/jezici/nemacki" />
+          <meta name="twitter:title" content="Uči nemački online uz personalizovanu podršku | Norskly" />
+          <meta name="twitter:description" content="Personalizovano učenje nemačkog, praktične vežbe i podrška profesora — sve na jednom mestu." />
+        </Helmet>
+      )}
       {/* NAV */}
       <nav className="fixed top-0 inset-x-0 z-50 backdrop-blur-md bg-background/80 border-b border-border/60">
         <div className="container flex items-center justify-between h-16">
@@ -183,7 +213,11 @@ export default function LanguagePage() {
               <h1 className="text-display text-[clamp(2.4rem,7vw,5.5rem)] text-primary mb-6 leading-[1.05]">
                 {lang.slug === "norveski"
                   ? "Uči norveški online uz podršku koja se prilagođava tebi."
-                  : lang.heroTitle}
+                  : lang.slug === "engleski"
+                    ? "Uči engleski online uz podršku koja se prilagođava tebi."
+                    : lang.slug === "nemacki"
+                      ? "Uči nemački online uz podršku koja se prilagođava tebi."
+                      : lang.heroTitle}
               </h1>
 
               <p className="text-base md:text-xl text-muted-foreground max-w-2xl mb-10 leading-relaxed">
