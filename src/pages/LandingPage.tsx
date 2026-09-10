@@ -122,6 +122,17 @@ export default function LandingPage() {
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
       <Helmet>
+        <title>Norskly — Online učenje norveškog, engleskog i nemačkog jezika</title>
+        <meta
+          name="description"
+          content="Uči norveški, engleski i nemački online kroz personalizovane vežbe, praktičan razgovor i podršku profesora. Norskly se prilagođava tvom nivou i ciljevima."
+        />
+        <link rel="canonical" href="https://norskly.com/" />
+        <meta property="og:title" content="Norskly — Online učenje norveškog, engleskog i nemačkog jezika" />
+        <meta property="og:description" content="Personalizovane vežbe, praktičan razgovor i podrška profesora — uči jezike online svojim tempom na Norskly platformi." />
+        <meta property="og:url" content="https://norskly.com/" />
+        <meta name="twitter:title" content="Norskly — Online učenje norveškog, engleskog i nemačkog jezika" />
+        <meta name="twitter:description" content="Personalizovane vežbe, praktičan razgovor i podrška profesora — uči jezike online svojim tempom na Norskly platformi." />
         <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
       </Helmet>
       {/* ============== NAV ============== */}
