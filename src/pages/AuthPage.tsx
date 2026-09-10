@@ -127,6 +127,19 @@ export default function AuthPage() {
 
   return (
     <div className="min-h-screen bg-background flex items-center justify-center p-4 relative">
+      <Helmet>
+        <title>Prijava i registracija | Norskly</title>
+        <meta
+          name="description"
+          content="Prijavi se na svoj Norskly nalog ili kreiraj novi i nastavi učenje jezika tamo gde si stao."
+        />
+        <link rel="canonical" href="https://norskly.com/auth" />
+        <meta property="og:title" content="Prijava i registracija | Norskly" />
+        <meta property="og:description" content="Prijavi se na Norskly ili napravi nalog i nastavi učenje svojim tempom." />
+        <meta property="og:url" content="https://norskly.com/auth" />
+        <meta name="twitter:title" content="Prijava i registracija | Norskly" />
+        <meta name="twitter:description" content="Prijavi se na Norskly ili napravi nalog i nastavi učenje svojim tempom." />
+      </Helmet>
       <div className="absolute top-4 left-4">
         <BackButton to="/" />
       </div>
