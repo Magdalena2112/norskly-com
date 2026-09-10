@@ -106,8 +106,24 @@ const QUOTE_CARD_TYPO = {
 export default function LandingPage() {
   const navigate = useNavigate();
 
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: FAQ.map((item) => ({
+      "@type": "Question",
+      name: item.q,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.a,
+      },
+    })),
+  };
+
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
+      <Helmet>
+        <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
+      </Helmet>
       {/* ============== NAV ============== */}
       <nav className="fixed top-0 inset-x-0 z-50 backdrop-blur-md bg-background/80 border-b border-border/60">
         <div className="container flex items-center justify-between h-14 sm:h-16">
