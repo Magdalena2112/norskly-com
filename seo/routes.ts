@@ -51,4 +51,22 @@ export const SEO_ROUTES: RouteSeo[] = [
     ogDescription:
       "Personalizovano učenje nemačkog, praktične vežbe i podrška profesora — sve na jednom mestu.",
   },
+  {
+    path: "/za-profesore",
+    title: "Postani predavač na Norskly platformi | Norskly",
+    description:
+      "Predaji jezike online preko Norskly platforme: prijava, verifikacija, individualni i grupni časovi, kursevi i alati za organizaciju nastave.",
+    ogTitle: "Postani predavač na Norskly platformi | Norskly",
+    ogDescription:
+      "Prijavi se za predavanje na Norskly platformi i organizuj časove, kurseve i praćenje učenika na jednom mestu.",
+  },
+  {
+    path: "/auth",
+    title: "Prijava i registracija | Norskly",
+    description:
+      "Prijavi se na svoj Norskly nalog ili kreiraj novi i nastavi učenje jezika tamo gde si stao.",
+    ogTitle: "Prijava i registracija | Norskly",
+    ogDescription:
+      "Prijavi se na Norskly ili napravi nalog i nastavi učenje svojim tempom.",
+  },
 ];
