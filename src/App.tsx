@@ -40,6 +40,7 @@ import UnsubscribePage from "./pages/UnsubscribePage";
 import ProfilePage from "./pages/ProfilePage";
 import SettingsPage from "./pages/SettingsPage";
 import NotFound from "./pages/NotFound";
+import HomeRedirect from "@/components/HomeRedirect";
 
 const queryClient = new QueryClient();
 
@@ -54,6 +55,7 @@ const App = () => (
             <LanguageSync />
             <Routes>
               <Route path="/" element={<LandingPage />} />
+              <Route path="/home" element={<HomeRedirect />} />
               <Route path="/za-profesore" element={<ForTeachersPage />} />
               <Route path="/jezici/:slug" element={<LanguagePage />} />
               <Route path="/auth" element={<AuthPage />} />

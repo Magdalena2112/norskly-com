@@ -96,8 +96,17 @@ export function seoPrerender(): Plugin {
         fs.mkdirSync(path.dirname(target), { recursive: true });
         fs.writeFileSync(target, html, "utf8");
       }
+      for (const redirect of LEGACY_REDIRECTS) {
+        const targetUrl = SITE_URL + (redirect.to === "/" ? "/" : redirect.to);
+        const html = buildRedirectHtml(baseHtml, targetUrl);
+        const target = path.join(outDir, redirect.from.replace(/^\//, ""), "index.html");
+        fs.mkdirSync(path.dirname(target), { recursive: true });
+        fs.writeFileSync(target, html, "utf8");
+      }
       // eslint-disable-next-line no-console
-      console.log(`[seo-prerender] wrote ${SEO_ROUTES.length} route HTML files`);
+      console.log(
+        `[seo-prerender] wrote ${SEO_ROUTES.length} route HTML files and ${LEGACY_REDIRECTS.length} redirect files`
+      );
     },
   };
 }
