@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import { ArrowRight, Check, Sparkles, Star, GraduationCap, Clock } from "lucide-react";
+import { ArrowRight, Sparkles, Star, GraduationCap, Clock } from "lucide-react";
 import { getLanguageBySlug } from "@/lib/languages";
 import JourneyStepper from "@/components/onboarding/JourneyStepper";
 import { Helmet } from "react-helmet-async";
