@@ -96,7 +96,7 @@ export default function PricingSection({
   teacherDisabled = false,
 }: PricingSectionProps) {
   return (
-    <section id={id} className={cn("py-14 md:py-24", className)}>
+    <section id={id} className={cn("scroll-mt-16 py-14 md:scroll-mt-20 md:py-24", className)}>
       <div className="container">
         <div className="mx-auto mb-10 max-w-2xl text-center sm:mb-12">
           <p className="mb-3 text-[10px] font-semibold uppercase tracking-widest text-primary/70 sm:text-xs">
@@ -116,7 +116,7 @@ export default function PricingSection({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.45 }}
-            className="h-full"
+            className="min-w-0"
           >
             <Card className="h-full rounded-3xl border-border bg-background shadow-card-soft">
               <CardContent className="flex h-full flex-col p-6 sm:p-8">
@@ -143,7 +143,7 @@ export default function PricingSection({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.45, delay: 0.07 }}
-            className="h-full"
+            className="min-w-0"
           >
             <Card className="h-full rounded-3xl border-2 border-accent bg-card shadow-accent-glow">
               <CardContent className="flex h-full flex-col p-6 sm:p-8">
