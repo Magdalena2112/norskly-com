@@ -116,18 +116,20 @@ export default function PricingSection({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.45 }}
-            className="min-w-0"
+            className="h-full min-w-0"
           >
-            <Card className="h-full rounded-3xl border-border bg-background shadow-card-soft">
+            <Card className="h-full rounded-3xl border-2 border-border bg-background shadow-card-soft">
               <CardContent className="flex h-full flex-col p-6 sm:p-8">
-                <h3 className="font-display text-2xl font-bold text-primary sm:text-3xl">Isprobaj Norskly</h3>
-                <div className="mt-3 flex items-baseline gap-2">
-                  <span className="font-display text-4xl font-black text-foreground">0 €</span>
+                <div className="flex flex-col md:min-h-[17.5rem]">
+                  <h3 className="font-display text-2xl font-bold text-primary sm:text-3xl">Isprobaj Norskly</h3>
+                  <div className="mt-4 flex min-h-32 items-center rounded-2xl border border-border bg-card px-4 py-5">
+                    <span className="font-display text-4xl font-black text-foreground">0 €</span>
+                  </div>
+                  <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+                    Upoznaj platformu pre nego što se pretplatiš.
+                  </p>
                 </div>
-                <p className="mt-3 min-h-10 text-sm leading-relaxed text-muted-foreground">
-                  Upoznaj platformu pre nego što se pretplatiš.
-                </p>
-                <div className="mt-6 flex-1">
+                <div className="mt-6 flex flex-1 flex-col">
                   <FeatureList items={FREE_FEATURES} />
                   <BenefitsAccordion value="free-benefits" items={FREE_DETAILS} />
                 </div>
@@ -143,27 +145,29 @@ export default function PricingSection({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.45, delay: 0.07 }}
-            className="min-w-0"
+            className="h-full min-w-0"
           >
             <Card className="h-full rounded-3xl border-2 border-accent bg-card shadow-accent-glow">
               <CardContent className="flex h-full flex-col p-6 sm:p-8">
-                <h3 className="font-display text-2xl font-bold text-primary sm:text-3xl">Uči uz Norskly</h3>
-                <div className="mt-4 grid grid-cols-2 gap-3">
-                  <div className="rounded-2xl border border-border bg-background p-3 sm:p-4">
-                    <p className="font-display text-2xl font-black text-foreground sm:text-3xl">9,90 €</p>
-                    <p className="mt-1 text-xs text-muted-foreground">mesečno</p>
+                <div className="flex flex-col md:min-h-[17.5rem]">
+                  <h3 className="font-display text-2xl font-bold text-primary sm:text-3xl">Uči uz Norskly</h3>
+                  <div className="mt-4 grid min-h-32 grid-cols-2 gap-3">
+                    <div className="flex flex-col justify-center rounded-2xl border border-border bg-background p-3 sm:p-4">
+                      <p className="font-display text-2xl font-black text-foreground sm:text-3xl">9,90 €</p>
+                      <p className="mt-1 text-xs text-muted-foreground">mesečno</p>
+                    </div>
+                    <div className="flex flex-col justify-center rounded-2xl border border-accent/60 bg-accent/10 p-3 sm:p-4">
+                      <Badge className="mb-2 w-fit bg-accent text-accent-foreground hover:bg-accent">Najisplativije</Badge>
+                      <p className="font-display text-2xl font-black text-foreground sm:text-3xl">89 €</p>
+                      <p className="mt-1 text-xs text-muted-foreground">godišnje</p>
+                      <p className="mt-2 text-xs font-semibold text-primary">Uštedi 29,80 € godišnje</p>
+                    </div>
                   </div>
-                  <div className="rounded-2xl border border-accent/60 bg-accent/10 p-3 sm:p-4">
-                    <Badge className="mb-2 bg-accent text-accent-foreground hover:bg-accent">Najisplativije</Badge>
-                    <p className="font-display text-2xl font-black text-foreground sm:text-3xl">89 €</p>
-                    <p className="mt-1 text-xs text-muted-foreground">godišnje</p>
-                    <p className="mt-2 text-xs font-semibold text-primary">Uštedi 29,80 € godišnje</p>
-                  </div>
+                  <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+                    Za korisnike koji žele kompletan pristup platformi i učenje svojim tempom.
+                  </p>
                 </div>
-                <p className="mt-4 min-h-10 text-sm leading-relaxed text-muted-foreground">
-                  Za korisnike koji žele kompletan pristup platformi i učenje svojim tempom.
-                </p>
-                <div className="mt-6 flex-1">
+                <div className="mt-6 flex flex-1 flex-col">
                   <FeatureList items={PAID_FEATURES} />
                   <BenefitsAccordion value="paid-benefits" items={PAID_DETAILS} />
                   <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
@@ -178,12 +182,12 @@ export default function PricingSection({
           </motion.div>
         </div>
 
-        <div className="mx-auto mt-8 max-w-5xl border-t border-border pt-8 sm:mt-10 sm:pt-10">
-          <div className="rounded-3xl border border-border bg-secondary/60 p-6 sm:p-8 md:p-10">
-            <div className="grid gap-7 lg:grid-cols-[1.35fr_1fr] lg:items-center">
-              <div>
+        <div className="mx-auto mt-5 max-w-5xl sm:mt-6">
+          <div className="rounded-3xl border border-border bg-background p-6 shadow-card-soft sm:p-8">
+            <div className="grid gap-8 md:grid-cols-2 md:items-stretch md:gap-10">
+              <div className="flex flex-col justify-center md:pr-2">
                 <div className="mb-3 flex items-center gap-3">
-                  <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-background">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-border bg-card">
                     <GraduationCap className="h-5 w-5 text-primary" />
                   </span>
                   <h3 className="font-display text-2xl font-bold text-primary sm:text-3xl">Želiš dodatnu podršku profesora?</h3>
@@ -193,11 +197,12 @@ export default function PricingSection({
                   Uz aktivnu Norskly pretplatu možeš da izabereš profesora i zakažeš individualni čas ili paket časova, u zavisnosti od njegove ponude i dostupnosti.
                 </p>
               </div>
-              <div>
-                <div className="grid gap-2 sm:grid-cols-3 lg:grid-cols-1">
+              <div className="flex min-w-0 flex-col">
+                <div className="grid gap-2">
                   {TEACHER_OPTIONS.map((option) => (
-                    <div key={option} className="flex items-center gap-2 rounded-xl border border-border bg-background px-4 py-3 text-sm font-medium text-foreground">
-                      <Check className="h-4 w-4 shrink-0 text-primary" /> {option}
+                    <div key={option} className="flex min-h-12 w-full items-center gap-3 rounded-xl border border-border bg-card px-4 py-3 text-sm font-medium text-foreground">
+                      <Check className="h-4 w-4 shrink-0 text-primary" />
+                      <span>{option}</span>
                     </div>
                   ))}
                 </div>
