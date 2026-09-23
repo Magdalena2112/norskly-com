@@ -118,7 +118,7 @@ export default function PricingSection({
             transition={{ duration: 0.45 }}
             className="h-full min-w-0"
           >
-            <Card className="h-full rounded-3xl border-border bg-background shadow-card-soft">
+            <Card className="h-full rounded-3xl border-2 border-border bg-background shadow-card-soft">
               <CardContent className="flex h-full flex-col p-6 sm:p-8">
                 <div className="flex flex-col md:min-h-[17.5rem]">
                   <h3 className="font-display text-2xl font-bold text-primary sm:text-3xl">Isprobaj Norskly</h3>
