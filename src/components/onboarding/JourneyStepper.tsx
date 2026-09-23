@@ -13,12 +13,13 @@ export const JOURNEY_STEPS = [
 
 export type JourneyStepId = (typeof JOURNEY_STEPS)[number]["id"];
 
-export type PlanId = "trial" | "self" | "lessons";
+export type PlanId = "trial" | "subscription" | "self" | "lessons";
 
 export const PLAN_META: Record<PlanId, { label: string; icon: typeof Gift }> = {
-  trial: { label: "7 dana besplatno", icon: Gift },
-  self: { label: "Self-Learning", icon: BookOpen },
-  lessons: { label: "Learning + Lessons", icon: GraduationCap },
+  trial: { label: "Isprobaj Norskly", icon: Gift },
+  subscription: { label: "Uči uz Norskly", icon: BookOpen },
+  self: { label: "Uči uz Norskly", icon: BookOpen },
+  lessons: { label: "Uči uz Norskly", icon: GraduationCap },
 };
 
 interface Props {
