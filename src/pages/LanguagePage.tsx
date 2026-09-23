@@ -9,53 +9,12 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import { ArrowRight, Check, Sparkles, Star, GraduationCap, Clock } from "lucide-react";
+import { ArrowRight, Sparkles, Star, GraduationCap, Clock } from "lucide-react";
 import { getLanguageBySlug } from "@/lib/languages";
 import JourneyStepper from "@/components/onboarding/JourneyStepper";
 import { Helmet } from "react-helmet-async";
 import teacherPhotoFallback from "@/assets/teacher-photo.jpg";
-
-const PLANS = [
-  {
-    id: "trial",
-    name: "7 dana besplatno",
-    price: "0€",
-    per: "prvih 7 dana",
-    highlight: true,
-    features: [
-      "Pun pristup AI modulima",
-      "Gramatika, vokabular i razgovori",
-      "Bez obaveze i bez kartice",
-    ],
-    cta: "Probaj besplatno",
-  },
-  {
-    id: "self",
-    name: "Self-Learning",
-    price: "22€",
-    per: "/mesec",
-    features: [
-      "Kompletan AI sadržaj",
-      "AI razgovori i feedback",
-      "Praćenje napretka",
-      "Neograničeno učenje",
-    ],
-    cta: "Izaberi plan",
-  },
-  {
-    id: "lessons",
-    name: "Learning + Lessons",
-    price: "19€",
-    per: "/mesec + časovi",
-    features: [
-      "Sve iz Self-Learning plana",
-      "Rezervacija živih časova",
-      "Podrška profesora",
-      "Časovi se naplaćuju zasebno",
-    ],
-    cta: "Izaberi plan",
-  },
-];
+import PricingSection from "@/components/PricingSection";
 
 export default function LanguagePage() {
   const { slug } = useParams<{ slug: string }>();
@@ -332,74 +291,14 @@ export default function LanguagePage() {
         </div>
       </section>
 
-      {/* PLANS */}
-      <section id="plans" className="py-20 md:py-24">
-        <div className="container">
-          <div className="max-w-2xl mb-12 text-center mx-auto">
-            <p className="text-xs font-semibold uppercase tracking-widest text-primary/70 mb-3">Planovi</p>
-            <h2 className="text-display text-[clamp(2rem,4.5vw,3.5rem)] text-primary">
-              Počni <span className="font-script text-primary/70">besplatno</span>.
-            </h2>
-            <p className="text-muted-foreground mt-3">
-              Probaj 7 dana besplatno. Bez kartice, bez obaveza.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-5 max-w-5xl mx-auto">
-            {PLANS.map((p, i) => (
-              <motion.div
-                key={p.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.4, delay: i * 0.05 }}
-              >
-                <Card
-                  className={`h-full rounded-3xl transition-all ${
-                    p.highlight
-                      ? "border-2 border-accent shadow-accent-glow bg-card"
-                      : "border-border hover:shadow-soft"
-                  }`}
-                >
-                  <CardContent className="p-7 flex flex-col h-full">
-                    {p.highlight && (
-                      <Badge className="self-start mb-3 bg-accent text-accent-foreground hover:bg-accent">
-                        Najpopularnije
-                      </Badge>
-                    )}
-                    <h3 className="font-display text-2xl font-bold text-primary">{p.name}</h3>
-                    <div className="mt-3 flex items-baseline gap-1">
-                      <span className="text-4xl font-display font-black text-foreground">{p.price}</span>
-                      <span className="text-sm text-muted-foreground">{p.per}</span>
-                    </div>
-
-                    <ul className="space-y-2.5 mt-6 flex-1">
-                      {p.features.map((f) => (
-                        <li key={f} className="flex gap-2 text-sm text-foreground/85">
-                          <Check className="w-4 h-4 text-primary shrink-0 mt-0.5" />
-                          {f}
-                        </li>
-                      ))}
-                    </ul>
-
-                    <Button
-                      className={`mt-7 rounded-full ${
-                        p.highlight
-                          ? "bg-accent text-accent-foreground hover:bg-accent/90"
-                          : "bg-primary hover:bg-primary/90"
-                      }`}
-                      onClick={() => goAuth({ plan: p.id })}
-                      disabled={!lang.available && p.id !== "trial"}
-                    >
-                      {p.cta} <ArrowRight className="ml-1 h-4 w-4" />
-                    </Button>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <PricingSection
+        id="plans"
+        onFreeSelect={() => goAuth({ plan: "trial" })}
+        onPaidSelect={() => goAuth({ plan: "subscription" })}
+        onTeacherSelect={() => goAuth({ next: "/select-teacher" })}
+        paidDisabled={!lang.available}
+        teacherDisabled={!lang.available}
+      />
 
       {/* REGISTRATION CTA */}
       <section className="py-20 md:py-24 bg-primary text-primary-foreground">
