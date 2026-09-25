@@ -17,6 +17,7 @@ import { FloatingGreetings } from "@/components/FloatingGreetings";
 import { FloatingQuestionMarks } from "@/components/FloatingQuestionMarks";
 import PricingSection from "@/components/PricingSection";
 import ecosystemCollageAsset from "@/assets/ecosystem-collage.webp.asset.json";
+import relocationBox from "@/assets/relocation-box-3d.png";
 const ecosystemCollage = ecosystemCollageAsset.url;
 
 
@@ -256,27 +257,15 @@ export default function LandingPage() {
               className="relative mx-auto aspect-[5/4] w-full max-w-md"
               aria-hidden="true"
             >
-              <div className="absolute inset-[8%] rounded-full bg-secondary/60 blur-2xl" />
-              <svg viewBox="0 0 400 320" className="absolute inset-0 h-full w-full text-primary" fill="none">
-                <path d="M90 250 C 150 150, 230 210, 300 80" stroke="currentColor" strokeOpacity="0.35" strokeWidth="1.5" strokeDasharray="5 7" />
-                {/* passport */}
-                <g transform="translate(160 120) rotate(-8)">
-                  <rect width="84" height="112" rx="10" className="fill-card" stroke="currentColor" strokeOpacity="0.3" />
-                  <circle cx="42" cy="44" r="16" stroke="currentColor" strokeOpacity="0.45" />
-                  <path d="M26 44h32M42 28c-8 10-8 22 0 32M42 28c8 10 8 22 0 32" stroke="currentColor" strokeOpacity="0.35" />
-                  <rect x="20" y="78" width="44" height="4" rx="2" fill="currentColor" fillOpacity="0.25" />
-                  <rect x="28" y="88" width="28" height="4" rx="2" fill="currentColor" fillOpacity="0.18" />
-                </g>
-                {/* pins */}
-                <g transform="translate(78 222)">
-                  <path d="M12 0C5 0 0 5 0 12c0 9 12 22 12 22s12-13 12-22C24 5 19 0 12 0z" fill="currentColor" fillOpacity="0.2" />
-                  <circle cx="12" cy="12" r="4" fill="currentColor" />
-                </g>
-                <g transform="translate(288 46)">
-                  <path d="M12 0C5 0 0 5 0 12c0 9 12 22 12 22s12-13 12-22C24 5 19 0 12 0z" fill="currentColor" />
-                  <circle cx="12" cy="12" r="4" className="fill-background" />
-                </g>
-              </svg>
+              <div className="absolute inset-[10%] rounded-full bg-secondary/60 blur-2xl" />
+              <img
+                src={relocationBox}
+                alt=""
+                width={1024}
+                height={1024}
+                loading="lazy"
+                className="absolute inset-0 h-full w-full object-contain drop-shadow-[0_18px_28px_rgba(0,0,0,0.12)]"
+              />
               <div className="absolute left-0 top-[12%] rounded-2xl border border-border bg-background/90 px-3.5 py-2.5 shadow-card-soft backdrop-blur">
                 <p className="text-sm font-bold text-primary"><span className="mr-1.5">🇳🇴</span>Norveška</p>
                 <p className="text-xs text-muted-foreground">Posao · dokumenta · studije</p>
