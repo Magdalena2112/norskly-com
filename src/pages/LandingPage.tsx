@@ -21,9 +21,9 @@ const ecosystemCollage = ecosystemCollageAsset.url;
 
 
 const GOALS = [
-  { icon: Stethoscope, title: "Jezik za zdravstvo", desc: "Za rad i komunikaciju u zdravstvenom okruženju." },
-  { icon: Briefcase, title: "Jezik za posao i preseljenje", desc: "Za posao, svakodnevni život i pripremu za preseljenje." },
-  { icon: GraduationCap, title: "Jezik za obrazovanje", desc: "Za studiranje, stručno obrazovanje i život tokom školovanja." },
+  { icon: Stethoscope, title: "Zdravstvo", desc: "Rad i komunikacija u struci." },
+  { icon: Briefcase, title: "Posao i preseljenje", desc: "Jezik za posao i novi život." },
+  { icon: GraduationCap, title: "Obrazovanje", desc: "Studije i stručno usavršavanje." },
 ];
 
 const RELOCATION_COUNTRIES = [
@@ -184,9 +184,9 @@ export default function LandingPage() {
       </section>
 
       {/* ============== GOALS ============== */}
-      <section id="ciljevi" className="pb-14 md:pb-24">
+      <section id="ciljevi" className="pb-10 md:pb-14">
         <div className="container max-w-5xl">
-          <div className="text-center mb-8 sm:mb-10 max-w-2xl mx-auto">
+          <div className="text-center mb-8 sm:mb-12 max-w-2xl mx-auto">
             <h2 className="text-display text-[clamp(1.75rem,4.5vw,3.25rem)] text-primary mb-3">
               Uči prema svom <span className="font-script text-primary/70">cilju</span>
             </h2>
@@ -194,76 +194,99 @@ export default function LandingPage() {
               Nije svima jezik potreban iz istog razloga. Izaberi putanju koja odgovara onome što želiš da postigneš.
             </p>
           </div>
-          <div className="grid gap-4 sm:gap-5 md:grid-cols-3">
-            {GOALS.map((g, i) => (
-              <motion.div
-                key={g.title}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.45, delay: i * 0.07 }}
-                className={`${i === 1 ? "bg-secondary/50" : "bg-card"} group h-full rounded-3xl border border-border p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-card-soft`}
-              >
-                <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-2xl bg-background border border-border transition-colors group-hover:bg-primary">
-                  <g.icon className="h-5 w-5 text-primary transition-colors group-hover:text-primary-foreground" />
-                </div>
-                <h3 className="font-display text-xl font-bold text-primary mb-1.5">{g.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{g.desc}</p>
-              </motion.div>
-            ))}
+          <div className="relative">
+            <div aria-hidden="true" className="pointer-events-none absolute left-[16.66%] right-[16.66%] top-6 hidden border-t border-dashed border-primary/25 md:block" />
+            <div className="grid md:grid-cols-3 divide-y divide-border md:divide-y-0">
+              {GOALS.map((g, i) => (
+                <motion.a
+                  key={g.title}
+                  href="#languages"
+                  initial={{ opacity: 0, y: 14 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-40px" }}
+                  transition={{ duration: 0.45, delay: i * 0.08 }}
+                  className="group relative flex items-center gap-4 py-5 md:flex-col md:items-center md:gap-0 md:px-6 md:py-0 md:text-center"
+                >
+                  <span className="relative z-10 flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-primary/20 bg-background ring-8 ring-background transition-colors duration-300 group-hover:bg-primary md:mb-5">
+                    <g.icon className="h-5 w-5 text-primary transition-colors group-hover:text-primary-foreground" />
+                  </span>
+                  <span className="min-w-0 flex-1">
+                    <span className="block font-display text-lg sm:text-xl font-bold text-primary mb-1">{g.title}</span>
+                    <span className="block text-sm text-muted-foreground">{g.desc}</span>
+                  </span>
+                  <ArrowRight className="h-4 w-4 shrink-0 text-primary/50 transition-all duration-300 group-hover:translate-x-1 group-hover:text-primary md:mt-4" />
+                </motion.a>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
       {/* ============== RELOCATION HUB TEASER ============== */}
-      <section id="relocation-hub" className="pb-12 md:pb-16">
-        <div className="container max-w-4xl">
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-40px" }}
-            transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-            className="bg-card border border-border rounded-3xl p-6 sm:p-8 shadow-card-soft"
-          >
-            <div className="text-center max-w-2xl mx-auto mb-6 sm:mb-7">
-              <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-widest text-primary/70 mb-2">
+      <section id="relocation-hub" className="pb-14 md:pb-20">
+        <div className="container max-w-5xl">
+          <div className="grid items-center gap-10 border-t border-border pt-10 md:grid-cols-2 md:gap-14 md:pt-14">
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-widest text-primary/70 mb-3">
                 Relocation Hub
               </p>
-              <h2 className="text-display text-[clamp(1.4rem,3.5vw,2.25rem)] text-primary mb-2">
+              <h2 className="text-display text-[clamp(1.6rem,3.8vw,2.75rem)] text-primary mb-3">
                 Planiraš život u Norveškoj ili <span className="font-script text-primary/70">Nemačkoj?</span>
               </h2>
-              <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
-                Pronađi praktične informacije za posao, dokumenta, studije i svakodnevni život.
+              <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-6 max-w-md">
+                Posao, dokumenta, studije i svakodnevni život — na jednom mestu.
               </p>
-            </div>
-
-            <div className="grid gap-3 sm:gap-4 sm:grid-cols-2">
-              {RELOCATION_COUNTRIES.map((c, i) => (
-                <motion.div
-                  key={c.name}
-                  initial={{ opacity: 0, y: 14 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-40px" }}
-                  transition={{ duration: 0.4, delay: i * 0.07 }}
-                  className="flex items-center gap-4 rounded-2xl border border-border bg-background p-4 sm:p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/30 hover:shadow-card-soft"
-                >
-                  <span className="text-2xl sm:text-3xl leading-none" aria-hidden="true">{c.flag}</span>
-                  <span className="min-w-0">
-                    <span className="block font-display text-lg font-bold text-primary">{c.name}</span>
-                    <span className="block text-sm text-muted-foreground">{c.topics}</span>
-                  </span>
-                </motion.div>
-              ))}
-            </div>
-
-            <div className="mt-6 text-center">
               <Button asChild className="rounded-full bg-primary hover:bg-primary/90">
                 <a href="#relocation-hub">
                   Istraži Relocation Hub <ArrowRight className="ml-1 h-4 w-4" />
                 </a>
               </Button>
-            </div>
-          </motion.div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.96 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              className="relative mx-auto aspect-[5/4] w-full max-w-md"
+              aria-hidden="true"
+            >
+              <div className="absolute inset-[8%] rounded-full bg-secondary/60 blur-2xl" />
+              <svg viewBox="0 0 400 320" className="absolute inset-0 h-full w-full text-primary" fill="none">
+                <path d="M90 250 C 150 150, 230 210, 300 80" stroke="currentColor" strokeOpacity="0.35" strokeWidth="1.5" strokeDasharray="5 7" />
+                {/* passport */}
+                <g transform="translate(160 120) rotate(-8)">
+                  <rect width="84" height="112" rx="10" className="fill-card" stroke="currentColor" strokeOpacity="0.3" />
+                  <circle cx="42" cy="44" r="16" stroke="currentColor" strokeOpacity="0.45" />
+                  <path d="M26 44h32M42 28c-8 10-8 22 0 32M42 28c8 10 8 22 0 32" stroke="currentColor" strokeOpacity="0.35" />
+                  <rect x="20" y="78" width="44" height="4" rx="2" fill="currentColor" fillOpacity="0.25" />
+                  <rect x="28" y="88" width="28" height="4" rx="2" fill="currentColor" fillOpacity="0.18" />
+                </g>
+                {/* pins */}
+                <g transform="translate(78 222)">
+                  <path d="M12 0C5 0 0 5 0 12c0 9 12 22 12 22s12-13 12-22C24 5 19 0 12 0z" fill="currentColor" fillOpacity="0.2" />
+                  <circle cx="12" cy="12" r="4" fill="currentColor" />
+                </g>
+                <g transform="translate(288 46)">
+                  <path d="M12 0C5 0 0 5 0 12c0 9 12 22 12 22s12-13 12-22C24 5 19 0 12 0z" fill="currentColor" />
+                  <circle cx="12" cy="12" r="4" className="fill-background" />
+                </g>
+              </svg>
+              <div className="absolute left-0 top-[12%] rounded-2xl border border-border bg-background/90 px-3.5 py-2.5 shadow-card-soft backdrop-blur">
+                <p className="text-sm font-bold text-primary"><span className="mr-1.5">🇳🇴</span>Norveška</p>
+                <p className="text-xs text-muted-foreground">Posao · dokumenta · studije</p>
+              </div>
+              <div className="absolute bottom-[6%] right-0 rounded-2xl border border-border bg-background/90 px-3.5 py-2.5 shadow-card-soft backdrop-blur">
+                <p className="text-sm font-bold text-primary"><span className="mr-1.5">🇩🇪</span>Nemačka</p>
+                <p className="text-xs text-muted-foreground">Posao · Ausbildung · dokumenta</p>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
