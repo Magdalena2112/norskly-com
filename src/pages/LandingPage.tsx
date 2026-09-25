@@ -26,6 +26,11 @@ const GOALS = [
   { icon: GraduationCap, title: "Jezik za obrazovanje", desc: "Za studiranje, stručno obrazovanje i život tokom školovanja." },
 ];
 
+const RELOCATION_COUNTRIES = [
+  { flag: "🇳🇴", name: "Norveška", topics: "Posao · dokumenta · studije · život" },
+  { flag: "🇩🇪", name: "Nemačka", topics: "Posao · Ausbildung · dokumenta · život" },
+];
+
 const FEATURES = [
   { icon: MessageCircle, title: "Praktična komunikacija", desc: "Vežbaj jezik kroz realistične svakodnevne i poslovne razgovore." },
   { icon: Target, title: "Vežbe prilagođene tebi", desc: "Vežbe i sadržaj prilagođavaju se tvom nivou, ciljevima i tempu učenja." },
