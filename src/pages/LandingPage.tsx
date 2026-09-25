@@ -27,10 +27,6 @@ const GOALS = [
   { icon: GraduationCap, title: "Obrazovanje", desc: "Studije i stručno usavršavanje." },
 ];
 
-const RELOCATION_COUNTRIES = [
-  { flag: "🇳🇴", name: "Norveška", topics: "Posao · dokumenta · studije · život" },
-  { flag: "🇩🇪", name: "Nemačka", topics: "Posao · Ausbildung · dokumenta · život" },
-];
 
 const FEATURES = [
   { icon: MessageCircle, title: "Praktična komunikacija", desc: "Vežbaj jezik kroz realistične svakodnevne i poslovne razgovore." },
