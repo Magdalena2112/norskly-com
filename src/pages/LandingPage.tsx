@@ -272,9 +272,11 @@ export default function LandingPage() {
                   <circle cx="288" cy="102" r="4" />
                   <circle cx="108" cy="128" r="4" />
                 </g>
-                <g transform="rotate(-18 168 84)">
-                  <path d="M138 84l64-20-14 20 14 20-64-20z" fill="#F08FA6" />
-                  <path d="M186 64l24-8-10 14-14-6z" fill="#D96C87" />
+                <path d="M100 196l-22-30 58 12z" fill="#E0A62F" />
+                <path d="M300 196l22-30-58 12z" fill="#E0A62F" />
+                <g transform="rotate(-14 170 86)">
+                  <path d="M134 86l70-22-16 22 16 22-70-22z" fill="#F08FA6" />
+                  <path d="M188 64l26-8-12 16-14-8z" fill="#D96C87" />
                 </g>
                 <g transform="rotate(10 268 78)">
                   <rect x="236" y="52" width="66" height="46" rx="6" fill="#F2954A" />
@@ -289,8 +291,6 @@ export default function LandingPage() {
                   <path d="M286 114c-16 0-29 13-29 29 0 21 29 45 29 45s29-24 29-45c0-16-13-29-29-29z" fill="#E4573D" />
                   <circle cx="286" cy="143" r="11" fill="#FFF3E2" />
                 </g>
-                <path d="M104 198l-26-34 54-6z" fill="#E0A62F" />
-                <path d="M296 198l26-34-54-6z" fill="#E0A62F" />
                 <rect x="96" y="192" width="208" height="102" rx="12" fill="#F7C544" />
                 <rect x="182" y="192" width="36" height="102" fill="#FFE49B" opacity="0.85" />
                 <path d="M96 200l-34 26 12 18 44-26z" fill="#FFD75E" />
