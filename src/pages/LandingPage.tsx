@@ -17,7 +17,6 @@ import { FloatingGreetings } from "@/components/FloatingGreetings";
 import { FloatingQuestionMarks } from "@/components/FloatingQuestionMarks";
 import PricingSection from "@/components/PricingSection";
 import ecosystemCollageAsset from "@/assets/ecosystem-collage.webp.asset.json";
-import relocationBox from "@/assets/relocation-box-3d.png";
 const ecosystemCollage = ecosystemCollageAsset.url;
 
 
@@ -257,14 +256,47 @@ export default function LandingPage() {
             >
               <div className="absolute inset-[8%] rounded-full bg-[radial-gradient(circle_at_38%_32%,hsl(var(--gold-soft)/0.95),hsl(var(--sunset)/0.6)_55%,hsl(var(--secondary)/0.4)_72%,transparent_82%)] blur-xl" />
               <div className="absolute left-[16%] top-[14%] h-1/3 w-1/3 rounded-full bg-gold/25 blur-3xl" />
-              <img
-                src={relocationBox}
-                alt=""
-                width={1024}
-                height={1024}
-                loading="lazy"
-                className="absolute inset-0 h-full w-full object-contain drop-shadow-[0_18px_28px_rgba(0,0,0,0.12)]"
-              />
+              <svg
+                viewBox="0 0 400 320"
+                className="absolute inset-0 h-full w-full"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g stroke="#F4B942" strokeWidth="5" strokeLinecap="round" opacity="0.5">
+                  <path d="M96 62h30" />
+                  <path d="M78 88h18" />
+                  <path d="M300 54h26" />
+                </g>
+                <g fill="#7FC29B">
+                  <circle cx="132" cy="44" r="5" />
+                  <circle cx="288" cy="102" r="4" />
+                  <circle cx="108" cy="128" r="4" />
+                </g>
+                <path d="M100 196l-22-30 58 12z" fill="#E0A62F" />
+                <path d="M300 196l22-30-58 12z" fill="#E0A62F" />
+                <g transform="rotate(-14 170 86)">
+                  <path d="M134 86l70-22-16 22 16 22-70-22z" fill="#F08FA6" />
+                  <path d="M188 64l26-8-12 16-14-8z" fill="#D96C87" />
+                </g>
+                <g transform="rotate(10 268 78)">
+                  <rect x="236" y="52" width="66" height="46" rx="6" fill="#F2954A" />
+                  <path d="M238 60l31 22 31-22" stroke="#FFF3E2" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" />
+                </g>
+                <g transform="rotate(-10 122 150)">
+                  <rect x="92" y="118" width="58" height="76" rx="8" fill="#3F8F6B" />
+                  <circle cx="121" cy="150" r="14" stroke="#EAF7EF" strokeWidth="4" />
+                  <path d="M104 178h34" stroke="#EAF7EF" strokeWidth="4" strokeLinecap="round" />
+                </g>
+                <g transform="rotate(12 286 150)">
+                  <path d="M286 114c-16 0-29 13-29 29 0 21 29 45 29 45s29-24 29-45c0-16-13-29-29-29z" fill="#E4573D" />
+                  <circle cx="286" cy="143" r="11" fill="#FFF3E2" />
+                </g>
+                <rect x="96" y="192" width="208" height="102" rx="12" fill="#F7C544" />
+                <rect x="182" y="192" width="36" height="102" fill="#FFE49B" opacity="0.85" />
+                <path d="M96 200l-34 26 12 18 44-26z" fill="#FFD75E" />
+                <path d="M304 200l34 26-12 18-44-26z" fill="#FFD75E" />
+                <ellipse cx="200" cy="302" rx="118" ry="12" fill="#3A1220" opacity="0.08" />
+              </svg>
             </motion.div>
           </div>
         </div>
