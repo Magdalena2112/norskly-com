@@ -4,6 +4,7 @@ import norsklyLogo from "@/assets/norskly-logo.webp.asset.json";
 import {
   MessageCircle, Sparkles, BookOpen, Target, Mic, BarChart3,
   Check, X, ArrowRight, GraduationCap, Users, CalendarCheck,
+  Stethoscope, Briefcase,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate, Link } from "react-router-dom";
@@ -19,12 +20,18 @@ import ecosystemCollageAsset from "@/assets/ecosystem-collage.webp.asset.json";
 const ecosystemCollage = ecosystemCollageAsset.url;
 
 
+const GOALS = [
+  { icon: Stethoscope, title: "Jezik za zdravstvo", desc: "Za rad i komunikaciju u zdravstvenom okruženju." },
+  { icon: Briefcase, title: "Jezik za posao i preseljenje", desc: "Za posao, svakodnevni život i pripremu za preseljenje." },
+  { icon: GraduationCap, title: "Jezik za obrazovanje", desc: "Za studiranje, stručno obrazovanje i život tokom školovanja." },
+];
+
 const FEATURES = [
   { icon: MessageCircle, title: "Praktična komunikacija", desc: "Vežbaj jezik kroz realistične svakodnevne i poslovne razgovore." },
   { icon: Target, title: "Vežbe prilagođene tebi", desc: "Vežbe i sadržaj prilagođavaju se tvom nivou, ciljevima i tempu učenja." },
   { icon: BookOpen, title: "Gramatika u kontekstu", desc: "Uči gramatiku kroz primere, dijaloge i stvarnu komunikaciju." },
   { icon: Sparkles, title: "Povratna informacija odmah", desc: "Dobij jasna objašnjenja, ispravke i predloge dok vežbaš." },
-  { icon: Mic, title: "Vežbanje razgovora", desc: "Vežbaj komunikaciju kroz svakodnevne i praktične situacije, bez pritiska i svojim tempom." },
+  { icon: Mic, title: "Vežbanje razgovora", desc: "Vežbaj razgovore koji te stvarno čekaju — na poslu, fakultetu, kod lekara ili u svakodnevnom životu." },
   { icon: BarChart3, title: "Praćenje napretka", desc: "Prati šta si savladao, na čemu još treba da radiš i kako napreduješ kroz vreme." },
   { icon: CalendarCheck, title: "Podrška profesora", desc: "Poveži se sa profesorima i zakaži časove kada želiš dodatnu podršku u učenju." },
 ];
@@ -46,15 +53,16 @@ const TEACHER_BENEFITS = [
 ];
 
 const FIT_YES = [
-  "Želiš strukturisano učenje jezika",
-  "Uživaš u interaktivnoj praksi",
-  "Želiš da se učenje prilagođava tvom nivou i ciljevima",
-  "Želiš konkretne povratne informacije o svom radu",
+  "Planiraš posao ili preseljenje u Norvešku ili Nemačku",
+  "Potreban ti je jezik za posao, zdravstvo ili studije",
+  "Želiš da vežbaš realne situacije, a ne samo lekcije iz udžbenika",
+  "Želiš da kombinuješ samostalno učenje i podršku profesora",
+  "Želiš pouzdane informacije o narednim koracima za život u novoj zemlji",
 ];
 const FIT_NO = [
-  "Želiš samo pasivno učenje",
+  "Tražiš samo pasivno učenje",
   "Ne želiš redovnu praksu",
-  "Preferiraš učenje samo iz udžbenika",
+  "Želiš da učiš isključivo iz klasičnog udžbenika",
 ];
 
 // Fine-tune the decorative FAQ quote card's responsive typography here.
@@ -133,15 +141,15 @@ export default function LandingPage() {
             className="max-w-5xl mx-auto text-center"
           >
             <span className="inline-block px-3 py-1 sm:px-4 sm:py-1.5 rounded-full bg-secondary/70 text-primary text-[10px] sm:text-xs font-semibold tracking-widest uppercase mb-5 sm:mb-6">
-              Učenje koje se prilagođava tebi
+              Posao · Preseljenje · Zdravstvo · Studije
             </span>
 
-            <h1 className="text-display text-[clamp(2rem,9vw,7rem)] text-primary mb-5 sm:mb-6">
-              Uči jezike online svojim tempom, uz podršku koja se prilagođava tebi.
+            <h1 className="text-display text-[clamp(2.25rem,9vw,7rem)] text-primary mb-5 sm:mb-6">
+              Uči jezik za život koji <span className="font-script text-primary/70">planiraš</span>.
             </h1>
 
             <p className="text-sm sm:text-base md:text-xl text-muted-foreground max-w-2xl mx-auto mb-8 sm:mb-10 leading-relaxed">
-              Vežbaj kroz praktične situacije, prati svoj napredak i poveži se sa profesorom kada ti je potrebna dodatna podrška.
+              Pripremi se za posao, preseljenje ili studije u Norveškoj i Nemačkoj uz praktično učenje, personalizovane vežbe i podršku profesora.
             </p>
 
             {/* language pills — entry to per-language onboarding */}
@@ -169,6 +177,39 @@ export default function LandingPage() {
           </motion.div>
         </div>
       </section>
+
+      {/* ============== GOALS ============== */}
+      <section id="ciljevi" className="pb-14 md:pb-24">
+        <div className="container max-w-5xl">
+          <div className="text-center mb-8 sm:mb-10 max-w-2xl mx-auto">
+            <h2 className="text-display text-[clamp(1.75rem,4.5vw,3.25rem)] text-primary mb-3">
+              Uči prema svom <span className="font-script text-primary/70">cilju</span>
+            </h2>
+            <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
+              Nije svima jezik potreban iz istog razloga. Izaberi putanju koja odgovara onome što želiš da postigneš.
+            </p>
+          </div>
+          <div className="grid gap-4 sm:gap-5 md:grid-cols-3">
+            {GOALS.map((g, i) => (
+              <motion.div
+                key={g.title}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.45, delay: i * 0.07 }}
+                className={`${i === 1 ? "bg-secondary/50" : "bg-card"} group h-full rounded-3xl border border-border p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-card-soft`}
+              >
+                <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-2xl bg-background border border-border transition-colors group-hover:bg-primary">
+                  <g.icon className="h-5 w-5 text-primary transition-colors group-hover:text-primary-foreground" />
+                </div>
+                <h3 className="font-display text-xl font-bold text-primary mb-1.5">{g.title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{g.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
 
       {/* ============== FEATURES ============== */}
       <section id="features" className="py-14 md:py-28 bg-card/60">
@@ -244,7 +285,7 @@ export default function LandingPage() {
                 <GraduationCap className="w-5 h-5 text-primary" />
                 <span className="text-[10px] sm:text-xs font-semibold uppercase tracking-widest text-primary/70">Za učenike</span>
               </div>
-              <h3 className="text-display text-3xl md:text-4xl text-primary mb-5 sm:mb-6">Uči efikasnije. Govori sa <span className="font-script text-primary/70">samopouzdanjem</span>.</h3>
+              <h3 className="text-display text-3xl md:text-4xl text-primary mb-5 sm:mb-6">Učenje prilagođeno tvom cilju — poslu, studijama ili <span className="font-script text-primary/70">preseljenju</span>.</h3>
               <ul className="space-y-3 mb-7 sm:mb-8">
                 {STUDENT_BENEFITS.map((b) => (
                   <li key={b} className="flex items-center gap-3 text-sm sm:text-base text-foreground/80">
@@ -291,13 +332,13 @@ export default function LandingPage() {
           <div className="text-center mb-10 sm:mb-12">
             <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-widest text-primary/70 mb-3">Izaberi svoju ulogu</p>
             <h2 className="text-display text-[clamp(1.75rem,5vw,4rem)] text-primary">
-              Kako želiš <span className="font-script text-primary/70">da</span> kreneš?
+              Kako želiš <span className="font-script text-primary/70">da</span> koristiš Norskly?
             </h2>
           </div>
           <div className="grid sm:grid-cols-2 gap-4 sm:gap-5">
             {[
-              { label: "Učenik", desc: "Uči, vežbaj i napreduj svaki dan.", role: "student", bg: "bg-background" },
-              { label: "Profesor", desc: "Predavaj, organizuj i prati učenike.", role: "teacher", bg: "bg-secondary" },
+              { label: "Učenik", desc: "Uči, vežbaj i pripremi se za svoj cilj.", role: "student", bg: "bg-background" },
+              { label: "Profesor", desc: "Predaj, organizuj i prati učenike.", role: "teacher", bg: "bg-secondary" },
             ].map((r) => (
               <button key={r.role} onClick={() => navigate(`/auth?role=${r.role}`)}
                 className={`${r.bg} group rounded-3xl p-6 sm:p-10 text-left border border-border hover:-translate-y-1 hover:shadow-soft transition-all`}
@@ -322,9 +363,9 @@ export default function LandingPage() {
               Da li je Norskly <span className="font-script text-primary/70">pravi</span> za tebe?
             </h2>
           </div>
-          <div className="grid md:grid-cols-2 gap-4 sm:gap-5">
-            <div className="bg-card rounded-3xl p-6 md:p-8 border border-border">
-              <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-widest text-primary mb-4">Norskly je za tebe ako:</p>
+          <div className="grid md:grid-cols-5 gap-4 sm:gap-5 md:items-start">
+            <div className="md:col-span-3 bg-card rounded-3xl p-6 md:p-8 border-2 border-primary/20 shadow-card-soft">
+              <h3 className="text-[11px] sm:text-xs font-sans font-semibold uppercase tracking-widest text-primary mb-4">Norskly je za tebe ako:</h3>
               <ul className="space-y-3 sm:space-y-4">
                 {FIT_YES.map((t) => (
                   <li key={t} className="flex gap-3 text-sm sm:text-base text-foreground/85">
@@ -333,8 +374,8 @@ export default function LandingPage() {
                 ))}
               </ul>
             </div>
-            <div className="bg-secondary rounded-3xl p-6 md:p-8 border border-border">
-              <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-widest text-primary mb-4">Možda nije za tebe ako:</p>
+            <div className="md:col-span-2 bg-secondary/60 rounded-3xl p-6 md:p-8 border border-border">
+              <h3 className="text-[11px] sm:text-xs font-sans font-semibold uppercase tracking-widest text-primary/80 mb-4">Možda nije za tebe ako:</h3>
               <ul className="space-y-3 sm:space-y-4">
                 {FIT_NO.map((t) => (
                   <li key={t} className="flex gap-3 text-sm sm:text-base text-foreground/85">
