@@ -255,8 +255,8 @@ export default function LandingPage() {
               className="relative mx-auto aspect-[5/4] w-full max-w-md"
               aria-hidden="true"
             >
-              <div className="absolute left-[6%] top-[6%] h-2/3 w-2/3 rounded-full bg-gold-soft/80 blur-3xl" />
-              <div className="absolute bottom-[4%] right-[4%] h-1/2 w-1/2 rounded-full bg-sunset/70 blur-3xl" />
+              <div className="absolute inset-[8%] rounded-full bg-[radial-gradient(circle_at_38%_32%,hsl(var(--gold-soft)/0.95),hsl(var(--sunset)/0.6)_55%,hsl(var(--secondary)/0.4)_72%,transparent_82%)] blur-xl" />
+              <div className="absolute left-[16%] top-[14%] h-1/3 w-1/3 rounded-full bg-gold/25 blur-3xl" />
               <img
                 src={relocationBox}
                 alt=""
