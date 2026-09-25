@@ -26,6 +26,11 @@ const GOALS = [
   { icon: GraduationCap, title: "Jezik za obrazovanje", desc: "Za studiranje, stručno obrazovanje i život tokom školovanja." },
 ];
 
+const RELOCATION_COUNTRIES = [
+  { flag: "🇳🇴", name: "Norveška", topics: "Posao · dokumenta · studije · život" },
+  { flag: "🇩🇪", name: "Nemačka", topics: "Posao · Ausbildung · dokumenta · život" },
+];
+
 const FEATURES = [
   { icon: MessageCircle, title: "Praktična komunikacija", desc: "Vežbaj jezik kroz realistične svakodnevne i poslovne razgovore." },
   { icon: Target, title: "Vežbe prilagođene tebi", desc: "Vežbe i sadržaj prilagođavaju se tvom nivou, ciljevima i tempu učenja." },
@@ -210,6 +215,57 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* ============== RELOCATION HUB TEASER ============== */}
+      <section id="relocation-hub" className="pb-12 md:pb-16">
+        <div className="container max-w-4xl">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+            className="bg-card border border-border rounded-3xl p-6 sm:p-8 shadow-card-soft"
+          >
+            <div className="text-center max-w-2xl mx-auto mb-6 sm:mb-7">
+              <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-widest text-primary/70 mb-2">
+                Relocation Hub
+              </p>
+              <h2 className="text-display text-[clamp(1.4rem,3.5vw,2.25rem)] text-primary mb-2">
+                Planiraš život u Norveškoj ili <span className="font-script text-primary/70">Nemačkoj?</span>
+              </h2>
+              <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
+                Pronađi praktične informacije za posao, dokumenta, studije i svakodnevni život.
+              </p>
+            </div>
+
+            <div className="grid gap-3 sm:gap-4 sm:grid-cols-2">
+              {RELOCATION_COUNTRIES.map((c, i) => (
+                <motion.div
+                  key={c.name}
+                  initial={{ opacity: 0, y: 14 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-40px" }}
+                  transition={{ duration: 0.4, delay: i * 0.07 }}
+                  className="flex items-center gap-4 rounded-2xl border border-border bg-background p-4 sm:p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/30 hover:shadow-card-soft"
+                >
+                  <span className="text-2xl sm:text-3xl leading-none" aria-hidden="true">{c.flag}</span>
+                  <span className="min-w-0">
+                    <span className="block font-display text-lg font-bold text-primary">{c.name}</span>
+                    <span className="block text-sm text-muted-foreground">{c.topics}</span>
+                  </span>
+                </motion.div>
+              ))}
+            </div>
+
+            <div className="mt-6 text-center">
+              <Button asChild className="rounded-full bg-primary hover:bg-primary/90">
+                <a href="#relocation-hub">
+                  Istraži Relocation Hub <ArrowRight className="ml-1 h-4 w-4" />
+                </a>
+              </Button>
+            </div>
+          </motion.div>
+        </div>
+      </section>
 
       {/* ============== FEATURES ============== */}
       <section id="features" className="py-14 md:py-28 bg-card/60">
