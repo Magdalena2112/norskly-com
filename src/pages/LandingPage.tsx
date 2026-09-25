@@ -226,23 +226,25 @@ export default function LandingPage() {
       {/* ============== RELOCATION HUB TEASER ============== */}
       <section id="relocation-hub" className="pb-14 md:pb-20">
         <div className="container max-w-5xl">
-          <div className="grid items-center gap-10 border-t border-border pt-10 md:grid-cols-2 md:gap-14 md:pt-14">
+          <div className="h-px w-full bg-gradient-to-r from-transparent via-gold/50 to-transparent" />
+          <div className="grid items-center gap-10 pt-10 md:grid-cols-2 md:gap-14 md:pt-14">
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
             >
-              <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-widest text-primary/70 mb-3">
+              <p className="mb-3 flex items-center gap-2.5 text-[10px] sm:text-xs font-semibold uppercase tracking-widest text-gold-deep">
+                <span className="h-px w-6 shrink-0 bg-gold" />
                 Relocation Hub
               </p>
               <h2 className="text-display text-[clamp(1.6rem,3.8vw,2.75rem)] text-primary mb-3">
-                Planiraš život u Norveškoj ili <span className="font-script text-primary/70">Nemačkoj?</span>
+                Planiraš život u Norveškoj ili <span className="font-script text-gold-deep">Nemačkoj?</span>
               </h2>
               <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-6 max-w-md">
                 Posao, dokumenta, studije i svakodnevni život — na jednom mestu.
               </p>
-              <Button asChild className="rounded-full bg-primary hover:bg-primary/90">
+              <Button asChild className="rounded-full bg-primary hover:bg-primary/90 ring-1 ring-gold/40 shadow-[0_14px_34px_-16px_hsl(var(--gold)/0.8)]">
                 <a href="#relocation-hub">
                   Istraži Relocation Hub <ArrowRight className="ml-1 h-4 w-4" />
                 </a>
@@ -257,7 +259,8 @@ export default function LandingPage() {
               className="relative mx-auto aspect-[5/4] w-full max-w-md"
               aria-hidden="true"
             >
-              <div className="absolute inset-[10%] rounded-full bg-secondary/60 blur-2xl" />
+              <div className="absolute left-[6%] top-[6%] h-2/3 w-2/3 rounded-full bg-gold-soft/80 blur-3xl" />
+              <div className="absolute bottom-[4%] right-[4%] h-1/2 w-1/2 rounded-full bg-sunset/70 blur-3xl" />
               <img
                 src={relocationBox}
                 alt=""
@@ -266,14 +269,6 @@ export default function LandingPage() {
                 loading="lazy"
                 className="absolute inset-0 h-full w-full object-contain drop-shadow-[0_18px_28px_rgba(0,0,0,0.12)]"
               />
-              <div className="absolute left-0 top-[12%] rounded-2xl border border-border bg-background/90 px-3.5 py-2.5 shadow-card-soft backdrop-blur">
-                <p className="text-sm font-bold text-primary"><span className="mr-1.5">🇳🇴</span>Norveška</p>
-                <p className="text-xs text-muted-foreground">Posao · dokumenta · studije</p>
-              </div>
-              <div className="absolute bottom-[6%] right-0 rounded-2xl border border-border bg-background/90 px-3.5 py-2.5 shadow-card-soft backdrop-blur">
-                <p className="text-sm font-bold text-primary"><span className="mr-1.5">🇩🇪</span>Nemačka</p>
-                <p className="text-xs text-muted-foreground">Posao · Ausbildung · dokumenta</p>
-              </div>
             </motion.div>
           </div>
         </div>

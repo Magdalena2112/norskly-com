@@ -52,6 +52,11 @@
     --sunset: 18 75% 78%;            /* warm sunset peach */
     --mist: 200 25% 88%;
 
+    /* Warm brass accents (echoed from the relocation illustration) */
+    --gold: 45 65% 52%;
+    --gold-soft: 45 78% 76%;
+    --gold-deep: 36 55% 32%;
+
     --shadow-soft: 0 10px 40px -15px hsl(350 40% 20% / 0.15);
     --shadow-card: 0 4px 24px -8px hsl(350 40% 20% / 0.10);
     --shadow-postcard: 0 12px 36px -10px hsl(350 40% 20% / 0.18), 0 2px 6px -2px hsl(350 40% 20% / 0.12);

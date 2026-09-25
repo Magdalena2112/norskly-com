@@ -64,6 +64,11 @@ export default {
         },
         forest: "hsl(var(--forest))",
         sunset: "hsl(var(--sunset))",
+        gold: {
+          DEFAULT: "hsl(var(--gold))",
+          soft: "hsl(var(--gold-soft))",
+          deep: "hsl(var(--gold-deep))",
+        },
         mist: "hsl(var(--mist))",
         cream: "hsl(var(--cream))",
         sidebar: {
