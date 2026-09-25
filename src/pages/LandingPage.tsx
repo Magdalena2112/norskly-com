@@ -17,6 +17,7 @@ import { FloatingGreetings } from "@/components/FloatingGreetings";
 import { FloatingQuestionMarks } from "@/components/FloatingQuestionMarks";
 import PricingSection from "@/components/PricingSection";
 import ecosystemCollageAsset from "@/assets/ecosystem-collage.webp.asset.json";
+import relocationBox from "@/assets/relocation-box-3d.png";
 const ecosystemCollage = ecosystemCollageAsset.url;
 
 
