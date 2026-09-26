@@ -4,13 +4,11 @@ import { Link, useSearchParams } from "react-router-dom";
 import { ArrowLeft, ArrowRight, Check, ChevronDown, ExternalLink } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 import { cn } from "@/lib/utils";
+import { GERMANY_BEFORE_LEAVING, GERMANY_GUIDE, GERMANY_LINK_GROUPS, type GermanyTopic } from "@/lib/germanyRelocationData";
 import { NORWAY_BEFORE_LEAVING, NORWAY_GUIDE, NORWAY_LINK_GROUPS, NORWAY_SOURCES, type NorwayTopic } from "@/lib/norwayRelocationData";
 import {
-  BEFORE_LEAVING, COUNTRIES, DOCUMENTS, DOC_QUESTIONS, PERMIT_FIELDS, PERMIT_STEPS,
-  PLACEHOLDER, STEPS, TOPICS, type CountryData, type CountryId,
+  COUNTRIES, STEPS, type CountryData, type CountryId,
 } from "@/lib/relocationData";
-
-const Placeholder = () => <p className="text-xs italic text-muted-foreground">{PLACEHOLDER}</p>;
 
 function Expandable({ title, children, icon }: { title: string; children: ReactNode; icon?: ReactNode }) {
   const [open, setOpen] = useState(false);
@@ -43,37 +41,27 @@ function StepShell({ step, children }: { step: (typeof STEPS)[number]; children:
   );
 }
 
-function TopicList({ items }: { items: string[] }) {
-  return (
-    <div className="grid gap-2.5 sm:grid-cols-2">
-      {items.map((t) => (
-        <Expandable key={t} title={t}><Placeholder /></Expandable>
-      ))}
-    </div>
-  );
-}
-
-function NorwayTopicList({ stepId }: { stepId: string }) {
-  const data = NORWAY_GUIDE[stepId];
+function CountryTopicList({ stepId, countryId }: { stepId: string; countryId: CountryId }) {
+  const data = countryId === "norveska" ? NORWAY_GUIDE[stepId] : GERMANY_GUIDE[stepId];
   if (!data) return null;
   return (
     <div className="space-y-3">
       {data.intro && <p className="text-sm leading-relaxed text-muted-foreground">{data.intro}</p>}
-      {data.topics.map((topic: NorwayTopic) => (
+      {data.topics.map((topic: NorwayTopic | GermanyTopic) => (
         <Expandable key={topic.title} title={topic.title}>
           {topic.paragraphs?.map((text) => <p key={text} className="text-sm leading-relaxed text-foreground/85">{text}</p>)}
           {topic.bullets && <ul className="list-disc space-y-1 pl-5 text-sm leading-relaxed text-foreground/85">{topic.bullets.map((text) => <li key={text}>{text}</li>)}</ul>}
           {topic.source && <a href={topic.source.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-xs font-medium text-primary underline underline-offset-2">{topic.source.label}<ExternalLink className="h-3 w-3" /></a>}
         </Expandable>
       ))}
-      {stepId === "dokumenta" && <a href={NORWAY_SOURCES.checklist.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-xs font-medium text-primary underline underline-offset-2">{NORWAY_SOURCES.checklist.label}<ExternalLink className="h-3 w-3" /></a>}
+      {countryId === "norveska" && stepId === "dokumenta" && <a href={NORWAY_SOURCES.checklist.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-xs font-medium text-primary underline underline-offset-2">{NORWAY_SOURCES.checklist.label}<ExternalLink className="h-3 w-3" /></a>}
     </div>
   );
 }
 
 function ReadinessChecklist({ country }: { country: CountryId }) {
   const key = `norskly_relocation_ready_${country}`;
-  const items = country === "norveska" ? NORWAY_BEFORE_LEAVING : BEFORE_LEAVING;
+  const items = country === "norveska" ? NORWAY_BEFORE_LEAVING : GERMANY_BEFORE_LEAVING;
   const [done, setDone] = useState<string[]>([]);
   useEffect(() => {
     try { setDone(JSON.parse(localStorage.getItem(key) || "[]")); } catch { setDone([]); }
@@ -159,84 +147,43 @@ function Roadmap({ country }: { country: CountryData }) {
         <div className="relative space-y-14 md:space-y-16">
           <span aria-hidden className="absolute bottom-0 left-5 top-2 w-px border-l border-dashed border-primary/30 md:left-6" />
 
-          <StepShell step={STEPS[0]}>{country.id === "norveska" ? <NorwayTopicList stepId="uslovi" /> : <TopicList items={TOPICS.uslovi} />}</StepShell>
-          <StepShell step={STEPS[1]}>{country.id === "norveska" ? <NorwayTopicList stepId="posao" /> : <TopicList items={TOPICS.posao} />}</StepShell>
-          <StepShell step={STEPS[2]}>{country.id === "norveska" ? <NorwayTopicList stepId="diploma" /> : <TopicList items={TOPICS.diploma} />}</StepShell>
+          <StepShell step={STEPS[0]}><CountryTopicList countryId={country.id} stepId="uslovi" /></StepShell>
+          <StepShell step={STEPS[1]}><CountryTopicList countryId={country.id} stepId="posao" /></StepShell>
+          <StepShell step={STEPS[2]}><CountryTopicList countryId={country.id} stepId="diploma" /></StepShell>
 
           <StepShell step={STEPS[3]}>
-            {country.id === "norveska" ? <NorwayTopicList stepId="dokumenta" /> : DOCUMENTS.map((d) => (
-              <Expandable key={d} title={d} icon={<Check className="h-4 w-4 text-primary" />}>
-                {DOC_QUESTIONS.map((q) => (
-                  <div key={q}>
-                    <p className="text-xs font-semibold text-foreground">{q}</p>
-                    <Placeholder />
-                  </div>
-                ))}
-              </Expandable>
-            ))}
+            <CountryTopicList countryId={country.id} stepId="dokumenta" />
           </StepShell>
 
           <StepShell step={STEPS[4]}>
-            {country.id === "norveska" ? <NorwayTopicList stepId="dozvola" /> :
-            <ol className="grid gap-2.5">
-              {PERMIT_STEPS.map((p, i) => (
-                <li key={p}>
-                  <Expandable
-                    title={p}
-                    icon={<span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-secondary text-xs font-semibold text-primary">{i + 1}</span>}
-                  >
-                    <dl className="grid gap-2 sm:grid-cols-2">
-                      {PERMIT_FIELDS.map((f) => (
-                        <div key={f}>
-                          <dt className="text-xs font-semibold text-foreground">{f}</dt>
-                          <dd><Placeholder /></dd>
-                        </div>
-                      ))}
-                    </dl>
-                  </Expandable>
-                </li>
-              ))}
-            </ol>}
+            <CountryTopicList countryId={country.id} stepId="dozvola" />
           </StepShell>
 
           <StepShell step={STEPS[5]}>
-            {country.id === "norveska" && <NorwayTopicList stepId="pre-odlaska" />}
+            <CountryTopicList countryId={country.id} stepId="pre-odlaska" />
             <div className="pt-3"><ReadinessChecklist country={country.id} /></div>
           </StepShell>
 
           <StepShell step={STEPS[6]}>
-            {country.id === "norveska" ? <NorwayTopicList stepId="nakon-dolaska" /> : <><p className="mb-1 text-sm text-muted-foreground">{country.flag} {country.name}</p>
-            <ol className="space-y-2.5">
-              {country.arrival.map((a, i) => (
-                <li key={a}>
-                  <Expandable
-                    title={a}
-                    icon={<span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-secondary text-xs font-semibold text-primary">{i + 1}</span>}
-                  >
-                    <Placeholder />
-                  </Expandable>
-                </li>
-              ))}
-            </ol></>}
+            <CountryTopicList countryId={country.id} stepId="nakon-dolaska" />
           </StepShell>
 
           <StepShell step={STEPS[7]}>
             <div className="grid gap-4 sm:grid-cols-2">
-              {(country.id === "norveska" ? NORWAY_LINK_GROUPS.map((g) => ({ category: g.category, items: g.items.map((item) => ({ name: item.label, url: item.url, desc: "Zvanični izvor ili specijalizovani portal" })) })) : country.links).map((g) => (
+              {(country.id === "norveska" ? NORWAY_LINK_GROUPS : GERMANY_LINK_GROUPS).map((g) => (
                 <div key={g.category} className="rounded-2xl border border-border bg-card p-4 shadow-card-soft">
                   <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-primary">{g.category}</p>
                   <ul className="space-y-3">
                     {g.items.map((l) => (
-                      <li key={l.name} className="flex items-start justify-between gap-3">
+                      <li key={l.label} className="flex items-start justify-between gap-3">
                         <div className="min-w-0">
-                          <p className="text-sm font-medium text-foreground">{l.name}</p>
-                          <p className="text-xs text-muted-foreground">{l.desc}</p>
+                          <p className="text-sm font-medium text-foreground">{l.label}</p>
                         </div>
                         <a
                           href={l.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          aria-label={`Otvori ${l.name}`}
+                          aria-label={`Otvori ${l.label}`}
                           className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-primary/30 text-primary hover:bg-primary/5"
                         >
                           <ExternalLink className="h-3.5 w-3.5" />
