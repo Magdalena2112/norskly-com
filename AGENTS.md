@@ -1,0 +1,2 @@
+- Keep country-specific Relocation Hub guidance in separate typed data modules and render it only for its selected country, because content and rules must not leak between Norway and Germany.
+- Link mutable immigration and tax guidance to official sources and avoid unverified fixed figures, because rules and fees can change.
