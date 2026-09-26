@@ -22,11 +22,11 @@ type Bubble = {
 // zdravstvo i studije — mešavina norveškog, nemačkog i engleskog.
 const BUBBLES: Bubble[] = [
   { text: "Norsk",        top: "8%",  left: "5%",  rotate: -8, scale: 1.0,  variant: "secondary", delay: 0.0, duration: 7,   depth: 1.1, font: "script" },
-  { icon: GraduationCap, text: "Study", top: "14%", left: "80%", rotate: 6, scale: 1.1, variant: "accent", delay: 0.4, duration: 8, depth: 1.2, font: "display" },
+  { icon: GraduationCap, text: "Study", top: "14%", left: "80%", rotate: 6, scale: 1.1, variant: "accent", delay: 0.4, duration: 8, depth: 1.2, font: "display", hideOnMobile: true },
   { text: "Jobb",         top: "68%", left: "4%",  rotate: -5, scale: 1.0,  variant: "cream",     delay: 0.8, duration: 9,   depth: 0.9, font: "display" },
-  { icon: Briefcase, text: "Arbeit", top: "60%", left: "84%", rotate: 9, scale: 1.0, variant: "primary", delay: 0.2, duration: 7.5, depth: 1.0, font: "sans" },
+  { icon: Briefcase, text: "Arbeit", top: "60%", left: "84%", rotate: 9, scale: 1.0, variant: "primary", delay: 0.2, duration: 7.5, depth: 1.0, font: "sans", hideOnMobile: true },
   { icon: Stethoscope, text: "Lege", top: "30%", left: "-3%", rotate: -4, scale: 0.95, variant: "sage", delay: 1.0, duration: 8.5, depth: 0.7, font: "sans" },
-  { text: "Visa",         top: "40%", left: "90%", rotate: 7,  scale: 0.95, variant: "secondary", delay: 0.6, duration: 7.2, depth: 0.8, font: "display" },
+  { text: "Visa",         top: "40%", left: "90%", rotate: 7,  scale: 0.95, variant: "secondary", delay: 0.6, duration: 7.2, depth: 0.8, font: "display", hideOnMobile: true },
   { text: "Deutsch",      top: "4%",  left: "42%", rotate: -3, scale: 0.85, variant: "sage",      delay: 1.4, duration: 7.8, depth: 0.45, font: "display" },
   { icon: MapPin, text: "Bolig", top: "52%", left: "-4%", rotate: 5, scale: 0.85, variant: "primary", delay: 1.6, duration: 8.4, depth: 0.5, font: "script" },
   { text: "Karriere",     top: "84%", left: "66%", rotate: -6, scale: 0.9,  variant: "accent",    delay: 1.2, duration: 8.2, depth: 0.6, font: "script" },
