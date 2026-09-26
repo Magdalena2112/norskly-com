@@ -22,6 +22,7 @@ export const NORWAY_SOURCES = {
   sua: { label: "SUA – servis za strane radnike", url: "https://www.sua.no/en/" },
   police: { label: "Politiet – policija", url: "https://www.politiet.no/en/" },
   tax: { label: "Skatteetaten – poreska kartica i identifikacioni broj", url: "https://www.skatteetaten.no/en/person/foreign/are-you-intending-to-work-in-norway/" },
+  bank: { label: "Finans Norge – otvaranje bankovnog računa", url: "https://www.finansnorge.no/en/tema/new-in-norway/opening-a-bank-account-in-norway/" },
   paye: { label: "Skatteetaten – PAYE sistem", url: "https://www.skatteetaten.no/en/person/taxes/tax-deduction-card-and-advance-tax/i-am-a-foreign-employee/paye/" },
   health: { label: "Helsenorge – zdravstvene usluge", url: "https://www.helsenorge.no/en/foreigners-in-norway/" },
   bankid: { label: "BankID – digitalni identitet", url: "https://bankid.no/en" },
@@ -82,7 +83,7 @@ export const NORWAY_GUIDE: Record<string, { intro?: string; topics: NorwayTopic[
       { title: "02 · D-number ili fødselsnummer", paragraphs: ["Norveška koristi privremeni D-number i nacionalni identifikacioni broj (fødselsnummer). Nadležni organ utvrđuje koji ti pripada na osnovu statusa i trajanja boravka; D-number se ne traži kao samostalna obična prijava."], source: NORWAY_SOURCES.tax },
       { title: "03 · Prijava preseljenja", paragraphs: ["Ako planiraš boravak od šest meseci ili duže, proveri obavezu prijave preseljenja u Folkeregisteret (nacionalni registar)."], source: NORWAY_SOURCES.tax },
       { title: "04 · Poreska kartica (skattekort)", paragraphs: ["Za rad ti je potrebna poreska kartica. Može biti potrebna i provera identiteta. Bez kartice poslodavac može morati da zadrži 50% plate za porez. Novi strani radnici često ulaze u dobrovoljni PAYE sistem; stopa i uslovi zavise od godine i prihoda, zato ih proveri na Skatteetaten-u."], source: NORWAY_SOURCES.paye },
-      { title: "05 · Bankovni račun", paragraphs: ["Banka proverava identitet i određuje potrebnu dokumentaciju. Pripremi pasoš, identifikacioni broj, adresu i, ako traži, dokaz o zaposlenju."], source: NORWAY_SOURCES.tax },
+      { title: "05 · Bankovni račun", paragraphs: ["Banka proverava identitet i određuje potrebnu dokumentaciju. Pripremi pasoš, identifikacioni broj, adresu i, ako traži, dokaz o zaposlenju."], source: NORWAY_SOURCES.bank },
       { title: "06 · BankID", paragraphs: ["BankID je digitalni identitet za mnoge usluge. Dobija se preko banke, koja proverava tvoj identitet i uslove za izdavanje."], source: NORWAY_SOURCES.bankid },
       { title: "07 · Zdravstveno i socijalno osiguranje", paragraphs: ["Proveri svoje pravo na zdravstvene usluge i članstvo u sistemu socijalnog osiguranja prema radnom i boravišnom statusu. Pravila i participacije zavise od situacije."], source: NORWAY_SOURCES.health },
     ],
@@ -100,5 +101,5 @@ export const NORWAY_LINK_GROUPS = [
   { category: "Posao", items: [NORWAY_SOURCES.jobs, NORWAY_SOURCES.nav, NORWAY_SOURCES.finn] },
   { category: "Diplome i profesije", items: [NORWAY_SOURCES.regulated, NORWAY_SOURCES.recognition] },
   { category: "Prijava i dolazak", items: [NORWAY_SOURCES.checklist, NORWAY_SOURCES.sua, NORWAY_SOURCES.police] },
-  { category: "Porezi i svakodnevica", items: [NORWAY_SOURCES.tax, NORWAY_SOURCES.health, NORWAY_SOURCES.bankid] },
+  { category: "Porezi i svakodnevica", items: [NORWAY_SOURCES.tax, NORWAY_SOURCES.bank, NORWAY_SOURCES.health, NORWAY_SOURCES.bankid] },
 ];
