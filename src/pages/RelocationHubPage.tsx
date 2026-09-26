@@ -2,7 +2,6 @@ import { useEffect, useState, type ReactNode } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link, useSearchParams } from "react-router-dom";
 import { ArrowLeft, ArrowRight, Check, ChevronDown, ExternalLink } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { cn } from "@/lib/utils";
 import { NORWAY_BEFORE_LEAVING, NORWAY_GUIDE, NORWAY_LINK_GROUPS, NORWAY_SOURCES, type NorwayTopic } from "@/lib/norwayRelocationData";
