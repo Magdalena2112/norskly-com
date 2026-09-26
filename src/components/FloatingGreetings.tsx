@@ -1,8 +1,11 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, MotionValue, useMotionValue, useSpring, useTransform } from "framer-motion";
+import type { LucideIcon } from "lucide-react";
+import { Briefcase, GraduationCap, Languages, Luggage, MapPin, Stethoscope } from "lucide-react";
 
 type Bubble = {
-  text: string;
+  text?: string;
+  icon?: LucideIcon;
   top: string;
   left: string;
   rotate: number;
@@ -12,22 +15,55 @@ type Bubble = {
   duration: number;
   depth: number; // 0.2 (far) → 1.2 (near) for parallax
   font?: "display" | "script" | "sans";
+  hideOnMobile?: boolean; // edge-bleeding bubbles that would be cut on narrow screens
 };
 
+// Kratke reči vezane za Norskly koncept: jezik, posao, preseljenje,
+// zdravstvo i studije — mešavina norveškog, nemačkog i engleskog.
 const BUBBLES: Bubble[] = [
-  { text: "Hei",       top: "8%",  left: "6%",  rotate: -8, scale: 1.0,  variant: "secondary", delay: 0.0, duration: 7,   depth: 1.1, font: "script" },
-  { text: "Hallo",     top: "14%", left: "82%", rotate: 6,  scale: 1.1,  variant: "accent",    delay: 0.4, duration: 8,   depth: 1.2, font: "display" },
-  { text: "Hello",     top: "70%", left: "4%",  rotate: -5, scale: 1.0,  variant: "cream",     delay: 0.8, duration: 9,   depth: 0.9, font: "display" },
-  { text: "Ciao",      top: "62%", left: "84%", rotate: 9,  scale: 1.0,  variant: "primary",   delay: 0.2, duration: 7.5, depth: 1.0, font: "script" },
-  { text: "Bonjour",   top: "30%", left: "-2%", rotate: -4, scale: 0.95, variant: "sage",      delay: 1.0, duration: 8.5, depth: 0.7, font: "script" },
-  { text: "Hola",      top: "38%", left: "90%", rotate: 7,  scale: 0.95, variant: "secondary", delay: 0.6, duration: 7.2, depth: 0.8, font: "display" },
-  { text: "Privet",    top: "85%", left: "70%", rotate: -6, scale: 0.9,  variant: "accent",    delay: 1.2, duration: 8.2, depth: 0.6, font: "script" },
-  { text: "Namaste",   top: "82%", left: "32%", rotate: 4,  scale: 0.9,  variant: "cream",     delay: 0.5, duration: 9,   depth: 0.5, font: "script" },
-  { text: "Hej",       top: "4%",  left: "44%", rotate: -3, scale: 0.85, variant: "sage",      delay: 1.4, duration: 7.8, depth: 0.4, font: "display" },
-  { text: "Salam",     top: "50%", left: "-4%", rotate: 5,  scale: 0.85, variant: "primary",   delay: 1.6, duration: 8.4, depth: 0.5, font: "script" },
-  { text: "Konnichiwa",top: "92%", left: "10%", rotate: -7, scale: 0.85, variant: "accent",    delay: 0.9, duration: 9.2, depth: 0.3, font: "display" },
-  { text: "Tak",       top: "22%", left: "26%", rotate: 8,  scale: 0.8,  variant: "secondary", delay: 1.8, duration: 7.6, depth: 0.35, font: "script" },
+  { text: "Norsk",        top: "8%",  left: "5%",  rotate: -8, scale: 1.0,  variant: "secondary", delay: 0.0, duration: 7,   depth: 1.1, font: "script" },
+  { icon: GraduationCap, text: "Study", top: "14%", left: "80%", rotate: 6, scale: 1.1, variant: "accent", delay: 0.4, duration: 8, depth: 1.2, font: "display", hideOnMobile: true },
+  { text: "Jobb",         top: "68%", left: "4%",  rotate: -5, scale: 1.0,  variant: "cream",     delay: 0.8, duration: 9,   depth: 0.9, font: "display" },
+  { icon: Briefcase, text: "Arbeit", top: "60%", left: "84%", rotate: 9, scale: 1.0, variant: "primary", delay: 0.2, duration: 7.5, depth: 1.0, font: "sans", hideOnMobile: true },
+  { icon: Stethoscope, text: "Lege", top: "30%", left: "-3%", rotate: -4, scale: 0.95, variant: "sage", delay: 1.0, duration: 8.5, depth: 0.7, font: "sans" },
+  { text: "Visa",         top: "40%", left: "90%", rotate: 7,  scale: 0.95, variant: "secondary", delay: 0.6, duration: 7.2, depth: 0.8, font: "display", hideOnMobile: true },
+  { text: "Deutsch",      top: "4%",  left: "42%", rotate: -3, scale: 0.85, variant: "sage",      delay: 1.4, duration: 7.8, depth: 0.45, font: "display" },
+  { icon: MapPin, text: "Bolig", top: "52%", left: "-4%", rotate: 5, scale: 0.85, variant: "primary", delay: 1.6, duration: 8.4, depth: 0.5, font: "script" },
+  { text: "Karriere",     top: "84%", left: "66%", rotate: -6, scale: 0.9,  variant: "accent",    delay: 1.2, duration: 8.2, depth: 0.6, font: "script" },
+  { text: "Språk",        top: "82%", left: "30%", rotate: 4,  scale: 0.9,  variant: "cream",     delay: 0.5, duration: 9,   depth: 0.55, font: "script" },
+  { icon: Luggage,        top: "90%", left: "10%", rotate: -7, scale: 0.85, variant: "accent",    delay: 0.9, duration: 9.2, depth: 0.35, font: "sans" },
+  { text: "Learn",        top: "22%", left: "26%", rotate: 8,  scale: 0.8,  variant: "secondary", delay: 1.8, duration: 7.6, depth: 0.35, font: "display" },
+  { icon: Languages,      top: "46%", left: "74%", rotate: 3,  scale: 0.8,  variant: "sage",      delay: 1.1, duration: 8.8, depth: 0.4, font: "display" },
 ];
+
+// Adaptive scale by viewport width: smaller screens → softer, smaller bubbles
+// so the hero copy stays dominant.
+type Tier = { opacityMul: number; blurAdd: number; sizeMul: number };
+const tierFor = (w: number): Tier => {
+  if (w < 480) return { opacityMul: 0.55, blurAdd: 0.5, sizeMul: 0.6 };  // mobile
+  if (w < 768) return { opacityMul: 0.7,  blurAdd: 0.3, sizeMul: 0.7 };  // large mobile
+  if (w < 1024) return { opacityMul: 0.85, blurAdd: 0.15, sizeMul: 0.85 }; // tablet
+  return { opacityMul: 1.0, blurAdd: 0, sizeMul: 1.0 };                  // desktop+
+};
+
+const useViewportTier = (): Tier => {
+  const [tier, setTier] = useState<Tier>(() =>
+    typeof window === "undefined" ? tierFor(1280) : tierFor(window.innerWidth)
+  );
+  useEffect(() => {
+    let raf = 0;
+    const onResize = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => setTier(tierFor(window.innerWidth)));
+    };
+    window.addEventListener("resize", onResize);
+    return () => {
+      window.removeEventListener("resize", onResize);
+      cancelAnimationFrame(raf);
+    };
+  }, []);
+  return tier;
+};
 
 const variantClasses: Record<Bubble["variant"], string> = {
   primary:   "bg-primary text-primary-foreground border-primary/30",
@@ -45,16 +81,19 @@ const fontClasses = {
 
 const MAX_PARALLAX = 40;
 
-const BubbleItem = ({ b, smx, smy }: { b: Bubble; smx: MotionValue<number>; smy: MotionValue<number> }) => {
+const BubbleItem = ({ b, smx, smy, tier }: { b: Bubble; smx: MotionValue<number>; smy: MotionValue<number>; tier: Tier }) => {
   const tx = useTransform(smx, (v) => -v * MAX_PARALLAX * b.depth);
   const ty = useTransform(smy, (v) => -v * MAX_PARALLAX * b.depth);
 
-  const opacity = 0.55 + b.depth * 0.4;
-  const blurPx = Math.max(0, (1.0 - b.depth) * 1.6);
+  const opacity = (0.55 + b.depth * 0.4) * tier.opacityMul;
+  const blurPx = Math.max(0, (1.0 - b.depth) * 1.6) + tier.blurAdd;
+  const effScale = b.scale * tier.sizeMul;
+
+  const Icon = b.icon;
 
   return (
     <motion.div
-      className="absolute will-change-transform"
+      className={`absolute will-change-transform ${b.hideOnMobile ? "hidden sm:block" : ""}`}
       style={{
         top: b.top,
         left: b.left,
@@ -73,15 +112,24 @@ const BubbleItem = ({ b, smx, smy }: { b: Bubble; smx: MotionValue<number>; smy:
           rotate: [b.rotate, b.rotate + (b.rotate > 0 ? 2 : -2), b.rotate],
         }}
         transition={{ duration: b.duration, repeat: Infinity, ease: "easeInOut", delay: b.delay }}
-        style={{ transform: `scale(${b.scale})` }}
-        className={`relative inline-flex items-center px-5 py-2.5 rounded-full border shadow-card-soft ${variantClasses[b.variant]}`}
+        style={{ transform: `scale(${effScale})` }}
+        className={
+          Icon && !b.text
+            ? `relative inline-flex h-10 w-10 items-center justify-center rounded-full border shadow-card-soft ${variantClasses[b.variant]}`
+            : `relative inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full border shadow-card-soft ${variantClasses[b.variant]}`
+        }
       >
-        <span className={`text-base md:text-xl ${fontClasses[b.font ?? "display"]} tracking-tight whitespace-nowrap`}>
-          {b.text}
-        </span>
-        <span
-          className={`absolute -bottom-1.5 left-6 h-3 w-3 rotate-45 border-r border-b ${variantClasses[b.variant]}`}
-        />
+        {Icon && <Icon className="w-4 h-4 shrink-0" strokeWidth={2} aria-hidden />}
+        {b.text && (
+          <span className={`text-base md:text-xl ${fontClasses[b.font ?? "display"]} tracking-tight whitespace-nowrap`}>
+            {b.text}
+          </span>
+        )}
+        {b.text && (
+          <span
+            className={`absolute -bottom-1.5 left-6 h-3 w-3 rotate-45 border-r border-b ${variantClasses[b.variant]}`}
+          />
+        )}
       </motion.div>
     </motion.div>
   );
@@ -89,6 +137,7 @@ const BubbleItem = ({ b, smx, smy }: { b: Bubble; smx: MotionValue<number>; smy:
 
 export const FloatingGreetings = () => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const tier = useViewportTier();
 
   const mx = useMotionValue(0);
   const my = useMotionValue(0);
@@ -129,7 +178,7 @@ export const FloatingGreetings = () => {
       className="pointer-events-none absolute inset-0 overflow-hidden motion-reduce:hidden"
     >
       {BUBBLES.map((b, i) => (
-        <BubbleItem key={i} b={b} smx={smx} smy={smy} />
+        <BubbleItem key={i} b={b} smx={smx} smy={smy} tier={tier} />
       ))}
     </div>
   );
