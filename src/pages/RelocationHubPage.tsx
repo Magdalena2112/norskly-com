@@ -1,6 +1,6 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { Helmet } from "react-helmet-async";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, Navigate, useParams, useSearchParams } from "react-router-dom";
 import { ArrowLeft, ArrowRight, Check, ChevronDown, ExternalLink } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 import { RelocationStatusBar } from "@/components/RelocationStatusBar";
@@ -15,6 +15,7 @@ const REVIEWED_ON: Record<CountryId, string> = {
   norveska: "26.09.2026.",
   nemacka: "26.09.2026.",
 };
+const HUB_REVIEWED_ON = "26.09.2026.";
 
 function Expandable({ title, children, icon }: { title: string; children: ReactNode; icon?: ReactNode }) {
   const [open, setOpen] = useState(false);
@@ -208,62 +209,61 @@ function Roadmap({ country }: { country: CountryData }) {
 }
 
 export default function RelocationHubPage() {
-  const [params, setParams] = useSearchParams();
-  const raw = params.get("zemlja");
-  const country = raw === "norveska" || raw === "nemacka" ? COUNTRIES[raw] : null;
-
-  const choose = (id: CountryId) => {
-    setParams({ zemlja: id });
-    setTimeout(() => document.getElementById("roadmap")?.scrollIntoView({ behavior: "smooth" }), 50);
-  };
+  const [params] = useSearchParams();
+  const { countryId } = useParams();
+  const legacyCountry = params.get("zemlja");
+  const country = countryId === "norveska" || countryId === "nemacka" ? COUNTRIES[countryId] : null;
+  if (countryId && !country) return <Navigate to="/relocation-hub" replace />;
+  if (!countryId && (legacyCountry === "norveska" || legacyCountry === "nemacka")) {
+    return <Navigate to={`/relocation-hub/${legacyCountry}`} replace />;
+  }
 
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
-        <title>Relocation Hub - Preseljenje u Norvešku ili Nemačku | Norskly</title>
-        <meta name="description" content="Sve što ti je potrebno za preseljenje u Norvešku ili Nemačku – korak po korak." />
+        <title>{country ? `Preseljenje u ${country.name === "Nemačka" ? "Nemačku" : "Norvešku"} | Relocation Hub | Norskly` : "Relocation Hub - Norveška ili Nemačka | Norskly"}</title>
+        <meta name="description" content={country ? `Vodič za državljane Srbije: preseljenje u ${country.name === "Nemačka" ? "Nemačku" : "Norvešku"}, korak po korak. Posao, dokumenta, dozvola i život.` : "Izaberi Norvešku ili Nemačku i pronađi praktične smernice za preseljenje, korak po korak."} />
       </Helmet>
 
-      <header className="container flex items-center px-4 py-5">
+      <header className="container relative z-10 flex items-center justify-between gap-4 px-4 py-5">
         <Link to="/" className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-primary">
           <ArrowLeft className="h-4 w-4" /> Norskly
         </Link>
+        {country && <Link to="/relocation-hub" className="text-sm text-primary underline underline-offset-4 hover:text-foreground">Sve zemlje</Link>}
       </header>
 
-      <section className="container max-w-4xl px-4 pb-12 pt-6 text-center md:pb-16 md:pt-10">
-        <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-gold-deep">Korak po korak</p>
-        <h1 className="mb-4 font-display text-4xl text-foreground md:text-6xl">Relocation Hub</h1>
-        <p className="mx-auto mb-5 max-w-xl text-base text-muted-foreground md:text-lg">
-          Sve što ti je potrebno za preseljenje u Norvešku ili Nemačku – korak po korak.
-        </p>
-        <RelocationStatusBar reviewedOn={REVIEWED_ON[country?.id ?? "norveska"]} />
-        <div className="mx-auto mt-10 grid max-w-2xl gap-4 sm:grid-cols-2">
-          {Object.values(COUNTRIES).map((c) => {
-            const selected = country?.id === c.id;
-            return (
-              <button
-                key={c.id}
-                type="button"
-                onClick={() => choose(c.id)}
-                aria-pressed={selected}
-                className={cn(
-                  "group rounded-3xl border-2 bg-card p-6 text-left shadow-card-soft transition-all hover:-translate-y-0.5 md:p-8",
-                  selected ? "border-primary" : "border-border hover:border-primary/40",
-                )}
-              >
+      {country ? (
+        <>
+          <section className="relative isolate overflow-hidden pb-16 pt-12 text-center md:pb-24 md:pt-20">
+            <div aria-hidden="true" className={cn("relocation-flag", country.id === "norveska" ? "relocation-flag-norveska" : "relocation-flag-nemacka")} />
+            <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-gradient-to-b from-background/50 via-background/40 to-background" />
+            <div className="container relative z-10 max-w-4xl px-4">
+              <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-gold-deep">Relocation Hub · Korak po korak</p>
+              <h1 className="mb-4 font-display text-4xl text-foreground md:text-6xl">Preseljenje u {country.id === "norveska" ? "Norvešku" : "Nemačku"}</h1>
+              <p className="mx-auto mb-6 max-w-xl text-base text-foreground/80 md:text-lg">Praktičan vodič za posao, dokumenta i prve korake u {country.id === "norveska" ? "Norveškoj" : "Nemačkoj"}.</p>
+              <RelocationStatusBar reviewedOn={REVIEWED_ON[country.id]} />
+            </div>
+          </section>
+          <Roadmap key={country.id} country={country} />
+        </>
+      ) : (
+        <section className="container max-w-4xl px-4 pb-12 pt-6 text-center md:pb-16 md:pt-10">
+          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-gold-deep">Korak po korak</p>
+          <h1 className="mb-4 font-display text-4xl text-foreground md:text-6xl">Relocation Hub</h1>
+          <p className="mx-auto mb-5 max-w-xl text-base text-muted-foreground md:text-lg">Sve što ti je potrebno za preseljenje u Norvešku ili Nemačku – korak po korak.</p>
+          <RelocationStatusBar reviewedOn={HUB_REVIEWED_ON} />
+          <div className="mx-auto mt-10 grid max-w-2xl gap-4 sm:grid-cols-2">
+            {Object.values(COUNTRIES).map((c) => (
+              <Link key={c.id} to={`/relocation-hub/${c.id}`} className="group rounded-3xl border-2 border-border bg-card p-6 text-left shadow-card-soft transition-all hover:-translate-y-0.5 hover:border-primary/40 md:p-8">
                 <span className="mb-4 block text-4xl">{c.flag}</span>
                 <span className="block font-display text-2xl text-foreground">{c.name}</span>
                 <span className="mt-1 block text-sm text-muted-foreground">{c.tagline}</span>
-                <span className="mt-5 inline-flex items-center text-sm font-medium text-primary">
-                  {selected ? "Izabrano" : "Pogledaj put"} <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-                </span>
-              </button>
-            );
-          })}
-        </div>
-      </section>
-
-      <div id="roadmap">{country && <Roadmap key={country.id} country={country} />}</div>
+                <span className="mt-5 inline-flex items-center text-sm font-medium text-primary">Pogledaj put <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-0.5" /></span>
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
     </div>
   );
 }

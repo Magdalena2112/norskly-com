@@ -1,3 +1,4 @@
 - Keep country-specific Relocation Hub guidance in separate typed data modules and render it only for its selected country, because content and rules must not leak between Norway and Germany.
 - Link mutable immigration and tax guidance to official sources and avoid unverified fixed figures, because rules and fees can change.
 - Keep Relocation Hub credibility labels in a reusable status component with per-country review dates, so each guide can be updated independently.
+- Keep `/relocation-hub` as the country selector and render `/relocation-hub/:countryId` from the shared roadmap, so country-specific links stay stable without duplicating guidance.
