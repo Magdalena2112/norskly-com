@@ -208,7 +208,7 @@ function Roadmap({ country }: { country: CountryData }) {
 }
 
 export default function RelocationHubPage() {
-  const [params, setParams] = useSearchParams();
+  const [params] = useSearchParams();
   const { countryId } = useParams();
   const legacyCountry = params.get("zemlja");
   const country = countryId === "norveska" || countryId === "nemacka" ? COUNTRIES[countryId] : null;
