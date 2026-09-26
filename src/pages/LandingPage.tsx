@@ -248,9 +248,9 @@ export default function LandingPage() {
                 Posao, dokumenta, studije i svakodnevni život — na jednom mestu.
               </p>
               <Button asChild className="rounded-full bg-primary hover:bg-primary/90 ring-1 ring-gold/40 shadow-[0_14px_34px_-16px_hsl(var(--gold)/0.8)]">
-                <a href="#relocation-hub">
+                <Link to="/relocation-hub">
                   Istraži Relocation Hub <ArrowRight className="ml-1 h-4 w-4" />
-                </a>
+                </Link>
               </Button>
             </motion.div>
 
