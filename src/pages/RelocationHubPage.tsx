@@ -15,6 +15,7 @@ const REVIEWED_ON: Record<CountryId, string> = {
   norveska: "26.09.2026.",
   nemacka: "26.09.2026.",
 };
+const HUB_REVIEWED_ON = "26.09.2026.";
 
 function Expandable({ title, children, icon }: { title: string; children: ReactNode; icon?: ReactNode }) {
   const [open, setOpen] = useState(false);
@@ -249,8 +250,9 @@ export default function RelocationHubPage() {
         <section className="container max-w-4xl px-4 pb-12 pt-6 text-center md:pb-16 md:pt-10">
           <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-gold-deep">Korak po korak</p>
           <h1 className="mb-4 font-display text-4xl text-foreground md:text-6xl">Relocation Hub</h1>
-          <p className="mx-auto mb-10 max-w-xl text-base text-muted-foreground md:text-lg">Sve što ti je potrebno za preseljenje u Norvešku ili Nemačku – korak po korak.</p>
-          <div className="mx-auto grid max-w-2xl gap-4 sm:grid-cols-2">
+          <p className="mx-auto mb-5 max-w-xl text-base text-muted-foreground md:text-lg">Sve što ti je potrebno za preseljenje u Norvešku ili Nemačku – korak po korak.</p>
+          <RelocationStatusBar reviewedOn={HUB_REVIEWED_ON} />
+          <div className="mx-auto mt-10 grid max-w-2xl gap-4 sm:grid-cols-2">
             {Object.values(COUNTRIES).map((c) => (
               <Link key={c.id} to={`/relocation-hub/${c.id}`} className="group rounded-3xl border-2 border-border bg-card p-6 text-left shadow-card-soft transition-all hover:-translate-y-0.5 hover:border-primary/40 md:p-8">
                 <span className="mb-4 block text-4xl">{c.flag}</span>

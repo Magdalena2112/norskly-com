@@ -147,9 +147,10 @@
 @layer utilities {
   .relocation-flag {
     position: absolute;
-    inset: 0;
+    inset: -18px;
     pointer-events: none;
     opacity: 0.23;
+    filter: blur(18px);
     -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 18%, black 48%, transparent 100%);
     mask-image: linear-gradient(to bottom, transparent 0%, black 18%, black 48%, transparent 100%);
   }
