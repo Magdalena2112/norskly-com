@@ -234,7 +234,7 @@ export default function RelocationHubPage() {
       {country ? (
         <>
           <section className="relative isolate overflow-hidden pb-16 pt-12 text-center md:pb-24 md:pt-20">
-            <div aria-hidden="true" className={`relocation-flag relocation-flag-${country.id}`} />
+            <div aria-hidden="true" className={cn("relocation-flag", country.id === "norveska" ? "relocation-flag-norveska" : "relocation-flag-nemacka")} />
             <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-gradient-to-b from-background/70 via-background/55 to-background" />
             <div className="container relative z-10 max-w-4xl px-4">
               <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-gold-deep">Relocation Hub · Korak po korak</p>
