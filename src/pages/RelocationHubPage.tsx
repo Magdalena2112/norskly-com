@@ -236,7 +236,7 @@ export default function RelocationHubPage() {
         <>
           <section className="relative isolate overflow-hidden pb-16 pt-12 text-center md:pb-24 md:pt-20">
             <div aria-hidden="true" className={cn("relocation-flag", country.id === "norveska" ? "relocation-flag-norveska" : "relocation-flag-nemacka")} />
-            <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-gradient-to-b from-background/70 via-background/55 to-background" />
+            <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-gradient-to-b from-background/50 via-background/40 to-background" />
             <div className="container relative z-10 max-w-4xl px-4">
               <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-gold-deep">Relocation Hub · Korak po korak</p>
               <h1 className="mb-4 font-display text-4xl text-foreground md:text-6xl">Preseljenje u {country.id === "norveska" ? "Norvešku" : "Nemačku"}</h1>
