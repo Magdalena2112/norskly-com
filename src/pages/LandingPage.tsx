@@ -120,16 +120,17 @@ export default function LandingPage() {
       <nav className="fixed top-0 inset-x-0 z-50 backdrop-blur-md bg-background/80 border-b border-border/60">
         <div className="container flex items-center justify-between h-14 sm:h-16">
           <img src={norsklyLogo.url} alt="Norskly" width={370} height={144} fetchPriority="high" decoding="async" className="h-10 sm:h-12 w-auto select-none" draggable={false} />
-          <div className="hidden md:flex items-center gap-8 text-sm font-medium text-foreground/80">
+          <div className="hidden md:flex md:min-w-0 md:overflow-x-auto items-center gap-4 whitespace-nowrap text-xs font-medium text-foreground/80 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:overflow-x-visible lg:gap-8 lg:text-sm">
             <a href="#features" className="hover:text-primary transition-colors">Platforma</a>
+            <Link to="/relocation-hub" className="hover:text-primary transition-colors">Relocation Hub</Link>
             <a href="#teachers" className="hover:text-primary transition-colors">Za učenike</a>
             <a href="#teachers" className="hover:text-primary transition-colors">Za profesore</a>
             <a href="#pricing" className="hover:text-primary transition-colors">Kako učiš</a>
             <a href="#faq" className="hover:text-primary transition-colors">FAQ</a>
           </div>
           <div className="flex items-center gap-1.5 sm:gap-2">
-            <Button variant="ghost" size="sm" className="hidden sm:inline-flex" onClick={() => navigate("/auth")}>Prijava</Button>
-            <Button size="sm" className="rounded-full bg-primary hover:bg-primary/90 px-3 sm:px-4 text-xs sm:text-sm" onClick={() => document.getElementById("languages")?.scrollIntoView({ behavior: "smooth" })}>
+            <Button variant="ghost" size="sm" className="hidden lg:inline-flex" onClick={() => navigate("/auth")}>Prijava</Button>
+            <Button size="sm" className="rounded-full bg-primary hover:bg-primary/90 px-3 text-xs lg:px-4 lg:text-sm" onClick={() => document.getElementById("languages")?.scrollIntoView({ behavior: "smooth" })}>
               Započni besplatno
             </Button>
           </div>
