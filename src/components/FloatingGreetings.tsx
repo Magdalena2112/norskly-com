@@ -111,7 +111,7 @@ const BubbleItem = ({ b, smx, smy, tier }: { b: Bubble; smx: MotionValue<number>
           rotate: [b.rotate, b.rotate + (b.rotate > 0 ? 2 : -2), b.rotate],
         }}
         transition={{ duration: b.duration, repeat: Infinity, ease: "easeInOut", delay: b.delay }}
-        style={{ transform: `scale(${b.scale})` }}
+        style={{ transform: `scale(${effScale})` }}
         className={
           Icon && !b.text
             ? `relative inline-flex h-10 w-10 items-center justify-center rounded-full border shadow-card-soft ${variantClasses[b.variant]}`
