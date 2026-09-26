@@ -14,6 +14,7 @@ import LanguageSync from "@/components/LanguageSync";
 import LandingPage from "./pages/LandingPage";
 
 const ForTeachersPage = lazy(() => import("./pages/ForTeachersPage"));
+const RelocationHubPage = lazy(() => import("./pages/RelocationHubPage"));
 const LanguagePage = lazy(() => import("./pages/LanguagePage"));
 const AuthPage = lazy(() => import("./pages/AuthPage"));
 const OnboardingPage = lazy(() => import("./pages/OnboardingPage"));
@@ -71,6 +72,7 @@ const App = () => (
                 <Route path="/" element={<LandingPage />} />
                 <Route path="/home" element={<HomeRedirect />} />
                 <Route path="/za-profesore" element={<ForTeachersPage />} />
+                <Route path="/relocation-hub" element={<RelocationHubPage />} />
                 <Route path="/jezici/:slug" element={<LanguagePage />} />
                 <Route path="/auth" element={<AuthPage />} />
                 <Route path="/onboarding" element={<ProtectedRoute><OnboardingPage /></ProtectedRoute>} />
