@@ -177,7 +177,7 @@ export const FloatingGreetings = () => {
       className="pointer-events-none absolute inset-0 overflow-hidden motion-reduce:hidden"
     >
       {BUBBLES.map((b, i) => (
-        <BubbleItem key={i} b={b} smx={smx} smy={smy} />
+        <BubbleItem key={i} b={b} smx={smx} smy={smy} tier={tier} />
       ))}
     </div>
   );
