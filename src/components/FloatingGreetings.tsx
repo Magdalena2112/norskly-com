@@ -136,6 +136,7 @@ const BubbleItem = ({ b, smx, smy, tier }: { b: Bubble; smx: MotionValue<number>
 
 export const FloatingGreetings = () => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const tier = useViewportTier();
 
   const mx = useMotionValue(0);
   const my = useMotionValue(0);
