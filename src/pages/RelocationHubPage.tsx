@@ -5,6 +5,7 @@ import { ArrowLeft, ArrowRight, Check, ChevronDown, ExternalLink } from "lucide-
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { cn } from "@/lib/utils";
+import { NORWAY_BEFORE_LEAVING, NORWAY_GUIDE, NORWAY_LINK_GROUPS, NORWAY_SOURCES, type NorwayTopic } from "@/lib/norwayRelocationData";
 import {
   BEFORE_LEAVING, COUNTRIES, DOCUMENTS, DOC_QUESTIONS, PERMIT_FIELDS, PERMIT_STEPS,
   PLACEHOLDER, STEPS, TOPICS, type CountryData, type CountryId,
@@ -58,8 +59,27 @@ function TopicList({ items }: { items: string[] }) {
   );
 }
 
+function NorwayTopicList({ stepId }: { stepId: string }) {
+  const data = NORWAY_GUIDE[stepId];
+  if (!data) return null;
+  return (
+    <div className="space-y-3">
+      {data.intro && <p className="text-sm leading-relaxed text-muted-foreground">{data.intro}</p>}
+      {data.topics.map((topic: NorwayTopic) => (
+        <Expandable key={topic.title} title={topic.title}>
+          {topic.paragraphs?.map((text) => <p key={text} className="text-sm leading-relaxed text-foreground/85">{text}</p>)}
+          {topic.bullets && <ul className="list-disc space-y-1 pl-5 text-sm leading-relaxed text-foreground/85">{topic.bullets.map((text) => <li key={text}>{text}</li>)}</ul>}
+          {topic.source && <a href={topic.source.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-xs font-medium text-primary underline underline-offset-2">{topic.source.label}<ExternalLink className="h-3 w-3" /></a>}
+        </Expandable>
+      ))}
+      {stepId === "dokumenta" && <a href={NORWAY_SOURCES.checklist.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-xs font-medium text-primary underline underline-offset-2">{NORWAY_SOURCES.checklist.label}<ExternalLink className="h-3 w-3" /></a>}
+    </div>
+  );
+}
+
 function ReadinessChecklist({ country }: { country: CountryId }) {
   const key = `norskly_relocation_ready_${country}`;
+  const items = country === "norveska" ? NORWAY_BEFORE_LEAVING : BEFORE_LEAVING;
   const [done, setDone] = useState<string[]>([]);
   useEffect(() => {
     try { setDone(JSON.parse(localStorage.getItem(key) || "[]")); } catch { setDone([]); }
@@ -69,11 +89,12 @@ function ReadinessChecklist({ country }: { country: CountryId }) {
     setDone(next);
     localStorage.setItem(key, JSON.stringify(next));
   };
-  const pct = Math.round((done.length / BEFORE_LEAVING.length) * 100);
+  const completed = items.filter((item) => done.includes(item)).length;
+  const pct = Math.round((completed / items.length) * 100);
   return (
     <div>
       <div className="grid gap-2 sm:grid-cols-2">
-        {BEFORE_LEAVING.map((item) => {
+        {items.map((item) => {
           const checked = done.includes(item);
           return (
             <button
@@ -97,7 +118,7 @@ function ReadinessChecklist({ country }: { country: CountryId }) {
       <div className="mt-5 rounded-xl bg-secondary/60 p-4">
         <div className="mb-2 flex items-center justify-between text-sm">
           <span className="font-medium text-foreground">Spreman/na za preseljenje</span>
-          <span className="text-primary">{done.length}/{BEFORE_LEAVING.length}</span>
+          <span className="text-primary">{completed}/{items.length}</span>
         </div>
         <Progress value={pct} className="h-2" />
       </div>
@@ -148,12 +169,12 @@ function Roadmap({ country }: { country: CountryData }) {
         <div className="relative space-y-14 md:space-y-16">
           <span aria-hidden className="absolute bottom-0 left-5 top-2 w-px border-l border-dashed border-primary/30 md:left-6" />
 
-          <StepShell step={STEPS[0]} onCta={() => openFirst("uslovi")}><TopicList items={TOPICS.uslovi} /></StepShell>
-          <StepShell step={STEPS[1]} onCta={() => openFirst("posao")}><TopicList items={TOPICS.posao} /></StepShell>
-          <StepShell step={STEPS[2]} onCta={() => openFirst("diploma")}><TopicList items={TOPICS.diploma} /></StepShell>
+          <StepShell step={STEPS[0]} onCta={() => openFirst("uslovi")}>{country.id === "norveska" ? <NorwayTopicList stepId="uslovi" /> : <TopicList items={TOPICS.uslovi} />}</StepShell>
+          <StepShell step={STEPS[1]} onCta={() => openFirst("posao")}>{country.id === "norveska" ? <NorwayTopicList stepId="posao" /> : <TopicList items={TOPICS.posao} />}</StepShell>
+          <StepShell step={STEPS[2]} onCta={() => openFirst("diploma")}>{country.id === "norveska" ? <NorwayTopicList stepId="diploma" /> : <TopicList items={TOPICS.diploma} />}</StepShell>
 
           <StepShell step={STEPS[3]} onCta={() => openFirst("dokumenta")}>
-            {DOCUMENTS.map((d) => (
+            {country.id === "norveska" ? <NorwayTopicList stepId="dokumenta" /> : DOCUMENTS.map((d) => (
               <Expandable key={d} title={d} icon={<Check className="h-4 w-4 text-primary" />}>
                 {DOC_QUESTIONS.map((q) => (
                   <div key={q}>
@@ -166,6 +187,7 @@ function Roadmap({ country }: { country: CountryData }) {
           </StepShell>
 
           <StepShell step={STEPS[4]} onCta={() => openFirst("dozvola")}>
+            {country.id === "norveska" ? <NorwayTopicList stepId="dozvola" /> :
             <ol className="grid gap-2.5">
               {PERMIT_STEPS.map((p, i) => (
                 <li key={p}>
@@ -184,13 +206,16 @@ function Roadmap({ country }: { country: CountryData }) {
                   </Expandable>
                 </li>
               ))}
-            </ol>
+            </ol>}
           </StepShell>
 
-          <StepShell step={STEPS[5]}><ReadinessChecklist country={country.id} /></StepShell>
+          <StepShell step={STEPS[5]}>
+            {country.id === "norveska" && <NorwayTopicList stepId="pre-odlaska" />}
+            <div className="pt-3"><ReadinessChecklist country={country.id} /></div>
+          </StepShell>
 
           <StepShell step={STEPS[6]} onCta={() => openFirst("nakon-dolaska")}>
-            <p className="mb-1 text-sm text-muted-foreground">{country.flag} {country.name}</p>
+            {country.id === "norveska" ? <NorwayTopicList stepId="nakon-dolaska" /> : <><p className="mb-1 text-sm text-muted-foreground">{country.flag} {country.name}</p>
             <ol className="space-y-2.5">
               {country.arrival.map((a, i) => (
                 <li key={a}>
@@ -202,12 +227,12 @@ function Roadmap({ country }: { country: CountryData }) {
                   </Expandable>
                 </li>
               ))}
-            </ol>
+            </ol></>}
           </StepShell>
 
           <StepShell step={STEPS[7]}>
             <div className="grid gap-4 sm:grid-cols-2">
-              {country.links.map((g) => (
+              {(country.id === "norveska" ? NORWAY_LINK_GROUPS.map((g) => ({ category: g.category, items: g.items.map((item) => ({ name: item.label, url: item.url, desc: "Zvanični izvor ili specijalizovani portal" })) })) : country.links).map((g) => (
                 <div key={g.category} className="rounded-2xl border border-border bg-card p-4 shadow-card-soft">
                   <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-primary">{g.category}</p>
                   <ul className="space-y-3">
