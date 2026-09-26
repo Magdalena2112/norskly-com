@@ -2,7 +2,7 @@
 
 ## Stanje koje je provereno
 
-- Dugme „Istraži Relocation Hub” u Relocation Hub delu početne stranice **već vodi** na stranicu Relocation Hub. U pregledu je klik testiran: adresa se menja u `/relocation-hub` i otvar se naslov „Relocation Hub”. Razlog što ga na pravom sajtu još ne vidiš je što poslednje izmene početne stranice **još nisu objavljene**.
+- Dugme „Istraži Relocation Hub” u Relocation Hub delu početne stranice **već vodi** na stranicu Relocation Hub. U pregledu je klik testiran: adresa se menja u `/relocation-hub` i otvara se naslov „Relocation Hub”. Razlog što ga na pravom sajtu još ne vidiš je što poslednje izmene početne stranice **još nisu objavljene**.
 - Glavni meni na vrhu početne stranice trenutno ima: Platforma, Za učenike, Za profesore, Kako učiš, FAQ. Stavka za Relocation Hub **ne postoji**.
 
 ## Šta se radi
