@@ -128,9 +128,10 @@ export default function LandingPage() {
             <a href="#pricing" className="hover:text-primary transition-colors">Kako učiš</a>
             <a href="#faq" className="hover:text-primary transition-colors">FAQ</a>
           </div>
-          <div className="flex items-center gap-1.5 sm:gap-2">
-            <Button variant="ghost" size="sm" className="hidden lg:inline-flex" onClick={() => navigate("/auth")}>Prijava</Button>
-            <Button size="sm" className="rounded-full bg-primary hover:bg-primary/90 px-3 text-xs lg:px-4 lg:text-sm" onClick={() => document.getElementById("languages")?.scrollIntoView({ behavior: "smooth" })}>
+          <div className="flex items-center gap-1 sm:gap-1.5 lg:gap-2">
+            <Button variant="ghost" size="sm" className="px-1.5 text-[10px] sm:px-3 sm:text-xs lg:px-3 lg:text-sm" onClick={() => navigate("/auth")}>Prijavi se</Button>
+            <Button size="sm" variant="outline" className="rounded-full border-primary/50 text-primary hover:bg-secondary/60 hover:text-primary px-2 text-[10px] sm:px-4 sm:text-xs lg:px-4 lg:text-sm" onClick={() => navigate("/auth?mode=signup")}>Registruj se</Button>
+            <Button size="sm" className="rounded-full bg-primary hover:bg-primary/90 px-2 text-[10px] sm:px-4 sm:text-xs lg:px-4 lg:text-sm" onClick={() => document.getElementById("languages")?.scrollIntoView({ behavior: "smooth" })}>
               Započni besplatno
             </Button>
           </div>
