@@ -122,6 +122,7 @@ export default function LandingPage() {
           <img src={norsklyLogo.url} alt="Norskly" width={370} height={144} fetchPriority="high" decoding="async" className="h-10 sm:h-12 w-auto select-none" draggable={false} />
           <div className="hidden md:flex items-center gap-8 text-sm font-medium text-foreground/80">
             <a href="#features" className="hover:text-primary transition-colors">Platforma</a>
+            <Link to="/relocation-hub" className="hover:text-primary transition-colors">Relocation Hub</Link>
             <a href="#teachers" className="hover:text-primary transition-colors">Za učenike</a>
             <a href="#teachers" className="hover:text-primary transition-colors">Za profesore</a>
             <a href="#pricing" className="hover:text-primary transition-colors">Kako učiš</a>
