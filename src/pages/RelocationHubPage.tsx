@@ -3,12 +3,18 @@ import { Helmet } from "react-helmet-async";
 import { Link, useSearchParams } from "react-router-dom";
 import { ArrowLeft, ArrowRight, Check, ChevronDown, ExternalLink } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
+import { RelocationStatusBar } from "@/components/RelocationStatusBar";
 import { cn } from "@/lib/utils";
 import { GERMANY_BEFORE_LEAVING, GERMANY_GUIDE, GERMANY_LINK_GROUPS, type GermanyTopic } from "@/lib/germanyRelocationData";
 import { NORWAY_BEFORE_LEAVING, NORWAY_GUIDE, NORWAY_LINK_GROUPS, NORWAY_SOURCES, type NorwayTopic } from "@/lib/norwayRelocationData";
 import {
   COUNTRIES, STEPS, type CountryData, type CountryId,
 } from "@/lib/relocationData";
+
+const REVIEWED_ON: Record<CountryId, string> = {
+  norveska: "26.09.2026.",
+  nemacka: "26.09.2026.",
+};
 
 function Expandable({ title, children, icon }: { title: string; children: ReactNode; icon?: ReactNode }) {
   const [open, setOpen] = useState(false);
@@ -227,10 +233,11 @@ export default function RelocationHubPage() {
       <section className="container max-w-4xl px-4 pb-12 pt-6 text-center md:pb-16 md:pt-10">
         <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-gold-deep">Korak po korak</p>
         <h1 className="mb-4 font-display text-4xl text-foreground md:text-6xl">Relocation Hub</h1>
-        <p className="mx-auto mb-10 max-w-xl text-base text-muted-foreground md:text-lg">
+        <p className="mx-auto mb-5 max-w-xl text-base text-muted-foreground md:text-lg">
           Sve što ti je potrebno za preseljenje u Norvešku ili Nemačku – korak po korak.
         </p>
-        <div className="mx-auto grid max-w-2xl gap-4 sm:grid-cols-2">
+        <RelocationStatusBar reviewedOn={country ? REVIEWED_ON[country.id] : "26.09.2026."} />
+        <div className="mx-auto mt-10 grid max-w-2xl gap-4 sm:grid-cols-2">
           {Object.values(COUNTRIES).map((c) => {
             const selected = country?.id === c.id;
             return (
