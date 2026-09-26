@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, MotionValue, useMotionValue, useSpring, useTransform } from "framer-motion";
 import type { LucideIcon } from "lucide-react";
 import { Briefcase, GraduationCap, Languages, Luggage, MapPin, Stethoscope } from "lucide-react";
