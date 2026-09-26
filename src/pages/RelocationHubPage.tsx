@@ -236,7 +236,7 @@ export default function RelocationHubPage() {
         <p className="mx-auto mb-5 max-w-xl text-base text-muted-foreground md:text-lg">
           Sve što ti je potrebno za preseljenje u Norvešku ili Nemačku – korak po korak.
         </p>
-        <RelocationStatusBar reviewedOn={country ? REVIEWED_ON[country.id] : "26.09.2026."} />
+        <RelocationStatusBar reviewedOn={REVIEWED_ON[country?.id ?? "norveska"]} />
         <div className="mx-auto mt-10 grid max-w-2xl gap-4 sm:grid-cols-2">
           {Object.values(COUNTRIES).map((c) => {
             const selected = country?.id === c.id;
