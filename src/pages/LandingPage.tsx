@@ -4,7 +4,7 @@ import norsklyLogo from "@/assets/norskly-logo.webp.asset.json";
 import {
   MessageCircle, Sparkles, BookOpen, Target, Mic, BarChart3,
   Check, X, ArrowRight, GraduationCap, Users, CalendarCheck,
-  Stethoscope, Briefcase,
+  Stethoscope, Briefcase, Globe, Gauge, Feather, UserCheck,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate, Link } from "react-router-dom";
@@ -25,6 +25,13 @@ const GOALS = [
   { icon: Stethoscope, title: "Zdravstvo", desc: "Rad i komunikacija u struci." },
   { icon: Briefcase, title: "Posao i preseljenje", desc: "Jezik za posao i novi život." },
   { icon: GraduationCap, title: "Obrazovanje", desc: "Studije i stručno usavršavanje." },
+];
+
+const STEPS = [
+  { no: "01", icon: Globe, title: "Izaberi jezik i cilj" },
+  { no: "02", icon: Gauge, title: "Odredi tvoj trenutni nivo jezika" },
+  { no: "03", icon: Feather, title: "Uči samostalno svojim tempom" },
+  { no: "04", icon: UserCheck, title: "Uključi profesora kada ti zatreba" },
 ];
 
 
@@ -385,30 +392,60 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ============== ROLE CHOICE ============== */}
+      {/* ============== HOW TO START — 4 STEPS ============== */}
       <section className="py-14 md:py-28 bg-card/60">
         <div className="container max-w-5xl">
-          <div className="text-center mb-10 sm:mb-12">
-            <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-widest text-primary/70 mb-3">Izaberi svoju ulogu</p>
+          <div className="text-center mb-10 sm:mb-14">
+            <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-widest text-primary/70 mb-3">Jednostavan početak</p>
             <h2 className="text-display text-[clamp(1.75rem,5vw,4rem)] text-primary">
-              Kako želiš <span className="font-script text-primary/70">da</span> koristiš Norskly?
+              Tvoj put do jezika u <span className="font-script text-primary/70">četiri</span> koraka.
             </h2>
           </div>
-          <div className="grid sm:grid-cols-2 gap-4 sm:gap-5">
-            {[
-              { label: "Učenik", desc: "Uči, vežbaj i pripremi se za svoj cilj.", role: "student", bg: "bg-background" },
-              { label: "Profesor", desc: "Predaj, organizuj i prati učenike.", role: "teacher", bg: "bg-secondary" },
-            ].map((r) => (
-              <button key={r.role} onClick={() => navigate(`/auth?role=${r.role}`)}
-                className={`${r.bg} group rounded-3xl p-6 sm:p-10 text-left border border-border hover:-translate-y-1 hover:shadow-soft transition-all`}
-              >
-                <h3 className="text-display text-4xl sm:text-5xl text-primary mb-2 sm:mb-3">{r.label}</h3>
-                <p className="text-sm sm:text-base text-muted-foreground mb-5 sm:mb-6">{r.desc}</p>
-                <span className="inline-flex items-center gap-2 text-primary font-semibold">
-                  Izaberi <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+
+          {/* Desktop: horizontal timeline */}
+          <div className="relative hidden md:block">
+            <div aria-hidden className="absolute left-[12%] right-[12%] top-7 border-t border-dashed border-primary/25" />
+            <ol className="relative grid grid-cols-4 gap-5">
+              {STEPS.map((s, i) => (
+                <motion.li
+                  key={s.no}
+                  initial={{ opacity: 0, y: 14 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.08 }}
+                  className="flex flex-col items-center text-center"
+                >
+                  <span className="relative z-10 flex h-14 w-14 items-center justify-center rounded-full border border-primary/20 bg-background shadow-card-soft">
+                    <s.icon className="h-5 w-5 text-primary" />
+                  </span>
+                  <span className="mt-5 text-[11px] font-semibold uppercase tracking-[0.2em] text-primary/45">{s.no}</span>
+                  <h3 className="mt-2 max-w-[15ch] text-lg font-semibold leading-snug text-primary">{s.title}</h3>
+                </motion.li>
+              ))}
+            </ol>
+          </div>
+
+          {/* Mobile: vertical timeline */}
+          <ol className="relative pl-12 md:hidden">
+            <div aria-hidden className="absolute bottom-3 left-[21px] top-3 border-l border-dashed border-primary/25" />
+            {STEPS.map((s) => (
+              <li key={s.no} className="relative pb-7 last:pb-0">
+                <span className="absolute -left-12 top-0 z-10 flex h-11 w-11 items-center justify-center rounded-full border border-primary/20 bg-background">
+                  <s.icon className="h-4 w-4 text-primary" />
                 </span>
-              </button>
+                <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-primary/45">{s.no}</span>
+                <h3 className="mt-1 text-base font-semibold leading-snug text-primary">{s.title}</h3>
+              </li>
             ))}
+          </ol>
+
+          <div className="mt-10 text-center sm:mt-12">
+            <Button
+              onClick={() => document.getElementById("languages")?.scrollIntoView({ behavior: "smooth", block: "start" })}
+              className="rounded-full bg-primary hover:bg-primary/90"
+            >
+              Isprobaj Norskly besplatno <ArrowRight className="ml-1 h-4 w-4" />
+            </Button>
           </div>
         </div>
       </section>
