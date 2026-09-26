@@ -32,7 +32,7 @@ function Expandable({ title, children, icon }: { title: string; children: ReactN
   );
 }
 
-function StepShell({ step, children, onCta }: { step: (typeof STEPS)[number]; children: ReactNode; onCta?: () => void }) {
+function StepShell({ step, children }: { step: (typeof STEPS)[number]; children: ReactNode }) {
   return (
     <section id={step.id} className="relative scroll-mt-32 pl-14 md:pl-20">
       <span className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-full bg-primary font-display text-sm text-primary-foreground ring-4 ring-background md:h-12 md:w-12 md:text-base">
@@ -40,11 +40,6 @@ function StepShell({ step, children, onCta }: { step: (typeof STEPS)[number]; ch
       </span>
       <h2 className="mb-4 pt-1.5 font-display text-2xl text-foreground md:pt-2.5 md:text-3xl">{step.title}</h2>
       <div className="space-y-2.5">{children}</div>
-      {step.cta && (
-        <Button variant="outline" size="sm" className="mt-5 rounded-full border-primary/40 text-primary hover:bg-primary/5" onClick={onCta}>
-          {step.cta} <ArrowRight className="ml-1 h-4 w-4" />
-        </Button>
-      )}
     </section>
   );
 }
@@ -138,10 +133,6 @@ function Roadmap({ country }: { country: CountryData }) {
   }, [country.id]);
 
   const go = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
-  const openFirst = (id: string) => {
-    const btn = document.querySelector<HTMLButtonElement>(`#${id} button[aria-expanded="false"]`);
-    btn?.click();
-  };
 
   return (
     <>
@@ -169,11 +160,11 @@ function Roadmap({ country }: { country: CountryData }) {
         <div className="relative space-y-14 md:space-y-16">
           <span aria-hidden className="absolute bottom-0 left-5 top-2 w-px border-l border-dashed border-primary/30 md:left-6" />
 
-          <StepShell step={STEPS[0]} onCta={() => openFirst("uslovi")}>{country.id === "norveska" ? <NorwayTopicList stepId="uslovi" /> : <TopicList items={TOPICS.uslovi} />}</StepShell>
-          <StepShell step={STEPS[1]} onCta={() => openFirst("posao")}>{country.id === "norveska" ? <NorwayTopicList stepId="posao" /> : <TopicList items={TOPICS.posao} />}</StepShell>
-          <StepShell step={STEPS[2]} onCta={() => openFirst("diploma")}>{country.id === "norveska" ? <NorwayTopicList stepId="diploma" /> : <TopicList items={TOPICS.diploma} />}</StepShell>
+          <StepShell step={STEPS[0]}>{country.id === "norveska" ? <NorwayTopicList stepId="uslovi" /> : <TopicList items={TOPICS.uslovi} />}</StepShell>
+          <StepShell step={STEPS[1]}>{country.id === "norveska" ? <NorwayTopicList stepId="posao" /> : <TopicList items={TOPICS.posao} />}</StepShell>
+          <StepShell step={STEPS[2]}>{country.id === "norveska" ? <NorwayTopicList stepId="diploma" /> : <TopicList items={TOPICS.diploma} />}</StepShell>
 
-          <StepShell step={STEPS[3]} onCta={() => openFirst("dokumenta")}>
+          <StepShell step={STEPS[3]}>
             {country.id === "norveska" ? <NorwayTopicList stepId="dokumenta" /> : DOCUMENTS.map((d) => (
               <Expandable key={d} title={d} icon={<Check className="h-4 w-4 text-primary" />}>
                 {DOC_QUESTIONS.map((q) => (
@@ -186,7 +177,7 @@ function Roadmap({ country }: { country: CountryData }) {
             ))}
           </StepShell>
 
-          <StepShell step={STEPS[4]} onCta={() => openFirst("dozvola")}>
+          <StepShell step={STEPS[4]}>
             {country.id === "norveska" ? <NorwayTopicList stepId="dozvola" /> :
             <ol className="grid gap-2.5">
               {PERMIT_STEPS.map((p, i) => (
@@ -214,7 +205,7 @@ function Roadmap({ country }: { country: CountryData }) {
             <div className="pt-3"><ReadinessChecklist country={country.id} /></div>
           </StepShell>
 
-          <StepShell step={STEPS[6]} onCta={() => openFirst("nakon-dolaska")}>
+          <StepShell step={STEPS[6]}>
             {country.id === "norveska" ? <NorwayTopicList stepId="nakon-dolaska" /> : <><p className="mb-1 text-sm text-muted-foreground">{country.flag} {country.name}</p>
             <ol className="space-y-2.5">
               {country.arrival.map((a, i) => (
