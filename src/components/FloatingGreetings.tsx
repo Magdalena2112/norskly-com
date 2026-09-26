@@ -35,6 +35,35 @@ const BUBBLES: Bubble[] = [
   { icon: Languages,      top: "46%", left: "74%", rotate: 3,  scale: 0.8,  variant: "sage",      delay: 1.1, duration: 8.8, depth: 0.4, font: "display" },
 ];
 
+// Adaptive scale by viewport width: smaller screens → softer, smaller bubbles
+// so the hero copy stays dominant.
+type Tier = { opacityMul: number; blurAdd: number; sizeMul: number };
+const tierFor = (w: number): Tier => {
+  if (w < 480) return { opacityMul: 0.55, blurAdd: 0.5, sizeMul: 0.6 };  // mobile
+  if (w < 768) return { opacityMul: 0.7,  blurAdd: 0.3, sizeMul: 0.7 };  // large mobile
+  if (w < 1024) return { opacityMul: 0.85, blurAdd: 0.15, sizeMul: 0.85 }; // tablet
+  return { opacityMul: 1.0, blurAdd: 0, sizeMul: 1.0 };                  // desktop+
+};
+
+const useViewportTier = (): Tier => {
+  const [tier, setTier] = useState<Tier>(() =>
+    typeof window === "undefined" ? tierFor(1280) : tierFor(window.innerWidth)
+  );
+  useEffect(() => {
+    let raf = 0;
+    const onResize = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => setTier(tierFor(window.innerWidth)));
+    };
+    window.addEventListener("resize", onResize);
+    return () => {
+      window.removeEventListener("resize", onResize);
+      cancelAnimationFrame(raf);
+    };
+  }, []);
+  return tier;
+};
+
 const variantClasses: Record<Bubble["variant"], string> = {
   primary:   "bg-primary text-primary-foreground border-primary/30",
   accent:    "bg-accent text-accent-foreground border-accent/40",
