@@ -13,7 +13,11 @@ import BackButton from "@/components/BackButton";
 import JourneyStepper from "@/components/onboarding/JourneyStepper";
 
 export default function AuthPage() {
-  const [isLogin, setIsLogin] = useState(true);
+  // „Registruj se" u zaglavlju otvara odmah karticu Registracije (?mode=signup).
+  const [isLogin, setIsLogin] = useState(() => {
+    if (typeof window === "undefined") return true;
+    return new URLSearchParams(window.location.search).get("mode") !== "signup";
+  });
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
