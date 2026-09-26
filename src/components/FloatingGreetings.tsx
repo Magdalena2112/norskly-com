@@ -15,6 +15,7 @@ type Bubble = {
   duration: number;
   depth: number; // 0.2 (far) → 1.2 (near) for parallax
   font?: "display" | "script" | "sans";
+  hideOnMobile?: boolean; // edge-bleeding bubbles that would be cut on narrow screens
 };
 
 // Kratke reči vezane za Norskly koncept: jezik, posao, preseljenje,
