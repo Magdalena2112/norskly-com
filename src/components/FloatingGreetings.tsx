@@ -93,7 +93,7 @@ const BubbleItem = ({ b, smx, smy, tier }: { b: Bubble; smx: MotionValue<number>
 
   return (
     <motion.div
-      className="absolute will-change-transform"
+      className={`absolute will-change-transform ${b.hideOnMobile ? "hidden sm:block" : ""}`}
       style={{
         top: b.top,
         left: b.left,
