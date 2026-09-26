@@ -80,12 +80,13 @@ const fontClasses = {
 
 const MAX_PARALLAX = 40;
 
-const BubbleItem = ({ b, smx, smy }: { b: Bubble; smx: MotionValue<number>; smy: MotionValue<number> }) => {
+const BubbleItem = ({ b, smx, smy, tier }: { b: Bubble; smx: MotionValue<number>; smy: MotionValue<number>; tier: Tier }) => {
   const tx = useTransform(smx, (v) => -v * MAX_PARALLAX * b.depth);
   const ty = useTransform(smy, (v) => -v * MAX_PARALLAX * b.depth);
 
-  const opacity = 0.55 + b.depth * 0.4;
-  const blurPx = Math.max(0, (1.0 - b.depth) * 1.6);
+  const opacity = (0.55 + b.depth * 0.4) * tier.opacityMul;
+  const blurPx = Math.max(0, (1.0 - b.depth) * 1.6) + tier.blurAdd;
+  const effScale = b.scale * tier.sizeMul;
 
   const Icon = b.icon;
 
