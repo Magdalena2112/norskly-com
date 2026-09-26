@@ -73,6 +73,7 @@ const App = () => (
                 <Route path="/home" element={<HomeRedirect />} />
                 <Route path="/za-profesore" element={<ForTeachersPage />} />
                 <Route path="/relocation-hub" element={<RelocationHubPage />} />
+                <Route path="/relocation-hub/:countryId" element={<RelocationHubPage />} />
                 <Route path="/jezici/:slug" element={<LanguagePage />} />
                 <Route path="/auth" element={<AuthPage />} />
                 <Route path="/onboarding" element={<ProtectedRoute><OnboardingPage /></ProtectedRoute>} />
