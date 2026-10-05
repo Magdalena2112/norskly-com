@@ -3,3 +3,4 @@
 - Keep Relocation Hub credibility labels in a reusable status component with per-country review dates, so each guide can be updated independently.
 - Keep `/relocation-hub` as the country selector and render `/relocation-hub/:countryId` from the shared roadmap, so country-specific links stay stable without duplicating guidance.
 - Listening activities are data rows (`listening_activities`) graded through the type registry in `src/lib/listening.ts`, and progress is scoped per language, so new activity types or courses can be added without rebuilding the module.
+- Pronunciation activities are per-language data rows (`pronunciation_activities`) with types/categories registered in `src/lib/pronunciation.ts`, progress scoped per language, and optional course/chapter/lesson ids, so content and lesson links can be added later without UI changes.
