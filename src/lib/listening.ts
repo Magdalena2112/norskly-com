@@ -2,7 +2,7 @@
  * Listening module — shared types, level guidelines and the activity-type /
  * question-type registry. Add new types here instead of changing pages.
  */
-export type CefrLevel = "A1" | "A2" | "B1" | "B2";
+export type CefrLevel = "A1" | "A2" | "B1" | "B2" | "C1";
 
 export type ActivityType =
   | "listen_understand"

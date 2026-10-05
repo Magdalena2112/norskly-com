@@ -18,7 +18,7 @@ export default function ListeningPage() {
   const { user } = useAuth();
   const { code, labelSr } = useSelectedLanguage();
   const { profile, loading: profileLoading } = useProfile();
-  const level = profile.level === "C1" ? "B2" : profile.level;
+  const level = profile.level || "A1";
   const navigate = useNavigate();
   const [items, setItems] = useState<ListeningActivity[]>([]);
   const [progress, setProgress] = useState<Record<string, ListeningProgress>>({});
@@ -91,7 +91,9 @@ export default function ListeningPage() {
         {loading ? (
           <div className="flex justify-center py-16"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary" /></div>
         ) : filtered.length === 0 ? (
-          <p className="text-center text-muted-foreground py-16">Nema aktivnosti za izabrane filtere.</p>
+          <p className="text-center text-muted-foreground py-16">
+            {items.length === 0 ? `Vežbe slušanja za nivo ${level} su u pripremi.` : "Nema aktivnosti za izabrane filtere."}
+          </p>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
             {filtered.map((a, i) => {
