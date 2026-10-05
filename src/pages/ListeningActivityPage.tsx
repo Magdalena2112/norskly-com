@@ -45,7 +45,7 @@ export default function ListeningActivityPage() {
       setAct(a);
       if (a) {
         const [{ data: list }, { data: prog }] = await Promise.all([
-          supabase.from("listening_activities").select("id").eq("language", a.language).eq("is_published", true).order("cefr_level").order("sort_order"),
+          supabase.from("listening_activities").select("id").eq("language", a.language).eq("cefr_level", a.cefr_level).eq("is_published", true).order("sort_order"),
           supabase.from("listening_progress").select("attempts").eq("user_id", user.id).eq("activity_id", a.id).maybeSingle(),
         ]);
         const ids = (list || []).map((r) => r.id);
