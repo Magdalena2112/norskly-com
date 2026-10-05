@@ -66,6 +66,8 @@ export const LEVEL_GUIDELINES: Record<CefrLevel, string[]> = {
   A2: ["kratki dijalozi", "jednostavne svakodnevne situacije"],
   B1: ["duži razgovori", "prirodniji tempo govora", "detaljnija pitanja razumevanja"],
   B2: ["prirodan govor", "duži snimci", "implicitno značenje i složenije razumevanje"],
+  // C1 — placeholder; detaljni kriterijumi biće definisani kasnije.
+  C1: ["autentičan govor", "složene i apstraktne teme"],
 };
 
 const norm = (s: string) =>
