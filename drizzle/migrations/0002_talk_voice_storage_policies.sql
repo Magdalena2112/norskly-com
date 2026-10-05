@@ -1,0 +1,3 @@
+CREATE POLICY "Users read own talk voice" ON storage.objects FOR SELECT TO authenticated USING (bucket_id = 'talk-voice' AND (storage.foldername(name))[1] = auth.uid()::text);
+CREATE POLICY "Users upload own talk voice" ON storage.objects FOR INSERT TO authenticated WITH CHECK (bucket_id = 'talk-voice' AND (storage.foldername(name))[1] = auth.uid()::text);
+CREATE POLICY "Users delete own talk voice" ON storage.objects FOR DELETE TO authenticated USING (bucket_id = 'talk-voice' AND (storage.foldername(name))[1] = auth.uid()::text);
