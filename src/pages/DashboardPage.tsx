@@ -4,7 +4,7 @@ import { useProfile } from "@/context/ProfileContext";
 import { useAuth } from "@/context/AuthContext";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { BookOpen, Languages, MessageSquare, GraduationCap, CalendarCheck, PenLine, BookOpenText, Headphones } from "lucide-react";
+import { BookOpen, Languages, MessageSquare, GraduationCap, CalendarCheck, PenLine, BookOpenText, Headphones, Mic } from "lucide-react";
 import XpProgressCard from "@/components/XpProgressCard";
 import { useNavigate, useParams } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
@@ -62,6 +62,7 @@ export default function DashboardPage() {
       { title: "Pisanje", subtitle: ui.module.writing, description: "Vežbaj pisanje, bildebeskrivelse i dobij detaljan feedback.", icon: PenLine, route: "/writing", vignette: "book", iconBg: "bg-accent", rotation: "rotate-card-4" },
       { title: "Čitanje", subtitle: ui.module.reading, description: "Čitaj tekstove prilagođene tvom nivou i reši vežbe razumevanja.", icon: BookOpenText, route: "/reading", vignette: "stamp", iconBg: "bg-fjord", rotation: "rotate-card-2" },
       { title: "Slušanje", subtitle: ({ no: "Lytting", de: "Hören", en: "Listening" } as Record<string, string>)[activeLang.code] || "Listening", description: "Slušaj snimke i dijaloge i proveri razumevanje kroz vežbe.", icon: Headphones, route: "/listening", vignette: "speech", iconBg: "bg-sunset", rotation: "rotate-card-3" },
+      { title: "Izgovor", subtitle: ({ no: "Uttale", de: "Aussprache", en: "Pronunciation" } as Record<string, string>)[activeLang.code] || "Pronunciation", description: "Slušaj, ponovi i uvežbaj glasove, reči, naglasak i intonaciju.", icon: Mic, route: "/pronunciation", vignette: "speech", iconBg: "bg-primary", rotation: "rotate-card-4" },
       { title: "Razgovor sa profesorom", subtitle: ui.module.teacher, description: `Rezerviši 90-minutni čas sa profesorom ${activeLang.label.toLowerCase()}.`, icon: GraduationCap, route: "/book-lesson", vignette: "cabins", iconBg: "bg-forest", rotation: "rotate-card-1", buttonLabel: "Rezerviši čas", fullWidth: true },
     ],
     [ui, activeLang.label],
