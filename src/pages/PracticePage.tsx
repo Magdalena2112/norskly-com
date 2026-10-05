@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect, useCallback } from "react";
+import { Mic, Square as StopIcon, Loader2 as Spinner } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
 import { useProfile } from "@/context/ProfileContext";
@@ -50,6 +51,7 @@ import { getCurrentLanguageCode } from "@/lib/currentLanguage";
 interface Message {
   role: "user" | "assistant";
   content: string;
+  voice?: boolean;
 }
 
 interface RecapData {
@@ -97,6 +99,12 @@ const roleOptions = [
 ];
 
 const CHAT_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/talk-ai`;
+const VOICE_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/talk-voice`;
+
+function extractReply(content: string): string {
+  const m = content.match(/\[ODGOVOR\]([\s\S]*?)(?=\n\[[A-ZČĆŠŽĐ ]+\]|$)/);
+  return (m ? m[1] : content).replace(/[*_#`>]/g, "").trim();
+}
 
 // ── Section parser for structured AI responses ──
 const SECTION_KEYS = ["ODGOVOR", "VOKABULAR", "ISPRAVKE", "POVRATNA INFORMACIJA", "SLEDEĆI KORAK"] as const;
@@ -256,6 +264,99 @@ export default function PracticePage() {
   const [historyLoading, setHistoryLoading] = useState(false);
   const [viewingSession, setViewingSession] = useState<TalkSession | null>(null);
   const [currentSessionId, setCurrentSessionId] = useState<string | null>(null);
+  const [recording, setRecording] = useState(false);
+  const [transcribing, setTranscribing] = useState(false);
+  const [recSeconds, setRecSeconds] = useState(0);
+  const [audioUrls, setAudioUrls] = useState<Record<number, string>>({});
+  const [speakingIdx, setSpeakingIdx] = useState<number | null>(null);
+  const [autoPlay, setAutoPlay] = useState(() => localStorage.getItem("talk_autoplay") !== "0");
+  const recorderRef = useRef<MediaRecorder | null>(null);
+  const chunksRef = useRef<Blob[]>([]);
+  const recTimerRef = useRef<number | null>(null);
+
+  const getToken = async () => (await supabase.auth.getSession()).data.session?.access_token;
+
+  const speakReply = async (idx: number, content: string) => {
+    const text = extractReply(content).slice(0, 1500);
+    if (!text) return;
+    setSpeakingIdx(idx);
+    try {
+      const token = await getToken();
+      const r = await fetch(VOICE_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+        body: JSON.stringify({ text, language: langCode }),
+      });
+      if (!r.ok) {
+        const err = await r.json().catch(() => ({}));
+        toast.error(err.error || "Glasovni odgovor nije uspeo.");
+        return;
+      }
+      const url = URL.createObjectURL(await r.blob());
+      setAudioUrls((prev) => ({ ...prev, [idx]: url }));
+      if (autoPlay) new Audio(url).play().catch(() => {});
+    } catch {
+      toast.error("Glasovni odgovor nije uspeo.");
+    } finally {
+      setSpeakingIdx(null);
+    }
+  };
+
+  const startRecording = async () => {
+    if (!navigator.mediaDevices?.getUserMedia || typeof MediaRecorder === "undefined") {
+      toast.error("Tvoj pretraživač ne podržava snimanje zvuka.");
+      return;
+    }
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      const mime = MediaRecorder.isTypeSupported("audio/webm") ? "audio/webm" : MediaRecorder.isTypeSupported("audio/mp4") ? "audio/mp4" : "";
+      const rec = new MediaRecorder(stream, mime ? { mimeType: mime } : undefined);
+      chunksRef.current = [];
+      rec.ondataavailable = (e) => { if (e.data.size) chunksRef.current.push(e.data); };
+      rec.onstop = async () => {
+        stream.getTracks().forEach((t) => t.stop());
+        const type = (rec.mimeType || "audio/webm").split(";")[0].replace("video/", "audio/");
+        const blob = new Blob(chunksRef.current, { type });
+        if (blob.size < 1000) { toast.error("Snimak je prekratak."); return; }
+        setTranscribing(true);
+        try {
+          const fd = new FormData();
+          fd.append("file", new File([blob], `voice.${type.includes("mp4") ? "m4a" : "webm"}`, { type }));
+          fd.append("language", langCode);
+          const token = await getToken();
+          const r = await fetch(VOICE_URL, { method: "POST", headers: { Authorization: `Bearer ${token}` }, body: fd });
+          const data = await r.json().catch(() => ({}));
+          if (!r.ok || !data.text) {
+            toast.error(data.error || "Nisam razumeo snimak. Pokušaj ponovo.");
+            return;
+          }
+          setTranscribing(false);
+          await sendMessage(data.text, true);
+        } catch {
+          toast.error("Transkripcija nije uspela.");
+        } finally {
+          setTranscribing(false);
+        }
+      };
+      recorderRef.current = rec;
+      rec.start();
+      setRecording(true);
+      setRecSeconds(0);
+      recTimerRef.current = window.setInterval(() => setRecSeconds((s) => {
+        if (s + 1 >= 120) stopRecording();
+        return s + 1;
+      }), 1000);
+    } catch {
+      toast.error("Dozvoli pristup mikrofonu da bi snimala poruku.");
+    }
+  };
+
+  const stopRecording = () => {
+    if (recTimerRef.current) window.clearInterval(recTimerRef.current);
+    recTimerRef.current = null;
+    setRecording(false);
+    if (recorderRef.current?.state === "recording") recorderRef.current.stop();
+  };
 
   const bottomRef = useRef<HTMLDivElement>(null);
 
@@ -343,9 +444,9 @@ export default function PracticePage() {
     await autoSaveSession(messages, recapData);
   };
 
-  const sendMessage = async (text: string) => {
+  const sendMessage = async (text: string, voice = false) => {
     if (!text.trim() || isLoading) return;
-    const userMsg: Message = { role: "user", content: text };
+    const userMsg: Message = { role: "user", content: text, ...(voice ? { voice: true } : {}) };
     const updatedMessages = [...messages, userMsg];
     setMessages(updatedMessages);
     setInput("");
@@ -466,6 +567,7 @@ export default function PracticePage() {
     }
 
     setIsLoading(false);
+    if (voice && assistantSoFar) speakReply(updatedMessages.length, assistantSoFar);
   };
 
   const endSession = async () => {
@@ -934,11 +1036,18 @@ export default function PracticePage() {
               className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
             >
               {msg.role === "assistant" ? (
-                <div className="max-w-[90%]">
+                <div className="max-w-[90%] space-y-2">
+                  {audioUrls[i] && (
+                    <audio controls src={audioUrls[i]} className="w-full max-w-xs h-10" aria-label="Glasovni odgovor" />
+                  )}
+                  {speakingIdx === i && (
+                    <p className="flex items-center gap-2 text-xs text-muted-foreground"><Spinner className="w-3 h-3 animate-spin" /> Pripremam glasovni odgovor…</p>
+                  )}
                   <StructuredAssistantMessage content={msg.content} />
                 </div>
               ) : (
                 <div className="max-w-[85%] rounded-2xl px-5 py-3 bg-primary text-primary-foreground rounded-br-md">
+                  {msg.voice && <p className="flex items-center gap-1 text-xs opacity-75 mb-1"><Mic className="w-3 h-3" /> Glasovna poruka</p>}
                   <p className="text-sm">{msg.content}</p>
                 </div>
               )}
@@ -965,19 +1074,50 @@ export default function PracticePage() {
       <div className="border-t border-border bg-background/80 backdrop-blur-md p-4">
         <form
           onSubmit={(e) => { e.preventDefault(); sendMessage(input); }}
-          className="container max-w-3xl flex gap-3"
+          className="container max-w-3xl flex gap-2 sm:gap-3"
         >
-          <Input
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            placeholder="Napiši poruku na norveškom..."
-            className="flex-1 h-12"
-            disabled={isLoading}
-          />
+          {recording ? (
+            <div className="flex-1 h-12 flex items-center gap-3 px-4 rounded-md border border-accent/40 bg-accent/5 text-sm text-foreground">
+              <span className="w-2.5 h-2.5 rounded-full bg-destructive animate-pulse" />
+              Snimam… {Math.floor(recSeconds / 60)}:{String(recSeconds % 60).padStart(2, "0")}
+            </div>
+          ) : transcribing ? (
+            <div className="flex-1 h-12 flex items-center gap-2 px-4 rounded-md border border-border text-sm text-muted-foreground">
+              <Spinner className="w-4 h-4 animate-spin" /> Pretvaram govor u tekst…
+            </div>
+          ) : (
+            <Input
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              placeholder="Napiši poruku ili snimi glasovnu…"
+              className="flex-1 h-12"
+              disabled={isLoading}
+            />
+          )}
+          <Button
+            type="button"
+            variant={recording ? "destructive" : "outline"}
+            size="icon"
+            className="h-12 w-12"
+            onClick={recording ? stopRecording : startRecording}
+            disabled={isLoading || transcribing}
+            aria-label={recording ? "Zaustavi i pošalji" : "Snimi glasovnu poruku"}
+          >
+            {recording ? <StopIcon className="w-5 h-5" /> : <Mic className="w-5 h-5" />}
+          </Button>
           <Button variant="hero" size="icon" className="h-12 w-12" disabled={!input.trim() || isLoading}>
             <Send className="w-5 h-5" />
           </Button>
         </form>
+        <label className="container max-w-3xl mt-2 flex items-center gap-2 text-xs text-muted-foreground cursor-pointer select-none">
+          <input
+            type="checkbox"
+            checked={autoPlay}
+            onChange={(e) => { setAutoPlay(e.target.checked); localStorage.setItem("talk_autoplay", e.target.checked ? "1" : "0"); }}
+            className="accent-[hsl(var(--accent))]"
+          />
+          Automatski pusti glasovni odgovor
+        </label>
       </div>
     </div>
   );
