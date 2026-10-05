@@ -1,7 +1,7 @@
 import { supabase } from "@/integrations/supabase/client";
 import { getCurrentLanguageCode } from "@/lib/currentLanguage";
 
-type ActivityModule = "grammar" | "vocabulary" | "talk" | "quiz";
+type ActivityModule = "grammar" | "vocabulary" | "talk" | "quiz" | "listening";
 
 interface LogActivityOptions {
   /** Unique key to prevent duplicate XP awards (e.g. "quiz_abc123") */
