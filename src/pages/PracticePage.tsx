@@ -52,6 +52,21 @@ interface Message {
   role: "user" | "assistant";
   content: string;
   voice?: boolean;
+  /** Storage path of the learner's own recording (private talk-voice bucket). */
+  audioPath?: string;
+}
+
+function OwnVoicePlayer({ path }: { path: string }) {
+  const [url, setUrl] = useState<string | null>(null);
+  useEffect(() => {
+    let alive = true;
+    supabase.storage.from("talk-voice").createSignedUrl(path, 3600).then(({ data }) => {
+      if (alive && data?.signedUrl) setUrl(data.signedUrl);
+    });
+    return () => { alive = false; };
+  }, [path]);
+  if (!url) return null;
+  return <audio controls src={url} className="w-full max-w-xs h-9 mb-2" aria-label="Tvoja glasovna poruka" />;
 }
 
 interface RecapData {
@@ -330,8 +345,15 @@ export default function PracticePage() {
             toast.error(data.error || "Nisam razumeo snimak. Pokušaj ponovo.");
             return;
           }
+          let audioPath: string | undefined;
+          if (user) {
+            const path = `${user.id}/${Date.now()}.${type.includes("mp4") ? "m4a" : "webm"}`;
+            const { error: upErr } = await supabase.storage.from("talk-voice").upload(path, blob, { contentType: type });
+            if (upErr) console.error("Voice upload failed", upErr);
+            else audioPath = path;
+          }
           setTranscribing(false);
-          await sendMessage(data.text, true);
+          await sendMessage(data.text, true, audioPath);
         } catch {
           toast.error("Transkripcija nije uspela.");
         } finally {
@@ -444,9 +466,9 @@ export default function PracticePage() {
     await autoSaveSession(messages, recapData);
   };
 
-  const sendMessage = async (text: string, voice = false) => {
+  const sendMessage = async (text: string, voice = false, audioPath?: string) => {
     if (!text.trim() || isLoading) return;
-    const userMsg: Message = { role: "user", content: text, ...(voice ? { voice: true } : {}) };
+    const userMsg: Message = { role: "user", content: text, ...(voice ? { voice: true } : {}), ...(audioPath ? { audioPath } : {}) };
     const updatedMessages = [...messages, userMsg];
     setMessages(updatedMessages);
     setInput("");
@@ -746,6 +768,7 @@ export default function PracticePage() {
                   </div>
                 ) : (
                   <div className="max-w-[85%] rounded-2xl px-5 py-3 bg-primary text-primary-foreground rounded-br-md">
+                    {msg.audioPath && <OwnVoicePlayer path={msg.audioPath} />}
                     <p className="text-sm">{msg.content}</p>
                   </div>
                 )}
@@ -1048,6 +1071,7 @@ export default function PracticePage() {
               ) : (
                 <div className="max-w-[85%] rounded-2xl px-5 py-3 bg-primary text-primary-foreground rounded-br-md">
                   {msg.voice && <p className="flex items-center gap-1 text-xs opacity-75 mb-1"><Mic className="w-3 h-3" /> Glasovna poruka</p>}
+                  {msg.audioPath && <OwnVoicePlayer path={msg.audioPath} />}
                   <p className="text-sm">{msg.content}</p>
                 </div>
               )}

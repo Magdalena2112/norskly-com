@@ -15,6 +15,13 @@
       "when": 1791218031255,
       "tag": "0001_pronunciation_module",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1791234405228,
+      "tag": "0002_talk_voice_storage_policies",
+      "breakpoints": true
     }
   ]
 }
