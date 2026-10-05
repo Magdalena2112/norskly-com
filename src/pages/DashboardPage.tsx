@@ -16,6 +16,7 @@ import FjordHero from "@/components/student/FjordHero";
 import PostcardVignette from "@/components/student/PostcardVignette";
 import { useSelectedLanguage } from "@/hooks/useSelectedLanguage";
 import { getLanguageBySlug, getLanguageByCode, type LanguageSlug } from "@/lib/languages";
+import CourseLessonsSection from "@/components/student/CourseLessonsSection";
 
 type ModuleDef = {
   title: string;
@@ -140,6 +141,8 @@ export default function DashboardPage() {
         )}
 
         <WeeklyDigest />
+
+        {profile.level && <CourseLessonsSection language={activeLang.code} level={profile.level} />}
 
         <div className="mt-10 mb-5 flex items-center gap-3">
           <span className="h-px flex-1 bg-border" />
