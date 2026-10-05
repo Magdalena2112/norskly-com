@@ -2,3 +2,4 @@
 - Link mutable immigration and tax guidance to official sources and avoid unverified fixed figures, because rules and fees can change.
 - Keep Relocation Hub credibility labels in a reusable status component with per-country review dates, so each guide can be updated independently.
 - Keep `/relocation-hub` as the country selector and render `/relocation-hub/:countryId` from the shared roadmap, so country-specific links stay stable without duplicating guidance.
+- Listening activities are data rows (`listening_activities`) graded through the type registry in `src/lib/listening.ts`, and progress is scoped per language, so new activity types or courses can be added without rebuilding the module.

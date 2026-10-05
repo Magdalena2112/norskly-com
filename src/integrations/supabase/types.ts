@@ -505,6 +505,128 @@ export type Database = {
           },
         ]
       }
+      listening_activities: {
+        Row: {
+          activity_type: string
+          audio_url: string | null
+          cefr_level: string
+          chapter_id: string | null
+          course_id: string | null
+          created_at: string
+          description: string
+          difficulty: number
+          duration_seconds: number
+          id: string
+          is_published: boolean
+          language: string
+          lesson_id: string | null
+          questions: Json
+          segments: Json
+          sort_order: number
+          title: string
+          topic: string
+          transcript: string
+          updated_at: string
+        }
+        Insert: {
+          activity_type: string
+          audio_url?: string | null
+          cefr_level: string
+          chapter_id?: string | null
+          course_id?: string | null
+          created_at?: string
+          description?: string
+          difficulty?: number
+          duration_seconds?: number
+          id?: string
+          is_published?: boolean
+          language: string
+          lesson_id?: string | null
+          questions?: Json
+          segments?: Json
+          sort_order?: number
+          title: string
+          topic: string
+          transcript?: string
+          updated_at?: string
+        }
+        Update: {
+          activity_type?: string
+          audio_url?: string | null
+          cefr_level?: string
+          chapter_id?: string | null
+          course_id?: string | null
+          created_at?: string
+          description?: string
+          difficulty?: number
+          duration_seconds?: number
+          id?: string
+          is_published?: boolean
+          language?: string
+          lesson_id?: string | null
+          questions?: Json
+          segments?: Json
+          sort_order?: number
+          title?: string
+          topic?: string
+          transcript?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      listening_progress: {
+        Row: {
+          activity_id: string
+          answers: Json
+          attempts: number
+          completed_at: string | null
+          created_at: string
+          id: string
+          language: string
+          score: number
+          status: string
+          total: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          activity_id: string
+          answers?: Json
+          attempts?: number
+          completed_at?: string | null
+          created_at?: string
+          id?: string
+          language: string
+          score?: number
+          status?: string
+          total?: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          activity_id?: string
+          answers?: Json
+          attempts?: number
+          completed_at?: string | null
+          created_at?: string
+          id?: string
+          language?: string
+          score?: number
+          status?: string
+          total?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "listening_progress_activity_id_fkey"
+            columns: ["activity_id"]
+            isOneToOne: false
+            referencedRelation: "listening_activities"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           avatar_url: string | null
