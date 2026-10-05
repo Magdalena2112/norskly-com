@@ -681,6 +681,143 @@ export type Database = {
         }
         Relationships: []
       }
+      pronunciation_activities: {
+        Row: {
+          activity_type: string
+          audio_url: string | null
+          category: string
+          cefr_level: string
+          chapter_id: string | null
+          course_id: string | null
+          created_at: string
+          description: string
+          difficulty: number
+          duration_seconds: number
+          example_words: Json
+          id: string
+          is_published: boolean
+          items: Json
+          language: string
+          lesson_id: string | null
+          phonetic_transcription: string | null
+          pronunciation_hint: string | null
+          pronunciation_tip: string | null
+          slow_audio_url: string | null
+          sort_order: number
+          stress_data: Json | null
+          target_text: string
+          title: string
+          topic: string
+          updated_at: string
+        }
+        Insert: {
+          activity_type: string
+          audio_url?: string | null
+          category: string
+          cefr_level?: string
+          chapter_id?: string | null
+          course_id?: string | null
+          created_at?: string
+          description?: string
+          difficulty?: number
+          duration_seconds?: number
+          example_words?: Json
+          id?: string
+          is_published?: boolean
+          items?: Json
+          language: string
+          lesson_id?: string | null
+          phonetic_transcription?: string | null
+          pronunciation_hint?: string | null
+          pronunciation_tip?: string | null
+          slow_audio_url?: string | null
+          sort_order?: number
+          stress_data?: Json | null
+          target_text?: string
+          title: string
+          topic?: string
+          updated_at?: string
+        }
+        Update: {
+          activity_type?: string
+          audio_url?: string | null
+          category?: string
+          cefr_level?: string
+          chapter_id?: string | null
+          course_id?: string | null
+          created_at?: string
+          description?: string
+          difficulty?: number
+          duration_seconds?: number
+          example_words?: Json
+          id?: string
+          is_published?: boolean
+          items?: Json
+          language?: string
+          lesson_id?: string | null
+          phonetic_transcription?: string | null
+          pronunciation_hint?: string | null
+          pronunciation_tip?: string | null
+          slow_audio_url?: string | null
+          sort_order?: number
+          stress_data?: Json | null
+          target_text?: string
+          title?: string
+          topic?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      pronunciation_progress: {
+        Row: {
+          activity_id: string
+          attempts: number
+          completed_at: string | null
+          created_at: string
+          id: string
+          language: string
+          practiced_items: Json
+          score: number | null
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          activity_id: string
+          attempts?: number
+          completed_at?: string | null
+          created_at?: string
+          id?: string
+          language: string
+          practiced_items?: Json
+          score?: number | null
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          activity_id?: string
+          attempts?: number
+          completed_at?: string | null
+          created_at?: string
+          id?: string
+          language?: string
+          practiced_items?: Json
+          score?: number | null
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "pronunciation_progress_activity_id_fkey"
+            columns: ["activity_id"]
+            isOneToOne: false
+            referencedRelation: "pronunciation_activities"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       reading_sessions: {
         Row: {
           completed: boolean
