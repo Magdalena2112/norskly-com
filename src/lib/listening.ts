@@ -2,7 +2,7 @@
  * Listening module — shared types, level guidelines and the activity-type /
  * question-type registry. Add new types here instead of changing pages.
  */
-export type CefrLevel = "A1" | "A2" | "B1" | "B2";
+export type CefrLevel = "A1" | "A2" | "B1" | "B2" | "C1";
 
 export type ActivityType =
   | "listen_understand"
@@ -66,6 +66,8 @@ export const LEVEL_GUIDELINES: Record<CefrLevel, string[]> = {
   A2: ["kratki dijalozi", "jednostavne svakodnevne situacije"],
   B1: ["duži razgovori", "prirodniji tempo govora", "detaljnija pitanja razumevanja"],
   B2: ["prirodan govor", "duži snimci", "implicitno značenje i složenije razumevanje"],
+  // C1 — placeholder; detaljni kriterijumi biće definisani kasnije.
+  C1: ["autentičan govor", "složene i apstraktne teme"],
 };
 
 const norm = (s: string) =>
