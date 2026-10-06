@@ -140,9 +140,9 @@ export default function LanguagePage() {
             <img src={norsklyLogo.url} alt="Norskly" width={370} height={144} fetchPriority="high" decoding="async" className="h-12 w-auto select-none" draggable={false} />
           </Link>
           <div className="flex items-center gap-2">
-            <Button variant="ghost" size="sm" onClick={() => navigate(`/auth?lang=${lang.slug}`)}>Prijava</Button>
+            <Button variant="ghost" size="sm" onClick={() => goAuth({})}>Prijavi se</Button>
             <Button size="sm" className="rounded-full bg-primary hover:bg-primary/90" onClick={() => goAuth({ plan: "trial", mode: "signup" })}>
-              Započni besplatno
+              Registruj se
             </Button>
           </div>
         </div>

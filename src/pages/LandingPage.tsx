@@ -130,10 +130,7 @@ export default function LandingPage() {
           </div>
           <div className="flex items-center gap-1 sm:gap-1.5 lg:gap-2">
             <Button variant="ghost" size="sm" className="px-1.5 text-[10px] sm:px-3 sm:text-xs lg:px-3 lg:text-sm" onClick={() => navigate("/auth")}>Prijavi se</Button>
-            <Button size="sm" variant="outline" className="rounded-full border-primary/50 text-primary hover:bg-secondary/60 hover:text-primary px-2 text-[10px] sm:px-4 sm:text-xs lg:px-4 lg:text-sm" onClick={() => navigate("/auth?mode=signup")}>Registruj se</Button>
-            <Button size="sm" className="rounded-full bg-primary hover:bg-primary/90 px-2 text-[10px] sm:px-4 sm:text-xs lg:px-4 lg:text-sm" onClick={() => document.getElementById("languages")?.scrollIntoView({ behavior: "smooth" })}>
-              Započni besplatno
-            </Button>
+            <Button size="sm" className="rounded-full bg-primary hover:bg-primary/90 px-2 text-[10px] sm:px-4 sm:text-xs lg:px-4 lg:text-sm" onClick={() => navigate("/auth?mode=signup")}>Registruj se</Button>
           </div>
         </div>
       </nav>
