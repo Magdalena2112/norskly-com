@@ -413,7 +413,7 @@ function ExercisesTab({ level, userId, initialTopic, onGoToExplain }: { level: s
               <Card className="border-accent/30 bg-accent/5">
                 <CardContent className="pt-5 pb-5 text-center space-y-3">
                   <p className="text-sm font-medium text-accent">
-                    ✅ Sve vežbe završene! Tačno: {states.filter((s) => s.status === "correct").length}/{states.length}
+                    ✅ Sve vežbe završene! Tačno: {states.filter((s) => s.status === "correct").length}/{states.length} · Netačno: {states.filter((s) => s.status === "incorrect").length}
                   </p>
                   {onGoToExplain && topic && (
                     <Button variant="outline" size="sm" onClick={() => onGoToExplain(topic)}>
