@@ -317,6 +317,46 @@ export default function PracticePage() {
     }
   };
 
+  const [pendingVoice, setPendingVoice] = useState<{ blob: Blob; type: string; url: string } | null>(null);
+
+  const discardVoice = () => {
+    if (pendingVoice) URL.revokeObjectURL(pendingVoice.url);
+    setPendingVoice(null);
+  };
+
+  const sendVoice = async () => {
+    if (!pendingVoice) return;
+    const { blob, type, url } = pendingVoice;
+    setPendingVoice(null);
+    setTranscribing(true);
+    try {
+      const fd = new FormData();
+      fd.append("file", new File([blob], `voice.${type.includes("mp4") ? "m4a" : "webm"}`, { type }));
+      fd.append("language", langCode);
+      const token = await getToken();
+      const r = await fetch(VOICE_URL, { method: "POST", headers: { Authorization: `Bearer ${token}` }, body: fd });
+      const data = await r.json().catch(() => ({}));
+      if (!r.ok || !data.text) {
+        toast.error(data.error || "Nisam razumeo snimak. Pokušaj ponovo.");
+        return;
+      }
+      let audioPath: string | undefined;
+      if (user) {
+        const path = `${user.id}/${Date.now()}.${type.includes("mp4") ? "m4a" : "webm"}`;
+        const { error: upErr } = await supabase.storage.from("talk-voice").upload(path, blob, { contentType: type });
+        if (upErr) console.error("Voice upload failed", upErr);
+        else audioPath = path;
+      }
+      setTranscribing(false);
+      await sendMessage(data.text, true, audioPath);
+    } catch {
+      toast.error("Transkripcija nije uspela.");
+    } finally {
+      setTranscribing(false);
+      URL.revokeObjectURL(url);
+    }
+  };
+
   const startRecording = async () => {
     if (!navigator.mediaDevices?.getUserMedia || typeof MediaRecorder === "undefined") {
       toast.error("Tvoj pretraživač ne podržava snimanje zvuka.");
