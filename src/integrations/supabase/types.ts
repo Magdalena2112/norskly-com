@@ -1323,6 +1323,39 @@ export type Database = {
         }
         Relationships: []
       }
+      vocab_images: {
+        Row: {
+          created_at: string
+          id: string
+          image_url: string | null
+          is_visual: boolean
+          language: string
+          translation: string | null
+          word: string
+          word_key: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          image_url?: string | null
+          is_visual?: boolean
+          language: string
+          translation?: string | null
+          word: string
+          word_key: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          image_url?: string | null
+          is_visual?: boolean
+          language?: string
+          translation?: string | null
+          word?: string
+          word_key?: string
+        }
+        Relationships: []
+      }
       vocab_items: {
         Row: {
           antonym: string | null

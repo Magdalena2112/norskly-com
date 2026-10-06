@@ -22,6 +22,13 @@
       "when": 1791234405228,
       "tag": "0002_talk_voice_storage_policies",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1791270963241,
+      "tag": "0003_vocab_images_cache",
+      "breakpoints": true
     }
   ]
 }

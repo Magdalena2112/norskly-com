@@ -19,3 +19,6 @@ verify_jwt = false
 verify_jwt = false
 [functions.talk-voice]
 verify_jwt = false
+
+[functions.vocab-image]
+verify_jwt = false
