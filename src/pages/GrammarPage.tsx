@@ -357,6 +357,7 @@ function ExercisesTab({ level, userId, initialTopic, onGoToExplain }: { level: s
                       </p>
                       {st.answer && <p className="text-xs text-muted-foreground">Tvoj poslednji odgovor: {st.answer}</p>}
                       {st.analysis && <p className="text-sm text-foreground">{st.analysis}</p>}
+                      <p className="text-sm font-medium text-foreground">Tačan odgovor: <span className="text-primary">{ex.solution}</span></p>
                     </motion.div>
                   )}
 
