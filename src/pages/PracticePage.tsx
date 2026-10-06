@@ -328,37 +328,12 @@ export default function PracticePage() {
       const rec = new MediaRecorder(stream, mime ? { mimeType: mime } : undefined);
       chunksRef.current = [];
       rec.ondataavailable = (e) => { if (e.data.size) chunksRef.current.push(e.data); };
-      rec.onstop = async () => {
+      rec.onstop = () => {
         stream.getTracks().forEach((t) => t.stop());
         const type = (rec.mimeType || "audio/webm").split(";")[0].replace("video/", "audio/");
         const blob = new Blob(chunksRef.current, { type });
         if (blob.size < 1000) { toast.error("Snimak je prekratak."); return; }
-        setTranscribing(true);
-        try {
-          const fd = new FormData();
-          fd.append("file", new File([blob], `voice.${type.includes("mp4") ? "m4a" : "webm"}`, { type }));
-          fd.append("language", langCode);
-          const token = await getToken();
-          const r = await fetch(VOICE_URL, { method: "POST", headers: { Authorization: `Bearer ${token}` }, body: fd });
-          const data = await r.json().catch(() => ({}));
-          if (!r.ok || !data.text) {
-            toast.error(data.error || "Nisam razumeo snimak. Pokušaj ponovo.");
-            return;
-          }
-          let audioPath: string | undefined;
-          if (user) {
-            const path = `${user.id}/${Date.now()}.${type.includes("mp4") ? "m4a" : "webm"}`;
-            const { error: upErr } = await supabase.storage.from("talk-voice").upload(path, blob, { contentType: type });
-            if (upErr) console.error("Voice upload failed", upErr);
-            else audioPath = path;
-          }
-          setTranscribing(false);
-          await sendMessage(data.text, true, audioPath);
-        } catch {
-          toast.error("Transkripcija nije uspela.");
-        } finally {
-          setTranscribing(false);
-        }
+        setPendingVoice({ blob, type, url: URL.createObjectURL(blob) });
       };
       recorderRef.current = rec;
       rec.start();
