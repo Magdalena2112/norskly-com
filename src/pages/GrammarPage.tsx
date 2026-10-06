@@ -144,12 +144,14 @@ export default function GrammarPage() {
 interface ExerciseState {
   answer: string;
   attempts: number;
-  status: "pending" | "correct" | "skipped";
+  status: "pending" | "correct" | "skipped" | "incorrect";
   feedback: string;
   analysis?: string;
   checking?: boolean;
   logged: boolean;
 }
+
+const MAX_ATTEMPTS = 3;
 
 function normalizeAnswer(s: string) {
   return s.trim().toLowerCase().replace(/\s+/g, " ");
@@ -248,6 +250,10 @@ function ExercisesTab({ level, userId, initialTopic, onGoToExplain }: { level: s
           example_wrong: st.answer,
           example_correct: ex.solution,
         }], ex.sentence, newAttempts);
+      }
+      if (newAttempts >= MAX_ATTEMPTS) {
+        updateState(i, { checking: false, status: "incorrect", analysis, feedback: "" });
+        return;
       }
       updateState(i, { checking: false, analysis, feedback: hint || fallbackHint(newAttempts) });
     }
