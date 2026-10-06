@@ -22,3 +22,6 @@ verify_jwt = false
 
 [functions.vocab-image]
 verify_jwt = false
+
+[functions.writing-topics]
+verify_jwt = false
