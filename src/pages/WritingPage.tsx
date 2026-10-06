@@ -505,7 +505,7 @@ function TopicInspiration({ level, selected, onSelect }: { level: string; select
           </div>
           <div>
             <p className="font-medium text-xs mb-1">Počeci rečenica</p>
-            <ul className="space-y-0.5 italic">{selected.sentence_starters.map((s, i) => <li key={i}>„{s}…“</li>)}</ul>
+            <ul className="space-y-0.5 italic">{selected.sentence_starters.map((s, i) => <li key={i}>„{s.replace(/[….\s]+$/, "")}…“</li>)}</ul>
           </div>
         </CollapsibleContent>
       </Collapsible>
@@ -609,7 +609,7 @@ function CorrectionTab({ level }: { level: string }) {
       <CardContent className="space-y-3">
         <TopicInspiration level={level} selected={topic} onSelect={setTopic} />
         <Textarea
-          placeholder={topic ? topic.sentence_starters[0] ? `${topic.sentence_starters[0]}…` : "" : "Počni da pišeš..."}
+          placeholder={topic ? topic.sentence_starters[0] ? `${topic.sentence_starters[0].replace(/[….\s]+$/, "")}…` : "" : "Počni da pišeš..."}
           value={text}
           onChange={(e) => setText(e.target.value)}
           rows={10}
