@@ -317,17 +317,7 @@ export default function PracticePage() {
     }
   };
 
-  const [pendingVoice, setPendingVoice] = useState<{ blob: Blob; type: string; url: string } | null>(null);
-
-  const discardVoice = () => {
-    if (pendingVoice) URL.revokeObjectURL(pendingVoice.url);
-    setPendingVoice(null);
-  };
-
-  const sendVoice = async () => {
-    if (!pendingVoice) return;
-    const { blob, type, url } = pendingVoice;
-    setPendingVoice(null);
+  const processVoice = async (blob: Blob, type: string) => {
     setTranscribing(true);
     try {
       const fd = new FormData();
@@ -353,7 +343,6 @@ export default function PracticePage() {
       toast.error("Transkripcija nije uspela.");
     } finally {
       setTranscribing(false);
-      URL.revokeObjectURL(url);
     }
   };
 
@@ -373,7 +362,7 @@ export default function PracticePage() {
         const type = (rec.mimeType || "audio/webm").split(";")[0].replace("video/", "audio/");
         const blob = new Blob(chunksRef.current, { type });
         if (blob.size < 1000) { toast.error("Snimak je prekratak."); return; }
-        setPendingVoice({ blob, type, url: URL.createObjectURL(blob) });
+        void processVoice(blob, type);
       };
       recorderRef.current = rec;
       rec.start();
@@ -1111,20 +1100,6 @@ export default function PracticePage() {
 
       {/* Input */}
       <div className="border-t border-border bg-background/80 backdrop-blur-md p-4">
-        {pendingVoice ? (
-          <div className="container max-w-3xl flex items-center gap-2 sm:gap-3">
-            <div className="flex-1 min-w-0 flex items-center gap-2 px-3 py-1.5 rounded-md border border-accent/40 bg-accent/5">
-              <span className="hidden sm:inline text-xs text-muted-foreground shrink-0">Preslušaj:</span>
-              <audio controls src={pendingVoice.url} className="w-full h-9" aria-label="Preslušaj svoju glasovnu poruku" />
-            </div>
-            <Button type="button" variant="outline" size="icon" className="h-12 w-12" onClick={discardVoice} aria-label="Obriši snimak">
-              <Trash2 className="w-5 h-5" />
-            </Button>
-            <Button type="button" variant="hero" size="icon" className="h-12 w-12" onClick={sendVoice} disabled={isLoading} aria-label="Pošalji glasovnu poruku">
-              <Send className="w-5 h-5" />
-            </Button>
-          </div>
-        ) : (
         <form
           onSubmit={(e) => { e.preventDefault(); sendMessage(input); }}
           className="container max-w-3xl flex gap-2 sm:gap-3"
@@ -1162,7 +1137,6 @@ export default function PracticePage() {
             <Send className="w-5 h-5" />
           </Button>
         </form>
-        )}
         <label className="container max-w-3xl mt-2 flex items-center gap-2 text-xs text-muted-foreground cursor-pointer select-none">
           <input
             type="checkbox"
