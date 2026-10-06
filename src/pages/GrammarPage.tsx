@@ -350,6 +350,16 @@ function ExercisesTab({ level, userId, initialTopic, onGoToExplain }: { level: s
                     <p className="text-xs text-muted-foreground italic">Zadatak preskočen.</p>
                   )}
 
+                  {st.status === "incorrect" && (
+                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="p-3 rounded-lg bg-destructive/10 border border-destructive/20 space-y-1">
+                      <p className="text-sm font-medium text-destructive">
+                        Netačno — iskorišćena su sva {MAX_ATTEMPTS} pokušaja.
+                      </p>
+                      {st.answer && <p className="text-xs text-muted-foreground">Tvoj poslednji odgovor: {st.answer}</p>}
+                      {st.analysis && <p className="text-sm text-foreground">{st.analysis}</p>}
+                    </motion.div>
+                  )}
+
                   {st.status === "pending" && (
                     <>
                       <div className="flex gap-2">
@@ -377,7 +387,9 @@ function ExercisesTab({ level, userId, initialTopic, onGoToExplain }: { level: s
                             <Lightbulb className="w-4 h-4 text-accent shrink-0 mt-0.5" />
                             {st.feedback}
                           </p>
-                          <p className="text-xs text-muted-foreground mt-1">Pokušaj {st.attempts}</p>
+                          <p className="text-xs text-muted-foreground mt-1">
+                            Pokušaj {st.attempts} od {MAX_ATTEMPTS} · preostalo: {MAX_ATTEMPTS - st.attempts}
+                          </p>
                         </motion.div>
                       )}
 
