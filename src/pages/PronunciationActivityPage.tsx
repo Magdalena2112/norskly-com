@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { ArrowLeft, ArrowRight, Check, Mic, Snail, Volume2, Lightbulb } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, Mic, Snail, Volume2, Lightbulb, Square, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
@@ -334,7 +334,7 @@ export default function PronunciationActivityPage() {
                   <Target item={current} />
                   <div className="mt-6"><ListenButtons item={current} lang={lang} onPlayed={() => setHeard(true)} /></div>
                   <Guide item={current} />
-                  <RecordSlot />
+                  <RecordSlot item={current} lang={lang} level={activity.cefr_level} onSuccess={() => setHeard(true)} />
                 </>
               )}
 

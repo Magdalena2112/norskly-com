@@ -55,24 +55,60 @@ Deno.serve(async (req) => {
 You get the TARGET text and what speech recognition HEARD. Mismatches reveal pronunciation problems (recognizer is lenient about punctuation/case — ignore those).
 Return ONLY JSON: {"score": 0-100 integer, "verdict": "excellent"|"good"|"retry", "feedback": "1-2 short encouraging sentences in Serbian (Latin script)", "tip": "one concrete articulation tip in Serbian Latin (mouth/tongue/lips/stress) for the weakest sound, or empty string if perfect", "words": [{"word": "target word", "ok": true|false}]}
 excellent >= 90, good 70-89, retry < 70. "words" must list every target word in order.`;
-    const r = await fetch(`${GATEWAY}/v1/chat/completions`, {
+    const schema = {
+      type: "object", additionalProperties: false,
+      required: ["score", "verdict", "feedback", "tip", "words"],
+      properties: {
+        score: { type: "integer" },
+        verdict: { type: "string", enum: ["excellent", "good", "retry"] },
+        feedback: { type: "string" },
+        tip: { type: "string" },
+        words: { type: "array", items: { type: "object", additionalProperties: false, required: ["word", "ok"], properties: { word: { type: "string" }, ok: { type: "boolean" } } } },
+      },
+    };
+    const r = await fetch(`${GATEWAY}/v1/responses`, {
       method: "POST",
-      headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
+      headers: { "Lovable-API-Key": apiKey, Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json", "X-Lovable-AIG-SDK": "fetch" },
       body: JSON.stringify({
-        model: "google/gemini-3-flash-preview",
-        messages: [{ role: "system", content: sys }, { role: "user", content: `TARGET: ${expected}\nHEARD: ${heard}` }],
-        response_format: { type: "json_object" },
+        model: "openai/gpt-6-astra",
+        stream: true,
+        store: false,
+        reasoning: { effort: "low" },
+        instructions: sys,
+        input: [{ role: "user", content: `TARGET: ${expected}\nHEARD: ${heard}` }],
+        text: { format: { type: "json_schema", name: "pron_eval", strict: true, schema } },
       }),
     });
-    if (!r.ok) {
+    if (!r.ok || !r.body) {
       const t = await r.text();
       console.error("Eval error", r.status, t);
       if (r.status === 402) return json({ error: "AI krediti su potrošeni." }, 402);
+      if (r.status === 429) return json({ error: "Previše zahteva, pokušaj malo kasnije." }, 429);
       return json({ error: "Procena izgovora nije uspela." }, 502);
     }
-    const data = await r.json();
+    let raw = "";
+    const reader = r.body.getReader();
+    const dec = new TextDecoder();
+    let buf = "";
+    for (;;) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      buf += dec.decode(value, { stream: true });
+      let i;
+      while ((i = buf.indexOf("\n")) >= 0) {
+        const line = buf.slice(0, i).trim();
+        buf = buf.slice(i + 1);
+        if (!line.startsWith("data:")) continue;
+        const d = line.slice(5).trim();
+        if (!d || d === "[DONE]") continue;
+        try {
+          const ev = JSON.parse(d);
+          if (ev.type === "response.output_text.delta") raw += ev.delta || "";
+        } catch { /* ignore */ }
+      }
+    }
     let out: any = {};
-    try { out = JSON.parse(data.choices?.[0]?.message?.content || "{}"); } catch { out = {}; }
+    try { out = JSON.parse(raw || "{}"); } catch { out = {}; }
     const score = Math.max(0, Math.min(100, Math.round(Number(out.score) || 0)));
     const verdict = score >= 90 ? "excellent" : score >= 70 ? "good" : "retry";
     return json({
