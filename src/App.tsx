@@ -43,7 +43,6 @@ const ListeningActivityPage = lazy(() => import("./pages/ListeningActivityPage")
 const PronunciationPage = lazy(() => import("./pages/PronunciationPage"));
 const PronunciationActivityPage = lazy(() => import("./pages/PronunciationActivityPage"));
 const TalkPage = lazy(() => import("./pages/TalkPage"));
-const CourseLessonPage = lazy(() => import("./pages/CourseLessonPage"));
 const ProgressPage = lazy(() => import("./pages/ProgressPage"));
 const TeacherProfilePage = lazy(() => import("./pages/TeacherProfilePage"));
 const SelectTeacherPage = lazy(() => import("./pages/SelectTeacherPage"));
@@ -108,7 +107,6 @@ const App = () => (
                 <Route path="/pronunciation" element={<ProtectedRoute><PronunciationPage /></ProtectedRoute>} />
                 <Route path="/pronunciation/:activityId" element={<ProtectedRoute><PronunciationActivityPage /></ProtectedRoute>} />
                 <Route path="/talk" element={<ProtectedRoute><TalkPage /></ProtectedRoute>} />
-                <Route path="/lekcije/:lessonId" element={<ProtectedRoute><CourseLessonPage /></ProtectedRoute>} />
                 <Route path="/progress" element={<ProtectedRoute><ProgressPage /></ProtectedRoute>} />
                 <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
                 <Route path="/settings" element={<ProtectedRoute><SettingsPage /></ProtectedRoute>} />

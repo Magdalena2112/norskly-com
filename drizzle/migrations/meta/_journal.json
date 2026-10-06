@@ -22,13 +22,6 @@
       "when": 1791234405228,
       "tag": "0002_talk_voice_storage_policies",
       "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "7",
-      "when": 1791235917222,
-      "tag": "0003_create_course_lessons",
-      "breakpoints": true
     }
   ]
 }
