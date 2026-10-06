@@ -317,6 +317,46 @@ export default function PracticePage() {
     }
   };
 
+  const [pendingVoice, setPendingVoice] = useState<{ blob: Blob; type: string; url: string } | null>(null);
+
+  const discardVoice = () => {
+    if (pendingVoice) URL.revokeObjectURL(pendingVoice.url);
+    setPendingVoice(null);
+  };
+
+  const sendVoice = async () => {
+    if (!pendingVoice) return;
+    const { blob, type, url } = pendingVoice;
+    setPendingVoice(null);
+    setTranscribing(true);
+    try {
+      const fd = new FormData();
+      fd.append("file", new File([blob], `voice.${type.includes("mp4") ? "m4a" : "webm"}`, { type }));
+      fd.append("language", langCode);
+      const token = await getToken();
+      const r = await fetch(VOICE_URL, { method: "POST", headers: { Authorization: `Bearer ${token}` }, body: fd });
+      const data = await r.json().catch(() => ({}));
+      if (!r.ok || !data.text) {
+        toast.error(data.error || "Nisam razumeo snimak. Pokušaj ponovo.");
+        return;
+      }
+      let audioPath: string | undefined;
+      if (user) {
+        const path = `${user.id}/${Date.now()}.${type.includes("mp4") ? "m4a" : "webm"}`;
+        const { error: upErr } = await supabase.storage.from("talk-voice").upload(path, blob, { contentType: type });
+        if (upErr) console.error("Voice upload failed", upErr);
+        else audioPath = path;
+      }
+      setTranscribing(false);
+      await sendMessage(data.text, true, audioPath);
+    } catch {
+      toast.error("Transkripcija nije uspela.");
+    } finally {
+      setTranscribing(false);
+      URL.revokeObjectURL(url);
+    }
+  };
+
   const startRecording = async () => {
     if (!navigator.mediaDevices?.getUserMedia || typeof MediaRecorder === "undefined") {
       toast.error("Tvoj pretraživač ne podržava snimanje zvuka.");
@@ -328,37 +368,12 @@ export default function PracticePage() {
       const rec = new MediaRecorder(stream, mime ? { mimeType: mime } : undefined);
       chunksRef.current = [];
       rec.ondataavailable = (e) => { if (e.data.size) chunksRef.current.push(e.data); };
-      rec.onstop = async () => {
+      rec.onstop = () => {
         stream.getTracks().forEach((t) => t.stop());
         const type = (rec.mimeType || "audio/webm").split(";")[0].replace("video/", "audio/");
         const blob = new Blob(chunksRef.current, { type });
         if (blob.size < 1000) { toast.error("Snimak je prekratak."); return; }
-        setTranscribing(true);
-        try {
-          const fd = new FormData();
-          fd.append("file", new File([blob], `voice.${type.includes("mp4") ? "m4a" : "webm"}`, { type }));
-          fd.append("language", langCode);
-          const token = await getToken();
-          const r = await fetch(VOICE_URL, { method: "POST", headers: { Authorization: `Bearer ${token}` }, body: fd });
-          const data = await r.json().catch(() => ({}));
-          if (!r.ok || !data.text) {
-            toast.error(data.error || "Nisam razumeo snimak. Pokušaj ponovo.");
-            return;
-          }
-          let audioPath: string | undefined;
-          if (user) {
-            const path = `${user.id}/${Date.now()}.${type.includes("mp4") ? "m4a" : "webm"}`;
-            const { error: upErr } = await supabase.storage.from("talk-voice").upload(path, blob, { contentType: type });
-            if (upErr) console.error("Voice upload failed", upErr);
-            else audioPath = path;
-          }
-          setTranscribing(false);
-          await sendMessage(data.text, true, audioPath);
-        } catch {
-          toast.error("Transkripcija nije uspela.");
-        } finally {
-          setTranscribing(false);
-        }
+        setPendingVoice({ blob, type, url: URL.createObjectURL(blob) });
       };
       recorderRef.current = rec;
       rec.start();
@@ -1096,6 +1111,20 @@ export default function PracticePage() {
 
       {/* Input */}
       <div className="border-t border-border bg-background/80 backdrop-blur-md p-4">
+        {pendingVoice ? (
+          <div className="container max-w-3xl flex items-center gap-2 sm:gap-3">
+            <div className="flex-1 min-w-0 flex items-center gap-2 px-3 py-1.5 rounded-md border border-accent/40 bg-accent/5">
+              <span className="hidden sm:inline text-xs text-muted-foreground shrink-0">Preslušaj:</span>
+              <audio controls src={pendingVoice.url} className="w-full h-9" aria-label="Preslušaj svoju glasovnu poruku" />
+            </div>
+            <Button type="button" variant="outline" size="icon" className="h-12 w-12" onClick={discardVoice} aria-label="Obriši snimak">
+              <Trash2 className="w-5 h-5" />
+            </Button>
+            <Button type="button" variant="hero" size="icon" className="h-12 w-12" onClick={sendVoice} disabled={isLoading} aria-label="Pošalji glasovnu poruku">
+              <Send className="w-5 h-5" />
+            </Button>
+          </div>
+        ) : (
         <form
           onSubmit={(e) => { e.preventDefault(); sendMessage(input); }}
           className="container max-w-3xl flex gap-2 sm:gap-3"
@@ -1125,7 +1154,7 @@ export default function PracticePage() {
             className="h-12 w-12"
             onClick={recording ? stopRecording : startRecording}
             disabled={isLoading || transcribing}
-            aria-label={recording ? "Zaustavi i pošalji" : "Snimi glasovnu poruku"}
+            aria-label={recording ? "Zaustavi snimanje" : "Snimi glasovnu poruku"}
           >
             {recording ? <StopIcon className="w-5 h-5" /> : <Mic className="w-5 h-5" />}
           </Button>
@@ -1133,6 +1162,7 @@ export default function PracticePage() {
             <Send className="w-5 h-5" />
           </Button>
         </form>
+        )}
         <label className="container max-w-3xl mt-2 flex items-center gap-2 text-xs text-muted-foreground cursor-pointer select-none">
           <input
             type="checkbox"
