@@ -64,6 +64,13 @@
       "when": 1791309727986,
       "tag": "0008_approve_teacher_replaces_student_role",
       "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1791310176127,
+      "tag": "0009_fix_approve_teacher_existing_profile",
+      "breakpoints": true
     }
   ]
 }
