@@ -5,7 +5,7 @@ import { format } from "date-fns";
 import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import BackButton from "@/components/BackButton";
+import TeacherHeader from "@/components/teacher/TeacherHeader";
 import LanguageFilter, { LangBadge, type LangFilter } from "@/components/teacher/LanguageFilter";
 import { Shield, ArrowRight, Users } from "lucide-react";
 
@@ -26,12 +26,7 @@ export default function TeacherStudentsPage() {
 
   return (
     <div className="min-h-screen bg-fjord-soft">
-      <header className="border-b border-border/50 bg-cream/80 backdrop-blur-md sticky top-0 z-50">
-        <div className="container flex items-center gap-3 h-14">
-          <BackButton to="/teacher/dashboard" />
-          <span className="font-display font-bold text-lg text-primary">Moji učenici</span>
-        </div>
-      </header>
+      <TeacherHeader />
 
       <div className="container max-w-3xl py-8 space-y-4">
         <LanguageFilter value={lang} onChange={setLang} />

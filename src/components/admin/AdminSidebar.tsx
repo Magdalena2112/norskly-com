@@ -1,4 +1,4 @@
-import { LayoutDashboard, Users, CalendarDays, Clock, UserCog, LogOut, GraduationCap, UserCheck } from "lucide-react";
+import { LayoutDashboard, Users, CalendarDays, LogOut, GraduationCap, UserCheck } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
@@ -34,8 +34,6 @@ const groups = [
     label: "Nastava",
     items: [
       { title: "Časovi", url: "/admin/lessons", icon: CalendarDays },
-      { title: "Termini", url: "/admin/availability", icon: Clock },
-      { title: "Moj profil predavača", url: "/admin/teacher-profile", icon: UserCog },
     ],
   },
 ];

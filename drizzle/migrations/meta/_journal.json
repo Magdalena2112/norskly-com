@@ -78,6 +78,13 @@
       "when": 1791315941902,
       "tag": "0010_fix_approve_teacher_langs_array",
       "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "7",
+      "when": 1791317241591,
+      "tag": "0011_teacher_photo_upload",
+      "breakpoints": true
     }
   ]
 }

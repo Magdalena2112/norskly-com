@@ -57,8 +57,8 @@ const AdminStudentsPage = lazy(() => import("./pages/AdminStudentsPage"));
 const AdminTeachersPage = lazy(() => import("./pages/AdminTeachersPage"));
 const AdminStudentDetailPage = lazy(() => import("./pages/AdminStudentDetailPage"));
 const AdminLessonsPage = lazy(() => import("./pages/AdminLessonsPage"));
-const AdminAvailabilityPage = lazy(() => import("./pages/AdminAvailabilityPage"));
-const AdminTeacherProfilePage = lazy(() => import("./pages/AdminTeacherProfilePage"));
+const TeacherAvailabilityPage = lazy(() => import("./pages/TeacherAvailabilityPage"));
+const TeacherOwnProfilePage = lazy(() => import("./pages/TeacherOwnProfilePage"));
 const AdminTeacherApplicationsPage = lazy(() => import("./pages/AdminTeacherApplicationsPage"));
 const AdminTeacherApplicationDetailPage = lazy(() => import("./pages/AdminTeacherApplicationDetailPage"));
 const UnsubscribePage = lazy(() => import("./pages/UnsubscribePage"));
@@ -121,6 +121,8 @@ const App = () => (
                 <Route path="/teacher/dashboard" element={<ProtectedRoute><TeacherRoute><TeacherDashboardPage /></TeacherRoute></ProtectedRoute>} />
                 <Route path="/teacher/students" element={<ProtectedRoute><TeacherRoute><TeacherStudentsPage /></TeacherRoute></ProtectedRoute>} />
                 <Route path="/teacher/students/:studentId" element={<ProtectedRoute><TeacherRoute><TeacherStudentDetailPage /></TeacherRoute></ProtectedRoute>} />
+                <Route path="/teacher/availability" element={<ProtectedRoute><TeacherRoute><TeacherAvailabilityPage /></TeacherRoute></ProtectedRoute>} />
+                <Route path="/teacher/profile" element={<ProtectedRoute><TeacherRoute><TeacherOwnProfilePage /></TeacherRoute></ProtectedRoute>} />
                 <Route path="/my-lessons" element={<ProtectedRoute><MyLessonsPage /></ProtectedRoute>} />
                 {/* Admin routes */}
                 <Route path="/admin" element={<Navigate to="/admin/dashboard" replace />} />
@@ -129,8 +131,8 @@ const App = () => (
                 <Route path="/admin/teachers" element={<ProtectedRoute><AdminRoute><AdminTeachersPage /></AdminRoute></ProtectedRoute>} />
                 <Route path="/admin/students/:userId" element={<ProtectedRoute><AdminRoute><AdminStudentDetailPage /></AdminRoute></ProtectedRoute>} />
                 <Route path="/admin/lessons" element={<ProtectedRoute><AdminRoute><AdminLessonsPage /></AdminRoute></ProtectedRoute>} />
-                <Route path="/admin/availability" element={<ProtectedRoute><AdminRoute><AdminAvailabilityPage /></AdminRoute></ProtectedRoute>} />
-                <Route path="/admin/teacher-profile" element={<ProtectedRoute><AdminRoute><AdminTeacherProfilePage /></AdminRoute></ProtectedRoute>} />
+                <Route path="/admin/availability" element={<Navigate to="/admin/dashboard" replace />} />
+                <Route path="/admin/teacher-profile" element={<Navigate to="/admin/dashboard" replace />} />
                 <Route path="/admin/teacher-applications" element={<ProtectedRoute><AdminRoute><AdminTeacherApplicationsPage /></AdminRoute></ProtectedRoute>} />
                 <Route path="/admin/teacher-applications/:id" element={<ProtectedRoute><AdminRoute><AdminTeacherApplicationDetailPage /></AdminRoute></ProtectedRoute>} />
                 <Route path="/unsubscribe" element={<UnsubscribePage />} />

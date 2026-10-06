@@ -9,6 +9,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import TeacherHeader from "@/components/teacher/TeacherHeader";
 import TeacherOfferManager from "@/components/teacher/TeacherOfferManager";
 import LanguageFilter, { LangBadge, type LangFilter } from "@/components/teacher/LanguageFilter";
 import { Calendar, Users, ArrowRight, ClipboardList, LogOut, Shield, Sparkles } from "lucide-react";
@@ -71,14 +72,7 @@ export default function TeacherDashboardPage() {
 
   return (
     <div className="min-h-screen bg-fjord-soft">
-      <header className="border-b border-border/50 bg-cream/80 backdrop-blur-md sticky top-0 z-50">
-        <div className="container flex items-center justify-between gap-3 h-14">
-          <span className="font-display font-bold text-lg text-primary">Profesorski panel</span>
-          <Button variant="ghost" size="sm" onClick={async () => { await (signOut ? signOut() : supabase.auth.signOut()); navigate("/profesori/prijava"); }}>
-            <LogOut className="w-4 h-4 sm:mr-1" /><span className="hidden sm:inline">Odjavi se</span>
-          </Button>
-        </div>
-      </header>
+      <TeacherHeader />
 
       <div className="container max-w-4xl py-8 space-y-6">
         <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}>
