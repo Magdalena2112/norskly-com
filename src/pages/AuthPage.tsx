@@ -24,24 +24,29 @@ export default function AuthPage() {
   const navigate = useNavigate();
   const { toast } = useToast();
   const [searchParams] = useSearchParams();
+  const VALID = ["norveski", "engleski", "nemacki"];
+  const urlLangParam = searchParams.get("lang");
+  const lockedLang = urlLangParam && VALID.includes(urlLangParam) ? urlLangParam : null;
+  const [pickedLang, setPickedLang] = useState<string | null>(lockedLang);
+  useEffect(() => { if (lockedLang) setPickedLang(lockedLang); }, [lockedLang]);
 
-  // Persist language/plan choice from the journey
+  // Persist plan choice from the journey
   useEffect(() => {
-    const lang = searchParams.get("lang");
     const plan = searchParams.get("plan");
-    if (lang) localStorage.setItem("norskly_selected_language", lang);
     if (plan) localStorage.setItem("norskly_selected_plan", plan);
   }, [searchParams]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!pickedLang) {
+      toast({ title: "Izaberi jezik", description: "Izaberi jezik na koji se prijavljuješ.", variant: "destructive" });
+      return;
+    }
     setLoading(true);
 
     try {
-      // Namera važi SAMO ako je jezik došao iz URL-a (klik na jezik u ovoj prijavi).
-      // Stari zapamćeni izbor ne sme da pregazi profil iz baze.
-      const urlLang = searchParams.get("lang");
-      const intentLang = urlLang || null;
+      // Jezik je uvek eksplicitan: sa jezičke stranice (URL) ili izabran ovde.
+      const intentLang = pickedLang;
       const selectedPlan = localStorage.getItem("norskly_selected_plan");
 
       const slugToCode = (slug: string): "no" | "en" | "de" =>
@@ -57,8 +62,7 @@ export default function AuthPage() {
             .eq("user_id", data.user.id)
             .maybeSingle();
 
-          // Namera iz URL-a pobeđuje sačuvani preferred_language; inače baza.
-          const lang = intentLang || prof?.preferred_language || "norveski";
+          const lang = intentLang;
           const plan = prof?.subscription_type || selectedPlan;
           localStorage.setItem("norskly_selected_language", lang);
           try { sessionStorage.setItem("norskly_language_intent", lang); } catch { /* ignore */ }
@@ -89,7 +93,7 @@ export default function AuthPage() {
         navigate("/practice");
 
       } else {
-        const signupLang = intentLang || "norveski";
+        const signupLang = intentLang;
         localStorage.setItem("norskly_selected_language", signupLang);
         const { data, error } = await supabase.auth.signUp({
           email,
@@ -166,6 +170,36 @@ export default function AuthPage() {
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="space-y-2">
+                <Label>{lockedLang ? "Jezik" : "Izaberi jezik"}</Label>
+                {lockedLang ? (
+                  <p className="text-sm font-medium text-primary">
+                    {lockedLang === "engleski" ? "🇬🇧 Engleski" : lockedLang === "nemacki" ? "🇩🇪 Nemački" : "🇳🇴 Norveški"}
+                  </p>
+                ) : (
+                  <div className="grid grid-cols-3 gap-2">
+                    {[
+                      ["norveski", "🇳🇴 Norveški"],
+                      ["engleski", "🇬🇧 Engleski"],
+                      ["nemacki", "🇩🇪 Nemački"],
+                    ].map(([slug, label]) => (
+                      <button
+                        key={slug}
+                        type="button"
+                        onClick={() => setPickedLang(slug)}
+                        aria-pressed={pickedLang === slug}
+                        className={`rounded-full border px-2 py-2 text-xs sm:text-sm transition-colors ${
+                          pickedLang === slug
+                            ? "border-primary bg-primary text-primary-foreground"
+                            : "border-border bg-background/60 text-foreground hover:bg-secondary/60"
+                        }`}
+                      >
+                        {label}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
               <div className="space-y-2">
                 <Label htmlFor="email">Email</Label>
                 <Input
