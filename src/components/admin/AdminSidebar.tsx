@@ -1,4 +1,4 @@
-import { LayoutDashboard, Users, CalendarDays, Clock, UserCog, LogOut, GraduationCap } from "lucide-react";
+import { LayoutDashboard, Users, CalendarDays, Clock, UserCog, LogOut, GraduationCap, UserCheck } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
@@ -26,6 +26,7 @@ const groups = [
     label: "Ljudi",
     items: [
       { title: "Prijave profesora", url: "/admin/teacher-applications", icon: GraduationCap, badge: true },
+      { title: "Profesori", url: "/admin/teachers", icon: UserCheck },
       { title: "Učenici", url: "/admin/students", icon: Users },
     ],
   },

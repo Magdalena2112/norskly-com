@@ -54,7 +54,7 @@ export default function AdminDashboardPage() {
   const stats = [
     { label: "Učenici", value: data?.students.length ?? 0, sub: `${data?.activeWeek ?? 0} aktivno ove nedelje`, icon: Users, to: "/admin/students" },
     { label: "Prijave na čekanju", value: data?.pending.length ?? 0, sub: "profesori čekaju odluku", icon: GraduationCap, to: "/admin/teacher-applications", highlight: (data?.pending.length ?? 0) > 0 },
-    { label: "Aktivni profesori", value: data?.activeTeachers ?? 0, sub: "drže nastavu", icon: UserCheck, to: "/admin/teacher-applications" },
+    { label: "Aktivni profesori", value: data?.activeTeachers ?? 0, sub: "drže nastavu", icon: UserCheck, to: "/admin/teachers" },
     { label: "Časovi", value: data?.scheduledCount ?? 0, sub: `zakazano · ${data?.completedCount ?? 0} održano`, icon: CalendarDays, to: "/admin/lessons" },
   ];
 
