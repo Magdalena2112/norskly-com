@@ -1111,6 +1111,20 @@ export default function PracticePage() {
 
       {/* Input */}
       <div className="border-t border-border bg-background/80 backdrop-blur-md p-4">
+        {pendingVoice ? (
+          <div className="container max-w-3xl flex items-center gap-2 sm:gap-3">
+            <div className="flex-1 min-w-0 flex items-center gap-2 px-3 py-1.5 rounded-md border border-accent/40 bg-accent/5">
+              <span className="hidden sm:inline text-xs text-muted-foreground shrink-0">Preslušaj:</span>
+              <audio controls src={pendingVoice.url} className="w-full h-9" aria-label="Preslušaj svoju glasovnu poruku" />
+            </div>
+            <Button type="button" variant="outline" size="icon" className="h-12 w-12" onClick={discardVoice} aria-label="Obriši snimak">
+              <Trash2 className="w-5 h-5" />
+            </Button>
+            <Button type="button" variant="hero" size="icon" className="h-12 w-12" onClick={sendVoice} disabled={isLoading} aria-label="Pošalji glasovnu poruku">
+              <Send className="w-5 h-5" />
+            </Button>
+          </div>
+        ) : (
         <form
           onSubmit={(e) => { e.preventDefault(); sendMessage(input); }}
           className="container max-w-3xl flex gap-2 sm:gap-3"
@@ -1140,7 +1154,7 @@ export default function PracticePage() {
             className="h-12 w-12"
             onClick={recording ? stopRecording : startRecording}
             disabled={isLoading || transcribing}
-            aria-label={recording ? "Zaustavi i pošalji" : "Snimi glasovnu poruku"}
+            aria-label={recording ? "Zaustavi snimanje" : "Snimi glasovnu poruku"}
           >
             {recording ? <StopIcon className="w-5 h-5" /> : <Mic className="w-5 h-5" />}
           </Button>
@@ -1148,6 +1162,7 @@ export default function PracticePage() {
             <Send className="w-5 h-5" />
           </Button>
         </form>
+        )}
         <label className="container max-w-3xl mt-2 flex items-center gap-2 text-xs text-muted-foreground cursor-pointer select-none">
           <input
             type="checkbox"
