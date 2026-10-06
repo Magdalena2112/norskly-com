@@ -46,6 +46,7 @@ const TalkPage = lazy(() => import("./pages/TalkPage"));
 const ProgressPage = lazy(() => import("./pages/ProgressPage"));
 const TeacherProfilePage = lazy(() => import("./pages/TeacherProfilePage"));
 const SelectTeacherPage = lazy(() => import("./pages/SelectTeacherPage"));
+const TeacherAuthPage = lazy(() => import("./pages/TeacherAuthPage"));
 const BookingSuccessPage = lazy(() => import("./pages/BookingSuccessPage"));
 const TeacherDashboardPage = lazy(() => import("./pages/TeacherDashboardPage"));
 const TeacherStudentsPage = lazy(() => import("./pages/TeacherStudentsPage"));
@@ -91,6 +92,8 @@ const App = () => (
                 <Route path="/" element={<LandingPage />} />
                 <Route path="/home" element={<HomeRedirect />} />
                 <Route path="/za-profesore" element={<ForTeachersPage />} />
+                <Route path="/profesori/prijava" element={<TeacherAuthPage mode="login" />} />
+                <Route path="/profesori/aktivacija" element={<TeacherAuthPage mode="activate" />} />
                 <Route path="/relocation-hub" element={<RelocationHubPage />} />
                 <Route path="/relocation-hub/:countryId" element={<RelocationHubPage />} />
                 <Route path="/jezici/:slug" element={<LanguagePage />} />

@@ -75,12 +75,26 @@ export default function AdminTeacherApplicationDetailPage() {
       if (error) throw error;
 
       if (action === "approve") {
-        const result = data as { role_granted?: boolean } | null;
+        const result = data as { has_account?: boolean; email?: string; name?: string } | null;
+        const email = result?.email || app?.email;
+        const path = result?.has_account ? "/profesori/prijava" : "/profesori/aktivacija";
+        const { error: mailErr } = await supabase.functions.invoke("send-transactional-email", {
+          body: {
+            templateName: "teacher-approved",
+            recipientEmail: email,
+            idempotencyKey: `teacher-approved-${id}`,
+            templateData: {
+              name: (result?.name || app?.full_name || "").split(" ")[0],
+              hasAccount: !!result?.has_account,
+              activationUrl: `${window.location.origin}${path}?email=${encodeURIComponent(email || "")}`,
+            },
+          },
+        });
         toast({
           title: "Prijava odobrena",
-          description: result?.role_granted
-            ? "Kandidat je dobio pristup profesorskim alatima."
-            : "Status ažuriran. Korisnički nalog nije pronađen — uloga će biti dodeljena kada se registruje sa istim email-om.",
+          description: mailErr
+            ? "Profil profesora je kreiran, ali email pozivnica nije poslata."
+            : "Profil profesora je kreiran i pozivnica je poslata na email.",
         });
       } else {
         toast({ title: "Prijava odbijena", description: "Status je ažuriran." });

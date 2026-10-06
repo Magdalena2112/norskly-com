@@ -1173,6 +1173,131 @@ export type Database = {
         }
         Relationships: []
       }
+      teacher_assignments: {
+        Row: {
+          created_at: string
+          description: string
+          due_date: string | null
+          feedback: string | null
+          id: string
+          language: string
+          resource_url: string | null
+          reviewed_at: string | null
+          status: string
+          student_id: string
+          submission_text: string | null
+          submitted_at: string | null
+          teacher_id: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string
+          due_date?: string | null
+          feedback?: string | null
+          id?: string
+          language?: string
+          resource_url?: string | null
+          reviewed_at?: string | null
+          status?: string
+          student_id: string
+          submission_text?: string | null
+          submitted_at?: string | null
+          teacher_id: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string
+          due_date?: string | null
+          feedback?: string | null
+          id?: string
+          language?: string
+          resource_url?: string | null
+          reviewed_at?: string | null
+          status?: string
+          student_id?: string
+          submission_text?: string | null
+          submitted_at?: string | null
+          teacher_id?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "teacher_assignments_teacher_id_fkey"
+            columns: ["teacher_id"]
+            isOneToOne: false
+            referencedRelation: "teachers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      teacher_lesson_notes: {
+        Row: {
+          covered: string
+          created_at: string
+          id: string
+          language: string
+          lesson_id: string | null
+          next_plan: string
+          revisit: string
+          shared_with_student: boolean
+          struggles: string
+          student_id: string
+          student_summary: string
+          teacher_id: string
+          updated_at: string
+        }
+        Insert: {
+          covered?: string
+          created_at?: string
+          id?: string
+          language?: string
+          lesson_id?: string | null
+          next_plan?: string
+          revisit?: string
+          shared_with_student?: boolean
+          struggles?: string
+          student_id: string
+          student_summary?: string
+          teacher_id: string
+          updated_at?: string
+        }
+        Update: {
+          covered?: string
+          created_at?: string
+          id?: string
+          language?: string
+          lesson_id?: string | null
+          next_plan?: string
+          revisit?: string
+          shared_with_student?: boolean
+          struggles?: string
+          student_id?: string
+          student_summary?: string
+          teacher_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "teacher_lesson_notes_lesson_id_fkey"
+            columns: ["lesson_id"]
+            isOneToOne: false
+            referencedRelation: "lessons"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "teacher_lesson_notes_teacher_id_fkey"
+            columns: ["teacher_id"]
+            isOneToOne: false
+            referencedRelation: "teachers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       teacher_profile: {
         Row: {
           bio: string
@@ -1231,6 +1356,7 @@ export type Database = {
           rating: number
           spoken_languages: string[]
           students_count: number
+          teaching_languages: string[]
           updated_at: string
           user_id: string | null
         }
@@ -1249,6 +1375,7 @@ export type Database = {
           rating?: number
           spoken_languages?: string[]
           students_count?: number
+          teaching_languages?: string[]
           updated_at?: string
           user_id?: string | null
         }
@@ -1267,6 +1394,7 @@ export type Database = {
           rating?: number
           spoken_languages?: string[]
           students_count?: number
+          teaching_languages?: string[]
           updated_at?: string
           user_id?: string | null
         }
@@ -1554,6 +1682,8 @@ export type Database = {
         }
         Returns: string
       }
+      claim_teacher_account: { Args: never; Returns: boolean }
+      current_teacher_id: { Args: never; Returns: string }
       delete_email: {
         Args: { message_id: number; queue_name: string }
         Returns: boolean
@@ -1589,6 +1719,18 @@ export type Database = {
           rating: number
           spoken_languages: string[]
           students_count: number
+        }[]
+      }
+      get_my_students: {
+        Args: never
+        Returns: {
+          consent_granted: boolean
+          display_name: string
+          languages: string[]
+          last_lesson: string
+          lessons_count: number
+          next_lesson: string
+          student_id: string
         }[]
       }
       get_teacher_email: { Args: never; Returns: string }
@@ -1652,9 +1794,19 @@ export type Database = {
         Args: { _application_id: string; _notes?: string }
         Returns: undefined
       }
+      teacher_has_student: {
+        Args: { _student_id: string; _teacher_id: string }
+        Returns: boolean
+      }
     }
     Enums: {
-      app_role: "admin" | "moderator" | "user" | "admin_teacher" | "student"
+      app_role:
+        | "admin"
+        | "moderator"
+        | "user"
+        | "admin_teacher"
+        | "student"
+        | "teacher"
       lesson_kind: "individual" | "group" | "course"
     }
     CompositeTypes: {
@@ -1783,7 +1935,14 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
-      app_role: ["admin", "moderator", "user", "admin_teacher", "student"],
+      app_role: [
+        "admin",
+        "moderator",
+        "user",
+        "admin_teacher",
+        "student",
+        "teacher",
+      ],
       lesson_kind: ["individual", "group", "course"],
     },
   },
