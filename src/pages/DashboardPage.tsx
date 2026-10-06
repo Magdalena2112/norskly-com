@@ -9,6 +9,7 @@ import XpProgressCard from "@/components/XpProgressCard";
 import { useNavigate, useParams } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import WeeklyDigest from "@/components/WeeklyDigest";
+import TeacherWorkWidget from "@/components/student/TeacherWorkWidget";
 import { format } from "date-fns";
 import StudentLayout from "@/components/student/StudentLayout";
 import NordicBackdrop from "@/components/student/NordicBackdrop";
@@ -140,6 +141,8 @@ export default function DashboardPage() {
         )}
 
         <WeeklyDigest />
+
+        <TeacherWorkWidget language={code} />
 
         <div className="mt-10 mb-5 flex items-center gap-3">
           <span className="h-px flex-1 bg-border" />
