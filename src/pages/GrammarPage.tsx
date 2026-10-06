@@ -144,8 +144,10 @@ export default function GrammarPage() {
 interface ExerciseState {
   answer: string;
   attempts: number;
-  status: "pending" | "correct" | "revealed";
+  status: "pending" | "correct" | "skipped";
   feedback: string;
+  analysis?: string;
+  checking?: boolean;
   logged: boolean;
 }
 
@@ -153,15 +155,10 @@ function normalizeAnswer(s: string) {
   return s.trim().toLowerCase().replace(/\s+/g, " ");
 }
 
-function getHint(attempt: number, solution: string, answer: string): string {
-  const hints = [
-    "Obrati pažnju na oblik reči.",
-    "Razmisli o redosledu reči u rečenici.",
-    "Pogledaj da li je potreban određeni član ili predlog.",
-  ];
-  if (attempt === 1) return hints[0];
-  if (attempt === 2) return "Blizu si! Proveri još jednom pravopis i oblik.";
-  return hints[Math.min(attempt - 1, hints.length - 1)];
+function fallbackHint(attempt: number): string {
+  if (attempt === 1) return "Obrati pažnju na oblik reči i pravilo iz teme.";
+  if (attempt === 2) return "Pogledaj koji deo rečenice određuje oblik (vreme, rod, član, red reči).";
+  return "Blizu si — proveri nastavak i pravopis.";
 }
 
 function ExercisesTab({ level, userId, initialTopic, onGoToExplain }: { level: string; userId?: string; initialTopic?: string; onGoToExplain?: (topic: string) => void }) {
@@ -225,7 +222,24 @@ function ExercisesTab({ level, userId, initialTopic, onGoToExplain }: { level: s
       }
     } else {
       const newAttempts = st.attempts + 1;
-      // Log error on each wrong attempt
+      updateState(i, { checking: true, attempts: newAttempts });
+      let analysis = "";
+      let hint = "";
+      let aiCorrect = false;
+      try {
+        const res = await callGrammarAI({
+          action: "check_exercise", level, text: ex.sentence, topic: st.answer, count: ex.solution, attempt_no: newAttempts,
+        });
+        aiCorrect = !!res?.is_correct;
+        analysis = typeof res?.analysis === "string" ? res.analysis : "";
+        hint = typeof res?.hint === "string" ? res.hint : "";
+      } catch (e) {
+        console.error(e);
+      }
+      if (aiCorrect) {
+        updateState(i, { checking: false, status: "correct", feedback: hint || "Odlično! Tačan odgovor. 🎉", analysis: "" });
+        return;
+      }
       if (userId) {
         await logErrors(userId, "grammar", "exercise_check", [{
           category: "exercise_mistake",
@@ -235,20 +249,12 @@ function ExercisesTab({ level, userId, initialTopic, onGoToExplain }: { level: s
           example_correct: ex.solution,
         }], ex.sentence, newAttempts);
       }
-      if (newAttempts >= 3) {
-        updateState(i, { status: "revealed", attempts: newAttempts, feedback: "" });
-        if (userId && !st.logged) {
-          updateState(i, { logged: true });
-        }
-      } else {
-        const hint = getHint(newAttempts, ex.solution, st.answer);
-        updateState(i, { attempts: newAttempts, feedback: hint });
-      }
+      updateState(i, { checking: false, analysis, feedback: hint || fallbackHint(newAttempts) });
     }
   };
 
-  const reveal = (i: number) => {
-    updateState(i, { status: "revealed", feedback: "" });
+  const skip = (i: number) => {
+    updateState(i, { status: "skipped", feedback: "", analysis: "" });
   };
 
   const allDone = states.length > 0 && states.every((s) => s.status !== "pending");
@@ -271,7 +277,7 @@ function ExercisesTab({ level, userId, initialTopic, onGoToExplain }: { level: s
         session_type: "exercise",
         topic,
         questions: exercises.map((e) => ({ instruction: e.instruction, sentence: e.sentence })),
-        user_answers: states.map((s) => s.answer || (s.status === "revealed" ? "(prikazano)" : "")),
+        user_answers: states.map((s) => s.answer || (s.status === "skipped" ? "(preskočeno)" : "")),
         correct_answers: exercises.map((e) => e.solution),
         score: correctCount,
         total: states.length,
@@ -334,10 +340,8 @@ function ExercisesTab({ level, userId, initialTopic, onGoToExplain }: { level: s
                     </motion.div>
                   )}
 
-                  {st.status === "revealed" && (
-                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="p-3 rounded-lg bg-muted">
-                      <p className="text-sm font-medium text-foreground">Rešenje: <span className="text-accent">{ex.solution}</span></p>
-                    </motion.div>
+                  {st.status === "skipped" && (
+                    <p className="text-xs text-muted-foreground italic">Zadatak preskočen.</p>
                   )}
 
                   {st.status === "pending" && (
@@ -354,19 +358,20 @@ function ExercisesTab({ level, userId, initialTopic, onGoToExplain }: { level: s
                           variant="hero"
                           size="sm"
                           onClick={() => checkAnswer(i)}
-                          disabled={!st.answer.trim()}
+                          disabled={!st.answer.trim() || st.checking}
                         >
-                          Proveri
+                          {st.checking ? <Loader2 className="w-4 h-4 animate-spin" /> : "Proveri"}
                         </Button>
                       </div>
 
                       {st.feedback && (
                         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="p-3 rounded-lg bg-destructive/10 border border-destructive/20">
-                          <p className="text-sm text-foreground flex items-center gap-2">
-                            <Lightbulb className="w-4 h-4 text-accent shrink-0" />
+                          {st.analysis && <p className="text-sm text-foreground mb-2">{st.analysis}</p>}
+                          <p className="text-sm text-foreground flex items-start gap-2">
+                            <Lightbulb className="w-4 h-4 text-accent shrink-0 mt-0.5" />
                             {st.feedback}
                           </p>
-                          <p className="text-xs text-muted-foreground mt-1">Pokušaj {st.attempts}/3</p>
+                          <p className="text-xs text-muted-foreground mt-1">Pokušaj {st.attempts}</p>
                         </motion.div>
                       )}
 
@@ -374,9 +379,9 @@ function ExercisesTab({ level, userId, initialTopic, onGoToExplain }: { level: s
                         variant="ghost"
                         size="sm"
                         className="text-xs text-muted-foreground"
-                        onClick={() => reveal(i)}
+                        onClick={() => skip(i)}
                       >
-                        <Eye className="w-3 h-3 mr-1" /> Prikaži rešenje
+                        Preskoči zadatak
                       </Button>
                     </>
                   )}

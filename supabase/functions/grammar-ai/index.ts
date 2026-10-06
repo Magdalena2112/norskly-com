@@ -378,6 +378,14 @@ VAŽNA UPUTSTVA:
       }
     }
 
+    // Never leak the solution in guided feedback
+    if (action === "check_exercise" && parsed && !parsed.is_correct) {
+      const sol = String(count ?? "").trim().toLowerCase();
+      const leaks = (v: unknown) => sol.length > 1 && typeof v === "string" && v.toLowerCase().includes(sol);
+      if (leaks(parsed.hint)) parsed.hint = "Pogledaj ponovo signale u rečenici i pravilo koje ih određuje — blizu si.";
+      if (leaks(parsed.analysis)) parsed.analysis = "Tvoj odgovor još nije u tačnom obliku.";
+    }
+
     // Save correction to grammar_submissions (now language-aware)
     if (action === "correct_text") {
       await supabase.from("grammar_submissions").insert({
