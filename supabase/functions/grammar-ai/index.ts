@@ -185,18 +185,28 @@ Odgovori ISKLJUČIVO u JSON formatu, bez markdown-a. Format:
       userPrompt = `Generiši ${count || 5} vežbi na temu "${topic}". Jezik: ${lang.native}. Nivo: ${level}. Svaka vežba treba da ima rečenicu sa blankom i rešenje.`;
     } else if (action === "check_exercise") {
       errorLimit = 2;
-      systemPrompt = `Ti si nastavnik ${lang.promptName}. Korisnik pokušava da reši gramatičku vežbu.
+      const attemptN = Number(attempt_no) || 1;
+      const stage = attemptN <= 1
+        ? "1. pokušaj: imenuj TIP greške (npr. vreme, rod, član, red reči, predlog, oblik glagola) i usmeri pažnju na pravilo. Bez konkretnih slova ili oblika."
+        : attemptN === 2
+        ? "2. pokušaj: daj konkretniji trag — objasni pravilo primenjeno na ovu rečenicu (npr. koji signal u rečenici određuje oblik, kojoj grupi glagol pripada)."
+        : "3+. pokušaj: daj vrlo blizak trag (npr. kojim nastavkom se završava, koliko reči ima, početno slovo), ali NIKADA ceo odgovor.";
+      systemPrompt = `Ti si strpljiv nastavnik ${lang.promptName}. Učenik rešava vežbu sa prazninom i dao je odgovor. Vodi ga sokratskim metodom do tačnog odgovora.
+Analiziraj TAČNO ono što je učenik napisao u odnosu na tačan odgovor: šta je dobro (npr. značenje, osnova reči) i šta je pogrešno (oblik, vreme, rod, član, red reči, pravopis).
+${stage}
+STROGO ZABRANJENO: napisati tačan odgovor, bilo celu reč/frazu tačnog rešenja, ili ga prevesti. Ako je odgovor tačan osim sitne slovne greške ili velikog slova, označi is_correct: true.
 Odgovori ISKLJUČIVO u JSON formatu, bez markdown-a. Format:
 {
   "is_correct": true/false,
-  "hint": "Ako je netačno: kratki hint na srpskom koji ukazuje na pravilo, bez davanja odgovora. Ako je tačno: kratka pohvala.",
   "close": true/false,
+  "analysis": "1–2 rečenice na srpskom: šta je učenik uradio i u čemu je greška (bez otkrivanja rešenja)",
+  "hint": "1 rečenica na srpskom: usmeravajuće pitanje ili trag prema tačnom odgovoru (bez otkrivanja rešenja). Ako je tačno: kratka pohvala.",
   "_errors": [...]
 }
 ${ERROR_EXTRACT_BLOCK}
 OGRANIČENJE: Maksimalno ${errorLimit} greške u _errors nizu.
-Ako je tačan odgovor, "_errors" mora biti prazan niz.` + qualityCheck;
-      userPrompt = `Vežba: "${text}"\nKorisnikov odgovor: "${topic}"\nTačan odgovor: "${count}"\nJezik: ${lang.native}\nNivo: ${level}\nBroj pokušaja: ${attempt_no || 1}`;
+Ako je tačan odgovor, "_errors" mora biti prazan niz.`;
+      userPrompt = `Vežba: "${text}"\nKorisnikov odgovor: "${topic}"\nTačan odgovor (NE OTKRIVAJ GA): "${count}"\nJezik: ${lang.native}\nNivo: ${level}\nBroj pokušaja: ${attemptN}`;
     } else if (action === "correct_text") {
       errorLimit = 5;
       systemPrompt = `Ti si nastavnik ${lang.promptName}. Ispravljaš tekst korisnika na nivou ${level}.
@@ -366,6 +376,14 @@ VAŽNA UPUTSTVA:
         console.error("No JSON found in AI response:", content);
         throw new Error("Invalid AI response format");
       }
+    }
+
+    // Never leak the solution in guided feedback
+    if (action === "check_exercise" && parsed && !parsed.is_correct) {
+      const sol = String(count ?? "").trim().toLowerCase();
+      const leaks = (v: unknown) => sol.length > 1 && typeof v === "string" && v.toLowerCase().includes(sol);
+      if (leaks(parsed.hint)) parsed.hint = "Pogledaj ponovo signale u rečenici i pravilo koje ih određuje — blizu si.";
+      if (leaks(parsed.analysis)) parsed.analysis = "Tvoj odgovor još nije u tačnom obliku.";
     }
 
     // Save correction to grammar_submissions (now language-aware)
