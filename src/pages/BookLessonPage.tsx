@@ -89,18 +89,14 @@ export default function BookLessonPage() {
         }
       }
 
-      // Email to teacher
-      const { data: teacherEmail } = await supabase
-        .rpc("get_teacher_email");
-
-      if (teacherEmail) {
+      // Email to teacher — recipient resolved server-side from the lesson
+      {
         try {
           const { error: teacherEmailError } = await supabase.functions.invoke("send-transactional-email", {
             body: {
               templateName: "lesson-booked-teacher",
-              recipientEmail: teacherEmail,
               idempotencyKey: `lesson-teacher-${lessonId}`,
-              templateData: { studentName, date: dateStr, time: timeStr, note: note || undefined },
+              templateData: { lessonId, studentName, date: dateStr, time: timeStr, note: note || undefined },
             },
           });
           if (teacherEmailError) console.error("Teacher email failed:", teacherEmailError);
