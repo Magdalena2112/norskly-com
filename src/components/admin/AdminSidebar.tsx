@@ -1,6 +1,8 @@
 import { LayoutDashboard, Users, CalendarDays, Clock, UserCog, LogOut, GraduationCap } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/context/AuthContext";
 import {
   Sidebar,
@@ -14,15 +16,27 @@ import {
   SidebarFooter,
   useSidebar,
 } from "@/components/ui/sidebar";
-import { Button } from "@/components/ui/button";
 
-const items = [
-  { title: "Kontrolna tabla", url: "/admin/dashboard", icon: LayoutDashboard },
-  { title: "Studenti", url: "/admin/students", icon: Users },
-  { title: "Lekcije", url: "/admin/lessons", icon: CalendarDays },
-  { title: "Termini", url: "/admin/availability", icon: Clock },
-  { title: "Profil nastavnika", url: "/admin/teacher-profile", icon: UserCog },
-  { title: "Prijave profesora", url: "/admin/teacher-applications", icon: GraduationCap },
+const groups = [
+  {
+    label: "Pregled",
+    items: [{ title: "Kontrolna tabla", url: "/admin/dashboard", icon: LayoutDashboard }],
+  },
+  {
+    label: "Ljudi",
+    items: [
+      { title: "Prijave profesora", url: "/admin/teacher-applications", icon: GraduationCap, badge: true },
+      { title: "Učenici", url: "/admin/students", icon: Users },
+    ],
+  },
+  {
+    label: "Nastava",
+    items: [
+      { title: "Časovi", url: "/admin/lessons", icon: CalendarDays },
+      { title: "Termini", url: "/admin/availability", icon: Clock },
+      { title: "Moj profil predavača", url: "/admin/teacher-profile", icon: UserCog },
+    ],
+  },
 ];
 
 export function AdminSidebar() {
@@ -32,43 +46,51 @@ export function AdminSidebar() {
   const navigate = useNavigate();
   const { signOut } = useAuth();
 
+  const { data: pendingCount = 0 } = useQuery({
+    queryKey: ["admin-pending-applications-count"],
+    queryFn: async () => {
+      const { count } = await supabase
+        .from("teacher_applications")
+        .select("id", { count: "exact", head: true })
+        .eq("status", "pending");
+      return count ?? 0;
+    },
+    staleTime: 60_000,
+  });
+
   const isActive = (path: string) =>
     location.pathname === path || location.pathname.startsWith(path + "/");
 
   return (
     <Sidebar collapsible="icon">
       <SidebarContent>
-        <SidebarGroup>
-          <SidebarGroupLabel>Upravljanje</SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              {items.map((item) => (
-                <SidebarMenuItem key={item.url}>
-                  <SidebarMenuButton asChild isActive={isActive(item.url)}>
-                    <NavLink to={item.url} end={item.url === "/admin/dashboard"} className="hover:bg-sidebar-accent/50" activeClassName="bg-sidebar-accent text-sidebar-accent-foreground font-medium">
-                      <item.icon className="mr-2 h-4 w-4" />
-                      {!collapsed && <span>{item.title}</span>}
-                    </NavLink>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
+        {groups.map((g) => (
+          <SidebarGroup key={g.label}>
+            <SidebarGroupLabel>{g.label}</SidebarGroupLabel>
+            <SidebarGroupContent>
+              <SidebarMenu>
+                {g.items.map((item: any) => (
+                  <SidebarMenuItem key={item.url}>
+                    <SidebarMenuButton asChild isActive={isActive(item.url)}>
+                      <NavLink to={item.url} end={item.url === "/admin/dashboard"} className="hover:bg-sidebar-accent/50" activeClassName="bg-sidebar-accent text-sidebar-accent-foreground font-medium">
+                        <item.icon className="mr-2 h-4 w-4" />
+                        {!collapsed && <span className="flex-1">{item.title}</span>}
+                        {!collapsed && item.badge && pendingCount > 0 && (
+                          <span className="ml-auto rounded-full bg-accent text-accent-foreground text-xs px-2 py-0.5">
+                            {pendingCount}
+                          </span>
+                        )}
+                      </NavLink>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                ))}
+              </SidebarMenu>
+            </SidebarGroupContent>
+          </SidebarGroup>
+        ))}
       </SidebarContent>
       <SidebarFooter>
         <SidebarMenu>
-          <SidebarMenuItem>
-            <SidebarMenuButton asChild>
-              <button
-                onClick={() => navigate("/practice")}
-                className="flex items-center w-full hover:bg-sidebar-accent/50 text-sidebar-foreground"
-              >
-                <LayoutDashboard className="mr-2 h-4 w-4" />
-                {!collapsed && <span>Student panel</span>}
-              </button>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
           <SidebarMenuItem>
             <SidebarMenuButton asChild>
               <button

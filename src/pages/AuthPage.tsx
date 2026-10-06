@@ -38,7 +38,7 @@ export default function AuthPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!pickedLang) {
+    if (!pickedLang && !isLogin) {
       toast({ title: "Izaberi jezik", description: "Izaberi jezik na koji se prijavljuješ.", variant: "destructive" });
       return;
     }
@@ -46,7 +46,7 @@ export default function AuthPage() {
 
     try {
       // Jezik je uvek eksplicitan: sa jezičke stranice (URL) ili izabran ovde.
-      const intentLang = pickedLang;
+      const intentLang = pickedLang as string;
       const selectedPlan = localStorage.getItem("norskly_selected_plan");
 
       const slugToCode = (slug: string): "no" | "en" | "de" =>
@@ -56,6 +56,25 @@ export default function AuthPage() {
         const { data, error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw error;
         if (data.user) {
+          // Uloga ima prednost nad jezikom: admin → admin panel, profesor → profesorski panel.
+          const { data: roleRows } = await supabase
+            .from("user_roles")
+            .select("role")
+            .eq("user_id", data.user.id);
+          const roles = (roleRows ?? []).map((r) => r.role as string);
+          if (roles.includes("admin") || roles.includes("admin_teacher")) {
+            toast({ title: "Dobrodošla nazad 👋", description: "Otvaram admin panel." });
+            navigate("/admin/dashboard", { replace: true });
+            return;
+          }
+          if (roles.includes("teacher")) {
+            navigate("/teacher/dashboard", { replace: true });
+            return;
+          }
+          if (!intentLang) {
+            toast({ title: "Izaberi jezik", description: "Izaberi jezik koji želiš da učiš, pa se ponovo prijavi.", variant: "destructive" });
+            return;
+          }
           const { data: prof } = await supabase
             .from("profiles")
             .select("preferred_language, subscription_type, display_name")
