@@ -144,12 +144,14 @@ export default function GrammarPage() {
 interface ExerciseState {
   answer: string;
   attempts: number;
-  status: "pending" | "correct" | "skipped";
+  status: "pending" | "correct" | "skipped" | "incorrect";
   feedback: string;
   analysis?: string;
   checking?: boolean;
   logged: boolean;
 }
+
+const MAX_ATTEMPTS = 3;
 
 function normalizeAnswer(s: string) {
   return s.trim().toLowerCase().replace(/\s+/g, " ");
@@ -249,6 +251,10 @@ function ExercisesTab({ level, userId, initialTopic, onGoToExplain }: { level: s
           example_correct: ex.solution,
         }], ex.sentence, newAttempts);
       }
+      if (newAttempts >= MAX_ATTEMPTS) {
+        updateState(i, { checking: false, status: "incorrect", analysis, feedback: "" });
+        return;
+      }
       updateState(i, { checking: false, analysis, feedback: hint || fallbackHint(newAttempts) });
     }
   };
@@ -344,6 +350,16 @@ function ExercisesTab({ level, userId, initialTopic, onGoToExplain }: { level: s
                     <p className="text-xs text-muted-foreground italic">Zadatak preskočen.</p>
                   )}
 
+                  {st.status === "incorrect" && (
+                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="p-3 rounded-lg bg-destructive/10 border border-destructive/20 space-y-1">
+                      <p className="text-sm font-medium text-destructive">
+                        Netačno — iskorišćena su sva {MAX_ATTEMPTS} pokušaja.
+                      </p>
+                      {st.answer && <p className="text-xs text-muted-foreground">Tvoj poslednji odgovor: {st.answer}</p>}
+                      {st.analysis && <p className="text-sm text-foreground">{st.analysis}</p>}
+                    </motion.div>
+                  )}
+
                   {st.status === "pending" && (
                     <>
                       <div className="flex gap-2">
@@ -371,7 +387,9 @@ function ExercisesTab({ level, userId, initialTopic, onGoToExplain }: { level: s
                             <Lightbulb className="w-4 h-4 text-accent shrink-0 mt-0.5" />
                             {st.feedback}
                           </p>
-                          <p className="text-xs text-muted-foreground mt-1">Pokušaj {st.attempts}</p>
+                          <p className="text-xs text-muted-foreground mt-1">
+                            Pokušaj {st.attempts} od {MAX_ATTEMPTS} · preostalo: {MAX_ATTEMPTS - st.attempts}
+                          </p>
                         </motion.div>
                       )}
 
@@ -395,7 +413,7 @@ function ExercisesTab({ level, userId, initialTopic, onGoToExplain }: { level: s
               <Card className="border-accent/30 bg-accent/5">
                 <CardContent className="pt-5 pb-5 text-center space-y-3">
                   <p className="text-sm font-medium text-accent">
-                    ✅ Sve vežbe završene! Tačno: {states.filter((s) => s.status === "correct").length}/{states.length}
+                    ✅ Sve vežbe završene! Tačno: {states.filter((s) => s.status === "correct").length}/{states.length} · Netačno: {states.filter((s) => s.status === "incorrect").length}
                   </p>
                   {onGoToExplain && topic && (
                     <Button variant="outline" size="sm" onClick={() => onGoToExplain(topic)}>
