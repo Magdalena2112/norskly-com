@@ -185,6 +185,7 @@ export default function TeacherProfilePage() {
           templateName: "lesson-booked-teacher",
           idempotencyKey: `lesson-teacher-${lessonId}`,
           templateData: {
+            lessonId,
             studentName,
             studentLanguage,
             lessonType: `${selectedType.title} (${selectedType.duration_minutes} min)`,
