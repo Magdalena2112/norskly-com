@@ -431,11 +431,128 @@ function BildebeskrivelseTab({ level }: { level: string }) {
 // ═══════════════════════════════════════
 // Free text correction
 // ═══════════════════════════════════════
+interface WritingTopic {
+  title: string;
+  title_sr: string;
+  guiding_questions: string[];
+  keywords: { word: string; translation: string }[];
+  sentence_starters: string[];
+  min_words: number;
+  max_words: number;
+}
+
+const TOPIC_CATEGORIES = [
+  { id: "", label: "Mešovito" },
+  { id: "svakodnevno", label: "Svakodnevni život" },
+  { id: "posao", label: "Posao i karijera" },
+  { id: "misljenje", label: "Moje mišljenje" },
+  { id: "formalno", label: "Formalni imejl / pismo" },
+];
+
+function TopicInspiration({ level, selected, onSelect }: { level: string; selected: WritingTopic | null; onSelect: (t: WritingTopic | null) => void }) {
+  const [category, setCategory] = useState("");
+  const [topics, setTopics] = useState<WritingTopic[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [open, setOpen] = useState(true);
+  const seen = useRef<string[]>([]);
+
+  const generate = async () => {
+    setLoading(true);
+    setError("");
+    try {
+      const p = getCurrentPersonalization();
+      const data = await callFn<{ topics?: WritingTopic[]; error?: string }>("writing-topics", {
+        level, language: getCurrentLanguageCode(), category, avoid: seen.current,
+        focus_area: p.focus_area, life_context: p.life_context,
+      });
+      if (!data.topics?.length) throw new Error(data.error || "Nema tema");
+      seen.current = [...seen.current, ...data.topics.map((t) => t.title)].slice(-12);
+      setTopics(data.topics);
+    } catch (e) {
+      setError((e as Error).message || "Greška pri generisanju tema.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (selected) {
+    return (
+      <Collapsible open={open} onOpenChange={setOpen} className="rounded-2xl border border-primary/20 bg-secondary/30 p-4">
+        <div className="flex items-start justify-between gap-2">
+          <CollapsibleTrigger className="text-left flex-1">
+            <p className="text-[11px] uppercase tracking-wider text-muted-foreground">Tvoja tema</p>
+            <p className="font-display text-primary">{selected.title}</p>
+            <p className="text-xs text-muted-foreground">{selected.title_sr} · Cilj: {selected.min_words}–{selected.max_words} reči</p>
+          </CollapsibleTrigger>
+          <div className="flex gap-1 shrink-0">
+            <Button size="sm" variant="ghost" onClick={() => setOpen(!open)}><ChevronDown className={`w-4 h-4 transition-transform ${open ? "rotate-180" : ""}`} /></Button>
+            <Button size="sm" variant="ghost" onClick={() => onSelect(null)}>Promeni</Button>
+          </div>
+        </div>
+        <CollapsibleContent className="pt-3 space-y-3 text-sm">
+          <div>
+            <p className="font-medium text-xs mb-1">Pitanja vodilje</p>
+            <ul className="list-disc pl-5 space-y-0.5">{selected.guiding_questions.map((q, i) => <li key={i}>{q}</li>)}</ul>
+          </div>
+          <div>
+            <p className="font-medium text-xs mb-1">Korisne reči</p>
+            <div className="flex flex-wrap gap-1.5">
+              {selected.keywords.map((k, i) => (
+                <span key={i} className="rounded-full bg-cream/80 border border-border/50 px-2.5 py-0.5 text-xs"><b>{k.word}</b> — {k.translation}</span>
+              ))}
+            </div>
+          </div>
+          <div>
+            <p className="font-medium text-xs mb-1">Počeci rečenica</p>
+            <ul className="space-y-0.5 italic">{selected.sentence_starters.map((s, i) => <li key={i}>„{s.replace(/[….\s]+$/, "")}…“</li>)}</ul>
+          </div>
+        </CollapsibleContent>
+      </Collapsible>
+    );
+  }
+
+  return (
+    <div className="rounded-2xl border border-dashed border-primary/30 bg-secondary/20 p-4 space-y-3">
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <p className="text-sm font-medium text-primary">Treba ti inspiracija za temu?</p>
+        <Button size="sm" variant="outline" onClick={generate} disabled={loading}>
+          {loading ? <Loader2 className="w-4 h-4 animate-spin mr-1" /> : topics.length ? <RefreshCcw className="w-4 h-4 mr-1" /> : <Sparkles className="w-4 h-4 mr-1" />}
+          {topics.length ? "Druge teme" : "Predloži teme"}
+        </Button>
+      </div>
+      <div className="flex gap-1.5 overflow-x-auto scrollbar-hide">
+        {TOPIC_CATEGORIES.map((c) => (
+          <button key={c.id} onClick={() => setCategory(c.id)}
+            className={`shrink-0 rounded-full px-3 py-1 text-xs border transition-colors ${category === c.id ? "bg-primary text-primary-foreground border-primary" : "bg-cream/60 border-border/50 hover:border-primary/40"}`}>
+            {c.label}
+          </button>
+        ))}
+      </div>
+      {error && <p className="text-xs text-destructive">{error}</p>}
+      {topics.length > 0 && (
+        <div className="grid gap-2 sm:grid-cols-3">
+          {topics.map((t, i) => (
+            <button key={i} onClick={() => { onSelect(t); setOpen(true); }}
+              className="text-left rounded-xl bg-cream/80 border border-border/50 p-3 hover:border-primary/50 hover:shadow-card-soft transition-all">
+              <p className="font-display text-sm text-primary leading-snug">{t.title}</p>
+              <p className="text-xs text-muted-foreground mt-1">{t.title_sr}</p>
+              <p className="text-[11px] text-muted-foreground mt-2">{t.min_words}–{t.max_words} reči</p>
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 function CorrectionTab({ level }: { level: string }) {
   const { user } = useAuth();
   const [text, setText] = useState("");
   const [result, setResult] = useState<CorrectionResult | null>(null);
   const [loading, setLoading] = useState(false);
+  const [topic, setTopic] = useState<WritingTopic | null>(null);
+  const wordCount = text.trim() ? text.trim().split(/\s+/).length : 0;
 
   const correct = async () => {
     if (!text.trim() || !user) return;
@@ -443,7 +560,7 @@ function CorrectionTab({ level }: { level: string }) {
     setResult(null);
     try {
       const _p2 = getCurrentPersonalization();
-      const data = await callFn<CorrectionResult>("writing-correct", { text: text.trim(), level, language: getCurrentLanguageCode(), focus_area: _p2.focus_area, life_context: _p2.life_context });
+      const data = await callFn<CorrectionResult>("writing-correct", { text: text.trim(), level, language: getCurrentLanguageCode(), focus_area: _p2.focus_area, life_context: _p2.life_context, topic: topic ? { title: topic.title, guiding_questions: topic.guiding_questions } : undefined });
       setResult(data);
       if (data._errors?.length) {
         await logErrors(user.id, "writing", "text_correction", data._errors.slice(0, 5));
@@ -487,19 +604,22 @@ function CorrectionTab({ level }: { level: string }) {
     <Card className="bg-cream/90 border-border/50 shadow-card-soft max-w-3xl mx-auto">
       <CardHeader>
         <CardTitle className="text-base font-display text-primary">Slobodno pisanje</CardTitle>
-        <CardDescription>Napiši tekst na norveškom — AI će ga ispraviti i objasniti greške.</CardDescription>
+        <CardDescription>Napiši tekst — AI će ga ispraviti i objasniti greške. Ako nemaš ideju, izaberi temu.</CardDescription>
       </CardHeader>
       <CardContent className="space-y-3">
+        <TopicInspiration level={level} selected={topic} onSelect={setTopic} />
         <Textarea
-          placeholder="Skriv en tekst på norsk..."
+          placeholder={topic ? topic.sentence_starters[0] ? `${topic.sentence_starters[0].replace(/[….\s]+$/, "")}…` : "" : "Počni da pišeš..."}
           value={text}
           onChange={(e) => setText(e.target.value)}
           rows={10}
           maxLength={3000}
           className="resize-none bg-cream/60"
         />
-        <div className="flex justify-between items-center">
-          <span className="text-xs text-muted-foreground">{text.length}/3000</span>
+        <div className="flex justify-between items-center gap-2">
+          <span className="text-xs text-muted-foreground">
+            {topic ? <>Napisano: <b className={wordCount >= topic.min_words ? "text-primary" : ""}>{wordCount}</b> / Cilj: {topic.min_words}–{topic.max_words} reči</> : <>{wordCount} reči · {text.length}/3000</>}
+          </span>
           <Button variant="hero" onClick={correct} disabled={loading || !text.trim()}>
             {loading ? <><Loader2 className="w-4 h-4 animate-spin mr-1" /> Analiziram...</> : "Ispravi tekst"}
           </Button>

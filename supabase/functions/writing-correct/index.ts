@@ -86,9 +86,12 @@ Deno.serve(async (req) => {
     const hasImage: boolean = !!body.has_image;
     const langCode = (["no", "en", "de"].includes(String(body.language)) ? String(body.language) : "no") as LangCode;
     const personalization = buildPersonalizationLines(langCode, body.focus_area, body.life_context);
-    const personalizationLine = personalization.serbianLine
-      ? `PERSONALIZACIJA: ${personalization.serbianLine}`
-      : "";
+    const topicTitle = body.topic?.title ? String(body.topic.title).slice(0, 200) : "";
+    const topicQs = Array.isArray(body.topic?.guiding_questions) ? body.topic.guiding_questions.slice(0, 5).map((q: unknown) => String(q).slice(0, 200)).join(" | ") : "";
+    const personalizationLine = [
+      personalization.serbianLine ? `PERSONALIZACIJA: ${personalization.serbianLine}` : "",
+      topicTitle ? `ZADATA TEMA: "${topicTitle}"${topicQs ? ` (pitanja vodilje: ${topicQs})` : ""}. U "overall_feedback" ukratko oceni koliko je student odgovorio na temu i pitanja vodilje.` : "",
+    ].filter(Boolean).join("\n");
 
     if (!text.trim()) {
       return new Response(JSON.stringify({ error: "Tekst je obavezan" }), {
