@@ -34,8 +34,6 @@ const groups = [
     label: "Nastava",
     items: [
       { title: "Časovi", url: "/admin/lessons", icon: CalendarDays },
-      { title: "Termini", url: "/admin/availability", icon: Clock },
-      { title: "Moj profil predavača", url: "/admin/teacher-profile", icon: UserCog },
     ],
   },
 ];
