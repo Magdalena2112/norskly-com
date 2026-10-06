@@ -261,6 +261,12 @@ export default function AuthPage() {
         </Card>
 
         <p className="text-center text-xs text-muted-foreground mt-6">
+          Predaješ na Norskly-ju?{" "}
+          <button onClick={() => navigate("/profesori/prijava")} className="text-accent font-medium hover:underline">
+            Prijavi se kao profesor
+          </button>
+        </p>
+        <p className="text-center text-xs text-muted-foreground mt-2">
           <button onClick={() => navigate("/")} className="hover:underline">
             ← Nazad na početnu
           </button>

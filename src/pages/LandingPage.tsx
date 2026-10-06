@@ -124,7 +124,7 @@ export default function LandingPage() {
             <a href="#features" className="hover:text-primary transition-colors">Platforma</a>
             <Link to="/relocation-hub" className="hover:text-primary transition-colors">Relocation Hub</Link>
             <a href="#teachers" className="hover:text-primary transition-colors">Za učenike</a>
-            <a href="#teachers" className="hover:text-primary transition-colors">Za profesore</a>
+            <Link to="/za-profesore" className="hover:text-primary transition-colors">Za profesore</Link>
             <a href="#pricing" className="hover:text-primary transition-colors">Kako učiš</a>
             <a href="#faq" className="hover:text-primary transition-colors">FAQ</a>
           </div>
@@ -570,6 +570,11 @@ export default function LandingPage() {
       <footer className="border-t border-border/60 py-8 md:py-10">
         <div className="container flex flex-col md:flex-row items-center justify-between gap-3 md:gap-4 text-xs sm:text-sm text-muted-foreground text-center md:text-left">
           <img src={norsklyLogo.url} alt="Norskly" width={370} height={144} loading="lazy" decoding="async" className="h-12 w-auto select-none" draggable={false} />
+          <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-5">
+            <span className="font-medium text-foreground/70">Za profesore:</span>
+            <Link to="/za-profesore" className="hover:text-primary transition-colors">Postani profesor</Link>
+            <Link to="/profesori/prijava" className="hover:text-primary transition-colors">Profesorski portal</Link>
+          </div>
           <p>© 2026 Norskly. Sva prava zadržana.</p>
         </div>
       </footer>
