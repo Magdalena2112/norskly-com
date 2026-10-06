@@ -87,7 +87,7 @@ export default function LanguagePage() {
     : [];
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
       {lang.slug === "norveski" && (
         <Helmet>
           <title>Uči norveški online uz personalizovanu podršku | Norskly</title>
