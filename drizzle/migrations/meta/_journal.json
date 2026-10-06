@@ -43,6 +43,13 @@
       "when": 1791306014017,
       "tag": "0005_teacher_workspace",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1791308211922,
+      "tag": "0006_admin_email_and_teacher_lesson_email",
+      "breakpoints": true
     }
   ]
 }

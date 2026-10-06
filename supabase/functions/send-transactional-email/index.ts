@@ -138,16 +138,26 @@ Deno.serve(async (req) => {
       break
     }
     case 'lesson-booked-teacher': {
-      // Teacher email is resolved server-side; caller cannot override it.
-      const { data: teacherEmail, error: teacherErr } = await supabase.rpc('get_teacher_email')
-      if (teacherErr || !teacherEmail) {
-        console.error('Teacher email lookup failed', { error: teacherErr })
+      // Resolve the specific teacher of this lesson; caller must own the lesson.
+      const lessonId = templateData?.lessonId
+      let teacherEmail: string | null = null
+      if (lessonId) {
+        const { data, error } = await supabase.rpc('get_lesson_teacher_email', {
+          p_lesson_id: lessonId, p_student_id: authUser.id,
+        })
+        if (error) console.error('Lesson teacher email lookup failed', { error })
+        teacherEmail = (data as string) || null
+      } else {
+        const { data } = await supabase.rpc('get_teacher_email')
+        teacherEmail = (data as string) || null
+      }
+      if (!teacherEmail) {
         return new Response(
           JSON.stringify({ error: 'Teacher email unavailable' }),
           { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
         )
       }
-      enforcedRecipient = teacherEmail as string
+      enforcedRecipient = teacherEmail
       break
     }
     default: {

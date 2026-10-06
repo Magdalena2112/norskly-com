@@ -1721,6 +1721,10 @@ export type Database = {
           students_count: number
         }[]
       }
+      get_lesson_teacher_email: {
+        Args: { p_lesson_id: string; p_student_id: string }
+        Returns: string
+      }
       get_my_students: {
         Args: never
         Returns: {
