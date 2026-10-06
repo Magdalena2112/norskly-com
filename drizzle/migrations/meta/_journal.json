@@ -50,6 +50,13 @@
       "when": 1791308211922,
       "tag": "0006_admin_email_and_teacher_lesson_email",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1791308684237,
+      "tag": "0007_admin_signup_full_roles",
+      "breakpoints": true
     }
   ]
 }
