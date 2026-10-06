@@ -24,6 +24,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import VocabCollections from "@/components/VocabCollections";
 import CollectionSelector from "@/components/CollectionSelector";
 import VocabWordCard, { type GrammarForms } from "@/components/VocabWordCard";
+import { FlashcardImage, fetchWordImage } from "@/components/vocabulary/FlashcardImage";
 
 // ─── Types ───
 interface VocabWord {
@@ -774,8 +775,11 @@ function FlashcardsTab({ userId }: { userId?: string }) {
             exit={{ rotateY: -90, opacity: 0 }}
             transition={{ duration: 0.25 }}
           >
-            <Card className="shadow-nordic bg-background/80 backdrop-blur-sm border-border/30 min-h-[240px] flex items-center justify-center">
-              <CardContent className="pt-6 text-center space-y-3">
+            <Card className="relative overflow-hidden shadow-nordic border-2 border-accent/20 min-h-[300px] flex items-center justify-center bg-gradient-to-br from-accent/10 via-background to-primary/10">
+              <div aria-hidden className="pointer-events-none absolute -top-10 -right-10 w-32 h-32 rounded-full bg-accent/20 blur-2xl" />
+              <div aria-hidden className="pointer-events-none absolute -bottom-12 -left-8 w-36 h-36 rounded-full bg-primary/15 blur-2xl" />
+              <CardContent className="relative pt-6 text-center space-y-4">
+                {card && <FlashcardImage word={card.word} translation={card.translation} />}
                 {!flipped ? (
                   <>
                     <p className="text-4xl font-display font-bold text-foreground">{frontText}</p>
@@ -786,7 +790,8 @@ function FlashcardsTab({ userId }: { userId?: string }) {
                   </>
                 ) : (
                   <>
-                    <p className="text-2xl font-display font-bold text-accent">{backMainText}</p>
+                    <p className="text-sm text-muted-foreground">{frontText}</p>
+                    <p className="text-3xl font-display font-bold text-accent">{backMainText}</p>
                     {card?.examples?.map((ex: string, j: number) => (
                       <p key={j} className="text-sm text-muted-foreground italic">"{ex}"</p>
                     ))}
