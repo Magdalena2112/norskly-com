@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { ArrowLeft, ArrowRight, Check, Mic, Snail, Volume2, Lightbulb } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, Mic, Snail, Volume2, Lightbulb, Square, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
@@ -71,14 +71,120 @@ function Guide({ item }: { item: PronItem }) {
   );
 }
 
-/** Placeholder for future recording / scoring. */
-function RecordSlot() {
+type CheckResult = { score: number; verdict: "excellent" | "good" | "retry"; heard: string; feedback: string; tip?: string; words: { word: string; ok: boolean }[] };
+const CHECK_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/pronunciation-check`;
+const MAX_REC_MS = 15000;
+
+/** Record the learner, then get an AI pronunciation score and feedback. */
+function RecordSlot({ item, lang, level, onSuccess }: { item: PronItem; lang: string; level: string; onSuccess: () => void }) {
+  const [state, setState] = useState<"idle" | "rec" | "busy">("idle");
+  const [secs, setSecs] = useState(0);
+  const [result, setResult] = useState<CheckResult | null>(null);
+  const [myUrl, setMyUrl] = useState<string | null>(null);
+  const recRef = useRef<MediaRecorder | null>(null);
+  const timerRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    setResult(null);
+    setMyUrl(null);
+    return () => { recRef.current?.state === "recording" && recRef.current.stop(); };
+  }, [item.text]);
+
+  const start = async () => {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      const type = ["audio/webm", "audio/mp4", "audio/ogg"].find((t) => MediaRecorder.isTypeSupported?.(t)) || "";
+      const rec = new MediaRecorder(stream, type ? { mimeType: type } : undefined);
+      const chunks: Blob[] = [];
+      rec.ondataavailable = (e) => e.data.size && chunks.push(e.data);
+      rec.onstop = () => {
+        stream.getTracks().forEach((t) => t.stop());
+        if (timerRef.current) window.clearInterval(timerRef.current);
+        const blob = new Blob(chunks, { type: rec.mimeType || "audio/webm" });
+        send(blob);
+      };
+      recRef.current = rec;
+      rec.start();
+      setResult(null);
+      setSecs(0);
+      setState("rec");
+      const t0 = Date.now();
+      timerRef.current = window.setInterval(() => {
+        const s = Date.now() - t0;
+        setSecs(Math.floor(s / 1000));
+        if (s >= MAX_REC_MS && rec.state === "recording") rec.stop();
+      }, 250);
+    } catch {
+      toast.error("Dozvoli pristup mikrofonu da bi snimio/la izgovor.");
+    }
+  };
+
+  const send = async (blob: Blob) => {
+    if (blob.size < 1000) { setState("idle"); toast.error("Snimak je prekratak."); return; }
+    setState("busy");
+    setMyUrl(URL.createObjectURL(blob));
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      const ext = blob.type.includes("mp4") ? "m4a" : blob.type.includes("ogg") ? "ogg" : "webm";
+      const fd = new FormData();
+      fd.append("file", blob, `rec.${ext}`);
+      fd.append("expected", item.text);
+      fd.append("language", lang);
+      fd.append("level", level);
+      const r = await fetch(CHECK_URL, { method: "POST", headers: { Authorization: `Bearer ${session?.access_token}` }, body: fd });
+      const data = await r.json();
+      if (!r.ok) throw new Error(data.error || "Greška");
+      setResult(data);
+      if (data.verdict !== "retry") onSuccess();
+    } catch (e) {
+      toast.error(e instanceof Error ? e.message : "Procena nije uspela.");
+    } finally {
+      setState("idle");
+    }
+  };
+
+  const tone = result?.verdict === "excellent" ? "border-emerald-500/40 bg-emerald-500/10 text-emerald-700"
+    : result?.verdict === "good" ? "border-amber-500/40 bg-amber-500/10 text-amber-700"
+    : "border-destructive/40 bg-destructive/10 text-destructive";
+  const label = result?.verdict === "excellent" ? "Odlično!" : result?.verdict === "good" ? "Vrlo dobro" : "Pokušaj ponovo";
+
   return (
-    <div className="mt-6 flex flex-col items-center gap-1">
-      <Button variant="outline" size="sm" disabled className="rounded-full">
-        <Mic className="w-4 h-4 mr-1" /> Snimi svoj izgovor
-      </Button>
-      <span className="text-[11px] text-muted-foreground">Snimanje i ocena izgovora uskoro</span>
+    <div className="mt-6 flex flex-col items-center gap-3">
+      {state === "rec" ? (
+        <Button variant="destructive" className="rounded-full" onClick={() => recRef.current?.stop()}>
+          <Square className="w-4 h-4 mr-1" /> Završi snimanje · {secs}s
+        </Button>
+      ) : (
+        <Button variant={result ? "outline" : "hero"} className="rounded-full" disabled={state === "busy"} onClick={start}>
+          {state === "busy" ? <><Loader2 className="w-4 h-4 mr-1 animate-spin" /> Analiziram izgovor…</>
+            : <><Mic className="w-4 h-4 mr-1" /> {result ? "Snimi ponovo" : "Izgovori i proveri"}</>}
+        </Button>
+      )}
+      {state === "rec" && <span className="text-xs text-destructive animate-pulse">● Snimanje… izgovori naglas</span>}
+
+      {result && (
+        <div className={`w-full max-w-md rounded-2xl border p-4 text-left ${tone}`}>
+          <div className="flex items-center justify-between mb-2">
+            <span className="font-semibold">{label}</span>
+            <span className="text-lg font-display">{result.score}%</span>
+          </div>
+          {result.words.length > 0 && (
+            <p className="text-base mb-2 text-foreground">
+              {result.words.map((w, i) => (
+                <span key={i} className={w.ok ? "text-emerald-700" : "text-orange-600 underline decoration-wavy underline-offset-4"}>{w.word} </span>
+              ))}
+            </p>
+          )}
+          {result.heard && <p className="text-xs text-muted-foreground mb-2">Čuli smo: „{result.heard}“</p>}
+          {result.feedback && <p className="text-sm text-foreground">{result.feedback}</p>}
+          {result.tip && (
+            <p className="mt-2 flex items-start gap-1.5 text-sm text-foreground">
+              <Lightbulb className="w-4 h-4 mt-0.5 shrink-0 text-sunset" />{result.tip}
+            </p>
+          )}
+          {myUrl && <audio controls src={myUrl} className="w-full h-9 mt-3" aria-label="Tvoj snimak" />}
+        </div>
+      )}
     </div>
   );
 }
@@ -228,7 +334,7 @@ export default function PronunciationActivityPage() {
                   <Target item={current} />
                   <div className="mt-6"><ListenButtons item={current} lang={lang} onPlayed={() => setHeard(true)} /></div>
                   <Guide item={current} />
-                  <RecordSlot />
+                  <RecordSlot item={current} lang={lang} level={activity.cefr_level} onSuccess={() => setHeard(true)} />
                 </>
               )}
 
