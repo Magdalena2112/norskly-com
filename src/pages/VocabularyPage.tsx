@@ -618,6 +618,12 @@ function FlashcardsTab({ userId }: { userId?: string }) {
   const isDone = started && (queue.length === 0 || totalReviews >= maxReviews);
   const current = queue[0];
   const card = current ? savedWords[current.wordIndex] : undefined;
+  const nextCard = queue[1] ? savedWords[queue[1].wordIndex] : undefined;
+
+  // Prefetch the next card's illustration so it appears instantly.
+  useEffect(() => {
+    if (nextCard) fetchWordImage(nextCard.word, nextCard.translation);
+  }, [nextCard?.word]);
 
   const frontText = card ? (direction === "no-sr" ? card.word : card.translation) : "";
   const backMainText = card ? (direction === "no-sr" ? card.translation : card.word) : "";
