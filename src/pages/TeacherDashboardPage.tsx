@@ -9,6 +9,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import TeacherHeader from "@/components/teacher/TeacherHeader";
 import TeacherOfferManager from "@/components/teacher/TeacherOfferManager";
 import LanguageFilter, { LangBadge, type LangFilter } from "@/components/teacher/LanguageFilter";
 import { Calendar, Users, ArrowRight, ClipboardList, LogOut, Shield, Sparkles } from "lucide-react";
