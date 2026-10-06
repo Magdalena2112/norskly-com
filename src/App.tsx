@@ -54,6 +54,7 @@ const TeacherStudentDetailPage = lazy(() => import("./pages/TeacherStudentDetail
 const MyLessonsPage = lazy(() => import("./pages/MyLessonsPage"));
 const AdminDashboardPage = lazy(() => import("./pages/AdminDashboardPage"));
 const AdminStudentsPage = lazy(() => import("./pages/AdminStudentsPage"));
+const AdminTeachersPage = lazy(() => import("./pages/AdminTeachersPage"));
 const AdminStudentDetailPage = lazy(() => import("./pages/AdminStudentDetailPage"));
 const AdminLessonsPage = lazy(() => import("./pages/AdminLessonsPage"));
 const AdminAvailabilityPage = lazy(() => import("./pages/AdminAvailabilityPage"));
@@ -125,6 +126,7 @@ const App = () => (
                 <Route path="/admin" element={<Navigate to="/admin/dashboard" replace />} />
                 <Route path="/admin/dashboard" element={<ProtectedRoute><AdminRoute><AdminDashboardPage /></AdminRoute></ProtectedRoute>} />
                 <Route path="/admin/students" element={<ProtectedRoute><AdminRoute><AdminStudentsPage /></AdminRoute></ProtectedRoute>} />
+                <Route path="/admin/teachers" element={<ProtectedRoute><AdminRoute><AdminTeachersPage /></AdminRoute></ProtectedRoute>} />
                 <Route path="/admin/students/:userId" element={<ProtectedRoute><AdminRoute><AdminStudentDetailPage /></AdminRoute></ProtectedRoute>} />
                 <Route path="/admin/lessons" element={<ProtectedRoute><AdminRoute><AdminLessonsPage /></AdminRoute></ProtectedRoute>} />
                 <Route path="/admin/availability" element={<ProtectedRoute><AdminRoute><AdminAvailabilityPage /></AdminRoute></ProtectedRoute>} />
