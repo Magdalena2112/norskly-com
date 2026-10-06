@@ -121,6 +121,110 @@ export type Database = {
           },
         ]
       }
+      course_lesson_progress: {
+        Row: {
+          completed_at: string | null
+          completed_steps: Json
+          created_at: string
+          id: string
+          language: string
+          lesson_id: string
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          completed_at?: string | null
+          completed_steps?: Json
+          created_at?: string
+          id?: string
+          language: string
+          lesson_id: string
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          completed_at?: string | null
+          completed_steps?: Json
+          created_at?: string
+          id?: string
+          language?: string
+          lesson_id?: string
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "course_lesson_progress_lesson_id_fkey"
+            columns: ["lesson_id"]
+            isOneToOne: false
+            referencedRelation: "course_lessons"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      course_lessons: {
+        Row: {
+          cefr_level: string
+          created_at: string
+          goals: Json
+          grammar: Json
+          id: string
+          illustration_url: string | null
+          is_published: boolean
+          language: string
+          sort_order: number
+          source_note: string | null
+          summary: string
+          text_segments: Json
+          text_title: string
+          title: string
+          title_target: string
+          updated_at: string
+          vocabulary: Json
+        }
+        Insert: {
+          cefr_level: string
+          created_at?: string
+          goals?: Json
+          grammar?: Json
+          id?: string
+          illustration_url?: string | null
+          is_published?: boolean
+          language: string
+          sort_order?: number
+          source_note?: string | null
+          summary?: string
+          text_segments?: Json
+          text_title?: string
+          title: string
+          title_target?: string
+          updated_at?: string
+          vocabulary?: Json
+        }
+        Update: {
+          cefr_level?: string
+          created_at?: string
+          goals?: Json
+          grammar?: Json
+          id?: string
+          illustration_url?: string | null
+          is_published?: boolean
+          language?: string
+          sort_order?: number
+          source_note?: string | null
+          summary?: string
+          text_segments?: Json
+          text_title?: string
+          title?: string
+          title_target?: string
+          updated_at?: string
+          vocabulary?: Json
+        }
+        Relationships: []
+      }
       email_send_log: {
         Row: {
           created_at: string
