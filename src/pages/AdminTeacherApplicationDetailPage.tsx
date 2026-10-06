@@ -84,6 +84,7 @@ export default function AdminTeacherApplicationDetailPage() {
             recipientEmail: email,
             idempotencyKey: `teacher-approved-${id}`,
             templateData: {
+              applicationId: id,
               name: (result?.name || app?.full_name || "").split(" ")[0],
               hasAccount: !!result?.has_account,
               activationUrl: `${window.location.origin}${path}?email=${encodeURIComponent(email || "")}`,

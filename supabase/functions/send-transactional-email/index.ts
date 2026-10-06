@@ -160,6 +160,32 @@ Deno.serve(async (req) => {
       enforcedRecipient = teacherEmail
       break
     }
+    case 'teacher-approved': {
+      // Only admins; recipient is the approved application's email.
+      const { data: isAdmin } = await supabase.rpc('has_role', {
+        _user_id: authUser.id, _role: 'admin',
+      })
+      const applicationId = templateData?.applicationId
+      if (!isAdmin || !applicationId) {
+        return new Response(
+          JSON.stringify({ error: 'Not authorized' }),
+          { status: 403, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        )
+      }
+      const { data: app } = await supabase
+        .from('teacher_applications')
+        .select('email, status')
+        .eq('id', applicationId)
+        .maybeSingle()
+      if (!app || app.status !== 'approved') {
+        return new Response(
+          JSON.stringify({ error: 'Application not approved' }),
+          { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        )
+      }
+      enforcedRecipient = app.email
+      break
+    }
     default: {
       console.warn('Template not allowed for caller', { templateName, userId: authUser.id })
       return new Response(
