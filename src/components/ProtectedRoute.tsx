@@ -29,7 +29,10 @@ export function ProtectedRoute({ children }: { children: React.ReactNode }) {
     );
   }
 
-  if (!user) return <Navigate to="/auth" replace />;
+  if (!user) {
+    const m = location.pathname.match(/^\/ucenje\/([^/]+)/);
+    return <Navigate to={m ? `/auth?lang=${m[1]}` : "/auth"} replace />;
+  }
 
   if (isAdmin) return <>{children}</>;
 
