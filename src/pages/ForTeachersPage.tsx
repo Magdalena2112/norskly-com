@@ -407,6 +407,9 @@ export default function ForTeachersPage() {
               <p className="text-xs text-foreground/55 text-center">
                 Slanjem prijave ne dobijaš automatski pristup. Verifikaciju vrše administratori platforme.
               </p>
+              <p className="text-sm text-foreground/70 text-center">
+                Već si profesor na platformi? <a href="/profesori/prijava" className="text-primary underline">Prijava za profesore</a>
+              </p>
             </form>
           )}
         </div>
