@@ -92,6 +92,13 @@
       "when": 1791890316251,
       "tag": "0012_course_lesson_modules",
       "breakpoints": true
+    },
+    {
+      "idx": 13,
+      "version": "7",
+      "when": 1791928414725,
+      "tag": "0013_grant_teacher_profile_public_anon",
+      "breakpoints": true
     }
   ]
 }

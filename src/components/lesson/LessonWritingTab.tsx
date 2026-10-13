@@ -31,13 +31,28 @@ export default function LessonWritingTab({ lessonId, language, level, onOpenFree
     });
   }, [lessonId]);
 
-  const markDone = (exCode: string) => {
+  // Merge saved lesson progress so completion survives devices and counts toward the lesson.
+  useEffect(() => {
+    if (!user) return;
+    supabase.from("course_lesson_progress").select("completed_steps").eq("user_id", user.id).eq("lesson_id", lessonId).maybeSingle()
+      .then(({ data }) => {
+        if (data && Array.isArray(data.completed_steps)) setDone((d) => Array.from(new Set([...d, ...(data.completed_steps as string[])])));
+      });
+  }, [user, lessonId]);
+
+  const markDone = async (exCode: string) => {
     if (done.includes(exCode)) return;
     const next = [...done, exCode];
     setDone(next);
     localStorage.setItem(storeKey, JSON.stringify(next));
-    if (user) void logActivity(user.id, "grammar", "lesson_writing", 10, { lesson: code, exercise: exCode },
+    if (!user) return;
+    void logActivity(user.id, "grammar", "lesson_writing", 10, { lesson: code, exercise: exCode },
       { dedupKey: `lesson_write_${code}_${exCode}_${language}`, language });
+    const { data: p } = await supabase.from("course_lesson_progress").select("completed_steps").eq("user_id", user.id).eq("lesson_id", lessonId).maybeSingle();
+    const steps = Array.from(new Set([...((p?.completed_steps as string[]) || []), exCode]));
+    await supabase.from("course_lesson_progress").upsert({
+      user_id: user.id, lesson_id: lessonId, language, completed_steps: steps, status: "in_progress",
+    }, { onConflict: "user_id,lesson_id" });
   };
 
   if (!exercises) return <div className="py-10 flex justify-center"><Loader2 className="w-5 h-5 animate-spin text-primary" /></div>;

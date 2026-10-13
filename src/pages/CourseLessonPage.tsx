@@ -103,6 +103,15 @@ export default function CourseLessonPage() {
     }, { onConflict: "user_id,lesson_id" });
   }
 
+  // Steps finished in module pages (grammar, vocabulary, writing) save as "in_progress";
+  // mark the lesson completed once every step is present.
+  useEffect(() => {
+    if (!user || !row || !exercises.length) return;
+    if (!exercises.every((e) => done.includes(e.code))) return;
+    void supabase.from("course_lesson_progress").update({ status: "completed", completed_at: new Date().toISOString() })
+      .eq("user_id", user.id).eq("lesson_id", row.id).neq("status", "completed");
+  }, [user, row, exercises, done]);
+
   const renderExercises = (list?: Exercise[]) =>
     (list || []).map((ex) => (
       <LessonExercise key={ex.id} exercise={ex} language={lang} level={level} lessonTitle={row.title_target || row.title} done={done.includes(ex.code)} onDone={markDone} />
