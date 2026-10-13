@@ -1,0 +1,1 @@
+GRANT EXECUTE ON FUNCTION public.get_teacher_profile_public() TO anon;
