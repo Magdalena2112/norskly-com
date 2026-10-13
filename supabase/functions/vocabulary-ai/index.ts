@@ -177,6 +177,14 @@ Odgovori ISKLJUČIVO u JSON formatu, bez markdown-a. Format:
   ]
 }` + qualityCheck;
       userPrompt = `Generiši 10 kviz pitanja koristeći sledeće norveške reči: ${theme}. Nivo: ${level}. Pitanja mogu biti prevod, popuni blanko, sinonim/antonim itd. Za svako pitanje dodaj _error objekat.`;
+    } else if (action === "generate_lesson_exercises") {
+      const langName = language === "de" ? "nemačkog" : language === "no" ? "norveškog (Bokmål)" : "engleskog";
+      systemPrompt = `Ti si nastavnik ${langName} jezika. Praviš nove vežbe vokabulara za nivo ${level}, ISKLJUČIVO od datih reči.
+Pravila: uputstva kratka i neutralna na srpskom (npr. "Izaberi tačan prevod.", "Dopuni rečenicu."), bez hintova, bez otkrivanja rešenja ili pravila. Rečenice na ciljnom jeziku, prirodne i tačne za nivo.
+Odgovori ISKLJUČIVO JSON-om:
+{"exercises":[{"title":"kratak naslov","instruction":"kratko uputstvo","items":[{"prompt":"...","options":["a","b","c"],"answers":["tačno"]}]}]}
+Napravi 3 vežbe po 5 stavki. Mešaj tipove: izbor prevoda (sa options), dopuna rečenice (bez options, answers = sve prihvatljive varijante), prevod sa srpskog (bez options).` + qualityCheck;
+      userPrompt = `Oblast: ${theme}. Reči: ${(exclude_words || []).join(", ")}. Nivo: ${level}.`;
     } else {
       return new Response(JSON.stringify({ error: "Invalid action" }), {
         status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" },
