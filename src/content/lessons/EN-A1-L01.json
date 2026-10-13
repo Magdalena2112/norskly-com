@@ -1214,25 +1214,29 @@
           "kind": "closed",
           "items": [
             {
-              "prompt": "Vizuelni opis: dva dečaka. ___ are friends.",
+              "image": "pr08-1",
+              "prompt": "___ are friends.",
               "answers": [
                 "they"
               ]
             },
             {
-              "prompt": "Vizuelni opis: jedna devojka sa knjigom. ___ is a student.",
+              "image": "pr08-2",
+              "prompt": "___ is a student.",
               "answers": [
                 "she"
               ]
             },
             {
-              "prompt": "Vizuelni opis: jedna knjiga. ___ is new.",
+              "image": "pr08-3",
+              "prompt": "___ is new.",
               "answers": [
                 "it"
               ]
             },
             {
-              "prompt": "Vizuelni opis: dečak i ja. ___ are students.",
+              "image": "pr08-4",
+              "prompt": "___ are students.",
               "answers": [
                 "we"
               ]
