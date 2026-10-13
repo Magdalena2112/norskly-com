@@ -22,15 +22,17 @@ export default function LessonCultureTab({ data, lang, level, lessonTitle, done,
 
   return (
     <div className="space-y-5">
-      <div className="flex gap-2">
-        {(["learn", "practice"] as const).map((v) => (
-          <Button key={v} size="sm" variant={view === v ? "default" : "outline"} onClick={() => setView(v)}>
-            {v === "learn" ? "Gradivo" : "Vežbe"}
-          </Button>
-        ))}
-      </div>
+      {!!exercises.length && (
+        <div className="flex gap-2">
+          {(["learn", "practice"] as const).map((v) => (
+            <Button key={v} size="sm" variant={view === v ? "default" : "outline"} onClick={() => setView(v)}>
+              {v === "learn" ? "Gradivo" : "Vežbe"}
+            </Button>
+          ))}
+        </div>
+      )}
 
-      {view === "learn" ? (
+      {view === "learn" || !exercises.length ? (
         <>
           <section className="rounded-2xl border border-border/60 bg-cream/90 p-5 shadow-card-soft">
             <div className="flex items-center justify-between gap-2 mb-2">
