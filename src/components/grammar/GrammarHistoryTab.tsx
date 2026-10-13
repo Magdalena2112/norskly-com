@@ -20,11 +20,15 @@ interface GrammarSession {
   total: number;
 }
 
-export default function GrammarHistoryTab({ userId }: { userId?: string }) {
-  const [sessions, setSessions] = useState<GrammarSession[]>([]);
+export default function GrammarHistoryTab({ userId, lessonTopics }: { userId?: string; lessonTopics?: string[] }) {
+  const [allSessions, setSessions] = useState<GrammarSession[]>([]);
   const [loading, setLoading] = useState(true);
   const [expandedId, setExpandedId] = useState<string | null>(null);
+  const [onlyLesson, setOnlyLesson] = useState(true);
+  const [onlyWrong, setOnlyWrong] = useState(false);
   const { code } = useSelectedLanguage();
+  const matchesLesson = (t: string) => !lessonTopics?.length || lessonTopics.some((lt) => t.toLowerCase().includes(lt.toLowerCase()));
+  const sessions = allSessions.filter((s) => (!onlyLesson || matchesLesson(s.topic)) && (!onlyWrong || s.score < s.total));
 
   useEffect(() => {
     if (!userId) return;
@@ -57,20 +61,37 @@ export default function GrammarHistoryTab({ userId }: { userId?: string }) {
     );
   }
 
+  const filters = (
+    <div className="flex flex-wrap gap-2">
+      {lessonTopics?.length ? (
+        <Button size="sm" variant={onlyLesson ? "default" : "outline"} className="text-xs" onClick={() => setOnlyLesson((v) => !v)}>
+          {onlyLesson ? "Samo ova lekcija" : "Sve sesije"}
+        </Button>
+      ) : null}
+      <Button size="sm" variant={onlyWrong ? "default" : "outline"} className="text-xs" onClick={() => setOnlyWrong((v) => !v)}>
+        Samo sa greškama
+      </Button>
+    </div>
+  );
+
   if (sessions.length === 0) {
     return (
-      <Card className="shadow-nordic">
-        <CardContent className="pt-8 pb-8 text-center">
-          <BookOpen className="w-10 h-10 text-muted-foreground/40 mx-auto mb-3" />
-          <p className="text-sm text-muted-foreground">Nemaš završenih sesija.</p>
-          <p className="text-xs text-muted-foreground mt-1">Završi vežbe ili kviz da bi se pojavili ovde.</p>
-        </CardContent>
-      </Card>
+      <div className="space-y-3">
+        {filters}
+        <Card className="shadow-nordic">
+          <CardContent className="pt-8 pb-8 text-center">
+            <BookOpen className="w-10 h-10 text-muted-foreground/40 mx-auto mb-3" />
+            <p className="text-sm text-muted-foreground">Nemaš završenih sesija{allSessions.length ? " za ovaj filter" : ""}.</p>
+            <p className="text-xs text-muted-foreground mt-1">Završi vežbe ili kviz da bi se pojavili ovde.</p>
+          </CardContent>
+        </Card>
+      </div>
     );
   }
 
   return (
     <div className="space-y-3">
+      {filters}
       <p className="text-xs text-muted-foreground">{sessions.length} sesij{sessions.length === 1 ? "a" : "e"} ukupno</p>
       {sessions.map((session) => {
         const pct = session.total > 0 ? Math.round((session.score / session.total) * 100) : 0;

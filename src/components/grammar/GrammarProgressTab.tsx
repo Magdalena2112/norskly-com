@@ -28,11 +28,12 @@ interface WeeklySummary {
   topicsPracticed: string[];
 }
 
-export default function GrammarProgressTab({ userId }: { userId?: string }) {
+export default function GrammarProgressTab({ userId, lessonTopics }: { userId?: string; lessonTopics?: { label: string; aiTopic: string }[] }) {
   const [topicProgress, setTopicProgress] = useState<TopicProgress[]>([]);
   const [weakTopics, setWeakTopics] = useState<WeakTopic[]>([]);
   const [weeklySummary, setWeeklySummary] = useState<WeeklySummary | null>(null);
   const [recommendations, setRecommendations] = useState<string[]>([]);
+  const [mastery, setMastery] = useState<{ label: string; pct: number | null; sessions: number }[]>([]);
   const [loading, setLoading] = useState(true);
   const { code } = useSelectedLanguage();
   const navigate = useNavigate();
@@ -64,6 +65,14 @@ export default function GrammarProgressTab({ userId }: { userId?: string }) {
 
     const sessions = (sessionsRes.data as any[]) || [];
     const errors = errorsRes.data || [];
+
+    if (lessonTopics?.length) {
+      setMastery(lessonTopics.map((lt) => {
+        const m = sessions.filter((s) => String(s.topic).toLowerCase().includes(lt.aiTopic.toLowerCase()));
+        const sc = m.reduce((a, s) => a + s.score, 0), tt = m.reduce((a, s) => a + s.total, 0);
+        return { label: lt.label, pct: tt > 0 ? Math.round((sc / tt) * 100) : null, sessions: m.length };
+      }));
+    }
 
     // Topic progress aggregation
     const topicMap = new Map<string, { sessions: number; totalScore: number; totalTotal: number; lastDate: string }>();
@@ -155,6 +164,25 @@ export default function GrammarProgressTab({ userId }: { userId?: string }) {
 
   return (
     <div className="space-y-5">
+      {mastery.length > 0 && (
+        <Card className="border-primary/20">
+          <CardHeader className="pb-3">
+            <CardTitle className="text-base flex items-center gap-2"><TrendingUp className="w-4 h-4 text-primary" /> Savladanost tema lekcije</CardTitle>
+            <CardDescription className="text-xs">Na osnovu kvizova i AI vežbi za teme ove lekcije</CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-3">
+            {mastery.map((m) => (
+              <div key={m.label} className="space-y-1">
+                <div className="flex items-center justify-between text-sm">
+                  <span className="font-medium text-foreground">{m.label}</span>
+                  <span className="text-xs text-muted-foreground">{m.pct === null ? "Još nije vežbano" : `${m.pct}% · ${m.sessions} sesij${m.sessions === 1 ? "a" : "e"}`}</span>
+                </div>
+                <Progress value={m.pct ?? 0} className={`h-2 ${(m.pct ?? 0) >= 80 ? "[&>div]:bg-accent" : (m.pct ?? 0) >= 50 ? "[&>div]:bg-primary" : "[&>div]:bg-destructive"}`} />
+              </div>
+            ))}
+          </CardContent>
+        </Card>
+      )}
       {/* Weekly Summary */}
       {weeklySummary && (
         <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}>
