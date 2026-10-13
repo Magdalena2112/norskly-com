@@ -25,14 +25,14 @@ describe("Unified lesson listening", () => {
     render(<LessonListeningTab scenes={scenes} lang="en" lessonCode={lesson.code} onDone={onDone} />);
     expect(screen.getAllByRole("button", { name: /^Aktivnost / })).toHaveLength(10);
     fireEvent.click(screen.getByRole("button", { name: "0.75x lagano" }));
-    fireEvent.click(screen.getByRole("button", { name: "Slušaj", exact: true }));
+    fireEvent.click(screen.getByRole("button", { name: "Slušaj" }));
     expect(speak).toHaveBeenLastCalledWith(scenes[0].lines, "en", expect.objectContaining({ rate: 0.75 }));
     for (let i = 0; i < scenes.length; i++) {
       fireEvent.click(screen.getByRole("button", { name: new RegExp(`^Aktivnost ${i + 1}(,|$)`) }));
-      expect(screen.queryByRole("button", { name: "Stop", exact: true })).toBeNull();
+      expect(screen.queryByRole("button", { name: "Stop" })).toBeNull();
       const scene = scenes[i];
       for (let j = 0; j < scene.questions.length; j++) {
-        fireEvent.click(screen.getByRole("button", { name: scene.questions[j].answer, exact: true }));
+        fireEvent.click(screen.getByRole("button", { name: scene.questions[j].answer }));
         if (j < scene.questions.length - 1) fireEvent.click(screen.getByRole("button", { name: "Sledeće pitanje" }));
       }
       expect(screen.getByText(`Rezultat: ${scene.questions.length} / ${scene.questions.length}`)).toBeInTheDocument();
@@ -42,13 +42,13 @@ describe("Unified lesson listening", () => {
     expect(onDone.mock.calls.map(c => c[0])).toEqual(scenes.map(s => s.code));
     expect(log).toHaveBeenCalledWith("test-user", "listening", "lesson_scene", expect.any(Number), expect.any(Object), expect.objectContaining({ language: "en" }));
     fireEvent.click(screen.getByRole("button", { name: "Aktivnost 1, završena" }));
-    expect(screen.getByRole("button", { name: scenes[0].questions[4].answer, exact: true })).toBeDisabled();
+    expect(screen.getByRole("button", { name: scenes[0].questions[4].answer })).toBeDisabled();
     expect(log).toHaveBeenCalledTimes(10);
   });
   it("does not award XP again for an activity already saved in lesson progress", () => {
     render(<LessonListeningTab scenes={scenes} lang="de" lessonCode={lesson.code} completed={[scenes[0].code]} />);
     for (let j = 0; j < scenes[0].questions.length; j++) {
-      fireEvent.click(screen.getByRole("button", { name: scenes[0].questions[j].answer, exact: true }));
+      fireEvent.click(screen.getByRole("button", { name: scenes[0].questions[j].answer }));
       if (j < scenes[0].questions.length - 1) fireEvent.click(screen.getByRole("button", { name: "Sledeće pitanje" }));
     }
     expect(log).not.toHaveBeenCalled();
