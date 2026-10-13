@@ -53,6 +53,8 @@ export default function LessonGrammarTab({ lessonId, onPractice, onExplain, mode
   const [done, setDone] = useState<string[]>([]);
   const [active, setActive] = useState(initialTopic);
   useEffect(() => { setActive(initialTopic); }, [initialTopic]);
+  const [exIdx, setExIdx] = useState(0);
+  useEffect(() => { setExIdx(0); }, [active]);
   useEffect(() => { setShowMore(false); }, [active]);
 
   useEffect(() => {
