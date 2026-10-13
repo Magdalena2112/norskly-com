@@ -58,3 +58,14 @@ export const TALK_SCENARIOS: Record<string, TalkScenario[]> = {
 export function getTalkScenarios(code?: string | null): TalkScenario[] {
   return code ? TALK_SCENARIOS[code] ?? [] : [];
 }
+
+/** Sažetak gradiva lekcije koji AI koristi u obaveznim situacijama. */
+export const LESSON_MATERIAL: Record<string, string> = {
+  "EN-A1-L01": `Course level A1, Lesson 1.
+Grammar: personal pronouns (I, you, he, she, it, we, they); verb to be in present (am/is/are, negative isn't/aren't, questions Are you...? Is she...?, short forms I'm/you're/he's); articles a/an (a book, an eraser, an apple).
+Vocabulary: greetings & introductions (hello, hi, good morning, goodbye, see you, nice to meet you, my name is, I'm from, how are you, I'm fine/great/OK, thank you); people & feelings (friend, student, teacher, classmate, boy, girl, happy, sad, tired, fine, hungry, new); classroom objects (book, pen, pencil, eraser, notebook, bag/backpack, desk, chair, board, phone, ruler); numbers 0–20 (age, phone numbers); spelling names with the alphabet ("How do you spell that?").`,
+};
+
+export function getLessonMaterial(code?: string | null): string | undefined {
+  return code ? LESSON_MATERIAL[code] : undefined;
+}
