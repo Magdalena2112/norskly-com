@@ -8,6 +8,7 @@ import NordicBackdrop from "@/components/student/NordicBackdrop";
 import BackButton from "@/components/BackButton";
 import DialoguePlayer from "@/components/lesson/DialoguePlayer";
 import LessonListeningTab from "@/components/lesson/LessonListeningTab";
+import LessonPronunciationTab from "@/components/lesson/LessonPronunciationTab";
 import LessonExercise from "@/components/lesson/LessonExercise";
 import { Button } from "@/components/ui/button";
 import { Volume2, Mic, MessageSquare, CheckCircle2, ChevronLeft, ChevronRight, BookOpen, Languages, BookOpenText, Headphones, PenLine, Globe2, Trophy } from "lucide-react";
@@ -326,31 +327,9 @@ export default function CourseLessonPage() {
 
 
           {tab === "pronunciation" && m.pronunciation && (
-            <>
-              {m.pronunciation.alphabet && (
-                <div className="rounded-2xl border border-border/60 bg-cream/90 p-5 shadow-card-soft space-y-3">
-                  <h3 className="font-display font-semibold text-primary">Alfabet</h3>
-                  <Table head={["Slova", "Naziv"]} rows={m.pronunciation.alphabet} />
-                  <p className="text-sm text-muted-foreground">{m.pronunciation.note}</p>
-                </div>
-              )}
-              {m.pronunciation.drills?.map((d: any) => (
-                <div key={d.code} className="rounded-2xl border border-border/60 bg-cream/90 p-5 shadow-card-soft">
-                  <span className="text-[11px] font-mono text-primary/50">{d.code}</span>
-                  <h4 className="font-display font-semibold text-primary mb-2">{d.title}</h4>
-                  <p className="text-sm text-muted-foreground mb-3">Poslušaj model, pa ponovi naglas.</p>
-                  <div className="flex flex-wrap gap-2">
-                    {d.targets.map((t: string) => (
-                      <button key={t} onClick={() => speakLines([{ speaker: "m", text: t }], lang, { slow: true })} className="px-3 py-1.5 rounded-full border border-border bg-background text-sm flex items-center gap-1.5 hover:border-primary/50">
-                        <Volume2 className="w-3.5 h-3.5" /> {t}
-                      </button>
-                    ))}
-                  </div>
-                  {d.extra && <p className="text-xs text-primary/70 mt-2">{d.extra}</p>}
-                </div>
-              ))}
-              <Button variant="hero" onClick={() => navigate("/pronunciation")}><Mic className="w-4 h-4" /> Snimi se i dobij ocenu izgovora</Button>
-            </>
+            m.pronunciation.exercises
+              ? <LessonPronunciationTab key={`${row.id}_${lang}`} data={m.pronunciation} lang={lang} level={level} lessonCode={content?.code || "lesson"} />
+              : <Button variant="hero" onClick={() => navigate("/pronunciation")}><Mic className="w-4 h-4" /> Snimi se i dobij ocenu izgovora</Button>
           )}
 
           {tab === "speaking" && m.speaking && (
