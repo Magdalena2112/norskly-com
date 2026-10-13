@@ -5947,6 +5947,42 @@
             }
           ]
         }
+      ],
+      "customs": [
+        {
+          "title": "Hi ili Hello?",
+          "text": "„Hi” koristimo sa prijateljima i vršnjacima. „Hello” je neutralno i odgovara skoro svakoj situaciji.",
+          "example": "Hi, Liam! / Hello, I'm Anna."
+        },
+        {
+          "title": "„How are you?” je pozdrav",
+          "text": "Ovo pitanje je često deo pozdrava, a ne poziv na dugu priču. Kratak, ljubazan odgovor je uobičajen.",
+          "example": "How are you? – I'm fine, thanks. And you?"
+        },
+        {
+          "title": "Imena i titule",
+          "text": "Nastavnike u školi često oslovljavamo titulom i prezimenom, a vršnjake imenom.",
+          "example": "Good morning, Mr Smith. / Hi, Sophie!"
+        },
+        {
+          "title": "Thank you i please",
+          "text": "Male ljubazne reči koriste se vrlo često, i u neformalnim situacijama.",
+          "example": "Can you spell it, please? – Thank you!"
+        }
+      ],
+      "comparison": [
+        {
+          "title": "Ti i Vi",
+          "text": "Engleski ima samo „you” za ti i Vi. Formalnost se pokazuje izborom pozdrava, titulom (Mr, Mrs, Ms) i tonom."
+        },
+        {
+          "title": "Zamka: dug odgovor na „How are you?”",
+          "text": "Na srpskom je prirodno ispričati kako si. Na engleskom je u kratkom susretu dovoljno „Fine, thanks”."
+        },
+        {
+          "title": "Zamka: „Teacher!”",
+          "text": "Obraćanje sa samo „Teacher” može zvučati čudno. Bolje je koristiti titulu i prezime ako ga znaš."
+        }
       ]
     },
     "review": {

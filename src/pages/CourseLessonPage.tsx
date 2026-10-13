@@ -9,6 +9,7 @@ import BackButton from "@/components/BackButton";
 import DialoguePlayer from "@/components/lesson/DialoguePlayer";
 import LessonListeningTab from "@/components/lesson/LessonListeningTab";
 import LessonPronunciationTab from "@/components/lesson/LessonPronunciationTab";
+import LessonCultureTab from "@/components/lesson/LessonCultureTab";
 import LessonExercise from "@/components/lesson/LessonExercise";
 import { Button } from "@/components/ui/button";
 import { Volume2, Mic, MessageSquare, CheckCircle2, ChevronLeft, ChevronRight, BookOpen, Languages, BookOpenText, Headphones, PenLine, Globe2, Trophy } from "lucide-react";
@@ -350,16 +351,9 @@ export default function CourseLessonPage() {
           )}
 
           {tab === "culture" && m.culture && (
-            <>
-              <div className="rounded-2xl border border-border/60 bg-cream/90 p-5 shadow-card-soft">
-                <div className="flex items-center justify-between gap-2 mb-2">
-                  <h3 className="font-display font-semibold text-lg text-primary">{m.culture.title}</h3>
-                  <Button size="sm" variant="outline" onClick={() => speakLines([{ speaker: "n", text: m.culture.body }], lang)}><Volume2 className="w-4 h-4" /> Slušaj</Button>
-                </div>
-                <p className="leading-relaxed whitespace-pre-line">{m.culture.body}</p>
-                {m.culture.note && <p className="text-sm text-muted-foreground mt-3">{m.culture.note}</p>}
-              </div>
-            </>
+            <LessonCultureTab key={`${row.id}_${lang}`} data={m.culture} lang={lang} level={level}
+              lessonTitle={row.title_target || ""} done={done} onDone={markDone}
+              onTalk={() => navigate(`/talk?lesson=${encodeURIComponent(content?.code || "")}`)} />
           )}
 
         </div>
