@@ -116,6 +116,7 @@ export default function CourseLessonPage() {
   const openEx: Exercise[] = open ? m[open]?.exercises || [] : [];
   const openModule = (k: string | null) => {
     if (k === "grammar") { navigate(`/grammar?lesson=${row.id}`); return; }
+    if (k === "vocabulary") { navigate(`/vocabulary?lesson=${row.id}`); return; }
     setOpen(k); setView("learn"); requestAnimationFrame(() => document.getElementById("lesson-modules")?.scrollIntoView({ behavior: "smooth" }));
   };
 
