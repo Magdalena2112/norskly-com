@@ -2058,683 +2058,1383 @@
       ]
     },
     "vocabulary": {
+      "areas": [
+        {
+          "key": "GI",
+          "title": "Greetings & Introductions",
+          "sr": "Pozdravi i predstavljanje",
+          "images": [
+            "v1"
+          ],
+          "words": [
+            {
+              "word": "hello",
+              "translation": "zdravo",
+              "collection": "GI",
+              "active": true
+            },
+            {
+              "word": "hi",
+              "translation": "zdravo / ćao",
+              "collection": "GI",
+              "active": true
+            },
+            {
+              "word": "good morning",
+              "translation": "dobro jutro",
+              "collection": "GI",
+              "active": true
+            },
+            {
+              "word": "nice to meet you",
+              "translation": "drago mi je",
+              "collection": "GI",
+              "active": true
+            },
+            {
+              "word": "my name is…",
+              "translation": "moje ime je…",
+              "collection": "GI",
+              "active": true
+            },
+            {
+              "word": "what’s your name?",
+              "translation": "kako se zoveš?",
+              "collection": "GI",
+              "active": true
+            },
+            {
+              "word": "how are you?",
+              "translation": "kako si?",
+              "collection": "GI",
+              "active": true
+            },
+            {
+              "word": "I’m fine.",
+              "translation": "dobro sam.",
+              "collection": "GI",
+              "active": true
+            },
+            {
+              "word": "thank you",
+              "translation": "hvala",
+              "collection": "GI",
+              "active": true
+            },
+            {
+              "word": "see you",
+              "translation": "vidimo se",
+              "collection": "GI",
+              "active": true
+            }
+          ],
+          "examples": [
+            "Hello! My name is Emma.",
+            "Hi! I’m Oliver.",
+            "Good morning, Ms Taylor.",
+            "Nice to meet you, Sophie.",
+            "How are you? – I’m fine, thank you."
+          ],
+          "exercises": [
+            "GI-01",
+            "GI-02",
+            "GI-03",
+            "GI-04",
+            "GI-05"
+          ],
+          "aiTopic": "Greetings and introductions (hello, nice to meet you, my name is, how are you)"
+        },
+        {
+          "key": "PCF",
+          "title": "People, Classroom & Feelings",
+          "sr": "Osobe, učionica i osećanja",
+          "images": [
+            "v2"
+          ],
+          "words": [
+            {
+              "word": "teacher",
+              "translation": "nastavnik / nastavnica",
+              "collection": "PCF",
+              "active": true
+            },
+            {
+              "word": "student",
+              "translation": "učenik / učenica",
+              "collection": "PCF",
+              "active": true
+            },
+            {
+              "word": "friend",
+              "translation": "prijatelj / prijateljica",
+              "collection": "PCF",
+              "active": true
+            },
+            {
+              "word": "boy",
+              "translation": "dečak",
+              "collection": "PCF",
+              "active": true
+            },
+            {
+              "word": "girl",
+              "translation": "devojčica / devojka",
+              "collection": "PCF",
+              "active": true
+            },
+            {
+              "word": "classroom",
+              "translation": "učionica",
+              "collection": "PCF",
+              "active": true
+            },
+            {
+              "word": "class",
+              "translation": "čas / odeljenje",
+              "collection": "PCF",
+              "active": true
+            },
+            {
+              "word": "book",
+              "translation": "knjiga",
+              "collection": "PCF",
+              "active": true
+            },
+            {
+              "word": "notebook",
+              "translation": "sveska",
+              "collection": "PCF",
+              "active": true
+            },
+            {
+              "word": "bag",
+              "translation": "torba",
+              "collection": "PCF",
+              "active": true
+            },
+            {
+              "word": "happy",
+              "translation": "srećan / srećna",
+              "collection": "PCF",
+              "active": true
+            },
+            {
+              "word": "good",
+              "translation": "dobro / dobar",
+              "collection": "PCF",
+              "active": true
+            },
+            {
+              "word": "okay",
+              "translation": "u redu",
+              "collection": "PCF",
+              "active": true
+            },
+            {
+              "word": "tired",
+              "translation": "umoran / umorna",
+              "collection": "PCF",
+              "active": true
+            },
+            {
+              "word": "nervous",
+              "translation": "nervozan / nervozna",
+              "collection": "PCF",
+              "active": true
+            }
+          ],
+          "examples": [
+            "Ms Taylor is a teacher.",
+            "Emma is a student.",
+            "Sophie is my friend.",
+            "This is our classroom.",
+            "I am happy / tired / nervous."
+          ],
+          "exercises": [
+            "PCF-01",
+            "PCF-02",
+            "PCF-03",
+            "PCF-04",
+            "PCF-05"
+          ],
+          "aiTopic": "People, classroom and feelings (teacher, student, friend, happy, tired, nervous)"
+        },
+        {
+          "key": "CO",
+          "title": "Classroom Objects",
+          "sr": "Predmeti u učionici",
+          "images": [
+            "v3",
+            "v4"
+          ],
+          "words": [
+            {
+              "word": "door",
+              "translation": "vrata",
+              "collection": "CO",
+              "active": true
+            },
+            {
+              "word": "backpack",
+              "translation": "ranac",
+              "collection": "CO",
+              "active": true
+            },
+            {
+              "word": "desk",
+              "translation": "klupa / sto",
+              "collection": "CO",
+              "active": true
+            },
+            {
+              "word": "blackboard",
+              "translation": "tabla",
+              "collection": "CO",
+              "active": true
+            },
+            {
+              "word": "pen",
+              "translation": "hemijska olovka",
+              "collection": "CO",
+              "active": true
+            },
+            {
+              "word": "chair",
+              "translation": "stolica",
+              "collection": "CO",
+              "active": true
+            },
+            {
+              "word": "book",
+              "translation": "knjiga",
+              "collection": "CO",
+              "active": true
+            },
+            {
+              "word": "sharpener",
+              "translation": "rezač / zarezač",
+              "collection": "CO",
+              "active": true
+            },
+            {
+              "word": "pencil",
+              "translation": "grafitna olovka",
+              "collection": "CO",
+              "active": true
+            },
+            {
+              "word": "crayons",
+              "translation": "bojice",
+              "collection": "CO",
+              "active": true
+            },
+            {
+              "word": "notebook",
+              "translation": "sveska",
+              "collection": "CO",
+              "active": true
+            },
+            {
+              "word": "eraser",
+              "translation": "gumica",
+              "collection": "CO",
+              "active": true
+            },
+            {
+              "word": "teacher",
+              "translation": "nastavnica / nastavnik",
+              "collection": "CO",
+              "active": true
+            },
+            {
+              "word": "ruler",
+              "translation": "lenjir",
+              "collection": "CO",
+              "active": true
+            },
+            {
+              "word": "pencil case",
+              "translation": "pernica",
+              "collection": "CO",
+              "active": true
+            },
+            {
+              "word": "scissors",
+              "translation": "makaze",
+              "collection": "CO",
+              "active": true
+            },
+            {
+              "word": "glue",
+              "translation": "lepak",
+              "collection": "CO",
+              "active": true
+            },
+            {
+              "word": "clock",
+              "translation": "sat",
+              "collection": "CO",
+              "active": true
+            },
+            {
+              "word": "classroom",
+              "translation": "učionica",
+              "collection": "CO",
+              "active": false
+            },
+            {
+              "word": "class",
+              "translation": "čas / odeljenje",
+              "collection": "CO",
+              "active": false
+            },
+            {
+              "word": "bag",
+              "translation": "torba",
+              "collection": "CO",
+              "active": false
+            },
+            {
+              "word": "student",
+              "translation": "učenik / učenica",
+              "collection": "CO",
+              "active": false
+            }
+          ],
+          "examples": [
+            "This is a pen.",
+            "My notebook is blue.",
+            "The ruler is on the desk.",
+            "Put the book in your backpack.",
+            "The clock is on the wall."
+          ],
+          "exercises": [
+            "CO-01",
+            "CO-02",
+            "CO-03",
+            "CO-04",
+            "CO-05"
+          ],
+          "aiTopic": "Classroom objects (pen, desk, ruler, backpack, scissors, eraser)"
+        }
+      ],
       "words": [
         {
-          "word": "hello / hi",
+          "word": "hello",
+          "translation": "zdravo",
+          "collection": "GI",
+          "active": true
+        },
+        {
+          "word": "hi",
           "translation": "zdravo / ćao",
-          "example": "Hello, Emma!",
-          "collection": "A",
+          "collection": "GI",
           "active": true
         },
         {
           "word": "good morning",
           "translation": "dobro jutro",
-          "example": "Good morning, everyone!",
-          "collection": "A",
-          "active": true
-        },
-        {
-          "word": "good afternoon / good evening",
-          "translation": "dobar dan / dobro veče",
-          "example": "Good evening!",
-          "collection": "A",
-          "active": true
-        },
-        {
-          "word": "goodbye / bye / see you",
-          "translation": "doviđenja / ćao / vidimo se",
-          "example": "See you in class!",
-          "collection": "A",
-          "active": true
-        },
-        {
-          "word": "name / my name is",
-          "translation": "ime / zovem se",
-          "example": "My name is Emma.",
-          "collection": "B",
-          "active": true
-        },
-        {
-          "word": "What's your name?",
-          "translation": "Kako se zoveš?",
-          "example": "I'm Emma.",
-          "collection": "B",
+          "collection": "GI",
           "active": true
         },
         {
           "word": "nice to meet you",
           "translation": "drago mi je",
-          "example": "Nice to meet you too.",
-          "collection": "B",
+          "collection": "GI",
           "active": true
         },
         {
-          "word": "student",
-          "translation": "učenik / polaznik",
-          "example": "Oliver is a student.",
-          "collection": "B",
+          "word": "my name is…",
+          "translation": "moje ime je…",
+          "collection": "GI",
+          "active": true
+        },
+        {
+          "word": "what’s your name?",
+          "translation": "kako se zoveš?",
+          "collection": "GI",
+          "active": true
+        },
+        {
+          "word": "how are you?",
+          "translation": "kako si?",
+          "collection": "GI",
+          "active": true
+        },
+        {
+          "word": "I’m fine.",
+          "translation": "dobro sam.",
+          "collection": "GI",
+          "active": true
+        },
+        {
+          "word": "thank you",
+          "translation": "hvala",
+          "collection": "GI",
+          "active": true
+        },
+        {
+          "word": "see you",
+          "translation": "vidimo se",
+          "collection": "GI",
           "active": true
         },
         {
           "word": "teacher",
           "translation": "nastavnik / nastavnica",
-          "example": "Ms Taylor is an English teacher.",
-          "collection": "B",
+          "collection": "PCF",
           "active": true
         },
         {
-          "word": "fine / good",
-          "translation": "dobro",
-          "example": "I'm fine.",
-          "collection": "C",
+          "word": "student",
+          "translation": "učenik / učenica",
+          "collection": "PCF",
           "active": true
         },
         {
-          "word": "happy",
-          "translation": "srećan / srećna",
-          "example": "I'm happy today.",
-          "collection": "C",
+          "word": "friend",
+          "translation": "prijatelj / prijateljica",
+          "collection": "PCF",
           "active": true
         },
         {
-          "word": "thanks / thank you",
-          "translation": "hvala",
-          "example": "Thank you, Oliver.",
-          "collection": "C",
+          "word": "boy",
+          "translation": "dečak",
+          "collection": "PCF",
           "active": true
         },
         {
-          "word": "please",
-          "translation": "molim",
-          "example": "Please, sit down.",
-          "collection": "C",
+          "word": "girl",
+          "translation": "devojčica / devojka",
+          "collection": "PCF",
           "active": true
         },
         {
-          "word": "welcome",
-          "translation": "dobro došao / došla",
-          "example": "Welcome to the class.",
-          "collection": "C",
+          "word": "classroom",
+          "translation": "učionica",
+          "collection": "PCF",
           "active": true
         },
         {
-          "word": "How are you?",
-          "translation": "Kako si?",
-          "example": "I'm good, thanks.",
-          "collection": "C",
+          "word": "class",
+          "translation": "čas / odeljenje",
+          "collection": "PCF",
           "active": true
         },
         {
-          "word": "class / classroom",
-          "translation": "čas, grupa / učionica",
-          "example": "We are in class.",
-          "collection": "D",
+          "word": "book",
+          "translation": "knjiga",
+          "collection": "PCF",
           "active": true
         },
         {
           "word": "notebook",
           "translation": "sveska",
-          "example": "Emma has a notebook.",
-          "collection": "D",
-          "active": false
-        },
-        {
-          "word": "book",
-          "translation": "knjiga",
-          "example": "It is a book.",
-          "collection": "D",
+          "collection": "PCF",
           "active": true
         },
         {
-          "word": "pen",
-          "translation": "olovka",
-          "example": "This is a pen.",
-          "collection": "D",
+          "word": "bag",
+          "translation": "torba",
+          "collection": "PCF",
+          "active": true
+        },
+        {
+          "word": "happy",
+          "translation": "srećan / srećna",
+          "collection": "PCF",
+          "active": true
+        },
+        {
+          "word": "good",
+          "translation": "dobro / dobar",
+          "collection": "PCF",
+          "active": true
+        },
+        {
+          "word": "okay",
+          "translation": "u redu",
+          "collection": "PCF",
+          "active": true
+        },
+        {
+          "word": "tired",
+          "translation": "umoran / umorna",
+          "collection": "PCF",
+          "active": true
+        },
+        {
+          "word": "nervous",
+          "translation": "nervozan / nervozna",
+          "collection": "PCF",
+          "active": true
+        },
+        {
+          "word": "door",
+          "translation": "vrata",
+          "collection": "CO",
+          "active": true
+        },
+        {
+          "word": "backpack",
+          "translation": "ranac",
+          "collection": "CO",
           "active": true
         },
         {
           "word": "desk",
           "translation": "klupa / sto",
-          "example": "This is my desk.",
-          "collection": "D",
+          "collection": "CO",
           "active": true
         },
         {
-          "word": "How do you spell it?",
-          "translation": "Kako se slovka?",
-          "example": "E–M–M–A.",
-          "collection": "E",
+          "word": "blackboard",
+          "translation": "tabla",
+          "collection": "CO",
           "active": true
         },
         {
-          "word": "break time",
-          "translation": "pauza",
-          "example": "It is break time.",
-          "collection": "D",
-          "active": false
-        },
-        {
-          "word": "together",
-          "translation": "zajedno",
-          "example": "They are together.",
-          "collection": "D",
-          "active": false
-        },
-        {
-          "word": "ready",
-          "translation": "spreman",
-          "example": "We are ready!",
-          "collection": "C",
-          "active": false
-        },
-        {
-          "word": "zero",
-          "translation": "0",
-          "example": "",
-          "collection": "E",
+          "word": "pen",
+          "translation": "hemijska olovka",
+          "collection": "CO",
           "active": true
         },
         {
-          "word": "one",
-          "translation": "1",
-          "example": "",
-          "collection": "E",
+          "word": "chair",
+          "translation": "stolica",
+          "collection": "CO",
           "active": true
         },
         {
-          "word": "two",
-          "translation": "2",
-          "example": "",
-          "collection": "E",
+          "word": "book",
+          "translation": "knjiga",
+          "collection": "CO",
           "active": true
         },
         {
-          "word": "three",
-          "translation": "3",
-          "example": "",
-          "collection": "E",
+          "word": "sharpener",
+          "translation": "rezač / zarezač",
+          "collection": "CO",
           "active": true
         },
         {
-          "word": "four",
-          "translation": "4",
-          "example": "",
-          "collection": "E",
+          "word": "pencil",
+          "translation": "grafitna olovka",
+          "collection": "CO",
           "active": true
         },
         {
-          "word": "five",
-          "translation": "5",
-          "example": "",
-          "collection": "E",
+          "word": "crayons",
+          "translation": "bojice",
+          "collection": "CO",
           "active": true
         },
         {
-          "word": "six",
-          "translation": "6",
-          "example": "",
-          "collection": "E",
+          "word": "notebook",
+          "translation": "sveska",
+          "collection": "CO",
           "active": true
         },
         {
-          "word": "seven",
-          "translation": "7",
-          "example": "",
-          "collection": "E",
+          "word": "eraser",
+          "translation": "gumica",
+          "collection": "CO",
           "active": true
         },
         {
-          "word": "eight",
-          "translation": "8",
-          "example": "",
-          "collection": "E",
+          "word": "teacher",
+          "translation": "nastavnica / nastavnik",
+          "collection": "CO",
           "active": true
         },
         {
-          "word": "nine",
-          "translation": "9",
-          "example": "",
-          "collection": "E",
+          "word": "ruler",
+          "translation": "lenjir",
+          "collection": "CO",
           "active": true
         },
         {
-          "word": "ten",
-          "translation": "10",
-          "example": "",
-          "collection": "E",
+          "word": "pencil case",
+          "translation": "pernica",
+          "collection": "CO",
           "active": true
         },
         {
-          "word": "eleven",
-          "translation": "11",
-          "example": "",
-          "collection": "E",
+          "word": "scissors",
+          "translation": "makaze",
+          "collection": "CO",
           "active": true
         },
         {
-          "word": "twelve",
-          "translation": "12",
-          "example": "",
-          "collection": "E",
+          "word": "glue",
+          "translation": "lepak",
+          "collection": "CO",
           "active": true
         },
         {
-          "word": "thirteen",
-          "translation": "13",
-          "example": "",
-          "collection": "E",
-          "active": true
-        },
-        {
-          "word": "fourteen",
-          "translation": "14",
-          "example": "",
-          "collection": "E",
-          "active": true
-        },
-        {
-          "word": "fifteen",
-          "translation": "15",
-          "example": "",
-          "collection": "E",
-          "active": true
-        },
-        {
-          "word": "sixteen",
-          "translation": "16",
-          "example": "",
-          "collection": "E",
-          "active": true
-        },
-        {
-          "word": "seventeen",
-          "translation": "17",
-          "example": "",
-          "collection": "E",
-          "active": true
-        },
-        {
-          "word": "eighteen",
-          "translation": "18",
-          "example": "",
-          "collection": "E",
-          "active": true
-        },
-        {
-          "word": "nineteen",
-          "translation": "19",
-          "example": "",
-          "collection": "E",
-          "active": true
-        },
-        {
-          "word": "twenty",
-          "translation": "20",
-          "example": "",
-          "collection": "E",
+          "word": "clock",
+          "translation": "sat",
+          "collection": "CO",
           "active": true
         }
       ],
       "collections": {
-        "A": "Greetings & Goodbyes",
-        "B": "Introducing People",
-        "C": "Feelings & Polite Responses",
-        "D": "In the Classroom",
-        "E": "Alphabet & Numbers"
+        "GI": "Greetings & Introductions",
+        "PCF": "People, Classroom & Feelings",
+        "CO": "Classroom Objects"
       },
       "exercises": [
         {
-          "id": "EN-A1-L01-VO-01",
-          "code": "VO-01",
-          "title": "Match greetings",
-          "instruction": "Prevedi na srpski.",
-          "kind": "closed",
+          "id": "GI-01",
+          "code": "GI-01",
+          "title": "Match the phrase and the meaning",
+          "instruction": "Poveži izraz sa značenjem.",
+          "kind": "vocabulary",
           "items": [
             {
-              "prompt": "Hello → ___",
-              "answers": [
-                "Zdravo",
-                "ćao"
-              ],
+              "prompt": "hello",
               "options": [
-                "Zdravo",
-                "Izvini"
+                "moje ime je…",
+                "zdravo",
+                "hvala"
+              ],
+              "answers": [
+                "zdravo"
               ]
             },
             {
-              "prompt": "Good morning → ___",
-              "answers": [
+              "prompt": "nice to meet you",
+              "options": [
+                "drago mi je",
+                "vidimo se",
                 "dobro jutro"
-              ]
-            },
-            {
-              "prompt": "See you → ___",
+              ],
               "answers": [
-                "vidimo se"
+                "drago mi je"
               ]
             },
             {
-              "prompt": "Thank you → ___",
+              "prompt": "my name is…",
+              "options": [
+                "kako si?",
+                "moje ime je…",
+                "dobro sam"
+              ],
+              "answers": [
+                "moje ime je…"
+              ]
+            },
+            {
+              "prompt": "thank you",
+              "options": [
+                "hvala",
+                "ćao",
+                "dobro jutro"
+              ],
               "answers": [
                 "hvala"
               ]
-            }
-          ]
-        },
-        {
-          "id": "EN-A1-L01-VO-02",
-          "code": "VO-02",
-          "title": "Match person",
-          "instruction": "Izaberi: student ili teacher.",
-          "kind": "closed",
-          "items": [
-            {
-              "prompt": "Emma",
-              "answers": [
-                "student"
-              ],
-              "options": [
-                "student",
-                "teacher"
-              ]
             },
             {
-              "prompt": "Ms Taylor",
-              "answers": [
-                "teacher"
-              ],
+              "prompt": "see you",
               "options": [
-                "student",
-                "teacher"
-              ]
-            },
-            {
-              "prompt": "Oliver",
-              "answers": [
-                "student"
+                "kako se zoveš?",
+                "vidimo se",
+                "drago mi je"
               ],
-              "options": [
-                "student",
-                "teacher"
+              "answers": [
+                "vidimo se"
               ]
             }
           ]
         },
         {
-          "id": "EN-A1-L01-VO-03",
-          "code": "VO-03",
-          "title": "Listen and choose",
-          "instruction": "Poslušaj broj i izaberi.",
-          "kind": "closed",
+          "id": "GI-02",
+          "code": "GI-02",
+          "title": "Complete the mini-dialogues",
+          "instruction": "Dopuni dijalog odgovarajućim izrazom.",
+          "kind": "vocabulary",
           "items": [
             {
-              "prompt": "🔊 eleven",
+              "prompt": "A: Hello! ______ Emma.  B: Hi, Emma! I’m Sophie.",
               "answers": [
-                "11"
-              ],
-              "options": [
-                "7",
-                "11",
-                "17"
+                "My name is",
+                "I'm"
               ]
             },
             {
-              "prompt": "🔊 three",
+              "prompt": "A: What’s your name?  B: ______ Oliver.",
               "answers": [
-                "3"
-              ],
-              "options": [
-                "3",
-                "13",
-                "30"
+                "My name is",
+                "I'm"
               ]
             },
             {
-              "prompt": "🔊 twenty",
+              "prompt": "A: How are you?  B: ______, thank you.",
               "answers": [
-                "20"
-              ],
-              "options": [
-                "12",
-                "20",
-                "2"
-              ]
-            }
-          ]
-        },
-        {
-          "id": "EN-A1-L01-VO-04",
-          "code": "VO-04",
-          "title": "Complete phrases",
-          "instruction": "Dopuni izraz.",
-          "kind": "closed",
-          "items": [
-            {
-              "prompt": "Nice to ___ you.",
-              "answers": [
-                "meet"
+                "I'm fine"
               ]
             },
             {
-              "prompt": "How ___ you?",
-              "answers": [
-                "are"
-              ]
-            },
-            {
-              "prompt": "What's your ___?",
-              "answers": [
-                "name"
-              ]
-            },
-            {
-              "prompt": "My ___ is Emma.",
-              "answers": [
-                "name"
-              ]
-            }
-          ]
-        },
-        {
-          "id": "EN-A1-L01-VO-05",
-          "code": "VO-05",
-          "title": "Classify",
-          "instruction": "Da li je izraz pozdrav (greeting) ili rastanak (goodbye)?",
-          "kind": "closed",
-          "items": [
-            {
-              "prompt": "Hello",
-              "answers": [
-                "greeting"
-              ],
-              "options": [
-                "greeting",
-                "goodbye"
-              ]
-            },
-            {
-              "prompt": "Bye",
-              "answers": [
-                "goodbye"
-              ],
-              "options": [
-                "greeting",
-                "goodbye"
-              ]
-            },
-            {
-              "prompt": "Hi",
-              "answers": [
-                "greeting"
-              ],
-              "options": [
-                "greeting",
-                "goodbye"
-              ]
-            },
-            {
-              "prompt": "See you",
-              "answers": [
-                "goodbye"
-              ],
-              "options": [
-                "greeting",
-                "goodbye"
-              ]
-            },
-            {
-              "prompt": "Good morning",
-              "answers": [
-                "greeting"
-              ],
-              "options": [
-                "greeting",
-                "goodbye"
-              ]
-            }
-          ]
-        },
-        {
-          "id": "EN-A1-L01-VO-06",
-          "code": "VO-06",
-          "title": "Choose in context",
-          "instruction": "Izaberi pravi izraz.",
-          "kind": "closed",
-          "items": [
-            {
-              "prompt": "It is morning.",
-              "answers": [
-                "Good morning"
-              ],
-              "options": [
-                "Good morning",
-                "Good evening"
-              ]
-            },
-            {
-              "prompt": "You meet Sophie.",
+              "prompt": "A: Nice to meet you.  B: ______ too.",
               "answers": [
                 "Nice to meet you"
-              ],
-              "options": [
-                "Nice to meet you",
-                "Goodbye"
               ]
             },
             {
-              "prompt": "Oliver leaves the classroom.",
+              "prompt": "A: Goodbye!  B: ______!",
               "answers": [
                 "See you"
-              ],
-              "options": [
-                "See you",
-                "Good morning"
               ]
             }
           ]
         },
         {
-          "id": "EN-A1-L01-VO-07",
-          "code": "VO-07",
-          "title": "Useful chunks",
-          "instruction": "Dopuni izraz.",
-          "kind": "closed",
+          "id": "GI-03",
+          "code": "GI-03",
+          "title": "Look at the poster and choose the right phrase",
+          "instruction": "Pogledaj ilustraciju i napiši odgovarajući izraz.",
+          "kind": "vocabulary",
           "items": [
             {
-              "prompt": "my + ___ (name / class)",
+              "prompt": "Emma waves and says: ______",
               "answers": [
-                "name",
-                "class"
+                "Hello",
+                "Hi"
               ]
             },
             {
-              "prompt": "nice + to + ___",
+              "prompt": "Oliver meets Sophie for the first time: ______",
               "answers": [
-                "meet"
+                "Nice to meet you"
               ]
             },
             {
-              "prompt": "thank + ___",
+              "prompt": "Emma points to herself: ______ Emma.",
               "answers": [
-                "you"
+                "My name is",
+                "I'm"
               ]
             },
             {
-              "prompt": "see + ___",
+              "prompt": "Oliver asks Emma for her name: ______?",
               "answers": [
-                "you"
+                "What's your name"
+              ]
+            },
+            {
+              "prompt": "At the end of class Oliver waves goodbye: ______",
+              "answers": [
+                "See you"
               ]
             }
           ]
         },
         {
-          "id": "EN-A1-L01-VO-08",
-          "code": "VO-08",
-          "title": "Picture description",
-          "instruction": "Dopuni rečenicu.",
-          "kind": "closed",
+          "id": "GI-04",
+          "code": "GI-04",
+          "title": "Put the words in order",
+          "instruction": "Sastavi pravilne izraze.",
+          "kind": "vocabulary",
           "items": [
             {
-              "prompt": "Ms Taylor: She is a ___.",
+              "prompt": "you / nice / meet / to",
               "answers": [
-                "teacher"
+                "Nice to meet you"
               ]
             },
             {
-              "prompt": "Emma: She is a ___.",
+              "prompt": "name / my / Emma / is",
               "answers": [
-                "student"
+                "My name is Emma"
+              ]
+            },
+            {
+              "prompt": "are / how / you",
+              "answers": [
+                "How are you"
+              ]
+            },
+            {
+              "prompt": "thank / you",
+              "answers": [
+                "Thank you"
+              ]
+            },
+            {
+              "prompt": "see / you",
+              "answers": [
+                "See you"
               ]
             }
           ]
         },
         {
-          "id": "EN-A1-L01-VO-09",
-          "code": "VO-09",
-          "title": "Make sentences",
-          "instruction": "Napiši rečenicu sa datom reči.",
-          "kind": "open",
+          "id": "GI-05",
+          "code": "GI-05",
+          "title": "Create your own answers",
+          "instruction": "Napiši kratke odgovore. Mogući su različiti tačni odgovori.",
+          "kind": "vocabulary",
           "items": [
             {
-              "prompt": "student",
-              "open": true
+              "prompt": "What’s your name?",
+              "open": true,
+              "guide": "Prihvati različite gramatički tačne odgovore na nivou A1."
             },
+            {
+              "prompt": "How are you?",
+              "open": true,
+              "guide": "Prihvati različite gramatički tačne odgovore na nivou A1."
+            },
+            {
+              "prompt": "What do you say when you meet your teacher in the morning?",
+              "open": true,
+              "guide": "Očekivano: Good morning (+ ime)."
+            },
+            {
+              "prompt": "What do you say when you meet a new friend?",
+              "open": true,
+              "guide": "Očekivano: Nice to meet you / Hello."
+            },
+            {
+              "prompt": "What do you say at the end of class?",
+              "open": true,
+              "guide": "Očekivano: See you / Goodbye."
+            }
+          ]
+        },
+        {
+          "id": "PCF-01",
+          "code": "PCF-01",
+          "title": "Sort the words into groups",
+          "instruction": "Razvrstaj reči u tri grupe.",
+          "kind": "vocabulary",
+          "items": [
             {
               "prompt": "teacher",
-              "open": true
+              "options": [
+                "PEOPLE",
+                "PLACE & THINGS",
+                "FEELINGS"
+              ],
+              "answers": [
+                "PEOPLE"
+              ]
+            },
+            {
+              "prompt": "classroom",
+              "options": [
+                "PEOPLE",
+                "PLACE & THINGS",
+                "FEELINGS"
+              ],
+              "answers": [
+                "PLACE & THINGS"
+              ]
             },
             {
               "prompt": "happy",
-              "open": true
+              "options": [
+                "PEOPLE",
+                "PLACE & THINGS",
+                "FEELINGS"
+              ],
+              "answers": [
+                "FEELINGS"
+              ]
+            },
+            {
+              "prompt": "student",
+              "options": [
+                "PEOPLE",
+                "PLACE & THINGS",
+                "FEELINGS"
+              ],
+              "answers": [
+                "PEOPLE"
+              ]
+            },
+            {
+              "prompt": "bag",
+              "options": [
+                "PEOPLE",
+                "PLACE & THINGS",
+                "FEELINGS"
+              ],
+              "answers": [
+                "PLACE & THINGS"
+              ]
+            },
+            {
+              "prompt": "tired",
+              "options": [
+                "PEOPLE",
+                "PLACE & THINGS",
+                "FEELINGS"
+              ],
+              "answers": [
+                "FEELINGS"
+              ]
+            },
+            {
+              "prompt": "friend",
+              "options": [
+                "PEOPLE",
+                "PLACE & THINGS",
+                "FEELINGS"
+              ],
+              "answers": [
+                "PEOPLE"
+              ]
+            },
+            {
+              "prompt": "book",
+              "options": [
+                "PEOPLE",
+                "PLACE & THINGS",
+                "FEELINGS"
+              ],
+              "answers": [
+                "PLACE & THINGS"
+              ]
+            },
+            {
+              "prompt": "nervous",
+              "options": [
+                "PEOPLE",
+                "PLACE & THINGS",
+                "FEELINGS"
+              ],
+              "answers": [
+                "FEELINGS"
+              ]
             }
           ]
         },
         {
-          "id": "EN-A1-L01-VO-10",
-          "code": "VO-10",
-          "title": "Real-life greeting",
-          "instruction": "Napiši kratke replike.",
-          "kind": "open",
+          "id": "PCF-02",
+          "code": "PCF-02",
+          "title": "Complete the sentence",
+          "instruction": "Dopuni rečenicu odgovarajućom rečju.",
+          "kind": "vocabulary",
           "items": [
             {
-              "prompt": "Napiši pozdrav.",
-              "open": true
+              "prompt": "Ms Taylor is a ______.",
+              "answers": [
+                "teacher"
+              ]
             },
             {
-              "prompt": "Reci svoje ime.",
-              "open": true
+              "prompt": "Emma writes in her ______.",
+              "answers": [
+                "notebook"
+              ]
             },
             {
-              "prompt": "Pitaj sagovornika za ime.",
-              "open": true
+              "prompt": "Oliver is my ______.",
+              "answers": [
+                "friend"
+              ]
             },
             {
-              "prompt": "Zahvali se.",
-              "open": true
+              "prompt": "Sophie is ______ after a long day. (happy / tired)",
+              "answers": [
+                "tired"
+              ]
             },
             {
-              "prompt": "Pozdravi se na odlasku.",
-              "open": true
+              "prompt": "The students are in the ______.",
+              "answers": [
+                "classroom"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "PCF-03",
+          "code": "PCF-03",
+          "title": "Look at the poster and answer",
+          "instruction": "Pogledaj ilustraciju i napiši odgovarajuću reč.",
+          "kind": "vocabulary",
+          "items": [
+            {
+              "prompt": "Who teaches the class? ______",
+              "answers": [
+                "teacher",
+                "the teacher",
+                "a teacher"
+              ]
+            },
+            {
+              "prompt": "What is the room for learning called? ______",
+              "answers": [
+                "classroom",
+                "the classroom",
+                "a classroom"
+              ]
+            },
+            {
+              "prompt": "What do we call Emma? She is a ______.",
+              "answers": [
+                "student"
+              ]
+            },
+            {
+              "prompt": "Which word describes feeling worried? ______",
+              "answers": [
+                "nervous"
+              ]
+            },
+            {
+              "prompt": "Which word means “prijatelj”? ______",
+              "answers": [
+                "friend"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "PCF-04",
+          "code": "PCF-04",
+          "title": "Match English and Serbian",
+          "instruction": "Poveži pojmove.",
+          "kind": "vocabulary",
+          "items": [
+            {
+              "prompt": "teacher",
+              "options": [
+                "knjiga",
+                "nastavnik",
+                "učionica"
+              ],
+              "answers": [
+                "nastavnik"
+              ]
+            },
+            {
+              "prompt": "nervous",
+              "options": [
+                "nervozan",
+                "srećan",
+                "učenik"
+              ],
+              "answers": [
+                "nervozan"
+              ]
+            },
+            {
+              "prompt": "classroom",
+              "options": [
+                "torba",
+                "učionica",
+                "časovnik"
+              ],
+              "answers": [
+                "učionica"
+              ]
+            },
+            {
+              "prompt": "friend",
+              "options": [
+                "prijatelj",
+                "dečak",
+                "tabla"
+              ],
+              "answers": [
+                "prijatelj"
+              ]
+            },
+            {
+              "prompt": "notebook",
+              "options": [
+                "sveska",
+                "olovka",
+                "gumica"
+              ],
+              "answers": [
+                "sveska"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "PCF-05",
+          "code": "PCF-05",
+          "title": "Write about the picture",
+          "instruction": "Napiši kratke rečenice. Mogući su različiti tačni odgovori.",
+          "kind": "vocabulary",
+          "items": [
+            {
+              "prompt": "Write one sentence about the teacher.",
+              "open": true,
+              "guide": "Prihvati različite gramatički tačne odgovore na nivou A1."
+            },
+            {
+              "prompt": "Write one sentence about a student.",
+              "open": true,
+              "guide": "Prihvati različite gramatički tačne odgovore na nivou A1."
+            },
+            {
+              "prompt": "Write one sentence with classroom.",
+              "open": true,
+              "guide": "Rečenica mora sadržati reč classroom."
+            },
+            {
+              "prompt": "Write one sentence with happy or tired.",
+              "open": true,
+              "guide": "Rečenica mora sadržati happy ili tired."
+            },
+            {
+              "prompt": "Write one sentence with friend.",
+              "open": true,
+              "guide": "Rečenica mora sadržati reč friend."
+            }
+          ]
+        },
+        {
+          "id": "CO-01",
+          "code": "CO-01",
+          "title": "Look and write",
+          "instruction": "Pogledaj ilustracije i napiši englesku reč.",
+          "kind": "vocabulary",
+          "items": [
+            {
+              "prompt": "vrata → ______",
+              "answers": [
+                "door"
+              ]
+            },
+            {
+              "prompt": "tabla → ______",
+              "answers": [
+                "blackboard"
+              ]
+            },
+            {
+              "prompt": "makaze → ______",
+              "answers": [
+                "scissors"
+              ]
+            },
+            {
+              "prompt": "pernica → ______",
+              "answers": [
+                "pencil case"
+              ]
+            },
+            {
+              "prompt": "gumica → ______",
+              "answers": [
+                "eraser"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "CO-02",
+          "code": "CO-02",
+          "title": "Match the object and the translation",
+          "instruction": "Poveži reč i prevod.",
+          "kind": "vocabulary",
+          "items": [
+            {
+              "prompt": "desk",
+              "options": [
+                "stolica",
+                "klupa / sto",
+                "lenjir"
+              ],
+              "answers": [
+                "klupa / sto"
+              ]
+            },
+            {
+              "prompt": "backpack",
+              "options": [
+                "ranac",
+                "gumica",
+                "lepak"
+              ],
+              "answers": [
+                "ranac"
+              ]
+            },
+            {
+              "prompt": "clock",
+              "options": [
+                "vrata",
+                "tabla",
+                "sat"
+              ],
+              "answers": [
+                "sat"
+              ]
+            },
+            {
+              "prompt": "sharpener",
+              "options": [
+                "zarezač",
+                "sveska",
+                "bojice"
+              ],
+              "answers": [
+                "zarezač"
+              ]
+            },
+            {
+              "prompt": "crayons",
+              "options": [
+                "makaze",
+                "bojice",
+                "knjiga"
+              ],
+              "answers": [
+                "bojice"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "CO-03",
+          "code": "CO-03",
+          "title": "Find the odd one out",
+          "instruction": "Izaberi reč koja ne pripada grupi.",
+          "kind": "vocabulary",
+          "items": [
+            {
+              "prompt": "pen – pencil – notebook – tired",
+              "options": [
+                "pen",
+                "pencil",
+                "notebook",
+                "tired"
+              ],
+              "answers": [
+                "tired"
+              ]
+            },
+            {
+              "prompt": "desk – chair – blackboard – happy",
+              "options": [
+                "desk",
+                "chair",
+                "blackboard",
+                "happy"
+              ],
+              "answers": [
+                "happy"
+              ]
+            },
+            {
+              "prompt": "scissors – glue – ruler – friend",
+              "options": [
+                "scissors",
+                "glue",
+                "ruler",
+                "friend"
+              ],
+              "answers": [
+                "friend"
+              ]
+            },
+            {
+              "prompt": "backpack – pencil case – book – nervous",
+              "options": [
+                "backpack",
+                "pencil case",
+                "book",
+                "nervous"
+              ],
+              "answers": [
+                "nervous"
+              ]
+            },
+            {
+              "prompt": "clock – door – classroom – hello",
+              "options": [
+                "clock",
+                "door",
+                "classroom",
+                "hello"
+              ],
+              "answers": [
+                "hello"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "CO-04",
+          "code": "CO-04",
+          "title": "Complete the sentence with the correct word",
+          "instruction": "Dopuni rečenicu odgovarajućom rečju.",
+          "kind": "vocabulary",
+          "items": [
+            {
+              "prompt": "I write with a ______.",
+              "answers": [
+                "pen",
+                "pencil"
+              ]
+            },
+            {
+              "prompt": "I sit on a ______.",
+              "answers": [
+                "chair"
+              ]
+            },
+            {
+              "prompt": "My books are in my ______.",
+              "answers": [
+                "backpack",
+                "bag"
+              ]
+            },
+            {
+              "prompt": "I erase with an ______.",
+              "answers": [
+                "eraser"
+              ]
+            },
+            {
+              "prompt": "I cut paper with ______.",
+              "answers": [
+                "scissors"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "CO-05",
+          "code": "CO-05",
+          "title": "Mini visual challenge",
+          "instruction": "Koristi ilustracije i napiši rečenicu za svaki pojam.",
+          "kind": "vocabulary",
+          "items": [
+            {
+              "prompt": "This is a ______.",
+              "open": true,
+              "guide": "Prihvati različite gramatički tačne odgovore na nivou A1."
+            },
+            {
+              "prompt": "I have a ______.",
+              "open": true,
+              "guide": "Prihvati različite gramatički tačne odgovore na nivou A1."
+            },
+            {
+              "prompt": "The ______ is on the desk.",
+              "open": true,
+              "guide": "Prihvati različite gramatički tačne odgovore na nivou A1."
+            },
+            {
+              "prompt": "My favorite classroom object is ______.",
+              "open": true,
+              "guide": "Prihvati različite gramatički tačne odgovore na nivou A1."
+            },
+            {
+              "prompt": "In my classroom I can see ______, ______ and ______.",
+              "open": true,
+              "guide": "Treba navesti tri predmeta iz učionice."
             }
           ]
         }
