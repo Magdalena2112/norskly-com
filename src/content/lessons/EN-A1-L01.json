@@ -5172,6 +5172,609 @@
           ],
           "extra": "Slovkaj svoje ime naglas, slovo po slovo."
         }
+      ],
+      "letters": [
+        {
+          "letter": "A",
+          "ipa": "/eɪ/",
+          "word": "apple",
+          "meaning": "jabuka"
+        },
+        {
+          "letter": "B",
+          "ipa": "/biː/",
+          "word": "book",
+          "meaning": "knjiga"
+        },
+        {
+          "letter": "C",
+          "ipa": "/siː/",
+          "word": "cat",
+          "meaning": "mačka"
+        },
+        {
+          "letter": "D",
+          "ipa": "/diː/",
+          "word": "dog",
+          "meaning": "pas"
+        },
+        {
+          "letter": "E",
+          "ipa": "/iː/",
+          "word": "egg",
+          "meaning": "jaje"
+        },
+        {
+          "letter": "F",
+          "ipa": "/ef/",
+          "word": "friend",
+          "meaning": "prijatelj"
+        },
+        {
+          "letter": "G",
+          "ipa": "/dʒiː/",
+          "word": "girl",
+          "meaning": "devojčica"
+        },
+        {
+          "letter": "H",
+          "ipa": "/eɪtʃ/",
+          "word": "hello",
+          "meaning": "zdravo"
+        },
+        {
+          "letter": "I",
+          "ipa": "/aɪ/",
+          "word": "ice cream",
+          "meaning": "sladoled"
+        },
+        {
+          "letter": "J",
+          "ipa": "/dʒeɪ/",
+          "word": "juice",
+          "meaning": "sok"
+        },
+        {
+          "letter": "K",
+          "ipa": "/keɪ/",
+          "word": "key",
+          "meaning": "ključ"
+        },
+        {
+          "letter": "L",
+          "ipa": "/el/",
+          "word": "lemon",
+          "meaning": "limun"
+        },
+        {
+          "letter": "M",
+          "ipa": "/em/",
+          "word": "mother",
+          "meaning": "majka"
+        },
+        {
+          "letter": "N",
+          "ipa": "/en/",
+          "word": "name",
+          "meaning": "ime"
+        },
+        {
+          "letter": "O",
+          "ipa": "/əʊ/",
+          "word": "orange",
+          "meaning": "pomorandža"
+        },
+        {
+          "letter": "P",
+          "ipa": "/piː/",
+          "word": "pen",
+          "meaning": "olovka (hemijska)"
+        },
+        {
+          "letter": "Q",
+          "ipa": "/kjuː/",
+          "word": "queen",
+          "meaning": "kraljica"
+        },
+        {
+          "letter": "R",
+          "ipa": "/ɑː/",
+          "word": "red",
+          "meaning": "crven"
+        },
+        {
+          "letter": "S",
+          "ipa": "/es/",
+          "word": "student",
+          "meaning": "učenik"
+        },
+        {
+          "letter": "T",
+          "ipa": "/tiː/",
+          "word": "teacher",
+          "meaning": "nastavnik"
+        },
+        {
+          "letter": "U",
+          "ipa": "/juː/",
+          "word": "umbrella",
+          "meaning": "kišobran"
+        },
+        {
+          "letter": "V",
+          "ipa": "/viː/",
+          "word": "van",
+          "meaning": "kombi"
+        },
+        {
+          "letter": "W",
+          "ipa": "/ˈdʌbəl.juː/",
+          "word": "water",
+          "meaning": "voda"
+        },
+        {
+          "letter": "X",
+          "ipa": "/eks/",
+          "word": "box",
+          "meaning": "kutija"
+        },
+        {
+          "letter": "Y",
+          "ipa": "/waɪ/",
+          "word": "yellow",
+          "meaning": "žut"
+        },
+        {
+          "letter": "Z",
+          "ipa": "/zed/",
+          "word": "zero",
+          "meaning": "nula"
+        }
+      ],
+      "spelling": {
+        "title": "Šta znači spelovanje?",
+        "text": "Spelovanje (eng. spelling) znači izgovoriti reč slovo po slovo, koristeći engleske nazive slova. Na engleskom se često traži kada se predstavljaš, upisuješ u školu ili ostavljaš ime na recepciji: „How do you spell it?“ (Kako se to piše / sloviš?).",
+        "examples": [
+          {
+            "word": "Emma",
+            "spelled": "E – M – M – A"
+          },
+          {
+            "word": "book",
+            "spelled": "B – O – O – K"
+          },
+          {
+            "word": "Oliver",
+            "spelled": "O – L – I – V – E – R"
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "code": "IZ-01",
+          "title": "Koje slovo čuješ?",
+          "instruction": "Poslušaj i izaberi slovo.",
+          "type": "choose",
+          "items": [
+            {
+              "prompt": "",
+              "say": "E",
+              "options": [
+                "E",
+                "I",
+                "A"
+              ],
+              "answer": "E"
+            },
+            {
+              "prompt": "",
+              "say": "I",
+              "options": [
+                "E",
+                "I",
+                "Y"
+              ],
+              "answer": "I"
+            },
+            {
+              "prompt": "",
+              "say": "G",
+              "options": [
+                "G",
+                "J",
+                "Z"
+              ],
+              "answer": "G"
+            },
+            {
+              "prompt": "",
+              "say": "J",
+              "options": [
+                "G",
+                "J",
+                "H"
+              ],
+              "answer": "J"
+            },
+            {
+              "prompt": "",
+              "say": "A",
+              "options": [
+                "E",
+                "A",
+                "R"
+              ],
+              "answer": "A"
+            }
+          ]
+        },
+        {
+          "code": "IZ-02",
+          "title": "Slične zvučne parove",
+          "instruction": "Poslušaj i izaberi slovo.",
+          "type": "choose",
+          "items": [
+            {
+              "prompt": "",
+              "say": "B",
+              "options": [
+                "B",
+                "P",
+                "V"
+              ],
+              "answer": "B"
+            },
+            {
+              "prompt": "",
+              "say": "P",
+              "options": [
+                "B",
+                "P",
+                "T"
+              ],
+              "answer": "P"
+            },
+            {
+              "prompt": "",
+              "say": "M",
+              "options": [
+                "M",
+                "N",
+                "L"
+              ],
+              "answer": "M"
+            },
+            {
+              "prompt": "",
+              "say": "N",
+              "options": [
+                "M",
+                "N",
+                "L"
+              ],
+              "answer": "N"
+            },
+            {
+              "prompt": "",
+              "say": "V",
+              "options": [
+                "B",
+                "V",
+                "W"
+              ],
+              "answer": "V"
+            }
+          ]
+        },
+        {
+          "code": "IZ-03",
+          "title": "Izgovori slovo",
+          "instruction": "Poslušaj, pa snimi svoj izgovor.",
+          "type": "record",
+          "items": [
+            {
+              "say": "A",
+              "hint": ""
+            },
+            {
+              "say": "E",
+              "hint": ""
+            },
+            {
+              "say": "I",
+              "hint": ""
+            },
+            {
+              "say": "R",
+              "hint": ""
+            },
+            {
+              "say": "W",
+              "hint": ""
+            }
+          ]
+        },
+        {
+          "code": "IZ-04",
+          "title": "Slovo i reč",
+          "instruction": "Poslušaj i izaberi reč koja počinje tim slovom.",
+          "type": "choose",
+          "items": [
+            {
+              "prompt": "Slovo G",
+              "say": "G",
+              "options": [
+                "girl",
+                "juice",
+                "key"
+              ],
+              "answer": "girl"
+            },
+            {
+              "prompt": "Slovo J",
+              "say": "J",
+              "options": [
+                "girl",
+                "juice",
+                "yellow"
+              ],
+              "answer": "juice"
+            },
+            {
+              "prompt": "Slovo Y",
+              "say": "Y",
+              "options": [
+                "water",
+                "yellow",
+                "egg"
+              ],
+              "answer": "yellow"
+            },
+            {
+              "prompt": "Slovo E",
+              "say": "E",
+              "options": [
+                "egg",
+                "ice cream",
+                "apple"
+              ],
+              "answer": "egg"
+            },
+            {
+              "prompt": "Slovo I",
+              "say": "I",
+              "options": [
+                "egg",
+                "ice cream",
+                "yellow"
+              ],
+              "answer": "ice cream"
+            }
+          ]
+        },
+        {
+          "code": "IZ-05",
+          "title": "Kako se piše ime?",
+          "instruction": "Poslušaj slovkanje i izaberi ime.",
+          "type": "choose",
+          "items": [
+            {
+              "prompt": "",
+              "say": "E, M, M, A",
+              "options": [
+                "Emma",
+                "Anna",
+                "Ema"
+              ],
+              "answer": "Emma"
+            },
+            {
+              "prompt": "",
+              "say": "T, O, M",
+              "options": [
+                "Tim",
+                "Tom",
+                "Ton"
+              ],
+              "answer": "Tom"
+            },
+            {
+              "prompt": "",
+              "say": "M, I, A",
+              "options": [
+                "Mia",
+                "Maya",
+                "Mea"
+              ],
+              "answer": "Mia"
+            },
+            {
+              "prompt": "",
+              "say": "J, A, C, K",
+              "options": [
+                "Jake",
+                "Jack",
+                "Gack"
+              ],
+              "answer": "Jack"
+            },
+            {
+              "prompt": "",
+              "say": "K, A, T, E",
+              "options": [
+                "Kate",
+                "Cate",
+                "Katie"
+              ],
+              "answer": "Kate"
+            }
+          ]
+        },
+        {
+          "code": "IZ-06",
+          "title": "Slovkaj reč",
+          "instruction": "Snimi slovkanje reči, slovo po slovo.",
+          "type": "record",
+          "items": [
+            {
+              "say": "B, O, O, K",
+              "hint": "book"
+            },
+            {
+              "say": "P, E, N",
+              "hint": "pen"
+            },
+            {
+              "say": "D, E, S, K",
+              "hint": "desk"
+            },
+            {
+              "say": "B, A, G",
+              "hint": "bag"
+            },
+            {
+              "say": "N, A, M, E",
+              "hint": "name"
+            }
+          ]
+        },
+        {
+          "code": "IZ-07",
+          "title": "Pročitaj i snimi",
+          "instruction": "Poslušaj model, pa snimi rečenicu.",
+          "type": "record",
+          "items": [
+            {
+              "say": "Hello! I'm Emma.",
+              "hint": ""
+            },
+            {
+              "say": "Nice to meet you!",
+              "hint": ""
+            },
+            {
+              "say": "I'm a student.",
+              "hint": ""
+            },
+            {
+              "say": "She is my teacher.",
+              "hint": ""
+            },
+            {
+              "say": "This is my friend.",
+              "hint": ""
+            }
+          ]
+        },
+        {
+          "code": "IZ-08",
+          "title": "Pitanje ili izjava?",
+          "instruction": "Poslušaj intonaciju i izaberi.",
+          "type": "choose",
+          "items": [
+            {
+              "prompt": "",
+              "say": "How are you?",
+              "options": [
+                "Pitanje",
+                "Izjava"
+              ],
+              "answer": "Pitanje"
+            },
+            {
+              "prompt": "",
+              "say": "I'm fine.",
+              "options": [
+                "Pitanje",
+                "Izjava"
+              ],
+              "answer": "Izjava"
+            },
+            {
+              "prompt": "",
+              "say": "Are you a student?",
+              "options": [
+                "Pitanje",
+                "Izjava"
+              ],
+              "answer": "Pitanje"
+            },
+            {
+              "prompt": "",
+              "say": "My name is Liam.",
+              "options": [
+                "Pitanje",
+                "Izjava"
+              ],
+              "answer": "Izjava"
+            },
+            {
+              "prompt": "",
+              "say": "What's your name?",
+              "options": [
+                "Pitanje",
+                "Izjava"
+              ],
+              "answer": "Pitanje"
+            }
+          ]
+        },
+        {
+          "code": "IZ-09",
+          "title": "Pozdravi i pitanja",
+          "instruction": "Snimi sa prirodnom intonacijom.",
+          "type": "record",
+          "items": [
+            {
+              "say": "Hello!",
+              "hint": ""
+            },
+            {
+              "say": "How are you?",
+              "hint": ""
+            },
+            {
+              "say": "What's your name?",
+              "hint": ""
+            },
+            {
+              "say": "How do you spell it?",
+              "hint": ""
+            },
+            {
+              "say": "Goodbye! See you tomorrow.",
+              "hint": ""
+            }
+          ]
+        },
+        {
+          "code": "IZ-10",
+          "title": "Mini razgovor",
+          "instruction": "Poslušaj pitanje i snimi svoj odgovor.",
+          "type": "record",
+          "items": [
+            {
+              "say": "My name is Emma.",
+              "hint": "What's your name?"
+            },
+            {
+              "say": "E, M, M, A.",
+              "hint": "How do you spell it?"
+            },
+            {
+              "say": "I'm fine, thank you.",
+              "hint": "How are you?"
+            },
+            {
+              "say": "I'm a student.",
+              "hint": "Are you a teacher?"
+            },
+            {
+              "say": "Nice to meet you too!",
+              "hint": "Nice to meet you!"
+            }
+          ]
+        }
       ]
     },
     "speaking": {
