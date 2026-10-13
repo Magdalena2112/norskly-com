@@ -49,7 +49,7 @@ export default function LessonExercise({
 
     if (user && wrongs.length) {
       logErrors(user.id, "grammar", "lesson", wrongs.slice(0, 5).map((w) => ({
-        category: exercise.code.startsWith("VO") ? "vocabulary" : "grammar",
+        category: /^(VO|GI|PCF|CO)-/.test(exercise.code) ? "vocabulary" : "grammar",
         topic: `${exercise.code} · ${exercise.title}`,
         severity: 2,
         example_wrong: `${w.prompt} → ${w.wrong}`,
