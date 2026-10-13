@@ -1,0 +1,2723 @@
+{
+ "code": "EN-A1-L01",
+ "intro": [
+  {
+   "id": "EN-A1-L01-T01",
+   "title": "Text 1 · First Day",
+   "type": "dialogue",
+   "scene": "Monday morning. Emma is outside her new English classroom. Oliver is at the door.",
+   "lines": [
+    {
+     "speaker": "Oliver",
+     "text": "Hello! I'm Oliver. What's your name?"
+    },
+    {
+     "speaker": "Emma",
+     "text": "Hi! I'm Emma. Nice to meet you!"
+    },
+    {
+     "speaker": "Oliver",
+     "text": "Nice to meet you too!"
+    },
+    {
+     "speaker": "Emma",
+     "text": "Are you a student here?"
+    },
+    {
+     "speaker": "Oliver",
+     "text": "Yes, I am. And you?"
+    },
+    {
+     "speaker": "Emma",
+     "text": "Yes, I'm a student too."
+    },
+    {
+     "speaker": "Oliver",
+     "text": "Great! Welcome to the class!"
+    },
+    {
+     "speaker": "Emma",
+     "text": "Thank you!"
+    }
+   ]
+  },
+  {
+   "id": "EN-A1-L01-T02",
+   "title": "Text 2 · In the Classroom",
+   "type": "dialogue",
+   "scene": "Ms Taylor is at the board. Three students sit at their desks.",
+   "lines": [
+    {
+     "speaker": "Ms Taylor",
+     "text": "Good morning, everyone!"
+    },
+    {
+     "speaker": "Class",
+     "text": "Good morning!"
+    },
+    {
+     "speaker": "Ms Taylor",
+     "text": "I'm Ms Taylor. I'm your English teacher."
+    },
+    {
+     "speaker": "Ms Taylor",
+     "text": "This is Emma. She is a new student."
+    },
+    {
+     "speaker": "Emma",
+     "text": "Hello, everyone!"
+    },
+    {
+     "speaker": "Ms Taylor",
+     "text": "This is Oliver. He is a student too."
+    },
+    {
+     "speaker": "Oliver",
+     "text": "Hi!"
+    },
+    {
+     "speaker": "Ms Taylor",
+     "text": "And this is Sophie. She is a student."
+    },
+    {
+     "speaker": "Sophie",
+     "text": "Hello! Nice to meet you!"
+    },
+    {
+     "speaker": "Emma",
+     "text": "Nice to meet you too!"
+    },
+    {
+     "speaker": "Ms Taylor",
+     "text": "Wonderful. We are ready!"
+    }
+   ]
+  },
+  {
+   "id": "EN-A1-L01-T03",
+   "title": "Text 3 · At the Break",
+   "type": "dialogue",
+   "scene": "It is break time. Emma, Oliver and Sophie are together. Emma has a notebook. Sophie smiles.",
+   "lines": [
+    {
+     "speaker": "Sophie",
+     "text": "Hi, Emma! How are you?"
+    },
+    {
+     "speaker": "Emma",
+     "text": "I'm good, thanks. And you?"
+    },
+    {
+     "speaker": "Sophie",
+     "text": "I'm fine, thank you."
+    },
+    {
+     "speaker": "Oliver",
+     "text": "How do you spell your name, Emma?"
+    },
+    {
+     "speaker": "Emma",
+     "text": "E – M – M – A."
+    },
+    {
+     "speaker": "Sophie",
+     "text": "Great! My name is Sophie. S – O – P – H – I – E."
+    },
+    {
+     "speaker": "Oliver",
+     "text": "See you in class!"
+    },
+    {
+     "speaker": "Emma and Sophie",
+     "text": "See you!"
+    }
+   ]
+  }
+ ],
+ "modules": {
+  "intro": {
+   "exercises": [
+    {
+     "id": "EN-A1-L01-T-Q",
+     "code": "T-Q",
+     "title": "First comprehension · Osnovna pitanja",
+     "instruction": "Odgovori na osnovu uvodnih tekstova.",
+     "kind": "closed",
+     "items": [
+      {
+       "prompt": "Who is new in the class?",
+       "answers": [
+        "Emma"
+       ]
+      },
+      {
+       "prompt": "Who is the teacher?",
+       "answers": [
+        "Ms Taylor",
+        "Ms. Taylor",
+        "Taylor"
+       ]
+      },
+      {
+       "prompt": "What is the new student's name?",
+       "answers": [
+        "Emma"
+       ]
+      },
+      {
+       "prompt": "Are Emma and Oliver students?",
+       "answers": [
+        "Yes",
+        "Yes, they are",
+        "yes they are"
+       ]
+      },
+      {
+       "prompt": "How do you spell EMMA?",
+       "answers": [
+        "E-M-M-A",
+        "EMMA",
+        "E M M A"
+       ]
+      },
+      {
+       "prompt": "Which phrase means „Drago mi je“?",
+       "answers": [
+        "Nice to meet you"
+       ],
+       "options": [
+        "Nice to meet you",
+        "See you",
+        "How are you?"
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  "grammar": {
+   "sections": [
+    {
+     "title": "2.1 Lične zamenice (Personal Pronouns)",
+     "explanation": "Lične zamenice označavaju osobe, životinje ili stvari bez ponavljanja imena. Subjekatske zamenice: I, you, he, she, it, we, they. Obrazac: SUBJEKAT + GLAGOL + DOPUNA (I am Emma. She is Sophie. They are students.)",
+     "table": [
+      [
+       "I",
+       "ja",
+       "I am Emma."
+      ],
+      [
+       "you",
+       "ti / vi",
+       "You are my classmate."
+      ],
+      [
+       "he",
+       "on",
+       "He is Oliver."
+      ],
+      [
+       "she",
+       "ona",
+       "She is Sophie."
+      ],
+      [
+       "it",
+       "ono / to",
+       "It is a notebook."
+      ],
+      [
+       "we",
+       "mi",
+       "We are students."
+      ],
+      [
+       "they",
+       "oni / one / ona",
+       "They are friends."
+      ]
+     ],
+     "rules": [
+      "I koristimo kada govorimo o sebi – uvek velikim slovom.",
+      "You = jedna osoba ili grupa (ti i vi).",
+      "He/she za osobe: Oliver → he; Sophie → she.",
+      "It za predmet ili pojavu: It is a book.",
+      "We = govornik + bar još jedna osoba: Emma and I → we.",
+      "They = više osoba ili stvari; može i za jednu osobu nepoznatog roda."
+     ],
+     "compare": "U srpskom se zamenica često izostavlja („Emma sam“), ali u engleskoj izjavi mora da stoji: “I am Emma”, ne “Am Emma”. You pokriva i ti i vi. Pridevi nemaju rod: He is happy. / She is happy.",
+     "examples": [
+      [
+       "I am new here.",
+       "Nova sam ovde."
+      ],
+      [
+       "You are Oliver.",
+       "Ti si Oliver."
+      ],
+      [
+       "He is a student.",
+       "On je polaznik."
+      ],
+      [
+       "She is our teacher.",
+       "Ona je naša profesorka."
+      ],
+      [
+       "We are in class.",
+       "Mi smo na času."
+      ],
+      [
+       "They are friends.",
+       "Oni su prijatelji."
+      ]
+     ],
+     "mistakes": [
+      [
+       "Am Emma.",
+       "I am Emma.",
+       "U potpunoj izjavi potreban je subjekat."
+      ],
+      [
+       "She are Sophie.",
+       "She is Sophie.",
+       "Uz she ide is."
+      ],
+      [
+       "Emma she is happy.",
+       "Emma is happy.",
+       "Ne ponavljamo subjekat."
+      ],
+      [
+       "i am here.",
+       "I am here.",
+       "I se uvek piše velikim slovom."
+      ],
+      [
+       "You is a student.",
+       "You are a student.",
+       "Uz you ide are."
+      ]
+     ],
+     "remember": "I – govornik; you – sagovornik; he/she/it – treće lice jednine; we – govornik i drugi; they – drugi ljudi ili stvari."
+    },
+    {
+     "title": "2.2 Glagol to be – potvrdni oblik",
+     "explanation": "To be = „biti“. Koristi se za predstavljanje, ulogu, stanje, opis i mesto. Oblici: am, is, are. Obrazac: SUBJEKAT + AM / IS / ARE + DOPUNA.",
+     "table": [
+      [
+       "I am",
+       "I'm",
+       "I'm Emma."
+      ],
+      [
+       "you are",
+       "you're",
+       "You're Oliver."
+      ],
+      [
+       "he is",
+       "he's",
+       "He's a student."
+      ],
+      [
+       "she is",
+       "she's",
+       "She's Sophie."
+      ],
+      [
+       "it is",
+       "it's",
+       "It's a notebook."
+      ],
+      [
+       "we are",
+       "we're",
+       "We're classmates."
+      ],
+      [
+       "they are",
+       "they're",
+       "They're happy."
+      ]
+     ],
+     "rules": [
+      "Identitet: I am Emma.",
+      "Uloga: Ms Taylor is a teacher.",
+      "Stanje: We are ready.",
+      "Opis: Sophie is friendly.",
+      "Mesto: We are in the classroom.",
+      "Skraćeni oblici su česti u razgovoru; you're (= you are) ≠ your (= tvoj)."
+     ],
+     "compare": "Srpski ima sam, si, je, smo, ste, su; engleski samo am, is, are. Uz zanimanje u jednini ide član: “She is a teacher”. Ne kažemo “I am study English” – kažemo “I study English”.",
+     "examples": [
+      [
+       "I am a new student.",
+       "Ja sam nova polaznica."
+      ],
+      [
+       "Oliver is friendly.",
+       "Oliver je druželjubiv."
+      ],
+      [
+       "Sophie is happy.",
+       "Sophie je srećna."
+      ],
+      [
+       "We are in the classroom.",
+       "Mi smo u učionici."
+      ],
+      [
+       "They are ready.",
+       "Oni su spremni."
+      ]
+     ],
+     "mistakes": [
+      [
+       "I is Emma.",
+       "I am Emma.",
+       "Uz I koristimo am."
+      ],
+      [
+       "You is my friend.",
+       "You are my friend.",
+       "Uz you koristimo are."
+      ],
+      [
+       "The students is here.",
+       "The students are here.",
+       "Množina zahteva are."
+      ],
+      [
+       "She teacher.",
+       "She is a teacher.",
+       "Potreban je is i član."
+      ],
+      [
+       "Im happy.",
+       "I'm happy.",
+       "U skraćenom obliku stoji apostrof."
+      ]
+     ],
+     "remember": "I → am; he / she / it → is; you / we / they → are."
+    },
+    {
+     "title": "2.3 Neodređeni članovi a / an",
+     "explanation": "A / AN + IMENICA U JEDNINI. A ispred suglasničkog glasa (a student, a teacher), AN ispred samoglasničkog glasa (an apple, an English teacher). Odlučuje IZGOVOR: a university student, an hour.",
+     "rules": [
+      "Neodređena osoba/stvar: This is a notebook.",
+      "Uloga ili zanimanje: Emma is a student.",
+      "Prvo uvođenje predmeta: Emma has a notebook.",
+      "Pridev + imenica: Sophie is a new student.",
+      "NE uz množinu (students), nebrojive imenice (water), imena (I am Emma) ni uz my/your (my notebook)."
+     ],
+     "compare": "Srpski nema članove, pa početnici kažu “I am student”. Pravilno je “I am a student”. Izbor a/an nije pitanje roda, već početnog glasa.",
+     "examples": [
+      [
+       "Emma is a student.",
+       "Emma je polaznica."
+      ],
+      [
+       "This is a notebook.",
+       "Ovo je sveska."
+      ],
+      [
+       "She is an English teacher.",
+       "Ona je profesorka engleskog."
+      ],
+      [
+       "Oliver is a new friend.",
+       "Oliver je novi prijatelj."
+      ]
+     ],
+     "mistakes": [
+      [
+       "I am student.",
+       "I am a student.",
+       "Uz ulogu u jednini ide član."
+      ],
+      [
+       "She is an teacher.",
+       "She is a teacher.",
+       "Teacher počinje suglasnikom."
+      ],
+      [
+       "It is a apple.",
+       "It is an apple.",
+       "Apple počinje samoglasnikom."
+      ],
+      [
+       "This is a my notebook.",
+       "This is my notebook.",
+       "Uz my nema a/an."
+      ],
+      [
+       "They are a students.",
+       "They are students.",
+       "Nema a/an uz množinu."
+      ]
+     ],
+     "remember": "Izgovor odlučuje između a i an."
+    },
+    {
+     "title": "2.4 Korisna pitanja iz dijaloga",
+     "explanation": "What's your name? – Kako se zoveš? | How are you? – Kako si? | Are you a student? – Da li si polaznik? | How do you spell it? – Kako se slovka? Zasad ih učimo kao gotove fraze; građenje pitanja i negacija slede u lekciji 2."
+    },
+    {
+     "title": "2.5 Grammar Snapshot",
+     "explanation": "1) Zamenice: I, you, he, she, it, we, they. 2) To be: I am / he, she, it is / you, we, they are. 3) a + suglasnički glas, an + samoglasnički glas. 4) Pravimo kratke, tačne potvrdne rečenice."
+    }
+   ],
+   "exercises": [
+    {
+     "id": "EN-A1-L01-GR-01",
+     "code": "GR-01",
+     "title": "Choose am/is/are",
+     "instruction": "Izaberi tačan oblik.",
+     "kind": "closed",
+     "items": [
+      {
+       "prompt": "Emma ___ a student.",
+       "answers": [
+        "is"
+       ],
+       "options": [
+        "am",
+        "is",
+        "are"
+       ]
+      },
+      {
+       "prompt": "I ___ happy.",
+       "answers": [
+        "am"
+       ],
+       "options": [
+        "am",
+        "is",
+        "are"
+       ]
+      },
+      {
+       "prompt": "Oliver and Sophie ___ friends.",
+       "answers": [
+        "are"
+       ],
+       "options": [
+        "am",
+        "is",
+        "are"
+       ]
+      },
+      {
+       "prompt": "You ___ in class.",
+       "answers": [
+        "are"
+       ],
+       "options": [
+        "am",
+        "is",
+        "are"
+       ]
+      },
+      {
+       "prompt": "Ms Taylor ___ a teacher.",
+       "answers": [
+        "is"
+       ],
+       "options": [
+        "am",
+        "is",
+        "are"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "EN-A1-L01-GR-02",
+     "code": "GR-02",
+     "title": "Fill in the blanks",
+     "instruction": "Dopuni sa am, is, are.",
+     "kind": "closed",
+     "items": [
+      {
+       "prompt": "I ___ Emma.",
+       "answers": [
+        "am"
+       ]
+      },
+      {
+       "prompt": "She ___ Sophie.",
+       "answers": [
+        "is"
+       ]
+      },
+      {
+       "prompt": "We ___ students.",
+       "answers": [
+        "are"
+       ]
+      },
+      {
+       "prompt": "Oliver ___ friendly.",
+       "answers": [
+        "is"
+       ]
+      },
+      {
+       "prompt": "They ___ in the classroom.",
+       "answers": [
+        "are"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "EN-A1-L01-GR-03",
+     "code": "GR-03",
+     "title": "Pronoun matching",
+     "instruction": "Zameni ime odgovarajućom zamenicom.",
+     "kind": "closed",
+     "items": [
+      {
+       "prompt": "Emma → ___",
+       "answers": [
+        "she"
+       ]
+      },
+      {
+       "prompt": "Oliver → ___",
+       "answers": [
+        "he"
+       ]
+      },
+      {
+       "prompt": "Ms Taylor → ___",
+       "answers": [
+        "she"
+       ]
+      },
+      {
+       "prompt": "Emma and Sophie → ___",
+       "answers": [
+        "they"
+       ]
+      },
+      {
+       "prompt": "Emma and I → ___",
+       "answers": [
+        "we"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "EN-A1-L01-GR-04",
+     "code": "GR-04",
+     "title": "Order the words",
+     "instruction": "Poređaj reči u rečenicu.",
+     "kind": "closed",
+     "items": [
+      {
+       "prompt": "Emma / am / I",
+       "answers": [
+        "I am Emma"
+       ]
+      },
+      {
+       "prompt": "is / Sophie / she",
+       "answers": [
+        "She is Sophie"
+       ]
+      },
+      {
+       "prompt": "students / are / we",
+       "answers": [
+        "We are students"
+       ]
+      },
+      {
+       "prompt": "a / teacher / is / she",
+       "answers": [
+        "She is a teacher"
+       ]
+      },
+      {
+       "prompt": "are / friends / they",
+       "answers": [
+        "They are friends"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "EN-A1-L01-GR-05",
+     "code": "GR-05",
+     "title": "Correct the mistake",
+     "instruction": "Ispravi greške.",
+     "kind": "closed",
+     "items": [
+      {
+       "prompt": "I is Emma.",
+       "answers": [
+        "I am Emma",
+        "I'm Emma"
+       ]
+      },
+      {
+       "prompt": "He are Oliver.",
+       "answers": [
+        "He is Oliver",
+        "He's Oliver"
+       ]
+      },
+      {
+       "prompt": "They is students.",
+       "answers": [
+        "They are students",
+        "They're students"
+       ]
+      },
+      {
+       "prompt": "She is teacher.",
+       "answers": [
+        "She is a teacher",
+        "She's a teacher"
+       ]
+      },
+      {
+       "prompt": "Im fine.",
+       "answers": [
+        "I'm fine"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "EN-A1-L01-GR-06",
+     "code": "GR-06",
+     "title": "Write contractions",
+     "instruction": "Prepiši u skraćenom obliku.",
+     "kind": "closed",
+     "items": [
+      {
+       "prompt": "I am happy.",
+       "answers": [
+        "I'm happy"
+       ]
+      },
+      {
+       "prompt": "She is a student.",
+       "answers": [
+        "She's a student"
+       ]
+      },
+      {
+       "prompt": "We are friends.",
+       "answers": [
+        "We're friends"
+       ]
+      },
+      {
+       "prompt": "They are here.",
+       "answers": [
+        "They're here"
+       ]
+      },
+      {
+       "prompt": "You are kind.",
+       "answers": [
+        "You're kind"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "EN-A1-L01-GR-07",
+     "code": "GR-07",
+     "title": "A or an?",
+     "instruction": "Dodaj odgovarajući član.",
+     "kind": "closed",
+     "items": [
+      {
+       "prompt": "___ student",
+       "answers": [
+        "a"
+       ],
+       "options": [
+        "a",
+        "an"
+       ]
+      },
+      {
+       "prompt": "___ English teacher",
+       "answers": [
+        "an"
+       ],
+       "options": [
+        "a",
+        "an"
+       ]
+      },
+      {
+       "prompt": "___ actor",
+       "answers": [
+        "an"
+       ],
+       "options": [
+        "a",
+        "an"
+       ]
+      },
+      {
+       "prompt": "___ doctor",
+       "answers": [
+        "a"
+       ],
+       "options": [
+        "a",
+        "an"
+       ]
+      },
+      {
+       "prompt": "___ university student",
+       "answers": [
+        "a"
+       ],
+       "options": [
+        "a",
+        "an"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "EN-A1-L01-GR-08",
+     "code": "GR-08",
+     "title": "Complete the dialogue",
+     "instruction": "Dopuni sa am, is, are, a ili an.",
+     "kind": "closed",
+     "items": [
+      {
+       "prompt": "Emma: I ___ Emma.",
+       "answers": [
+        "am"
+       ]
+      },
+      {
+       "prompt": "Oliver: I ___ Oliver.",
+       "answers": [
+        "am"
+       ]
+      },
+      {
+       "prompt": "Sophie ___ a student.",
+       "answers": [
+        "is"
+       ]
+      },
+      {
+       "prompt": "Ms Taylor ___ ___ English teacher.",
+       "answers": [
+        "is an"
+       ]
+      },
+      {
+       "prompt": "We ___ friends.",
+       "answers": [
+        "are"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "EN-A1-L01-GR-09",
+     "code": "GR-09",
+     "title": "Illustration-based sentences",
+     "instruction": "Napiši rečenice po modelu: She is Sophie.",
+     "kind": "closed",
+     "items": [
+      {
+       "prompt": "Emma → ___",
+       "answers": [
+        "She is Emma",
+        "She's Emma"
+       ]
+      },
+      {
+       "prompt": "Oliver → ___",
+       "answers": [
+        "He is Oliver",
+        "He's Oliver"
+       ]
+      },
+      {
+       "prompt": "Sophie → ___",
+       "answers": [
+        "She is Sophie",
+        "She's Sophie"
+       ]
+      },
+      {
+       "prompt": "Ms Taylor → ___",
+       "answers": [
+        "She is Ms Taylor",
+        "She's Ms Taylor"
+       ]
+      },
+      {
+       "prompt": "Emma and Oliver → ___",
+       "answers": [
+        "They are students",
+        "They're students",
+        "They are Emma and Oliver"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "EN-A1-L01-GR-10",
+     "code": "GR-10",
+     "title": "Grammar in real life",
+     "instruction": "Upoznaješ novu osobu. Napiši pet jednostavnih rečenica sa zamenicama i to be.",
+     "kind": "open",
+     "items": [
+      {
+       "prompt": "Predstavi sebe.",
+       "open": true
+      },
+      {
+       "prompt": "Predstavi jednu drugu osobu.",
+       "open": true
+      },
+      {
+       "prompt": "Reci da si student/polaznik.",
+       "open": true
+      },
+      {
+       "prompt": "Reci kako se osećaš.",
+       "open": true
+      },
+      {
+       "prompt": "Upotrebi jedan skraćeni oblik.",
+       "open": true
+      }
+     ]
+    }
+   ]
+  },
+  "vocabulary": {
+   "words": [
+    {
+     "word": "hello / hi",
+     "translation": "zdravo / ćao",
+     "example": "Hello, Emma!",
+     "collection": "A",
+     "active": true
+    },
+    {
+     "word": "good morning",
+     "translation": "dobro jutro",
+     "example": "Good morning, everyone!",
+     "collection": "A",
+     "active": true
+    },
+    {
+     "word": "good afternoon / good evening",
+     "translation": "dobar dan / dobro veče",
+     "example": "Good evening!",
+     "collection": "A",
+     "active": true
+    },
+    {
+     "word": "goodbye / bye / see you",
+     "translation": "doviđenja / ćao / vidimo se",
+     "example": "See you in class!",
+     "collection": "A",
+     "active": true
+    },
+    {
+     "word": "name / my name is",
+     "translation": "ime / zovem se",
+     "example": "My name is Emma.",
+     "collection": "B",
+     "active": true
+    },
+    {
+     "word": "What's your name?",
+     "translation": "Kako se zoveš?",
+     "example": "I'm Emma.",
+     "collection": "B",
+     "active": true
+    },
+    {
+     "word": "nice to meet you",
+     "translation": "drago mi je",
+     "example": "Nice to meet you too.",
+     "collection": "B",
+     "active": true
+    },
+    {
+     "word": "student",
+     "translation": "učenik / polaznik",
+     "example": "Oliver is a student.",
+     "collection": "B",
+     "active": true
+    },
+    {
+     "word": "teacher",
+     "translation": "nastavnik / nastavnica",
+     "example": "Ms Taylor is an English teacher.",
+     "collection": "B",
+     "active": true
+    },
+    {
+     "word": "fine / good",
+     "translation": "dobro",
+     "example": "I'm fine.",
+     "collection": "C",
+     "active": true
+    },
+    {
+     "word": "happy",
+     "translation": "srećan / srećna",
+     "example": "I'm happy today.",
+     "collection": "C",
+     "active": true
+    },
+    {
+     "word": "thanks / thank you",
+     "translation": "hvala",
+     "example": "Thank you, Oliver.",
+     "collection": "C",
+     "active": true
+    },
+    {
+     "word": "please",
+     "translation": "molim",
+     "example": "Please, sit down.",
+     "collection": "C",
+     "active": true
+    },
+    {
+     "word": "welcome",
+     "translation": "dobro došao / došla",
+     "example": "Welcome to the class.",
+     "collection": "C",
+     "active": true
+    },
+    {
+     "word": "How are you?",
+     "translation": "Kako si?",
+     "example": "I'm good, thanks.",
+     "collection": "C",
+     "active": true
+    },
+    {
+     "word": "class / classroom",
+     "translation": "čas, grupa / učionica",
+     "example": "We are in class.",
+     "collection": "D",
+     "active": true
+    },
+    {
+     "word": "notebook",
+     "translation": "sveska",
+     "example": "Emma has a notebook.",
+     "collection": "D",
+     "active": false
+    },
+    {
+     "word": "book",
+     "translation": "knjiga",
+     "example": "It is a book.",
+     "collection": "D",
+     "active": true
+    },
+    {
+     "word": "pen",
+     "translation": "olovka",
+     "example": "This is a pen.",
+     "collection": "D",
+     "active": true
+    },
+    {
+     "word": "desk",
+     "translation": "klupa / sto",
+     "example": "This is my desk.",
+     "collection": "D",
+     "active": true
+    },
+    {
+     "word": "How do you spell it?",
+     "translation": "Kako se slovka?",
+     "example": "E–M–M–A.",
+     "collection": "E",
+     "active": true
+    },
+    {
+     "word": "break time",
+     "translation": "pauza",
+     "example": "It is break time.",
+     "collection": "D",
+     "active": false
+    },
+    {
+     "word": "together",
+     "translation": "zajedno",
+     "example": "They are together.",
+     "collection": "D",
+     "active": false
+    },
+    {
+     "word": "ready",
+     "translation": "spreman",
+     "example": "We are ready!",
+     "collection": "C",
+     "active": false
+    },
+    {
+     "word": "zero",
+     "translation": "0",
+     "example": "",
+     "collection": "E",
+     "active": true
+    },
+    {
+     "word": "one",
+     "translation": "1",
+     "example": "",
+     "collection": "E",
+     "active": true
+    },
+    {
+     "word": "two",
+     "translation": "2",
+     "example": "",
+     "collection": "E",
+     "active": true
+    },
+    {
+     "word": "three",
+     "translation": "3",
+     "example": "",
+     "collection": "E",
+     "active": true
+    },
+    {
+     "word": "four",
+     "translation": "4",
+     "example": "",
+     "collection": "E",
+     "active": true
+    },
+    {
+     "word": "five",
+     "translation": "5",
+     "example": "",
+     "collection": "E",
+     "active": true
+    },
+    {
+     "word": "six",
+     "translation": "6",
+     "example": "",
+     "collection": "E",
+     "active": true
+    },
+    {
+     "word": "seven",
+     "translation": "7",
+     "example": "",
+     "collection": "E",
+     "active": true
+    },
+    {
+     "word": "eight",
+     "translation": "8",
+     "example": "",
+     "collection": "E",
+     "active": true
+    },
+    {
+     "word": "nine",
+     "translation": "9",
+     "example": "",
+     "collection": "E",
+     "active": true
+    },
+    {
+     "word": "ten",
+     "translation": "10",
+     "example": "",
+     "collection": "E",
+     "active": true
+    },
+    {
+     "word": "eleven",
+     "translation": "11",
+     "example": "",
+     "collection": "E",
+     "active": true
+    },
+    {
+     "word": "twelve",
+     "translation": "12",
+     "example": "",
+     "collection": "E",
+     "active": true
+    },
+    {
+     "word": "thirteen",
+     "translation": "13",
+     "example": "",
+     "collection": "E",
+     "active": true
+    },
+    {
+     "word": "fourteen",
+     "translation": "14",
+     "example": "",
+     "collection": "E",
+     "active": true
+    },
+    {
+     "word": "fifteen",
+     "translation": "15",
+     "example": "",
+     "collection": "E",
+     "active": true
+    },
+    {
+     "word": "sixteen",
+     "translation": "16",
+     "example": "",
+     "collection": "E",
+     "active": true
+    },
+    {
+     "word": "seventeen",
+     "translation": "17",
+     "example": "",
+     "collection": "E",
+     "active": true
+    },
+    {
+     "word": "eighteen",
+     "translation": "18",
+     "example": "",
+     "collection": "E",
+     "active": true
+    },
+    {
+     "word": "nineteen",
+     "translation": "19",
+     "example": "",
+     "collection": "E",
+     "active": true
+    },
+    {
+     "word": "twenty",
+     "translation": "20",
+     "example": "",
+     "collection": "E",
+     "active": true
+    }
+   ],
+   "collections": {
+    "A": "Greetings & Goodbyes",
+    "B": "Introducing People",
+    "C": "Feelings & Polite Responses",
+    "D": "In the Classroom",
+    "E": "Alphabet & Numbers"
+   },
+   "exercises": [
+    {
+     "id": "EN-A1-L01-VO-01",
+     "code": "VO-01",
+     "title": "Match greetings",
+     "instruction": "Prevedi na srpski.",
+     "kind": "closed",
+     "items": [
+      {
+       "prompt": "Hello → ___",
+       "answers": [
+        "Zdravo",
+        "ćao"
+       ],
+       "options": [
+        "Zdravo",
+        "Izvini"
+       ]
+      },
+      {
+       "prompt": "Good morning → ___",
+       "answers": [
+        "dobro jutro"
+       ]
+      },
+      {
+       "prompt": "See you → ___",
+       "answers": [
+        "vidimo se"
+       ]
+      },
+      {
+       "prompt": "Thank you → ___",
+       "answers": [
+        "hvala"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "EN-A1-L01-VO-02",
+     "code": "VO-02",
+     "title": "Match person",
+     "instruction": "Izaberi: student ili teacher.",
+     "kind": "closed",
+     "items": [
+      {
+       "prompt": "Emma",
+       "answers": [
+        "student"
+       ],
+       "options": [
+        "student",
+        "teacher"
+       ]
+      },
+      {
+       "prompt": "Ms Taylor",
+       "answers": [
+        "teacher"
+       ],
+       "options": [
+        "student",
+        "teacher"
+       ]
+      },
+      {
+       "prompt": "Oliver",
+       "answers": [
+        "student"
+       ],
+       "options": [
+        "student",
+        "teacher"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "EN-A1-L01-VO-03",
+     "code": "VO-03",
+     "title": "Listen and choose",
+     "instruction": "Poslušaj broj i izaberi.",
+     "kind": "closed",
+     "items": [
+      {
+       "prompt": "🔊 eleven",
+       "answers": [
+        "11"
+       ],
+       "options": [
+        "7",
+        "11",
+        "17"
+       ]
+      },
+      {
+       "prompt": "🔊 three",
+       "answers": [
+        "3"
+       ],
+       "options": [
+        "3",
+        "13",
+        "30"
+       ]
+      },
+      {
+       "prompt": "🔊 twenty",
+       "answers": [
+        "20"
+       ],
+       "options": [
+        "12",
+        "20",
+        "2"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "EN-A1-L01-VO-04",
+     "code": "VO-04",
+     "title": "Complete phrases",
+     "instruction": "Dopuni izraz.",
+     "kind": "closed",
+     "items": [
+      {
+       "prompt": "Nice to ___ you.",
+       "answers": [
+        "meet"
+       ]
+      },
+      {
+       "prompt": "How ___ you?",
+       "answers": [
+        "are"
+       ]
+      },
+      {
+       "prompt": "What's your ___?",
+       "answers": [
+        "name"
+       ]
+      },
+      {
+       "prompt": "My ___ is Emma.",
+       "answers": [
+        "name"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "EN-A1-L01-VO-05",
+     "code": "VO-05",
+     "title": "Classify",
+     "instruction": "Da li je izraz pozdrav (greeting) ili rastanak (goodbye)?",
+     "kind": "closed",
+     "items": [
+      {
+       "prompt": "Hello",
+       "answers": [
+        "greeting"
+       ],
+       "options": [
+        "greeting",
+        "goodbye"
+       ]
+      },
+      {
+       "prompt": "Bye",
+       "answers": [
+        "goodbye"
+       ],
+       "options": [
+        "greeting",
+        "goodbye"
+       ]
+      },
+      {
+       "prompt": "Hi",
+       "answers": [
+        "greeting"
+       ],
+       "options": [
+        "greeting",
+        "goodbye"
+       ]
+      },
+      {
+       "prompt": "See you",
+       "answers": [
+        "goodbye"
+       ],
+       "options": [
+        "greeting",
+        "goodbye"
+       ]
+      },
+      {
+       "prompt": "Good morning",
+       "answers": [
+        "greeting"
+       ],
+       "options": [
+        "greeting",
+        "goodbye"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "EN-A1-L01-VO-06",
+     "code": "VO-06",
+     "title": "Choose in context",
+     "instruction": "Izaberi pravi izraz.",
+     "kind": "closed",
+     "items": [
+      {
+       "prompt": "It is morning.",
+       "answers": [
+        "Good morning"
+       ],
+       "options": [
+        "Good morning",
+        "Good evening"
+       ]
+      },
+      {
+       "prompt": "You meet Sophie.",
+       "answers": [
+        "Nice to meet you"
+       ],
+       "options": [
+        "Nice to meet you",
+        "Goodbye"
+       ]
+      },
+      {
+       "prompt": "Oliver leaves the classroom.",
+       "answers": [
+        "See you"
+       ],
+       "options": [
+        "See you",
+        "Good morning"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "EN-A1-L01-VO-07",
+     "code": "VO-07",
+     "title": "Useful chunks",
+     "instruction": "Dopuni izraz.",
+     "kind": "closed",
+     "items": [
+      {
+       "prompt": "my + ___ (name / class)",
+       "answers": [
+        "name",
+        "class"
+       ]
+      },
+      {
+       "prompt": "nice + to + ___",
+       "answers": [
+        "meet"
+       ]
+      },
+      {
+       "prompt": "thank + ___",
+       "answers": [
+        "you"
+       ]
+      },
+      {
+       "prompt": "see + ___",
+       "answers": [
+        "you"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "EN-A1-L01-VO-08",
+     "code": "VO-08",
+     "title": "Picture description",
+     "instruction": "Dopuni rečenicu.",
+     "kind": "closed",
+     "items": [
+      {
+       "prompt": "Ms Taylor: She is a ___.",
+       "answers": [
+        "teacher"
+       ]
+      },
+      {
+       "prompt": "Emma: She is a ___.",
+       "answers": [
+        "student"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "EN-A1-L01-VO-09",
+     "code": "VO-09",
+     "title": "Make sentences",
+     "instruction": "Napiši rečenicu sa datom reči.",
+     "kind": "open",
+     "items": [
+      {
+       "prompt": "student",
+       "open": true
+      },
+      {
+       "prompt": "teacher",
+       "open": true
+      },
+      {
+       "prompt": "happy",
+       "open": true
+      }
+     ]
+    },
+    {
+     "id": "EN-A1-L01-VO-10",
+     "code": "VO-10",
+     "title": "Real-life greeting",
+     "instruction": "Napiši kratke replike.",
+     "kind": "open",
+     "items": [
+      {
+       "prompt": "Napiši pozdrav.",
+       "open": true
+      },
+      {
+       "prompt": "Reci svoje ime.",
+       "open": true
+      },
+      {
+       "prompt": "Pitaj sagovornika za ime.",
+       "open": true
+      },
+      {
+       "prompt": "Zahvali se.",
+       "open": true
+      },
+      {
+       "prompt": "Pozdravi se na odlasku.",
+       "open": true
+      }
+     ]
+    }
+   ]
+  },
+  "reading": {
+   "texts": [
+    {
+     "id": "EN-A1-L01-RD",
+     "title": "The First Morning",
+     "body": "Hello! My name is Emma. I'm new in London. Today is my first English class. My teacher is Ms Taylor. She is nice. Oliver is a student. Sophie is a student too. We are in the same class. I'm happy. Nice to meet you, everyone!",
+     "note": "Receptivni izrazi: today, first, same."
+    }
+   ],
+   "exercises": [
+    {
+     "id": "EN-A1-L01-RD-01",
+     "code": "RD-01",
+     "title": "Predict",
+     "instruction": "Pre čitanja: pogledaj naslov.",
+     "kind": "open",
+     "items": [
+      {
+       "prompt": "Gde je Emma?",
+       "open": true
+      },
+      {
+       "prompt": "Ko bi mogao da bude njen nastavnik?",
+       "open": true
+      }
+     ]
+    },
+    {
+     "id": "EN-A1-L01-RD-02",
+     "code": "RD-02",
+     "title": "Main idea",
+     "instruction": "O čemu je tekst?",
+     "kind": "closed",
+     "items": [
+      {
+       "prompt": "Tema teksta:",
+       "answers": [
+        "prvi čas"
+       ],
+       "options": [
+        "porodica",
+        "prvi čas",
+        "hrana"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "EN-A1-L01-RD-03",
+     "code": "RD-03",
+     "title": "True or false",
+     "instruction": "Tačno ili netačno?",
+     "kind": "closed",
+     "items": [
+      {
+       "prompt": "Emma is new in London.",
+       "answers": [
+        "True"
+       ],
+       "options": [
+        "True",
+        "False"
+       ]
+      },
+      {
+       "prompt": "Oliver is the teacher.",
+       "answers": [
+        "False"
+       ],
+       "options": [
+        "True",
+        "False"
+       ]
+      },
+      {
+       "prompt": "Sophie is a student.",
+       "answers": [
+        "True"
+       ],
+       "options": [
+        "True",
+        "False"
+       ]
+      },
+      {
+       "prompt": "Emma is happy.",
+       "answers": [
+        "True"
+       ],
+       "options": [
+        "True",
+        "False"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "EN-A1-L01-RD-04",
+     "code": "RD-04",
+     "title": "Multiple choice",
+     "instruction": "Izaberi tačan odgovor.",
+     "kind": "closed",
+     "items": [
+      {
+       "prompt": "Who is the teacher?",
+       "answers": [
+        "Ms Taylor"
+       ],
+       "options": [
+        "Oliver",
+        "Ms Taylor",
+        "Emma"
+       ]
+      },
+      {
+       "prompt": "Where is Emma?",
+       "answers": [
+        "In English class"
+       ],
+       "options": [
+        "At home",
+        "In English class",
+        "At a shop"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "EN-A1-L01-RD-05",
+     "code": "RD-05",
+     "title": "Find details",
+     "instruction": "Pronađi u tekstu.",
+     "kind": "mixed",
+     "items": [
+      {
+       "prompt": "Ime profesorke:",
+       "answers": [
+        "Ms Taylor",
+        "Taylor"
+       ]
+      },
+      {
+       "prompt": "Dva imena polaznika:",
+       "open": true,
+       "guide": "Oliver, Sophie (i Emma)"
+      }
+     ]
+    },
+    {
+     "id": "EN-A1-L01-RD-06",
+     "code": "RD-06",
+     "title": "Who is who?",
+     "instruction": "Poveži osobu i ulogu.",
+     "kind": "closed",
+     "items": [
+      {
+       "prompt": "Emma",
+       "answers": [
+        "new student"
+       ],
+       "options": [
+        "new student",
+        "teacher",
+        "student"
+       ]
+      },
+      {
+       "prompt": "Ms Taylor",
+       "answers": [
+        "teacher"
+       ],
+       "options": [
+        "new student",
+        "teacher",
+        "student"
+       ]
+      },
+      {
+       "prompt": "Oliver",
+       "answers": [
+        "student"
+       ],
+       "options": [
+        "new student",
+        "teacher",
+        "student"
+       ]
+      },
+      {
+       "prompt": "Sophie",
+       "answers": [
+        "student"
+       ],
+       "options": [
+        "new student",
+        "teacher",
+        "student"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "EN-A1-L01-RD-07",
+     "code": "RD-07",
+     "title": "Order events",
+     "instruction": "Šta je prvo, drugo, treće?",
+     "kind": "closed",
+     "items": [
+      {
+       "prompt": "1.",
+       "answers": [
+        "Emma arrives"
+       ],
+       "options": [
+        "Emma arrives",
+        "Emma meets her class",
+        "Emma is happy"
+       ]
+      },
+      {
+       "prompt": "2.",
+       "answers": [
+        "Emma meets her class"
+       ],
+       "options": [
+        "Emma arrives",
+        "Emma meets her class",
+        "Emma is happy"
+       ]
+      },
+      {
+       "prompt": "3.",
+       "answers": [
+        "Emma is happy"
+       ],
+       "options": [
+        "Emma arrives",
+        "Emma meets her class",
+        "Emma is happy"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "EN-A1-L01-RD-08",
+     "code": "RD-08",
+     "title": "Words in context",
+     "instruction": "Šta znači…?",
+     "kind": "mixed",
+     "items": [
+      {
+       "prompt": "new",
+       "answers": [
+        "nov",
+        "nova",
+        "novo"
+       ]
+      },
+      {
+       "prompt": "happy",
+       "answers": [
+        "srećan",
+        "srećna"
+       ]
+      },
+      {
+       "prompt": "same class",
+       "open": true,
+       "guide": "isti razred / ista grupa"
+      }
+     ]
+    },
+    {
+     "id": "EN-A1-L01-RD-09",
+     "code": "RD-09",
+     "title": "Short answers",
+     "instruction": "Kratko odgovori na engleskom.",
+     "kind": "open",
+     "items": [
+      {
+       "prompt": "Is Emma a student?",
+       "open": true,
+       "guide": "Yes, she is."
+      },
+      {
+       "prompt": "Who is Oliver?",
+       "open": true,
+       "guide": "He is a student."
+      },
+      {
+       "prompt": "Is Ms Taylor nice?",
+       "open": true,
+       "guide": "Yes, she is."
+      }
+     ]
+    },
+    {
+     "id": "EN-A1-L01-RD-10",
+     "code": "RD-10",
+     "title": "Transfer to real life",
+     "instruction": "Piši o sebi.",
+     "kind": "open",
+     "items": [
+      {
+       "prompt": "Napiši jednu rečenicu o svom razredu.",
+       "open": true
+      },
+      {
+       "prompt": "Napiši jednu rečenicu o svom profesoru.",
+       "open": true
+      }
+     ]
+    }
+   ]
+  },
+  "listening": {
+   "audios": [
+    {
+     "id": "A1",
+     "title": "Audio A1 · First Day",
+     "source": "EN-A1-L01-T01"
+    },
+    {
+     "id": "A2",
+     "title": "Audio A2 · In the Classroom",
+     "source": "EN-A1-L01-T02"
+    },
+    {
+     "id": "A3",
+     "title": "Audio A3 · At the Break",
+     "source": "EN-A1-L01-T03"
+    },
+    {
+     "id": "B",
+     "title": "Audio B · At the Door",
+     "lines": [
+      {
+       "speaker": "Sophie",
+       "text": "Good morning!"
+      },
+      {
+       "speaker": "Emma",
+       "text": "Good morning! I'm Emma."
+      },
+      {
+       "speaker": "Sophie",
+       "text": "I'm Sophie. Nice to meet you."
+      },
+      {
+       "speaker": "Emma",
+       "text": "Nice to meet you too!"
+      },
+      {
+       "speaker": "Sophie",
+       "text": "How are you?"
+      },
+      {
+       "speaker": "Emma",
+       "text": "I'm fine, thank you."
+      },
+      {
+       "speaker": "Sophie",
+       "text": "Great. Are you a student?"
+      },
+      {
+       "speaker": "Emma",
+       "text": "Yes, I am."
+      },
+      {
+       "speaker": "Sophie",
+       "text": "See you in class!"
+      },
+      {
+       "speaker": "Emma",
+       "text": "See you!"
+      }
+     ]
+    },
+    {
+     "id": "C",
+     "title": "Audio C · Short Introductions",
+     "lines": [
+      {
+       "speaker": "Voice 1",
+       "text": "Hi! I'm Oliver. I'm a student."
+      },
+      {
+       "speaker": "Voice 2",
+       "text": "Hello! I'm Ms Taylor. I'm your teacher."
+      },
+      {
+       "speaker": "Voice 3",
+       "text": "Good morning! I'm Emma. I'm happy."
+      }
+     ]
+    }
+   ],
+   "exercises": [
+    {
+     "id": "EN-A1-L01-LI-01",
+     "code": "LI-01",
+     "title": "Before listening",
+     "instruction": "Pre slušanja (Audio A1).",
+     "kind": "open",
+     "items": [
+      {
+       "prompt": "Ko govori?",
+       "open": true
+      },
+      {
+       "prompt": "Šta očekuješ da čuješ?",
+       "open": true
+      }
+     ]
+    },
+    {
+     "id": "EN-A1-L01-LI-02",
+     "code": "LI-02",
+     "title": "General idea",
+     "instruction": "Audio B.",
+     "kind": "closed",
+     "items": [
+      {
+       "prompt": "Gde se osobe nalaze?",
+       "answers": [
+        "at school"
+       ],
+       "options": [
+        "at school",
+        "at a shop"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "EN-A1-L01-LI-03",
+     "code": "LI-03",
+     "title": "True/False",
+     "instruction": "Audio B.",
+     "kind": "closed",
+     "items": [
+      {
+       "prompt": "Sophie says good morning.",
+       "answers": [
+        "True"
+       ],
+       "options": [
+        "True",
+        "False"
+       ]
+      },
+      {
+       "prompt": "Emma says goodbye first.",
+       "answers": [
+        "False"
+       ],
+       "options": [
+        "True",
+        "False"
+       ]
+      },
+      {
+       "prompt": "Emma is a student.",
+       "answers": [
+        "True"
+       ],
+       "options": [
+        "True",
+        "False"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "EN-A1-L01-LI-04",
+     "code": "LI-04",
+     "title": "Choose",
+     "instruction": "Audio B.",
+     "kind": "closed",
+     "items": [
+      {
+       "prompt": "What is the new girl's name?",
+       "answers": [
+        "Emma"
+       ],
+       "options": [
+        "Emma",
+        "Lily",
+        "Mia"
+       ]
+      },
+      {
+       "prompt": "Who asks How are you?",
+       "answers": [
+        "Sophie"
+       ],
+       "options": [
+        "Sophie",
+        "Oliver",
+        "Ms Taylor"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "EN-A1-L01-LI-05",
+     "code": "LI-05",
+     "title": "Extract",
+     "instruction": "Audio B.",
+     "kind": "closed",
+     "items": [
+      {
+       "prompt": "Dva imena koja čuješ:",
+       "answers": [
+        "Emma i Sophie",
+        "Emma and Sophie",
+        "Sophie i Emma",
+        "Emma, Sophie",
+        "Sophie, Emma"
+       ]
+      },
+      {
+       "prompt": "Pozdrav na početku:",
+       "answers": [
+        "Good morning"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "EN-A1-L01-LI-06",
+     "code": "LI-06",
+     "title": "Match speaker",
+     "instruction": "Audio C – poveži glas sa likom.",
+     "kind": "closed",
+     "items": [
+      {
+       "prompt": "Voice 1 = ___",
+       "answers": [
+        "Oliver"
+       ],
+       "options": [
+        "Oliver",
+        "Ms Taylor",
+        "Emma"
+       ]
+      },
+      {
+       "prompt": "Voice 2 = ___",
+       "answers": [
+        "Ms Taylor"
+       ],
+       "options": [
+        "Oliver",
+        "Ms Taylor",
+        "Emma"
+       ]
+      },
+      {
+       "prompt": "Voice 3 = ___",
+       "answers": [
+        "Emma"
+       ],
+       "options": [
+        "Oliver",
+        "Ms Taylor",
+        "Emma"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "EN-A1-L01-LI-07",
+     "code": "LI-07",
+     "title": "Missing words",
+     "instruction": "Audio B – dopuni reči.",
+     "kind": "closed",
+     "items": [
+      {
+       "prompt": "I'm ___.",
+       "answers": [
+        "Emma"
+       ]
+      },
+      {
+       "prompt": "Nice to ___ you.",
+       "answers": [
+        "meet"
+       ]
+      },
+      {
+       "prompt": "See you in ___.",
+       "answers": [
+        "class"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "EN-A1-L01-LI-08",
+     "code": "LI-08",
+     "title": "Order lines",
+     "instruction": "Audio B – redosled replika.",
+     "kind": "closed",
+     "items": [
+      {
+       "prompt": "1.",
+       "answers": [
+        "Good morning"
+       ],
+       "options": [
+        "Nice to meet you",
+        "Good morning",
+        "I'm Emma",
+        "See you"
+       ]
+      },
+      {
+       "prompt": "2.",
+       "answers": [
+        "I'm Emma"
+       ],
+       "options": [
+        "Nice to meet you",
+        "Good morning",
+        "I'm Emma",
+        "See you"
+       ]
+      },
+      {
+       "prompt": "3.",
+       "answers": [
+        "Nice to meet you"
+       ],
+       "options": [
+        "Nice to meet you",
+        "Good morning",
+        "I'm Emma",
+        "See you"
+       ]
+      },
+      {
+       "prompt": "4.",
+       "answers": [
+        "See you"
+       ],
+       "options": [
+        "Nice to meet you",
+        "Good morning",
+        "I'm Emma",
+        "See you"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "EN-A1-L01-LI-09",
+     "code": "LI-09",
+     "title": "Identify speaker",
+     "instruction": "Audio C.",
+     "kind": "closed",
+     "items": [
+      {
+       "prompt": "Ko kaže I'm your teacher?",
+       "answers": [
+        "Ms Taylor"
+       ],
+       "options": [
+        "Oliver",
+        "Ms Taylor",
+        "Emma"
+       ]
+      },
+      {
+       "prompt": "Ko kaže I'm happy?",
+       "answers": [
+        "Emma"
+       ],
+       "options": [
+        "Oliver",
+        "Ms Taylor",
+        "Emma"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "EN-A1-L01-LI-10",
+     "code": "LI-10",
+     "title": "Real-life listening",
+     "instruction": "Posle slušanja.",
+     "kind": "open",
+     "items": [
+      {
+       "prompt": "Reci ime jednog govornika.",
+       "open": true
+      },
+      {
+       "prompt": "Da li je osoba student ili nastavnik?",
+       "open": true
+      }
+     ]
+    }
+   ]
+  },
+  "writing": {
+   "exercises": [
+    {
+     "id": "EN-A1-L01-WR-01",
+     "code": "WR-01",
+     "title": "Write basic information",
+     "instruction": "Dopuni: My name is ___. I'm ___. I'm a student / a teacher. Poštuj veliko slovo I i tačku.",
+     "kind": "open",
+     "items": [
+      {
+       "prompt": "Napiši 3 lične informacije.",
+       "open": true,
+       "guide": "Hello! My name is Ana. I'm happy. I'm a student."
+      }
+     ]
+    },
+    {
+     "id": "EN-A1-L01-WR-02",
+     "code": "WR-02",
+     "title": "Build sentences",
+     "instruction": "Sastavi rečenice od ponuđenih reči.",
+     "kind": "closed",
+     "items": [
+      {
+       "prompt": "I / Emma / am",
+       "answers": [
+        "I am Emma"
+       ]
+      },
+      {
+       "prompt": "Sophie / is / student / a",
+       "answers": [
+        "Sophie is a student"
+       ]
+      },
+      {
+       "prompt": "we / are / friends",
+       "answers": [
+        "We are friends"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "EN-A1-L01-WR-03",
+     "code": "WR-03",
+     "title": "Describe a character",
+     "instruction": "Oliver – name: Oliver, role: student, mood: happy. Napiši 3 proste rečenice.",
+     "kind": "open",
+     "items": [
+      {
+       "prompt": "Opis Olivera (3 rečenice)",
+       "open": true,
+       "guide": "He is Oliver. He is a student. He is happy."
+      }
+     ]
+    },
+    {
+     "id": "EN-A1-L01-WR-04",
+     "code": "WR-04",
+     "title": "Guided message",
+     "instruction": "Napiši poruku novom prijatelju: pozdravi, predstavi se, upotrebi Nice to meet you, završi sa See you.",
+     "kind": "open",
+     "items": [
+      {
+       "prompt": "Tvoja poruka",
+       "open": true
+      }
+     ]
+    },
+    {
+     "id": "EN-A1-L01-WR-05",
+     "code": "WR-05",
+     "title": "Independent introduction",
+     "instruction": "Napiši 4–6 rečenica o sebi, kao Emma. Kriterijumi: komunikativni cilj 40%, gramatika 30%, vokabular 20%, pisanje 10%.",
+     "kind": "open",
+     "items": [
+      {
+       "prompt": "Tvoje predstavljanje",
+       "open": true,
+       "guide": "Hello! My name is Mila. I'm a student. I'm happy today. Nice to meet you! See you!"
+      }
+     ]
+    }
+   ]
+  },
+  "pronunciation": {
+   "alphabet": [
+    [
+     "A B C D E",
+     "/eɪ/ /biː/ /siː/ /diː/ /iː/"
+    ],
+    [
+     "F G H I J",
+     "/ef/ /dʒiː/ /eɪtʃ/ /aɪ/ /dʒeɪ/"
+    ],
+    [
+     "K L M N O",
+     "/keɪ/ /el/ /em/ /en/ /əʊ/"
+    ],
+    [
+     "P Q R S T",
+     "/piː/ /kjuː/ /ɑː/ /es/ /tiː/"
+    ],
+    [
+     "U V W X Y Z",
+     "/juː/ /viː/ /ˈdʌbəl.juː/ /eks/ /waɪ/ /zed/"
+    ]
+   ],
+   "note": "Slova nisu isto što i nazivi glasova; posebno proveri A, E, I, R, W, Y. Britansko Z je /zed/, američko /ziː/. Cilj je razumljivost, ne uklanjanje akcenta.",
+   "drills": [
+    {
+     "code": "PR-01",
+     "title": "Listen & identify",
+     "targets": [
+      "A",
+      "E",
+      "I",
+      "G",
+      "J"
+     ]
+    },
+    {
+     "code": "PR-02",
+     "title": "Alphabet contrasts",
+     "targets": [
+      "B",
+      "P",
+      "M",
+      "N",
+      "E",
+      "I"
+     ]
+    },
+    {
+     "code": "PR-03",
+     "title": "Spell names",
+     "targets": [
+      "E, M, M, A",
+      "O, L, I, V, E, R"
+     ],
+     "extra": "Slovkaj i svoje ime."
+    },
+    {
+     "code": "PR-04",
+     "title": "Read and record",
+     "targets": [
+      "Hello! I'm Emma.",
+      "Nice to meet you!",
+      "I'm a student."
+     ]
+    },
+    {
+     "code": "PR-05",
+     "title": "Greeting intonation",
+     "targets": [
+      "Hello!",
+      "How are you?"
+     ],
+     "extra": "Snimi pozdrav i pitanje, pa uporedi sa modelom."
+    }
+   ]
+  },
+  "speaking": {
+   "tasks": [
+    {
+     "code": "SP-01",
+     "title": "Guided response",
+     "prompts": [
+      "What's your name?",
+      "How are you?",
+      "Are you a student?"
+     ]
+    },
+    {
+     "code": "SP-02",
+     "title": "Picture speaking",
+     "prompts": [
+      "Reci ko je Emma.",
+      "Reci čime se bavi Ms Taylor.",
+      "Predstavi Olivera."
+     ]
+    },
+    {
+     "code": "SP-03",
+     "title": "Dialogue completion",
+     "prompts": [
+      "Oliver: Hello, I'm Oliver. → You: ___",
+      "Oliver: Nice to meet you! → You: ___"
+     ]
+    },
+    {
+     "code": "SP-04",
+     "title": "RoleSwitch – with Sophie",
+     "prompts": [
+      "Uloga: novi polaznik; sagovornik: Sophie; mesto: školski hodnik.",
+      "Cilj: pozdravi, reci ime, pitaj za ime, reci kako si, pozdravi se."
+     ],
+     "roleswitch": true
+    },
+    {
+     "code": "SP-05",
+     "title": "Independent talk",
+     "prompts": [
+      "Zamisli da dolaziš na prvi čas.",
+      "Govori 20–40 sekundi ili izgovori 4–6 prostih rečenica.",
+      "Koristi najmanje 3 ciljana izraza."
+     ]
+    }
+   ],
+   "roleswitch": {
+    "situation": "Hodnik škole u Londonu, neposredno pre početka časa. Korisnik je novi polaznik; Sophie je prijateljski raspoložena i želi da upozna novog člana grupe.",
+    "opening": "Hi! I'm Sophie. What's your name?",
+    "flow": [
+     "Hi! I'm Sophie. What's your name?",
+     "Nice to meet you, [ime]! How are you?",
+     "Great! Are you a student?",
+     "See you in class!"
+    ],
+    "rules": "Sophie odgovara kratkim A1 rečenicama, nudi model ako učenik zastane („You can say: I'm …“), ne prekida razgovor zbog sitnica. Na kraju objašnjava najviše 2–3 važne greške.",
+    "rubric": "Komunikativni cilj 0–2; razumljivost 0–2; ciljna gramatika 0–2; tematski vokabular 0–2."
+   }
+  },
+  "culture": {
+   "title": "Greetings in English-speaking communities",
+   "body": "English is spoken in many parts of the world. People use it at school, at work and when they travel. In English, there are different ways to greet someone. You can say “Hello”, “Hi” or “Good morning”. “Hi” is usually informal. “Good morning” is useful in more formal situations too.\n\nWhen people say “How are you?”, a short polite answer such as “I'm fine, thanks” is common. Customs vary between people, places and situations. English is not the culture of only one country.",
+   "note": "Pozdravi zavise od sagovornika, odnosa i konteksta. Ne predstavljamo jednu naviku kao pravilo za sve govornike engleskog.",
+   "exercises": [
+    {
+     "id": "EN-A1-L01-C-01",
+     "code": "C-01",
+     "title": "Greetings & situations",
+     "instruction": "Poveži pozdrav sa situacijom.",
+     "kind": "closed",
+     "items": [
+      {
+       "prompt": "Prijatelj na pauzi",
+       "answers": [
+        "Hi"
+       ],
+       "options": [
+        "Hi",
+        "Hello",
+        "Good morning"
+       ]
+      },
+      {
+       "prompt": "Nova osoba, neutralno",
+       "answers": [
+        "Hello"
+       ],
+       "options": [
+        "Hi",
+        "Hello",
+        "Good morning"
+       ]
+      },
+      {
+       "prompt": "Profesor ujutru",
+       "answers": [
+        "Good morning"
+       ],
+       "options": [
+        "Hi",
+        "Hello",
+        "Good morning"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "EN-A1-L01-C-02",
+     "code": "C-02",
+     "title": "True / False",
+     "instruction": "Tačno ili netačno?",
+     "kind": "closed",
+     "items": [
+      {
+       "prompt": "English is spoken in only one country.",
+       "answers": [
+        "False"
+       ],
+       "options": [
+        "True",
+        "False"
+       ]
+      },
+      {
+       "prompt": "Hi is usually informal.",
+       "answers": [
+        "True"
+       ],
+       "options": [
+        "True",
+        "False"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "EN-A1-L01-C-03",
+     "code": "C-03",
+     "title": "Uporedi",
+     "instruction": "Na srpskom.",
+     "kind": "open",
+     "items": [
+      {
+       "prompt": "Kako pozdravljaš profesora, prijatelja i novu osobu?",
+       "open": true
+      }
+     ]
+    },
+    {
+     "id": "EN-A1-L01-C-04",
+     "code": "C-04",
+     "title": "Picture match",
+     "instruction": "Slika jutarnjeg časa.",
+     "kind": "closed",
+     "items": [
+      {
+       "prompt": "Koji izraz ide uz jutarnji čas?",
+       "answers": [
+        "Good morning"
+       ],
+       "options": [
+        "Good morning",
+        "Good night",
+        "See you"
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  "review": {
+   "exercises": [
+    {
+     "id": "EN-A1-L01-RE-01",
+     "code": "RE-01",
+     "title": "Core vocabulary",
+     "instruction": "Dopuni pozdrav i predstavljanje.",
+     "kind": "closed",
+     "items": [
+      {
+       "prompt": "Good ___.",
+       "answers": [
+        "morning",
+        "afternoon",
+        "evening"
+       ]
+      },
+      {
+       "prompt": "What's your ___?",
+       "answers": [
+        "name"
+       ]
+      },
+      {
+       "prompt": "Nice to ___ you.",
+       "answers": [
+        "meet"
+       ]
+      },
+      {
+       "prompt": "See you in ___.",
+       "answers": [
+        "class"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "EN-A1-L01-RE-02",
+     "code": "RE-02",
+     "title": "Core grammar",
+     "instruction": "Dopuni pravilnim oblikom.",
+     "kind": "closed",
+     "items": [
+      {
+       "prompt": "I ___ Emma.",
+       "answers": [
+        "am"
+       ]
+      },
+      {
+       "prompt": "She ___ a teacher.",
+       "answers": [
+        "is"
+       ]
+      },
+      {
+       "prompt": "They ___ students.",
+       "answers": [
+        "are"
+       ]
+      },
+      {
+       "prompt": "He is ___ student.",
+       "answers": [
+        "a"
+       ]
+      },
+      {
+       "prompt": "We ___ friends.",
+       "answers": [
+        "are"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "EN-A1-L01-RE-03",
+     "code": "RE-03",
+     "title": "Integrated task",
+     "instruction": "Zamisli prvi čas. Napravi dijalog sa Sophie: bar dva pozdrava, predstavi se, pitaj za ime, odgovori na How are you?, završi razgovor.",
+     "kind": "open",
+     "items": [
+      {
+       "prompt": "Tvoj dijalog",
+       "open": true
+      }
+     ]
+    }
+   ]
+  }
+ }
+}
