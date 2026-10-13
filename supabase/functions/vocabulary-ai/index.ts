@@ -176,11 +176,11 @@ Odgovori ISKLJUČIVO u JSON formatu, bez markdown-a. Format:
     }
   ]
 }` + qualityCheck;
-      userPrompt = `Generiši 10 kviz pitanja koristeći sledeće norveške reči: ${theme}. Nivo: ${level}. Pitanja mogu biti prevod, popuni blanko, sinonim/antonim itd. Za svako pitanje dodaj _error objekat.`;
+      userPrompt = `Generiši 10 kviz pitanja koristeći sledeće norveške reči: ${theme}. Nivo: ${level}. Pitanja mogu biti prevod, popuni blanko, sinonim/antonim itd. Za svako pitanje dodaj _error objekat. Važno: sve 4 opcije moraju biti iz ISTE kategorije (npr. sve su fraze za pozdrav, ili sve su imenice za školske predmete, ili svi su glagoli) i svaka mora delovati plauzibilno — zabranjene su opcije koje se odmah eliminišu jer pripadaju drugoj vrsti reči ili temi. Poziciju tačnog odgovora nasumično rasporedi (ne stavljaj ga uvek prvo).`;
     } else if (action === "generate_lesson_exercises") {
       const langName = language === "de" ? "nemačkog" : language === "no" ? "norveškog (Bokmål)" : "engleskog";
       systemPrompt = `Ti si nastavnik ${langName} jezika. Praviš nove vežbe vokabulara za nivo ${level}, ISKLJUČIVO od datih reči.
-Pravila: uputstva kratka i neutralna na srpskom (npr. "Izaberi tačan prevod.", "Dopuni rečenicu."), bez hintova, bez otkrivanja rešenja ili pravila. Rečenice na ciljnom jeziku, prirodne i tačne za nivo.
+Pravila: uputstva kratka i neutralna na srpskom (npr. "Izaberi tačan prevod.", "Dopuni rečenicu."), bez hintova, bez otkrivanja rešenja ili pravila. Rečenice na ciljnom jeziku, prirodne i tačne za nivo. Kod stavki sa options: sve opcije moraju biti iz iste leksičke/gramatičke kategorije i sve plauzibilne (tipične greške učenika), bez opcija koje se odmah eliminišu; tačan odgovor ne sme uvek biti na istoj poziciji.
 Odgovori ISKLJUČIVO JSON-om:
 {"exercises":[{"title":"kratak naslov","instruction":"kratko uputstvo","items":[{"prompt":"...","options":["a","b","c"],"answers":["tačno"]}]}]}
 Napravi 3 vežbe po 5 stavki. Mešaj tipove: izbor prevoda (sa options), dopuna rečenice (bez options, answers = sve prihvatljive varijante), prevod sa srpskog (bez options).` + qualityCheck;

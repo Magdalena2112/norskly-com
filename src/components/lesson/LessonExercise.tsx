@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -23,6 +23,11 @@ export default function LessonExercise({
   const { user } = useAuth();
   const [state, setState] = useState<ItemState[]>(() => exercise.items.map(() => ({ value: "", attempts: 0, status: "idle" })));
   const [checking, setChecking] = useState(false);
+  // Shuffle options once per exercise so the correct answer's position doesn't give it away.
+  const shuffledOptions = useMemo(
+    () => exercise.items.map((it) => (it.options ? [...it.options].sort(() => Math.random() - 0.5) : undefined)),
+    [exercise]
+  );
 
   const set = (i: number, patch: Partial<ItemState>) =>
     setState((s) => s.map((x, j) => (j === i ? { ...x, ...patch } : x)));
@@ -112,7 +117,7 @@ export default function LessonExercise({
               <p className="text-sm font-medium text-foreground">{i + 1}. {item.prompt}</p>
               {item.options ? (
                 <div className="flex flex-wrap gap-2">
-                  {item.options.map((o) => (
+                  {(shuffledOptions[i] || item.options).map((o) => (
                     <button key={o} type="button" disabled={locked}
                       onClick={() => set(i, { value: o, status: s.status === "wrong" ? "wrong" : "idle" })}
                       className={`px-3 py-1.5 rounded-full text-sm border transition-colors ${s.value === o ? "bg-primary text-primary-foreground border-primary" : "bg-background border-border hover:border-primary/50"} disabled:opacity-70`}>
