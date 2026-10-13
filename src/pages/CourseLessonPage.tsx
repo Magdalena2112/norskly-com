@@ -124,6 +124,7 @@ export default function CourseLessonPage() {
   const openModule = (k: string | null) => {
     if (k === "grammar") { navigate(`/grammar?lesson=${row.id}`); return; }
     if (k === "vocabulary") { navigate(`/vocabulary?lesson=${row.id}`); return; }
+    if (k === "writing") { navigate(`/writing?lesson=${row.id}`); return; }
     setOpen(k); setView("learn"); requestAnimationFrame(() => document.getElementById("lesson-modules")?.scrollIntoView({ behavior: "smooth" }));
   };
 
