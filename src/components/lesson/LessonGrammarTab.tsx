@@ -91,8 +91,8 @@ export default function LessonGrammarTab({ lessonId, onPractice, onExplain, mode
     }, { onConflict: "user_id,lesson_id" });
   }
 
-  const topic = topics[active];
-  const topicEx = exercises.filter((e) => topic.exercises.includes(e.code));
+  const topic = topics[Math.min(Math.max(active, 0), topics.length - 1)] ?? topics[0];
+  const topicEx = topic ? exercises.filter((e) => topic.exercises.includes(e.code)) : [];
   const isTopicDone = (t: Topic) => t.exercises.length > 0 && t.exercises.every((c) => done.includes(c));
   const img = images.length ? images[active % images.length] : undefined;
 
