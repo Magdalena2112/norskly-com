@@ -80,6 +80,8 @@ export default function GrammarPage() {
   const [activeTab, setActiveTab] = useState(lessonId ? "lesson" : defaultTab);
   const [explainTopic, setExplainTopic] = useState("");
   const [practiceTopic, setPracticeTopic] = useState("");
+  const [lessonTopicIdx, setLessonTopicIdx] = useState(0);
+  const goToLessonPractice = (i: number) => { setLessonTopicIdx(i); setActiveTab("exercises"); window.scrollTo({ top: 0, behavior: "smooth" }); };
 
   const goToExplainTab = (topicText: string) => {
     setExplainTopic(topicText);
@@ -131,11 +133,16 @@ export default function GrammarPage() {
 
           {lessonId && (
             <TabsContent value="lesson">
-              <LessonGrammarTab lessonId={lessonId} onPractice={goToPracticeTab} onExplain={goToExplainTab} />
+              <LessonGrammarTab lessonId={lessonId} onPractice={goToLessonPractice} onExplain={goToExplainTab} initialTopic={lessonTopicIdx} onTopicChange={setLessonTopicIdx} />
             </TabsContent>
           )}
           <TabsContent value="exercises">
+            {lessonId ? (
+              <LessonGrammarTab lessonId={lessonId} mode="practice" initialTopic={lessonTopicIdx} onTopicChange={setLessonTopicIdx}
+                renderMore={(t) => <ExercisesTab key={t} level={level} userId={user?.id} initialTopic={t} onGoToExplain={goToExplainTab} />} />
+            ) : (
             <ExercisesTab key={practiceTopic} level={level} userId={user?.id} initialTopic={practiceTopic || (navState.tab === "exercises" ? navState.topic : undefined)} onGoToExplain={goToExplainTab} />
+            )}
           </TabsContent>
           <TabsContent value="explain">
             <ExplainTab key={explainTopic} level={level} userId={user?.id} initialQuery={explainTopic || (navState.tab === "explain" ? navState.query : undefined)} />

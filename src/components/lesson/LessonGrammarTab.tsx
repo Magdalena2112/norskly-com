@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/context/AuthContext";
 import LessonExercise from "@/components/lesson/LessonExercise";
@@ -40,14 +40,19 @@ const TOPICS: Record<string, Topic[]> = {
   ],
 };
 
-export default function LessonGrammarTab({ lessonId, onPractice, onExplain }: {
-  lessonId: string; onPractice?: (topic: string) => void; onExplain?: (topic: string) => void;
+export default function LessonGrammarTab({ lessonId, onPractice, onExplain, mode = "theory", initialTopic = 0, onTopicChange, renderMore }: {
+  lessonId: string; onPractice?: (topicIndex: number) => void; onExplain?: (topic: string) => void;
+  mode?: "theory" | "practice"; initialTopic?: number; onTopicChange?: (i: number) => void;
+  renderMore?: (aiTopic: string) => React.ReactNode;
 }) {
+  const [showMore, setShowMore] = useState(false);
   const { user } = useAuth();
   const [row, setRow] = useState<any>(null);
   const [content, setContent] = useState<LessonContent | null>(null);
   const [done, setDone] = useState<string[]>([]);
-  const [active, setActive] = useState(0);
+  const [active, setActive] = useState(initialTopic);
+  useEffect(() => { setActive(initialTopic); }, [initialTopic]);
+  useEffect(() => { setShowMore(false); }, [active]);
 
   useEffect(() => {
     (async () => {
@@ -99,7 +104,7 @@ export default function LessonGrammarTab({ lessonId, onPractice, onExplain }: {
 
       <div className="flex gap-2 overflow-x-auto scrollbar-hide pb-1 -mx-1 px-1">
         {topics.map((t, i) => (
-          <button key={t.label} type="button" onClick={() => setActive(i)}
+          <button key={t.label} type="button" onClick={() => { setActive(i); onTopicChange?.(i); }}
             className={`shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs sm:text-sm border transition-colors ${i === active ? "bg-primary text-primary-foreground border-primary" : "bg-cream/90 border-border hover:border-primary/50 text-foreground"}`}>
             {isTopicDone(t) && <CheckCircle2 className={`w-3.5 h-3.5 ${i === active ? "" : "text-forest"}`} />}
             <span>{i + 1}. {t.label}</span>
@@ -107,6 +112,7 @@ export default function LessonGrammarTab({ lessonId, onPractice, onExplain }: {
         ))}
       </div>
 
+      {mode === "theory" ? (<>
       {img && <img src={img} alt={topic.label} loading="lazy" className="w-full max-h-72 object-cover rounded-2xl border border-border/60 shadow-card-soft" />}
 
       {topic.sectionIdx.map((si) => sections[si]).filter(Boolean).map((s: any) => (
@@ -131,24 +137,14 @@ export default function LessonGrammarTab({ lessonId, onPractice, onExplain }: {
         </div>
       ))}
 
-      {topicEx.length > 0 && (
-        <div className="space-y-4">
-          <h3 className="font-display text-xl text-primary">Provežbaj ovu temu ({topicEx.filter((e) => done.includes(e.code)).length}/{topicEx.length})</h3>
-          {topicEx.map((ex) => (
-            <LessonExercise key={ex.id} exercise={ex} language={lang} level={row.cefr_level} lessonTitle={row.title_target || row.title} done={done.includes(ex.code)} onDone={markDone} />
-          ))}
-        </div>
-      )}
-
       {onPractice && (
         <div className="rounded-2xl border border-primary/20 bg-primary/5 p-4 flex flex-col sm:flex-row sm:items-center gap-3">
-          <p className="text-sm flex-1">Želiš još vežbe? AI će napraviti nove zadatke baš za ovu temu.</p>
-          <Button variant="hero" size="sm" onClick={() => onPractice(topic.aiTopic)}>
-            <Sparkles className="w-4 h-4" /> Provežbaj
+          <p className="text-sm flex-1">Spremna/spreman? Pređi na vežbe za ovu temu i osvoji XP.</p>
+          <Button variant="hero" size="sm" onClick={() => onPractice(active)}>
+            Provežbaj ovu temu <ArrowRight className="w-4 h-4" />
           </Button>
         </div>
       )}
-
       {topic.related.length > 0 && onExplain && (
         <div className="space-y-2">
           <p className="text-sm font-semibold text-primary flex items-center gap-1.5"><Lightbulb className="w-4 h-4" /> Povezane gramatičke oblasti</p>
@@ -163,9 +159,31 @@ export default function LessonGrammarTab({ lessonId, onPractice, onExplain }: {
         </div>
       )}
 
+      </>) : (<>
+      {topicEx.length > 0 && (
+        <div className="space-y-4">
+          <h3 className="font-display text-xl text-primary">Pripremljene vežbe ({topicEx.filter((e) => done.includes(e.code)).length}/{topicEx.length})</h3>
+          {topicEx.map((ex) => (
+            <LessonExercise key={ex.id} exercise={ex} language={lang} level={row.cefr_level} lessonTitle={row.title_target || row.title} done={done.includes(ex.code)} onDone={markDone} />
+          ))}
+        </div>
+      )}
+
+      {renderMore && (
+        <div className="rounded-2xl border border-primary/20 bg-primary/5 p-4 space-y-3">
+          {!showMore ? (
+            <div className="flex flex-col sm:flex-row sm:items-center gap-3">
+              <p className="text-sm flex-1">Želiš još? AI pravi nove slične vežbe za ovu oblast i tvoj nivo.</p>
+              <Button variant="hero" size="sm" onClick={() => setShowMore(true)}><Sparkles className="w-4 h-4" /> Provežbaj još</Button>
+            </div>
+          ) : renderMore(topic.aiTopic)}
+        </div>
+      )}
+      </>)}
+
       {active < topics.length - 1 && (
         <div className="flex justify-end">
-          <Button variant="outline" size="sm" onClick={() => { setActive(active + 1); window.scrollTo({ top: 0, behavior: "smooth" }); }}>
+          <Button variant="outline" size="sm" onClick={() => { setActive(active + 1); onTopicChange?.(active + 1); window.scrollTo({ top: 0, behavior: "smooth" }); }}>
             Sledeća tema: {topics[active + 1].label} <ArrowRight className="w-4 h-4" />
           </Button>
         </div>
