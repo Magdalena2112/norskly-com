@@ -5,7 +5,8 @@ import { loadLessonContent, speakLines, type Exercise } from "@/lib/courseLesson
 import LessonExercise from "@/components/lesson/LessonExercise";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Volume2, BookOpen, ArrowRight, CheckCircle2, MessageSquareQuote, PenLine, ZoomIn, Layers } from "lucide-react";
+import { Volume2, BookOpen, ArrowRight, CheckCircle2, MessageSquareQuote, PenLine, ZoomIn, Layers, Sparkles, Loader2 } from "lucide-react";
+import { toast } from "sonner";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import v1 from "@/assets/lessons/en-a1-l01-vocab-1.webp.asset.json";
 import v2 from "@/assets/lessons/en-a1-l01-vocab-2.webp.asset.json";
@@ -62,7 +63,20 @@ export default function LessonVocabularyTab({ lessonId, mode, onPractice, onFlas
     })();
   }, [lessonId, user]);
 
-  useEffect(() => { setExIdx(0); }, [idx, mode]);
+  useEffect(() => { setExIdx(0); setAiEx(null); }, [idx, mode]);
+  const [aiEx, setAiEx] = useState<Exercise[] | null>(null);
+  const [aiLoading, setAiLoading] = useState(false);
+  async function genMore() {
+    const cur = areas[Math.min(idx, areas.length - 1)];
+    setAiLoading(true);
+    const { data, error } = await supabase.functions.invoke("vocabulary-ai", {
+      body: { action: "generate_lesson_exercises", theme: cur.title, exclude_words: cur.words.map((w) => w.word), level: row?.cefr_level || "A1", language: row?.language || "en" },
+    });
+    setAiLoading(false);
+    if (error || !Array.isArray(data?.exercises)) { toast.error("AI vežbe trenutno nisu dostupne. Pokušaj ponovo."); return; }
+    const t = Date.now();
+    setAiEx(data.exercises.map((e: any, i: number) => ({ id: `ai-${t}-${i}`, code: `AI-${t}-${i}`, kind: "vocabulary", title: e.title || "Vežba", instruction: e.instruction || "", items: e.items || [] })));
+  }
 
   if (!row || !areas.length) return <p className="text-sm text-muted-foreground text-center py-8">Učitavanje reči lekcije…</p>;
   const lang = row.language || "en";
@@ -211,6 +225,30 @@ export default function LessonVocabularyTab({ lessonId, mode, onPractice, onFlas
             )}
           </div>
           {isAreaDone(a) && <p className="text-sm rounded-xl bg-forest/10 border border-forest/30 p-3">🎉 Bravo! Završila/o si sve vežbe ove oblasti.</p>}
+          <div className="rounded-2xl border border-primary/20 bg-primary/5 p-4 space-y-3">
+            {!aiEx ? (
+              <div className="flex flex-col sm:flex-row sm:items-center gap-3">
+                <p className="text-sm flex-1">Želiš još? AI pravi nove slične vežbe od reči ove oblasti za tvoj nivo.</p>
+                <Button variant="hero" size="sm" disabled={aiLoading} onClick={genMore}>
+                  {aiLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Sparkles className="w-4 h-4" />} Provežbaj još
+                </Button>
+              </div>
+            ) : (
+              <div className="space-y-4">
+                {aiEx.map((ex) => <LessonExercise key={ex.id} exercise={ex} language={lang} level={row.cefr_level} lessonTitle={row.title_target || row.title} done={false} onDone={() => {}} />)}
+                <Button variant="outline" size="sm" disabled={aiLoading} onClick={genMore}>
+                  {aiLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Sparkles className="w-4 h-4" />} Nove vežbe
+                </Button>
+              </div>
+            )}
+          </div>
+          {idx < areas.length - 1 && (
+            <div className="flex justify-end">
+              <Button variant="outline" size="sm" onClick={() => { setIdx(idx + 1); window.scrollTo({ top: 0, behavior: "smooth" }); }}>
+                Sledeća oblast: {areas[idx + 1].sr} <ArrowRight className="w-4 h-4" />
+              </Button>
+            </div>
+          )}
         </div>
       )}
       <Dialog open={!!zoom} onOpenChange={(o) => !o && setZoom(null)}>

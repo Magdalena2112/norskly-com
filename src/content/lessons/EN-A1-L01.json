@@ -4740,7 +4740,7 @@
           "kind": "vocabulary",
           "items": [
             {
-              "prompt": "",
+              "prompt": "Koji broj je višak?",
               "options": [
                 "thirty",
                 "three",
@@ -4751,7 +4751,7 @@
               ]
             },
             {
-              "prompt": "",
+              "prompt": "Koji broj je višak?",
               "options": [
                 "fifty",
                 "fifteen",
@@ -4762,7 +4762,7 @@
               ]
             },
             {
-              "prompt": "",
+              "prompt": "Koji broj je višak?",
               "options": [
                 "eighty",
                 "eight",
@@ -4773,7 +4773,7 @@
               ]
             },
             {
-              "prompt": "",
+              "prompt": "Koji broj je višak?",
               "options": [
                 "sixty",
                 "six",
@@ -4784,7 +4784,7 @@
               ]
             },
             {
-              "prompt": "",
+              "prompt": "Koji broj je višak?",
               "options": [
                 "forty",
                 "four",
