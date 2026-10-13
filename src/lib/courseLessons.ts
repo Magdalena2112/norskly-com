@@ -87,7 +87,7 @@ const PITCHES = [1, 0.8, 1.2, 0.95, 1.1];
 export function speakLines(
   lines: DialogueLine[],
   lang: string,
-  opts: { slow?: boolean; onLine?: (i: number) => void; onEnd?: () => void } = {},
+  opts: { slow?: boolean; rate?: number; onLine?: (i: number) => void; onEnd?: () => void } = {},
 ) {
   const synth = window.speechSynthesis;
   if (!synth) return;
@@ -100,7 +100,7 @@ export function speakLines(
     u.lang = LOCALE[lang] || "en-GB";
     if (voices.length) u.voice = voices[idx % voices.length];
     u.pitch = PITCHES[idx % PITCHES.length];
-    u.rate = opts.slow ? 0.7 : 0.95;
+    u.rate = opts.rate ?? (opts.slow ? 0.7 : 0.95);
     u.onstart = () => opts.onLine?.(i);
     if (i === lines.length - 1) u.onend = () => opts.onEnd?.();
     synth.speak(u);

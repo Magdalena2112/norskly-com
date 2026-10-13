@@ -4776,6 +4776,277 @@
             }
           ]
         }
+      ],
+      "scenes": [
+        {
+          "id": "S1",
+          "title": "Scena 1 · New Student at the Office",
+          "context": "Nova učenica dolazi u školsku kancelariju i treba da kaže ime.",
+          "lines": [
+            {
+              "speaker": "Mr Brown",
+              "text": "Good afternoon! Can I help you?"
+            },
+            {
+              "speaker": "Lily",
+              "text": "Good afternoon. I'm a new student."
+            },
+            {
+              "speaker": "Mr Brown",
+              "text": "Welcome! What's your name?"
+            },
+            {
+              "speaker": "Lily",
+              "text": "My name is Lily Carter."
+            },
+            {
+              "speaker": "Mr Brown",
+              "text": "How do you spell Carter?"
+            },
+            {
+              "speaker": "Lily",
+              "text": "C – A – R – T – E – R."
+            },
+            {
+              "speaker": "Mr Brown",
+              "text": "Thank you, Lily. You are in class five."
+            },
+            {
+              "speaker": "Lily",
+              "text": "Thank you. Goodbye!"
+            }
+          ],
+          "questions": [
+            {
+              "prompt": "Koje je doba dana?",
+              "options": [
+                "morning",
+                "afternoon",
+                "evening"
+              ],
+              "answer": "afternoon",
+              "explanation": "Mr Brown kaže „Good afternoon“."
+            },
+            {
+              "prompt": "Ko je Lily?",
+              "options": [
+                "a new student",
+                "a teacher",
+                "a friend of Mr Brown"
+              ],
+              "answer": "a new student",
+              "explanation": "Lily kaže „I'm a new student“."
+            },
+            {
+              "prompt": "Kako se piše njeno prezime?",
+              "options": [
+                "CARTER",
+                "KARTER",
+                "CARTAR"
+              ],
+              "answer": "CARTER",
+              "explanation": "Slovka se C–A–R–T–E–R."
+            },
+            {
+              "prompt": "U kom je odeljenju?",
+              "options": [
+                "class four",
+                "class five",
+                "class nine"
+              ],
+              "answer": "class five",
+              "explanation": "„You are in class five.“"
+            },
+            {
+              "prompt": "Kako se Lily oprašta?",
+              "options": [
+                "See you!",
+                "Goodbye!",
+                "Good night!"
+              ],
+              "answer": "Goodbye!",
+              "explanation": "Na kraju kaže „Goodbye!“"
+            }
+          ]
+        },
+        {
+          "id": "S2",
+          "title": "Scena 2 · What's in Your Bag?",
+          "context": "Dva druga iz razreda upoređuju šta imaju u torbi.",
+          "lines": [
+            {
+              "speaker": "Tom",
+              "text": "Hi, Mia! Is this your bag?"
+            },
+            {
+              "speaker": "Mia",
+              "text": "Yes, it is. It's new."
+            },
+            {
+              "speaker": "Tom",
+              "text": "What's in it?"
+            },
+            {
+              "speaker": "Mia",
+              "text": "A notebook, two pens and an eraser."
+            },
+            {
+              "speaker": "Tom",
+              "text": "Is there a ruler?"
+            },
+            {
+              "speaker": "Mia",
+              "text": "No, there isn't. Sorry."
+            },
+            {
+              "speaker": "Tom",
+              "text": "That's OK. I'm tired today."
+            },
+            {
+              "speaker": "Mia",
+              "text": "Me too!"
+            }
+          ],
+          "questions": [
+            {
+              "prompt": "Kakva je Mijina torba?",
+              "options": [
+                "old",
+                "new",
+                "big"
+              ],
+              "answer": "new",
+              "explanation": "„It's new.“"
+            },
+            {
+              "prompt": "Koliko olovaka (pens) ima Mia?",
+              "options": [
+                "one",
+                "two",
+                "three"
+              ],
+              "answer": "two",
+              "explanation": "„two pens“"
+            },
+            {
+              "prompt": "Šta Mia NEMA u torbi?",
+              "options": [
+                "a ruler",
+                "an eraser",
+                "a notebook"
+              ],
+              "answer": "a ruler",
+              "explanation": "„Is there a ruler? – No, there isn't.“"
+            },
+            {
+              "prompt": "Kako se Tom oseća?",
+              "options": [
+                "happy",
+                "tired",
+                "sad"
+              ],
+              "answer": "tired",
+              "explanation": "„I'm tired today.“"
+            },
+            {
+              "prompt": "Kako se oseća Mia?",
+              "options": [
+                "She is tired too.",
+                "She is happy.",
+                "She is hungry."
+              ],
+              "answer": "She is tired too.",
+              "explanation": "„Me too!“ znači da je i ona umorna."
+            }
+          ]
+        },
+        {
+          "id": "S3",
+          "title": "Scena 3 · Phone Numbers and Ages",
+          "context": "Učenici razmenjuju godine i brojeve telefona.",
+          "lines": [
+            {
+              "speaker": "Jack",
+              "text": "Hello, I'm Jack. I'm twelve."
+            },
+            {
+              "speaker": "Anna",
+              "text": "Hi, Jack. I'm Anna. I'm eleven."
+            },
+            {
+              "speaker": "Jack",
+              "text": "What's your phone number, Anna?"
+            },
+            {
+              "speaker": "Anna",
+              "text": "It's zero, seven, four, nine, three, eight."
+            },
+            {
+              "speaker": "Jack",
+              "text": "Zero, seven, four, nine, three, eight. Thanks!"
+            },
+            {
+              "speaker": "Anna",
+              "text": "And this is my sister, Kate. She is sixteen."
+            },
+            {
+              "speaker": "Kate",
+              "text": "Hi, Jack! Nice to meet you."
+            }
+          ],
+          "questions": [
+            {
+              "prompt": "Koliko godina ima Jack?",
+              "options": [
+                "eleven",
+                "twelve",
+                "twenty"
+              ],
+              "answer": "twelve",
+              "explanation": "„I'm twelve.“"
+            },
+            {
+              "prompt": "Koliko godina ima Anna?",
+              "options": [
+                "eleven",
+                "seven",
+                "thirteen"
+              ],
+              "answer": "eleven",
+              "explanation": "„I'm eleven.“"
+            },
+            {
+              "prompt": "Koji je Annin broj telefona?",
+              "options": [
+                "074938",
+                "047938",
+                "074983"
+              ],
+              "answer": "074938",
+              "explanation": "zero-seven-four-nine-three-eight"
+            },
+            {
+              "prompt": "Ko je Kate?",
+              "options": [
+                "Anna's sister",
+                "Jack's sister",
+                "Anna's teacher"
+              ],
+              "answer": "Anna's sister",
+              "explanation": "„this is my sister, Kate“"
+            },
+            {
+              "prompt": "Koliko godina ima Kate?",
+              "options": [
+                "six",
+                "sixteen",
+                "sixty"
+              ],
+              "answer": "sixteen",
+              "explanation": "„She is sixteen.“ — pazi na -teen."
+            }
+          ]
+        }
       ]
     },
     "writing": {
