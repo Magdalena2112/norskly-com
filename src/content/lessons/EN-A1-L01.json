@@ -2416,6 +2416,151 @@
             "CO-05"
           ],
           "aiTopic": "Classroom objects (pen, desk, ruler, backpack, scissors, eraser)"
+        },
+        {
+          "key": "NUM",
+          "title": "Numbers 0–20 & Alphabet",
+          "sr": "Brojevi 0–20 i alfabet",
+          "words": [
+            {
+              "word": "How do you spell it?",
+              "translation": "Kako se slovka?",
+              "example": "E–M–M–A.",
+              "active": true
+            },
+            {
+              "word": "zero",
+              "translation": "0",
+              "example": "",
+              "active": true
+            },
+            {
+              "word": "one",
+              "translation": "1",
+              "example": "",
+              "active": true
+            },
+            {
+              "word": "two",
+              "translation": "2",
+              "example": "",
+              "active": true
+            },
+            {
+              "word": "three",
+              "translation": "3",
+              "example": "",
+              "active": true
+            },
+            {
+              "word": "four",
+              "translation": "4",
+              "example": "",
+              "active": true
+            },
+            {
+              "word": "five",
+              "translation": "5",
+              "example": "",
+              "active": true
+            },
+            {
+              "word": "six",
+              "translation": "6",
+              "example": "",
+              "active": true
+            },
+            {
+              "word": "seven",
+              "translation": "7",
+              "example": "",
+              "active": true
+            },
+            {
+              "word": "eight",
+              "translation": "8",
+              "example": "",
+              "active": true
+            },
+            {
+              "word": "nine",
+              "translation": "9",
+              "example": "",
+              "active": true
+            },
+            {
+              "word": "ten",
+              "translation": "10",
+              "example": "",
+              "active": true
+            },
+            {
+              "word": "eleven",
+              "translation": "11",
+              "example": "",
+              "active": true
+            },
+            {
+              "word": "twelve",
+              "translation": "12",
+              "example": "",
+              "active": true
+            },
+            {
+              "word": "thirteen",
+              "translation": "13",
+              "example": "",
+              "active": true
+            },
+            {
+              "word": "fourteen",
+              "translation": "14",
+              "example": "",
+              "active": true
+            },
+            {
+              "word": "fifteen",
+              "translation": "15",
+              "example": "",
+              "active": true
+            },
+            {
+              "word": "sixteen",
+              "translation": "16",
+              "example": "",
+              "active": true
+            },
+            {
+              "word": "seventeen",
+              "translation": "17",
+              "example": "",
+              "active": true
+            },
+            {
+              "word": "eighteen",
+              "translation": "18",
+              "example": "",
+              "active": true
+            },
+            {
+              "word": "nineteen",
+              "translation": "19",
+              "example": "",
+              "active": true
+            },
+            {
+              "word": "twenty",
+              "translation": "20",
+              "example": "",
+              "active": true
+            }
+          ],
+          "examples": [
+            "How do you spell it? E–M–M–A.",
+            "I'm ten.",
+            "Room twelve."
+          ],
+          "exercises": []
         }
       ],
       "words": [
@@ -2676,12 +2821,167 @@
           "translation": "sat",
           "collection": "CO",
           "active": true
+        },
+        {
+          "word": "How do you spell it?",
+          "translation": "Kako se slovka?",
+          "example": "E–M–M–A.",
+          "collection": "NUM",
+          "active": true
+        },
+        {
+          "word": "zero",
+          "translation": "0",
+          "example": "",
+          "collection": "NUM",
+          "active": true
+        },
+        {
+          "word": "one",
+          "translation": "1",
+          "example": "",
+          "collection": "NUM",
+          "active": true
+        },
+        {
+          "word": "two",
+          "translation": "2",
+          "example": "",
+          "collection": "NUM",
+          "active": true
+        },
+        {
+          "word": "three",
+          "translation": "3",
+          "example": "",
+          "collection": "NUM",
+          "active": true
+        },
+        {
+          "word": "four",
+          "translation": "4",
+          "example": "",
+          "collection": "NUM",
+          "active": true
+        },
+        {
+          "word": "five",
+          "translation": "5",
+          "example": "",
+          "collection": "NUM",
+          "active": true
+        },
+        {
+          "word": "six",
+          "translation": "6",
+          "example": "",
+          "collection": "NUM",
+          "active": true
+        },
+        {
+          "word": "seven",
+          "translation": "7",
+          "example": "",
+          "collection": "NUM",
+          "active": true
+        },
+        {
+          "word": "eight",
+          "translation": "8",
+          "example": "",
+          "collection": "NUM",
+          "active": true
+        },
+        {
+          "word": "nine",
+          "translation": "9",
+          "example": "",
+          "collection": "NUM",
+          "active": true
+        },
+        {
+          "word": "ten",
+          "translation": "10",
+          "example": "",
+          "collection": "NUM",
+          "active": true
+        },
+        {
+          "word": "eleven",
+          "translation": "11",
+          "example": "",
+          "collection": "NUM",
+          "active": true
+        },
+        {
+          "word": "twelve",
+          "translation": "12",
+          "example": "",
+          "collection": "NUM",
+          "active": true
+        },
+        {
+          "word": "thirteen",
+          "translation": "13",
+          "example": "",
+          "collection": "NUM",
+          "active": true
+        },
+        {
+          "word": "fourteen",
+          "translation": "14",
+          "example": "",
+          "collection": "NUM",
+          "active": true
+        },
+        {
+          "word": "fifteen",
+          "translation": "15",
+          "example": "",
+          "collection": "NUM",
+          "active": true
+        },
+        {
+          "word": "sixteen",
+          "translation": "16",
+          "example": "",
+          "collection": "NUM",
+          "active": true
+        },
+        {
+          "word": "seventeen",
+          "translation": "17",
+          "example": "",
+          "collection": "NUM",
+          "active": true
+        },
+        {
+          "word": "eighteen",
+          "translation": "18",
+          "example": "",
+          "collection": "NUM",
+          "active": true
+        },
+        {
+          "word": "nineteen",
+          "translation": "19",
+          "example": "",
+          "collection": "NUM",
+          "active": true
+        },
+        {
+          "word": "twenty",
+          "translation": "20",
+          "example": "",
+          "collection": "NUM",
+          "active": true
         }
       ],
       "collections": {
         "GI": "Greetings & Introductions",
         "PCF": "People, Classroom & Feelings",
-        "CO": "Classroom Objects"
+        "CO": "Classroom Objects",
+        "NUM": "Numbers 0–20 & Alphabet"
       },
       "exercises": [
         {
