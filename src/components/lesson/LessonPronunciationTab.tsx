@@ -144,7 +144,6 @@ export default function LessonPronunciationTab({ data, lang, level, lessonCode }
                   {(
 
                     <div className="rounded-2xl border border-border/60 bg-background/60 p-3">
-                      <p className="text-xs text-muted-foreground mb-2">Snimi se: <span className="font-medium text-foreground">{it.say}</span></p>
                       <RecordSlot item={{ text: it.say }} lang={lang} level={level} onSuccess={() => setOk((o) => ({ ...o, [k]: true }))} />
                     </div>
                   )}
