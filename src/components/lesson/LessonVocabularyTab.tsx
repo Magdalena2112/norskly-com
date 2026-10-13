@@ -16,15 +16,19 @@ const IMAGES: Record<string, string> = { v1: v1.url, v2: v2.url, v3: v3.url, v4:
 interface Word { word: string; translation: string; example?: string; active?: boolean }
 interface Area { key: string; title: string; sr: string; images?: string[]; words: Word[]; examples?: string[]; exercises: string[] }
 
-export default function LessonVocabularyTab({ lessonId }: { lessonId: string }) {
+let sharedIdx = 0;
+
+export default function LessonVocabularyTab({ lessonId, mode, onPractice }: { lessonId: string; mode: "theory" | "practice"; onPractice: () => void }) {
   const { user } = useAuth();
   const [row, setRow] = useState<any>(null);
   const [areas, setAreas] = useState<Area[]>([]);
   const [exercises, setExercises] = useState<Exercise[]>([]);
   const [done, setDone] = useState<string[]>([]);
-  const [idx, setIdx] = useState(0);
-  const [mode, setMode] = useState<"theory" | "practice">("theory");
+  const [idx, setIdxState] = useState(sharedIdx);
+  const setIdx = (i: number) => { sharedIdx = i; setIdxState(i); };
+  useEffect(() => { setIdxState(sharedIdx); }, [mode]);
   const [exIdx, setExIdx] = useState(0);
+  const [zoom, setZoom] = useState<string | null>(null);
 
   useEffect(() => {
     (async () => {
@@ -99,30 +103,32 @@ export default function LessonVocabularyTab({ lessonId }: { lessonId: string }) 
         ))}
       </div>
 
-      {areaEx.length > 0 && (
-        <div className="inline-flex rounded-full border border-border bg-cream/90 p-1">
-          {(["theory", "practice"] as const).map((m) => (
-            <button key={m} type="button" onClick={() => setMode(m)}
-              className={`px-4 py-1.5 rounded-full text-sm transition-colors ${mode === m ? "bg-primary text-primary-foreground" : "text-foreground"}`}>
-              {m === "theory" ? "Gradivo" : `Vežbe (${areaEx.filter((e) => done.includes(e.code)).length}/${areaEx.length})`}
-            </button>
-          ))}
-        </div>
-      )}
-
       {mode === "theory" ? (
         <div className="space-y-4">
-          <Card className="border-accent/30 bg-accent/5">
-            <CardContent className="pt-5 pb-5">
+          <div className="flex items-end justify-between gap-3">
+            <div>
               <h3 className="font-display font-bold text-lg text-foreground">{a.sr}</h3>
               <p className="text-xs text-muted-foreground">{a.title} · {a.words.length} reči</p>
-            </CardContent>
-          </Card>
+            </div>
+            <Button variant="outline" size="sm" onClick={() => speakLines(active.map((w) => ({ speaker: "m", text: w.word.split(" / ")[0].replace("…", "") })), lang)}>
+              <Volume2 className="w-4 h-4" /> Poslušaj reči
+            </Button>
+          </div>
 
-          {(a.images || []).map((k) => IMAGES[k] && (
-            <img key={k} src={IMAGES[k]} alt={a.title} loading="lazy" width={1448} height={1086}
-              className="w-full h-auto rounded-2xl border border-border/60 shadow-card-soft" />
-          ))}
+          {(a.images || []).length > 0 && (
+            <div className={`grid gap-3 ${(a.images || []).length > 1 ? "grid-cols-2" : "grid-cols-1"}`}>
+              {(a.images || []).map((k) => IMAGES[k] && (
+                <button key={k} type="button" onClick={() => setZoom(IMAGES[k])} aria-label="Uvećaj ilustraciju"
+                  className="group relative rounded-2xl border border-border/60 bg-background/60 overflow-hidden shadow-card-soft">
+                  <img src={IMAGES[k]} alt={a.title} loading="lazy" width={1448} height={1086}
+                    className="w-full max-h-64 object-contain mx-auto" />
+                  <span className="absolute bottom-2 right-2 inline-flex items-center gap-1 rounded-full bg-background/80 backdrop-blur px-2.5 py-1 text-xs text-foreground border border-border/60">
+                    <ZoomIn className="w-3.5 h-3.5" /> Uvećaj
+                  </span>
+                </button>
+              ))}
+            </div>
+          )}
 
           {active.length > 0 && (
             <Card>
