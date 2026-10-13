@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import LessonWritingTab from "@/components/lesson/LessonWritingTab";
 import { useAuth } from "@/context/AuthContext";
 import { useProfile } from "@/context/ProfileContext";
 import { supabase } from "@/integrations/supabase/client";
@@ -78,7 +79,9 @@ export default function WritingPage() {
   const navigate = useNavigate();
   const { profile } = useProfile();
   const level = profile.level || "A1";
-  const [tab, setTab] = useState("bildebeskrivelse");
+  const location = useLocation();
+  const lessonId = new URLSearchParams(location.search).get("lesson");
+  const [tab, setTab] = useState(lessonId ? "lesson" : "bildebeskrivelse");
 
   return (
     <StudentLayout>
@@ -86,7 +89,7 @@ export default function WritingPage() {
       <div className="relative z-10">
         <header className="border-b border-border/50 bg-cream/80 backdrop-blur-md sticky top-0 z-40">
           <div className="container flex items-center gap-3 h-14">
-            <Button variant="ghost" size="icon" onClick={() => navigate("/practice")} className="text-primary hover:text-primary/80">
+            <Button variant="ghost" size="icon" onClick={() => navigate(lessonId ? `/lekcija/${lessonId}` : "/practice")} className="text-primary hover:text-primary/80">
               <ArrowLeft className="w-4 h-4" />
             </Button>
             <PenLine className="w-4 h-4 text-primary" />
@@ -110,6 +113,11 @@ export default function WritingPage() {
 
           <Tabs value={tab} onValueChange={setTab} className="space-y-6">
             <TabsList className="w-full flex gap-0.5 overflow-x-auto scrollbar-hide">
+              {lessonId && (
+                <TabsTrigger value="lesson" className="gap-1 text-[11px] sm:text-xs px-2 sm:px-3">
+                  <Sparkles className="w-3.5 h-3.5 shrink-0 hidden sm:block" /> Lekcija
+                </TabsTrigger>
+              )}
               <TabsTrigger value="bildebeskrivelse" className="gap-1 text-[11px] sm:text-xs px-2 sm:px-3">
                 <ImagePlus className="w-3.5 h-3.5 shrink-0 hidden sm:block" /> Bildebeskrivelse
               </TabsTrigger>
@@ -121,6 +129,11 @@ export default function WritingPage() {
               </TabsTrigger>
             </TabsList>
 
+            {lessonId && (
+              <TabsContent value="lesson">
+                <LessonWritingTab lessonId={lessonId} language={getCurrentLanguageCode() as "no" | "en" | "de"} level={level} onOpenFree={() => setTab("correction")} />
+              </TabsContent>
+            )}
             <TabsContent value="bildebeskrivelse"><BildebeskrivelseTab level={level} /></TabsContent>
             <TabsContent value="correction"><CorrectionTab level={level} /></TabsContent>
             <TabsContent value="history"><HistoryTab onReopen={(t) => setTab(t)} /></TabsContent>
