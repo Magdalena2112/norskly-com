@@ -18,6 +18,7 @@ const IMAGES: Record<string, string> = { v1: v1.url, v2: v2.url, v3: v3.url, v4:
 const PICS = wordPics as Record<string, Record<string, string>>;
 const picFor = (w: string, imgs: string[] = []) => {
   for (const k of imgs) { const u = PICS[k]?.[w]; if (u) return u; }
+  for (const k of Object.keys(PICS)) { const u = PICS[k][w]; if (u) return u; }
   return undefined;
 };
 
