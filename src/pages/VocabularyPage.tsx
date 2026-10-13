@@ -14,7 +14,8 @@ import {
   FolderOpen, Plus,
 } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import LessonVocabularyTab from "@/components/lesson/LessonVocabularyTab";
 import { supabase } from "@/integrations/supabase/client";
 import { logActivity } from "@/lib/logActivity";
 import { logErrors } from "@/lib/logErrors";
@@ -88,6 +89,7 @@ export default function VocabularyPage() {
   const { user } = useAuth();
   const navigate = useNavigate();
   const level = profile.level || "A1";
+  const lessonId = new URLSearchParams(useLocation().search).get("lesson");
 
   return (
     <div className="min-h-screen bg-fjord-soft flex flex-col">
@@ -104,8 +106,13 @@ export default function VocabularyPage() {
       </header>
 
       <div className="flex-1 container max-w-2xl py-6">
-        <Tabs defaultValue="generate" className="space-y-6">
+        <Tabs defaultValue={lessonId ? "lesson" : "generate"} className="space-y-6">
           <TabsList className="w-full flex gap-0.5 overflow-x-auto scrollbar-hide">
+            {lessonId && (
+              <TabsTrigger value="lesson" className="gap-1 text-[11px] sm:text-sm px-2 sm:px-3">
+                <BookOpen className="w-4 h-4 hidden sm:block shrink-0" /> Lekcija
+              </TabsTrigger>
+            )}
             <TabsTrigger value="generate" className="gap-1 text-[11px] sm:text-sm px-2 sm:px-3">
               <BookOpen className="w-4 h-4 hidden sm:block shrink-0" /> Generiši
             </TabsTrigger>
@@ -122,6 +129,12 @@ export default function VocabularyPage() {
               <Brain className="w-4 h-4 hidden sm:block shrink-0" /> Kviz
             </TabsTrigger>
           </TabsList>
+
+          {lessonId && (
+            <TabsContent value="lesson">
+              <LessonVocabularyTab lessonId={lessonId} />
+            </TabsContent>
+          )}
 
           <TabsContent value="generate">
             <GenerateTab level={level} userId={user?.id} />
