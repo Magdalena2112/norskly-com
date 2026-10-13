@@ -36,8 +36,6 @@ export const LESSON_GRAMMAR_TOPICS: Record<string, Topic[]> = {
       related: [{ title: "Odrični oblik (I am not…)", query: "Verb to be negative form" }, { title: "Upitni oblik (Are you…?)", query: "Verb to be questions" }] },
     { label: "Članovi a / an", sectionIdx: [2], exercises: ["AR-01","AR-02","AR-03","AR-04","AR-05","AR-06","AR-07","AR-08","AR-09","AR-10"], aiTopic: "Indefinite articles a / an",
       related: [{ title: "Množina imenica", query: "Plural nouns in English" }, { title: "Određeni član the", query: "Definite article the" }] },
-    { label: "Fraze i sažetak", sectionIdx: [3, 4], exercises: ["GR-08", "GR-09", "GR-10"], aiTopic: "Basic questions with to be (What is your name? Where are you from?)",
-      related: [{ title: "Upitne reči (what, where, who)", query: "Question words what, where, who, how" }] },
   ],
 };
 
