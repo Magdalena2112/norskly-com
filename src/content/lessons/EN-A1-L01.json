@@ -2419,15 +2419,9 @@
         },
         {
           "key": "NUM",
-          "title": "Numbers 0–20 & Alphabet",
-          "sr": "Brojevi 0–20 i alfabet",
+          "title": "Numbers 0–20",
+          "sr": "Brojevi 0–20",
           "words": [
-            {
-              "word": "How do you spell it?",
-              "translation": "Kako se slovka?",
-              "example": "E–M–M–A.",
-              "active": true
-            },
             {
               "word": "zero",
               "translation": "0",
@@ -2556,9 +2550,9 @@
             }
           ],
           "examples": [
-            "How do you spell it? E–M–M–A.",
             "I'm ten.",
-            "Room twelve."
+            "Room twelve.",
+            "I have two books."
           ],
           "exercises": []
         }
@@ -4605,6 +4599,14 @@
             "How are you?"
           ],
           "extra": "Snimi pozdrav i pitanje, pa uporedi sa modelom."
+        },
+        {
+          "title": "How do you spell it?",
+          "lines": [
+            "How do you spell it? – E–M–M–A.",
+            "How do you spell your name? – O–L–I–V–E–R.",
+            "How do you spell \"book\"? – B–O–O–K."
+          ]
         }
       ]
     },
