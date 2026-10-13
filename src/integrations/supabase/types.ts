@@ -173,8 +173,11 @@ export type Database = {
           grammar: Json
           id: string
           illustration_url: string | null
+          intro_texts: Json
           is_published: boolean
           language: string
+          lesson_code: string | null
+          modules: Json
           sort_order: number
           source_note: string | null
           summary: string
@@ -192,8 +195,11 @@ export type Database = {
           grammar?: Json
           id?: string
           illustration_url?: string | null
+          intro_texts?: Json
           is_published?: boolean
           language: string
+          lesson_code?: string | null
+          modules?: Json
           sort_order?: number
           source_note?: string | null
           summary?: string
@@ -211,8 +217,11 @@ export type Database = {
           grammar?: Json
           id?: string
           illustration_url?: string | null
+          intro_texts?: Json
           is_published?: boolean
           language?: string
+          lesson_code?: string | null
+          modules?: Json
           sort_order?: number
           source_note?: string | null
           summary?: string

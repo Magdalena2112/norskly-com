@@ -72,6 +72,24 @@ export default function DashboardPage() {
   const [xpData, setXpData] = useState<{ total_xp: number; level: number } | null>(null);
   const [upcomingLesson, setUpcomingLesson] = useState<{ start_time: string; end_time: string; status: string } | null>(null);
   const [lessonLoaded, setLessonLoaded] = useState(false);
+  const [courseLessons, setCourseLessons] = useState<{ id: string; sort_order: number; cefr_level: string; title_target: string; summary: string }[]>([]);
+  const [lessonProgress, setLessonProgress] = useState<Record<string, string>>({});
+  const [lessonsLoaded, setLessonsLoaded] = useState(false);
+
+  useEffect(() => {
+    if (!user) return;
+    const level = (String(profile.level || "A1").match(/[ABC][12]/)?.[0]) || "A1";
+    (async () => {
+      const [{ data: ls }, { data: pr }] = await Promise.all([
+        supabase.from("course_lessons").select("id, sort_order, cefr_level, title_target, summary").eq("language", code).eq("cefr_level", level).eq("is_published", true).order("sort_order"),
+        supabase.from("course_lesson_progress").select("lesson_id, status").eq("user_id", user.id).eq("language", code),
+      ]);
+      setCourseLessons(ls || []);
+      setLessonProgress(Object.fromEntries((pr || []).map((p) => [p.lesson_id, p.status])));
+      setLessonsLoaded(true);
+    })();
+  }, [user, code, profile.level]);
+
 
 
   useEffect(() => {
@@ -154,44 +172,58 @@ export default function DashboardPage() {
           <span className="h-px flex-1 bg-border" />
         </div>
 
+        {lessonsLoaded && courseLessons.length === 0 && (
+          <Card className="mb-6 bg-cream/90 border-border/60 shadow-card-soft">
+            <CardContent className="py-6 text-center text-sm text-muted-foreground">
+              Lekcije za nivo {profile.level || "A1"} su u pripremi. Uskoro ih dodajemo!
+            </CardContent>
+          </Card>
+        )}
+
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          {modules.map((mod, i) => (
-            <motion.div
-              key={mod.route}
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.08 + 0.15 }}
-              className={mod.fullWidth ? "sm:col-span-2" : ""}
-            >
-              <Card
-                className={`cursor-pointer group h-full bg-cream border border-border/60 shadow-postcard overflow-hidden relative ${mod.rotation} transition-all duration-500 ease-out hover:rotate-0 hover:-translate-y-1.5 hover:shadow-[0_18px_44px_-12px_hsl(350_40%_20%_/_0.25)]`}
-                onClick={() => navigate(mod.route)}
-              >
-                {/* Vignette top */}
-                <div className={`relative w-full ${mod.fullWidth ? "h-32 sm:h-36" : "h-28"} overflow-hidden border-b border-border/40`}>
+          {courseLessons.map((l, i) => {
+            const p = lessonProgress[l.id];
+            return (
+              <motion.div key={l.id} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.08 + 0.15 }}>
+                <Card
+                  className={`cursor-pointer group h-full bg-cream border border-border/60 shadow-postcard overflow-hidden relative ${["rotate-card-1", "rotate-card-2", "rotate-card-3", "rotate-card-4"][i % 4]} transition-all duration-500 ease-out hover:rotate-0 hover:-translate-y-1.5`}
+                  onClick={() => navigate(`/lekcija/${l.id}`)}
+                >
+                  <div className="relative w-full h-28 overflow-hidden border-b border-border/40">
+                    <PostcardVignette variant={(["book", "stamp", "speech", "cabins"] as const)[i % 4]} className="absolute inset-0 w-full h-full" />
+                    <div className="absolute -bottom-5 left-5 w-12 h-12 rounded-2xl bg-primary flex items-center justify-center shadow-card-soft ring-2 ring-cream font-display font-bold text-cream">
+                      {String(l.sort_order).padStart(2, "0")}
+                    </div>
+                    {p === "completed" && (
+                      <span className="absolute top-2 right-2 bg-forest text-cream text-[11px] px-2 py-0.5 rounded-full">✓ Završeno</span>
+                    )}
+                    {p === "in_progress" && (
+                      <span className="absolute top-2 right-2 bg-sunset text-cream text-[11px] px-2 py-0.5 rounded-full">U toku</span>
+                    )}
+                  </div>
+                  <CardContent className="pt-8 pb-5 px-5">
+                    <p className="font-script italic text-xs text-primary/55 mb-0.5">Lekcija {l.sort_order} · {l.cefr_level}</p>
+                    <h3 className="font-display font-semibold text-lg text-primary leading-tight">{l.title_target}</h3>
+                    <p className="text-sm text-muted-foreground mt-1.5 leading-relaxed line-clamp-3">{l.summary}</p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            );
+          })}
+          {modules.filter((m) => m.fullWidth).map((mod) => (
+            <motion.div key={mod.route} className="sm:col-span-2" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}>
+              <Card className="cursor-pointer group h-full bg-cream border border-border/60 shadow-postcard overflow-hidden relative transition-all duration-500 hover:-translate-y-1.5" onClick={() => navigate(mod.route)}>
+                <div className="relative w-full h-32 sm:h-36 overflow-hidden border-b border-border/40">
                   <PostcardVignette variant={mod.vignette} className="absolute inset-0 w-full h-full" />
-                  {/* Icon medallion */}
-                  <div className={`absolute -bottom-5 left-5 w-12 h-12 rounded-2xl ${mod.iconBg} flex items-center justify-center shadow-card-soft ring-2 ring-cream transition-transform duration-300 group-hover:scale-105`}>
+                  <div className={`absolute -bottom-5 left-5 w-12 h-12 rounded-2xl ${mod.iconBg} flex items-center justify-center shadow-card-soft ring-2 ring-cream`}>
                     <mod.icon className="w-5 h-5 text-cream" />
                   </div>
-                  {mod.stamp && (
-                    <div className="absolute top-2 right-2 bg-cream/95 rounded-sm border-2 border-dashed border-primary/40 px-1.5 py-0.5 rotate-[8deg] shadow-card-soft">
-                      <span className="font-display text-[7px] font-bold text-primary tracking-wider">27 KR</span>
-                    </div>
-                  )}
                 </div>
-
                 <CardContent className="pt-8 pb-5 px-5">
                   <p className="font-script italic text-xs text-primary/55 mb-0.5">{mod.subtitle}</p>
-                  <h3 className="font-display font-semibold text-lg text-primary leading-tight">
-                    {mod.title}
-                  </h3>
+                  <h3 className="font-display font-semibold text-lg text-primary leading-tight">{mod.title}</h3>
                   <p className="text-sm text-muted-foreground mt-1.5 leading-relaxed">{mod.description}</p>
-                  {mod.buttonLabel && (
-                    <Button size="sm" variant="hero" className="mt-3">
-                      {mod.buttonLabel}
-                    </Button>
-                  )}
+                  <Button size="sm" variant="hero" className="mt-3">{mod.buttonLabel}</Button>
                 </CardContent>
               </Card>
             </motion.div>
