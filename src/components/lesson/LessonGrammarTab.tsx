@@ -30,11 +30,11 @@ interface Topic {
 /** Topic grouping per lesson; sections without config become one topic each. */
 export const LESSON_GRAMMAR_TOPICS: Record<string, Topic[]> = {
   "EN-A1-L01": [
-    { label: "Lične zamenice", sectionIdx: [0], exercises: ["GR-03"], aiTopic: "Personal pronouns (I, you, he, she, it, we, they)",
+    { label: "Lične zamenice", sectionIdx: [0], exercises: ["PR-01","PR-02","PR-03","PR-04","PR-05","PR-06","PR-07","PR-08","PR-09","PR-10"], aiTopic: "Personal pronouns (I, you, he, she, it, we, they)",
       related: [{ title: "Prisvojni pridevi (my, your, his…)", query: "Possessive adjectives my, your, his, her" }, { title: "Objektne zamenice (me, him, her…)", query: "Object pronouns me, him, her, us, them" }] },
-    { label: "Glagol to be", sectionIdx: [1], exercises: ["GR-01", "GR-02", "GR-04", "GR-05", "GR-06"], aiTopic: "Verb to be – affirmative (am, is, are) and contractions",
+    { label: "Glagol to be", sectionIdx: [1], exercises: ["TB-01","TB-02","TB-03","TB-04","TB-05","TB-06","TB-07","TB-08","TB-09","TB-10"], aiTopic: "Verb to be – affirmative (am, is, are) and contractions",
       related: [{ title: "Odrični oblik (I am not…)", query: "Verb to be negative form" }, { title: "Upitni oblik (Are you…?)", query: "Verb to be questions" }] },
-    { label: "Članovi a / an", sectionIdx: [2], exercises: ["GR-07"], aiTopic: "Indefinite articles a / an",
+    { label: "Članovi a / an", sectionIdx: [2], exercises: ["AR-01","AR-02","AR-03","AR-04","AR-05","AR-06","AR-07","AR-08","AR-09","AR-10"], aiTopic: "Indefinite articles a / an",
       related: [{ title: "Množina imenica", query: "Plural nouns in English" }, { title: "Određeni član the", query: "Definite article the" }] },
     { label: "Fraze i sažetak", sectionIdx: [3, 4], exercises: ["GR-08", "GR-09", "GR-10"], aiTopic: "Basic questions with to be (What is your name? Where are you from?)",
       related: [{ title: "Upitne reči (what, where, who)", query: "Question words what, where, who, how" }] },
@@ -80,7 +80,7 @@ export default function LessonGrammarTab({ lessonId, onPractice, onExplain, mode
     label: s.title.replace(/^\d+(\.\d+)?\s*/, ""), sectionIdx: [i], exercises: [], aiTopic: s.title, related: [],
   }));
   const unassigned = exercises.filter((e) => !topics.some((t) => t.exercises.includes(e.code)));
-  if (unassigned.length) topics[topics.length - 1] = { ...topics[topics.length - 1], exercises: [...topics[topics.length - 1].exercises, ...unassigned.map((e) => e.code)] };
+  if (unassigned.length && !LESSON_GRAMMAR_TOPICS[row.lesson_code]) topics[topics.length - 1] = { ...topics[topics.length - 1], exercises: [...topics[topics.length - 1].exercises, ...unassigned.map((e) => e.code)] };
 
   async function markDone(code: string) {
     if (!user || done.includes(code)) return;
@@ -205,9 +205,29 @@ export default function LessonGrammarTab({ lessonId, onPractice, onExplain, mode
       {topicEx.length > 0 && (
         <div className="space-y-4">
           <h3 className="font-display text-xl text-primary">Pripremljene vežbe ({topicEx.filter((e) => done.includes(e.code)).length}/{topicEx.length})</h3>
-          {topicEx.map((ex) => (
-            <LessonExercise key={ex.id} exercise={ex} language={lang} level={row.cefr_level} lessonTitle={row.title_target || row.title} done={done.includes(ex.code)} onDone={markDone} />
-          ))}
+          <div className="flex flex-wrap gap-2">
+            {topicEx.map((ex, i) => {
+              const d = done.includes(ex.code), cur = i === exIdx;
+              return (
+                <button key={ex.id} type="button" onClick={() => setExIdx(i)} aria-label={`Vežba ${i + 1}`}
+                  className={`w-10 h-10 rounded-full text-sm font-semibold border-2 flex items-center justify-center transition-all ${cur ? "bg-primary text-primary-foreground border-primary scale-110 shadow-card-soft" : d ? "bg-forest/15 border-forest text-forest" : "bg-cream/90 border-border text-foreground hover:border-primary/50"}`}>
+                  {d && !cur ? <CheckCircle2 className="w-4 h-4" /> : i + 1}
+                </button>
+              );
+            })}
+          </div>
+          {topicEx[exIdx] && (
+            <LessonExercise key={topicEx[exIdx].id} exercise={topicEx[exIdx]} language={lang} level={row.cefr_level} lessonTitle={row.title_target || row.title} done={done.includes(topicEx[exIdx].code)} onDone={markDone} />
+          )}
+          <div className="flex justify-between gap-2">
+            <Button variant="outline" size="sm" disabled={exIdx === 0} onClick={() => setExIdx(exIdx - 1)}>← Prethodna</Button>
+            {exIdx < topicEx.length - 1 && (
+              <Button variant="hero" size="sm" onClick={() => setExIdx(exIdx + 1)}>Sledeća vežba <ArrowRight className="w-4 h-4" /></Button>
+            )}
+          </div>
+          {topicEx.every((e) => done.includes(e.code)) && (
+            <p className="text-sm rounded-xl bg-forest/10 border border-forest/30 p-3">🎉 Bravo! Završila/o si sve vežbe ove teme.</p>
+          )}
         </div>
       )}
 
