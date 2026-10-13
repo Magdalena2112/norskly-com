@@ -1176,7 +1176,7 @@ function QuizTab({ level, userId, initialTopic, lessonTopics, lessonTitle }: { l
     setFinished(false);
     setLogged(false);
     try {
-      const data = await callGrammarAI({ action: "generate_quiz", level, topic: topic.trim() });
+      const data = await callGrammarAI({ action: "generate_quiz", level, topic: topic_ });
       setQuestions(data.questions || []);
     } catch (e: any) {
       console.error(e);
