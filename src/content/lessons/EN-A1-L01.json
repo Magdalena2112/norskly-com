@@ -4601,12 +4601,15 @@
           "extra": "Snimi pozdrav i pitanje, pa uporedi sa modelom."
         },
         {
+          "code": "PR-06",
           "title": "How do you spell it?",
-          "lines": [
-            "How do you spell it? – E–M–M–A.",
-            "How do you spell your name? – O–L–I–V–E–R.",
-            "How do you spell \"book\"? – B–O–O–K."
-          ]
+          "targets": [
+            "How do you spell it?",
+            "E–M–M–A",
+            "O–L–I–V–E–R",
+            "B–O–O–K"
+          ],
+          "extra": "Slovkaj svoje ime naglas, slovo po slovo."
         }
       ]
     },
