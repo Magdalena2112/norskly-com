@@ -133,15 +133,11 @@ export default function LessonVocabularyTab({ lessonId, mode, onPractice }: { le
 
       {mode === "theory" ? (
         <div className="space-y-4">
-          <div className="flex items-end justify-between gap-3">
-            <div>
-              <h3 className="font-display font-bold text-lg text-foreground">{a.sr}</h3>
-              <p className="text-xs text-muted-foreground">{a.title} · {a.words.length} reči</p>
-            </div>
-            <Button variant="outline" size="sm" onClick={() => speakLines(active.map((w) => ({ speaker: "m", text: w.word.split(" / ")[0].replace("…", "") })), lang)}>
-              <Volume2 className="w-4 h-4" /> Poslušaj reči
-            </Button>
+          <div>
+            <h3 className="font-display font-bold text-lg text-foreground">{a.sr}</h3>
+            <p className="text-xs text-muted-foreground">{a.title} · {a.words.length} reči</p>
           </div>
+
 
           {(a.images || []).length > 0 && (
             <div className="flex flex-wrap gap-2">
