@@ -254,7 +254,17 @@ Jedan konkretan predlog za nastavak razgovora na srpskom (npr. "Probaj da pitaš
 VAŽNO: Uvek koristi sve 5 sekcija. Drži svaku sekciju kratkom.
 ${qualityCheck}`;
 
-      const systemPrompt = language === "en" ? englishPrompt : norwegianPrompt;
+      const sc = settings?.scenario;
+      const clip = (v: unknown, n = 400) => (typeof v === "string" ? v.slice(0, n) : "");
+      const scenarioBlock = sc && typeof sc === "object"
+        ? `\n\nLESSON ROLE-PLAY (mandatory lesson exercise "${clip(sc.title, 100)}"):
+- You play: ${clip(sc.ai_role, 150)}. The learner plays: ${clip(sc.student_role, 150)}. Stay in character in the reply section.
+- Scenario guidance: ${clip(sc.instructions, 600)}
+- Communicative goals the learner must reach: ${Array.isArray(sc.goals) ? sc.goals.slice(0, 6).map((g: unknown) => clip(g, 120)).join("; ") : ""}.
+- Lead the conversation actively: always end your reply with a short question that moves the learner toward the next unmet goal. Do not give the answer for them.
+- In the next-step section (Serbian), name which goals are done and which one is next.`
+        : "";
+      const systemPrompt = (language === "en" ? englishPrompt : norwegianPrompt) + scenarioBlock;
 
       const response = await fetch(GATEWAY_URL, {
         method: "POST",

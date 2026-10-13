@@ -332,25 +332,12 @@ export default function CourseLessonPage() {
               : <Button variant="hero" onClick={() => navigate("/pronunciation")}><Mic className="w-4 h-4" /> Snimi se i dobij ocenu izgovora</Button>
           )}
 
-          {tab === "speaking" && m.speaking && (
-            <>
-              {m.speaking.tasks?.map((t: any) => (
-                <div key={t.code} className="rounded-2xl border border-border/60 bg-cream/90 p-5 shadow-card-soft">
-                  <span className="text-[11px] font-mono text-primary/50">{t.code}</span>
-                  <h4 className="font-display font-semibold text-primary mb-2">{t.title}</h4>
-                  <ul className="list-disc pl-5 text-sm space-y-1">{t.prompts.map((p: string) => <li key={p}>{p}</li>)}</ul>
-                  {t.roleswitch && m.speaking.roleswitch && (
-                    <div className="mt-3 text-sm bg-secondary/40 rounded-lg p-3 space-y-1">
-                      <p>{m.speaking.roleswitch.situation}</p>
-                      <p className="italic text-primary">Sophie: „{m.speaking.roleswitch.opening}“</p>
-                      <p className="text-xs text-muted-foreground">{m.speaking.roleswitch.rubric}</p>
-                    </div>
-                  )}
-                </div>
-              ))}
-              <p className="text-sm text-muted-foreground">Dozvoljene su razumljive varijante odgovora. Razgovor možeš vežbati glasovnim porukama sa AI sagovornikom.</p>
-              <Button variant="hero" onClick={() => navigate("/talk")}><MessageSquare className="w-4 h-4" /> Vežbaj razgovor</Button>
-            </>
+          {tab === "speaking" && (
+            <div className="rounded-2xl border border-border/60 bg-cream/90 p-5 shadow-card-soft space-y-3">
+              <h4 className="font-display font-semibold text-primary">Razgovorne situacije lekcije</h4>
+              <p className="text-sm text-muted-foreground">AI preuzima ulogu sagovornika, započinje razgovor i vodi te kroz ciljeve lekcije. Posle toga možeš nastaviti slobodan razgovor.</p>
+              <Button variant="hero" onClick={() => navigate(`/talk?lesson=${encodeURIComponent(content?.code || "")}`)}><MessageSquare className="w-4 h-4" /> Otvori razgovor</Button>
+            </div>
           )}
 
           {tab === "culture" && m.culture && (
