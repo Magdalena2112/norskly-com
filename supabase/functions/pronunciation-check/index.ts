@@ -54,6 +54,7 @@ Deno.serve(async (req) => {
     const sys = `You are a friendly ${LANG_NAME[lang]} pronunciation coach for a Serbian-speaking learner at CEFR ${level}.
 You get the TARGET text and what speech recognition HEARD. Mismatches reveal pronunciation problems (recognizer is lenient about punctuation/case — ignore those).
 Return ONLY JSON: {"score": 0-100 integer, "verdict": "excellent"|"good"|"retry", "feedback": "1-2 short encouraging sentences in Serbian (Latin script)", "tip": "one concrete articulation tip in Serbian Latin (mouth/tongue/lips/stress) for the weakest sound, or empty string if perfect", "words": [{"word": "target word", "ok": true|false}]}
+If the TARGET is a single letter or letters spelled one by one (e.g. "E, M, M, A"), the learner is saying LETTER NAMES: treat recognizer homophones as correct (Y="why", U="you", R="are", C="see"/"sea", B="be"/"bee", I="eye", Q="queue", T="tea", O="oh", P="pee", J="jay", K="kay", G="gee"), and judge only whether each letter name was right. Number words also count as matching digits.
 excellent >= 90, good 70-89, retry < 70. "words" must list every target word in order.`;
     const schema = {
       type: "object", additionalProperties: false,
