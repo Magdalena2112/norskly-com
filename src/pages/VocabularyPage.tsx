@@ -786,6 +786,7 @@ function FlashcardsTab({ userId, lessonId, startArea }: { userId?: string; lesso
               <Button variant="outline" onClick={handleRestart} className="gap-2">
                 <RotateCcw className="w-4 h-4" /> Ponovi
               </Button>
+              {lessonId && <Button variant="hero" onClick={() => setStarted(false)}>Izaberi oblast</Button>}
             </div>
           </CardContent>
         </Card>
