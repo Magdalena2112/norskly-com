@@ -8,7 +8,7 @@ import { RecordSlot } from "@/pages/PronunciationActivityPage";
 
 type Letter = { letter: string; ipa: string; word: string; meaning: string };
 type Item = { prompt?: string; say: string; options?: string[]; answer?: string; hint?: string };
-type PEx = { code: string; title: string; instruction: string; type: "choose" | "record"; items: Item[] };
+type PEx = { code: string; title: string; instruction: string; type: "choose" | "record"; noAudio?: boolean; items: Item[] };
 
 const say = (text: string, lang: string, slow = false) => speakLines([{ speaker: "n", text }], lang, { slow });
 
@@ -122,14 +122,14 @@ export default function LessonPronunciationTab({ data, lang, level, lessonCode }
                 <div key={k} className="space-y-3">
                   {it.prompt && <p className="font-medium">{it.prompt}</p>}
                   {ex.type === "record" && it.hint && <p className="text-sm text-muted-foreground">„{it.hint}“</p>}
-                  <div className="flex gap-2">
+                  {!ex.noAudio && <div className="flex gap-2">
                     <Button size="sm" variant="outline" onClick={() => say(ex.type === "record" && it.hint ? it.hint : it.say, lang)}><Volume2 className="w-4 h-4" /> Poslušaj</Button>
                     <Button size="sm" variant="ghost" onClick={() => say(ex.type === "record" && it.hint ? it.hint : it.say, lang, true)}>Sporije</Button>
-                  </div>
+                  </div>}
                   {ex.type === "choose" && (
                     <div className="flex flex-wrap gap-2">
                       {it.options!.map((o) => {
-                        const state = p === undefined ? "" : o === it.answer ? "border-emerald-500 bg-emerald-500/10" : o === p ? "border-destructive bg-destructive/10" : "opacity-60";
+                        const state = p === undefined ? "" : o === p && o === it.answer ? "border-emerald-500 bg-emerald-500/10" : o === p ? "border-destructive bg-destructive/10" : "opacity-60";
                         return <button key={o} disabled={p !== undefined} onClick={() => setPicked({ ...picked, [k]: o })}
                           className={`px-4 py-2 rounded-full border border-border bg-background text-sm ${state}`}>{o}</button>;
                       })}
@@ -138,7 +138,7 @@ export default function LessonPronunciationTab({ data, lang, level, lessonCode }
                   {ex.type === "choose" && p !== undefined && (
                     <p className={`text-sm flex items-center gap-1 ${p === it.answer ? "text-emerald-700" : "text-destructive"}`}>
                       {p === it.answer ? <CheckCircle2 className="w-4 h-4" /> : <XCircle className="w-4 h-4" />}
-                      {p === it.answer ? "Tačno!" : `Tačno je: ${it.answer}`}
+                      {p === it.answer ? "Tačno!" : "Netačno"}
                     </p>
                   )}
                   {(

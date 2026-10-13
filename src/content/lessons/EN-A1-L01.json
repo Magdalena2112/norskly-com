@@ -5501,7 +5501,7 @@
           "type": "choose",
           "items": [
             {
-              "prompt": "Slovo G",
+              "prompt": "",
               "say": "G",
               "options": [
                 "girl",
@@ -5511,7 +5511,7 @@
               "answer": "girl"
             },
             {
-              "prompt": "Slovo J",
+              "prompt": "",
               "say": "J",
               "options": [
                 "girl",
@@ -5521,7 +5521,7 @@
               "answer": "juice"
             },
             {
-              "prompt": "Slovo Y",
+              "prompt": "",
               "say": "Y",
               "options": [
                 "water",
@@ -5531,7 +5531,7 @@
               "answer": "yellow"
             },
             {
-              "prompt": "Slovo E",
+              "prompt": "",
               "say": "E",
               "options": [
                 "egg",
@@ -5541,7 +5541,7 @@
               "answer": "egg"
             },
             {
-              "prompt": "Slovo I",
+              "prompt": "",
               "say": "I",
               "options": [
                 "egg",
@@ -5615,6 +5615,7 @@
           "title": "Slovkaj reč",
           "instruction": "Snimi slovkanje reči, slovo po slovo.",
           "type": "record",
+          "noAudio": true,
           "items": [
             {
               "say": "B, O, O, K",
