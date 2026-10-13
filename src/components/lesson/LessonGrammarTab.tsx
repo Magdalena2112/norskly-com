@@ -3,7 +3,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/context/AuthContext";
 import LessonExercise from "@/components/lesson/LessonExercise";
 import { Button } from "@/components/ui/button";
-import { Volume2, BookOpen, CheckCircle2, Sparkles, ArrowRight, Lightbulb } from "lucide-react";
+import { Volume2, BookOpen, CheckCircle2, Sparkles, ArrowRight, Lightbulb, AlertTriangle } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { loadLessonContent, speakLines, type Exercise, type LessonContent } from "@/lib/courseLessons";
 import { LESSON_IMAGES } from "@/content/lessons/images";
 
@@ -113,27 +114,68 @@ export default function LessonGrammarTab({ lessonId, onPractice, onExplain, mode
       </div>
 
       {mode === "theory" ? (<>
-      {img && <img src={img} alt={topic.label} loading="lazy" className="w-full max-h-72 object-cover rounded-2xl border border-border/60 shadow-card-soft" />}
+      {img && <img src={img} alt={topic.label} loading="lazy" className="w-full h-auto rounded-2xl border border-border/60 shadow-card-soft" />}
 
       {topic.sectionIdx.map((si) => sections[si]).filter(Boolean).map((s: any) => (
-        <div key={s.title} className="rounded-2xl border border-border/60 bg-cream/90 p-4 sm:p-5 shadow-card-soft space-y-3">
-          <h3 className="font-display font-semibold text-lg text-primary">{s.title}</h3>
-          <p className="text-sm leading-relaxed whitespace-pre-line">{s.explanation}</p>
-          {s.table && <Table rows={s.table} />}
-          {s.rules && <ul className="list-disc pl-5 text-sm space-y-1">{s.rules.map((r: string) => <li key={r}>{r}</li>)}</ul>}
-          {s.compare && <p className="text-sm bg-secondary/40 rounded-lg p-3"><strong>Poređenje sa srpskim:</strong> {s.compare}</p>}
-          {s.examples && (
-            <ul className="space-y-1.5">
-              {s.examples.map((e: string[]) => (
-                <li key={e[0]} className="flex items-start gap-2 text-sm">
-                  <button type="button" onClick={() => speakLines([{ speaker: "m", text: e[0] }], lang)} className="text-primary/60 hover:text-primary mt-0.5" aria-label={`Izgovori ${e[0]}`}><Volume2 className="w-4 h-4" /></button>
-                  <span><strong>{e[0]}</strong> <span className="text-muted-foreground">— {e[1]}</span></span>
-                </li>
-              ))}
-            </ul>
+        <div key={s.title} className="space-y-4">
+          <Card className="border-accent/30 bg-accent/5">
+            <CardContent className="pt-5 pb-5"><h3 className="font-display font-bold text-lg text-foreground">{s.title}</h3></CardContent>
+          </Card>
+          {s.explanation && (
+            <Card>
+              <CardHeader className="pb-2"><CardTitle className="text-base flex items-center gap-2"><BookOpen className="w-4 h-4 text-accent" /> Objašnjenje</CardTitle></CardHeader>
+              <CardContent><p className="text-sm leading-relaxed whitespace-pre-line">{s.explanation}</p></CardContent>
+            </Card>
           )}
-          {s.mistakes && <Table head={["Pogrešno", "Ispravno", "Zašto"]} rows={s.mistakes} />}
-          {s.remember && <p className="text-sm font-medium text-primary">📌 {s.remember}</p>}
+          {s.table && (
+            <Card className="border-accent/20">
+              <CardHeader className="pb-2"><CardTitle className="text-base flex items-center gap-2"><span className="text-accent">📐</span> Gramatički obrazac</CardTitle></CardHeader>
+              <CardContent><Table rows={s.table} /></CardContent>
+            </Card>
+          )}
+          {s.rules && (
+            <Card>
+              <CardHeader className="pb-2"><CardTitle className="text-base flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-accent" /> Pravila</CardTitle></CardHeader>
+              <CardContent><ul className="space-y-2">{s.rules.map((r: string) => <li key={r} className="text-sm flex items-start gap-2"><span className="text-accent mt-0.5">•</span><span>{r}</span></li>)}</ul></CardContent>
+            </Card>
+          )}
+          {s.compare && (
+            <Card className="bg-primary/5 border-primary/20">
+              <CardHeader className="pb-2"><CardTitle className="text-base flex items-center gap-2"><span>⚖️</span> Poređenje sa srpskim</CardTitle></CardHeader>
+              <CardContent><p className="text-sm leading-relaxed">{s.compare}</p></CardContent>
+            </Card>
+          )}
+          {s.examples && (
+            <Card>
+              <CardHeader className="pb-2"><CardTitle className="text-base flex items-center gap-2"><span>📝</span> Primeri</CardTitle></CardHeader>
+              <CardContent className="space-y-2">
+                {s.examples.map((e: string[]) => (
+                  <div key={e[0]} className="p-3 rounded-lg bg-muted flex items-start gap-2">
+                    <button type="button" onClick={() => speakLines([{ speaker: "m", text: e[0] }], lang)} className="text-primary/60 hover:text-primary mt-0.5" aria-label={`Izgovori ${e[0]}`}><Volume2 className="w-4 h-4" /></button>
+                    <div className="space-y-0.5"><p className="text-sm font-medium">{e[0]}</p><p className="text-xs text-muted-foreground">{e[1]}</p></div>
+                  </div>
+                ))}
+              </CardContent>
+            </Card>
+          )}
+          {s.mistakes && (
+            <Card className="bg-destructive/5 border-destructive/10">
+              <CardHeader className="pb-2"><CardTitle className="text-base flex items-center gap-2"><AlertTriangle className="w-4 h-4 text-destructive" /> Česte greške</CardTitle></CardHeader>
+              <CardContent className="space-y-2">
+                {s.mistakes.map((m: string[], i: number) => (
+                  <div key={i} className="p-3 rounded-lg bg-background/70 border border-destructive/10 space-y-1">
+                    <div className="flex flex-wrap gap-2 text-sm"><span className="text-destructive line-through">{m[0]}</span><span className="text-accent">→ {m[1]}</span></div>
+                    {m[2] && <p className="text-xs text-muted-foreground">{m[2]}</p>}
+                  </div>
+                ))}
+              </CardContent>
+            </Card>
+          )}
+          {s.remember && (
+            <Card className="border-accent/30 bg-accent/5">
+              <CardContent className="pt-5 pb-5"><p className="text-sm font-medium">📌 <strong>Zapamti:</strong> {s.remember}</p></CardContent>
+            </Card>
+          )}
         </div>
       ))}
 
