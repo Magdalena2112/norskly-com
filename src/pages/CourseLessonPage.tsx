@@ -10,6 +10,7 @@ import DialoguePlayer from "@/components/lesson/DialoguePlayer";
 import LessonListeningTab from "@/components/lesson/LessonListeningTab";
 import LessonPronunciationTab from "@/components/lesson/LessonPronunciationTab";
 import LessonCultureTab from "@/components/lesson/LessonCultureTab";
+import LessonReviewQuiz from "@/components/lesson/LessonReviewQuiz";
 import LessonExercise from "@/components/lesson/LessonExercise";
 import { Button } from "@/components/ui/button";
 import { Volume2, Mic, MessageSquare, CheckCircle2, ChevronLeft, ChevronRight, BookOpen, Languages, BookOpenText, Headphones, PenLine, Globe2, Trophy } from "lucide-react";
@@ -248,7 +249,9 @@ export default function CourseLessonPage() {
                 {imgs!.modules[open].map((src, i) => <img key={src + i} src={src} alt={`${MODULE_META[open].title} ilustracija ${i + 1}`} loading="lazy" className={`w-full rounded-2xl border border-border/50 shadow-card-soft object-cover ${imgs!.modules[open].length > 1 && i === 0 ? "sm:col-span-2" : ""}`} />)}
               </div>
             )}
-            {view === "practice" || !hasMaterial(open) ? (
+            {open === "review" && m.review?.quiz ? (
+              <LessonReviewQuiz quiz={m.review.quiz} lang={lang} lessonCode={content.code || row.lesson_code || "lesson"} passed={done.includes("REVIEW-PASS")} onPass={() => markDone("REVIEW-PASS")} />
+            ) : view === "practice" || !hasMaterial(open) ? (
               <ExerciseStepper list={openEx} done={done} render={(ex) => renderExercises([ex])} onFinish={() => openModule(null)} />
             ) : (
               <>

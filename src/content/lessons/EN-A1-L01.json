@@ -5880,95 +5880,132 @@
       ]
     },
     "review": {
-      "exercises": [
-        {
-          "id": "EN-A1-L01-RE-01",
-          "code": "RE-01",
-          "title": "Core vocabulary",
-          "instruction": "Dopuni pozdrav i predstavljanje.",
-          "kind": "closed",
-          "items": [
-            {
-              "prompt": "Good ___.",
-              "answers": [
-                "morning",
-                "afternoon",
-                "evening"
-              ]
-            },
-            {
-              "prompt": "What's your ___?",
-              "answers": [
-                "name"
-              ]
-            },
-            {
-              "prompt": "Nice to ___ you.",
-              "answers": [
-                "meet"
-              ]
-            },
-            {
-              "prompt": "See you in ___.",
-              "answers": [
-                "class"
-              ]
-            }
-          ]
-        },
-        {
-          "id": "EN-A1-L01-RE-02",
-          "code": "RE-02",
-          "title": "Core grammar",
-          "instruction": "Dopuni pravilnim oblikom.",
-          "kind": "closed",
-          "items": [
-            {
-              "prompt": "I ___ Emma.",
-              "answers": [
-                "am"
-              ]
-            },
-            {
-              "prompt": "She ___ a teacher.",
-              "answers": [
-                "is"
-              ]
-            },
-            {
-              "prompt": "They ___ students.",
-              "answers": [
-                "are"
-              ]
-            },
-            {
-              "prompt": "He is ___ student.",
-              "answers": [
-                "a"
-              ]
-            },
-            {
-              "prompt": "We ___ friends.",
-              "answers": [
-                "are"
-              ]
-            }
-          ]
-        },
-        {
-          "id": "EN-A1-L01-RE-03",
-          "code": "RE-03",
-          "title": "Integrated task",
-          "instruction": "Zamisli prvi čas. Napravi dijalog sa Sophie: bar dva pozdrava, predstavi se, pitaj za ime, odgovori na How are you?, završi razgovor.",
-          "kind": "open",
-          "items": [
-            {
-              "prompt": "Tvoj dijalog",
-              "open": true
-            }
-          ]
-        }
-      ]
+      "quiz": {
+        "passScore": 8,
+        "bonusXp": 50,
+        "questions": [
+          {
+            "area": "grammar",
+            "prompt": "I ___ a student.",
+            "options": [
+              "am",
+              "is",
+              "are",
+              "be"
+            ],
+            "answer": "am",
+            "explain": "Uz I uvek ide am."
+          },
+          {
+            "area": "grammar",
+            "prompt": "She ___ my teacher.",
+            "options": [
+              "is",
+              "am",
+              "are",
+              "be"
+            ],
+            "answer": "is",
+            "explain": "Uz he/she/it ide is."
+          },
+          {
+            "area": "grammar",
+            "prompt": "Tom and I ___ friends.",
+            "options": [
+              "are",
+              "is",
+              "am",
+              "be"
+            ],
+            "answer": "are",
+            "explain": "Tom and I = we, a uz we ide are."
+          },
+          {
+            "area": "grammar",
+            "prompt": "This is ___ apple.",
+            "options": [
+              "an",
+              "a",
+              "the",
+              "–"
+            ],
+            "answer": "an",
+            "explain": "Ispred samoglasničkog zvuka ide an."
+          },
+          {
+            "area": "vocabulary",
+            "prompt": "Kako kažeš „Drago mi je”?",
+            "options": [
+              "Nice to meet you.",
+              "See you later.",
+              "How are you?",
+              "Good night."
+            ],
+            "answer": "Nice to meet you.",
+            "explain": "Ovo kažemo kad nekog upoznamo."
+          },
+          {
+            "area": "vocabulary",
+            "prompt": "Ujutru pozdravljaš nastavnika:",
+            "options": [
+              "Good morning.",
+              "Good night.",
+              "Goodbye.",
+              "Hi, mate."
+            ],
+            "answer": "Good morning.",
+            "explain": "Good night je samo za odlazak na spavanje."
+          },
+          {
+            "area": "vocabulary",
+            "prompt": "Koliko je fifteen?",
+            "options": [
+              "15",
+              "50",
+              "5",
+              "16"
+            ],
+            "answer": "15",
+            "explain": "fifteen = 15, fifty = 50."
+          },
+          {
+            "area": "vocabulary",
+            "prompt": "Šta je notebook?",
+            "options": [
+              "sveska",
+              "knjiga",
+              "torba",
+              "sto"
+            ],
+            "answer": "sveska",
+            "explain": "book = knjiga, bag = torba."
+          },
+          {
+            "area": "communication",
+            "prompt": "„How are you?” — najprirodniji kratak odgovor:",
+            "options": [
+              "I'm fine, thanks. And you?",
+              "I am Emma.",
+              "I'm from Serbia.",
+              "Yes, I am."
+            ],
+            "answer": "I'm fine, thanks. And you?",
+            "explain": "Kratko odgovaramo i vraćamo pitanje."
+          },
+          {
+            "area": "communication",
+            "prompt": "„How do you spell your name?” — šta odgovaraš?",
+            "options": [
+              "M-A-R-K-O.",
+              "My name is Marko.",
+              "I'm ten.",
+              "Nice to meet you."
+            ],
+            "answer": "M-A-R-K-O.",
+            "explain": "Spell znači sricati slovo po slovo."
+          }
+        ]
+      }
     }
   }
 }
