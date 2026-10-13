@@ -38,7 +38,7 @@ import {
   Volume2,
 } from "lucide-react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { getTalkScenarios, type TalkScenario } from "@/content/lessons/talkScenarios";
+import { getTalkScenarios, getLessonMaterial, type TalkScenario } from "@/content/lessons/talkScenarios";
 import BackButton from "@/components/BackButton";
 import ReactMarkdown from "react-markdown";
 import { logActivity } from "@/lib/logActivity";
@@ -548,7 +548,7 @@ export default function PracticePage() {
             situation: situationPresets.find((s) => s.value === situation)?.label,
             formality: formalityOptions.find((f) => f.value === formality)?.label,
             role: scenario ? scenario.aiRole : roleOptions.find((r) => r.value === role)?.label,
-            ...(scenario ? { situation: scenario.title, scenario: { title: scenario.title, ai_role: scenario.aiRole, student_role: scenario.studentRole, goals: scenario.goals, instructions: scenario.instructions } } : {}),
+            ...(scenario ? { situation: scenario.title, formality: undefined, scenario: { title: scenario.title, ai_role: scenario.aiRole, student_role: scenario.studentRole, goals: scenario.goals, instructions: scenario.instructions, lesson_material: getLessonMaterial(lessonCode) } } : {}),
           },
         }),
       });
@@ -1030,7 +1030,7 @@ export default function PracticePage() {
 
       {/* Controls panel */}
       <AnimatePresence>
-        {showControls && (
+        {showControls && !scenario && (
           <motion.div
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
@@ -1086,7 +1086,7 @@ export default function PracticePage() {
         )}
       </AnimatePresence>
 
-      {!showControls && messages.length > 0 && (
+      {!showControls && !scenario && messages.length > 0 && (
         <button
           onClick={() => setShowControls(true)}
           className="border-b border-border bg-card/50 py-1.5 text-xs text-muted-foreground flex items-center justify-center gap-1 hover:text-foreground transition-colors"

@@ -262,7 +262,9 @@ ${qualityCheck}`;
 - Scenario guidance: ${clip(sc.instructions, 600)}
 - Communicative goals the learner must reach: ${Array.isArray(sc.goals) ? sc.goals.slice(0, 6).map((g: unknown) => clip(g, 120)).join("; ") : ""}.
 - Lead the conversation actively: always end your reply with a short question that moves the learner toward the next unmet goal. Do not give the answer for them.
-- In the next-step section (Serbian), name which goals are done and which one is next.`
+- In the next-step section (Serbian), name which goals are done and which one is next.
+${sc.lesson_material ? `- LESSON MATERIAL (the learner has just studied this — build the conversation on it):\n${clip(sc.lesson_material, 1500)}\n- Actively elicit these exact structures and words; reuse lesson vocabulary in your replies; do not introduce grammar beyond the lesson.\n- In corrections, focus first on the lesson's target grammar and vocabulary.` : ""}
+- ADAPT TO THE LEARNER: the learner's own profile level is ${userLevel}. If it is above the lesson level, keep the lesson topic but use slightly richer phrasing and ask follow-up questions; if the learner struggles (short, wrong or Serbian answers), simplify to very short sentences, offer a model phrase from the lesson and ask again. Mirror the learner's actual performance in the conversation.`
         : "";
       const systemPrompt = (language === "en" ? englishPrompt : norwegianPrompt) + scenarioBlock;
 
