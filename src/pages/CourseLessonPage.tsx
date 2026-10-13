@@ -84,7 +84,10 @@ export default function CourseLessonPage() {
     })();
   }, [lessonId, user]);
 
-  const exercises = useMemo(() => (content ? allExercises(content) : []), [content]);
+  const exercises = useMemo(() => content ? [
+    ...allExercises(content),
+    ...(content.modules.listening?.scenes || []).map((s: { id: string; code?: string }) => ({ id: s.id, code: s.code || s.id, title: "", instruction: "", kind: "listening", items: [] })),
+  ] : [], [content]);
   const lang = (row?.language || "en") as Lang;
   const level = row?.cefr_level || profile.level || "A1";
 
@@ -109,7 +112,10 @@ export default function CourseLessonPage() {
 
   const m = content.modules;
   const tabs = LESSON_TABS.filter((t) => t.key === "intro" ? content.intro.length : m[t.key]);
-  const modDone = (key: string) => { const ex: Exercise[] = m[key]?.exercises || []; return ex.length > 0 && ex.every((e) => done.includes(e.code)); };
+  const moduleExercises = (key: string): Exercise[] => key === "listening" && m.listening?.scenes
+    ? m.listening.scenes.map((s: { id: string; code?: string }) => ({ id: s.id, code: s.code || s.id, title: "", instruction: "", kind: "listening", items: [] }))
+    : m[key]?.exercises || [];
+  const modDone = (key: string) => { const ex = moduleExercises(key); return ex.length > 0 && ex.every((e) => done.includes(e.code)); };
   const textById = (id: string) => content.intro.find((t) => t.id === id);
   const imgs = LESSON_IMAGES[row.lesson_code || content.code];
   const moduleKeys = LESSON_TABS.map((t) => t.key).filter((k) => k !== "intro" && m[k] && MODULE_META[k]);
@@ -182,7 +188,7 @@ export default function CourseLessonPage() {
               {moduleKeys.map((key, i) => {
                 const meta = MODULE_META[key];
                 const cover = imgs?.modules[key]?.[0];
-                const ex: Exercise[] = m[key]?.exercises || [];
+                const ex = moduleExercises(key);
                 const n = ex.filter((e) => done.includes(e.code)).length;
                 return (
                   <motion.div key={key} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.04 }}>
@@ -225,7 +231,7 @@ export default function CourseLessonPage() {
                 </div>
               )}
             </div>
-            {view === "learn" && hasMaterial(open) && (imgs?.modules[open] || []).length > 0 && (
+            {open !== "listening" && view === "learn" && hasMaterial(open) && (imgs?.modules[open] || []).length > 0 && (
               <div className={`grid gap-3 ${(imgs!.modules[open].length > 1) ? "sm:grid-cols-2" : ""}`}>
                 {imgs!.modules[open].map((src, i) => <img key={src + i} src={src} alt={`${MODULE_META[open].title} ilustracija ${i + 1}`} loading="lazy" className={`w-full rounded-2xl border border-border/50 shadow-card-soft object-cover ${imgs!.modules[open].length > 1 && i === 0 ? "sm:col-span-2" : ""}`} />)}
               </div>
@@ -309,7 +315,7 @@ export default function CourseLessonPage() {
           {tab === "listening" && m.listening && (
             <>
               {m.listening.scenes ? (
-                <LessonListeningTab scenes={m.listening.scenes} lang={lang} lessonCode={content?.code || "lesson"} />
+                <LessonListeningTab key={`${row.id}_${lang}`} scenes={m.listening.scenes} lang={lang} lessonCode={content?.code || "lesson"} completed={done} onDone={markDone} onFinish={() => openModule(null)} />
               ) : m.listening.audios?.map((a: any) => {
                 const lines = a.lines || textById(a.source)?.lines || [];
                 return <DialoguePlayer key={a.id} title={a.title} lines={lines} language={lang} hideTranscript />;

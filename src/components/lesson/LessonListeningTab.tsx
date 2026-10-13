@@ -1,124 +1,135 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Play, Square, Eye, EyeOff, Volume2, CheckCircle2, XCircle, ChevronLeft, ChevronRight, Headphones } from "lucide-react";
+import { Play, Square, Eye, EyeOff, Volume2, CheckCircle2, XCircle, ChevronLeft, ChevronRight } from "lucide-react";
 import { speakLines, stopSpeaking, type DialogueLine } from "@/lib/courseLessons";
 import { logActivity } from "@/lib/logActivity";
 import { useAuth } from "@/context/AuthContext";
 import { cn } from "@/lib/utils";
+import { toast } from "sonner";
 
 type Q = { prompt: string; options: string[]; answer: string; explanation?: string };
-export type ListeningScene = { id: string; title: string; context?: string; lines: DialogueLine[]; questions: Q[] };
+export type ListeningScene = { id: string; code?: string; title: string; context?: string; lines: DialogueLine[]; questions: Q[] };
+type Answers = Record<string, Record<number, string>>;
 
-const shuffle = <T,>(a: T[]) => [...a].sort(() => Math.random() - 0.5);
-
-function Scene({ scene, lang, lessonCode }: { scene: ListeningScene; lang: string; lessonCode: string }) {
+export default function LessonListeningTab({ scenes, lang, lessonCode, completed = [], onDone, onFinish }: {
+  scenes: ListeningScene[]; lang: "no" | "en" | "de"; lessonCode: string;
+  completed?: string[]; onDone?: (code: string) => void; onFinish?: () => void;
+}) {
   const { user } = useAuth();
-  const [rate, setRate] = useState(0.95);
+  const [index, setIndex] = useState(0);
+  const [questionSteps, setQuestionSteps] = useState<Record<string, number>>({});
+  const [answers, setAnswers] = useState<Answers>({});
+  const [transcripts, setTranscripts] = useState<Record<string, boolean>>({});
+  const [rate, setRate] = useState(1);
   const [playing, setPlaying] = useState(false);
   const [active, setActive] = useState<number | null>(null);
-  const [step, setStep] = useState(0);
-  const [picked, setPicked] = useState<Record<number, string>>({});
-  const [showT, setShowT] = useState(false);
-  const opts = useMemo(() => scene.questions.map((q) => shuffle(q.options)), [scene]);
-  const done = Object.keys(picked).length === scene.questions.length;
-  const correct = scene.questions.filter((q, i) => picked[i] === q.answer).length;
-
-  useEffect(() => () => stopSpeaking(), []);
-  useEffect(() => {
-    if (done && user) {
-      logActivity(user.id, "listening", "lesson_scene", 5 + correct * 3, { lesson: lessonCode, scene: scene.id, score: correct },
-        { dedupKey: `lesson_listen_${lessonCode}_${scene.id}`, language: lang as "en" });
-      setShowT(true);
+  const awarded = useRef(new Set<string>());
+  const options = useMemo(() => Object.fromEntries(scenes.map(s => [s.id, s.questions.map(q => {
+    const result = [...q.options];
+    for (let i = result.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [result[i], result[j]] = [result[j], result[i]];
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [done]);
-
-  const play = () => {
-    setPlaying(true);
-    speakLines(scene.lines, lang, { rate, onLine: setActive, onEnd: () => { setPlaying(false); setActive(null); } });
-  };
-  const stop = () => { stopSpeaking(); setPlaying(false); setActive(null); };
+    return result;
+  })])), [scenes]);
+  useEffect(() => () => stopSpeaking(), []);
+  const scene = scenes[Math.min(index, scenes.length - 1)];
+  if (!scene) return null;
+  const step = Math.min(questionSteps[scene.id] || 0, scene.questions.length - 1);
   const q = scene.questions[step];
+  const picked = answers[scene.id] || {};
   const ans = picked[step];
+  const code = scene.code || scene.id;
+  const done = scene.questions.length > 0 && scene.questions.every((_, i) => picked[i] !== undefined);
+  const correct = scene.questions.filter((question, i) => picked[i] === question.answer).length;
+  const stop = () => { stopSpeaking(); setPlaying(false); setActive(null); };
+  const change = (i: number) => { stop(); setIndex(i); };
+  const play = (lines = scene.lines) => {
+    stop();
+    if (!window.speechSynthesis || !lines.length) { toast.error("Audio trenutno nije dostupan u ovom pregledaču."); return; }
+    setPlaying(true);
+    speakLines(lines, lang, { rate, onLine: setActive, onEnd: () => { setPlaying(false); setActive(null); } });
+  };
+  const select = (value: string) => {
+    if (ans !== undefined) return;
+    const next = { ...picked, [step]: value };
+    setAnswers(previous => ({ ...previous, [scene.id]: next }));
+    if (scene.questions.every((_, i) => next[i] !== undefined)) {
+      setTranscripts(previous => ({ ...previous, [scene.id]: true }));
+      if (user && !completed.includes(code) && !awarded.current.has(code)) {
+        awarded.current.add(code);
+        const score = scene.questions.filter((question, i) => next[i] === question.answer).length;
+        void logActivity(user.id, "listening", "lesson_scene", 5 + score * 3,
+          { lesson: lessonCode, scene: scene.id, score, total: scene.questions.length },
+          { dedupKey: `lesson_listen_${lessonCode}_${scene.id}_${lang}`, language: lang });
+      }
+      onDone?.(code);
+    }
+  };
 
   return (
-    <div className="rounded-2xl border border-border/60 bg-cream/90 p-4 sm:p-5 shadow-card-soft space-y-4">
-      <div>
-        <h3 className="font-display font-semibold text-lg text-primary flex items-center gap-2"><Headphones className="w-4 h-4" />{scene.title}</h3>
-        {scene.context && <p className="text-sm text-muted-foreground mt-1">{scene.context}</p>}
-      </div>
-      <div className="flex flex-wrap items-center gap-2">
-        {playing ? <Button size="sm" variant="outline" onClick={stop}><Square className="w-4 h-4" /> Stop</Button>
-          : <Button size="sm" variant="hero" onClick={play}><Play className="w-4 h-4" /> Slušaj</Button>}
-        {[{ r: 0.7, l: "0.75x lagano" }, { r: 0.95, l: "1x prirodno" }].map((o) => (
-          <Button key={o.r} size="sm" variant={rate === o.r ? "default" : "outline"} onClick={() => setRate(o.r)}>{o.l}</Button>
-        ))}
-      </div>
-
-      <div className="flex gap-2 flex-wrap">
-        {scene.questions.map((qq, i) => (
-          <button key={i} onClick={() => setStep(i)} className={cn("w-8 h-8 rounded-full text-sm border transition-colors",
-            i === step ? "border-primary bg-primary text-primary-foreground" :
-            picked[i] !== undefined ? (picked[i] === qq.answer ? "border-forest bg-forest/15" : "border-destructive bg-destructive/10") : "border-border bg-background")}>
-            {i + 1}
-          </button>
-        ))}
-      </div>
-
-      <div className="rounded-xl bg-background/70 p-4">
-        <p className="font-medium text-primary mb-3">{q.prompt}</p>
-        <div className="grid gap-2">
-          {opts[step].map((o) => {
-            const st = ans === undefined ? undefined : o === q.answer ? "right" : ans === o ? "wrong" : undefined;
-            return (
-              <button key={o} disabled={ans !== undefined} onClick={() => setPicked((p) => ({ ...p, [step]: o }))}
-                className={cn("text-left rounded-xl border px-4 py-2.5 text-sm",
-                  st === "right" ? "border-forest bg-forest/10" : st === "wrong" ? "border-destructive bg-destructive/10" : "border-border/60 bg-background hover:border-primary/40")}>
+    <section className="space-y-5" aria-label="Aktivnosti slušanja">
+      <nav className="flex flex-wrap gap-2" aria-label="Izbor aktivnosti">
+        {scenes.map((s, i) => {
+          const finished = completed.includes(s.code || s.id) || s.questions.every((_, j) => answers[s.id]?.[j] !== undefined);
+          return <Button key={s.id} variant="outline" size="icon" aria-label={`Aktivnost ${i + 1}${finished ? ", završena" : ""}`} aria-current={i === index ? "step" : undefined}
+            onClick={() => change(i)} className={cn("h-9 w-9 shrink-0 rounded-full relative", i === index ? "bg-primary text-primary-foreground border-primary" : finished && "bg-forest/10 border-forest/40 text-forest")}>
+            {i + 1}{finished && <CheckCircle2 className="absolute -right-1 -top-1 h-3.5 w-3.5 bg-cream rounded-full" />}
+          </Button>;
+        })}
+      </nav>
+      <div className="space-y-4">
+        <header>
+          <p className="text-xs text-muted-foreground mb-1">Aktivnost {index + 1} od {scenes.length}</p>
+          <h3 className="font-display font-semibold text-xl text-primary">{scene.title}</h3>
+          {scene.context && <p className="text-sm text-muted-foreground mt-1">{scene.context}</p>}
+        </header>
+        <div className="flex flex-wrap items-center gap-2 border-y border-border/60 py-3">
+          <Button size="sm" variant={playing ? "outline" : "hero"} onClick={() => playing ? stop() : play()}>
+            {playing ? <Square className="w-4 h-4" /> : <Play className="w-4 h-4" />}{playing ? "Stop" : "Slušaj"}
+          </Button>
+          {[{ r: 0.75, l: "0.75x lagano" }, { r: 1, l: "1x prirodno" }].map(o =>
+            <Button key={o.r} size="sm" variant={rate === o.r ? "default" : "outline"} aria-pressed={rate === o.r} onClick={() => { stop(); setRate(o.r); }}>{o.l}</Button>)}
+        </div>
+        {q && <div className="space-y-3">
+          <p className="text-xs text-muted-foreground">Pitanje {step + 1} od {scene.questions.length}</p>
+          <p className="font-medium text-primary">{q.prompt}</p>
+          <div className="grid gap-2">
+            {(options[scene.id]?.[step] || q.options).map(o => {
+              const right = ans !== undefined && o === q.answer;
+              const wrong = ans === o && o !== q.answer;
+              return <Button key={o} variant="outline" disabled={ans !== undefined} onClick={() => select(o)}
+                className={cn("h-auto min-h-11 w-full justify-start whitespace-normal break-words text-left px-4 py-2.5 rounded-lg disabled:opacity-100",
+                  right ? "border-forest bg-forest/10" : wrong && "border-destructive bg-destructive/10")}>
                 {o}
-              </button>
-            );
-          })}
-        </div>
-        {ans !== undefined && (
-          <div className={cn("mt-3 rounded-xl px-4 py-3 text-sm", ans === q.answer ? "bg-forest/10" : "bg-destructive/10")}>
-            <p className="font-medium flex items-center gap-1.5">
-              {ans === q.answer ? <CheckCircle2 className="w-4 h-4 text-forest" /> : <XCircle className="w-4 h-4 text-destructive" />}
-              {ans === q.answer ? "Tačno!" : "Netačno"}
-            </p>
-            {q.explanation && <p className="mt-1 text-muted-foreground">{q.explanation}</p>}
+              </Button>;
+            })}
           </div>
-        )}
-        <div className="mt-3 flex justify-between">
-          <Button size="sm" variant="ghost" disabled={step === 0} onClick={() => setStep(step - 1)}><ChevronLeft className="w-4 h-4" /> Nazad</Button>
-          <Button size="sm" variant="outline" disabled={step === scene.questions.length - 1} onClick={() => setStep(step + 1)}>Dalje <ChevronRight className="w-4 h-4" /></Button>
-        </div>
+          {ans !== undefined && <div role="status" className="text-sm space-y-1">
+            <p className="flex items-center gap-1.5 font-medium">{ans === q.answer ? <CheckCircle2 className="w-4 h-4 text-forest" /> : <XCircle className="w-4 h-4 text-destructive" />}{ans === q.answer ? "Tačno!" : "Netačno"}</p>
+            {q.explanation && <p className="text-muted-foreground">{q.explanation}</p>}
+          </div>}
+          {scene.questions.length > 1 && <div className="flex justify-between gap-2">
+            <Button size="sm" variant="ghost" disabled={step === 0} onClick={() => { stop(); setQuestionSteps(previous => ({ ...previous, [scene.id]: step - 1 })); }}><ChevronLeft className="w-4 h-4" />Prethodno pitanje</Button>
+            <Button size="sm" variant="outline" disabled={step === scene.questions.length - 1} onClick={() => { stop(); setQuestionSteps(previous => ({ ...previous, [scene.id]: step + 1 })); }}>Sledeće pitanje<ChevronRight className="w-4 h-4" /></Button>
+          </div>}
+        </div>}
+        {done && <p className="text-sm font-medium text-primary">Rezultat: {correct} / {scene.questions.length}</p>}
+        <Button size="sm" variant="ghost" onClick={() => { stop(); setTranscripts(previous => ({ ...previous, [scene.id]: !previous[scene.id] })); }}>
+          {transcripts[scene.id] ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}{transcripts[scene.id] ? "Sakrij transkript" : "Prikaži transkript"}
+        </Button>
+        {transcripts[scene.id] && <ul className="space-y-2 border-t border-border/60 pt-3">
+          {scene.lines.map((line, i) => <li key={i} className={cn("flex gap-2 items-start px-2 py-1 rounded-lg", active === i && "bg-secondary")}>
+            <Button size="icon" variant="ghost" className="w-7 h-7 shrink-0" aria-label={`Pusti rečenicu ${i + 1}`} onClick={() => play([line])}><Volume2 className="w-4 h-4" /></Button>
+            <p className="text-sm min-w-0"><strong className="text-primary">{line.speaker}:</strong> {line.text}</p>
+          </li>)}
+        </ul>}
       </div>
-
-      {done && <p className="text-sm font-medium text-primary">Rezultat: {correct} / {scene.questions.length}</p>}
-
-      <button className="text-xs text-primary/70 flex items-center gap-1" onClick={() => setShowT(!showT)}>
-        {showT ? <EyeOff className="w-3.5 h-3.5" /> : <Eye className="w-3.5 h-3.5" />} {showT ? "Sakrij transkript" : "Prikaži transkript"}
-      </button>
-      {showT && (
-        <ul className="space-y-1.5">
-          {scene.lines.map((l, i) => (
-            <li key={i} className={cn("flex items-start gap-2 rounded-lg px-2 py-1", active === i && "bg-secondary")}>
-              <button aria-label="Pusti rečenicu" onClick={() => speakLines([l], lang, { rate })} className="text-primary/60 hover:text-primary mt-0.5"><Volume2 className="w-4 h-4" /></button>
-              <span className="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-primary/10 text-primary whitespace-nowrap">{l.speaker}</span>
-              <span className="text-sm text-foreground">{l.text}</span>
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
-  );
-}
-
-export default function LessonListeningTab({ scenes, lang, lessonCode }: { scenes: ListeningScene[]; lang: string; lessonCode: string }) {
-  return (
-    <>
-      <p className="text-sm text-muted-foreground">Nove situacije sa rečima iz lekcije. Prvo slušaj bez teksta, pa odgovaraj korak po korak. Transkript se otvara na kraju ili na zahtev.</p>
-      {scenes.map((s) => <Scene key={s.id} scene={s} lang={lang} lessonCode={lessonCode} />)}
-    </>
+      <footer className="flex justify-between gap-2 border-t border-border/60 pt-4">
+        <Button size="sm" variant="outline" disabled={index === 0} onClick={() => change(index - 1)}><ChevronLeft className="w-4 h-4" />Nazad</Button>
+        {index < scenes.length - 1 ? <Button size="sm" variant="hero" onClick={() => change(index + 1)}>Dalje<ChevronRight className="w-4 h-4" /></Button>
+          : <Button size="sm" variant="hero" onClick={() => { stop(); onFinish?.(); }}>Svi moduli</Button>}
+      </footer>
+    </section>
   );
 }
