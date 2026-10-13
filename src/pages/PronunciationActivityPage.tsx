@@ -76,7 +76,7 @@ const CHECK_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/pronunciati
 const MAX_REC_MS = 15000;
 
 /** Record the learner, then get an AI pronunciation score and feedback. */
-function RecordSlot({ item, lang, level, onSuccess }: { item: PronItem; lang: string; level: string; onSuccess: () => void }) {
+export function RecordSlot({ item, lang, level, onSuccess }: { item: PronItem; lang: string; level: string; onSuccess: () => void }) {
   const [state, setState] = useState<"idle" | "rec" | "busy">("idle");
   const [secs, setSecs] = useState(0);
   const [result, setResult] = useState<CheckResult | null>(null);
