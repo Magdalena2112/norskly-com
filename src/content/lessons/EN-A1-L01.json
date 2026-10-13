@@ -186,9 +186,9 @@
                 "Nice to meet you"
               ],
               "options": [
-                "Nice to meet you",
-                "See you",
-                "How are you?"
+                "Pleased to meet you",
+                "How do you do?",
+                "Nice to meet you"
               ]
             }
           ]
@@ -3014,9 +3014,9 @@
             {
               "prompt": "hello",
               "options": [
-                "moje ime je…",
-                "zdravo",
-                "hvala"
+                "dobro jutro",
+                "vidimo se",
+                "zdravo"
               ],
               "answers": [
                 "zdravo"
@@ -3025,9 +3025,9 @@
             {
               "prompt": "nice to meet you",
               "options": [
-                "drago mi je",
-                "vidimo se",
-                "dobro jutro"
+                "kako se zoveš?",
+                "moje ime je…",
+                "drago mi je"
               ],
               "answers": [
                 "drago mi je"
@@ -3036,9 +3036,9 @@
             {
               "prompt": "my name is…",
               "options": [
-                "kako si?",
+                "drago mi je",
                 "moje ime je…",
-                "dobro sam"
+                "kako si?"
               ],
               "answers": [
                 "moje ime je…"
@@ -3047,9 +3047,9 @@
             {
               "prompt": "thank you",
               "options": [
+                "molim",
                 "hvala",
-                "ćao",
-                "dobro jutro"
+                "izvini"
               ],
               "answers": [
                 "hvala"
@@ -3058,9 +3058,9 @@
             {
               "prompt": "see you",
               "options": [
-                "kako se zoveš?",
-                "vidimo se",
-                "drago mi je"
+                "doviđenja",
+                "ćao",
+                "vidimo se"
               ],
               "answers": [
                 "vidimo se"
@@ -3423,9 +3423,9 @@
             {
               "prompt": "teacher",
               "options": [
-                "knjiga",
-                "nastavnik",
-                "učionica"
+                "učenik",
+                "prijatelj",
+                "nastavnik"
               ],
               "answers": [
                 "nastavnik"
@@ -3434,9 +3434,9 @@
             {
               "prompt": "nervous",
               "options": [
-                "nervozan",
                 "srećan",
-                "učenik"
+                "umoran",
+                "nervozan"
               ],
               "answers": [
                 "nervozan"
@@ -3445,9 +3445,9 @@
             {
               "prompt": "classroom",
               "options": [
-                "torba",
-                "učionica",
-                "časovnik"
+                "škola",
+                "hodnik",
+                "učionica"
               ],
               "answers": [
                 "učionica"
@@ -3456,9 +3456,9 @@
             {
               "prompt": "friend",
               "options": [
-                "prijatelj",
                 "dečak",
-                "tabla"
+                "nastavnik",
+                "prijatelj"
               ],
               "answers": [
                 "prijatelj"
@@ -3768,9 +3768,9 @@
             {
               "prompt": "Hello!",
               "options": [
+                "Good morning.",
                 "Hello!",
-                "Thank you.",
-                "Zero."
+                "Nice to meet you."
               ],
               "answers": [
                 "Hello!"
@@ -3779,9 +3779,9 @@
             {
               "prompt": "How are you?",
               "options": [
-                "I’m fine, thank you.",
-                "My name is Emma.",
-                "See you!"
+                "I'm fine, thank you.",
+                "I'm Oliver.",
+                "I'm ten."
               ],
               "answers": [
                 "I’m fine, thank you."
@@ -3790,9 +3790,9 @@
             {
               "prompt": "What’s your name?",
               "options": [
-                "I’m ten.",
+                "I'm ten.",
                 "My name is Oliver.",
-                "Good morning."
+                "I'm fine."
               ],
               "answers": [
                 "My name is Oliver."
@@ -3801,9 +3801,9 @@
             {
               "prompt": "Nice to meet you.",
               "options": [
-                "Nice to meet you too.",
-                "How are you?",
-                "Bye."
+                "How do you do?",
+                "Pleased to meet you.",
+                "Nice to meet you too."
               ],
               "answers": [
                 "Nice to meet you too."
@@ -3812,9 +3812,9 @@
             {
               "prompt": "Thank you!",
               "options": [
-                "You’re welcome.",
-                "Hi.",
-                "I’m tired."
+                "No problem.",
+                "You're welcome.",
+                "I'm sorry."
               ],
               "answers": [
                 "You’re welcome."
