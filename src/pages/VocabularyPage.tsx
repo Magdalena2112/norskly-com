@@ -996,27 +996,6 @@ function QuizTab({ level, userId }: { level: string; userId?: string }) {
   const q = questions[current];
   const progress = questions.length ? ((current + (finished ? 1 : 0)) / questions.length) * 100 : 0;
 
-  if (!started && lessonId) {
-    if (!lessonData) return <p className="text-sm text-muted-foreground text-center py-8">Učitavanje reči lekcije…</p>;
-    const total = lessonData.areas.reduce((n, x) => n + x.words.length, 0);
-    return (
-      <Card className="shadow-nordic bg-background/80 backdrop-blur-sm border-border/30">
-        <CardHeader>
-          <CardTitle className="text-lg">Fleš-kartice lekcije</CardTitle>
-          <CardDescription>Sve reči iz lekcije su ovde sačuvane — sa slikom, izgovorom i prevodom.</CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-2">
-          <Button variant="hero" className="w-full" onClick={() => startLesson("all")}><Layers className="w-4 h-4" /> Sve reči lekcije ({total})</Button>
-          {lessonData.areas.map((x, i) => (
-            <Button key={x.key} variant="outline" className="w-full justify-between" onClick={() => startLesson(x.key)}>
-              <span>{i + 1}. {x.sr}</span><span className="text-xs text-muted-foreground">{x.words.length} reči</span>
-            </Button>
-          ))}
-        </CardContent>
-      </Card>
-    );
-  }
-
   if (!started) {
     return (
       <CollectionSelector
