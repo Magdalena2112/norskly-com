@@ -92,6 +92,53 @@ const CLIPS: Record<string, string> = Object.assign(
 let session = 0;
 let currentAudio: HTMLAudioElement | null = null;
 
+// On-demand natural TTS (server-side, cached in storage) for lines without a pre-recorded clip.
+const MALE_SPEAKERS = new Set(["oliver", "tom", "jack", "mr brown", "ben", "dan", "leo", "max", "sam", "liam"]);
+const ttsCache = new Map<string, Promise<string | null>>();
+
+function naturalClip(line: DialogueLine, lang: string): Promise<string | null> {
+  const key = `${lang}|${line.speaker}|${line.text}`;
+  if (!ttsCache.has(key)) {
+    ttsCache.set(key, (async () => {
+      try {
+        const { supabase } = await import("@/integrations/supabase/client");
+        const { data: { session: s } } = await supabase.auth.getSession();
+        if (!s) return null;
+        const voice = MALE_SPEAKERS.has(line.speaker.toLowerCase()) ? "m" : line.speaker === "m" ? "n" : "f";
+        const res = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/lesson-tts`, {
+          method: "POST",
+          headers: { Authorization: `Bearer ${s.access_token}`, "Content-Type": "application/json" },
+          body: JSON.stringify({ text: line.text, language: lang, voice }),
+        });
+        if (!res.ok) return null;
+        const data = await res.json();
+        return typeof data?.url === "string" ? data.url : null;
+      } catch {
+        return null;
+      }
+    })());
+  }
+  return ttsCache.get(key)!;
+}
+
+function playClips(lines: DialogueLine[], urls: string[], rate: number, opts: { onLine?: (i: number) => void; onEnd?: () => void }) {
+  const id = ++session;
+  const playAt = (i: number) => {
+    if (id !== session) return;
+    if (i >= lines.length) { currentAudio = null; opts.onEnd?.(); return; }
+    const a = new Audio(urls[i]);
+    a.playbackRate = rate;
+    (a as HTMLAudioElement & { preservesPitch?: boolean }).preservesPitch = true;
+    currentAudio = a;
+    opts.onLine?.(i);
+    const next = () => setTimeout(() => playAt(i + 1), lines.length > 1 ? 350 : 0);
+    a.onended = next;
+    a.onerror = next;
+    a.play().catch(next);
+  };
+  playAt(0);
+}
+
 export function speakLines(
   lines: DialogueLine[],
   lang: string,
@@ -99,25 +146,22 @@ export function speakLines(
 ) {
   stopSpeaking();
   const rate = opts.rate ?? (opts.slow ? 0.75 : 1);
-  if (lines.length && lines.every((l) => CLIPS[`${l.speaker}|${l.text}`]) && typeof Audio !== "undefined") {
-    const id = ++session;
-    const playAt = (i: number) => {
-      if (id !== session) return;
-      if (i >= lines.length) { currentAudio = null; opts.onEnd?.(); return; }
-      const a = new Audio(CLIPS[`${lines[i].speaker}|${lines[i].text}`]);
-      a.playbackRate = rate;
-      (a as HTMLAudioElement & { preservesPitch?: boolean }).preservesPitch = true;
-      currentAudio = a;
-      opts.onLine?.(i);
-      const next = () => setTimeout(() => playAt(i + 1), lines.length > 1 ? 350 : 0);
-      a.onended = next;
-      a.onerror = next;
-      a.play().catch(next);
-    };
-    playAt(0);
+  if (!lines.length) return;
+  if (lines.every((l) => CLIPS[`${l.speaker}|${l.text}`]) && typeof Audio !== "undefined") {
+    playClips(lines, lines.map((l) => CLIPS[`${l.speaker}|${l.text}`]), rate, opts);
     return;
   }
-  speakBrowser(lines, lang, { ...opts, rate: opts.rate ?? (opts.slow ? 0.7 : 0.95) });
+  // Try natural server-side voices first; fall back to the browser voice on any failure.
+  const id = session + 1;
+  void Promise.all(lines.map((l) => naturalClip(l, lang))).then((urls) => {
+    if (id !== session + 1 || session !== id - 1) { /* stopped meanwhile */ }
+    if (session + 1 !== id + 1 && id !== session + 1) return;
+    if (urls.every((u) => u) && typeof Audio !== "undefined") {
+      playClips(lines, urls as string[], rate, opts);
+    } else {
+      speakBrowser(lines, lang, { ...opts, rate: opts.rate ?? (opts.slow ? 0.7 : 0.95) });
+    }
+  });
 }
 
 function speakBrowser(
