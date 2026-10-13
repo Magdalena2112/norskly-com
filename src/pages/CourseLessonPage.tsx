@@ -7,6 +7,7 @@ import StudentLayout from "@/components/student/StudentLayout";
 import NordicBackdrop from "@/components/student/NordicBackdrop";
 import BackButton from "@/components/BackButton";
 import DialoguePlayer from "@/components/lesson/DialoguePlayer";
+import LessonListeningTab from "@/components/lesson/LessonListeningTab";
 import LessonExercise from "@/components/lesson/LessonExercise";
 import { Button } from "@/components/ui/button";
 import { Volume2, Mic, MessageSquare, CheckCircle2, ChevronLeft, ChevronRight, BookOpen, Languages, BookOpenText, Headphones, PenLine, Globe2, Trophy } from "lucide-react";
@@ -307,8 +308,9 @@ export default function CourseLessonPage() {
 
           {tab === "listening" && m.listening && (
             <>
-              <p className="text-sm text-muted-foreground">Prvo slušaj bez čitanja. Transkript se otvara posle slušanja ili na zahtev.</p>
-              {m.listening.audios?.map((a: any) => {
+              {m.listening.scenes ? (
+                <LessonListeningTab scenes={m.listening.scenes} lang={lang} lessonCode={content?.code || "lesson"} />
+              ) : m.listening.audios?.map((a: any) => {
                 const lines = a.lines || textById(a.source)?.lines || [];
                 return <DialoguePlayer key={a.id} title={a.title} lines={lines} language={lang} hideTranscript />;
               })}
