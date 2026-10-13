@@ -7,6 +7,8 @@ export interface TalkScenario {
   opening: string;
   goals: string[];
   instructions: string;
+  /** Glas sagovornika: f = ženski, m = muški. */
+  voice?: "f" | "m";
 }
 
 /** Obavezne razgovorne situacije po lekciji (lesson_code). */
@@ -14,6 +16,7 @@ export const TALK_SCENARIOS: Record<string, TalkScenario[]> = {
   "EN-A1-L01": [
     {
       id: "RZ-01",
+      voice: "f",
       title: "Prvi dan u školi",
       description: "Upoznaješ novu drugaricu iz razreda u hodniku.",
       aiRole: "Sophie, nova učenica u školi",
@@ -24,6 +27,7 @@ export const TALK_SCENARIOS: Record<string, TalkScenario[]> = {
     },
     {
       id: "RZ-02",
+      voice: "f",
       title: "Upis u školsku kancelariju",
       description: "Sekretarica te upisuje i traži osnovne podatke.",
       aiRole: "Mrs Brown, školska sekretarica",
@@ -34,6 +38,7 @@ export const TALK_SCENARIOS: Record<string, TalkScenario[]> = {
     },
     {
       id: "RZ-03",
+      voice: "m",
       title: "U učionici",
       description: "Nastavnik pita šta imaš u torbi i kako se osećaš.",
       aiRole: "Mr Smith, nastavnik engleskog",
@@ -44,6 +49,7 @@ export const TALK_SCENARIOS: Record<string, TalkScenario[]> = {
     },
     {
       id: "RZ-04",
+      voice: "m",
       title: "Upoznaj mog prijatelja",
       description: "Liam ti predstavlja svog prijatelja i postavlja pitanja.",
       aiRole: "Liam, učenik koji predstavlja prijatelja Olivera",

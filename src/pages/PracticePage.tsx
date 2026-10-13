@@ -119,7 +119,13 @@ const VOICE_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/talk-voice`
 
 function extractReply(content: string): string {
   const m = content.match(/\[ODGOVOR\]([\s\S]*?)(?=\n\[[A-ZČĆŠŽĐ ]+\]|$)/);
-  return (m ? m[1] : content).replace(/[*_#`>]/g, "").trim();
+  return (m ? m[1] : content)
+    .replace(/\[[A-ZČĆŠŽĐ ]+\]/g, " ")
+    .replace(/\([^)]*[čćšžđČĆŠŽĐ][^)]*\)/g, " ")
+    .replace(/[*_#`>~]/g, "")
+    .replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{FE0F}]/gu, "")
+    .replace(/\s+/g, " ")
+    .trim();
 }
 
 // ── Section parser for structured AI responses ──
@@ -181,7 +187,7 @@ function speakNorwegian(text: string) {
   window.speechSynthesis.speak(utter);
 }
 
-function CollapsibleSection({ section, defaultOpen }: { section: ParsedSection; defaultOpen: boolean }) {
+function CollapsibleSection({ section, defaultOpen, onSpeak }: { section: ParsedSection; defaultOpen: boolean; onSpeak?: () => void }) {
   const [open, setOpen] = useState(defaultOpen);
   const config = sectionConfig[section.key];
   const isMain = section.key === "ODGOVOR";
@@ -194,7 +200,7 @@ function CollapsibleSection({ section, defaultOpen }: { section: ParsedSection; 
             <ReactMarkdown>{section.content}</ReactMarkdown>
           </div>
           <button
-            onClick={() => speakNorwegian(section.content)}
+            onClick={() => (onSpeak ? onSpeak() : speakNorwegian(section.content))}
             className="shrink-0 mt-1 p-1.5 rounded-lg text-accent hover:bg-accent/10 transition-colors"
             title="Slušaj izgovor"
           >
@@ -235,7 +241,7 @@ function CollapsibleSection({ section, defaultOpen }: { section: ParsedSection; 
   );
 }
 
-function StructuredAssistantMessage({ content }: { content: string }) {
+function StructuredAssistantMessage({ content, onSpeak }: { content: string; onSpeak?: () => void }) {
   const sections = parseSections(content);
 
   if (!sections) {
@@ -251,7 +257,7 @@ function StructuredAssistantMessage({ content }: { content: string }) {
   return (
     <div className="space-y-2">
       {sections.map((section, i) => (
-        <CollapsibleSection key={i} section={section} defaultOpen={section.key === "ODGOVOR" || section.key === "ISPRAVKE"} />
+        <CollapsibleSection key={i} section={section} defaultOpen={section.key === "ODGOVOR" || section.key === "ISPRAVKE"} onSpeak={onSpeak} />
       ))}
     </div>
   );
@@ -316,16 +322,18 @@ export default function PracticePage() {
 
   const getToken = async () => (await supabase.auth.getSession()).data.session?.access_token;
 
-  const speakReply = async (idx: number, content: string) => {
+  const speakReply = async (idx: number, content: string, manual = false) => {
     const text = extractReply(content).slice(0, 1500);
     if (!text) return;
+    if (audioUrls[idx]) { new Audio(audioUrls[idx]).play().catch(() => {}); return; }
+    if (speakingIdx !== null) return;
     setSpeakingIdx(idx);
     try {
       const token = await getToken();
       const r = await fetch(VOICE_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
-        body: JSON.stringify({ text, language: langCode }),
+        body: JSON.stringify({ text, language: langCode, voice: scenario?.voice, level: profile.level }),
       });
       if (!r.ok) {
         const err = await r.json().catch(() => ({}));
@@ -334,7 +342,7 @@ export default function PracticePage() {
       }
       const url = URL.createObjectURL(await r.blob());
       setAudioUrls((prev) => ({ ...prev, [idx]: url }));
-      if (autoPlay) new Audio(url).play().catch(() => {});
+      if (autoPlay || manual) new Audio(url).play().catch(() => {});
     } catch {
       toast.error("Glasovni odgovor nije uspeo.");
     } finally {
@@ -794,7 +802,7 @@ export default function PracticePage() {
               >
                 {msg.role === "assistant" ? (
                   <div className="max-w-[90%]">
-                    <StructuredAssistantMessage content={msg.content} />
+                    <StructuredAssistantMessage content={msg.content} onSpeak={() => speakReply(i, msg.content, true)} />
                   </div>
                 ) : (
                   <div className="max-w-[85%] rounded-2xl px-5 py-3 bg-primary text-primary-foreground rounded-br-md">
@@ -1146,7 +1154,7 @@ export default function PracticePage() {
                   {speakingIdx === i && (
                     <p className="flex items-center gap-2 text-xs text-muted-foreground"><Spinner className="w-3 h-3 animate-spin" /> Pripremam glasovni odgovor…</p>
                   )}
-                  <StructuredAssistantMessage content={msg.content} />
+                  <StructuredAssistantMessage content={msg.content} onSpeak={() => speakReply(i, msg.content, true)} />
                 </div>
               ) : (
                 <div className="max-w-[85%] rounded-2xl px-5 py-3 bg-primary text-primary-foreground rounded-br-md">
