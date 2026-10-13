@@ -87,7 +87,7 @@ const PITCHES = [1, 0.8, 1.2, 0.95, 1.1];
 // Pre-recorded natural voices per speaker: src/content/lessons/<code>.audio.json maps "speaker|text" -> clip URL.
 const CLIPS: Record<string, string> = Object.assign(
   {},
-  ...Object.values(import.meta.glob("../content/lessons/*.audio.json", { eager: true, import: "default" }) as Record<string, string>[]),
+  ...Object.values(import.meta.glob("../content/lessons/*.audio.json", { eager: true, import: "default" }) as unknown as Record<string, string>[]),
 );
 let session = 0;
 let currentAudio: HTMLAudioElement | null = null;
