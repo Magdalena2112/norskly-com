@@ -2140,7 +2140,12 @@
             "GI-02",
             "GI-03",
             "GI-04",
-            "GI-05"
+            "GI-05",
+            "GI-06",
+            "GI-07",
+            "GI-08",
+            "GI-09",
+            "GI-10"
           ],
           "aiTopic": "Greetings and introductions (hello, nice to meet you, my name is, how are you)"
         },
@@ -2255,7 +2260,12 @@
             "PCF-02",
             "PCF-03",
             "PCF-04",
-            "PCF-05"
+            "PCF-05",
+            "PCF-06",
+            "PCF-07",
+            "PCF-08",
+            "PCF-09",
+            "PCF-10"
           ],
           "aiTopic": "People, classroom and feelings (teacher, student, friend, happy, tired, nervous)"
         },
@@ -2413,7 +2423,12 @@
             "CO-02",
             "CO-03",
             "CO-04",
-            "CO-05"
+            "CO-05",
+            "CO-06",
+            "CO-07",
+            "CO-08",
+            "CO-09",
+            "CO-10"
           ],
           "aiTopic": "Classroom objects (pen, desk, ruler, backpack, scissors, eraser)"
         },
@@ -2554,7 +2569,18 @@
             "Room twelve.",
             "I have two books."
           ],
-          "exercises": []
+          "exercises": [
+            "NUM-01",
+            "NUM-02",
+            "NUM-03",
+            "NUM-04",
+            "NUM-05",
+            "NUM-06",
+            "NUM-07",
+            "NUM-08",
+            "NUM-09",
+            "NUM-10"
+          ]
         }
       ],
       "words": [
@@ -3729,6 +3755,1100 @@
               "prompt": "In my classroom I can see ______, ______ and ______.",
               "open": true,
               "guide": "Treba navesti tri predmeta iz učionice."
+            }
+          ]
+        },
+        {
+          "id": "GI-06",
+          "code": "GI-06",
+          "title": "Choose the reply",
+          "instruction": "Izaberi odgovor.",
+          "kind": "vocabulary",
+          "items": [
+            {
+              "prompt": "Hello!",
+              "options": [
+                "Hello!",
+                "Thank you.",
+                "Zero."
+              ],
+              "answers": [
+                "Hello!"
+              ]
+            },
+            {
+              "prompt": "How are you?",
+              "options": [
+                "I’m fine, thank you.",
+                "My name is Emma.",
+                "See you!"
+              ],
+              "answers": [
+                "I’m fine, thank you."
+              ]
+            },
+            {
+              "prompt": "What’s your name?",
+              "options": [
+                "I’m ten.",
+                "My name is Oliver.",
+                "Good morning."
+              ],
+              "answers": [
+                "My name is Oliver."
+              ]
+            },
+            {
+              "prompt": "Nice to meet you.",
+              "options": [
+                "Nice to meet you too.",
+                "How are you?",
+                "Bye."
+              ],
+              "answers": [
+                "Nice to meet you too."
+              ]
+            },
+            {
+              "prompt": "Thank you!",
+              "options": [
+                "You’re welcome.",
+                "Hi.",
+                "I’m tired."
+              ],
+              "answers": [
+                "You’re welcome."
+              ]
+            }
+          ]
+        },
+        {
+          "id": "GI-07",
+          "code": "GI-07",
+          "title": "Translate",
+          "instruction": "Prevedi na engleski.",
+          "kind": "vocabulary",
+          "items": [
+            {
+              "prompt": "zdravo",
+              "answers": [
+                "hello",
+                "hi"
+              ]
+            },
+            {
+              "prompt": "dobro jutro",
+              "answers": [
+                "good morning"
+              ]
+            },
+            {
+              "prompt": "hvala",
+              "answers": [
+                "thank you",
+                "thanks"
+              ]
+            },
+            {
+              "prompt": "vidimo se",
+              "answers": [
+                "see you"
+              ]
+            },
+            {
+              "prompt": "drago mi je",
+              "answers": [
+                "nice to meet you"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "GI-08",
+          "code": "GI-08",
+          "title": "Put the words in order",
+          "instruction": "Složi reči u rečenicu.",
+          "kind": "vocabulary",
+          "items": [
+            {
+              "prompt": "name / my / is / Emma",
+              "answers": [
+                "My name is Emma"
+              ]
+            },
+            {
+              "prompt": "are / how / you",
+              "answers": [
+                "How are you"
+              ]
+            },
+            {
+              "prompt": "fine / I’m / thank you",
+              "answers": [
+                "I’m fine, thank you",
+                "I'm fine thank you"
+              ]
+            },
+            {
+              "prompt": "your / what’s / name",
+              "answers": [
+                "What’s your name",
+                "What's your name"
+              ]
+            },
+            {
+              "prompt": "meet / to / nice / you",
+              "answers": [
+                "Nice to meet you"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "GI-09",
+          "code": "GI-09",
+          "title": "Morning or not?",
+          "instruction": "Izaberi pozdrav.",
+          "kind": "vocabulary",
+          "items": [
+            {
+              "prompt": "8:00 u školi, učiteljici:",
+              "options": [
+                "Good morning, Ms Taylor.",
+                "See you!",
+                "Thank you."
+              ],
+              "answers": [
+                "Good morning, Ms Taylor."
+              ]
+            },
+            {
+              "prompt": "Na kraju časa:",
+              "options": [
+                "See you!",
+                "Nice to meet you.",
+                "Hello!"
+              ],
+              "answers": [
+                "See you!"
+              ]
+            },
+            {
+              "prompt": "Prvi susret sa novim drugom:",
+              "options": [
+                "Nice to meet you.",
+                "See you.",
+                "I’m tired."
+              ],
+              "answers": [
+                "Nice to meet you."
+              ]
+            },
+            {
+              "prompt": "Drugu, neformalno:",
+              "options": [
+                "Hi!",
+                "Good morning, Ms Taylor.",
+                "Thank you."
+              ],
+              "answers": [
+                "Hi!"
+              ]
+            },
+            {
+              "prompt": "Neko ti da olovku:",
+              "options": [
+                "Thank you!",
+                "How are you?",
+                "Hello!"
+              ],
+              "answers": [
+                "Thank you!"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "GI-10",
+          "code": "GI-10",
+          "title": "Write about you",
+          "instruction": "Napiši odgovor o sebi.",
+          "kind": "vocabulary",
+          "items": [
+            {
+              "prompt": "What’s your name?",
+              "open": true
+            },
+            {
+              "prompt": "How are you today?",
+              "open": true
+            },
+            {
+              "prompt": "Introduce yourself in two sentences.",
+              "open": true
+            }
+          ]
+        },
+        {
+          "id": "PCF-06",
+          "code": "PCF-06",
+          "title": "Choose the word",
+          "instruction": "Izaberi reč.",
+          "kind": "vocabulary",
+          "items": [
+            {
+              "prompt": "učitelj / nastavnik",
+              "options": [
+                "teacher",
+                "student",
+                "friend"
+              ],
+              "answers": [
+                "teacher"
+              ]
+            },
+            {
+              "prompt": "devojčica",
+              "options": [
+                "boy",
+                "girl",
+                "class"
+              ],
+              "answers": [
+                "girl"
+              ]
+            },
+            {
+              "prompt": "umoran",
+              "options": [
+                "happy",
+                "tired",
+                "good"
+              ],
+              "answers": [
+                "tired"
+              ]
+            },
+            {
+              "prompt": "nervozan",
+              "options": [
+                "nervous",
+                "okay",
+                "happy"
+              ],
+              "answers": [
+                "nervous"
+              ]
+            },
+            {
+              "prompt": "učionica",
+              "options": [
+                "classroom",
+                "bag",
+                "book"
+              ],
+              "answers": [
+                "classroom"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "PCF-07",
+          "code": "PCF-07",
+          "title": "Translate",
+          "instruction": "Prevedi na engleski.",
+          "kind": "vocabulary",
+          "items": [
+            {
+              "prompt": "prijatelj",
+              "answers": [
+                "friend"
+              ]
+            },
+            {
+              "prompt": "dečak",
+              "answers": [
+                "boy"
+              ]
+            },
+            {
+              "prompt": "srećan",
+              "answers": [
+                "happy"
+              ]
+            },
+            {
+              "prompt": "sveska",
+              "answers": [
+                "notebook"
+              ]
+            },
+            {
+              "prompt": "torba",
+              "answers": [
+                "bag"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "PCF-08",
+          "code": "PCF-08",
+          "title": "Complete",
+          "instruction": "Dopuni rečenicu.",
+          "kind": "vocabulary",
+          "items": [
+            {
+              "prompt": "Ms Taylor is a ______.",
+              "answers": [
+                "teacher"
+              ]
+            },
+            {
+              "prompt": "Emma is a ______.",
+              "answers": [
+                "student",
+                "girl"
+              ]
+            },
+            {
+              "prompt": "Sophie is my ______.",
+              "answers": [
+                "friend"
+              ]
+            },
+            {
+              "prompt": "This is our ______.",
+              "answers": [
+                "classroom"
+              ]
+            },
+            {
+              "prompt": "I am ______. (umoran)",
+              "answers": [
+                "tired"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "PCF-09",
+          "code": "PCF-09",
+          "title": "Odd one out",
+          "instruction": "Izaberi reč koja ne pripada.",
+          "kind": "vocabulary",
+          "items": [
+            {
+              "prompt": "happy, tired, book",
+              "options": [
+                "happy",
+                "tired",
+                "book"
+              ],
+              "answers": [
+                "book"
+              ]
+            },
+            {
+              "prompt": "boy, girl, nervous",
+              "options": [
+                "boy",
+                "girl",
+                "nervous"
+              ],
+              "answers": [
+                "nervous"
+              ]
+            },
+            {
+              "prompt": "bag, notebook, friend",
+              "options": [
+                "bag",
+                "notebook",
+                "friend"
+              ],
+              "answers": [
+                "friend"
+              ]
+            },
+            {
+              "prompt": "teacher, student, okay",
+              "options": [
+                "teacher",
+                "student",
+                "okay"
+              ],
+              "answers": [
+                "okay"
+              ]
+            },
+            {
+              "prompt": "class, classroom, good",
+              "options": [
+                "class",
+                "classroom",
+                "good"
+              ],
+              "answers": [
+                "good"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "PCF-10",
+          "code": "PCF-10",
+          "title": "How do you feel?",
+          "instruction": "Napiši kako se osećaš i zašto.",
+          "kind": "vocabulary",
+          "items": [
+            {
+              "prompt": "How do you feel today?",
+              "open": true
+            },
+            {
+              "prompt": "Who is your friend? Write one sentence.",
+              "open": true
+            }
+          ]
+        },
+        {
+          "id": "CO-06",
+          "code": "CO-06",
+          "title": "Choose the word",
+          "instruction": "Izaberi reč.",
+          "kind": "vocabulary",
+          "items": [
+            {
+              "prompt": "lenjir",
+              "options": [
+                "ruler",
+                "eraser",
+                "glue"
+              ],
+              "answers": [
+                "ruler"
+              ]
+            },
+            {
+              "prompt": "makaze",
+              "options": [
+                "scissors",
+                "pencil",
+                "clock"
+              ],
+              "answers": [
+                "scissors"
+              ]
+            },
+            {
+              "prompt": "gumica",
+              "options": [
+                "eraser",
+                "sharpener",
+                "desk"
+              ],
+              "answers": [
+                "eraser"
+              ]
+            },
+            {
+              "prompt": "klupa / sto",
+              "options": [
+                "desk",
+                "door",
+                "chair"
+              ],
+              "answers": [
+                "desk"
+              ]
+            },
+            {
+              "prompt": "rezač",
+              "options": [
+                "sharpener",
+                "crayons",
+                "pen"
+              ],
+              "answers": [
+                "sharpener"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "CO-07",
+          "code": "CO-07",
+          "title": "Translate",
+          "instruction": "Prevedi na engleski.",
+          "kind": "vocabulary",
+          "items": [
+            {
+              "prompt": "olovka (grafitna)",
+              "answers": [
+                "pencil"
+              ]
+            },
+            {
+              "prompt": "hemijska",
+              "answers": [
+                "pen"
+              ]
+            },
+            {
+              "prompt": "stolica",
+              "answers": [
+                "chair"
+              ]
+            },
+            {
+              "prompt": "sat",
+              "answers": [
+                "clock"
+              ]
+            },
+            {
+              "prompt": "lepak",
+              "answers": [
+                "glue"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "CO-08",
+          "code": "CO-08",
+          "title": "Where is it?",
+          "instruction": "Dopuni rečenicu.",
+          "kind": "vocabulary",
+          "items": [
+            {
+              "prompt": "The clock is on the ______. (zid)",
+              "answers": [
+                "wall"
+              ]
+            },
+            {
+              "prompt": "The ruler is on the ______. (sto)",
+              "answers": [
+                "desk"
+              ]
+            },
+            {
+              "prompt": "Put the book in your ______. (ranac)",
+              "answers": [
+                "backpack",
+                "bag"
+              ]
+            },
+            {
+              "prompt": "The pencils are in the ______. (pernica)",
+              "answers": [
+                "pencil case"
+              ]
+            },
+            {
+              "prompt": "Open the ______. (vrata)",
+              "answers": [
+                "door"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "CO-09",
+          "code": "CO-09",
+          "title": "What do you use?",
+          "instruction": "Izaberi predmet.",
+          "kind": "vocabulary",
+          "items": [
+            {
+              "prompt": "Za sečenje papira:",
+              "options": [
+                "scissors",
+                "glue",
+                "pen"
+              ],
+              "answers": [
+                "scissors"
+              ]
+            },
+            {
+              "prompt": "Za brisanje:",
+              "options": [
+                "eraser",
+                "ruler",
+                "clock"
+              ],
+              "answers": [
+                "eraser"
+              ]
+            },
+            {
+              "prompt": "Za crtanje u boji:",
+              "options": [
+                "crayons",
+                "chair",
+                "door"
+              ],
+              "answers": [
+                "crayons"
+              ]
+            },
+            {
+              "prompt": "Za merenje linije:",
+              "options": [
+                "ruler",
+                "bag",
+                "desk"
+              ],
+              "answers": [
+                "ruler"
+              ]
+            },
+            {
+              "prompt": "Za lepljenje:",
+              "options": [
+                "glue",
+                "pencil",
+                "book"
+              ],
+              "answers": [
+                "glue"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "CO-10",
+          "code": "CO-10",
+          "title": "My classroom",
+          "instruction": "Opiši šta je na tvom stolu.",
+          "kind": "vocabulary",
+          "items": [
+            {
+              "prompt": "What is on your desk? Write two sentences.",
+              "open": true
+            }
+          ]
+        },
+        {
+          "id": "NUM-01",
+          "code": "NUM-01",
+          "title": "Number to word",
+          "instruction": "Napiši broj rečima.",
+          "kind": "vocabulary",
+          "items": [
+            {
+              "prompt": "3",
+              "answers": [
+                "three"
+              ]
+            },
+            {
+              "prompt": "7",
+              "answers": [
+                "seven"
+              ]
+            },
+            {
+              "prompt": "11",
+              "answers": [
+                "eleven"
+              ]
+            },
+            {
+              "prompt": "15",
+              "answers": [
+                "fifteen"
+              ]
+            },
+            {
+              "prompt": "20",
+              "answers": [
+                "twenty"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "NUM-02",
+          "code": "NUM-02",
+          "title": "Word to number",
+          "instruction": "Napiši broj ciframa.",
+          "kind": "vocabulary",
+          "items": [
+            {
+              "prompt": "twelve",
+              "answers": [
+                "12"
+              ]
+            },
+            {
+              "prompt": "eight",
+              "answers": [
+                "8"
+              ]
+            },
+            {
+              "prompt": "nineteen",
+              "answers": [
+                "19"
+              ]
+            },
+            {
+              "prompt": "zero",
+              "answers": [
+                "0"
+              ]
+            },
+            {
+              "prompt": "fourteen",
+              "answers": [
+                "14"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "NUM-03",
+          "code": "NUM-03",
+          "title": "Choose the right number",
+          "instruction": "Izaberi tačan broj.",
+          "kind": "vocabulary",
+          "items": [
+            {
+              "prompt": "13",
+              "options": [
+                "thirteen",
+                "thirty",
+                "three"
+              ],
+              "answers": [
+                "thirteen"
+              ]
+            },
+            {
+              "prompt": "18",
+              "options": [
+                "eighteen",
+                "eighty",
+                "eight"
+              ],
+              "answers": [
+                "eighteen"
+              ]
+            },
+            {
+              "prompt": "16",
+              "options": [
+                "sixteen",
+                "sixty",
+                "six"
+              ],
+              "answers": [
+                "sixteen"
+              ]
+            },
+            {
+              "prompt": "5",
+              "options": [
+                "five",
+                "fifteen",
+                "fifty"
+              ],
+              "answers": [
+                "five"
+              ]
+            },
+            {
+              "prompt": "2",
+              "options": [
+                "two",
+                "twelve",
+                "twenty"
+              ],
+              "answers": [
+                "two"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "NUM-04",
+          "code": "NUM-04",
+          "title": "What comes next?",
+          "instruction": "Napiši sledeći broj.",
+          "kind": "vocabulary",
+          "items": [
+            {
+              "prompt": "one, two, three, ______",
+              "answers": [
+                "four"
+              ]
+            },
+            {
+              "prompt": "ten, eleven, ______",
+              "answers": [
+                "twelve"
+              ]
+            },
+            {
+              "prompt": "sixteen, seventeen, ______",
+              "answers": [
+                "eighteen"
+              ]
+            },
+            {
+              "prompt": "two, four, six, ______",
+              "answers": [
+                "eight"
+              ]
+            },
+            {
+              "prompt": "five, ten, fifteen, ______",
+              "answers": [
+                "twenty"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "NUM-05",
+          "code": "NUM-05",
+          "title": "Simple maths",
+          "instruction": "Izračunaj i napiši rečima.",
+          "kind": "vocabulary",
+          "items": [
+            {
+              "prompt": "two + three =",
+              "answers": [
+                "five"
+              ]
+            },
+            {
+              "prompt": "ten + one =",
+              "answers": [
+                "eleven"
+              ]
+            },
+            {
+              "prompt": "six + seven =",
+              "answers": [
+                "thirteen"
+              ]
+            },
+            {
+              "prompt": "twenty − ten =",
+              "answers": [
+                "ten"
+              ]
+            },
+            {
+              "prompt": "nine + nine =",
+              "answers": [
+                "eighteen"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "NUM-06",
+          "code": "NUM-06",
+          "title": "Complete",
+          "instruction": "Dopuni rečenicu brojem rečima.",
+          "kind": "vocabulary",
+          "items": [
+            {
+              "prompt": "I’m ______. (10)",
+              "answers": [
+                "ten"
+              ]
+            },
+            {
+              "prompt": "Room ______. (12)",
+              "answers": [
+                "twelve"
+              ]
+            },
+            {
+              "prompt": "I have ______ books. (2)",
+              "answers": [
+                "two"
+              ]
+            },
+            {
+              "prompt": "Emma is ______. (9)",
+              "answers": [
+                "nine"
+              ]
+            },
+            {
+              "prompt": "Page ______. (17)",
+              "answers": [
+                "seventeen"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "NUM-07",
+          "code": "NUM-07",
+          "title": "Fix the spelling",
+          "instruction": "Ispravi grešku.",
+          "kind": "vocabulary",
+          "items": [
+            {
+              "prompt": "fourty",
+              "answers": [
+                "fourteen",
+                "forty"
+              ]
+            },
+            {
+              "prompt": "twelf",
+              "answers": [
+                "twelve"
+              ]
+            },
+            {
+              "prompt": "nineteeen",
+              "answers": [
+                "nineteen"
+              ]
+            },
+            {
+              "prompt": "thre",
+              "answers": [
+                "three"
+              ]
+            },
+            {
+              "prompt": "eigth",
+              "answers": [
+                "eight"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "NUM-08",
+          "code": "NUM-08",
+          "title": "Odd one out",
+          "instruction": "Izaberi broj koji nije između 0 i 20.",
+          "kind": "vocabulary",
+          "items": [
+            {
+              "prompt": "",
+              "options": [
+                "thirty",
+                "three",
+                "thirteen"
+              ],
+              "answers": [
+                "thirty"
+              ]
+            },
+            {
+              "prompt": "",
+              "options": [
+                "fifty",
+                "fifteen",
+                "five"
+              ],
+              "answers": [
+                "fifty"
+              ]
+            },
+            {
+              "prompt": "",
+              "options": [
+                "eighty",
+                "eight",
+                "eighteen"
+              ],
+              "answers": [
+                "eighty"
+              ]
+            },
+            {
+              "prompt": "",
+              "options": [
+                "sixty",
+                "six",
+                "sixteen"
+              ],
+              "answers": [
+                "sixty"
+              ]
+            },
+            {
+              "prompt": "",
+              "options": [
+                "forty",
+                "four",
+                "fourteen"
+              ],
+              "answers": [
+                "forty"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "NUM-09",
+          "code": "NUM-09",
+          "title": "Translate",
+          "instruction": "Prevedi na engleski.",
+          "kind": "vocabulary",
+          "items": [
+            {
+              "prompt": "nula",
+              "answers": [
+                "zero"
+              ]
+            },
+            {
+              "prompt": "jedan",
+              "answers": [
+                "one"
+              ]
+            },
+            {
+              "prompt": "devet",
+              "answers": [
+                "nine"
+              ]
+            },
+            {
+              "prompt": "šesnaest",
+              "answers": [
+                "sixteen"
+              ]
+            },
+            {
+              "prompt": "dvadeset",
+              "answers": [
+                "twenty"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "NUM-10",
+          "code": "NUM-10",
+          "title": "About you",
+          "instruction": "Odgovori o sebi.",
+          "kind": "vocabulary",
+          "items": [
+            {
+              "prompt": "How old are you?",
+              "open": true
+            },
+            {
+              "prompt": "How many students are in your class?",
+              "open": true
             }
           ]
         }
