@@ -18,6 +18,7 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import GrammarHistoryTab from "@/components/grammar/GrammarHistoryTab";
 import GrammarProgressTab from "@/components/grammar/GrammarProgressTab";
 import { getCurrentLanguageCode, getCurrentPersonalization } from "@/lib/currentLanguage";
+import LessonGrammarTab from "@/components/lesson/LessonGrammarTab";
 
 // ─── Types ───
 interface Exercise {
@@ -75,7 +76,8 @@ export default function GrammarPage() {
   const navState = (location.state as { tab?: string; query?: string; topic?: string }) || {};
   const defaultTab = navState.tab || "exercises";
 
-  const [activeTab, setActiveTab] = useState(defaultTab);
+  const lessonId = new URLSearchParams(location.search).get("lesson");
+  const [activeTab, setActiveTab] = useState(lessonId ? "lesson" : defaultTab);
   const [explainTopic, setExplainTopic] = useState("");
 
   const goToExplainTab = (topicText: string) => {
@@ -87,7 +89,7 @@ export default function GrammarPage() {
     <div className="min-h-screen bg-fjord-soft flex flex-col">
       <header className="border-b border-border/50 bg-cream/80 backdrop-blur-md sticky top-0 z-50">
         <div className="container flex items-center gap-3 h-14">
-          <Button variant="ghost" size="icon" onClick={() => navigate("/practice")} className="text-primary hover:text-primary/80">
+          <Button variant="ghost" size="icon" onClick={() => navigate(lessonId ? `/lekcija/${lessonId}` : "/practice")} className="text-primary hover:text-primary/80" aria-label="Nazad">
             <ArrowLeft className="w-4 h-4" />
           </Button>
           <span className="font-display font-bold text-lg text-primary">Gramatika</span>
@@ -100,6 +102,11 @@ export default function GrammarPage() {
       <div className={`flex-1 container py-6 ${activeTab === "explain" ? "max-w-5xl" : "max-w-2xl"}`}>
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
           <TabsList className="w-full flex gap-0.5 overflow-x-auto scrollbar-hide">
+            {lessonId && (
+              <TabsTrigger value="lesson" className="gap-1 text-[11px] sm:text-xs px-2 sm:px-3">
+                <Bookmark className="w-3.5 h-3.5 shrink-0 hidden sm:block" /> Lekcija
+              </TabsTrigger>
+            )}
             <TabsTrigger value="exercises" className="gap-1 text-[11px] sm:text-xs px-2 sm:px-3">
               <BookOpen className="w-3.5 h-3.5 shrink-0 hidden sm:block" /> Vežbe
             </TabsTrigger>
@@ -117,6 +124,11 @@ export default function GrammarPage() {
             </TabsTrigger>
           </TabsList>
 
+          {lessonId && (
+            <TabsContent value="lesson">
+              <LessonGrammarTab lessonId={lessonId} />
+            </TabsContent>
+          )}
           <TabsContent value="exercises">
             <ExercisesTab level={level} userId={user?.id} initialTopic={navState.tab === "exercises" ? navState.topic : undefined} onGoToExplain={goToExplainTab} />
           </TabsContent>

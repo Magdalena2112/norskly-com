@@ -114,7 +114,10 @@ export default function CourseLessonPage() {
   const moduleKeys = LESSON_TABS.map((t) => t.key).filter((k) => k !== "intro" && m[k] && MODULE_META[k]);
   const hasMaterial = (k: string) => !["writing", "review"].includes(k);
   const openEx: Exercise[] = open ? m[open]?.exercises || [] : [];
-  const openModule = (k: string | null) => { setOpen(k); setView("learn"); requestAnimationFrame(() => document.getElementById("lesson-modules")?.scrollIntoView({ behavior: "smooth" })); };
+  const openModule = (k: string | null) => {
+    if (k === "grammar") { navigate(`/grammar?lesson=${row.id}`); return; }
+    setOpen(k); setView("learn"); requestAnimationFrame(() => document.getElementById("lesson-modules")?.scrollIntoView({ behavior: "smooth" }));
+  };
 
   return (
     <StudentLayout>
