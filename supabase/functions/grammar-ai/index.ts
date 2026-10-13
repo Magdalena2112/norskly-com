@@ -262,7 +262,7 @@ Odgovori ISKLJUČIVO u JSON formatu, bez markdown-a. Format:
     }
   ]
 }` + qualityCheck;
-      userPrompt = `Generiši 5 kviz pitanja na temu "${topic}" iz ${lang.native}. Nivo: ${level}. Svako pitanje ima 4 opcije i jedno tačno rešenje. Za svako pitanje dodaj _error objekat sa kategorijom greške.`;
+      userPrompt = `Generiši 5 kviz pitanja na temu "${topic}" iz ${lang.native}. Nivo: ${level}. Svako pitanje ima 4 opcije i jedno tačno rešenje. Za svako pitanje dodaj _error objekat sa kategorijom greške. Važno: sve 4 opcije moraju biti iz iste gramatičke kategorije i svaka plauzibilna (tipične greške učenika na tom nivou) — bez opcija koje se odmah eliminišu. Tačan odgovor rasporedi na nasumične pozicije.`;
     } else if (action === "explain_topic") {
       systemPrompt = `Ti si nastavnik ${lang.promptName}. Objašnjavaš gramatičke teme za nivo ${level}.
 ${cefrFocus}
