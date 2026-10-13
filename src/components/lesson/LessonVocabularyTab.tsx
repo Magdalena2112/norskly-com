@@ -5,7 +5,8 @@ import { loadLessonContent, speakLines, type Exercise } from "@/lib/courseLesson
 import LessonExercise from "@/components/lesson/LessonExercise";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Volume2, BookOpen, ArrowRight, CheckCircle2, MessageSquareQuote, PenLine } from "lucide-react";
+import { Volume2, BookOpen, ArrowRight, CheckCircle2, MessageSquareQuote, PenLine, ZoomIn } from "lucide-react";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import v1 from "@/assets/lessons/en-a1-l01-vocab-1.webp.asset.json";
 import v2 from "@/assets/lessons/en-a1-l01-vocab-2.webp.asset.json";
 import v3 from "@/assets/lessons/en-a1-l01-vocab-3.webp.asset.json";
@@ -158,7 +159,7 @@ export default function LessonVocabularyTab({ lessonId, mode, onPractice }: { le
             </Card>
           )}
           <div className="flex flex-wrap justify-between gap-2">
-            {areaEx.length > 0 && <Button variant="hero" size="sm" onClick={() => setMode("practice")}><PenLine className="w-4 h-4" /> Provežbaj ovu oblast</Button>}
+            {areaEx.length > 0 && <Button variant="hero" size="sm" onClick={onPractice}><PenLine className="w-4 h-4" /> Provežbaj ovu oblast</Button>}
             {idx < areas.length - 1 && <Button variant="outline" size="sm" onClick={() => setIdx(idx + 1)}>Sledeća oblast <ArrowRight className="w-4 h-4" /></Button>}
           </div>
         </div>
@@ -184,12 +185,21 @@ export default function LessonVocabularyTab({ lessonId, mode, onPractice }: { le
             {exIdx < areaEx.length - 1 ? (
               <Button variant="hero" size="sm" onClick={() => setExIdx(exIdx + 1)}>Sledeća vežba <ArrowRight className="w-4 h-4" /></Button>
             ) : (
-              <Button variant="outline" size="sm" onClick={() => setMode("theory")}>Nazad na gradivo</Button>
+              <Button variant="outline" size="sm" onClick={onPractice}>Nazad na gradivo</Button>
             )}
           </div>
           {isAreaDone(a) && <p className="text-sm rounded-xl bg-forest/10 border border-forest/30 p-3">🎉 Bravo! Završila/o si sve vežbe ove oblasti.</p>}
         </div>
       )}
+      <Dialog open={!!zoom} onOpenChange={(o) => !o && setZoom(null)}>
+        <DialogContent className="max-w-4xl p-2">
+          <DialogTitle className="sr-only">{a.sr}</DialogTitle>
+          {zoom && <img src={zoom} alt={a.title} className="w-full h-auto max-h-[80vh] object-contain rounded-xl" />}
+          <Button variant="outline" size="sm" className="mx-auto" onClick={() => speakLines(active.map((w) => ({ speaker: "m", text: w.word.split(" / ")[0].replace("…", "") })), lang)}>
+            <Volume2 className="w-4 h-4" /> Poslušaj reči sa slike
+          </Button>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
