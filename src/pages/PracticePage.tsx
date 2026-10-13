@@ -273,6 +273,30 @@ export default function PracticePage() {
   const [situation, setSituation] = useState("slobodno");
   const [formality, setFormality] = useState("opušten");
   const [role, setRole] = useState("sagovornik");
+  const [searchParams] = useSearchParams();
+  const lessonCode = searchParams.get("lesson");
+  const lessonScenarios = getTalkScenarios(lessonCode);
+  const [scenario, setScenario] = useState<TalkScenario | null>(null);
+  const [scenarioPicked, setScenarioPicked] = useState(false);
+  const doneKey = `talk_lesson_done_${langCode}_${lessonCode}`;
+  const [doneScenarios, setDoneScenarios] = useState<string[]>(() => {
+    try { return JSON.parse(localStorage.getItem(`talk_lesson_done_${getCurrentLanguageCode()}_${new URLSearchParams(window.location.search).get("lesson")}`) || "[]"); } catch { return []; }
+  });
+  const startScenario = (s: TalkScenario | null) => {
+    setScenario(s);
+    setScenarioPicked(true);
+    setRecap(null);
+    setCurrentSessionId(null);
+    setMessages(s ? [{ role: "assistant", content: `[ODGOVOR]\n${s.opening}\n\n[SLEDEĆI KORAK]\nOdgovori sagovorniku. Tvoja uloga: ${s.studentRole}.` }] : []);
+  };
+  const completeScenario = async () => {
+    if (!scenario || !user) return;
+    const next = Array.from(new Set([...doneScenarios, scenario.id]));
+    setDoneScenarios(next);
+    localStorage.setItem(doneKey, JSON.stringify(next));
+    await logActivity(user.id, "talk", "lesson_scenario", 10, { lesson: lessonCode, scenario: scenario.id }, { dedupKey: `talk_${langCode}_${lessonCode}_${scenario.id}` });
+    toast.success("Situacija završena! +10 XP");
+  };
 
   // History state
   const [showHistory, setShowHistory] = useState(false);
