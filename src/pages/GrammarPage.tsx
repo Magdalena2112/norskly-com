@@ -1152,7 +1152,7 @@ function ExplainTab({ level, userId, initialQuery }: { level: string; userId?: s
 // ═══════════════════════════════════════
 // TAB 4: Mini Quiz
 // ═══════════════════════════════════════
-function QuizTab({ level, userId, initialTopic }: { level: string; userId?: string; initialTopic?: string }) {
+function QuizTab({ level, userId, initialTopic, lessonTopics, lessonTitle }: { level: string; userId?: string; initialTopic?: string; lessonTopics?: { label: string; aiTopic: string }[]; lessonTitle?: string }) {
   const [topic, setTopic] = useState(initialTopic || "");
   const [questions, setQuestions] = useState<QuizQuestion[]>([]);
   const [current, setCurrent] = useState(0);
@@ -1163,8 +1163,11 @@ function QuizTab({ level, userId, initialTopic }: { level: string; userId?: stri
   const [loading, setLoading] = useState(false);
   const [logged, setLogged] = useState(false);
 
-  const generate = async () => {
-    if (!topic.trim()) return;
+  const generate = async (override?: string) => {
+    const t = (override ?? topic).trim();
+    if (!t) return;
+    if (override) setTopic(t);
+    const topic_ = t;
     setLoading(true);
     setQuestions([]);
     setCurrent(0);
@@ -1243,10 +1246,29 @@ function QuizTab({ level, userId, initialTopic }: { level: string; userId?: stri
 
   return (
     <div className="space-y-4">
+      {questions.length === 0 && !loading && lessonTopics && lessonTopics.length > 0 && (
+        <Card className="shadow-nordic border-primary/20 bg-gradient-to-r from-primary/5 to-accent/5">
+          <CardHeader>
+            <CardTitle className="text-lg">Završni test lekcije</CardTitle>
+            <CardDescription>{lessonTitle ? `${lessonTitle} — ` : ""}pitanja iz svih gramatičkih tema ove lekcije.</CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-3">
+            <Button variant="hero" className="w-full" onClick={() => generate(lessonTopics.map((t) => t.aiTopic).join("; "))}>
+              Pokreni test lekcije
+            </Button>
+            <div className="flex flex-wrap gap-2">
+              <span className="text-xs text-muted-foreground w-full">Ili kviz za jednu temu:</span>
+              {lessonTopics.map((t) => (
+                <Button key={t.label} size="sm" variant="outline" className="text-xs" onClick={() => generate(t.aiTopic)}>{t.label}</Button>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      )}
       {questions.length === 0 && !loading && (
         <Card className="shadow-nordic bg-background/80 backdrop-blur-sm border-border/30">
           <CardHeader>
-            <CardTitle className="text-lg">Mini kviz</CardTitle>
+            <CardTitle className="text-lg">{lessonTopics?.length ? "Slobodan kviz" : "Mini kviz"}</CardTitle>
             <CardDescription>Izaberi temu i testiraj svoje znanje sa 5 pitanja.</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
@@ -1256,7 +1278,7 @@ function QuizTab({ level, userId, initialTopic }: { level: string; userId?: stri
               onChange={(e) => setTopic(e.target.value)}
               maxLength={100}
             />
-            <Button variant="hero" className="w-full" onClick={generate} disabled={!topic.trim()}>
+            <Button variant="hero" className="w-full" onClick={() => generate()} disabled={!topic.trim()}>
               Pokreni kviz
             </Button>
           </CardContent>
