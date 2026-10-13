@@ -2,8 +2,8 @@ import { useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { CheckCircle2, XCircle, AlertCircle, Loader2, Sparkles } from "lucide-react";
-import { isCorrect, type Exercise } from "@/lib/courseLessons";
+import { CheckCircle2, XCircle, AlertCircle, Loader2, Sparkles, Volume2 } from "lucide-react";
+import { isCorrect, speakLines, type Exercise } from "@/lib/courseLessons";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/context/AuthContext";
 import { logErrors } from "@/lib/logErrors";
@@ -54,7 +54,7 @@ export default function LessonExercise({
 
     if (user && wrongs.length) {
       logErrors(user.id, "grammar", "lesson", wrongs.slice(0, 5).map((w) => ({
-        category: /^(VO|GI|PCF|CO)-/.test(exercise.code) ? "vocabulary" : "grammar",
+        category: /^(VO|GI|PCF|CO|NUM)-/.test(exercise.code) ? "vocabulary" : "grammar",
         topic: `${exercise.code} · ${exercise.title}`,
         severity: 2,
         example_wrong: `${w.prompt} → ${w.wrong}`,
@@ -114,7 +114,16 @@ export default function LessonExercise({
           return (
             <li key={i} className={img ? "rounded-2xl border border-border/60 bg-background/70 p-3 space-y-2" : "space-y-1.5"}>
               {img && <img src={img} alt={`Slika ${i + 1}`} loading="lazy" className="w-full h-auto aspect-square object-contain rounded-xl bg-cream" />}
-              <p className="text-sm font-medium text-foreground">{i + 1}. {item.prompt}</p>
+              {item.audio ? (
+                <div className="flex items-center gap-2">
+                  <span className="text-sm font-medium text-foreground">{i + 1}.</span>
+                  <Button type="button" variant="outline" size="sm" onClick={() => speakLines([{ speaker: "m", text: item.audio! }], language)}>
+                    <Volume2 className="w-4 h-4 mr-1" /> Poslušaj
+                  </Button>
+                </div>
+              ) : (
+                <p className="text-sm font-medium text-foreground">{i + 1}. {item.prompt}</p>
+              )}
               {item.options ? (
                 <div className="flex flex-wrap gap-2">
                   {(shuffledOptions[i] || item.options).map((o) => (
