@@ -8,6 +8,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/context/AuthContext";
 import { logErrors } from "@/lib/logErrors";
 import { toast } from "sonner";
+import { ITEM_IMAGES } from "@/content/lessons/itemImages";
 
 type Status = "idle" | "correct" | "wrong" | "failed" | "partial" | "pending";
 interface ItemState { value: string; attempts: number; status: Status; feedback?: string; improved?: string }
@@ -100,12 +101,14 @@ export default function LessonExercise({
         {(done || finished) && <CheckCircle2 className="w-5 h-5 text-forest shrink-0" />}
       </div>
       <p className="text-sm text-muted-foreground mb-4">{exercise.instruction}</p>
-      <ol className="space-y-3">
+      <ol className={exercise.items.some((x) => x.image) ? "grid sm:grid-cols-2 gap-4" : "space-y-3"}>
         {exercise.items.map((item, i) => {
           const s = state[i];
           const locked = s.status === "correct" || s.status === "failed";
+          const img = item.image ? ITEM_IMAGES[item.image] : undefined;
           return (
-            <li key={i} className="space-y-1.5">
+            <li key={i} className={img ? "rounded-2xl border border-border/60 bg-background/70 p-3 space-y-2" : "space-y-1.5"}>
+              {img && <img src={img} alt={`Slika ${i + 1}`} loading="lazy" className="w-full h-auto aspect-square object-contain rounded-xl bg-cream" />}
               <p className="text-sm font-medium text-foreground">{i + 1}. {item.prompt}</p>
               {item.options ? (
                 <div className="flex flex-wrap gap-2">

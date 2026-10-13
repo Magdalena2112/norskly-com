@@ -4,7 +4,7 @@
 
 export interface DialogueLine { speaker: string; text: string }
 export interface IntroText { id: string; title: string; type: "dialogue" | "narrative"; scene?: string; lines: DialogueLine[] }
-export interface ExerciseItem { prompt: string; answers?: string[]; options?: string[]; open?: boolean; guide?: string }
+export interface ExerciseItem { prompt: string; answers?: string[]; options?: string[]; open?: boolean; guide?: string; image?: string }
 export interface Exercise { id: string; code: string; title: string; instruction: string; kind: string; items: ExerciseItem[] }
 
 export interface LessonContent {
