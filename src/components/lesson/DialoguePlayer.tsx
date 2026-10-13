@@ -55,7 +55,7 @@ export default function DialoguePlayer({
           {lines.map((l, i) => (
             <li key={i} className={`flex gap-2 rounded-lg px-2 py-1 transition-colors ${active === i ? "bg-secondary" : ""}`}>
               {count > 1 && (
-                <span className={`text-[11px] font-semibold px-2 py-0.5 rounded-full h-fit whitespace-nowrap ${COLORS[speakers.indexOf(l.speaker) % COLORS.length]}`}>{l.speaker}</span>
+                <span className={`text-[11px] font-semibold px-2 py-0.5 rounded-full h-fit whitespace-nowrap ${COLORS[[...l.speaker].reduce((a, ch) => a + ch.charCodeAt(0), 0) % COLORS.length]}`}>{l.speaker}</span>
               )}
               <span className="text-sm text-foreground">{l.text}</span>
             </li>
