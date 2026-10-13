@@ -18,7 +18,7 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import GrammarHistoryTab from "@/components/grammar/GrammarHistoryTab";
 import GrammarProgressTab from "@/components/grammar/GrammarProgressTab";
 import { getCurrentLanguageCode, getCurrentPersonalization } from "@/lib/currentLanguage";
-import LessonGrammarTab from "@/components/lesson/LessonGrammarTab";
+import LessonGrammarTab, { LESSON_GRAMMAR_TOPICS } from "@/components/lesson/LessonGrammarTab";
 
 // ─── Types ───
 interface Exercise {
@@ -81,6 +81,13 @@ export default function GrammarPage() {
   const [explainTopic, setExplainTopic] = useState("");
   const [practiceTopic, setPracticeTopic] = useState("");
   const [lessonTopicIdx, setLessonTopicIdx] = useState(0);
+  const [lessonMeta, setLessonMeta] = useState<{ code: string; title: string } | null>(null);
+  useEffect(() => {
+    if (!lessonId) return;
+    supabase.from("course_lessons").select("lesson_code,title_target").eq("id", lessonId).maybeSingle()
+      .then(({ data }) => data?.lesson_code && setLessonMeta({ code: data.lesson_code, title: data.title_target }));
+  }, [lessonId]);
+  const lessonTopics = lessonMeta ? (LESSON_GRAMMAR_TOPICS[lessonMeta.code] || []).map((t) => ({ label: t.label, aiTopic: t.aiTopic })) : undefined;
   const goToLessonPractice = (i: number) => { setLessonTopicIdx(i); setActiveTab("exercises"); window.scrollTo({ top: 0, behavior: "smooth" }); };
 
   const goToExplainTab = (topicText: string) => {
@@ -145,16 +152,24 @@ export default function GrammarPage() {
             )}
           </TabsContent>
           <TabsContent value="explain">
+            {lessonTopics && lessonTopics.length > 0 && (
+              <div className="mb-4 flex flex-wrap gap-2">
+                <span className="text-xs text-muted-foreground w-full">Teme iz lekcije — otvori dublje objašnjenje:</span>
+                {lessonTopics.map((t) => (
+                  <Button key={t.label} size="sm" variant="outline" className="text-xs" onClick={() => setExplainTopic(t.aiTopic)}>{t.label}</Button>
+                ))}
+              </div>
+            )}
             <ExplainTab key={explainTopic} level={level} userId={user?.id} initialQuery={explainTopic || (navState.tab === "explain" ? navState.query : undefined)} />
           </TabsContent>
           <TabsContent value="quiz">
-            <QuizTab level={level} userId={user?.id} initialTopic={navState.tab === "quiz" ? navState.topic : undefined} />
+            <QuizTab level={level} userId={user?.id} initialTopic={navState.tab === "quiz" ? navState.topic : undefined} lessonTopics={lessonTopics} lessonTitle={lessonMeta?.title} />
           </TabsContent>
           <TabsContent value="history">
-            <GrammarHistoryTab userId={user?.id} />
+            <GrammarHistoryTab userId={user?.id} lessonTopics={lessonTopics?.map((t) => t.aiTopic)} />
           </TabsContent>
           <TabsContent value="progress">
-            <GrammarProgressTab userId={user?.id} />
+            <GrammarProgressTab userId={user?.id} lessonTopics={lessonTopics} />
           </TabsContent>
         </Tabs>
       </div>
