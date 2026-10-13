@@ -4389,399 +4389,11 @@
       ]
     },
     "listening": {
-      "audios": [
-        {
-          "id": "A1",
-          "title": "Audio A1 · First Day",
-          "source": "EN-A1-L01-T01"
-        },
-        {
-          "id": "A2",
-          "title": "Audio A2 · In the Classroom",
-          "source": "EN-A1-L01-T02"
-        },
-        {
-          "id": "A3",
-          "title": "Audio A3 · At the Break",
-          "source": "EN-A1-L01-T03"
-        },
-        {
-          "id": "B",
-          "title": "Audio B · At the Door",
-          "lines": [
-            {
-              "speaker": "Sophie",
-              "text": "Good morning!"
-            },
-            {
-              "speaker": "Emma",
-              "text": "Good morning! I'm Emma."
-            },
-            {
-              "speaker": "Sophie",
-              "text": "I'm Sophie. Nice to meet you."
-            },
-            {
-              "speaker": "Emma",
-              "text": "Nice to meet you too!"
-            },
-            {
-              "speaker": "Sophie",
-              "text": "How are you?"
-            },
-            {
-              "speaker": "Emma",
-              "text": "I'm fine, thank you."
-            },
-            {
-              "speaker": "Sophie",
-              "text": "Great. Are you a student?"
-            },
-            {
-              "speaker": "Emma",
-              "text": "Yes, I am."
-            },
-            {
-              "speaker": "Sophie",
-              "text": "See you in class!"
-            },
-            {
-              "speaker": "Emma",
-              "text": "See you!"
-            }
-          ]
-        },
-        {
-          "id": "C",
-          "title": "Audio C · Short Introductions",
-          "lines": [
-            {
-              "speaker": "Voice 1",
-              "text": "Hi! I'm Oliver. I'm a student."
-            },
-            {
-              "speaker": "Voice 2",
-              "text": "Hello! I'm Ms Taylor. I'm your teacher."
-            },
-            {
-              "speaker": "Voice 3",
-              "text": "Good morning! I'm Emma. I'm happy."
-            }
-          ]
-        }
-      ],
-      "exercises": [
-        {
-          "id": "EN-A1-L01-LI-01",
-          "code": "LI-01",
-          "title": "Before listening",
-          "instruction": "Pre slušanja (Audio A1).",
-          "kind": "open",
-          "items": [
-            {
-              "prompt": "Ko govori?",
-              "open": true
-            },
-            {
-              "prompt": "Šta očekuješ da čuješ?",
-              "open": true
-            }
-          ]
-        },
-        {
-          "id": "EN-A1-L01-LI-02",
-          "code": "LI-02",
-          "title": "General idea",
-          "instruction": "Audio B.",
-          "kind": "closed",
-          "items": [
-            {
-              "prompt": "Gde se osobe nalaze?",
-              "answers": [
-                "at school"
-              ],
-              "options": [
-                "at school",
-                "at a shop"
-              ]
-            }
-          ]
-        },
-        {
-          "id": "EN-A1-L01-LI-03",
-          "code": "LI-03",
-          "title": "True/False",
-          "instruction": "Audio B.",
-          "kind": "closed",
-          "items": [
-            {
-              "prompt": "Sophie says good morning.",
-              "answers": [
-                "True"
-              ],
-              "options": [
-                "True",
-                "False"
-              ]
-            },
-            {
-              "prompt": "Emma says goodbye first.",
-              "answers": [
-                "False"
-              ],
-              "options": [
-                "True",
-                "False"
-              ]
-            },
-            {
-              "prompt": "Emma is a student.",
-              "answers": [
-                "True"
-              ],
-              "options": [
-                "True",
-                "False"
-              ]
-            }
-          ]
-        },
-        {
-          "id": "EN-A1-L01-LI-04",
-          "code": "LI-04",
-          "title": "Choose",
-          "instruction": "Audio B.",
-          "kind": "closed",
-          "items": [
-            {
-              "prompt": "What is the new girl's name?",
-              "answers": [
-                "Emma"
-              ],
-              "options": [
-                "Emma",
-                "Lily",
-                "Mia"
-              ]
-            },
-            {
-              "prompt": "Who asks How are you?",
-              "answers": [
-                "Sophie"
-              ],
-              "options": [
-                "Sophie",
-                "Oliver",
-                "Ms Taylor"
-              ]
-            }
-          ]
-        },
-        {
-          "id": "EN-A1-L01-LI-05",
-          "code": "LI-05",
-          "title": "Extract",
-          "instruction": "Audio B.",
-          "kind": "closed",
-          "items": [
-            {
-              "prompt": "Dva imena koja čuješ:",
-              "answers": [
-                "Emma i Sophie",
-                "Emma and Sophie",
-                "Sophie i Emma",
-                "Emma, Sophie",
-                "Sophie, Emma"
-              ]
-            },
-            {
-              "prompt": "Pozdrav na početku:",
-              "answers": [
-                "Good morning"
-              ]
-            }
-          ]
-        },
-        {
-          "id": "EN-A1-L01-LI-06",
-          "code": "LI-06",
-          "title": "Match speaker",
-          "instruction": "Audio C – poveži glas sa likom.",
-          "kind": "closed",
-          "items": [
-            {
-              "prompt": "Voice 1 = ___",
-              "answers": [
-                "Oliver"
-              ],
-              "options": [
-                "Oliver",
-                "Ms Taylor",
-                "Emma"
-              ]
-            },
-            {
-              "prompt": "Voice 2 = ___",
-              "answers": [
-                "Ms Taylor"
-              ],
-              "options": [
-                "Oliver",
-                "Ms Taylor",
-                "Emma"
-              ]
-            },
-            {
-              "prompt": "Voice 3 = ___",
-              "answers": [
-                "Emma"
-              ],
-              "options": [
-                "Oliver",
-                "Ms Taylor",
-                "Emma"
-              ]
-            }
-          ]
-        },
-        {
-          "id": "EN-A1-L01-LI-07",
-          "code": "LI-07",
-          "title": "Missing words",
-          "instruction": "Audio B – dopuni reči.",
-          "kind": "closed",
-          "items": [
-            {
-              "prompt": "I'm ___.",
-              "answers": [
-                "Emma"
-              ]
-            },
-            {
-              "prompt": "Nice to ___ you.",
-              "answers": [
-                "meet"
-              ]
-            },
-            {
-              "prompt": "See you in ___.",
-              "answers": [
-                "class"
-              ]
-            }
-          ]
-        },
-        {
-          "id": "EN-A1-L01-LI-08",
-          "code": "LI-08",
-          "title": "Order lines",
-          "instruction": "Audio B – redosled replika.",
-          "kind": "closed",
-          "items": [
-            {
-              "prompt": "1.",
-              "answers": [
-                "Good morning"
-              ],
-              "options": [
-                "Nice to meet you",
-                "Good morning",
-                "I'm Emma",
-                "See you"
-              ]
-            },
-            {
-              "prompt": "2.",
-              "answers": [
-                "I'm Emma"
-              ],
-              "options": [
-                "Nice to meet you",
-                "Good morning",
-                "I'm Emma",
-                "See you"
-              ]
-            },
-            {
-              "prompt": "3.",
-              "answers": [
-                "Nice to meet you"
-              ],
-              "options": [
-                "Nice to meet you",
-                "Good morning",
-                "I'm Emma",
-                "See you"
-              ]
-            },
-            {
-              "prompt": "4.",
-              "answers": [
-                "See you"
-              ],
-              "options": [
-                "Nice to meet you",
-                "Good morning",
-                "I'm Emma",
-                "See you"
-              ]
-            }
-          ]
-        },
-        {
-          "id": "EN-A1-L01-LI-09",
-          "code": "LI-09",
-          "title": "Identify speaker",
-          "instruction": "Audio C.",
-          "kind": "closed",
-          "items": [
-            {
-              "prompt": "Ko kaže I'm your teacher?",
-              "answers": [
-                "Ms Taylor"
-              ],
-              "options": [
-                "Oliver",
-                "Ms Taylor",
-                "Emma"
-              ]
-            },
-            {
-              "prompt": "Ko kaže I'm happy?",
-              "answers": [
-                "Emma"
-              ],
-              "options": [
-                "Oliver",
-                "Ms Taylor",
-                "Emma"
-              ]
-            }
-          ]
-        },
-        {
-          "id": "EN-A1-L01-LI-10",
-          "code": "LI-10",
-          "title": "Real-life listening",
-          "instruction": "Posle slušanja.",
-          "kind": "open",
-          "items": [
-            {
-              "prompt": "Reci ime jednog govornika.",
-              "open": true
-            },
-            {
-              "prompt": "Da li je osoba student ili nastavnik?",
-              "open": true
-            }
-          ]
-        }
-      ],
       "scenes": [
         {
           "id": "S1",
-          "title": "Scena 1 · New Student at the Office",
-          "context": "Nova učenica dolazi u školsku kancelariju i treba da kaže ime.",
+          "title": "Nova učenica u kancelariji",
+          "context": "Poslušaj razgovor i odgovori na pitanja.",
           "lines": [
             {
               "speaker": "Mr Brown",
@@ -4867,12 +4479,13 @@
               "answer": "Goodbye!",
               "explanation": "Na kraju kaže „Goodbye!“"
             }
-          ]
+          ],
+          "code": "LI-01"
         },
         {
           "id": "S2",
-          "title": "Scena 2 · What's in Your Bag?",
-          "context": "Dva druga iz razreda upoređuju šta imaju u torbi.",
+          "title": "Šta je u torbi?",
+          "context": "Poslušaj razgovor i odgovori na pitanja.",
           "lines": [
             {
               "speaker": "Tom",
@@ -4958,12 +4571,13 @@
               "answer": "She is tired too.",
               "explanation": "„Me too!“ znači da je i ona umorna."
             }
-          ]
+          ],
+          "code": "LI-02"
         },
         {
           "id": "S3",
-          "title": "Scena 3 · Phone Numbers and Ages",
-          "context": "Učenici razmenjuju godine i brojeve telefona.",
+          "title": "Godine i broj telefona",
+          "context": "Poslušaj razgovor i odgovori na pitanja.",
           "lines": [
             {
               "speaker": "Jack",
@@ -5040,10 +4654,347 @@
               "options": [
                 "six",
                 "sixteen",
-                "sixty"
+                "seventeen"
               ],
               "answer": "sixteen",
               "explanation": "„She is sixteen.“ — pazi na -teen."
+            }
+          ],
+          "code": "LI-03"
+        },
+        {
+          "id": "LI-04",
+          "code": "LI-04",
+          "title": "Pozdrav na kraju časa",
+          "context": "Poslušaj i izaberi odgovor.",
+          "lines": [
+            {
+              "speaker": "Teacher",
+              "text": "Good afternoon, Ben. How are you?"
+            },
+            {
+              "speaker": "Ben",
+              "text": "I'm fine, thank you."
+            },
+            {
+              "speaker": "Teacher",
+              "text": "See you tomorrow!"
+            },
+            {
+              "speaker": "Ben",
+              "text": "Goodbye!"
+            }
+          ],
+          "questions": [
+            {
+              "prompt": "Koji pozdrav čuješ na početku?",
+              "options": [
+                "Good morning!",
+                "Good afternoon!",
+                "Good evening!"
+              ],
+              "answer": "Good afternoon!",
+              "explanation": "Razgovor počinje sa „Good afternoon“. "
+            },
+            {
+              "prompt": "Kako se Ben oseća?",
+              "options": [
+                "He's tired.",
+                "He's fine.",
+                "He's happy."
+              ],
+              "answer": "He's fine.",
+              "explanation": "Ben kaže „I’m fine“."
+            }
+          ]
+        },
+        {
+          "id": "LI-05",
+          "code": "LI-05",
+          "title": "Ko govori?",
+          "context": "Poslušaj i izaberi odgovor.",
+          "lines": [
+            {
+              "speaker": "Nora",
+              "text": "Hello, I'm Nora. I'm a teacher."
+            },
+            {
+              "speaker": "Leo",
+              "text": "Hi, I'm Leo. I'm a student."
+            },
+            {
+              "speaker": "Eva",
+              "text": "Hello, I'm Eva. I'm a student too."
+            }
+          ],
+          "questions": [
+            {
+              "prompt": "Ko je nastavnik?",
+              "options": [
+                "Nora",
+                "Leo",
+                "Eva"
+              ],
+              "answer": "Nora",
+              "explanation": "Nora kaže „I’m a teacher“. "
+            },
+            {
+              "prompt": "Ko se predstavlja drugi?",
+              "options": [
+                "Nora",
+                "Leo",
+                "Eva"
+              ],
+              "answer": "Leo",
+              "explanation": "Posle Nore govori Leo."
+            }
+          ]
+        },
+        {
+          "id": "LI-06",
+          "code": "LI-06",
+          "title": "Predmeti na stolu",
+          "context": "Poslušaj i izaberi odgovor.",
+          "lines": [
+            {
+              "speaker": "Teacher",
+              "text": "What's on your desk, Sam?"
+            },
+            {
+              "speaker": "Sam",
+              "text": "A book, a pencil and a ruler."
+            },
+            {
+              "speaker": "Teacher",
+              "text": "Is this your pen?"
+            },
+            {
+              "speaker": "Sam",
+              "text": "No, it isn't. It's Lucy's pen."
+            }
+          ],
+          "questions": [
+            {
+              "prompt": "Koji predmet Sam pominje?",
+              "options": [
+                "an eraser",
+                "a ruler",
+                "a notebook"
+              ],
+              "answer": "a ruler",
+              "explanation": "Sam navodi „a book, a pencil and a ruler“. "
+            },
+            {
+              "prompt": "Čija je hemijska olovka?",
+              "options": [
+                "Sam's",
+                "Lucy's",
+                "the teacher's"
+              ],
+              "answer": "Lucy's",
+              "explanation": "Sam kaže „It’s Lucy’s pen“."
+            }
+          ]
+        },
+        {
+          "id": "LI-07",
+          "code": "LI-07",
+          "title": "Kako se osećaju?",
+          "context": "Poslušaj i izaberi odgovor.",
+          "lines": [
+            {
+              "speaker": "Ruby",
+              "text": "Hi, Max. I'm happy today. How are you?"
+            },
+            {
+              "speaker": "Max",
+              "text": "I'm tired."
+            },
+            {
+              "speaker": "Ruby",
+              "text": "Is Amy tired too?"
+            },
+            {
+              "speaker": "Max",
+              "text": "No, she isn't. She's fine."
+            }
+          ],
+          "questions": [
+            {
+              "prompt": "Kako se oseća Max?",
+              "options": [
+                "happy",
+                "tired",
+                "fine"
+              ],
+              "answer": "tired",
+              "explanation": "Max kaže „I’m tired“. "
+            },
+            {
+              "prompt": "Da li je Amy umorna?",
+              "options": [
+                "Yes, she is.",
+                "No, she is fine.",
+                "No, she is happy."
+              ],
+              "answer": "No, she is fine.",
+              "explanation": "Max kaže „She’s fine“."
+            }
+          ]
+        },
+        {
+          "id": "LI-08",
+          "code": "LI-08",
+          "title": "Brojanje u učionici",
+          "context": "Poslušaj i izaberi odgovor.",
+          "lines": [
+            {
+              "speaker": "Teacher",
+              "text": "There are fourteen books and four notebooks on the table."
+            },
+            {
+              "speaker": "Student",
+              "text": "And how many pens?"
+            },
+            {
+              "speaker": "Teacher",
+              "text": "There are nineteen pens and nine pencils."
+            }
+          ],
+          "questions": [
+            {
+              "prompt": "Koliko knjiga čuješ?",
+              "options": [
+                "four",
+                "fourteen",
+                "fifteen"
+              ],
+              "answer": "fourteen",
+              "explanation": "Čuje se „fourteen books“. "
+            },
+            {
+              "prompt": "Koliko hemijskih olovaka ima?",
+              "options": [
+                "nine",
+                "nineteen",
+                "eighteen"
+              ],
+              "answer": "nineteen",
+              "explanation": "Nastavnik kaže „nineteen pens“."
+            }
+          ]
+        },
+        {
+          "id": "LI-09",
+          "code": "LI-09",
+          "title": "Slovkanje imena",
+          "context": "Poslušaj i izaberi odgovor.",
+          "lines": [
+            {
+              "speaker": "Receptionist",
+              "text": "What's your name?"
+            },
+            {
+              "speaker": "Rose",
+              "text": "My name is Rose."
+            },
+            {
+              "speaker": "Receptionist",
+              "text": "How do you spell it?"
+            },
+            {
+              "speaker": "Rose",
+              "text": "R – O – S – E."
+            },
+            {
+              "speaker": "Receptionist",
+              "text": "And your friend?"
+            },
+            {
+              "speaker": "Rose",
+              "text": "His name is Finn. F – I – N – N."
+            }
+          ],
+          "questions": [
+            {
+              "prompt": "Kako se piše prvo ime?",
+              "options": [
+                "ROSE",
+                "ROZE",
+                "ROSS"
+              ],
+              "answer": "ROSE",
+              "explanation": "Čuje se R–O–S–E."
+            },
+            {
+              "prompt": "Kako se piše ime prijatelja?",
+              "options": [
+                "FIN",
+                "FINN",
+                "FINE"
+              ],
+              "answer": "FINN",
+              "explanation": "Čuje se F–I–N–N."
+            }
+          ]
+        },
+        {
+          "id": "LI-10",
+          "code": "LI-10",
+          "title": "Novo odeljenje",
+          "context": "Poslušaj i izaberi odgovor.",
+          "lines": [
+            {
+              "speaker": "Teacher",
+              "text": "Good morning! I'm Ms Green. What's your name?"
+            },
+            {
+              "speaker": "Dan",
+              "text": "I'm Dan. I'm thirteen."
+            },
+            {
+              "speaker": "Teacher",
+              "text": "Welcome, Dan. You are in class eight."
+            },
+            {
+              "speaker": "Dan",
+              "text": "Thank you. Is Alex in class eight too?"
+            },
+            {
+              "speaker": "Teacher",
+              "text": "No, Alex is in class eighteen."
+            }
+          ],
+          "questions": [
+            {
+              "prompt": "Koliko godina ima Dan?",
+              "options": [
+                "twelve",
+                "thirteen",
+                "fourteen"
+              ],
+              "answer": "thirteen",
+              "explanation": "Dan kaže „I’m thirteen“. "
+            },
+            {
+              "prompt": "U kom je odeljenju Dan?",
+              "options": [
+                "class eight",
+                "class eighteen",
+                "class ten"
+              ],
+              "answer": "class eight",
+              "explanation": "Nastavnica kaže Danu „You are in class eight“. "
+            },
+            {
+              "prompt": "U kom je odeljenju Alex?",
+              "options": [
+                "class eight",
+                "class eighteen",
+                "class seventeen"
+              ],
+              "answer": "class eighteen",
+              "explanation": "Alex je u „class eighteen“."
             }
           ]
         }
