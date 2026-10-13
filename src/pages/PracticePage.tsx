@@ -547,7 +547,8 @@ export default function PracticePage() {
           settings: {
             situation: situationPresets.find((s) => s.value === situation)?.label,
             formality: formalityOptions.find((f) => f.value === formality)?.label,
-            role: roleOptions.find((r) => r.value === role)?.label,
+            role: scenario ? scenario.aiRole : roleOptions.find((r) => r.value === role)?.label,
+            ...(scenario ? { situation: scenario.title, scenario: { title: scenario.title, ai_role: scenario.aiRole, student_role: scenario.studentRole, goals: scenario.goals, instructions: scenario.instructions } } : {}),
           },
         }),
       });
@@ -845,6 +846,37 @@ export default function PracticePage() {
     );
   }
 
+  // ── Lesson scenario picker ──
+  if (lessonScenarios.length > 0 && !scenarioPicked) {
+    return (
+      <div className="min-h-screen bg-fjord-soft flex flex-col">
+        <header className="border-b border-border/50 bg-cream/80 backdrop-blur-md sticky top-0 z-50">
+          <div className="container flex items-center h-14 gap-1">
+            <BackButton />
+            <span className="font-display font-bold text-lg text-primary">Norskly</span>
+          </div>
+        </header>
+        <div className="container max-w-3xl py-8 space-y-4">
+          <div>
+            <h1 className="font-display text-2xl font-bold text-primary">Razgovor — lekcija</h1>
+            <p className="text-sm text-muted-foreground mt-1">Obavezne situacije: AI preuzima ulogu, započinje razgovor i vodi te kroz ciljeve. Svaka završena situacija donosi 10 XP.</p>
+          </div>
+          <div className="grid sm:grid-cols-2 gap-3">
+            {lessonScenarios.map((s) => (
+              <button key={s.id} onClick={() => startScenario(s)} className="text-left rounded-2xl border border-border/60 bg-cream/90 p-4 shadow-card-soft hover:border-primary/50 transition-colors">
+                <div className="flex justify-between text-[11px] font-mono text-primary/60"><span>{s.id}</span>{doneScenarios.includes(s.id) && <span>✓ Završeno</span>}</div>
+                <h3 className="font-display font-semibold text-primary mt-1">{s.title}</h3>
+                <p className="text-sm text-muted-foreground mt-1">{s.description}</p>
+                <p className="text-xs text-foreground/70 mt-2">AI: {s.aiRole}</p>
+              </button>
+            ))}
+          </div>
+          <Button variant="outline" onClick={() => startScenario(null)}><MessageCircle className="w-4 h-4" /> Slobodan razgovor</Button>
+        </div>
+      </div>
+    );
+  }
+
   // ── Chat screen ──
   return (
     <div className="min-h-screen bg-fjord-soft flex flex-col">
@@ -882,6 +914,25 @@ export default function PracticePage() {
           </div>
         </div>
       </header>
+
+      {scenario && (
+        <div className="border-b border-border/50 bg-secondary/40">
+          <div className="container max-w-3xl py-3 flex flex-wrap items-start justify-between gap-3">
+            <div className="text-sm">
+              <p className="font-semibold text-primary">{scenario.id} · {scenario.title} — AI: {scenario.aiRole}</p>
+              <ul className="mt-1 flex flex-wrap gap-x-4 gap-y-1 text-xs text-muted-foreground">
+                {scenario.goals.map((g) => <li key={g}>• {g}</li>)}
+              </ul>
+            </div>
+            <div className="flex gap-2">
+              <Button size="sm" variant="outline" onClick={() => setScenarioPicked(false)}>Situacije</Button>
+              {doneScenarios.includes(scenario.id)
+                ? <span className="text-xs text-primary self-center">✓ Završeno</span>
+                : <Button size="sm" variant="hero" disabled={messages.filter((m) => m.role === "user").length < 3} onClick={completeScenario}>Završi situaciju</Button>}
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* History drawer */}
       <AnimatePresence>
