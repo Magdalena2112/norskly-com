@@ -78,7 +78,7 @@ export default function DashboardPage() {
 
   useEffect(() => {
     if (!user) return;
-    const level = profile.level || "A1";
+    const level = (String(profile.level || "A1").match(/[ABC][12]/)?.[0]) || "A1";
     (async () => {
       const [{ data: ls }, { data: pr }] = await Promise.all([
         supabase.from("course_lessons").select("id, sort_order, cefr_level, title_target, summary").eq("language", code).eq("cefr_level", level).eq("is_published", true).order("sort_order"),
