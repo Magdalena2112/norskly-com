@@ -84,14 +84,49 @@ function voicesFor(lang: string) {
 
 const PITCHES = [1, 0.8, 1.2, 0.95, 1.1];
 
+// Pre-recorded natural voices per speaker: src/content/lessons/<code>.audio.json maps "speaker|text" -> clip URL.
+const CLIPS: Record<string, string> = Object.assign(
+  {},
+  ...Object.values(import.meta.glob("../content/lessons/*.audio.json", { eager: true, import: "default" }) as unknown as Record<string, string>[]),
+);
+let session = 0;
+let currentAudio: HTMLAudioElement | null = null;
+
 export function speakLines(
   lines: DialogueLine[],
   lang: string,
   opts: { slow?: boolean; rate?: number; onLine?: (i: number) => void; onEnd?: () => void } = {},
 ) {
+  stopSpeaking();
+  const rate = opts.rate ?? (opts.slow ? 0.75 : 1);
+  if (lines.length && lines.every((l) => CLIPS[`${l.speaker}|${l.text}`]) && typeof Audio !== "undefined") {
+    const id = ++session;
+    const playAt = (i: number) => {
+      if (id !== session) return;
+      if (i >= lines.length) { currentAudio = null; opts.onEnd?.(); return; }
+      const a = new Audio(CLIPS[`${lines[i].speaker}|${lines[i].text}`]);
+      a.playbackRate = rate;
+      (a as HTMLAudioElement & { preservesPitch?: boolean }).preservesPitch = true;
+      currentAudio = a;
+      opts.onLine?.(i);
+      const next = () => setTimeout(() => playAt(i + 1), lines.length > 1 ? 350 : 0);
+      a.onended = next;
+      a.onerror = next;
+      a.play().catch(next);
+    };
+    playAt(0);
+    return;
+  }
+  speakBrowser(lines, lang, { ...opts, rate: opts.rate ?? (opts.slow ? 0.7 : 0.95) });
+}
+
+function speakBrowser(
+  lines: DialogueLine[],
+  lang: string,
+  opts: { rate: number; onLine?: (i: number) => void; onEnd?: () => void },
+) {
   const synth = window.speechSynthesis;
   if (!synth) return;
-  synth.cancel();
   const speakers = Array.from(new Set(lines.map((l) => l.speaker)));
   const voices = voicesFor(lang);
   lines.forEach((line, i) => {
@@ -100,7 +135,7 @@ export function speakLines(
     u.lang = LOCALE[lang] || "en-GB";
     if (voices.length) u.voice = voices[idx % voices.length];
     u.pitch = PITCHES[idx % PITCHES.length];
-    u.rate = opts.rate ?? (opts.slow ? 0.7 : 0.95);
+    u.rate = opts.rate;
     u.onstart = () => opts.onLine?.(i);
     if (i === lines.length - 1) u.onend = () => opts.onEnd?.();
     synth.speak(u);
@@ -108,5 +143,7 @@ export function speakLines(
 }
 
 export function stopSpeaking() {
-  window.speechSynthesis?.cancel();
+  session++;
+  if (currentAudio) { currentAudio.pause(); currentAudio = null; }
+  if (typeof window !== "undefined") window.speechSynthesis?.cancel();
 }
