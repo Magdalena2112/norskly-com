@@ -6,7 +6,7 @@ const STT_MODEL = "openai/gpt-transcribe";
 const TTS_MODEL = "google/gemini-3.1-flash-tts-preview";
 const MAX_AUDIO_BYTES = 10 * 1024 * 1024;
 const MAX_TTS_CHARS = 1500;
-const VOICES: Record<string, string> = { no: "Kore", de: "Kore", en: "Kore" };
+const ROLE_VOICES: Record<string, string> = { f: "Aoede", m: "Charon" };
 const LANG_NAME: Record<string, string> = { no: "Norwegian Bokmål", de: "German", en: "English" };
 
 const json = (body: unknown, status = 200) =>
@@ -63,16 +63,20 @@ Deno.serve(async (req) => {
     const text = typeof body?.text === "string" ? body.text.trim() : "";
     const lang = ["no", "de", "en"].includes(body?.language) ? body.language : "no";
     if (!text || text.length > MAX_TTS_CHARS) return json({ error: "Neispravan tekst." }, 400);
+    const voiceName = ROLE_VOICES[body?.voice] || "Kore";
+    const beginner = ["A1", "A2"].includes(String(body?.level || "").toUpperCase());
+    const accent = lang === "en" ? " with a natural British (Southern English) accent" : lang === "no" ? " in standard Eastern Norwegian (Bokmål)" : " in standard High German";
+    const style = `Read the following line aloud in ${LANG_NAME[lang]}${accent}, as a friendly person in a real conversation. ${beginner ? "Speak clearly and a little slower than usual for a beginner learner, with short natural pauses between sentences, but never robotic or exaggerated." : "Speak at a natural, relaxed conversational pace."} Use natural rising intonation for questions. Read ONLY the text after this instruction, word for word, adding nothing.`;
 
     const r = await fetch(`${GATEWAY}/v1/audio/speech`, {
       method: "POST",
       headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
       body: JSON.stringify({
         model: TTS_MODEL,
-        contents: [{ role: "user", parts: [{ text: `Say naturally and warmly in ${LANG_NAME[lang]}: ${text}` }] }],
+        contents: [{ role: "user", parts: [{ text: `${style}\n\n${text}` }] }],
         generationConfig: {
           responseModalities: ["AUDIO"],
-          speechConfig: { voiceConfig: { prebuiltVoiceConfig: { voiceName: VOICES[lang] } } },
+          speechConfig: { voiceConfig: { prebuiltVoiceConfig: { voiceName: voiceName } } },
         },
         stream_format: "audio",
       }),
