@@ -175,13 +175,19 @@ Odgovori ISKLJUČIVO u JSON formatu, bez markdown-a. Format:
   "exercises": [
     {
       "id": 1,
-      "instruction": "Instrukcija na srpskom",
+      "instruction": "Kratka neutralna instrukcija na srpskom (vidi pravila ispod)",
       "sentence": "Rečenica na ${lang.native} sa _____ na mestu gde treba popuniti",
       "solution": "Tačan odgovor na ${lang.native}",
       "hint": "Kratak hint na srpskom"
     }
   ]
-}` + qualityCheck;
+}
+STROGA PRAVILA ZA POLJE "instruction":
+- Instrukcija mora biti NEUTRALNA i kratka: samo kaže šta treba uraditi, nikad KAKO.
+- DOZVOLJENI obrasci: "Dopuni rečenicu.", "Upiši odgovarajući oblik glagola.", "Izaberi tačan oblik.", "Dopuni odgovarajućom zamenicom.", "Upiši ispravan član."
+- STROGO ZABRANJENO: pominjati gramatičko pravilo, signal u rečenici ili razlog (npr. "jer je treće lice jednine", "pošto reč počinje suglasnikom", "koristi 'is' sa he/she/it").
+- STROGO ZABRANJENO: pominjati tačan odgovor ili deo tačnog odgovora u instrukciji.
+- Isto važi za "hint": sme samo blago usmeravanje (npr. "Obrati pažnju na subjekat rečenice."), nikad direktan odgovor.` + qualityCheck;
       userPrompt = `Generiši ${count || 5} vežbi na temu "${topic}". Jezik: ${lang.native}. Nivo: ${level}. Svaka vežba treba da ima rečenicu sa blankom i rešenje.`;
     } else if (action === "check_exercise") {
       errorLimit = 2;
