@@ -37,7 +37,8 @@ import {
   Play,
   Volume2,
 } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { getTalkScenarios, type TalkScenario } from "@/content/lessons/talkScenarios";
 import BackButton from "@/components/BackButton";
 import ReactMarkdown from "react-markdown";
 import { logActivity } from "@/lib/logActivity";
