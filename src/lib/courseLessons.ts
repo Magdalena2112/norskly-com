@@ -152,10 +152,9 @@ export function speakLines(
     return;
   }
   // Try natural server-side voices first; fall back to the browser voice on any failure.
-  const id = session + 1;
+  const id = session;
   void Promise.all(lines.map((l) => naturalClip(l, lang))).then((urls) => {
-    if (id !== session + 1 || session !== id - 1) { /* stopped meanwhile */ }
-    if (session + 1 !== id + 1 && id !== session + 1) return;
+    if (id !== session) return; // stopped or replaced meanwhile
     if (urls.every((u) => u) && typeof Audio !== "undefined") {
       playClips(lines, urls as string[], rate, opts);
     } else {
