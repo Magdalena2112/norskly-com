@@ -5,7 +5,7 @@ import { loadLessonContent, speakLines, type Exercise } from "@/lib/courseLesson
 import LessonExercise from "@/components/lesson/LessonExercise";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Volume2, BookOpen, ArrowRight, CheckCircle2, MessageSquareQuote, PenLine, ZoomIn } from "lucide-react";
+import { Volume2, BookOpen, ArrowRight, CheckCircle2, MessageSquareQuote, PenLine, ZoomIn, Layers } from "lucide-react";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import v1 from "@/assets/lessons/en-a1-l01-vocab-1.webp.asset.json";
 import v2 from "@/assets/lessons/en-a1-l01-vocab-2.webp.asset.json";
@@ -27,7 +27,7 @@ interface Area { key: string; title: string; sr: string; images?: string[]; word
 
 let sharedIdx = 0;
 
-export default function LessonVocabularyTab({ lessonId, mode, onPractice }: { lessonId: string; mode: "theory" | "practice"; onPractice: () => void }) {
+export default function LessonVocabularyTab({ lessonId, mode, onPractice, onFlashcards }: { lessonId: string; mode: "theory" | "practice"; onPractice: () => void; onFlashcards?: (areaKey: string) => void }) {
   const { user } = useAuth();
   const [row, setRow] = useState<any>(null);
   const [areas, setAreas] = useState<Area[]>([]);
@@ -178,7 +178,10 @@ export default function LessonVocabularyTab({ lessonId, mode, onPractice }: { le
             </Card>
           )}
           <div className="flex flex-wrap justify-between gap-2">
-            {areaEx.length > 0 && <Button variant="hero" size="sm" onClick={onPractice}><PenLine className="w-4 h-4" /> Provežbaj ovu oblast</Button>}
+            <div className="flex flex-wrap gap-2">
+              {areaEx.length > 0 && <Button variant="hero" size="sm" onClick={onPractice}><PenLine className="w-4 h-4" /> Provežbaj ovu oblast</Button>}
+              {onFlashcards && <Button variant="outline" size="sm" onClick={() => onFlashcards(a.key)}><Layers className="w-4 h-4" /> Provežbaj kroz fleš-kartice</Button>}
+            </div>
             {idx < areas.length - 1 && <Button variant="outline" size="sm" onClick={() => setIdx(idx + 1)}>Sledeća oblast <ArrowRight className="w-4 h-4" /></Button>}
           </div>
         </div>
@@ -221,4 +224,17 @@ export default function LessonVocabularyTab({ lessonId, mode, onPractice }: { le
       </Dialog>
     </div>
   );
+}
+
+export interface LessonFlashArea { key: string; sr: string; words: { word: string; translation: string; example?: string; pic?: string }[] }
+/** All lesson vocabulary grouped by area, each word with its illustration. */
+export async function loadLessonFlashcards(lessonId: string): Promise<{ lang: string; areas: LessonFlashArea[] }> {
+  const { data } = await supabase.from("course_lessons").select("*").eq("id", lessonId).maybeSingle();
+  if (!data) return { lang: "en", areas: [] };
+  const v = (await loadLessonContent(data as any)).modules?.vocabulary;
+  const raw: Area[] = Array.isArray(v?.areas) ? v.areas : [{ key: "_", title: "Reči", sr: "Reči", exercises: [], words: v?.words || [] }];
+  return {
+    lang: (data as any).language || "en",
+    areas: raw.map((x) => ({ key: x.key, sr: x.sr, words: x.words.map((w) => ({ ...w, pic: picFor(w.word, x.images) ?? (x.images?.[0] ? IMAGES[x.images[0]] : undefined) })) })),
+  };
 }

@@ -15,8 +15,9 @@ import {
 } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { useNavigate, useLocation } from "react-router-dom";
-import LessonVocabularyTab from "@/components/lesson/LessonVocabularyTab";
+import LessonVocabularyTab, { loadLessonFlashcards, type LessonFlashArea } from "@/components/lesson/LessonVocabularyTab";
 import { supabase } from "@/integrations/supabase/client";
+import { speakLines } from "@/lib/courseLessons";
 import { logActivity } from "@/lib/logActivity";
 import { logErrors } from "@/lib/logErrors";
 import { getCurrentLanguageCode, getCurrentPersonalization } from "@/lib/currentLanguage";
@@ -48,6 +49,7 @@ interface SavedWord {
   theme: string;
   user_sentence: string | null;
   status: string;
+  pic?: string;
 }
 
 interface QuizQuestion {
@@ -91,6 +93,8 @@ export default function VocabularyPage() {
   const level = profile.level || "A1";
   const lessonId = new URLSearchParams(useLocation().search).get("lesson");
   const [tab, setTab] = useState(lessonId ? "lesson" : "generate");
+  const [flashArea, setFlashArea] = useState<{ key: string; n: number } | null>(null);
+  const openFlash = (key: string) => { setFlashArea({ key, n: Date.now() }); setTab("flashcards"); };
 
   return (
     <div className="min-h-screen bg-fjord-soft flex flex-col">
@@ -142,7 +146,7 @@ export default function VocabularyPage() {
           {lessonId && (
             <>
               <TabsContent value="lesson">
-                <LessonVocabularyTab lessonId={lessonId} mode="theory" onPractice={() => setTab("practice")} />
+                <LessonVocabularyTab lessonId={lessonId} mode="theory" onPractice={() => setTab("practice")} onFlashcards={openFlash} />
               </TabsContent>
               <TabsContent value="practice">
                 <LessonVocabularyTab lessonId={lessonId} mode="practice" onPractice={() => setTab("lesson")} />
@@ -160,7 +164,7 @@ export default function VocabularyPage() {
             <SentenceTab level={level} userId={user?.id} />
           </TabsContent>
           <TabsContent value="flashcards">
-            <FlashcardsTab userId={user?.id} />
+            <FlashcardsTab userId={user?.id} lessonId={lessonId} startArea={flashArea} />
           </TabsContent>
           <TabsContent value="quiz">
             <QuizTab level={level} userId={user?.id} />
@@ -597,7 +601,19 @@ function buildQueue(words: SavedWord[]): QueueItem[] {
   return [...learning, ...rest];
 }
 
-function FlashcardsTab({ userId }: { userId?: string }) {
+function FlashcardsTab({ userId, lessonId, startArea }: { userId?: string; lessonId?: string | null; startArea?: { key: string; n: number } | null }) {
+  const [lessonData, setLessonData] = useState<{ lang: string; areas: LessonFlashArea[] } | null>(null);
+  useEffect(() => { if (lessonId) loadLessonFlashcards(lessonId).then(setLessonData); }, [lessonId]);
+  const startLesson = (key: string) => {
+    if (!lessonData) return;
+    const list = lessonData.areas.filter((x) => key === "all" || x.key === key);
+    startFromCollections(list.flatMap((x) => x.words.map((w, i) => ({
+      id: `lesson:${x.key}:${i}`, word: w.word, translation: w.translation, synonym: null, antonym: null,
+      example_sentence: w.example, topic: x.sr, pic: w.pic,
+    }))));
+  };
+  useEffect(() => { if (startArea && lessonData) startLesson(startArea.key); }, [startArea?.n, lessonData]);
+  const sayWord = (t: string) => speakLines([{ speaker: "m", text: t.split(" / ")[0].replace("…", "") }], lessonData?.lang || getCurrentLanguageCode());
   const [savedWords, setSavedWords] = useState<SavedWord[]>([]);
   const [queue, setQueue] = useState<QueueItem[]>([]);
   const [flipped, setFlipped] = useState(false);
@@ -630,6 +646,7 @@ function FlashcardsTab({ userId }: { userId?: string }) {
       theme: w.topic,
       user_sentence: null,
       status: "new",
+      pic: w.pic,
     }));
     setSavedWords(mapped);
     setQueue(buildQueue(mapped));
@@ -665,7 +682,7 @@ function FlashcardsTab({ userId }: { userId?: string }) {
       setKnownCount((c) => c + 1);
       setQueue((q) => q.slice(1));
 
-      if (userId) {
+      if (userId && !card.id.startsWith("lesson:")) {
         await supabase
           .from("vocab_items")
           .update({ status: "known" })
@@ -685,7 +702,7 @@ function FlashcardsTab({ userId }: { userId?: string }) {
         return updated;
       });
 
-      if (userId) {
+      if (userId && !card.id.startsWith("lesson:")) {
         await supabase
           .from("vocab_items")
           .update({ status: "learning" })
@@ -718,6 +735,27 @@ function FlashcardsTab({ userId }: { userId?: string }) {
     setLogged(false);
   };
 
+  if (!started && lessonId) {
+    if (!lessonData) return <p className="text-sm text-muted-foreground text-center py-8">Učitavanje reči lekcije…</p>;
+    const total = lessonData.areas.reduce((n, x) => n + x.words.length, 0);
+    return (
+      <Card className="shadow-nordic bg-background/80 backdrop-blur-sm border-border/30">
+        <CardHeader>
+          <CardTitle className="text-lg">Fleš-kartice lekcije</CardTitle>
+          <CardDescription>Sve reči iz lekcije su ovde sačuvane — sa slikom, izgovorom i prevodom.</CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-2">
+          <Button variant="hero" className="w-full" onClick={() => startLesson("all")}><Layers className="w-4 h-4" /> Sve reči lekcije ({total})</Button>
+          {lessonData.areas.map((x, i) => (
+            <Button key={x.key} variant="outline" className="w-full justify-between" onClick={() => startLesson(x.key)}>
+              <span>{i + 1}. {x.sr}</span><span className="text-xs text-muted-foreground">{x.words.length} reči</span>
+            </Button>
+          ))}
+        </CardContent>
+      </Card>
+    );
+  }
+
   if (!started) {
     return (
       <CollectionSelector
@@ -748,6 +786,7 @@ function FlashcardsTab({ userId }: { userId?: string }) {
               <Button variant="outline" onClick={handleRestart} className="gap-2">
                 <RotateCcw className="w-4 h-4" /> Ponovi
               </Button>
+              {lessonId && <Button variant="hero" onClick={() => setStarted(false)}>Izaberi oblast</Button>}
             </div>
           </CardContent>
         </Card>
@@ -812,7 +851,15 @@ function FlashcardsTab({ userId }: { userId?: string }) {
               <div aria-hidden className="pointer-events-none absolute -top-10 -right-10 w-32 h-32 rounded-full bg-accent/20 blur-2xl" />
               <div aria-hidden className="pointer-events-none absolute -bottom-12 -left-8 w-36 h-36 rounded-full bg-primary/15 blur-2xl" />
               <CardContent className="relative pt-6 text-center space-y-4">
-                {card && <FlashcardImage word={card.word} translation={card.translation} />}
+                {card?.pic ? (
+                  <div className="relative mx-auto w-48 sm:w-56">
+                    <img src={card.pic} alt={card.word} className="w-full aspect-[4/3] object-contain rounded-xl bg-cream/60" />
+                    <button type="button" aria-label={`Izgovori ${card.word}`} onClick={(e) => { e.stopPropagation(); sayWord(card.word); }}
+                      className="absolute top-2 right-2 rounded-full bg-background/85 backdrop-blur p-1.5 border border-border/60 text-primary">
+                      <Volume2 className="w-4 h-4" />
+                    </button>
+                  </div>
+                ) : card && <FlashcardImage word={card.word} translation={card.translation} />}
                 {!flipped ? (
                   <>
                     <p className="text-4xl font-display font-bold text-foreground">{frontText}</p>
