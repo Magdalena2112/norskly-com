@@ -90,6 +90,7 @@ export default function VocabularyPage() {
   const navigate = useNavigate();
   const level = profile.level || "A1";
   const lessonId = new URLSearchParams(useLocation().search).get("lesson");
+  const [tab, setTab] = useState(lessonId ? "lesson" : "generate");
 
   return (
     <div className="min-h-screen bg-fjord-soft flex flex-col">
@@ -106,22 +107,30 @@ export default function VocabularyPage() {
       </header>
 
       <div className="flex-1 container max-w-2xl py-6">
-        <Tabs defaultValue={lessonId ? "lesson" : "generate"} className="space-y-6">
+        <Tabs value={tab} onValueChange={setTab} className="space-y-6">
           <TabsList className="w-full flex gap-0.5 overflow-x-auto scrollbar-hide">
-            {lessonId && (
-              <TabsTrigger value="lesson" className="gap-1 text-[11px] sm:text-sm px-2 sm:px-3">
-                <BookOpen className="w-4 h-4 hidden sm:block shrink-0" /> Lekcija
-              </TabsTrigger>
+            {lessonId ? (
+              <>
+                <TabsTrigger value="lesson" className="gap-1 text-[11px] sm:text-sm px-2 sm:px-3">
+                  <BookOpen className="w-4 h-4 hidden sm:block shrink-0" /> Gradivo
+                </TabsTrigger>
+                <TabsTrigger value="practice" className="gap-1 text-[11px] sm:text-sm px-2 sm:px-3">
+                  <PenTool className="w-4 h-4 hidden sm:block shrink-0" /> Vežbe
+                </TabsTrigger>
+              </>
+            ) : (
+              <>
+                <TabsTrigger value="generate" className="gap-1 text-[11px] sm:text-sm px-2 sm:px-3">
+                  <BookOpen className="w-4 h-4 hidden sm:block shrink-0" /> Generiši
+                </TabsTrigger>
+                <TabsTrigger value="collections" className="gap-1 text-[11px] sm:text-sm px-2 sm:px-3">
+                  <FolderOpen className="w-4 h-4 hidden sm:block shrink-0" /> Kolekcije
+                </TabsTrigger>
+                <TabsTrigger value="sentence" className="gap-1 text-[11px] sm:text-sm px-2 sm:px-3">
+                  <PenTool className="w-4 h-4 hidden sm:block shrink-0" /> Rečenica
+                </TabsTrigger>
+              </>
             )}
-            <TabsTrigger value="generate" className="gap-1 text-[11px] sm:text-sm px-2 sm:px-3">
-              <BookOpen className="w-4 h-4 hidden sm:block shrink-0" /> Generiši
-            </TabsTrigger>
-            <TabsTrigger value="collections" className="gap-1 text-[11px] sm:text-sm px-2 sm:px-3">
-              <FolderOpen className="w-4 h-4 hidden sm:block shrink-0" /> Kolekcije
-            </TabsTrigger>
-            <TabsTrigger value="sentence" className="gap-1 text-[11px] sm:text-sm px-2 sm:px-3">
-              <PenTool className="w-4 h-4 hidden sm:block shrink-0" /> Rečenica
-            </TabsTrigger>
             <TabsTrigger value="flashcards" className="gap-1 text-[11px] sm:text-sm px-2 sm:px-3">
               <Layers className="w-4 h-4 hidden sm:block shrink-0" /> Kartice
             </TabsTrigger>
@@ -131,9 +140,14 @@ export default function VocabularyPage() {
           </TabsList>
 
           {lessonId && (
-            <TabsContent value="lesson">
-              <LessonVocabularyTab lessonId={lessonId} />
-            </TabsContent>
+            <>
+              <TabsContent value="lesson">
+                <LessonVocabularyTab lessonId={lessonId} mode="theory" onPractice={() => setTab("practice")} />
+              </TabsContent>
+              <TabsContent value="practice">
+                <LessonVocabularyTab lessonId={lessonId} mode="practice" onPractice={() => setTab("lesson")} />
+              </TabsContent>
+            </>
           )}
 
           <TabsContent value="generate">
