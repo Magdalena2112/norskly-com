@@ -1,0 +1,53 @@
+{
+ "v1": {
+  "hello": "/__l5e/assets-v1/8bb53fe5-ca9d-4c48-a0f2-94b964e3bae2/en-a1-l01-v1-00.webp",
+  "hi": "/__l5e/assets-v1/375cb699-fe1b-4499-ac32-a1d0cf8ed2f8/en-a1-l01-v1-01.webp",
+  "good morning": "/__l5e/assets-v1/ac1bcdf5-5e04-4246-a407-42f1ceb22720/en-a1-l01-v1-02.webp",
+  "nice to meet you": "/__l5e/assets-v1/408fbc5f-3ed6-44a6-9f2d-d9553e9ab27a/en-a1-l01-v1-03.webp",
+  "my name is…": "/__l5e/assets-v1/b063a617-c73f-4192-ac1c-b9343c9bd2f9/en-a1-l01-v1-04.webp",
+  "what’s your name?": "/__l5e/assets-v1/5f72d8ec-fc01-4b23-9e42-588f44a95db5/en-a1-l01-v1-10.webp",
+  "how are you?": "/__l5e/assets-v1/c1b5bbb2-ffd6-4be3-a719-0e21ebfda344/en-a1-l01-v1-11.webp",
+  "I’m fine.": "/__l5e/assets-v1/392a7064-b88f-431d-b2df-cd5974b2ff03/en-a1-l01-v1-12.webp",
+  "thank you": "/__l5e/assets-v1/c96526f5-7538-4a36-a7e9-efa1d63dc05e/en-a1-l01-v1-13.webp",
+  "see you": "/__l5e/assets-v1/f7622f6f-45c2-47dc-ae16-f29a6f9ffe08/en-a1-l01-v1-14.webp"
+ },
+ "v2": {
+  "teacher": "/__l5e/assets-v1/c53f6986-74cc-491a-8cc9-7a2b276f6628/en-a1-l01-v2-00.webp",
+  "student": "/__l5e/assets-v1/244e21d7-eb71-4a10-b739-1fe215f5bc99/en-a1-l01-v2-01.webp",
+  "friend": "/__l5e/assets-v1/9de94ef2-eee8-4d79-b12c-edd28c189a99/en-a1-l01-v2-02.webp",
+  "boy": "/__l5e/assets-v1/5d56bfc6-f2ac-4a28-bf67-f19e0bfd45c1/en-a1-l01-v2-03.webp",
+  "girl": "/__l5e/assets-v1/1add498e-56a8-4f45-8a04-1de2e8ba57a9/en-a1-l01-v2-04.webp",
+  "classroom": "/__l5e/assets-v1/10b319f4-08dd-4b42-a352-37e92736f2c4/en-a1-l01-v2-10.webp",
+  "class": "/__l5e/assets-v1/13a0a4ac-6b06-423a-bed3-ab7c9502aedc/en-a1-l01-v2-11.webp",
+  "book": "/__l5e/assets-v1/84ec4a2b-16e8-4587-b942-39af27e63763/en-a1-l01-v2-12.webp",
+  "notebook": "/__l5e/assets-v1/11b97e6d-413a-4ed0-b0f0-4b1044e673ce/en-a1-l01-v2-13.webp",
+  "bag": "/__l5e/assets-v1/f5984783-1d1c-42b1-8fff-ad41a966afc6/en-a1-l01-v2-14.webp",
+  "happy": "/__l5e/assets-v1/2be0c217-dce9-41ae-bcc2-012ffc1508af/en-a1-l01-v2-20.webp",
+  "good": "/__l5e/assets-v1/6f635808-c232-4a1f-b37f-82731cc3f0dd/en-a1-l01-v2-21.webp",
+  "okay": "/__l5e/assets-v1/6413d227-a69f-47a9-bbc6-19d7ba8d9d56/en-a1-l01-v2-22.webp",
+  "tired": "/__l5e/assets-v1/58289038-4dd1-4617-9a44-4c81fce35621/en-a1-l01-v2-23.webp",
+  "nervous": "/__l5e/assets-v1/f58af2c1-bc36-4d59-bfdd-b90033fd6193/en-a1-l01-v2-24.webp"
+ },
+ "v3": {
+  "door": "/__l5e/assets-v1/3d72c865-393f-41fa-ac3d-63eefe291c7e/en-a1-l01-v3-00.webp",
+  "backpack": "/__l5e/assets-v1/f4afbaac-4ad1-4982-92be-76ed40eb164d/en-a1-l01-v3-01.webp",
+  "desk": "/__l5e/assets-v1/aab6a014-1041-4234-9e8b-6596b1e87746/en-a1-l01-v3-02.webp",
+  "blackboard": "/__l5e/assets-v1/b980b08e-cd4b-4c2e-b84d-312e19e8723e/en-a1-l01-v3-10.webp",
+  "pen": "/__l5e/assets-v1/359b25c8-f1ad-4403-a49a-5e63d2510c34/en-a1-l01-v3-11.webp",
+  "chair": "/__l5e/assets-v1/213d54a1-2a1c-4fb8-bcd3-8d1f361f2325/en-a1-l01-v3-12.webp",
+  "book": "/__l5e/assets-v1/49080edb-0131-4fa6-88ac-04c0e472bc40/en-a1-l01-v3-20.webp",
+  "sharpener": "/__l5e/assets-v1/78957eeb-0c9d-48e4-bb20-1e613f4748b8/en-a1-l01-v3-21.webp",
+  "pencil": "/__l5e/assets-v1/dcc07c9c-728c-472e-8357-22547afb2ea3/en-a1-l01-v3-22.webp"
+ },
+ "v4": {
+  "crayons": "/__l5e/assets-v1/90c64661-967b-4121-805e-8b6b29225084/en-a1-l01-v4-00.webp",
+  "notebook": "/__l5e/assets-v1/3c3ec563-307f-48e6-9ba3-b9edfd449af5/en-a1-l01-v4-01.webp",
+  "eraser": "/__l5e/assets-v1/dd2bb8d7-0c04-4799-aa27-424282600fcd/en-a1-l01-v4-02.webp",
+  "teacher": "/__l5e/assets-v1/5f1c69eb-2530-4667-8010-3405f026eea5/en-a1-l01-v4-10.webp",
+  "ruler": "/__l5e/assets-v1/bab4263a-34aa-422a-b460-0233867bb8a7/en-a1-l01-v4-11.webp",
+  "pencil case": "/__l5e/assets-v1/9811a881-b4df-47f4-909c-bcf6df5b0ce1/en-a1-l01-v4-12.webp",
+  "scissors": "/__l5e/assets-v1/3e932636-f490-4d0c-87c3-56101303d5b0/en-a1-l01-v4-20.webp",
+  "glue": "/__l5e/assets-v1/98473b2d-2ac7-4bc1-8c77-f1d5a0a6efc0/en-a1-l01-v4-21.webp",
+  "clock": "/__l5e/assets-v1/24adff5b-c365-4f72-95ad-cebe560b68a1/en-a1-l01-v4-22.webp"
+ }
+}

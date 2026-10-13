@@ -12,7 +12,15 @@ import v2 from "@/assets/lessons/en-a1-l01-vocab-2.webp.asset.json";
 import v3 from "@/assets/lessons/en-a1-l01-vocab-3.webp.asset.json";
 import v4 from "@/assets/lessons/en-a1-l01-vocab-4.webp.asset.json";
 
+import wordPics from "@/content/lessons/EN-A1-L01.vocab-images.json";
+
 const IMAGES: Record<string, string> = { v1: v1.url, v2: v2.url, v3: v3.url, v4: v4.url };
+const PICS = wordPics as Record<string, Record<string, string>>;
+const picFor = (w: string, imgs: string[] = []) => {
+  for (const k of imgs) { const u = PICS[k]?.[w]; if (u) return u; }
+  for (const k of Object.keys(PICS)) { const u = PICS[k][w]; if (u) return u; }
+  return undefined;
+};
 
 interface Word { word: string; translation: string; example?: string; active?: boolean }
 interface Area { key: string; title: string; sr: string; images?: string[]; words: Word[]; examples?: string[]; exercises: string[] }
@@ -74,18 +82,37 @@ export default function LessonVocabularyTab({ lessonId, mode, onPractice }: { le
     }, { onConflict: "user_id,lesson_id" });
   }
 
-  const WordCard = ({ w }: { w: Word }) => (
-    <li className="flex items-center gap-3 rounded-xl border border-border/50 bg-background/80 px-3 py-2.5">
-      <button onClick={() => say(w.word)} className="text-primary/60 hover:text-primary shrink-0" aria-label={`Izgovori ${w.word}`}>
-        <Volume2 className="w-4 h-4" />
-      </button>
-      <div className="min-w-0 flex-1 flex flex-wrap items-baseline justify-between gap-x-3">
-        <p className="font-semibold text-primary">{w.word}</p>
-        <p className="text-sm text-muted-foreground">{w.translation}</p>
-        {w.example && <p className="w-full text-xs italic text-primary/70 mt-0.5">„{w.example}“</p>}
-      </div>
-    </li>
-  );
+  const WordCard = ({ w }: { w: Word }) => {
+    const pic = picFor(w.word, a.images);
+    if (pic) return (
+      <li className="rounded-2xl border border-border/50 bg-background/80 overflow-hidden shadow-card-soft">
+        <button type="button" onClick={() => say(w.word)} aria-label={`Izgovori ${w.word}`}
+          className="group relative block w-full bg-cream/60">
+          <img src={pic} alt={w.word} loading="lazy" className="w-full aspect-[4/3] object-contain transition-transform group-hover:scale-105 group-active:scale-95" />
+          <span className="absolute top-2 right-2 rounded-full bg-background/85 backdrop-blur p-1.5 border border-border/60 text-primary">
+            <Volume2 className="w-3.5 h-3.5" />
+          </span>
+        </button>
+        <div className="px-3 py-2">
+          <p className="font-semibold text-primary leading-tight">{w.word}</p>
+          <p className="text-xs text-muted-foreground">{w.translation}</p>
+          {w.example && <p className="text-xs italic text-primary/70 mt-0.5">„{w.example}“</p>}
+        </div>
+      </li>
+    );
+    return (
+      <li className="flex items-center gap-3 rounded-xl border border-border/50 bg-background/80 px-3 py-2.5 col-span-2 sm:col-span-1">
+        <button onClick={() => say(w.word)} className="text-primary/60 hover:text-primary shrink-0" aria-label={`Izgovori ${w.word}`}>
+          <Volume2 className="w-4 h-4" />
+        </button>
+        <div className="min-w-0 flex-1">
+          <p className="font-semibold text-primary">{w.word}</p>
+          <p className="text-sm text-muted-foreground">{w.translation}</p>
+        </div>
+      </li>
+    );
+  };
+  const grid = "grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3";
 
   return (
     <div className="space-y-5">
@@ -117,30 +144,26 @@ export default function LessonVocabularyTab({ lessonId, mode, onPractice }: { le
           </div>
 
           {(a.images || []).length > 0 && (
-            <div className={`grid gap-3 ${(a.images || []).length > 1 ? "grid-cols-2" : "grid-cols-1"}`}>
-              {(a.images || []).map((k) => IMAGES[k] && (
-                <button key={k} type="button" onClick={() => setZoom(IMAGES[k])} aria-label="Uvećaj ilustraciju"
-                  className="group relative rounded-2xl border border-border/60 bg-background/60 overflow-hidden shadow-card-soft">
-                  <img src={IMAGES[k]} alt={a.title} loading="lazy" width={1448} height={1086}
-                    className="w-full max-h-64 object-contain mx-auto" />
-                  <span className="absolute bottom-2 right-2 inline-flex items-center gap-1 rounded-full bg-background/80 backdrop-blur px-2.5 py-1 text-xs text-foreground border border-border/60">
-                    <ZoomIn className="w-3.5 h-3.5" /> Uvećaj
-                  </span>
-                </button>
+            <div className="flex flex-wrap gap-2">
+              {(a.images || []).map((k, i) => IMAGES[k] && (
+                <Button key={k} variant="ghost" size="sm" onClick={() => setZoom(IMAGES[k])}>
+                  <ZoomIn className="w-4 h-4" /> Pogledaj celu ilustraciju{(a.images || []).length > 1 ? ` ${i + 1}` : ""}
+                </Button>
               ))}
             </div>
           )}
+          <p className="text-xs text-muted-foreground">Klikni na sličicu da čuješ izgovor.</p>
 
           {active.length > 0 && (
             <Card>
               <CardHeader className="pb-2"><CardTitle className="text-base flex items-center gap-2"><BookOpen className="w-4 h-4 text-accent" /> Osnovne reči</CardTitle></CardHeader>
-              <CardContent><ul className="grid sm:grid-cols-2 gap-2">{active.map((w) => <WordCard key={w.word} w={w} />)}</ul></CardContent>
+              <CardContent><ul className={grid}>{active.map((w) => <WordCard key={w.word} w={w} />)}</ul></CardContent>
             </Card>
           )}
           {passive.length > 0 && (
             <Card>
               <CardHeader className="pb-2"><CardTitle className="text-base">Dodatne reči iz lekcije — dovoljno je da ih prepoznaš</CardTitle></CardHeader>
-              <CardContent><ul className="grid sm:grid-cols-2 gap-2">{passive.map((w) => <WordCard key={w.word} w={w} />)}</ul></CardContent>
+              <CardContent><ul className={grid}>{passive.map((w) => <WordCard key={w.word} w={w} />)}</ul></CardContent>
             </Card>
           )}
           {a.examples && a.examples.length > 0 && (
