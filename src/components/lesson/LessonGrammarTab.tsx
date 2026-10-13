@@ -28,7 +28,7 @@ interface Topic {
 }
 
 /** Topic grouping per lesson; sections without config become one topic each. */
-const TOPICS: Record<string, Topic[]> = {
+export const LESSON_GRAMMAR_TOPICS: Record<string, Topic[]> = {
   "EN-A1-L01": [
     { label: "Lične zamenice", sectionIdx: [0], exercises: ["GR-03"], aiTopic: "Personal pronouns (I, you, he, she, it, we, they)",
       related: [{ title: "Prisvojni pridevi (my, your, his…)", query: "Possessive adjectives my, your, his, her" }, { title: "Objektne zamenice (me, him, her…)", query: "Object pronouns me, him, her, us, them" }] },
@@ -76,7 +76,7 @@ export default function LessonGrammarTab({ lessonId, onPractice, onExplain, mode
   const exercises: Exercise[] = g.exercises || [];
   const images = LESSON_IMAGES[row.lesson_code]?.modules.grammar || [];
 
-  const topics: Topic[] = TOPICS[row.lesson_code] || sections.map((s, i) => ({
+  const topics: Topic[] = LESSON_GRAMMAR_TOPICS[row.lesson_code] || sections.map((s, i) => ({
     label: s.title.replace(/^\d+(\.\d+)?\s*/, ""), sectionIdx: [i], exercises: [], aiTopic: s.title, related: [],
   }));
   const unassigned = exercises.filter((e) => !topics.some((t) => t.exercises.includes(e.code)));
