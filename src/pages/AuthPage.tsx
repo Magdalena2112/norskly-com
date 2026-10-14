@@ -71,42 +71,44 @@ export default function AuthPage() {
             navigate("/teacher/dashboard", { replace: true });
             return;
           }
-          if (!intentLang) {
-            toast({ title: "Izaberi jezik", description: "Izaberi jezik koji želiš da učiš, pa se ponovo prijavi.", variant: "destructive" });
-            return;
-          }
           const { data: prof } = await supabase
             .from("profiles")
             .select("preferred_language, subscription_type, display_name")
             .eq("user_id", data.user.id)
             .maybeSingle();
-
-          const lang = intentLang;
           const plan = prof?.subscription_type || selectedPlan;
-          localStorage.setItem("norskly_selected_language", lang);
-          try { sessionStorage.setItem("norskly_language_intent", lang); } catch { /* ignore */ }
           if (plan) localStorage.setItem("norskly_selected_plan", plan);
-
-          const code = slugToCode(lang);
-          const { data: langProf } = await supabase
-            .from("language_profiles")
-            .select("onboarding_completed")
-            .eq("user_id", data.user.id)
-            .eq("language", code)
-            .maybeSingle();
-
           const name = prof?.display_name?.trim();
           toast({
             title: name ? `Dobrodošao nazad, ${name} 👋` : "Dobrodošao nazad 👋",
             description: "Drago nam je što te ponovo vidimo.",
           });
 
-          if (!langProf?.onboarding_completed) {
-            navigate("/onboarding");
+          // Jezik sa jezičke stranice ima prednost. Inače sistem sam prepoznaje šta učenik uči.
+          if (intentLang) {
+            await goToLanguage(data.user.id, intentLang, plan);
             return;
           }
-          const qs = plan ? `?plan=${plan}` : "";
-          navigate(`/ucenje/${lang}${qs}`);
+          const { data: lps } = await supabase
+            .from("language_profiles")
+            .select("language")
+            .eq("user_id", data.user.id)
+            .eq("onboarding_completed", true);
+          const learned = (lps ?? []).map((r) => codeToSlug(r.language as string)).filter(Boolean) as string[];
+          if (learned.length === 1) {
+            await goToLanguage(data.user.id, learned[0], plan);
+            return;
+          }
+          if (learned.length > 1) {
+            setChooseFrom(learned);
+            return;
+          }
+          const pref = prof?.preferred_language && VALID.includes(prof.preferred_language) ? prof.preferred_language : null;
+          if (pref) {
+            await goToLanguage(data.user.id, pref, plan);
+            return;
+          }
+          setChooseFrom(VALID);
           return;
         }
         navigate("/practice");
