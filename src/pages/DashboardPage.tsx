@@ -4,7 +4,8 @@ import { useProfile } from "@/context/ProfileContext";
 import { useAuth } from "@/context/AuthContext";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { BookOpen, Languages, MessageSquare, GraduationCap, CalendarCheck, PenLine, BookOpenText, Headphones, Mic } from "lucide-react";
+import { BookOpen, Languages, MessageSquare, GraduationCap, CalendarCheck, PenLine, BookOpenText, Headphones, Mic, Lock } from "lucide-react";
+import { computeLevelStates, normalizeLevel, LEVEL_UNLOCK_THRESHOLD, type CefrLevel, type LevelState } from "@/lib/levels";
 import XpProgressCard from "@/components/XpProgressCard";
 import { useNavigate, useParams } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
@@ -191,16 +192,50 @@ export default function DashboardPage() {
           <span className="h-px flex-1 bg-border" />
         </div>
 
-        {lessonsLoaded && courseLessons.length === 0 && (
+        <div className="flex gap-2 overflow-x-auto pb-2 mb-4 -mx-1 px-1">
+          {levelStates.map((s, i) => {
+            const active = s.level === selectedLevel;
+            return (
+              <button
+                key={s.level}
+                onClick={() => onLevelClick(s, i)}
+                aria-disabled={!s.unlocked}
+                className={`shrink-0 rounded-full border px-4 py-2 text-sm font-medium transition-colors flex items-center gap-1.5 ${
+                  active
+                    ? "bg-primary text-primary-foreground border-primary"
+                    : s.unlocked
+                      ? "bg-cream text-primary border-border hover:border-primary/50"
+                      : "bg-muted text-muted-foreground border-border/60"
+                }`}
+              >
+                {!s.unlocked && <Lock className="w-3.5 h-3.5" />}
+                {s.level}
+                {s.unlocked && s.total > 0 && (
+                  <span className="text-xs opacity-75">{Math.round(s.ratio * 100)}%{s.ratio >= LEVEL_UNLOCK_THRESHOLD ? " ✓" : ""}</span>
+                )}
+              </button>
+            );
+          })}
+        </div>
+
+        {lockedMsg && (
+          <Card className="mb-6 bg-cream/90 border-border/60 shadow-card-soft">
+            <CardContent className="py-4 text-sm text-primary flex items-start gap-2">
+              <Lock className="w-4 h-4 mt-0.5 shrink-0" /> {lockedMsg}
+            </CardContent>
+          </Card>
+        )}
+
+        {lessonsLoaded && visibleLessons.length === 0 && (
           <Card className="mb-6 bg-cream/90 border-border/60 shadow-card-soft">
             <CardContent className="py-6 text-center text-sm text-muted-foreground">
-              Lekcije za nivo {profile.level || "A1"} su u pripremi. Uskoro ih dodajemo!
+              Lekcije za nivo {selectedLevel} su u pripremi. Uskoro ih dodajemo!
             </CardContent>
           </Card>
         )}
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          {courseLessons.map((l, i) => {
+          {visibleLessons.map((l, i) => {
             const p = lessonProgress[l.id];
             return (
               <motion.div key={l.id} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.08 + 0.15 }}>
