@@ -29,6 +29,32 @@ export default function AuthPage() {
   const lockedLang = urlLangParam && VALID.includes(urlLangParam) ? urlLangParam : null;
   const [pickedLang, setPickedLang] = useState<string | null>(lockedLang);
   useEffect(() => { if (lockedLang) setPickedLang(lockedLang); }, [lockedLang]);
+  const [chooseFrom, setChooseFrom] = useState<string[] | null>(null);
+  const LABELS: Record<string, string> = { norveski: "🇳🇴 Norveški", engleski: "🇬🇧 Engleski", nemacki: "🇩🇪 Nemački" };
+  const codeToSlug = (c: string) => (c === "en" ? "engleski" : c === "de" ? "nemacki" : c === "no" ? "norveski" : null);
+
+  const goToLanguage = async (userId: string, lang: string, plan?: string | null) => {
+    const code = lang === "engleski" ? "en" : lang === "nemacki" ? "de" : "no";
+    localStorage.setItem("norskly_selected_language", lang);
+    try { sessionStorage.setItem("norskly_language_intent", lang); } catch { /* ignore */ }
+    await supabase.from("profiles").update({ preferred_language: lang }).eq("user_id", userId);
+    const { data: langProf } = await supabase
+      .from("language_profiles")
+      .select("onboarding_completed")
+      .eq("user_id", userId)
+      .eq("language", code)
+      .maybeSingle();
+    if (!langProf?.onboarding_completed) {
+      navigate(`/onboarding?lang=${lang}`);
+      return;
+    }
+    navigate(`/ucenje/${lang}${plan ? `?plan=${plan}` : ""}`);
+  };
+
+  const pickAfterLogin = async (lang: string) => {
+    const { data } = await supabase.auth.getUser();
+    if (data.user) await goToLanguage(data.user.id, lang, localStorage.getItem("norskly_selected_plan"));
+  };
 
   // Persist plan choice from the journey
   useEffect(() => {
@@ -192,12 +218,12 @@ export default function AuthPage() {
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="space-y-2">
-                <Label>{lockedLang ? "Jezik" : "Izaberi jezik"}</Label>
+                {(lockedLang || !isLogin) && <Label>{lockedLang ? "Jezik" : "Izaberi jezik"}</Label>}
                 {lockedLang ? (
                   <p className="text-sm font-medium text-primary">
                     {lockedLang === "engleski" ? "🇬🇧 Engleski" : lockedLang === "nemacki" ? "🇩🇪 Nemački" : "🇳🇴 Norveški"}
                   </p>
-                ) : (
+                ) : isLogin ? null : (
                   <div className="grid grid-cols-3 gap-2">
                     {[
                       ["norveski", "🇳🇴 Norveški"],
