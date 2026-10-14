@@ -15,6 +15,7 @@ import JourneyStepper from "@/components/onboarding/JourneyStepper";
 import { Helmet } from "react-helmet-async";
 import teacherPhotoFallback from "@/assets/teacher-photo.jpg";
 import PricingSection from "@/components/PricingSection";
+import CourseTypeSection from "@/components/CourseTypeSection";
 
 export default function LanguagePage() {
   const { slug } = useParams<{ slug: string }>();
@@ -211,6 +212,14 @@ export default function LanguagePage() {
           </div>
         </div>
       </section>
+
+      <CourseTypeSection
+        slug={lang.slug}
+        onSelect={(course) => {
+          localStorage.setItem("norskly_selected_course", course);
+          goAuth({ plan: "trial", course });
+        }}
+      />
 
       {/* TEACHERS */}
       <section id="teachers" className="py-20 md:py-24 bg-card/60">
