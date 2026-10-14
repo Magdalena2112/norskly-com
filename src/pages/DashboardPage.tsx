@@ -76,19 +76,38 @@ export default function DashboardPage() {
   const [lessonProgress, setLessonProgress] = useState<Record<string, string>>({});
   const [lessonsLoaded, setLessonsLoaded] = useState(false);
 
+  const startLevel = normalizeLevel(profile.level);
+  const [selectedLevel, setSelectedLevel] = useState<CefrLevel>(startLevel);
+  const [lockedMsg, setLockedMsg] = useState<string | null>(null);
+  useEffect(() => { setSelectedLevel(startLevel); setLockedMsg(null); }, [startLevel, code]);
+
   useEffect(() => {
     if (!user) return;
-    const level = (String(profile.level || "A1").match(/[ABC][12]/)?.[0]) || "A1";
     (async () => {
       const [{ data: ls }, { data: pr }] = await Promise.all([
-        supabase.from("course_lessons").select("id, sort_order, cefr_level, title_target, summary").eq("language", code).eq("cefr_level", level).eq("is_published", true).order("sort_order"),
+        supabase.from("course_lessons").select("id, sort_order, cefr_level, title_target, summary").eq("language", code).eq("is_published", true).order("sort_order"),
         supabase.from("course_lesson_progress").select("lesson_id, status").eq("user_id", user.id).eq("language", code),
       ]);
       setCourseLessons(ls || []);
       setLessonProgress(Object.fromEntries((pr || []).map((p) => [p.lesson_id, p.status])));
       setLessonsLoaded(true);
     })();
-  }, [user, code, profile.level]);
+  }, [user, code]);
+
+  const levelStates = useMemo(() => computeLevelStates(startLevel, courseLessons, lessonProgress), [startLevel, courseLessons, lessonProgress]);
+  const visibleLessons = courseLessons.filter((l) => l.cefr_level === selectedLevel);
+
+  const onLevelClick = (s: LevelState, i: number) => {
+    if (s.unlocked) { setSelectedLevel(s.level); setLockedMsg(null); return; }
+    const prev = levelStates[i - 1];
+    const needed = Math.ceil(prev.total * LEVEL_UNLOCK_THRESHOLD);
+    const left = Math.max(needed - prev.done, 0);
+    setLockedMsg(
+      prev.total === 0
+        ? `Nivo ${s.level} se otključava kada završiš bar ${Math.round(LEVEL_UNLOCK_THRESHOLD * 100)}% nivoa ${prev.level}. Lekcije za ${prev.level} su u pripremi.`
+        : `Nivo ${s.level} se otključava kada završiš bar ${Math.round(LEVEL_UNLOCK_THRESHOLD * 100)}% nivoa ${prev.level} (trenutno: ${Math.round(prev.ratio * 100)}%).${prev.unlocked && left > 0 ? ` Još ${left} ${left === 1 ? "lekcija" : "lekcije"} do otključavanja!` : ""}`,
+    );
+  };
 
 
 
