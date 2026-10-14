@@ -216,6 +216,16 @@ export default function AuthPage() {
             </CardDescription>
           </CardHeader>
           <CardContent>
+            {chooseFrom ? (
+              <div className="space-y-3">
+                <p className="text-sm text-center text-muted-foreground">Koji jezik želiš sada da učiš?</p>
+                {chooseFrom.map((slug) => (
+                  <Button key={slug} variant="outline" className="w-full" onClick={() => pickAfterLogin(slug)}>
+                    {LABELS[slug]}
+                  </Button>
+                ))}
+              </div>
+            ) : (
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="space-y-2">
                 {(lockedLang || !isLogin) && <Label>{lockedLang ? "Jezik" : "Izaberi jezik"}</Label>}

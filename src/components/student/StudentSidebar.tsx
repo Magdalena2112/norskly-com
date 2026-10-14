@@ -14,6 +14,7 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 import { useAuth } from "@/context/AuthContext";
+import { getCurrentLanguageSlug } from "@/lib/currentLanguage";
 
 const mainItems = [
   { title: "Dashboard", url: "/practice", icon: LayoutDashboard },
@@ -59,7 +60,7 @@ export function StudentSidebar() {
           {!collapsed && <SidebarGroupLabel className="text-primary-foreground/50">Učenje</SidebarGroupLabel>}
           <SidebarGroupContent>
             <SidebarMenu>
-              {mainItems.map((item) => (
+              {mainItems.map((it) => ({ ...it, url: `/ucenje/${getCurrentLanguageSlug(pathname)}` })).map((item) => (
                 <SidebarMenuItem key={item.url}>
                   <SidebarMenuButton asChild tooltip={item.title}>
                     <NavLink
