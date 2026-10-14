@@ -9,3 +9,4 @@
 - Teacher notes and homework (`teacher_lesson_notes`, `teacher_assignments`) are scoped per language, because teachers may teach several languages and content must not mix.
 - Course lessons: metadata rows in `course_lessons` (per language + CEFR level, `lesson_code`), full structured content in `src/content/lessons/<lesson_code>.json` (fallback: row `modules`/`intro_texts`), rendered by `/lekcija/:lessonId` with module tabs; the dashboard lists lessons instead of standalone modules, so new lessons are added as data without UI changes.
 - Lesson listening uses one typed scene array with stable completion codes and audio/questions together; include these codes in lesson progress and deduplicate XP per language so navigation and reloads cannot multiply rewards.
+- CEFR level unlock rule lives in src/lib/levels.ts (start level from onboarding open, next level at LEVEL_UNLOCK_THRESHOLD of previous), so the threshold changes in one place.
