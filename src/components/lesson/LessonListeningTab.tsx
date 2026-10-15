@@ -92,7 +92,6 @@ export default function LessonListeningTab({ scenes, lang, lessonCode, completed
             <Button key={o.r} size="sm" variant={rate === o.r ? "default" : "outline"} aria-pressed={rate === o.r} onClick={() => { stop(); setRate(o.r); }}>{o.l}</Button>)}
         </div>
         {q && <div className="space-y-3">
-          <p className="text-xs text-muted-foreground">Pitanje {step + 1} od {scene.questions.length}</p>
           <p className="font-medium text-primary">{q.prompt}</p>
           <div className="grid gap-2">
             {(options[scene.id]?.[step] || q.options).map(o => {
