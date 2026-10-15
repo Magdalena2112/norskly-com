@@ -82,7 +82,6 @@ export default function LessonListeningTab({ scenes, lang, lessonCode, completed
         <header>
           <p className="text-xs text-muted-foreground mb-1">Aktivnost {index + 1} od {scenes.length}</p>
           <h3 className="font-display font-semibold text-xl text-primary">{scene.title}</h3>
-          {scene.context && <p className="text-sm text-muted-foreground mt-1">{scene.context}</p>}
         </header>
         <div className="flex flex-wrap items-center gap-2 border-y border-border/60 py-3">
           <Button size="sm" variant={playing ? "outline" : "hero"} onClick={() => playing ? stop() : play()}>
