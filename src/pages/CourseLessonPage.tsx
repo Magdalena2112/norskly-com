@@ -174,7 +174,7 @@ export default function CourseLessonPage() {
               </div>
               <AnimatePresence mode="wait">
                 <motion.div key={t.id} initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -24 }} transition={{ duration: 0.3 }} className="space-y-3">
-                  {img && <img src={img} alt={t.title} loading="lazy" className="w-full rounded-3xl border border-border/50 shadow-postcard object-cover aspect-[4/3] sm:aspect-[16/10]" />}
+                  {img && <img src={img} alt={t.title} loading="lazy" className="w-full h-auto rounded-3xl border border-border/50 shadow-postcard" />}
                   <DialoguePlayer title={t.title} scene={t.scene} lines={t.lines} language={lang} />
                 </motion.div>
               </AnimatePresence>

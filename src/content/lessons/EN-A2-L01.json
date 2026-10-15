@@ -1,16 +1,184 @@
 {
-  "code": "EN-A2-L01",
-  "intro": [],
-  "modules": {
-    "intro": { "exercises": [] },
-    "grammar": { "sections": [], "exercises": [] },
-    "vocabulary": { "areas": [], "words": [], "collections": [], "exercises": [] },
-    "reading": { "texts": [], "exercises": [] },
-    "listening": { "scenes": [] },
-    "writing": { "exercises": [] },
-    "pronunciation": { "alphabet": [], "note": "", "drills": [], "letters": [], "spelling": [], "exercises": [] },
-    "speaking": { "tasks": [], "roleswitch": [] },
-    "culture": { "title": "", "body": "", "note": "", "customs": [], "comparison": [] },
-    "review": { "quiz": [] }
+ "code": "EN-A2-L01",
+ "intro": [
+  {
+   "id": "EN-A2-L01-T01",
+   "title": "Text 1 · A New Routine",
+   "type": "monologue",
+   "scene": "Emma writes about her new life in London.",
+   "lines": [
+    {
+     "speaker": "Emma",
+     "text": "Hi! I'm Emma. I've lived in London for a few months now, and my life is quite different."
+    },
+    {
+     "speaker": "Emma",
+     "text": "I usually get up at seven and have breakfast before I leave home. I take the bus to work three days a week. On other days, I study English and work on my own projects."
+    },
+    {
+     "speaker": "Emma",
+     "text": "At the moment, I'm preparing for a new English course. I'm also looking for a new flat because my current room is quite small."
+    },
+    {
+     "speaker": "Emma",
+     "text": "My friends Oliver and Sophie are helping me. Oliver knows a lot about London, and Sophie is always finding interesting places to visit."
+    },
+    {
+     "speaker": "Emma",
+     "text": "Life in a big city isn't always easy, but I'm learning something new every day. I'm excited about this new chapter!"
+    }
+   ]
+  },
+  {
+   "id": "EN-A2-L01-T02",
+   "title": "Text 2 · Catching Up",
+   "type": "dialogue",
+   "scene": "Emma, Oliver and Sophie meet in a café.",
+   "lines": [
+    {
+     "speaker": "Oliver",
+     "text": "Emma! It's good to see you again. How's everything going?"
+    },
+    {
+     "speaker": "Emma",
+     "text": "Pretty well, thanks! I'm really busy these days."
+    },
+    {
+     "speaker": "Sophie",
+     "text": "Really? What are you doing?"
+    },
+    {
+     "speaker": "Emma",
+     "text": "I'm working part-time, and I'm studying English. I'm also looking for a bigger flat."
+    },
+    {
+     "speaker": "Oliver",
+     "text": "That's exciting! Do you still live near the park?"
+    },
+    {
+     "speaker": "Emma",
+     "text": "Yes, I do, but I want to move closer to work."
+    },
+    {
+     "speaker": "Sophie",
+     "text": "I understand. I usually cycle to work, but this week I'm taking the bus because my bike isn't working."
+    },
+    {
+     "speaker": "Oliver",
+     "text": "I'm taking a photography course at the moment. It's great fun!"
+    },
+    {
+     "speaker": "Emma",
+     "text": "That sounds interesting! Are you enjoying it?"
+    },
+    {
+     "speaker": "Oliver",
+     "text": "Yes, I am. I meet interesting people every week."
+    },
+    {
+     "speaker": "Sophie",
+     "text": "We all have something new to talk about!"
+    },
+    {
+     "speaker": "Emma",
+     "text": "Exactly! And our English course starts again soon."
+    }
+   ]
+  },
+  {
+   "id": "EN-A2-L01-T03",
+   "title": "Text 3 · Back to Class",
+   "type": "email",
+   "scene": "Subject: Welcome to Your A2 English Course! · From: Ms Taylor · To: A2 English Group",
+   "lines": [
+    {
+     "speaker": "Ms Taylor",
+     "text": "Hello everyone!"
+    },
+    {
+     "speaker": "Ms Taylor",
+     "text": "I hope you're all doing well."
+    },
+    {
+     "speaker": "Ms Taylor",
+     "text": "Our new English course starts on Monday at 6 p.m. We meet every Monday and Wednesday in Classroom 4."
+    },
+    {
+     "speaker": "Ms Taylor",
+     "text": "This month, we're focusing on everyday life, personal experiences and communication."
+    },
+    {
+     "speaker": "Ms Taylor",
+     "text": "Please bring your notebook and prepare a short introduction about your life now. Think about these questions:"
+    },
+    {
+     "speaker": "Ms Taylor",
+     "text": "What do you usually do during the week?"
+    },
+    {
+     "speaker": "Ms Taylor",
+     "text": "What are you doing differently these days?"
+    },
+    {
+     "speaker": "Ms Taylor",
+     "text": "What are you looking forward to?"
+    },
+    {
+     "speaker": "Ms Taylor",
+     "text": "I'm looking forward to seeing you all again!"
+    },
+    {
+     "speaker": "Ms Taylor",
+     "text": "Best wishes, Ms Taylor"
+    }
+   ]
   }
+ ],
+ "modules": {
+  "intro": {
+   "exercises": []
+  },
+  "grammar": {
+   "sections": [],
+   "exercises": []
+  },
+  "vocabulary": {
+   "areas": [],
+   "words": [],
+   "collections": [],
+   "exercises": []
+  },
+  "reading": {
+   "texts": [],
+   "exercises": []
+  },
+  "listening": {
+   "scenes": []
+  },
+  "writing": {
+   "exercises": []
+  },
+  "pronunciation": {
+   "alphabet": [],
+   "note": "",
+   "drills": [],
+   "letters": [],
+   "spelling": [],
+   "exercises": []
+  },
+  "speaking": {
+   "tasks": [],
+   "roleswitch": []
+  },
+  "culture": {
+   "title": "",
+   "body": "",
+   "note": "",
+   "customs": [],
+   "comparison": []
+  },
+  "review": {
+   "quiz": []
+  }
+ }
 }
