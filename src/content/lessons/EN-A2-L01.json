@@ -4013,7 +4013,688 @@
       ]
     },
     "listening": {
-      "scenes": []
+      "scenes": [
+        {
+          "id": "L-01",
+          "code": "EN-A2-L01-L01",
+          "title": "L-01 · Early Mornings",
+          "context": "Radio-intervju",
+          "lines": [
+            {
+              "speaker": "Presenter",
+              "text": "Good morning! Today we're talking about morning routines. Sarah, what time do you usually get up?"
+            },
+            {
+              "speaker": "Sarah",
+              "text": "I get up at five because I work at a bakery. I have breakfast at home and walk to work."
+            },
+            {
+              "speaker": "Presenter",
+              "text": "Do you like getting up so early?"
+            },
+            {
+              "speaker": "Sarah",
+              "text": "Sometimes it's difficult, especially in winter. But I finish work at two in the afternoon, so I have time to meet friends or go for a walk."
+            },
+            {
+              "speaker": "Presenter",
+              "text": "And what are you doing after work today?"
+            },
+            {
+              "speaker": "Sarah",
+              "text": "I'm meeting my sister for coffee."
+            }
+          ],
+          "questions": [
+            {
+              "prompt": "What does Sarah like about her working hours?",
+              "options": [
+                "She has time for activities in the afternoon.",
+                "She can have breakfast at work.",
+                "She can spend more time sleeping in the morning."
+              ],
+              "answer": "She has time for activities in the afternoon."
+            }
+          ]
+        },
+        {
+          "id": "L-02",
+          "code": "EN-A2-L01-L02",
+          "title": "L-02 · Where Is My Parcel?",
+          "context": "Telefonski razgovor",
+          "lines": [
+            {
+              "speaker": "Customer",
+              "text": "Hello. I'm calling about a parcel. It should arrive today, but I don't know when."
+            },
+            {
+              "speaker": "Assistant",
+              "text": "Let me check. Can I have your order number?"
+            },
+            {
+              "speaker": "Customer",
+              "text": "Yes, it's 4821."
+            },
+            {
+              "speaker": "Assistant",
+              "text": "Thank you. The driver is running late because there's a lot of traffic. Your parcel is now arriving between two and three this afternoon."
+            },
+            {
+              "speaker": "Customer",
+              "text": "That's okay. I'm working from home today, so I'll be here."
+            },
+            {
+              "speaker": "Assistant",
+              "text": "Great. The driver will call you before arriving."
+            }
+          ],
+          "questions": [
+            {
+              "prompt": "Order number",
+              "options": [
+                "4821",
+                "4281",
+                "4812"
+              ],
+              "answer": "4821"
+            },
+            {
+              "prompt": "Reason for the delay",
+              "options": [
+                "There's a lot of traffic.",
+                "The driver is ill.",
+                "The address is wrong."
+              ],
+              "answer": "There's a lot of traffic."
+            },
+            {
+              "prompt": "New delivery time",
+              "options": [
+                "Between 2 and 3 p.m.",
+                "Between 12 and 2 p.m.",
+                "Between 3 and 4 p.m."
+              ],
+              "answer": "Between 2 and 3 p.m."
+            }
+          ]
+        },
+        {
+          "id": "L-03",
+          "code": "EN-A2-L01-L03",
+          "title": "L-03 · Sharing the Housework",
+          "context": "Razgovor cimera",
+          "lines": [
+            {
+              "speaker": "Jack",
+              "text": "Maya, can we talk about the housework? We're both busy this week."
+            },
+            {
+              "speaker": "Maya",
+              "text": "Sure. I'm doing the laundry this evening. Can you vacuum the living room?"
+            },
+            {
+              "speaker": "Jack",
+              "text": "No problem. I'm also going grocery shopping after work."
+            },
+            {
+              "speaker": "Maya",
+              "text": "Great. What about dinner?"
+            },
+            {
+              "speaker": "Jack",
+              "text": "I'm cooking tonight, but can you do the washing-up afterwards?"
+            },
+            {
+              "speaker": "Maya",
+              "text": "Yes, that's fine. Oh, and don't forget to take out the rubbish!"
+            },
+            {
+              "speaker": "Jack",
+              "text": "I'll do it before I leave tomorrow morning."
+            }
+          ],
+          "questions": [
+            {
+              "prompt": "Who is doing this? Do the laundry",
+              "options": [
+                "Jack",
+                "Maya"
+              ],
+              "answer": "Maya"
+            },
+            {
+              "prompt": "Who is doing this? Vacuum the living room",
+              "options": [
+                "Jack",
+                "Maya"
+              ],
+              "answer": "Jack"
+            },
+            {
+              "prompt": "Who is doing this? Go grocery shopping",
+              "options": [
+                "Jack",
+                "Maya"
+              ],
+              "answer": "Jack"
+            },
+            {
+              "prompt": "Who is doing this? Cook dinner",
+              "options": [
+                "Jack",
+                "Maya"
+              ],
+              "answer": "Jack"
+            },
+            {
+              "prompt": "Who is doing this? Do the washing-up",
+              "options": [
+                "Jack",
+                "Maya"
+              ],
+              "answer": "Maya"
+            },
+            {
+              "prompt": "Who is doing this? Take out the rubbish",
+              "options": [
+                "Jack",
+                "Maya"
+              ],
+              "answer": "Jack"
+            }
+          ]
+        },
+        {
+          "id": "L-04",
+          "code": "EN-A2-L01-L04",
+          "title": "L-04 · The Train Is Late",
+          "context": "Obaveštenje na stanici",
+          "lines": [
+            {
+              "speaker": "Announcer",
+              "text": "Good morning, passengers. The train to Manchester, which usually leaves at ten forty-five, is about twenty minutes late today. It is now leaving at eleven oh five from Platform 3."
+            },
+            {
+              "speaker": "Announcer",
+              "text": "The train to Birmingham is leaving from Platform 5 in five minutes. Passengers travelling to Birmingham should go to Platform 5 now."
+            },
+            {
+              "speaker": "Announcer",
+              "text": "Please listen for more information. Thank you."
+            }
+          ],
+          "questions": [
+            {
+              "prompt": "When is the Manchester train leaving?",
+              "options": [
+                "10:45",
+                "11:05",
+                "11:15"
+              ],
+              "answer": "11:05"
+            },
+            {
+              "prompt": "Which platform is the Manchester train leaving from?",
+              "options": [
+                "Platform 2",
+                "Platform 3",
+                "Platform 5"
+              ],
+              "answer": "Platform 3"
+            },
+            {
+              "prompt": "Which train is leaving in five minutes?",
+              "options": [
+                "Manchester",
+                "Birmingham",
+                "Both trains"
+              ],
+              "answer": "Birmingham"
+            }
+          ]
+        },
+        {
+          "id": "L-05",
+          "code": "EN-A2-L01-L05",
+          "title": "L-05 · Making an Appointment",
+          "context": "Telefonski razgovor",
+          "lines": [
+            {
+              "speaker": "Receptionist",
+              "text": "Good morning. Green Street Medical Centre."
+            },
+            {
+              "speaker": "Patient",
+              "text": "Hello. I'd like to see a doctor tomorrow. Do you have any free appointments?"
+            },
+            {
+              "speaker": "Receptionist",
+              "text": "We have one at nine thirty in the morning."
+            },
+            {
+              "speaker": "Patient",
+              "text": "I usually start work at nine, so that's a little difficult."
+            },
+            {
+              "speaker": "Receptionist",
+              "text": "What about four fifteen in the afternoon?"
+            },
+            {
+              "speaker": "Patient",
+              "text": "That sounds better. I finish work at three thirty."
+            },
+            {
+              "speaker": "Receptionist",
+              "text": "All right. Your appointment is tomorrow at four fifteen. Please arrive ten minutes early."
+            }
+          ],
+          "questions": [
+            {
+              "prompt": "The patient wants an appointment today.",
+              "options": [
+                "True",
+                "False"
+              ],
+              "answer": "False"
+            },
+            {
+              "prompt": "The first appointment is too early for the patient.",
+              "options": [
+                "True",
+                "False"
+              ],
+              "answer": "True"
+            },
+            {
+              "prompt": "The patient finishes work before four.",
+              "options": [
+                "True",
+                "False"
+              ],
+              "answer": "True"
+            },
+            {
+              "prompt": "The patient should arrive at the medical centre at 4:15.",
+              "options": [
+                "True",
+                "False"
+              ],
+              "answer": "False",
+              "explanation": "Treba doći deset minuta ranije, u 4:05."
+            }
+          ]
+        },
+        {
+          "id": "L-06",
+          "code": "EN-A2-L01-L06",
+          "title": "L-06 · Trying Something New",
+          "context": "Podcast-intervju — dve rečenice su tačne",
+          "lines": [
+            {
+              "speaker": "Host",
+              "text": "Today we're talking to Daniel about his new hobby. Daniel, what are you doing these days?"
+            },
+            {
+              "speaker": "Daniel",
+              "text": "I'm taking climbing lessons at a sports centre."
+            },
+            {
+              "speaker": "Host",
+              "text": "Is this your first time?"
+            },
+            {
+              "speaker": "Daniel",
+              "text": "Yes! I usually go running, but I wanted to try something new. Climbing is more difficult than I expected."
+            },
+            {
+              "speaker": "Host",
+              "text": "What do you like about it?"
+            },
+            {
+              "speaker": "Daniel",
+              "text": "I enjoy learning new things, and I'm making new friends. Everyone is very friendly."
+            },
+            {
+              "speaker": "Host",
+              "text": "Are you going back next week?"
+            },
+            {
+              "speaker": "Daniel",
+              "text": "Yes, I've already booked another lesson for Saturday."
+            }
+          ],
+          "questions": [
+            {
+              "prompt": "Daniel usually goes running.",
+              "options": [
+                "True",
+                "False"
+              ],
+              "answer": "True"
+            },
+            {
+              "prompt": "Daniel is taking climbing lessons with his old friends.",
+              "options": [
+                "True",
+                "False"
+              ],
+              "answer": "False"
+            },
+            {
+              "prompt": "Daniel finds climbing easier than he expected.",
+              "options": [
+                "True",
+                "False"
+              ],
+              "answer": "False"
+            },
+            {
+              "prompt": "Daniel enjoys meeting people at the sports centre.",
+              "options": [
+                "True",
+                "False"
+              ],
+              "answer": "True"
+            },
+            {
+              "prompt": "Daniel is planning to stop climbing.",
+              "options": [
+                "True",
+                "False"
+              ],
+              "answer": "False"
+            }
+          ]
+        },
+        {
+          "id": "L-07",
+          "code": "EN-A2-L01-L07",
+          "title": "L-07 · News from the Library",
+          "context": "Snimljeno obaveštenje",
+          "lines": [
+            {
+              "speaker": "Announcer",
+              "text": "Hello, and welcome to Westfield Library."
+            },
+            {
+              "speaker": "Announcer",
+              "text": "Our usual opening hours are from nine in the morning until six in the evening, Monday to Friday."
+            },
+            {
+              "speaker": "Announcer",
+              "text": "This Thursday, the library is closing at four because we have a staff meeting."
+            },
+            {
+              "speaker": "Announcer",
+              "text": "On Saturday, we're organising a free book exchange. It starts at ten and finishes at one."
+            },
+            {
+              "speaker": "Announcer",
+              "text": "You can bring books you don't read anymore and choose some different books to take home."
+            },
+            {
+              "speaker": "Announcer",
+              "text": "We hope to see you there!"
+            }
+          ],
+          "questions": [
+            {
+              "prompt": "Usual closing time",
+              "options": [
+                "6 p.m.",
+                "4 p.m.",
+                "5 p.m."
+              ],
+              "answer": "6 p.m."
+            },
+            {
+              "prompt": "Thursday closing time",
+              "options": [
+                "4 p.m.",
+                "6 p.m.",
+                "1 p.m."
+              ],
+              "answer": "4 p.m."
+            },
+            {
+              "prompt": "Saturday book exchange (start–finish)",
+              "options": [
+                "10:00–1:00",
+                "9:00–1:00",
+                "10:00–4:00"
+              ],
+              "answer": "10:00–1:00"
+            }
+          ]
+        },
+        {
+          "id": "L-08",
+          "code": "EN-A2-L01-L08",
+          "title": "L-08 · Grandma's Birthday",
+          "context": "Govorna poruka",
+          "lines": [
+            {
+              "speaker": "Speaker",
+              "text": "Hi, Aunt Lucy! I'm calling about Grandma's birthday on Sunday."
+            },
+            {
+              "speaker": "Speaker",
+              "text": "We're having lunch at my parents' house at one o'clock. Dad is cooking, and I'm making a chocolate cake."
+            },
+            {
+              "speaker": "Speaker",
+              "text": "My brother is decorating the living room with balloons. Mum is preparing the table."
+            },
+            {
+              "speaker": "Speaker",
+              "text": "Could you bring some drinks, please? We already have everything else."
+            },
+            {
+              "speaker": "Speaker",
+              "text": "Oh, and please don't tell Grandma about the cake. It's a surprise!"
+            },
+            {
+              "speaker": "Speaker",
+              "text": "See you on Sunday!"
+            }
+          ],
+          "questions": [
+            {
+              "prompt": "Who? Cooking lunch",
+              "options": [
+                "Dad",
+                "The speaker",
+                "The brother",
+                "Mum",
+                "Aunt Lucy"
+              ],
+              "answer": "Dad"
+            },
+            {
+              "prompt": "Who? Making a cake",
+              "options": [
+                "Dad",
+                "The speaker",
+                "The brother",
+                "Mum",
+                "Aunt Lucy"
+              ],
+              "answer": "The speaker"
+            },
+            {
+              "prompt": "Who? Decorating the living room",
+              "options": [
+                "Dad",
+                "The speaker",
+                "The brother",
+                "Mum",
+                "Aunt Lucy"
+              ],
+              "answer": "The brother"
+            },
+            {
+              "prompt": "Who? Preparing the table",
+              "options": [
+                "Dad",
+                "The speaker",
+                "The brother",
+                "Mum",
+                "Aunt Lucy"
+              ],
+              "answer": "Mum"
+            },
+            {
+              "prompt": "Who? Bringing drinks",
+              "options": [
+                "Dad",
+                "The speaker",
+                "The brother",
+                "Mum",
+                "Aunt Lucy"
+              ],
+              "answer": "Aunt Lucy"
+            }
+          ]
+        },
+        {
+          "id": "L-09",
+          "code": "EN-A2-L01-L09",
+          "title": "L-09 · My New Neighbourhood",
+          "context": "Lični govorni dnevnik",
+          "lines": [
+            {
+              "speaker": "Speaker",
+              "text": "I've lived in this neighbourhood for three weeks now. At first, everything was new, and I didn't know where the shops were."
+            },
+            {
+              "speaker": "Speaker",
+              "text": "Now I'm getting used to the area. There's a small supermarket near my flat and a lovely park across the road."
+            },
+            {
+              "speaker": "Speaker",
+              "text": "I usually go for a walk after dinner. I'm also trying to make new friends, so this month I'm joining a yoga class."
+            },
+            {
+              "speaker": "Speaker",
+              "text": "The traffic is still quite noisy, but I like living here."
+            }
+          ],
+          "questions": [
+            {
+              "prompt": "Choose a category: Didn't know where the shops were",
+              "options": [
+                "At first",
+                "Now / usually",
+                "This month"
+              ],
+              "answer": "At first"
+            },
+            {
+              "prompt": "Choose a category: Goes for a walk after dinner",
+              "options": [
+                "At first",
+                "Now / usually",
+                "This month"
+              ],
+              "answer": "Now / usually"
+            },
+            {
+              "prompt": "Choose a category: Is joining a yoga class this month",
+              "options": [
+                "At first",
+                "Now / usually",
+                "This month"
+              ],
+              "answer": "This month"
+            },
+            {
+              "prompt": "Choose a category: Feels more comfortable in the area",
+              "options": [
+                "At first",
+                "Now / usually",
+                "This month"
+              ],
+              "answer": "Now / usually"
+            },
+            {
+              "prompt": "Choose a category: Found the neighbourhood unfamiliar",
+              "options": [
+                "At first",
+                "Now / usually",
+                "This month"
+              ],
+              "answer": "At first"
+            }
+          ]
+        },
+        {
+          "id": "L-10",
+          "code": "EN-A2-L01-L10",
+          "title": "L-10 · Three Different Lives",
+          "context": "Tri kratka monologa",
+          "lines": [
+            {
+              "speaker": "Rachel",
+              "text": "I usually watch television after dinner, but these days I'm taking cooking lessons twice a week. I'm learning to make different meals, and I really enjoy it."
+            },
+            {
+              "speaker": "James",
+              "text": "I normally take the bus to work, but I'm cycling more often now. It takes about twenty-five minutes, which is almost the same as the bus. I feel much better when I arrive at work."
+            },
+            {
+              "speaker": "Olivia",
+              "text": "My family is living in a smaller house outside the city now. It's quieter, and we have a nice garden. The only problem is that my journey to school takes longer than before."
+            }
+          ],
+          "questions": [
+            {
+              "prompt": "Which speaker? Is learning how to prepare new dishes.",
+              "options": [
+                "Rachel",
+                "James",
+                "Olivia"
+              ],
+              "answer": "Rachel"
+            },
+            {
+              "prompt": "Which speaker? Has changed the way they travel to work.",
+              "options": [
+                "Rachel",
+                "James",
+                "Olivia"
+              ],
+              "answer": "James"
+            },
+            {
+              "prompt": "Which speaker? Lives further away from school now.",
+              "options": [
+                "Rachel",
+                "James",
+                "Olivia"
+              ],
+              "answer": "Olivia"
+            },
+            {
+              "prompt": "Which speaker? Is doing a new activity in the evening.",
+              "options": [
+                "Rachel",
+                "James",
+                "Olivia"
+              ],
+              "answer": "Rachel"
+            },
+            {
+              "prompt": "Which speaker? Enjoys having a garden.",
+              "options": [
+                "Rachel",
+                "James",
+                "Olivia"
+              ],
+              "answer": "Olivia"
+            }
+          ]
+        }
+      ]
     },
     "writing": {
       "exercises": []
