@@ -3579,8 +3579,428 @@
       ]
     },
     "reading": {
-      "texts": [],
-      "exercises": []
+      "texts": [
+        {
+          "id": "EN-A2-L01-RD1",
+          "title": "Text 1 · A Busy Week",
+          "image": "a2:rd1",
+          "body": "Emma has a busy week. She works part-time at a bookshop on Mondays, Wednesdays and Fridays. She usually gets up at seven, has breakfast, and catches the bus to work.\n\nOn Tuesdays and Thursdays, she attends her English course in the evening, so she studies at home in the afternoon. This week is a little different because she is preparing for a class presentation. She is also looking for a new flat, so she spends time online after dinner.\n\nOn Saturday, she tidies her room, does the laundry, and meets up with Sophie for coffee. On Sunday, she goes for a walk with Oliver and plans the new week."
+        },
+        {
+          "id": "EN-A2-L01-RD2",
+          "title": "Text 2 · A Message from Sophie",
+          "image": "a2:rd2",
+          "body": "Hi Emma!\nSorry, I can't meet you on Friday evening because I'm helping my cousin move to a new flat. I'm busy on Saturday morning too, because I'm taking my bike to the repair shop. But I'm free in the afternoon. Do you want to meet at the café near the park at 4 p.m.? We can talk about your English course and your flat search. Oliver wants to join us later, after his photography class. Let me know if the plan works for you!"
+        },
+        {
+          "id": "EN-A2-L01-RD3",
+          "title": "Text 3 · A New Start in London",
+          "image": "a2:rd3",
+          "body": "When Lucas moved to London two months ago, everything felt new and a little confusing. Back home, he lived in a small town and knew everyone. In London, life is faster, the buses are always busy, and people seem to be in a hurry.\n\nAt first, Lucas found it difficult to get used to his new routine. He started a new job in a hotel, worked different shifts, and spent his evenings studying English. He also wanted to make new friends, so he joined a local football group on Sundays.\n\nLittle by little, things became easier. He learned how to manage his time, found a nice café near his flat, and began to enjoy the city. These days, he still misses his family, but he feels more confident and comfortable in his new life."
+        }
+      ],
+      "exercises": [
+        {
+          "id": "EN-A2-L01-R-01",
+          "code": "R-01",
+          "title": "Text 1 · True or False",
+          "instruction": "Write T for true or F for false.",
+          "kind": "closed",
+          "items": [
+            {
+              "prompt": "Emma works at a bookshop every day.",
+              "answers": [
+                "False"
+              ],
+              "options": [
+                "True",
+                "False"
+              ]
+            },
+            {
+              "prompt": "She usually goes to work by bus.",
+              "answers": [
+                "True"
+              ],
+              "options": [
+                "True",
+                "False"
+              ]
+            },
+            {
+              "prompt": "This week she is preparing for a presentation.",
+              "answers": [
+                "True"
+              ],
+              "options": [
+                "True",
+                "False"
+              ]
+            },
+            {
+              "prompt": "On Saturday she meets Oliver for coffee.",
+              "answers": [
+                "False"
+              ],
+              "options": [
+                "True",
+                "False"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-R-02",
+          "code": "R-02",
+          "title": "Text 1 · Choose the correct answer",
+          "instruction": "Choose the correct answer.",
+          "kind": "closed",
+          "items": [
+            {
+              "prompt": "Why is this week different for Emma?",
+              "answers": [
+                "She is preparing for a class presentation."
+              ],
+              "options": [
+                "She is preparing for a class presentation.",
+                "She is starting a new job at the bookshop.",
+                "She is visiting her family from another city."
+              ]
+            },
+            {
+              "prompt": "What does Emma do on Tuesdays and Thursdays?",
+              "answers": [
+                "She attends her English course in the evening."
+              ],
+              "options": [
+                "She studies at home all evening.",
+                "She attends her English course in the evening.",
+                "She works an extra shift at the bookshop."
+              ]
+            },
+            {
+              "prompt": "What does Emma do on Sunday?",
+              "answers": [
+                "She goes for a walk with Oliver and plans the new week."
+              ],
+              "options": [
+                "She goes for a walk with Oliver and plans the new week.",
+                "She cleans her room and does the laundry.",
+                "She meets Sophie for coffee after lunch."
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-R-03",
+          "code": "R-03",
+          "title": "Text 1 · Find the information",
+          "instruction": "Answer the questions.",
+          "kind": "open",
+          "items": [
+            {
+              "prompt": "Where does Emma work?",
+              "open": true,
+              "guide": "At a bookshop (part-time)."
+            },
+            {
+              "prompt": "Who does she meet on Saturday?",
+              "open": true,
+              "guide": "Sophie."
+            },
+            {
+              "prompt": "Why does she spend time online after dinner?",
+              "open": true,
+              "guide": "Because she is looking for a new flat."
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-R-04",
+          "code": "R-04",
+          "title": "Text 2 · Choose the correct answer",
+          "instruction": "Choose the correct answer.",
+          "kind": "closed",
+          "items": [
+            {
+              "prompt": "Why can't Sophie meet Emma on Friday evening?",
+              "answers": [
+                "She's helping her cousin move."
+              ],
+              "options": [
+                "She's helping her cousin move.",
+                "She's taking an evening class.",
+                "She's working at the café."
+              ]
+            },
+            {
+              "prompt": "What is Sophie doing on Saturday morning?",
+              "answers": [
+                "She is taking her bike to the repair shop."
+              ],
+              "options": [
+                "She is taking her bike to the repair shop.",
+                "She is helping Oliver with his class.",
+                "She is meeting Emma for coffee."
+              ]
+            },
+            {
+              "prompt": "Where do they want to meet?",
+              "answers": [
+                "At the café near the park."
+              ],
+              "options": [
+                "At the café near the park.",
+                "At the bookshop near Emma's flat.",
+                "At the repair shop."
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-R-05",
+          "code": "R-05",
+          "title": "Text 2 · Put the events in order",
+          "instruction": "Number the events from 1 to 4.",
+          "kind": "closed",
+          "items": [
+            {
+              "prompt": "Oliver joins them after class.",
+              "answers": [
+                "4"
+              ],
+              "options": [
+                "1",
+                "2",
+                "3",
+                "4"
+              ]
+            },
+            {
+              "prompt": "Sophie helps her cousin move.",
+              "answers": [
+                "1"
+              ],
+              "options": [
+                "1",
+                "2",
+                "3",
+                "4"
+              ]
+            },
+            {
+              "prompt": "Sophie takes her bike to the repair shop.",
+              "answers": [
+                "2"
+              ],
+              "options": [
+                "1",
+                "2",
+                "3",
+                "4"
+              ]
+            },
+            {
+              "prompt": "Emma and Sophie meet at the café.",
+              "answers": [
+                "3"
+              ],
+              "options": [
+                "1",
+                "2",
+                "3",
+                "4"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-R-06",
+          "code": "R-06",
+          "title": "Text 2 · Answer the questions",
+          "instruction": "Answer the questions.",
+          "kind": "open",
+          "items": [
+            {
+              "prompt": "Why is Sophie busy on Friday evening?",
+              "open": true,
+              "guide": "She is helping her cousin move to a new flat."
+            },
+            {
+              "prompt": "What do Emma and Sophie plan to talk about?",
+              "open": true,
+              "guide": "Emma's English course and her flat search."
+            },
+            {
+              "prompt": "When is Oliver free?",
+              "open": true,
+              "guide": "Later, after his photography class."
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-R-07",
+          "code": "R-07",
+          "title": "Text 3 · Match the headings",
+          "instruction": "Write the correct heading (A–C) next to each paragraph. A) Life in a big city · B) Getting used to a new life · C) Feeling more comfortable",
+          "kind": "closed",
+          "items": [
+            {
+              "prompt": "Paragraph 1",
+              "answers": [
+                "A"
+              ],
+              "options": [
+                "A",
+                "B",
+                "C"
+              ]
+            },
+            {
+              "prompt": "Paragraph 2",
+              "answers": [
+                "B"
+              ],
+              "options": [
+                "A",
+                "B",
+                "C"
+              ]
+            },
+            {
+              "prompt": "Paragraph 3",
+              "answers": [
+                "C"
+              ],
+              "options": [
+                "A",
+                "B",
+                "C"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-R-08",
+          "code": "R-08",
+          "title": "Text 3 · Vocabulary in context",
+          "instruction": "Match the words from the text with their meanings.",
+          "kind": "closed",
+          "items": [
+            {
+              "prompt": "confusing",
+              "answers": [
+                "difficult to understand"
+              ],
+              "options": [
+                "sure of yourself",
+                "work periods at different times",
+                "difficult to understand"
+              ]
+            },
+            {
+              "prompt": "shifts",
+              "answers": [
+                "work periods at different times"
+              ],
+              "options": [
+                "sure of yourself",
+                "work periods at different times",
+                "difficult to understand"
+              ]
+            },
+            {
+              "prompt": "confident",
+              "answers": [
+                "sure of yourself"
+              ],
+              "options": [
+                "sure of yourself",
+                "work periods at different times",
+                "difficult to understand"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-R-09",
+          "code": "R-09",
+          "title": "Text 3 · Fact or Opinion?",
+          "instruction": "Write F for fact or O for opinion.",
+          "kind": "closed",
+          "items": [
+            {
+              "prompt": "London life is faster.",
+              "answers": [
+                "O"
+              ],
+              "options": [
+                "F",
+                "O"
+              ]
+            },
+            {
+              "prompt": "People seem to be in a hurry.",
+              "answers": [
+                "O"
+              ],
+              "options": [
+                "F",
+                "O"
+              ]
+            },
+            {
+              "prompt": "Lucas joined a football group on Sundays.",
+              "answers": [
+                "F"
+              ],
+              "options": [
+                "F",
+                "O"
+              ]
+            },
+            {
+              "prompt": "He found a nice café near his flat.",
+              "answers": [
+                "F"
+              ],
+              "options": [
+                "F",
+                "O"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-R-10",
+          "code": "R-10",
+          "title": "Text 3 · Reading comprehension",
+          "instruction": "Answer the questions.",
+          "kind": "open",
+          "items": [
+            {
+              "prompt": "How long has Lucas lived in London?",
+              "open": true,
+              "guide": "For two months."
+            },
+            {
+              "prompt": "Why did he join a local football group?",
+              "open": true,
+              "guide": "Because he wanted to make new friends."
+            },
+            {
+              "prompt": "What helped him feel more comfortable in the city?",
+              "open": true,
+              "guide": "He learned to manage his time, found a nice café near his flat and began to enjoy the city."
+            },
+            {
+              "prompt": "How does he feel these days?",
+              "open": true,
+              "guide": "More confident and comfortable, but he still misses his family."
+            }
+          ]
+        }
+      ]
     },
     "listening": {
       "scenes": []
