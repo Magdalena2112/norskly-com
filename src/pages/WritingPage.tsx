@@ -103,10 +103,10 @@ export default function WritingPage() {
         <div className="container max-w-5xl py-6 sm:py-8">
           <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="mb-6">
             <div className="rounded-3xl border border-border/50 bg-cream/90 shadow-postcard p-5 sm:p-6">
-              <p className="font-script italic text-primary/60 text-sm">Skriving & bildebeskrivelse</p>
-              <h1 className="text-display text-2xl sm:text-3xl text-primary mt-1">Vežbaj pisanje na norveškom</h1>
+              <p className="font-script italic text-primary/60 text-sm">Skriving & writing</p>
+              <h1 className="text-display text-2xl sm:text-3xl text-primary mt-1">Vežbaj pisanje</h1>
               <p className="text-sm text-muted-foreground mt-2 max-w-2xl">
-                Učitaj sliku za bildebeskrivelse ili napiši slobodan tekst i dobi detaljan AI feedback, predloge vokabulara i PDF analizu.
+                Obavezna vežbanja iz lekcije i samostalna vežba — opis slike ili slobodan tekst sa detaljnim AI feedbackom, predlozima vokabulara i PDF analizom.
               </p>
             </div>
           </motion.div>

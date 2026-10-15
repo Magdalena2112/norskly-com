@@ -81,7 +81,7 @@ export default function LessonWritingTab({ lessonId, language, level, onOpenFree
         <Button variant="outline" size="sm" disabled={idx === 0} onClick={() => setIdx(idx - 1)}><ChevronLeft className="w-4 h-4" /> Nazad</Button>
         {idx < exercises.length - 1
           ? <Button size="sm" onClick={() => setIdx(idx + 1)}>Sledeći <ChevronRight className="w-4 h-4" /></Button>
-          : <Button size="sm" onClick={onOpenFree}>Slobodno pisanje</Button>}
+          : <Button size="sm" onClick={onOpenFree}>Samostalna vežba</Button>}
       </div>
     </div>
   );
