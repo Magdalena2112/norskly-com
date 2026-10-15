@@ -3647,7 +3647,8 @@
                 "False"
               ]
             }
-          ]
+          ],
+          "textId": "EN-A2-L01-RD1"
         },
         {
           "id": "EN-A2-L01-R-02",
@@ -3689,7 +3690,8 @@
                 "She meets Sophie for coffee after lunch."
               ]
             }
-          ]
+          ],
+          "textId": "EN-A2-L01-RD1"
         },
         {
           "id": "EN-A2-L01-R-03",
@@ -3713,7 +3715,8 @@
               "open": true,
               "guide": "Because she is looking for a new flat."
             }
-          ]
+          ],
+          "textId": "EN-A2-L01-RD1"
         },
         {
           "id": "EN-A2-L01-R-04",
@@ -3755,7 +3758,8 @@
                 "At the repair shop."
               ]
             }
-          ]
+          ],
+          "textId": "EN-A2-L01-RD2"
         },
         {
           "id": "EN-A2-L01-R-05",
@@ -3812,7 +3816,8 @@
                 "4"
               ]
             }
-          ]
+          ],
+          "textId": "EN-A2-L01-RD2"
         },
         {
           "id": "EN-A2-L01-R-06",
@@ -3836,7 +3841,8 @@
               "open": true,
               "guide": "Later, after his photography class."
             }
-          ]
+          ],
+          "textId": "EN-A2-L01-RD2"
         },
         {
           "id": "EN-A2-L01-R-07",
@@ -3878,7 +3884,8 @@
                 "C"
               ]
             }
-          ]
+          ],
+          "textId": "EN-A2-L01-RD3"
         },
         {
           "id": "EN-A2-L01-R-08",
@@ -3920,7 +3927,8 @@
                 "difficult to understand"
               ]
             }
-          ]
+          ],
+          "textId": "EN-A2-L01-RD3"
         },
         {
           "id": "EN-A2-L01-R-09",
@@ -3969,7 +3977,8 @@
                 "O"
               ]
             }
-          ]
+          ],
+          "textId": "EN-A2-L01-RD3"
         },
         {
           "id": "EN-A2-L01-R-10",
@@ -3998,7 +4007,8 @@
               "open": true,
               "guide": "More confident and comfortable, but he still misses his family."
             }
-          ]
+          ],
+          "textId": "EN-A2-L01-RD3"
         }
       ]
     },
