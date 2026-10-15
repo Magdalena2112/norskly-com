@@ -5,9 +5,8 @@ import { loadLessonContent, speakLines, type Exercise } from "@/lib/courseLesson
 import LessonExercise from "@/components/lesson/LessonExercise";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Volume2, BookOpen, ArrowRight, CheckCircle2, MessageSquareQuote, PenLine, ZoomIn, Layers, Sparkles, Loader2 } from "lucide-react";
+import { Volume2, BookOpen, ArrowRight, CheckCircle2, MessageSquareQuote, PenLine, Layers, Sparkles, Loader2 } from "lucide-react";
 import { toast } from "sonner";
-import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import v1 from "@/assets/lessons/en-a1-l01-vocab-1.webp.asset.json";
 import v2 from "@/assets/lessons/en-a1-l01-vocab-2.webp.asset.json";
 import v3 from "@/assets/lessons/en-a1-l01-vocab-3.webp.asset.json";
@@ -42,7 +41,6 @@ export default function LessonVocabularyTab({ lessonId, mode, onPractice, onFlas
   const setIdx = (i: number) => { sharedIdx = i; setIdxState(i); };
   useEffect(() => { setIdxState(sharedIdx); }, [mode]);
   const [exIdx, setExIdx] = useState(0);
-  const [zoom, setZoom] = useState<string | null>(null);
 
   useEffect(() => {
     (async () => {
@@ -157,15 +155,6 @@ export default function LessonVocabularyTab({ lessonId, mode, onPractice, onFlas
           </div>
 
 
-          {(a.images || []).length > 0 && (
-            <div className="flex flex-wrap gap-2">
-              {(a.images || []).map((k, i) => IMAGES[k] && (
-                <Button key={k} variant="ghost" size="sm" onClick={() => setZoom(IMAGES[k])}>
-                  <ZoomIn className="w-4 h-4" /> Pogledaj celu ilustraciju{(a.images || []).length > 1 ? ` ${i + 1}` : ""}
-                </Button>
-              ))}
-            </div>
-          )}
           <p className="text-xs text-muted-foreground">Klikni na sličicu da čuješ izgovor.</p>
 
           {active.length > 0 && (
@@ -255,15 +244,6 @@ export default function LessonVocabularyTab({ lessonId, mode, onPractice, onFlas
           )}
         </div>
       )}
-      <Dialog open={!!zoom} onOpenChange={(o) => !o && setZoom(null)}>
-        <DialogContent className="max-w-4xl p-2">
-          <DialogTitle className="sr-only">{a.sr}</DialogTitle>
-          {zoom && <img src={zoom} alt={a.title} className="w-full h-auto max-h-[80vh] object-contain rounded-xl" />}
-          <Button variant="outline" size="sm" className="mx-auto" onClick={() => speakLines(active.map((w) => ({ speaker: "m", text: w.word.split(" / ")[0].replace("…", "") })), lang)}>
-            <Volume2 className="w-4 h-4" /> Poslušaj reči sa slike
-          </Button>
-        </DialogContent>
-      </Dialog>
     </div>
   );
 }
