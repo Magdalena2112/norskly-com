@@ -1,3 +1,6 @@
+import a2rd1 from "@/assets/lessons/en-a2-l01-rd1.webp.asset.json";
+import a2rd2 from "@/assets/lessons/en-a2-l01-rd2.webp.asset.json";
+import a2rd3 from "@/assets/lessons/en-a2-l01-rd3.webp.asset.json";
 import a2mix01 from "@/assets/lessons/en-a2-l01-mix01.webp.asset.json";
 import a2mix02 from "@/assets/lessons/en-a2-l01-mix02.webp.asset.json";
 import a2mix03 from "@/assets/lessons/en-a2-l01-mix03.webp.asset.json";
@@ -120,3 +123,8 @@ ITEM_IMAGES["a2:vo17"] = a2vo17.url;
 ITEM_IMAGES["a2:vo18"] = a2vo18.url;
 ITEM_IMAGES["a2:vo19"] = a2vo19.url;
 ITEM_IMAGES["a2:vo20"] = a2vo20.url;
+
+// EN-A2-L01 reading text illustrations.
+ITEM_IMAGES["a2:rd1"] = a2rd1.url;
+ITEM_IMAGES["a2:rd2"] = a2rd2.url;
+ITEM_IMAGES["a2:rd3"] = a2rd3.url;
