@@ -1977,9 +1977,552 @@
       ]
     },
     "vocabulary": {
-      "areas": [],
-      "words": [],
-      "collections": [],
+      "areas": [
+        {
+          "key": "DR1",
+          "title": "Daily Routines 1",
+          "sr": "Dnevna rutina 1",
+          "images": [
+            "a2v1"
+          ],
+          "words": [
+            {
+              "word": "wake up",
+              "translation": "probuditi se",
+              "collection": "DR1",
+              "active": true
+            },
+            {
+              "word": "get up",
+              "translation": "ustati",
+              "collection": "DR1",
+              "active": true
+            },
+            {
+              "word": "brush your teeth",
+              "translation": "oprati zube",
+              "collection": "DR1",
+              "active": true
+            },
+            {
+              "word": "take a shower",
+              "translation": "istuširati se",
+              "collection": "DR1",
+              "active": true
+            },
+            {
+              "word": "get dressed",
+              "translation": "obući se",
+              "collection": "DR1",
+              "active": true
+            },
+            {
+              "word": "have breakfast",
+              "translation": "doručkovati",
+              "collection": "DR1",
+              "active": true
+            },
+            {
+              "word": "leave home",
+              "translation": "krenuti od kuće",
+              "collection": "DR1",
+              "active": true
+            },
+            {
+              "word": "catch the bus",
+              "translation": "uhvatiti autobus",
+              "collection": "DR1",
+              "active": true
+            },
+            {
+              "word": "get to work / school",
+              "translation": "stići na posao / u školu",
+              "collection": "DR1",
+              "active": true
+            },
+            {
+              "word": "start work",
+              "translation": "početi s poslom",
+              "collection": "DR1",
+              "active": true
+            },
+            {
+              "word": "check emails",
+              "translation": "proveravati mejlove",
+              "collection": "DR1",
+              "active": true
+            },
+            {
+              "word": "attend a meeting",
+              "translation": "prisustvovati sastanku",
+              "collection": "DR1",
+              "active": true
+            },
+            {
+              "word": "take notes",
+              "translation": "hvatati beleške",
+              "collection": "DR1",
+              "active": true
+            },
+            {
+              "word": "take a break",
+              "translation": "napraviti pauzu",
+              "collection": "DR1",
+              "active": true
+            },
+            {
+              "word": "finish work",
+              "translation": "završiti posao",
+              "collection": "DR1",
+              "active": true
+            }
+          ],
+          "exercises": []
+        },
+        {
+          "key": "DR2",
+          "title": "Daily Routines 2",
+          "sr": "Dnevna rutina 2",
+          "images": [
+            "a2v2"
+          ],
+          "words": [
+            {
+              "word": "do homework",
+              "translation": "raditi domaći",
+              "collection": "DR2",
+              "active": true
+            },
+            {
+              "word": "prepare for an exam",
+              "translation": "pripremati se za ispit",
+              "collection": "DR2",
+              "active": true
+            },
+            {
+              "word": "tidy up",
+              "translation": "pospremiti",
+              "collection": "DR2",
+              "active": true
+            },
+            {
+              "word": "do the laundry",
+              "translation": "prati veš",
+              "collection": "DR2",
+              "active": true
+            },
+            {
+              "word": "do the washing-up",
+              "translation": "prati sudove",
+              "collection": "DR2",
+              "active": true
+            },
+            {
+              "word": "go grocery shopping",
+              "translation": "ići u kupovinu namirnica",
+              "collection": "DR2",
+              "active": true
+            },
+            {
+              "word": "make the bed",
+              "translation": "namestiti krevet",
+              "collection": "DR2",
+              "active": true
+            },
+            {
+              "word": "cook dinner",
+              "translation": "spremati večeru",
+              "collection": "DR2",
+              "active": true
+            },
+            {
+              "word": "vacuum the floor",
+              "translation": "usisavati pod",
+              "collection": "DR2",
+              "active": true
+            },
+            {
+              "word": "take out the rubbish",
+              "translation": "izneti smeće",
+              "collection": "DR2",
+              "active": true
+            },
+            {
+              "word": "work out",
+              "translation": "trenirati",
+              "collection": "DR2",
+              "active": true
+            },
+            {
+              "word": "go for a walk",
+              "translation": "otići u šetnju",
+              "collection": "DR2",
+              "active": true
+            },
+            {
+              "word": "meet up with friends",
+              "translation": "naći se sa prijateljima",
+              "collection": "DR2",
+              "active": true
+            },
+            {
+              "word": "spend time with family",
+              "translation": "provoditi vreme sa porodicom",
+              "collection": "DR2",
+              "active": true
+            },
+            {
+              "word": "go to bed",
+              "translation": "otići na spavanje",
+              "collection": "DR2",
+              "active": true
+            }
+          ],
+          "exercises": []
+        },
+        {
+          "key": "CDL",
+          "title": "Changes in Daily Life",
+          "sr": "Promene u svakodnevnom životu",
+          "images": [
+            "a2v3"
+          ],
+          "words": [
+            {
+              "word": "change your routine",
+              "translation": "promeniti rutinu",
+              "collection": "CDL",
+              "active": true
+            },
+            {
+              "word": "start a new job",
+              "translation": "započeti novi posao",
+              "collection": "CDL",
+              "active": true
+            },
+            {
+              "word": "move to a new place",
+              "translation": "preseliti se na novo mesto",
+              "collection": "CDL",
+              "active": true
+            },
+            {
+              "word": "look for a new flat",
+              "translation": "tražiti novi stan",
+              "collection": "CDL",
+              "active": true
+            },
+            {
+              "word": "get used to something",
+              "translation": "navikavati se na nešto",
+              "collection": "CDL",
+              "active": true
+            },
+            {
+              "word": "settle into a new home",
+              "translation": "priviknuti se na novi dom",
+              "collection": "CDL",
+              "active": true
+            },
+            {
+              "word": "try something new",
+              "translation": "probati nešto novo",
+              "collection": "CDL",
+              "active": true
+            },
+            {
+              "word": "take up a new hobby",
+              "translation": "početi da se bavite novim hobijem",
+              "collection": "CDL",
+              "active": true
+            },
+            {
+              "word": "learn a new skill",
+              "translation": "naučiti novu veštinu",
+              "collection": "CDL",
+              "active": true
+            },
+            {
+              "word": "make new friends",
+              "translation": "steći nove prijatelje",
+              "collection": "CDL",
+              "active": true
+            },
+            {
+              "word": "change your plans",
+              "translation": "promeniti planove",
+              "collection": "CDL",
+              "active": true
+            },
+            {
+              "word": "make a decision",
+              "translation": "doneti odluku",
+              "collection": "CDL",
+              "active": true
+            }
+          ],
+          "exercises": []
+        }
+      ],
+      "words": [
+        {
+          "word": "wake up",
+          "translation": "probuditi se",
+          "collection": "DR1",
+          "active": true
+        },
+        {
+          "word": "get up",
+          "translation": "ustati",
+          "collection": "DR1",
+          "active": true
+        },
+        {
+          "word": "brush your teeth",
+          "translation": "oprati zube",
+          "collection": "DR1",
+          "active": true
+        },
+        {
+          "word": "take a shower",
+          "translation": "istuširati se",
+          "collection": "DR1",
+          "active": true
+        },
+        {
+          "word": "get dressed",
+          "translation": "obući se",
+          "collection": "DR1",
+          "active": true
+        },
+        {
+          "word": "have breakfast",
+          "translation": "doručkovati",
+          "collection": "DR1",
+          "active": true
+        },
+        {
+          "word": "leave home",
+          "translation": "krenuti od kuće",
+          "collection": "DR1",
+          "active": true
+        },
+        {
+          "word": "catch the bus",
+          "translation": "uhvatiti autobus",
+          "collection": "DR1",
+          "active": true
+        },
+        {
+          "word": "get to work / school",
+          "translation": "stići na posao / u školu",
+          "collection": "DR1",
+          "active": true
+        },
+        {
+          "word": "start work",
+          "translation": "početi s poslom",
+          "collection": "DR1",
+          "active": true
+        },
+        {
+          "word": "check emails",
+          "translation": "proveravati mejlove",
+          "collection": "DR1",
+          "active": true
+        },
+        {
+          "word": "attend a meeting",
+          "translation": "prisustvovati sastanku",
+          "collection": "DR1",
+          "active": true
+        },
+        {
+          "word": "take notes",
+          "translation": "hvatati beleške",
+          "collection": "DR1",
+          "active": true
+        },
+        {
+          "word": "take a break",
+          "translation": "napraviti pauzu",
+          "collection": "DR1",
+          "active": true
+        },
+        {
+          "word": "finish work",
+          "translation": "završiti posao",
+          "collection": "DR1",
+          "active": true
+        },
+        {
+          "word": "do homework",
+          "translation": "raditi domaći",
+          "collection": "DR2",
+          "active": true
+        },
+        {
+          "word": "prepare for an exam",
+          "translation": "pripremati se za ispit",
+          "collection": "DR2",
+          "active": true
+        },
+        {
+          "word": "tidy up",
+          "translation": "pospremiti",
+          "collection": "DR2",
+          "active": true
+        },
+        {
+          "word": "do the laundry",
+          "translation": "prati veš",
+          "collection": "DR2",
+          "active": true
+        },
+        {
+          "word": "do the washing-up",
+          "translation": "prati sudove",
+          "collection": "DR2",
+          "active": true
+        },
+        {
+          "word": "go grocery shopping",
+          "translation": "ići u kupovinu namirnica",
+          "collection": "DR2",
+          "active": true
+        },
+        {
+          "word": "make the bed",
+          "translation": "namestiti krevet",
+          "collection": "DR2",
+          "active": true
+        },
+        {
+          "word": "cook dinner",
+          "translation": "spremati večeru",
+          "collection": "DR2",
+          "active": true
+        },
+        {
+          "word": "vacuum the floor",
+          "translation": "usisavati pod",
+          "collection": "DR2",
+          "active": true
+        },
+        {
+          "word": "take out the rubbish",
+          "translation": "izneti smeće",
+          "collection": "DR2",
+          "active": true
+        },
+        {
+          "word": "work out",
+          "translation": "trenirati",
+          "collection": "DR2",
+          "active": true
+        },
+        {
+          "word": "go for a walk",
+          "translation": "otići u šetnju",
+          "collection": "DR2",
+          "active": true
+        },
+        {
+          "word": "meet up with friends",
+          "translation": "naći se sa prijateljima",
+          "collection": "DR2",
+          "active": true
+        },
+        {
+          "word": "spend time with family",
+          "translation": "provoditi vreme sa porodicom",
+          "collection": "DR2",
+          "active": true
+        },
+        {
+          "word": "go to bed",
+          "translation": "otići na spavanje",
+          "collection": "DR2",
+          "active": true
+        },
+        {
+          "word": "change your routine",
+          "translation": "promeniti rutinu",
+          "collection": "CDL",
+          "active": true
+        },
+        {
+          "word": "start a new job",
+          "translation": "započeti novi posao",
+          "collection": "CDL",
+          "active": true
+        },
+        {
+          "word": "move to a new place",
+          "translation": "preseliti se na novo mesto",
+          "collection": "CDL",
+          "active": true
+        },
+        {
+          "word": "look for a new flat",
+          "translation": "tražiti novi stan",
+          "collection": "CDL",
+          "active": true
+        },
+        {
+          "word": "get used to something",
+          "translation": "navikavati se na nešto",
+          "collection": "CDL",
+          "active": true
+        },
+        {
+          "word": "settle into a new home",
+          "translation": "priviknuti se na novi dom",
+          "collection": "CDL",
+          "active": true
+        },
+        {
+          "word": "try something new",
+          "translation": "probati nešto novo",
+          "collection": "CDL",
+          "active": true
+        },
+        {
+          "word": "take up a new hobby",
+          "translation": "početi da se bavite novim hobijem",
+          "collection": "CDL",
+          "active": true
+        },
+        {
+          "word": "learn a new skill",
+          "translation": "naučiti novu veštinu",
+          "collection": "CDL",
+          "active": true
+        },
+        {
+          "word": "make new friends",
+          "translation": "steći nove prijatelje",
+          "collection": "CDL",
+          "active": true
+        },
+        {
+          "word": "change your plans",
+          "translation": "promeniti planove",
+          "collection": "CDL",
+          "active": true
+        },
+        {
+          "word": "make a decision",
+          "translation": "doneti odluku",
+          "collection": "CDL",
+          "active": true
+        }
+      ],
+      "collections": {
+        "DR1": "Daily Routines 1",
+        "DR2": "Daily Routines 2",
+        "CDL": "Changes in Daily Life"
+      },
       "exercises": []
     },
     "reading": {
