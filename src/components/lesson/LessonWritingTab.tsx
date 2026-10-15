@@ -63,7 +63,7 @@ export default function LessonWritingTab({ lessonId, language, level, onOpenFree
     <div className="space-y-5">
       <div className="rounded-3xl border border-border/50 bg-cream/90 shadow-postcard p-5">
         <p className="font-script italic text-primary/60 text-sm">{title}</p>
-        <h2 className="text-display text-xl text-primary mt-1">Zadaci za pisanje iz lekcije</h2>
+        <h2 className="text-display text-xl text-primary mt-1">Obavezna vežbanja</h2>
         <div className="flex gap-2 mt-4 overflow-x-auto scrollbar-hide pb-1">
           {exercises.map((e, i) => (
             <button key={e.code} onClick={() => setIdx(i)}
