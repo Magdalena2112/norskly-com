@@ -13,10 +13,14 @@ import v2 from "@/assets/lessons/en-a1-l01-vocab-2.webp.asset.json";
 import v3 from "@/assets/lessons/en-a1-l01-vocab-3.webp.asset.json";
 import v4 from "@/assets/lessons/en-a1-l01-vocab-4.webp.asset.json";
 
+import a2v1 from "@/assets/lessons/en-a2-l01-vocab-1.webp.asset.json";
+import a2v2 from "@/assets/lessons/en-a2-l01-vocab-2.webp.asset.json";
+import a2v3 from "@/assets/lessons/en-a2-l01-vocab-3.webp.asset.json";
 import wordPics from "@/content/lessons/EN-A1-L01.vocab-images.json";
+import wordPicsA2 from "@/content/lessons/EN-A2-L01.vocab-images.json";
 
-const IMAGES: Record<string, string> = { v1: v1.url, v2: v2.url, v3: v3.url, v4: v4.url };
-const PICS = wordPics as Record<string, Record<string, string>>;
+const IMAGES: Record<string, string> = { v1: v1.url, v2: v2.url, v3: v3.url, v4: v4.url, a2v1: a2v1.url, a2v2: a2v2.url, a2v3: a2v3.url };
+const PICS = { ...wordPics, ...wordPicsA2 } as Record<string, Record<string, string>>;
 const picFor = (w: string, imgs: string[] = []) => {
   for (const k of imgs) { const u = PICS[k]?.[w]; if (u) return u; }
   for (const k of Object.keys(PICS)) { const u = PICS[k][w]; if (u) return u; }
