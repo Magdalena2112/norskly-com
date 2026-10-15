@@ -243,7 +243,7 @@ export default function CourseLessonPage() {
             <div className="rounded-3xl border border-border/50 bg-cream/90 backdrop-blur-md shadow-postcard p-5">
               <p className="font-script italic text-primary/60 text-sm">{MODULE_META[open].subtitle}</p>
               <h2 className="font-display text-2xl text-primary">{MODULE_META[open].title}</h2>
-              {open !== "reading" && hasMaterial(open) && openEx.length > 0 && (
+              {!["reading", "listening"].includes(open) && hasMaterial(open) && openEx.length > 0 && (
                 <div className="mt-4 inline-flex rounded-full bg-secondary/60 p-1">
                   {(["learn", "practice"] as const).map((v) => (
                     <button key={v} onClick={() => setView(v)} className={`px-4 py-1.5 rounded-full text-sm ${view === v ? "bg-primary text-primary-foreground" : "text-primary"}`}>
@@ -303,6 +303,8 @@ export default function CourseLessonPage() {
               })()
             ) : open === "review" && m.review?.quiz ? (
               <LessonReviewQuiz quiz={m.review.quiz} lang={lang} lessonCode={content.code || row.lesson_code || "lesson"} passed={done.includes("REVIEW-PASS")} onPass={() => markDone("REVIEW-PASS")} />
+            ) : open === "listening" && m.listening?.scenes ? (
+              <LessonListeningTab key={`${row.id}_${lang}`} scenes={m.listening.scenes} lang={lang} lessonCode={content?.code || "lesson"} completed={done} onDone={markDone} onFinish={() => openModule(null)} />
             ) : view === "practice" || !hasMaterial(open) ? (
               <ExerciseStepper list={openEx} done={done} render={(ex) => renderExercises([ex])} onFinish={() => openModule(null)} />
             ) : (
