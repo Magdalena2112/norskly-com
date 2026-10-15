@@ -20,20 +20,7 @@ import CorrectionResultView, { type CorrectionResult } from "@/components/writin
 import { format } from "date-fns";
 
 // ─── Shared types ───
-interface Mistake { original: string; corrected: string; explanation: string; }
-interface VocabSuggestion { weak: string; better: string; why: string; }
-interface CorrectionResult {
-  corrected_text: string;
-  mistakes: Mistake[];
-  vocabulary_suggestions?: VocabSuggestion[];
-  overall_feedback?: string;
-  naturalness_score?: number;
-  complexity_score?: number;
-  nivo_analiza?: Record<string, string>;
-  cefr_assessment?: string;
-  sledeci_korak?: string[];
-  _errors?: { category: string; topic: string; severity: number; example_wrong: string; example_correct: string }[];
-}
+// CorrectionResult lives in @/components/writing/CorrectionResultView
 
 interface VocabItem { word: string; translation: string; type?: string }
 interface ImageHelper {
