@@ -199,7 +199,7 @@ export default function ReadingPage() {
         <div className="flex items-center gap-2 mb-6">
           <BackButton to="/practice" className="text-primary" />
           <div className="flex-1">
-            <p className="font-script italic text-primary/60 text-sm">Lesing</p>
+            <p className="font-script italic text-primary/60 text-sm">{({ no: "Lesing", en: "Reading", de: "Lesen" } as Record<string, string>)[langCode] || "Reading"}</p>
             <h1 className="text-display text-2xl sm:text-3xl text-primary leading-tight flex items-center gap-2">
               <BookOpenText className="w-6 h-6" /> Čitanje
             </h1>
@@ -288,7 +288,7 @@ export default function ReadingPage() {
 
                 {(() => {
                   const isAdvanced = level === "B1" || level === "B2" || level === "C1";
-                  const L = isAdvanced
+                  const L = false
                     ? {
                         tf: { title: "1. Sant eller usant", instr: "Les påstandene og velg om de er sanne eller usanne." },
                         open: { title: "2. Leseforståelse", instr: "Svar på spørsmålene basert på teksten." },
