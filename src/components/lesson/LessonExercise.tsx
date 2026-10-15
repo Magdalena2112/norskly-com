@@ -24,6 +24,7 @@ export default function LessonExercise({
   const { user } = useAuth();
   const [state, setState] = useState<ItemState[]>(() => exercise.items.map(() => ({ value: "", attempts: 0, status: "idle" })));
   const [checking, setChecking] = useState(false);
+  const [analysis, setAnalysis] = useState<CorrectionResult | null>(null);
   // Shuffle options once per exercise so the correct answer's position doesn't give it away.
   const shuffledOptions = useMemo(
     () => exercise.items.map((it) => (it.options ? [...it.options].sort(() => Math.random() - 0.5) : undefined)),
@@ -61,6 +62,40 @@ export default function LessonExercise({
         example_wrong: `${w.prompt} → ${w.wrong}`,
         example_correct: w.correct,
       })), lessonTitle, MAX_ATTEMPTS, language);
+    }
+
+    // Writing tasks (single open answer) get the full writing-correct analysis, same as free writing.
+    if (isWriting) {
+      const s = next[0];
+      if (!s.value.trim() || s.status === "correct") { setState(next); return; }
+      setChecking(true);
+      next[0] = { ...s, status: "pending" };
+      setState([...next]);
+      const { data, error } = await supabase.functions.invoke("writing-correct", {
+        body: {
+          text: s.value.trim(),
+          level,
+          language,
+          has_image: !!exercise.image,
+          topic: { title: exercise.title, guiding_questions: exercise.items[0].guiding || [] },
+        },
+      });
+      setChecking(false);
+      if (error || data?.error) {
+        let msg = data?.error;
+        try { msg = msg || (await (error as any)?.context?.json?.())?.error; } catch { /* noop */ }
+        toast.error(msg || "AI provera nije uspela.");
+        next[0] = { ...next[0], status: "idle" };
+        setState([...next]);
+        return;
+      }
+      setAnalysis(data as CorrectionResult);
+      const mistakeCount = (data.mistakes || []).length;
+      next[0] = { ...next[0], status: mistakeCount === 0 ? "correct" : "partial", feedback: data.overall_feedback, improved: data.corrected_text, attempts: next[0].attempts + 1 };
+      setState([...next]);
+      if (user && data._errors?.length) logErrors(user.id, "writing", "lesson", data._errors.slice(0, 5), lessonTitle, undefined, language);
+      onDone(exercise.code);
+      return;
     }
 
     const openIdx = exercise.items.map((it, i) => (it.open && next[i].value.trim() && next[i].status !== "correct" ? i : -1)).filter((i) => i >= 0);
