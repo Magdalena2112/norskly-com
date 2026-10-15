@@ -9,6 +9,7 @@ import { useAuth } from "@/context/AuthContext";
 import { logErrors } from "@/lib/logErrors";
 import { toast } from "sonner";
 import { ITEM_IMAGES } from "@/content/lessons/itemImages";
+import CorrectionResultView, { type CorrectionResult } from "@/components/writing/CorrectionResultView";
 
 type Status = "idle" | "correct" | "wrong" | "failed" | "partial" | "pending";
 interface ItemState { value: string; attempts: number; status: Status; feedback?: string; improved?: string }
