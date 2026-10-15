@@ -255,7 +255,7 @@ export default function CourseLessonPage() {
                 </div>
               )}
             </div>
-            {open !== "listening" && view === "learn" && hasMaterial(open) && (imgs?.modules[open] || []).length > 0 && (
+            {!["listening", "pronunciation"].includes(open) && view === "learn" && hasMaterial(open) && (imgs?.modules[open] || []).length > 0 && (
               <div className={`grid gap-3 ${(imgs!.modules[open].length > 1) ? "sm:grid-cols-2" : ""}`}>
                 {imgs!.modules[open].map((src, i) => <img key={src + i} src={src} alt={`${MODULE_META[open].title} ilustracija ${i + 1}`} loading="lazy" className={`w-full rounded-2xl border border-border/50 shadow-card-soft object-cover ${imgs!.modules[open].length > 1 && i === 0 ? "sm:col-span-2" : ""}`} />)}
               </div>
