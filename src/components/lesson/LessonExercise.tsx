@@ -9,6 +9,7 @@ import { useAuth } from "@/context/AuthContext";
 import { logErrors } from "@/lib/logErrors";
 import { toast } from "sonner";
 import { ITEM_IMAGES } from "@/content/lessons/itemImages";
+import CorrectionResultView, { type CorrectionResult } from "@/components/writing/CorrectionResultView";
 
 type Status = "idle" | "correct" | "wrong" | "failed" | "partial" | "pending";
 interface ItemState { value: string; attempts: number; status: Status; feedback?: string; improved?: string }
@@ -23,6 +24,7 @@ export default function LessonExercise({
   const { user } = useAuth();
   const [state, setState] = useState<ItemState[]>(() => exercise.items.map(() => ({ value: "", attempts: 0, status: "idle" })));
   const [checking, setChecking] = useState(false);
+  const [analysis, setAnalysis] = useState<CorrectionResult | null>(null);
   // Shuffle options once per exercise so the correct answer's position doesn't give it away.
   const shuffledOptions = useMemo(
     () => exercise.items.map((it) => (it.options ? [...it.options].sort(() => Math.random() - 0.5) : undefined)),
@@ -60,6 +62,40 @@ export default function LessonExercise({
         example_wrong: `${w.prompt} → ${w.wrong}`,
         example_correct: w.correct,
       })), lessonTitle, MAX_ATTEMPTS, language);
+    }
+
+    // Writing tasks (single open answer) get the full writing-correct analysis, same as free writing.
+    if (isWriting) {
+      const s = next[0];
+      if (!s.value.trim() || s.status === "correct") { setState(next); return; }
+      setChecking(true);
+      next[0] = { ...s, status: "pending" };
+      setState([...next]);
+      const { data, error } = await supabase.functions.invoke("writing-correct", {
+        body: {
+          text: s.value.trim(),
+          level,
+          language,
+          has_image: !!exercise.image,
+          topic: { title: exercise.title, guiding_questions: exercise.items[0].guiding || [] },
+        },
+      });
+      setChecking(false);
+      if (error || data?.error) {
+        let msg = data?.error;
+        try { msg = msg || (await (error as any)?.context?.json?.())?.error; } catch { /* noop */ }
+        toast.error(msg || "AI provera nije uspela.");
+        next[0] = { ...next[0], status: "idle" };
+        setState([...next]);
+        return;
+      }
+      setAnalysis(data as CorrectionResult);
+      const mistakeCount = (data.mistakes || []).length;
+      next[0] = { ...next[0], status: mistakeCount === 0 ? "correct" : "partial", feedback: data.overall_feedback, improved: data.corrected_text, attempts: next[0].attempts + 1 };
+      setState([...next]);
+      if (user && data._errors?.length) logErrors(user.id, "writing", "lesson", data._errors.slice(0, 5), lessonTitle, undefined, language);
+      onDone(exercise.code);
+      return;
     }
 
     const openIdx = exercise.items.map((it, i) => (it.open && next[i].value.trim() && next[i].status !== "correct" ? i : -1)).filter((i) => i >= 0);
@@ -203,20 +239,15 @@ export default function LessonExercise({
           <div className="flex justify-between items-center">
             <span className="text-xs text-muted-foreground">{words} reči{wTarget ? ` · cilj ${wTarget[1]}–${wTarget[2]}` : ""}</span>
           </div>
-          {wState.status === "correct" && <p className="text-xs text-forest flex items-center gap-1"><CheckCircle2 className="w-3.5 h-3.5" /> Tačno!{wState.feedback ? ` ${wState.feedback}` : ""}</p>}
-          {(wState.status === "partial" || wState.status === "wrong") && (
-            <div className="text-xs rounded-lg bg-secondary/50 p-2 space-y-1">
-              <p className="flex items-start gap-1"><AlertCircle className="w-3.5 h-3.5 mt-0.5 text-sunset shrink-0" /> {wState.feedback}</p>
-              {wState.improved && <p className="italic text-primary">→ {wState.improved}</p>}
-            </div>
-          )}
-          {wState.status === "pending" && <p className="text-xs text-muted-foreground flex items-center gap-1"><Loader2 className="w-3.5 h-3.5 animate-spin" /> AI tutor proverava…</p>}
+          {wState.status === "correct" && !analysis && <p className="text-xs text-forest flex items-center gap-1"><CheckCircle2 className="w-3.5 h-3.5" /> Tačno!{wState.feedback ? ` ${wState.feedback}` : ""}</p>}
+          {wState.status === "pending" && <p className="text-xs text-muted-foreground flex items-center gap-1"><Loader2 className="w-3.5 h-3.5 animate-spin" /> AI tutor analizira tekst…</p>}
           <div>
-            <Button size="sm" variant="hero" onClick={check} disabled={checking}>
+            <Button size="sm" variant="hero" onClick={check} disabled={checking || wState.status === "pending"}>
               {checking ? <Loader2 className="w-4 h-4 animate-spin" /> : <Sparkles className="w-4 h-4" />}
-              Proveri
+              {analysis ? "Proveri ponovo" : "Proveri"}
             </Button>
           </div>
+          {analysis && <CorrectionResultView result={analysis} />}
         </div>
       </div>
     </div>
