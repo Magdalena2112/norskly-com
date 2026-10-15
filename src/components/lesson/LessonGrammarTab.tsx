@@ -91,6 +91,7 @@ export default function LessonGrammarTab({ lessonId, onPractice, onExplain, mode
     }, { onConflict: "user_id,lesson_id" });
   }
 
+  if (!topics.length) return <p className="text-sm text-muted-foreground">Gramatički sadržaj ove lekcije je u pripremi.</p>;
   const topic = topics[Math.min(Math.max(active, 0), topics.length - 1)] ?? topics[0];
   const topicEx = topic ? exercises.filter((e) => topic.exercises.includes(e.code)) : [];
   const isTopicDone = (t: Topic) => t.exercises.length > 0 && t.exercises.every((c) => done.includes(c));
