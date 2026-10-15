@@ -80,7 +80,7 @@ export default function LessonGrammarTab({ lessonId, onPractice, onExplain, mode
     label: s.title.replace(/^\d+(\.\d+)?\s*/, ""), sectionIdx: [i], exercises: [], aiTopic: s.title, related: [],
   }));
   const unassigned = exercises.filter((e) => !topics.some((t) => t.exercises.includes(e.code)));
-  if (unassigned.length && !LESSON_GRAMMAR_TOPICS[row.lesson_code]) topics[topics.length - 1] = { ...topics[topics.length - 1], exercises: [...topics[topics.length - 1].exercises, ...unassigned.map((e) => e.code)] };
+  if (unassigned.length && topics.length && !LESSON_GRAMMAR_TOPICS[row.lesson_code]) topics[topics.length - 1] = { ...topics[topics.length - 1], exercises: [...topics[topics.length - 1].exercises, ...unassigned.map((e) => e.code)] };
 
   async function markDone(code: string) {
     if (!user || done.includes(code)) return;
