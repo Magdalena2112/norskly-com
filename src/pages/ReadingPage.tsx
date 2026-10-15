@@ -287,8 +287,8 @@ export default function ReadingPage() {
                 )}
 
                 {(() => {
-                  const isAdvanced = level === "B1" || level === "B2" || level === "C1";
-                  const L = false
+                  const isAdvanced = false as boolean;
+                  const L = isAdvanced
                     ? {
                         tf: { title: "1. Sant eller usant", instr: "Les påstandene og velg om de er sanne eller usanne." },
                         open: { title: "2. Leseforståelse", instr: "Svar på spørsmålene basert på teksten." },
