@@ -571,10 +571,10 @@ export default function ProgressPage() {
             <p className="text-sm text-foreground font-medium mb-1">💡 Savet za {profile.level}</p>
             <p className="text-sm text-muted-foreground">
               {profile.level === "A1" && "Fokusiraj se na učenje najčešćih 100 reči. One pokrivaju ~50% svakodnevnog govora!"}
-              {profile.level === "A2" && "Počni da čitaš kratke norveške tekstove i pokušaj da prepoznaješ obrasce."}
-              {profile.level === "B1" && "Gledaj norveške serije sa titlovima. NRK ima odličan besplatan sadržaj!"}
-              {profile.level === "B2" && "Počni da pišeš kraće tekstove na norveškom — blogove, dnevnike, mejlove."}
-              {profile.level === "C1" && "Uključi se u norveške diskusione grupe i forume za autentičnu praksu."}
+              {profile.level === "A2" && "Počni da čitaš kratke tekstove na jeziku koji učiš i pokušaj da prepoznaješ obrasce."}
+              {profile.level === "B1" && "Gledaj serije na jeziku koji učiš, uz titlove na istom jeziku."}
+              {profile.level === "B2" && "Počni da pišeš kraće tekstove na jeziku koji učiš — dnevnike, mejlove, poruke."}
+              {profile.level === "C1" && "Uključi se u diskusione grupe i forume na jeziku koji učiš za autentičnu praksu."}
             </p>
           </CardContent>
         </Card>

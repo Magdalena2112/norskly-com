@@ -73,3 +73,32 @@ export function getCurrentPersonalization(): { focus_area: string; life_context:
     return { focus_area: "", life_context: "" };
   }
 }
+
+const LOCATIVE: Record<LanguageCode, string> = { no: "norveškom", en: "engleskom", de: "nemačkom" };
+const GENITIVE: Record<LanguageCode, string> = { no: "norveškog", en: "engleskog", de: "nemačkog" };
+const NOMINATIVE: Record<LanguageCode, string> = { no: "norveški", en: "engleski", de: "nemački" };
+const TTS: Record<LanguageCode, string> = { no: "nb-NO", en: "en-GB", de: "de-DE" };
+
+/** "na engleskom" → returns "engleskom" for the active language. */
+export const langLocative = (c: LanguageCode = getCurrentLanguageCode()) => LOCATIVE[c];
+/** "profesor engleskog" → returns "engleskog". */
+export const langGenitive = (c: LanguageCode = getCurrentLanguageCode()) => GENITIVE[c];
+export const langNominative = (c: LanguageCode = getCurrentLanguageCode()) => NOMINATIVE[c];
+export const ttsLang = (c: LanguageCode = getCurrentLanguageCode()) => TTS[c];
+
+/** Speech synthesis in the active learning language. */
+export function speakInCurrentLanguage(text: string) {
+  if (typeof window === "undefined" || !window.speechSynthesis) return;
+  window.speechSynthesis.cancel();
+  const clean = text.replace(/\*\*([^*]+)\*\*/g, "$1").replace(/\*([^*]+)\*/g, "$1").replace(/[#_~`>]/g, "").trim();
+  const lang = ttsLang();
+  const utter = new SpeechSynthesisUtterance(clean);
+  utter.lang = lang;
+  utter.rate = 0.9;
+  const prefix = lang.slice(0, 2);
+  const voice = window.speechSynthesis.getVoices().find((v) =>
+    prefix === "nb" ? v.lang.startsWith("nb") || v.lang.startsWith("no") : v.lang.startsWith(prefix),
+  );
+  if (voice) utter.voice = voice;
+  window.speechSynthesis.speak(utter);
+}

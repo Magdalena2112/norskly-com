@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import { langGenitive } from "@/lib/currentLanguage";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
@@ -79,7 +80,7 @@ export default function SelectTeacherPage() {
             Odaberi svog nastavnika
           </h1>
           <p className="text-primary/80 max-w-xl mx-auto">
-            Verifikovani profesori norveškog jezika. Izaberi tip časa, termin i odluči da li želiš da deliš svoj napredak za personalizovanije vođenje.
+            {`Verifikovani profesori ${langGenitive()} jezika.`} Izaberi tip časa, termin i odluči da li želiš da deliš svoj napredak za personalizovanije vođenje.
           </p>
         </motion.div>
 
@@ -135,7 +136,7 @@ export default function SelectTeacherPage() {
                         </div>
                       </div>
 
-                      <p className="mt-4 text-sm text-muted-foreground line-clamp-3">{t.bio || "Iskusan nastavnik norveškog jezika."}</p>
+                      <p className="mt-4 text-sm text-muted-foreground line-clamp-3">{t.bio || `Iskusan nastavnik ${langGenitive()} jezika.`}</p>
 
                       {t.spoken_languages?.length > 0 && (
                         <div className="mt-3 flex items-center gap-1.5 text-xs text-muted-foreground">

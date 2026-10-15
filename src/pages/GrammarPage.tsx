@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
+import { langLocative, langGenitive } from "@/lib/currentLanguage";
 import { motion } from "framer-motion";
 import { useProfile } from "@/context/ProfileContext";
 import { useAuth } from "@/context/AuthContext";
@@ -518,11 +519,11 @@ function CorrectionTab({ level, userId }: { level: string; userId?: string }) {
       <Card className="shadow-nordic bg-background/80 backdrop-blur-sm border-border/30">
         <CardHeader>
           <CardTitle className="text-lg">Korekcija teksta</CardTitle>
-          <CardDescription>Napišite tekst na norveškom, AI će ga ispraviti.</CardDescription>
+          <CardDescription>{`Napišite tekst na ${langLocative()}, AI će ga ispraviti.`}</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <Textarea
-            placeholder="Napišite tekst na norveškom ovde..."
+            placeholder={`Napišite tekst na ${langLocative()} ovde...`}
             value={text}
             onChange={(e) => setText(e.target.value)}
             rows={5}
@@ -813,7 +814,7 @@ function ExplainTab({ level, userId, initialQuery }: { level: string; userId?: s
         <CardHeader>
           <CardTitle className="text-lg">Objašnjenja gramatike</CardTitle>
           <CardDescription>
-            Postavite bilo koje pitanje o norveškoj gramatici — na srpskom ili norveškom.
+            Postavite bilo koje pitanje {`o gramatici ${langGenitive()} jezika — na srpskom ili ${langLocative()}.`}
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">

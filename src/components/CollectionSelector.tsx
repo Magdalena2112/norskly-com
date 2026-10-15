@@ -136,7 +136,7 @@ export default function CollectionSelector({
         <CardContent className="pt-8 pb-8 text-center space-y-2">
           <p className="text-muted-foreground">Nemate kolekcija.</p>
           <p className="text-sm text-muted-foreground">
-            Kreirajte kolekciju i dodajte reči u "Ordsamlinger" tabu.
+            Kreirajte kolekciju i dodajte reči u "Kolekcije" tabu.
           </p>
         </CardContent>
       </Card>

@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect, useCallback } from "react";
+import { langLocative, speakInCurrentLanguage } from "@/lib/currentLanguage";
 import { Mic, Square as StopIcon, Loader2 as Spinner } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
@@ -111,7 +112,7 @@ const roleOptions = [
   { value: "kolega", label: "Kolega na poslu" },
   { value: "prodavac", label: "Prodavac / konobar" },
   { value: "lekar", label: "Lekar / recepcioner" },
-  { value: "nastavnik", label: "Nastavnik norveškog" },
+  { value: "nastavnik", label: "Nastavnik jezika" },
 ];
 
 const CHAT_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/talk-ai`;
@@ -173,19 +174,7 @@ const sectionConfig: Record<SectionKey, { icon: React.ReactNode; label: string; 
 };
 
 // ── TTS helper ──
-function speakNorwegian(text: string) {
-  if (!window.speechSynthesis) return;
-  window.speechSynthesis.cancel();
-  // Strip markdown formatting for cleaner speech
-  const clean = text.replace(/\*\*([^*]+)\*\*/g, "$1").replace(/\*([^*]+)\*/g, "$1").replace(/[#_~`>]/g, "").trim();
-  const utter = new SpeechSynthesisUtterance(clean);
-  utter.lang = "nb-NO";
-  utter.rate = 0.9;
-  const voices = window.speechSynthesis.getVoices();
-  const nbVoice = voices.find((v) => v.lang.startsWith("nb") || v.lang.startsWith("no"));
-  if (nbVoice) utter.voice = nbVoice;
-  window.speechSynthesis.speak(utter);
-}
+const speakNorwegian = speakInCurrentLanguage;
 
 function CollapsibleSection({ section, defaultOpen, onSpeak }: { section: ParsedSection; defaultOpen: boolean; onSpeak?: () => void }) {
   const [open, setOpen] = useState(defaultOpen);
@@ -1119,14 +1108,15 @@ export default function PracticePage() {
                 Hei, {profile.name || "korisniče"}! 👋
               </h2>
               <p className="text-muted-foreground mb-8 max-w-md mx-auto">
-                Izaberi situaciju gore i započni razgovor na norveškom. Ja ću ti odgovarati i pomagati.
+                Izaberi situaciju gore i započni razgovor na {langLocative()}. Ja ću ti odgovarati i pomagati.
               </p>
               <div className="flex flex-wrap justify-center gap-2">
-                {[
-                  "Hei, jeg heter " + (profile.name || "..."),
-                  "Kan du hjelpe meg?",
-                  "Jeg vil gjerne øve på norsk",
-                ].map((s) => (
+                {(langCode === "en"
+                  ? ["Hi, my name is " + (profile.name || "..."), "Can you help me?", "I'd like to practise English"]
+                  : langCode === "de"
+                  ? ["Hallo, ich heiße " + (profile.name || "..."), "Kannst du mir helfen?", "Ich möchte Deutsch üben"]
+                  : ["Hei, jeg heter " + (profile.name || "..."), "Kan du hjelpe meg?", "Jeg vil gjerne øve på norsk"]
+                ).map((s) => (
                   <button
                     key={s}
                     onClick={() => sendMessage(s)}
