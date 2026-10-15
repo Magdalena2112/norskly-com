@@ -4581,7 +4581,7 @@
           ],
           "questions": [
             {
-              "prompt": "When? She didn't know where the shops were.",
+              "prompt": "When? The speaker didn't know where the shops were.",
               "options": [
                 "At first",
                 "Now / usually",
@@ -4590,7 +4590,7 @@
               "answer": "At first"
             },
             {
-              "prompt": "When? She goes for a walk after dinner.",
+              "prompt": "When? The speaker goes for a walk after dinner.",
               "options": [
                 "At first",
                 "Now / usually",
@@ -4599,7 +4599,7 @@
               "answer": "Now / usually"
             },
             {
-              "prompt": "When? She is joining a yoga class.",
+              "prompt": "When? The speaker is joining a yoga class.",
               "options": [
                 "At first",
                 "Now / usually",
@@ -4608,7 +4608,7 @@
               "answer": "This month"
             },
             {
-              "prompt": "When? She feels more comfortable in the area.",
+              "prompt": "When? The speaker feels more comfortable in the area.",
               "options": [
                 "At first",
                 "Now / usually",
@@ -4617,7 +4617,7 @@
               "answer": "Now / usually"
             },
             {
-              "prompt": "When? She found the neighbourhood unfamiliar.",
+              "prompt": "When? The speaker found the neighbourhood unfamiliar.",
               "options": [
                 "At first",
                 "Now / usually",
@@ -4648,7 +4648,7 @@
           ],
           "questions": [
             {
-              "prompt": "Who is learning how to prepare new dishes.",
+              "prompt": "Who is learning how to prepare new dishes?",
               "options": [
                 "Rachel",
                 "James",
@@ -4657,7 +4657,7 @@
               "answer": "Rachel"
             },
             {
-              "prompt": "Who has changed the way they travel to work.",
+              "prompt": "Who has changed the way they travel to work?",
               "options": [
                 "Rachel",
                 "James",
@@ -4666,7 +4666,7 @@
               "answer": "James"
             },
             {
-              "prompt": "Who lives further away from school now.",
+              "prompt": "Who lives further away from school now?",
               "options": [
                 "Rachel",
                 "James",
@@ -4675,7 +4675,7 @@
               "answer": "Olivia"
             },
             {
-              "prompt": "Who is doing a new activity in the evening.",
+              "prompt": "Who is doing a new activity in the evening?",
               "options": [
                 "Rachel",
                 "James",
@@ -4684,7 +4684,7 @@
               "answer": "Rachel"
             },
             {
-              "prompt": "Who enjoys having a garden.",
+              "prompt": "Who enjoys having a garden?",
               "options": [
                 "Rachel",
                 "James",
