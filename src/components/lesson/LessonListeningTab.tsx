@@ -113,10 +113,10 @@ export default function LessonListeningTab({ scenes, lang, lessonCode, completed
           </div>}
         </div>}
         {done && <p className="text-sm font-medium text-primary">Rezultat: {correct} / {scene.questions.length}</p>}
-        <Button size="sm" variant="ghost" onClick={() => { stop(); setTranscripts(previous => ({ ...previous, [scene.id]: !previous[scene.id] })); }}>
+        {ans !== undefined && <Button size="sm" variant="ghost" onClick={() => { stop(); setTranscripts(previous => ({ ...previous, [scene.id]: !previous[scene.id] })); }}>
           {transcripts[scene.id] ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}{transcripts[scene.id] ? "Sakrij transkript" : "Prikaži transkript"}
-        </Button>
-        {transcripts[scene.id] && <ul className="space-y-2 border-t border-border/60 pt-3">
+        </Button>}
+        {ans !== undefined && transcripts[scene.id] && <ul className="space-y-2 border-t border-border/60 pt-3">
           {scene.lines.map((line, i) => <li key={i} className={cn("flex gap-2 items-start px-2 py-1 rounded-lg", active === i && "bg-secondary")}>
             <Button size="icon" variant="ghost" className="w-7 h-7 shrink-0" aria-label={`Pusti rečenicu ${i + 1}`} onClick={() => play([line])}><Volume2 className="w-4 h-4" /></Button>
             <p className="text-sm min-w-0"><strong className="text-primary">{line.speaker}:</strong> {line.text}</p>
