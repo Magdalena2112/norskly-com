@@ -2077,7 +2077,14 @@
               "active": true
             }
           ],
-          "exercises": []
+          "exercises": [
+            "VO-01",
+            "VO-02",
+            "VO-05",
+            "VO-11",
+            "VO-12",
+            "VO-13"
+          ]
         },
         {
           "key": "DR2",
@@ -2178,7 +2185,14 @@
               "active": true
             }
           ],
-          "exercises": []
+          "exercises": [
+            "VO-03",
+            "VO-04",
+            "VO-06",
+            "VO-14",
+            "VO-15",
+            "VO-19"
+          ]
         },
         {
           "key": "CDL",
@@ -2261,7 +2275,16 @@
               "active": true
             }
           ],
-          "exercises": []
+          "exercises": [
+            "VO-07",
+            "VO-08",
+            "VO-09",
+            "VO-10",
+            "VO-16",
+            "VO-17",
+            "VO-18",
+            "VO-20"
+          ]
         }
       ],
       "words": [
@@ -2523,7 +2546,1037 @@
         "DR2": "Daily Routines 2",
         "CDL": "Changes in Daily Life"
       },
-      "exercises": []
+      "exercises": [
+        {
+          "id": "EN-A2-L01-VO-01",
+          "code": "VO-01",
+          "title": "Morning Routine",
+          "instruction": "Napiši tačan izraz za svaku sliku.",
+          "kind": "vocabulary",
+          "image": "a2:vo01",
+          "items": [
+            {
+              "prompt": "Slika 1 (gore levo)",
+              "answers": [
+                "wake up",
+                "get up"
+              ]
+            },
+            {
+              "prompt": "Slika 2 (gore desno)",
+              "answers": [
+                "brush your teeth"
+              ]
+            },
+            {
+              "prompt": "Slika 3 (dole levo)",
+              "answers": [
+                "have breakfast"
+              ]
+            },
+            {
+              "prompt": "Slika 4 (dole desno)",
+              "answers": [
+                "leave home"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-VO-02",
+          "code": "VO-02",
+          "title": "At Work",
+          "instruction": "Izaberi tačan izraz.",
+          "kind": "vocabulary",
+          "image": "a2:vo02",
+          "items": [
+            {
+              "prompt": "I ___ at 9 a.m.",
+              "options": [
+                "start work",
+                "go to bed",
+                "work out"
+              ],
+              "answers": [
+                "start work"
+              ]
+            },
+            {
+              "prompt": "In class, we ___.",
+              "options": [
+                "take notes",
+                "tidy up",
+                "go for a walk"
+              ],
+              "answers": [
+                "take notes"
+              ]
+            },
+            {
+              "prompt": "After two hours, we ___.",
+              "options": [
+                "take a break",
+                "do the laundry",
+                "make the bed"
+              ],
+              "answers": [
+                "take a break"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-VO-03",
+          "code": "VO-03",
+          "title": "Daily Chores",
+          "instruction": "Poveži slike sa izrazima.",
+          "kind": "vocabulary",
+          "image": "a2:vo03",
+          "items": [
+            {
+              "prompt": "Slika 1 (gore levo)",
+              "options": [
+                "do the laundry",
+                "do the washing-up",
+                "vacuum the floor",
+                "take out the rubbish"
+              ],
+              "answers": [
+                "do the laundry"
+              ]
+            },
+            {
+              "prompt": "Slika 2 (gore desno)",
+              "options": [
+                "do the laundry",
+                "do the washing-up",
+                "vacuum the floor",
+                "take out the rubbish"
+              ],
+              "answers": [
+                "do the washing-up"
+              ]
+            },
+            {
+              "prompt": "Slika 3 (dole levo)",
+              "options": [
+                "do the laundry",
+                "do the washing-up",
+                "vacuum the floor",
+                "take out the rubbish"
+              ],
+              "answers": [
+                "vacuum the floor"
+              ]
+            },
+            {
+              "prompt": "Slika 4 (dole desno)",
+              "options": [
+                "do the laundry",
+                "do the washing-up",
+                "vacuum the floor",
+                "take out the rubbish"
+              ],
+              "answers": [
+                "take out the rubbish"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-VO-04",
+          "code": "VO-04",
+          "title": "Free Time",
+          "instruction": "Dopuni rečenice izrazima iz okvira.",
+          "kind": "vocabulary",
+          "image": "a2:vo04",
+          "items": [
+            {
+              "prompt": "I usually ___ after work.",
+              "options": [
+                "work out",
+                "go for a walk",
+                "meet up with friends",
+                "spend time with family"
+              ],
+              "answers": [
+                "work out"
+              ]
+            },
+            {
+              "prompt": "On Sundays, we ___ in the park.",
+              "options": [
+                "work out",
+                "go for a walk",
+                "meet up with friends",
+                "spend time with family"
+              ],
+              "answers": [
+                "go for a walk"
+              ]
+            },
+            {
+              "prompt": "On Fridays, I ___ at a café.",
+              "options": [
+                "work out",
+                "go for a walk",
+                "meet up with friends",
+                "spend time with family"
+              ],
+              "answers": [
+                "meet up with friends"
+              ]
+            },
+            {
+              "prompt": "In the evening, I like to ___.",
+              "options": [
+                "work out",
+                "go for a walk",
+                "meet up with friends",
+                "spend time with family"
+              ],
+              "answers": [
+                "spend time with family"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-VO-05",
+          "code": "VO-05",
+          "title": "Put the Day in Order",
+          "instruction": "Poređaj aktivnosti redom kojim se dešavaju tokom dana (1–5).",
+          "kind": "vocabulary",
+          "image": "a2:vo05",
+          "items": [
+            {
+              "prompt": "get up",
+              "options": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5"
+              ],
+              "answers": [
+                "1"
+              ]
+            },
+            {
+              "prompt": "catch the bus",
+              "options": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5"
+              ],
+              "answers": [
+                "2"
+              ]
+            },
+            {
+              "prompt": "start work",
+              "options": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5"
+              ],
+              "answers": [
+                "3"
+              ]
+            },
+            {
+              "prompt": "finish work",
+              "options": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5"
+              ],
+              "answers": [
+                "4"
+              ]
+            },
+            {
+              "prompt": "go to bed",
+              "options": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5"
+              ],
+              "answers": [
+                "5"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-VO-06",
+          "code": "VO-06",
+          "title": "Weekend Plans",
+          "instruction": "Izaberi najbolji izraz.",
+          "kind": "vocabulary",
+          "image": "a2:vo06",
+          "items": [
+            {
+              "prompt": "I need milk and fruit. → I need to ___.",
+              "options": [
+                "go grocery shopping",
+                "cook dinner",
+                "tidy up",
+                "make the bed"
+              ],
+              "answers": [
+                "go grocery shopping"
+              ]
+            },
+            {
+              "prompt": "The kitchen is messy. → I need to ___.",
+              "options": [
+                "go grocery shopping",
+                "cook dinner",
+                "tidy up",
+                "make the bed"
+              ],
+              "answers": [
+                "tidy up"
+              ]
+            },
+            {
+              "prompt": "My room is untidy. → I need to ___.",
+              "options": [
+                "go grocery shopping",
+                "cook dinner",
+                "tidy up",
+                "make the bed"
+              ],
+              "answers": [
+                "tidy up",
+                "make the bed"
+              ]
+            },
+            {
+              "prompt": "It's Saturday morning. → First, I ___.",
+              "options": [
+                "go grocery shopping",
+                "cook dinner",
+                "tidy up",
+                "make the bed"
+              ],
+              "answers": [
+                "make the bed"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-VO-07",
+          "code": "VO-07",
+          "title": "Changes in Daily Life",
+          "instruction": "Poveži svaku sliku sa tačnim izrazom.",
+          "kind": "vocabulary",
+          "image": "a2:vo07",
+          "items": [
+            {
+              "prompt": "Slika 1 (gore levo)",
+              "options": [
+                "start a new job",
+                "move to a new place",
+                "look for a new flat",
+                "make new friends"
+              ],
+              "answers": [
+                "start a new job"
+              ]
+            },
+            {
+              "prompt": "Slika 2 (gore desno)",
+              "options": [
+                "start a new job",
+                "move to a new place",
+                "look for a new flat",
+                "make new friends"
+              ],
+              "answers": [
+                "move to a new place"
+              ]
+            },
+            {
+              "prompt": "Slika 3 (dole levo)",
+              "options": [
+                "start a new job",
+                "move to a new place",
+                "look for a new flat",
+                "make new friends"
+              ],
+              "answers": [
+                "look for a new flat"
+              ]
+            },
+            {
+              "prompt": "Slika 4 (dole desno)",
+              "options": [
+                "start a new job",
+                "move to a new place",
+                "look for a new flat",
+                "make new friends"
+              ],
+              "answers": [
+                "make new friends"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-VO-08",
+          "code": "VO-08",
+          "title": "A New Chapter",
+          "instruction": "Dopuni tekst izrazima iz okvira.",
+          "kind": "vocabulary",
+          "image": "a2:vo08",
+          "items": [
+            {
+              "prompt": "This month, I want to ___.",
+              "options": [
+                "change my routine",
+                "try something new",
+                "take up a new hobby",
+                "learn a new skill"
+              ],
+              "answers": [
+                "change my routine"
+              ]
+            },
+            {
+              "prompt": "I also want to ___ …",
+              "options": [
+                "change my routine",
+                "try something new",
+                "take up a new hobby",
+                "learn a new skill"
+              ],
+              "answers": [
+                "try something new"
+              ]
+            },
+            {
+              "prompt": "… and ___.",
+              "options": [
+                "change my routine",
+                "try something new",
+                "take up a new hobby",
+                "learn a new skill"
+              ],
+              "answers": [
+                "take up a new hobby"
+              ]
+            },
+            {
+              "prompt": "I hope to ___ soon.",
+              "options": [
+                "change my routine",
+                "try something new",
+                "take up a new hobby",
+                "learn a new skill"
+              ],
+              "answers": [
+                "learn a new skill"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-VO-09",
+          "code": "VO-09",
+          "title": "Which One Fits?",
+          "instruction": "Izaberi najbolji izraz.",
+          "kind": "vocabulary",
+          "image": "a2:vo09",
+          "items": [
+            {
+              "prompt": "I don't know what to choose.",
+              "options": [
+                "make a decision",
+                "settle into a new home"
+              ],
+              "answers": [
+                "make a decision"
+              ]
+            },
+            {
+              "prompt": "I'm feeling comfortable in my new flat.",
+              "options": [
+                "get used to something",
+                "settle into a new home"
+              ],
+              "answers": [
+                "settle into a new home"
+              ]
+            },
+            {
+              "prompt": "We can't go to the beach now.",
+              "options": [
+                "change our plans",
+                "learn a new skill"
+              ],
+              "answers": [
+                "change our plans"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-VO-10",
+          "code": "VO-10",
+          "title": "Use the Vocabulary",
+          "instruction": "Napiši jednu rečenicu za svaki izraz.",
+          "kind": "vocabulary",
+          "image": "a2:vo10",
+          "items": [
+            {
+              "prompt": "work out",
+              "open": true,
+              "guide": "Napiši jednu svoju rečenicu na engleskom u kojoj koristiš ovaj izraz."
+            },
+            {
+              "prompt": "meet up with friends",
+              "open": true,
+              "guide": "Napiši jednu svoju rečenicu na engleskom u kojoj koristiš ovaj izraz."
+            },
+            {
+              "prompt": "look for a new flat",
+              "open": true,
+              "guide": "Napiši jednu svoju rečenicu na engleskom u kojoj koristiš ovaj izraz."
+            },
+            {
+              "prompt": "start a new job",
+              "open": true,
+              "guide": "Napiši jednu svoju rečenicu na engleskom u kojoj koristiš ovaj izraz."
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-VO-11",
+          "code": "VO-11",
+          "title": "Morning or Evening?",
+          "instruction": "Odluči da li se aktivnost obično radi ujutru (M) ili uveče (E).",
+          "kind": "vocabulary",
+          "image": "a2:vo11",
+          "items": [
+            {
+              "prompt": "have breakfast",
+              "options": [
+                "M (morning)",
+                "E (evening)"
+              ],
+              "answers": [
+                "M (morning)"
+              ]
+            },
+            {
+              "prompt": "go to bed",
+              "options": [
+                "M (morning)",
+                "E (evening)"
+              ],
+              "answers": [
+                "E (evening)"
+              ]
+            },
+            {
+              "prompt": "brush your teeth",
+              "options": [
+                "M (morning)",
+                "E (evening)"
+              ],
+              "answers": [
+                "M (morning)",
+                "E (evening)"
+              ]
+            },
+            {
+              "prompt": "get up",
+              "options": [
+                "M (morning)",
+                "E (evening)"
+              ],
+              "answers": [
+                "M (morning)"
+              ]
+            },
+            {
+              "prompt": "finish work",
+              "options": [
+                "M (morning)",
+                "E (evening)"
+              ],
+              "answers": [
+                "E (evening)"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-VO-12",
+          "code": "VO-12",
+          "title": "Complete the Routine",
+          "instruction": "Dopuni rečenice izrazima iz okvira.",
+          "kind": "vocabulary",
+          "image": "a2:vo12",
+          "items": [
+            {
+              "prompt": "I wake up, wash my face, and ___.",
+              "options": [
+                "get dressed",
+                "take notes",
+                "have breakfast",
+                "take a break"
+              ],
+              "answers": [
+                "get dressed"
+              ]
+            },
+            {
+              "prompt": "Before I leave home, I ___.",
+              "options": [
+                "get dressed",
+                "take notes",
+                "have breakfast",
+                "take a break"
+              ],
+              "answers": [
+                "have breakfast"
+              ]
+            },
+            {
+              "prompt": "At school, I ___ in class.",
+              "options": [
+                "get dressed",
+                "take notes",
+                "have breakfast",
+                "take a break"
+              ],
+              "answers": [
+                "take notes"
+              ]
+            },
+            {
+              "prompt": "At 10 a.m., we usually ___.",
+              "options": [
+                "get dressed",
+                "take notes",
+                "have breakfast",
+                "take a break"
+              ],
+              "answers": [
+                "take a break"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-VO-13",
+          "code": "VO-13",
+          "title": "School & Work",
+          "instruction": "Izaberi tačan izraz.",
+          "kind": "vocabulary",
+          "image": "a2:vo13",
+          "items": [
+            {
+              "prompt": "In class, we ___.",
+              "options": [
+                "take notes",
+                "go to bed"
+              ],
+              "answers": [
+                "take notes"
+              ]
+            },
+            {
+              "prompt": "At 9 a.m., I ___.",
+              "options": [
+                "start work",
+                "do the laundry"
+              ],
+              "answers": [
+                "start work"
+              ]
+            },
+            {
+              "prompt": "When lessons finish, I ___.",
+              "options": [
+                "finish work",
+                "catch the bus"
+              ],
+              "answers": [
+                "catch the bus",
+                "finish work"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-VO-14",
+          "code": "VO-14",
+          "title": "Home Tasks",
+          "instruction": "Poveži slike sa izrazima.",
+          "kind": "vocabulary",
+          "image": "a2:vo14",
+          "items": [
+            {
+              "prompt": "Slika 1 (gore levo)",
+              "options": [
+                "do the laundry",
+                "vacuum the floor",
+                "make the bed",
+                "do the washing-up"
+              ],
+              "answers": [
+                "do the laundry"
+              ]
+            },
+            {
+              "prompt": "Slika 2 (gore desno)",
+              "options": [
+                "do the laundry",
+                "vacuum the floor",
+                "make the bed",
+                "do the washing-up"
+              ],
+              "answers": [
+                "vacuum the floor"
+              ]
+            },
+            {
+              "prompt": "Slika 3 (dole levo)",
+              "options": [
+                "do the laundry",
+                "vacuum the floor",
+                "make the bed",
+                "do the washing-up"
+              ],
+              "answers": [
+                "make the bed"
+              ]
+            },
+            {
+              "prompt": "Slika 4 (dole desno)",
+              "options": [
+                "do the laundry",
+                "vacuum the floor",
+                "make the bed",
+                "do the washing-up"
+              ],
+              "answers": [
+                "do the washing-up"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-VO-15",
+          "code": "VO-15",
+          "title": "What Do You Need To Do?",
+          "instruction": "Izaberi najbolji izraz.",
+          "kind": "vocabulary",
+          "image": "a2:vo15",
+          "items": [
+            {
+              "prompt": "Your bed is messy. → I need to ___.",
+              "options": [
+                "make the bed",
+                "do the washing-up",
+                "go grocery shopping",
+                "relax"
+              ],
+              "answers": [
+                "make the bed"
+              ]
+            },
+            {
+              "prompt": "There are dirty dishes. → I need to ___.",
+              "options": [
+                "make the bed",
+                "do the washing-up",
+                "go grocery shopping",
+                "relax"
+              ],
+              "answers": [
+                "do the washing-up"
+              ]
+            },
+            {
+              "prompt": "I need milk and bread. → I need to ___.",
+              "options": [
+                "make the bed",
+                "do the washing-up",
+                "go grocery shopping",
+                "relax"
+              ],
+              "answers": [
+                "go grocery shopping"
+              ]
+            },
+            {
+              "prompt": "I feel tired after work. → I want to ___.",
+              "options": [
+                "make the bed",
+                "do the washing-up",
+                "go grocery shopping",
+                "relax"
+              ],
+              "answers": [
+                "relax"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-VO-16",
+          "code": "VO-16",
+          "title": "Big Changes",
+          "instruction": "Poveži svaku sliku sa tačnim izrazom.",
+          "kind": "vocabulary",
+          "image": "a2:vo16",
+          "items": [
+            {
+              "prompt": "Slika 1 (gore levo)",
+              "options": [
+                "start a new job",
+                "move to a new place",
+                "look for a new flat",
+                "make new friends"
+              ],
+              "answers": [
+                "start a new job"
+              ]
+            },
+            {
+              "prompt": "Slika 2 (gore desno)",
+              "options": [
+                "start a new job",
+                "move to a new place",
+                "look for a new flat",
+                "make new friends"
+              ],
+              "answers": [
+                "move to a new place"
+              ]
+            },
+            {
+              "prompt": "Slika 3 (dole levo)",
+              "options": [
+                "start a new job",
+                "move to a new place",
+                "look for a new flat",
+                "make new friends"
+              ],
+              "answers": [
+                "look for a new flat"
+              ]
+            },
+            {
+              "prompt": "Slika 4 (dole desno)",
+              "options": [
+                "start a new job",
+                "move to a new place",
+                "look for a new flat",
+                "make new friends"
+              ],
+              "answers": [
+                "make new friends"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-VO-17",
+          "code": "VO-17",
+          "title": "A New Routine",
+          "instruction": "Dopuni tekst izrazima iz okvira.",
+          "kind": "vocabulary",
+          "image": "a2:vo17",
+          "items": [
+            {
+              "prompt": "This month, Leo wants to ___.",
+              "options": [
+                "change his routine",
+                "try something new",
+                "make new friends",
+                "learn a new skill"
+              ],
+              "answers": [
+                "change his routine"
+              ]
+            },
+            {
+              "prompt": "He has a new schedule, and he wants to ___ too.",
+              "options": [
+                "change his routine",
+                "try something new",
+                "make new friends",
+                "learn a new skill"
+              ],
+              "answers": [
+                "try something new"
+              ]
+            },
+            {
+              "prompt": "He has joined a club to ___ …",
+              "options": [
+                "change his routine",
+                "try something new",
+                "make new friends",
+                "learn a new skill"
+              ],
+              "answers": [
+                "make new friends"
+              ]
+            },
+            {
+              "prompt": "… and he hopes to ___ soon.",
+              "options": [
+                "change his routine",
+                "try something new",
+                "make new friends",
+                "learn a new skill"
+              ],
+              "answers": [
+                "learn a new skill"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-VO-18",
+          "code": "VO-18",
+          "title": "Which One Fits?",
+          "instruction": "Izaberi najbolji izraz.",
+          "kind": "vocabulary",
+          "image": "a2:vo18",
+          "items": [
+            {
+              "prompt": "I'm reading apartment ads online.",
+              "options": [
+                "look for a new flat",
+                "start a new job"
+              ],
+              "answers": [
+                "look for a new flat"
+              ]
+            },
+            {
+              "prompt": "I'm taking guitar lessons.",
+              "options": [
+                "change my plans",
+                "take up a new hobby"
+              ],
+              "answers": [
+                "take up a new hobby"
+              ]
+            },
+            {
+              "prompt": "I feel comfortable in my new apartment now.",
+              "options": [
+                "settle into a new home",
+                "make a decision"
+              ],
+              "answers": [
+                "settle into a new home"
+              ]
+            },
+            {
+              "prompt": "We can't go out because it's raining.",
+              "options": [
+                "change our plans",
+                "make new friends"
+              ],
+              "answers": [
+                "change our plans"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-VO-19",
+          "code": "VO-19",
+          "title": "Use the Vocabulary",
+          "instruction": "Napiši jednu rečenicu za svaki izraz.",
+          "kind": "vocabulary",
+          "image": "a2:vo19",
+          "items": [
+            {
+              "prompt": "go for a walk",
+              "open": true,
+              "guide": "Napiši jednu svoju rečenicu na engleskom u kojoj koristiš ovaj izraz."
+            },
+            {
+              "prompt": "prepare for an exam",
+              "open": true,
+              "guide": "Napiši jednu svoju rečenicu na engleskom u kojoj koristiš ovaj izraz."
+            },
+            {
+              "prompt": "change your routine",
+              "open": true,
+              "guide": "Napiši jednu svoju rečenicu na engleskom u kojoj koristiš ovaj izraz."
+            },
+            {
+              "prompt": "start a new job",
+              "open": true,
+              "guide": "Napiši jednu svoju rečenicu na engleskom u kojoj koristiš ovaj izraz."
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-VO-20",
+          "code": "VO-20",
+          "title": "Everyday Situations",
+          "instruction": "Napiši tačan izraz.",
+          "kind": "vocabulary",
+          "image": "a2:vo20",
+          "items": [
+            {
+              "prompt": "You begin work at a new company.",
+              "answers": [
+                "start a new job"
+              ]
+            },
+            {
+              "prompt": "You search for a different apartment.",
+              "answers": [
+                "look for a new flat",
+                "look for a new apartment"
+              ]
+            },
+            {
+              "prompt": "You begin to feel comfortable in a new home.",
+              "answers": [
+                "settle into a new home",
+                "get used to something"
+              ]
+            },
+            {
+              "prompt": "You stop doing the usual things and do something different.",
+              "answers": [
+                "change your routine",
+                "try something new"
+              ]
+            },
+            {
+              "prompt": "You begin a new activity like yoga or painting.",
+              "answers": [
+                "take up a new hobby"
+              ]
+            }
+          ]
+        }
+      ]
     },
     "reading": {
       "texts": [],
