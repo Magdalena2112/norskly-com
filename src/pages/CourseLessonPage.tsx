@@ -364,22 +364,6 @@ export default function CourseLessonPage() {
             </>
           )}
 
-          {tab === "reading" && m.reading && (
-            <>
-              {m.reading.texts?.map((t: any) => (
-                <div key={t.id} className="rounded-2xl border border-border/60 bg-cream/90 p-5 shadow-card-soft">
-                  <div className="flex items-center justify-between gap-2 mb-2">
-                    <h3 className="font-display font-semibold text-lg text-primary">{t.title}</h3>
-                    <Button size="sm" variant="outline" onClick={() => speakLines([{ speaker: "n", text: t.body }], lang)}><Volume2 className="w-4 h-4" /> Slušaj</Button>
-                  </div>
-                  {t.image && ITEM_IMAGES[t.image] && <img src={ITEM_IMAGES[t.image]} alt={t.title} loading="lazy" className="w-full max-w-md h-auto rounded-xl border border-border/60 mb-3" />}
-                  <p className="leading-relaxed whitespace-pre-line">{t.body}</p>
-                  {t.note && <p className="text-xs text-muted-foreground mt-2">{t.note}</p>}
-                </div>
-              ))}
-            </>
-          )}
-
           {tab === "listening" && m.listening && (
             <>
               {m.listening.scenes ? (
