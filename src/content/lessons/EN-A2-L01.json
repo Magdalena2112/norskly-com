@@ -4709,7 +4709,7 @@
             {
               "prompt": "Tvoj opis slike (70–90 reči, na engleskom)",
               "open": true,
-              "guide": [
+              "guiding": [
                 "Where are the people?",
                 "What is each person doing?",
                 "What objects can you see?",
@@ -4728,7 +4728,7 @@
             {
               "prompt": "Tvoj tekst (70–90 reči, na engleskom)",
               "open": true,
-              "guide": [
+              "guiding": [
                 "What time do you usually get up?",
                 "How do you get ready for the day?",
                 "What do you do at work or school?",
