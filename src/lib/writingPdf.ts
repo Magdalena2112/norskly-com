@@ -183,7 +183,7 @@ export function generateWritingPdf(payload: WritingPdfPayload, filename = "norsk
 
     // meta on the right
     const dateStr = new Date().toLocaleDateString("sr-Latn-RS", { day: "2-digit", month: "long", year: "numeric" });
-    const typeStr = payload.type === "image" ? "Bildebeskrivelse" : "Korekcija teksta";
+    const typeStr = payload.type === "image" ? "Opis slike" : "Korekcija teksta";
     const metaRight = pageWidth - margin;
 
     doc.setTextColor(...CREAM);

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { langNominative } from "@/lib/currentLanguage";
 import StudentLayout from "@/components/student/StudentLayout";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -158,7 +159,7 @@ export default function ProfilePage() {
               label="Datum registracije"
               value={registeredAt ? format(new Date(registeredAt), "dd.MM.yyyy") : "—"}
             />
-            <Row icon={Languages} label="Jezik koji učiš" value={preferredLanguage || "norveški"} />
+            <Row icon={Languages} label="Jezik koji učiš" value={preferredLanguage || langNominative()} />
             <Row
               icon={CreditCard}
               label="Aktuelni plan"

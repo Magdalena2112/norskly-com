@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from "react";
+import { langLocative } from "@/lib/currentLanguage";
 import { motion } from "framer-motion";
 import { useNavigate, useLocation } from "react-router-dom";
 import LessonWritingTab from "@/components/lesson/LessonWritingTab";
@@ -113,7 +114,7 @@ export default function WritingPage() {
               ) : (
                 <>
                   <TabsTrigger value="bildebeskrivelse" className="gap-1 text-[11px] sm:text-xs px-2 sm:px-3">
-                    <ImagePlus className="w-3.5 h-3.5 shrink-0 hidden sm:block" /> Bildebeskrivelse
+                    <ImagePlus className="w-3.5 h-3.5 shrink-0 hidden sm:block" /> Opis slike
                   </TabsTrigger>
                   <TabsTrigger value="correction" className="gap-1 text-[11px] sm:text-xs px-2 sm:px-3">
                     <PenLine className="w-3.5 h-3.5 shrink-0 hidden sm:block" /> Korekcija teksta
@@ -298,7 +299,7 @@ function BildebeskrivelseTab({ level }: { level: string }) {
           />
           {imageDataUrl ? (
             <div className="relative rounded-2xl overflow-hidden border border-border/50">
-              <img src={imageDataUrl} alt="Bildebeskrivelse" className="w-full h-auto object-cover max-h-80" />
+              <img src={imageDataUrl} alt="Opis slike" className="w-full h-auto object-cover max-h-80" />
               <Button
                 variant="secondary" size="sm"
                 className="absolute top-2 right-2"
@@ -440,7 +441,7 @@ function BildebeskrivelseTab({ level }: { level: string }) {
       <Card className="bg-cream/90 border-border/50 shadow-card-soft">
         <CardHeader>
           <CardTitle className="text-base font-display text-primary">2. Tvoj opis</CardTitle>
-          <CardDescription>Napiši opis slike na norveškom i dobi feedback.</CardDescription>
+          <CardDescription>{`Napiši opis slike na ${langLocative()} i dobi feedback.`}</CardDescription>
         </CardHeader>
         <CardContent className="space-y-3">
           <Textarea
@@ -741,7 +742,7 @@ function HistoryTab({ onReopen }: { onReopen: (tab: string) => void }) {
           {(["all", "image", "text"] as const).map((k) => (
             <button key={k} onClick={() => setTypeFilter(k)}
               className={`px-3 py-1 rounded-full text-xs font-medium transition ${typeFilter === k ? "bg-primary text-primary-foreground" : "text-primary/70 hover:text-primary"}`}>
-              {k === "all" ? "Sve" : k === "image" ? "Bildebeskrivelse" : "Tekst"}
+              {k === "all" ? "Sve" : k === "image" ? "Opis slike" : "Tekst"}
             </button>
           ))}
         </div>
@@ -761,7 +762,7 @@ function HistoryTab({ onReopen }: { onReopen: (tab: string) => void }) {
       {filtered.length === 0 ? (
         <Card className="bg-cream/90 border-border/50">
           <CardContent className="py-10 text-center text-muted-foreground text-sm">
-            Još nema sačuvanih vežbi. Započni u "Bildebeskrivelse" ili "Korekcija teksta".
+            Još nema sačuvanih vežbi. Započni u "Opis slike" ili "Korekcija teksta".
           </CardContent>
         </Card>
       ) : (
@@ -773,7 +774,7 @@ function HistoryTab({ onReopen }: { onReopen: (tab: string) => void }) {
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center gap-2 mb-1">
                       <span className="text-[10px] font-semibold uppercase tracking-wider text-primary/60">
-                        {i.exercise_type === "image" ? "Bildebeskrivelse" : "Tekst"}
+                        {i.exercise_type === "image" ? "Opis slike" : "Tekst"}
                       </span>
                       <span className="text-[10px] text-muted-foreground">·</span>
                       <span className="text-[10px] text-muted-foreground">{format(new Date(i.created_at), "dd.MM.yyyy HH:mm")}</span>

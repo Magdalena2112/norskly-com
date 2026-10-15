@@ -406,7 +406,7 @@ export function CollectionPicker({
   if (collections.length === 0) {
     return (
       <p className="text-center text-muted-foreground py-4">
-        Nemate kolekcija. Kreirajte kolekciju i dodajte reči u "Ordsamlinger" tabu.
+        Nemate kolekcija. Kreirajte kolekciju i dodajte reči u "Kolekcije" tabu.
       </p>
     );
   }
