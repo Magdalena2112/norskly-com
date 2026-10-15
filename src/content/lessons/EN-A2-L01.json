@@ -1,0 +1,16 @@
+{
+  "code": "EN-A2-L01",
+  "intro": [],
+  "modules": {
+    "intro": { "exercises": [] },
+    "grammar": { "sections": [], "exercises": [] },
+    "vocabulary": { "areas": [], "words": [], "collections": [], "exercises": [] },
+    "reading": { "texts": [], "exercises": [] },
+    "listening": { "scenes": [] },
+    "writing": { "exercises": [] },
+    "pronunciation": { "alphabet": [], "note": "", "drills": [], "letters": [], "spelling": [], "exercises": [] },
+    "speaking": { "tasks": [], "roleswitch": [] },
+    "culture": { "title": "", "body": "", "note": "", "customs": [], "comparison": [] },
+    "review": { "quiz": [] }
+  }
+}
