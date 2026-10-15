@@ -1,6 +1,7 @@
 import a2rd1 from "@/assets/lessons/en-a2-l01-rd1.webp.asset.json";
 import a2rd2 from "@/assets/lessons/en-a2-l01-rd2.webp.asset.json";
 import a2rd3 from "@/assets/lessons/en-a2-l01-rd3.webp.asset.json";
+import a2wr01 from "@/assets/lessons/en-a2-l01-wr01.webp.asset.json";
 import a2mix01 from "@/assets/lessons/en-a2-l01-mix01.webp.asset.json";
 import a2mix02 from "@/assets/lessons/en-a2-l01-mix02.webp.asset.json";
 import a2mix03 from "@/assets/lessons/en-a2-l01-mix03.webp.asset.json";
