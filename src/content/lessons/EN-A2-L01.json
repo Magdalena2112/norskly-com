@@ -1003,6 +1003,876 @@
               ]
             }
           ]
+        },
+        {
+          "id": "EN-A2-L01-MIX-01",
+          "code": "MIX-01",
+          "title": "Usually vs. Today",
+          "instruction": "Izaberi tačan odgovor.",
+          "kind": "closed",
+          "image": "a2:mix01",
+          "items": [
+            {
+              "prompt": "Emma usually ___ breakfast at 7 a.m.",
+              "answers": [
+                "has"
+              ],
+              "options": [
+                "has",
+                "is having",
+                "have"
+              ]
+            },
+            {
+              "prompt": "Today she ___ from home.",
+              "answers": [
+                "is working"
+              ],
+              "options": [
+                "works",
+                "is working",
+                "work"
+              ]
+            },
+            {
+              "prompt": "She usually ___ to the office by bus.",
+              "answers": [
+                "goes"
+              ],
+              "options": [
+                "goes",
+                "is going",
+                "go"
+              ]
+            },
+            {
+              "prompt": "But this week she ___ a car.",
+              "answers": [
+                "is renting"
+              ],
+              "options": [
+                "rents",
+                "is renting",
+                "rent"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-MIX-02",
+          "code": "MIX-02",
+          "title": "A Different Week",
+          "instruction": "Dopuni rečenice tačnim oblikom glagola u zagradi.",
+          "kind": "closed",
+          "image": "a2:mix02",
+          "items": [
+            {
+              "prompt": "Oliver usually ___ (go) to the gym three times a week.",
+              "answers": [
+                "goes"
+              ]
+            },
+            {
+              "prompt": "But this week he ___ (not go) to the gym because he ___ (recover) from an injury.",
+              "answers": [
+                "isn't going is recovering",
+                "is not going is recovering",
+                "isn't going / is recovering",
+                "is not going / is recovering",
+                "isn't going, is recovering"
+              ]
+            },
+            {
+              "prompt": "He still ___ (do) some exercises at home.",
+              "answers": [
+                "does"
+              ]
+            },
+            {
+              "prompt": "Next week he ___ (join) his football team again.",
+              "answers": [
+                "is joining",
+                "'s joining"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-MIX-03",
+          "code": "MIX-03",
+          "title": "Routine, Fact or Temporary?",
+          "instruction": "Izaberi tačnu opciju.",
+          "kind": "closed",
+          "image": "a2:mix03",
+          "items": [
+            {
+              "prompt": "She ___ coffee every morning.",
+              "answers": [
+                "drinks"
+              ],
+              "options": [
+                "drinks",
+                "is drinking"
+              ]
+            },
+            {
+              "prompt": "He ___ the living room this week.",
+              "answers": [
+                "is painting"
+              ],
+              "options": [
+                "paints",
+                "is painting"
+              ]
+            },
+            {
+              "prompt": "I ___ to music right now.",
+              "answers": [
+                "am listening"
+              ],
+              "options": [
+                "listen",
+                "am listening"
+              ]
+            },
+            {
+              "prompt": "We ___ in Belgrade this year.",
+              "answers": [
+                "are living"
+              ],
+              "options": [
+                "live",
+                "are living"
+              ]
+            },
+            {
+              "prompt": "My friend ___ a book at the moment.",
+              "answers": [
+                "is reading"
+              ],
+              "options": [
+                "reads",
+                "is reading"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-MIX-04",
+          "code": "MIX-04",
+          "title": "Sentence & Meaning",
+          "instruction": "Poveži rečenicu sa značenjem (A–D).",
+          "kind": "closed",
+          "image": "a2:mix04",
+          "items": [
+            {
+              "prompt": "I usually walk to work.",
+              "answers": [
+                "D – a regular habit"
+              ],
+              "options": [
+                "A – a situation that is happening at the moment",
+                "B – a repeated action",
+                "C – a temporary situation",
+                "D – a regular habit"
+              ]
+            },
+            {
+              "prompt": "I'm walking to work now.",
+              "answers": [
+                "A – a situation that is happening at the moment"
+              ],
+              "options": [
+                "A – a situation that is happening at the moment",
+                "B – a repeated action",
+                "C – a temporary situation",
+                "D – a regular habit"
+              ]
+            },
+            {
+              "prompt": "She's living in Berlin this year.",
+              "answers": [
+                "C – a temporary situation"
+              ],
+              "options": [
+                "A – a situation that is happening at the moment",
+                "B – a repeated action",
+                "C – a temporary situation",
+                "D – a regular habit"
+              ]
+            },
+            {
+              "prompt": "He always eats a snack in the afternoon.",
+              "answers": [
+                "B – a repeated action"
+              ],
+              "options": [
+                "A – a situation that is happening at the moment",
+                "B – a repeated action",
+                "C – a temporary situation",
+                "D – a regular habit"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-MIX-05",
+          "code": "MIX-05",
+          "title": "Grammar Detective",
+          "instruction": "Pronađi i ispravi grešku u svakoj rečenici. Napiši celu tačnu rečenicu.",
+          "kind": "closed",
+          "image": "a2:mix05",
+          "items": [
+            {
+              "prompt": "I am usually get up at 7 a.m.",
+              "answers": [
+                "I usually get up at 7 a.m.",
+                "I usually get up at 7 am."
+              ]
+            },
+            {
+              "prompt": "She is goes to the gym every day.",
+              "answers": [
+                "She goes to the gym every day."
+              ]
+            },
+            {
+              "prompt": "We are live with our parents this week.",
+              "answers": [
+                "We are living with our parents this week.",
+                "We're living with our parents this week."
+              ]
+            },
+            {
+              "prompt": "He always is late.",
+              "answers": [
+                "He is always late.",
+                "He's always late."
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-MIX-06",
+          "code": "MIX-06",
+          "title": "A New Job",
+          "instruction": "Dopuni dijalog tačnim oblikom glagola u zagradi.",
+          "kind": "closed",
+          "image": "a2:mix06",
+          "items": [
+            {
+              "prompt": "Sophie: I ___ (really enjoy) it.",
+              "answers": [
+                "really enjoy"
+              ]
+            },
+            {
+              "prompt": "Sophie: I usually ___ (work) in the office, …",
+              "answers": [
+                "work"
+              ]
+            },
+            {
+              "prompt": "Sophie: … but this month I ___ (work) from home.",
+              "answers": [
+                "am working",
+                "'m working"
+              ]
+            },
+            {
+              "prompt": "Liam: Oh, nice! What ___ (you / do) now?",
+              "answers": [
+                "are you doing"
+              ]
+            },
+            {
+              "prompt": "Sophie: I ___ (prepare) a report for tomorrow.",
+              "answers": [
+                "am preparing",
+                "'m preparing"
+              ]
+            },
+            {
+              "prompt": "Liam: I see. I ___ (not work) today, I'm just visiting the office.",
+              "answers": [
+                "am not working",
+                "'m not working",
+                "not working"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-MIX-07",
+          "code": "MIX-07",
+          "title": "Community Centre Notice",
+          "instruction": "Pročitaj obaveštenje i odgovori na pitanja.",
+          "kind": "closed",
+          "image": "a2:mix07",
+          "items": [
+            {
+              "prompt": "What time does the centre usually close on Fridays?",
+              "open": true,
+              "guide": "Odgovor: at 18:00 / It closes at 6 p.m. (Present Simple)"
+            },
+            {
+              "prompt": "What is happening this week?",
+              "open": true,
+              "guide": "Odgovor: They are organising a special art exhibition. (Present Continuous)"
+            },
+            {
+              "prompt": "How many days is the exhibition running?",
+              "open": true,
+              "guide": "Odgovor: six days (from Tuesday to Sunday)"
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-MIX-08",
+          "code": "MIX-08",
+          "title": "Plans for This Week",
+          "instruction": "Dopuni poruke tačnim oblikom glagola u zagradi.",
+          "kind": "closed",
+          "image": "a2:mix08",
+          "items": [
+            {
+              "prompt": "I ___ (visit) my sister in Novi Sad.",
+              "answers": [
+                "am visiting",
+                "'m visiting"
+              ]
+            },
+            {
+              "prompt": "Nice! I ___ (not come) this time.",
+              "answers": [
+                "am not coming",
+                "'m not coming"
+              ]
+            },
+            {
+              "prompt": "I ___ (work) on a big project.",
+              "answers": [
+                "am working",
+                "'m working"
+              ]
+            },
+            {
+              "prompt": "No problem! We ___ (meet) next week then!",
+              "answers": [
+                "are meeting",
+                "'re meeting"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-MIX-09",
+          "code": "MIX-09",
+          "title": "The Language School",
+          "instruction": "Pogledaj raspored i dopuni rečenice.",
+          "kind": "closed",
+          "image": "a2:mix09",
+          "items": [
+            {
+              "prompt": "The General English classes ___ (start) at 10:00 from Monday to Friday.",
+              "answers": [
+                "start"
+              ]
+            },
+            {
+              "prompt": "This week we ___ (have) extra speaking sessions on ___.",
+              "open": true,
+              "guide": "Odgovor: are having … Wednesday and Friday"
+            },
+            {
+              "prompt": "I ___ (not attend) the Exam Preparation class on Tuesday.",
+              "answers": [
+                "am not attending",
+                "'m not attending",
+                "don't attend",
+                "do not attend"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-MIX-10",
+          "code": "MIX-10",
+          "title": "Working From Home",
+          "instruction": "Izaberi tačan odgovor.",
+          "kind": "closed",
+          "image": "a2:mix10",
+          "items": [
+            {
+              "prompt": "I usually ___ from the office.",
+              "answers": [
+                "work"
+              ],
+              "options": [
+                "work",
+                "am working",
+                "works"
+              ]
+            },
+            {
+              "prompt": "But today I ___ from home.",
+              "answers": [
+                "am working"
+              ],
+              "options": [
+                "work",
+                "am working",
+                "works"
+              ]
+            },
+            {
+              "prompt": "I ___ a report at the moment.",
+              "answers": [
+                "am writing"
+              ],
+              "options": [
+                "write",
+                "am writing",
+                "writes"
+              ]
+            },
+            {
+              "prompt": "My team ___ a meeting later today.",
+              "answers": [
+                "is having"
+              ],
+              "options": [
+                "have",
+                "is having",
+                "has"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-ST-01",
+          "code": "ST-01",
+          "title": "What Do You Know?",
+          "instruction": "Izaberi tačan odgovor.",
+          "kind": "closed",
+          "image": "a2:st01",
+          "items": [
+            {
+              "prompt": "I ___ this city very much.",
+              "answers": [
+                "like"
+              ],
+              "options": [
+                "like",
+                "am liking",
+                "is liking"
+              ]
+            },
+            {
+              "prompt": "She ___ three languages.",
+              "answers": [
+                "knows"
+              ],
+              "options": [
+                "knows",
+                "is knowing",
+                "know"
+              ]
+            },
+            {
+              "prompt": "We ___ a new laptop.",
+              "answers": [
+                "have"
+              ],
+              "options": [
+                "have",
+                "are having",
+                "is having"
+              ]
+            },
+            {
+              "prompt": "He ___ you are right.",
+              "answers": [
+                "believes"
+              ],
+              "options": [
+                "believes",
+                "is believing",
+                "believe"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-ST-02",
+          "code": "ST-02",
+          "title": "Feelings & Needs",
+          "instruction": "Dopuni rečenice tačnim oblikom glagola u zagradi.",
+          "kind": "closed",
+          "image": "a2:st02",
+          "items": [
+            {
+              "prompt": "I ___ (want) to travel more next year.",
+              "answers": [
+                "want"
+              ]
+            },
+            {
+              "prompt": "She ___ (need) a new phone.",
+              "answers": [
+                "needs"
+              ]
+            },
+            {
+              "prompt": "We ___ (understand) the instructions.",
+              "answers": [
+                "understand"
+              ]
+            },
+            {
+              "prompt": "He ___ (like) spicy food.",
+              "answers": [
+                "likes"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-ST-03",
+          "code": "ST-03",
+          "title": "State or Action?",
+          "instruction": "Odluči da li rečenica opisuje stanje (S) ili aktivnost (A).",
+          "kind": "closed",
+          "image": "a2:st03",
+          "items": [
+            {
+              "prompt": "He listens to music every day.",
+              "answers": [
+                "A (activity)"
+              ],
+              "options": [
+                "S (state)",
+                "A (activity)"
+              ]
+            },
+            {
+              "prompt": "She likes ice cream.",
+              "answers": [
+                "S (state)"
+              ],
+              "options": [
+                "S (state)",
+                "A (activity)"
+              ]
+            },
+            {
+              "prompt": "I think it's a good idea.",
+              "answers": [
+                "S (state)"
+              ],
+              "options": [
+                "S (state)",
+                "A (activity)"
+              ]
+            },
+            {
+              "prompt": "He's running in the park.",
+              "answers": [
+                "A (activity)"
+              ],
+              "options": [
+                "S (state)",
+                "A (activity)"
+              ]
+            },
+            {
+              "prompt": "She understands the problem.",
+              "answers": [
+                "S (state)"
+              ],
+              "options": [
+                "S (state)",
+                "A (activity)"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-ST-04",
+          "code": "ST-04",
+          "title": "Spot the Mistake",
+          "instruction": "Svaka rečenica ima jednu grešku. Napiši tačnu rečenicu.",
+          "kind": "closed",
+          "image": "a2:st04",
+          "items": [
+            {
+              "prompt": "I am knowing the answer.",
+              "answers": [
+                "I know the answer."
+              ]
+            },
+            {
+              "prompt": "She is wanting to move abroad.",
+              "answers": [
+                "She wants to move abroad."
+              ]
+            },
+            {
+              "prompt": "We are having a new apartment.",
+              "answers": [
+                "We have a new apartment.",
+                "We've got a new apartment."
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-ST-05",
+          "code": "ST-05",
+          "title": "Think or Thinking?",
+          "instruction": "Izaberi tačan odgovor.",
+          "kind": "closed",
+          "image": "a2:st05",
+          "items": [
+            {
+              "prompt": "I ___ this film is really interesting.",
+              "answers": [
+                "think"
+              ],
+              "options": [
+                "think",
+                "am thinking",
+                "are thinking"
+              ]
+            },
+            {
+              "prompt": "She ___ about changing her job.",
+              "answers": [
+                "is thinking"
+              ],
+              "options": [
+                "thinks",
+                "is thinking",
+                "think"
+              ]
+            },
+            {
+              "prompt": "We ___ it's a good opportunity.",
+              "answers": [
+                "believe"
+              ],
+              "options": [
+                "believe",
+                "are believing",
+                "is believing"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-ST-06",
+          "code": "ST-06",
+          "title": "Have or Having?",
+          "instruction": "Izaberi tačan odgovor.",
+          "kind": "closed",
+          "image": "a2:st06",
+          "items": [
+            {
+              "prompt": "I ___ a big family.",
+              "answers": [
+                "have"
+              ],
+              "options": [
+                "have",
+                "am having",
+                "is having"
+              ]
+            },
+            {
+              "prompt": "He ___ lunch at the moment.",
+              "answers": [
+                "is having"
+              ],
+              "options": [
+                "have",
+                "is having",
+                "has"
+              ]
+            },
+            {
+              "prompt": "We ___ a meeting this afternoon.",
+              "answers": [
+                "are having"
+              ],
+              "options": [
+                "have",
+                "are having",
+                "has"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-ST-07",
+          "code": "ST-07",
+          "title": "What Does It Mean?",
+          "instruction": "Poveži slike sa značenjem glagola. Izaberi značenje za svaku sliku (1 – devojka gleda katedralu, 2 – mladić sa fotoaparatom, 3 – devojka sa kesama za kupovinu).",
+          "kind": "closed",
+          "image": "a2:st07",
+          "items": [
+            {
+              "prompt": "Slika 1",
+              "answers": [
+                "to think (have an opinion)"
+              ],
+              "options": [
+                "to have (possess)",
+                "to see (with your eyes)",
+                "to think (have an opinion)"
+              ]
+            },
+            {
+              "prompt": "Slika 2",
+              "answers": [
+                "to see (with your eyes)"
+              ],
+              "options": [
+                "to have (possess)",
+                "to see (with your eyes)",
+                "to think (have an opinion)"
+              ]
+            },
+            {
+              "prompt": "Slika 3",
+              "answers": [
+                "to have (possess)"
+              ],
+              "options": [
+                "to have (possess)",
+                "to see (with your eyes)",
+                "to think (have an opinion)"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-ST-08",
+          "code": "ST-08",
+          "title": "I Understand, but…",
+          "instruction": "Dopuni dijalog tačnim oblikom glagola u zagradi.",
+          "kind": "closed",
+          "image": "a2:st08",
+          "items": [
+            {
+              "prompt": "Sophie: I ___ (understand) your point, …",
+              "answers": [
+                "understand"
+              ]
+            },
+            {
+              "prompt": "Sophie: … but I ___ (not agree).",
+              "answers": [
+                "don't agree",
+                "do not agree"
+              ]
+            },
+            {
+              "prompt": "Emma: I ___ (know) it's not easy, …",
+              "answers": [
+                "know"
+              ]
+            },
+            {
+              "prompt": "Emma: … but I ___ (think) it's the right decision.",
+              "answers": [
+                "think"
+              ]
+            },
+            {
+              "prompt": "Sophie: I ___ (believe) you, …",
+              "answers": [
+                "believe"
+              ]
+            },
+            {
+              "prompt": "Sophie: … and I really ___ (appreciate) your honesty.",
+              "answers": [
+                "appreciate"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-ST-09",
+          "code": "ST-09",
+          "title": "Serbian vs. English",
+          "instruction": "Prevedi rečenice na engleski. Pazi na oblik glagola.",
+          "kind": "closed",
+          "image": "a2:st09",
+          "items": [
+            {
+              "prompt": "Mislim da je to dobra ideja.",
+              "answers": [
+                "I think it's a good idea.",
+                "I think it is a good idea.",
+                "I think that's a good idea.",
+                "I think that it is a good idea."
+              ]
+            },
+            {
+              "prompt": "Imam sastanak u 3 sata.",
+              "answers": [
+                "I have a meeting at 3.",
+                "I have a meeting at 3 o'clock.",
+                "I'm having a meeting at 3.",
+                "I am having a meeting at 3 o'clock.",
+                "I have a meeting at three o'clock.",
+                "I'm having a meeting at 3 o'clock."
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-ST-10",
+          "code": "ST-10",
+          "title": "Choose & Explain",
+          "instruction": "Izaberi tačan odgovor, a zatim ukratko objasni zašto.",
+          "kind": "closed",
+          "image": "a2:st10",
+          "items": [
+            {
+              "prompt": "I ___ to move to another city.",
+              "answers": [
+                "want"
+              ],
+              "options": [
+                "want",
+                "am wanting",
+                "is wanting"
+              ]
+            },
+            {
+              "prompt": "Zašto? (I want to move to another city.)",
+              "open": true,
+              "guide": "Objašnjenje: want je stativni glagol (želja/stanje), pa ne koristi -ing."
+            },
+            {
+              "prompt": "We ___ about buying a new apartment.",
+              "answers": [
+                "are thinking"
+              ],
+              "options": [
+                "are thinking",
+                "think",
+                "thinks"
+              ]
+            },
+            {
+              "prompt": "Zašto? (We are thinking about buying a new apartment.)",
+              "open": true,
+              "guide": "Objašnjenje: think about = razmišljati, aktivnost u toku, pa Present Continuous."
+            }
+          ]
         }
       ]
     },
