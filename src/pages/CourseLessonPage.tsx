@@ -245,7 +245,7 @@ export default function CourseLessonPage() {
             <div className="rounded-3xl border border-border/50 bg-cream/90 backdrop-blur-md shadow-postcard p-5">
               <p className="font-script italic text-primary/60 text-sm">{MODULE_META[open].subtitle}</p>
               <h2 className="font-display text-2xl text-primary">{MODULE_META[open].title}</h2>
-              {!["reading", "listening"].includes(open) && hasMaterial(open) && openEx.length > 0 && (
+              {!["reading", "listening", "pronunciation"].includes(open) && hasMaterial(open) && openEx.length > 0 && (
                 <div className="mt-4 inline-flex rounded-full bg-secondary/60 p-1">
                   {(["learn", "practice"] as const).map((v) => (
                     <button key={v} onClick={() => setView(v)} className={`px-4 py-1.5 rounded-full text-sm ${view === v ? "bg-primary text-primary-foreground" : "text-primary"}`}>
@@ -255,7 +255,7 @@ export default function CourseLessonPage() {
                 </div>
               )}
             </div>
-            {open !== "listening" && view === "learn" && hasMaterial(open) && (imgs?.modules[open] || []).length > 0 && (
+            {!["listening", "pronunciation"].includes(open) && view === "learn" && hasMaterial(open) && (imgs?.modules[open] || []).length > 0 && (
               <div className={`grid gap-3 ${(imgs!.modules[open].length > 1) ? "sm:grid-cols-2" : ""}`}>
                 {imgs!.modules[open].map((src, i) => <img key={src + i} src={src} alt={`${MODULE_META[open].title} ilustracija ${i + 1}`} loading="lazy" className={`w-full rounded-2xl border border-border/50 shadow-card-soft object-cover ${imgs!.modules[open].length > 1 && i === 0 ? "sm:col-span-2" : ""}`} />)}
               </div>
@@ -307,6 +307,8 @@ export default function CourseLessonPage() {
               <LessonReviewQuiz quiz={m.review.quiz} lang={lang} lessonCode={content.code || row.lesson_code || "lesson"} passed={done.includes("REVIEW-PASS")} onPass={() => markDone("REVIEW-PASS")} />
             ) : open === "listening" && m.listening?.scenes ? (
               <LessonListeningTab key={`${row.id}_${lang}`} scenes={m.listening.scenes} lang={lang} lessonCode={content?.code || "lesson"} completed={done} onDone={markDone} onFinish={() => openModule(null)} />
+            ) : open === "pronunciation" && m.pronunciation?.exercises ? (
+              <LessonPronunciationTab key={`${row.id}_${lang}`} data={m.pronunciation} lang={lang} level={level} lessonCode={content?.code || "lesson"} />
             ) : view === "practice" || !hasMaterial(open) ? (
               <ExerciseStepper list={openEx} done={done} render={(ex) => renderExercises([ex])} onFinish={() => openModule(null)} />
             ) : (
