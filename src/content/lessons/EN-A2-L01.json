@@ -4741,12 +4741,554 @@
       ]
     },
     "pronunciation": {
-      "alphabet": [],
-      "note": "",
-      "drills": [],
-      "letters": [],
-      "spelling": [],
-      "exercises": []
+      "theory": [
+        {
+          "title": "Završetak -s kod trećeg lica jednine",
+          "text": "U Present Simple glagol za he / she / it dobija nastavak -s ili -es. Taj nastavak se izgovara na tri načina, zavisno od poslednjeg glasa glagola. Klikni na primer da čuješ celu rečenicu.",
+          "groups": [
+            {
+              "label": "/s/",
+              "rule": "Posle bezvučnih glasova poput /p/, /t/, /k/, /f/ nastavak se izgovara kao /s/.",
+              "examples": [
+                {
+                  "word": "works",
+                  "sentence": "She works every day."
+                },
+                {
+                  "word": "likes",
+                  "sentence": "He likes coffee."
+                },
+                {
+                  "word": "gets",
+                  "sentence": "He gets up at seven."
+                }
+              ]
+            },
+            {
+              "label": "/z/",
+              "rule": "Posle samoglasnika i drugih zvučnih glasova (osim sibilanata) nastavak se izgovara kao /z/.",
+              "examples": [
+                {
+                  "word": "lives",
+                  "sentence": "Sophie lives near the park."
+                },
+                {
+                  "word": "plays",
+                  "sentence": "He plays football."
+                },
+                {
+                  "word": "goes",
+                  "sentence": "She goes to work by bus."
+                }
+              ]
+            },
+            {
+              "label": "/ɪz/",
+              "rule": "Posle glasova /s/, /z/, /ʃ/, /ʒ/, /tʃ/ i /dʒ/ nastavak dobija dodatni samoglasnik i izgovara se /ɪz/ — to je poseban slog.",
+              "examples": [
+                {
+                  "word": "watches",
+                  "sentence": "Emma watches TV after dinner."
+                },
+                {
+                  "word": "washes",
+                  "sentence": "She washes the dishes."
+                },
+                {
+                  "word": "finishes",
+                  "sentence": "Oliver finishes work at five."
+                }
+              ]
+            }
+          ],
+          "compare": "U srpskom ne postoji isti sistem izgovora nastavka za treće lice jednine — engleski nastavak -s menja izgovor u zavisnosti od prethodnog glasa. Glasovi /s/ i /z/ približno odgovaraju srpskim s i z, dok /ɪz/ sadrži dodatni samoglasnik i predstavlja poseban slog: watches se čita sa dva sloga na kraju."
+        },
+        {
+          "title": "Rečenični naglasak i ritam",
+          "text": "U engleskom određene reči nose jači rečenični naglasak. Sadržinske reči — glavni glagoli, imenice i važni vremenski izrazi — obično su naglašene. Kraće gramatičke reči (zamenice, predlozi, članovi) izgovaraju se slabije i brže. Poslušaj primere — naglašene reči su istaknute.",
+          "examples": [
+            {
+              "sentence": "I usually get up at seven.",
+              "stressed": [
+                "get up",
+                "seven"
+              ]
+            },
+            {
+              "sentence": "She works in a bookshop.",
+              "stressed": [
+                "works",
+                "bookshop"
+              ]
+            },
+            {
+              "sentence": "I'm studying English today.",
+              "stressed": [
+                "studying",
+                "English"
+              ]
+            }
+          ],
+          "compare": "I srpski koristi rečenični naglasak, ali je u engleskom kontrast između naglašenih i nenaglašenih delova često izraženiji. Nenaglašene reči mogu sadržati redukovani samoglasnik, naročito /ə/ (šva).",
+          "note": "Naglasak zavisi od značenja i konteksta — isti ispis može različito da se naglasi."
+        },
+        {
+          "title": "Prirodan povezan govor i skraćeni oblici",
+          "text": "Pomoćni glagol be u Present Continuous često se skraćuje i povezuje sa zamenicom u jednu izgovornu celinu. Poslušaj puni pa skraćeni oblik — vežbaj prirodan izgovor cele izraze, a ne svaku reč podjednako odvojeno.",
+          "pairs": [
+            {
+              "full": "I am studying",
+              "short": "I'm studying"
+            },
+            {
+              "full": "She is working",
+              "short": "She's working"
+            },
+            {
+              "full": "He is reading",
+              "short": "He's reading"
+            },
+            {
+              "full": "We are cooking",
+              "short": "We're cooking"
+            },
+            {
+              "full": "They are moving",
+              "short": "They're moving"
+            }
+          ],
+          "compare": "I u srpskom postoje kratki, nenaglašeni oblici pomoćnih glagola, kao što su sam, si i je. U engleskom se pomoćni glagol skoro uvek veže uz zamenicu u jedan slog: She is postaje She's."
+        }
+      ],
+      "exercises": [
+        {
+          "code": "P-01",
+          "title": "Poslušaj i prepoznaj",
+          "type": "choose",
+          "instruction": "Poslušaj svaku rečenicu i izaberi kako se izgovara završni glas -s. Nakon odgovora možeš da poslušaš model i ponoviš celu rečenicu.",
+          "items": [
+            {
+              "say": "She works in a café.",
+              "options": [
+                "/s/",
+                "/z/",
+                "/ɪz/"
+              ],
+              "answer": "/s/",
+              "repeat": "She works in a café."
+            },
+            {
+              "say": "He plays tennis on Sundays.",
+              "options": [
+                "/s/",
+                "/z/",
+                "/ɪz/"
+              ],
+              "answer": "/z/",
+              "repeat": "He plays tennis on Sundays."
+            },
+            {
+              "say": "Emma watches TV after dinner.",
+              "options": [
+                "/s/",
+                "/z/",
+                "/ɪz/"
+              ],
+              "answer": "/ɪz/",
+              "repeat": "Emma watches TV after dinner."
+            },
+            {
+              "say": "Sophie lives near the park.",
+              "options": [
+                "/s/",
+                "/z/",
+                "/ɪz/"
+              ],
+              "answer": "/z/",
+              "repeat": "Sophie lives near the park."
+            },
+            {
+              "say": "Oliver finishes work at five.",
+              "options": [
+                "/s/",
+                "/z/",
+                "/ɪz/"
+              ],
+              "answer": "/ɪz/",
+              "repeat": "Oliver finishes work at five."
+            }
+          ]
+        },
+        {
+          "code": "P-02",
+          "title": "Isti ili različit glas?",
+          "type": "choose",
+          "instruction": "Poslušaj par rečenica. Da li se glagoli na kraju završavaju istim ili različitim glasom? Nakon izbora možeš da snimiš svoj izgovor obe rečenice.",
+          "items": [
+            {
+              "say": "She likes coffee. He works from home.",
+              "options": [
+                "Isti glas",
+                "Različit glas"
+              ],
+              "answer": "Isti glas",
+              "repeat": "She likes coffee. He works from home."
+            },
+            {
+              "say": "She plays tennis. He watches football.",
+              "options": [
+                "Isti glas",
+                "Različit glas"
+              ],
+              "answer": "Različit glas",
+              "repeat": "She plays tennis. He watches football."
+            },
+            {
+              "say": "He lives in London. She goes to school.",
+              "options": [
+                "Isti glas",
+                "Različit glas"
+              ],
+              "answer": "Isti glas",
+              "repeat": "He lives in London. She goes to school."
+            },
+            {
+              "say": "Emma washes the dishes. Oliver finishes work.",
+              "options": [
+                "Isti glas",
+                "Različit glas"
+              ],
+              "answer": "Isti glas",
+              "repeat": "Emma washes the dishes. Oliver finishes work."
+            },
+            {
+              "say": "She gets up early. He studies English.",
+              "options": [
+                "Isti glas",
+                "Različit glas"
+              ],
+              "answer": "Različit glas",
+              "repeat": "She gets up early. He studies English."
+            }
+          ]
+        },
+        {
+          "code": "P-03",
+          "title": "Poslušaj, ponovi i snimi",
+          "type": "record",
+          "instruction": "Slušaj i ponovi. Obrati posebnu pažnju na završetak glagola.",
+          "items": [
+            {
+              "say": "She works every morning."
+            },
+            {
+              "say": "He plays football after school."
+            },
+            {
+              "say": "My sister watches a film every Friday."
+            },
+            {
+              "say": "Emma takes the bus to work."
+            },
+            {
+              "say": "Oliver finishes his homework before dinner."
+            }
+          ]
+        },
+        {
+          "code": "P-04",
+          "title": "Pronađi drugačiji glas",
+          "type": "choose",
+          "instruction": "Poslušaj rečenice za svaki glagol (klikni na zvučničić) i izaberi glagol čiji se završni glas razlikuje od ostala dva. Nakon odgovora ponovi sve tri rečenice iz grupe.",
+          "items": [
+            {
+              "prompt": "works / likes / lives",
+              "options": [
+                {
+                  "label": "works",
+                  "say": "She works a lot."
+                },
+                {
+                  "label": "likes",
+                  "say": "He likes tea."
+                },
+                {
+                  "label": "lives",
+                  "say": "She lives in Oslo."
+                }
+              ],
+              "answer": "lives",
+              "repeat": "She works a lot. He likes tea. She lives in Oslo."
+            },
+            {
+              "prompt": "plays / washes / goes",
+              "options": [
+                {
+                  "label": "plays",
+                  "say": "He plays tennis."
+                },
+                {
+                  "label": "washes",
+                  "say": "She washes the dishes."
+                },
+                {
+                  "label": "goes",
+                  "say": "He goes to school."
+                }
+              ],
+              "answer": "washes",
+              "repeat": "He plays tennis. She washes the dishes. He goes to school."
+            },
+            {
+              "prompt": "watches / finishes / gets",
+              "options": [
+                {
+                  "label": "watches",
+                  "say": "She watches TV."
+                },
+                {
+                  "label": "finishes",
+                  "say": "He finishes work."
+                },
+                {
+                  "label": "gets",
+                  "say": "He gets up early."
+                }
+              ],
+              "answer": "gets",
+              "repeat": "She watches TV. He finishes work. He gets up early."
+            },
+            {
+              "prompt": "takes / gets / studies",
+              "options": [
+                {
+                  "label": "takes",
+                  "say": "She takes the bus."
+                },
+                {
+                  "label": "gets",
+                  "say": "He gets home late."
+                },
+                {
+                  "label": "studies",
+                  "say": "He studies English."
+                }
+              ],
+              "answer": "studies",
+              "repeat": "She takes the bus. He gets home late. He studies English."
+            }
+          ]
+        },
+        {
+          "code": "P-05",
+          "title": "Koje reči su naglašene?",
+          "type": "stress",
+          "instruction": "Poslušaj rečenicu i izaberi dve najjače naglašene reči ili grupe reči. Zatim ponovi rečenicu.",
+          "items": [
+            {
+              "say": "I usually get up at seven.",
+              "options": [
+                "I",
+                "usually",
+                "get up",
+                "at",
+                "seven"
+              ],
+              "answers": [
+                "get up",
+                "seven"
+              ],
+              "repeat": "I usually get up at seven."
+            },
+            {
+              "say": "She works in a bookshop.",
+              "options": [
+                "She",
+                "works",
+                "in a",
+                "bookshop"
+              ],
+              "answers": [
+                "works",
+                "bookshop"
+              ],
+              "repeat": "She works in a bookshop."
+            },
+            {
+              "say": "We're cooking dinner at home.",
+              "options": [
+                "We're",
+                "cooking dinner",
+                "at home"
+              ],
+              "answers": [
+                "cooking dinner",
+                "at home"
+              ],
+              "repeat": "We're cooking dinner at home."
+            },
+            {
+              "say": "He takes the bus every morning.",
+              "options": [
+                "He",
+                "takes",
+                "the bus",
+                "every morning"
+              ],
+              "answers": [
+                "the bus",
+                "every morning"
+              ],
+              "repeat": "He takes the bus every morning."
+            }
+          ]
+        },
+        {
+          "code": "P-06",
+          "title": "Šta govornik naglašava?",
+          "type": "choose",
+          "instruction": "Poslušaj rečenicu i izaberi šta govornik naglašava. Zatim je ponovi sa odgovarajućim naglaskom.",
+          "items": [
+            {
+              "prompt": "Šta govornik naglašava?",
+              "say": "I work from home.",
+              "options": [
+                "Where the person works.",
+                "What the person does.",
+                "Who works."
+              ],
+              "answer": "Where the person works.",
+              "repeat": "I work from home."
+            },
+            {
+              "prompt": "Šta govornik naglašava?",
+              "say": "I'm studying English today.",
+              "options": [
+                "Which subject the person is studying.",
+                "When the person is studying.",
+                "Who is studying."
+              ],
+              "answer": "Which subject the person is studying.",
+              "repeat": "I'm studying English today."
+            }
+          ]
+        },
+        {
+          "code": "P-07",
+          "title": "Prati ritam",
+          "type": "record",
+          "instruction": "Slušaj i ponovi svaku rečenicu. Pokušaj da kopiraš ritam govornika.",
+          "items": [
+            {
+              "say": "I usually get up at seven.",
+              "stressNote": "GET UP · SEVEN"
+            },
+            {
+              "say": "She works in a bookshop.",
+              "stressNote": "WORKS · BOOKSHOP"
+            },
+            {
+              "say": "I'm studying English today.",
+              "stressNote": "STUDYING ENGLISH"
+            },
+            {
+              "say": "We cook dinner at home.",
+              "stressNote": "COOK DINNER · HOME"
+            },
+            {
+              "say": "He's taking the bus today.",
+              "stressNote": "TAKING · BUS"
+            }
+          ]
+        },
+        {
+          "code": "P-08",
+          "title": "Puni ili skraćeni oblik?",
+          "type": "choose",
+          "instruction": "Poslušaj i izaberi oblik koji čuješ. Nakon izbora ponovi skraćeni oblik.",
+          "items": [
+            {
+              "say": "I'm studying for an exam.",
+              "options": [
+                "I am studying for an exam.",
+                "I'm studying for an exam."
+              ],
+              "answer": "I'm studying for an exam.",
+              "repeat": "I'm studying for an exam."
+            },
+            {
+              "say": "She is working today.",
+              "options": [
+                "She is working today.",
+                "She's working today."
+              ],
+              "answer": "She is working today.",
+              "repeat": "She's working today."
+            },
+            {
+              "say": "We're cooking dinner.",
+              "options": [
+                "We are cooking dinner.",
+                "We're cooking dinner."
+              ],
+              "answer": "We're cooking dinner.",
+              "repeat": "We're cooking dinner."
+            },
+            {
+              "say": "He is reading a book.",
+              "options": [
+                "He is reading a book.",
+                "He's reading a book."
+              ],
+              "answer": "He is reading a book.",
+              "repeat": "He's reading a book."
+            },
+            {
+              "say": "They're looking for a flat.",
+              "options": [
+                "They are looking for a flat.",
+                "They're looking for a flat."
+              ],
+              "answer": "They're looking for a flat.",
+              "repeat": "They're looking for a flat."
+            }
+          ]
+        },
+        {
+          "code": "P-09",
+          "title": "Izazov prirodnog govora",
+          "type": "record",
+          "instruction": "Slušaj i ponovi rečenice prirodno, sa skraćenim oblicima. Povratna informacija prati razumljivost, skraćeni oblik, povezivanje reči i ritam.",
+          "items": [
+            {
+              "say": "I'm getting ready for work."
+            },
+            {
+              "say": "She's making breakfast."
+            },
+            {
+              "say": "We're doing the laundry."
+            },
+            {
+              "say": "He's taking a new course."
+            },
+            {
+              "say": "They're moving to a new flat."
+            }
+          ]
+        },
+        {
+          "code": "P-10",
+          "title": "Moja rutina: završni izazov",
+          "type": "record",
+          "instruction": "Poslušaj model, pa snimi čitanje svih pet rečenica u jednom povezanom snimku. Obrati pažnju na nastavke glagola, naglasak i skraćene oblike.",
+          "items": [
+            {
+              "say": "I usually get up at seven. My brother works in a café. He finishes work at four. I'm studying English this week. We're trying something new."
+            }
+          ]
+        }
+      ]
     },
     "speaking": {
       "tasks": [],
