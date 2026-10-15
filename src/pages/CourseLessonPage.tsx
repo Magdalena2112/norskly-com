@@ -258,7 +258,50 @@ export default function CourseLessonPage() {
                 {imgs!.modules[open].map((src, i) => <img key={src + i} src={src} alt={`${MODULE_META[open].title} ilustracija ${i + 1}`} loading="lazy" className={`w-full rounded-2xl border border-border/50 shadow-card-soft object-cover ${imgs!.modules[open].length > 1 && i === 0 ? "sm:col-span-2" : ""}`} />)}
               </div>
             )}
-            {open === "review" && m.review?.quiz ? (
+            {open === "reading" && m.reading?.texts?.length ? (
+              (() => {
+                const texts = m.reading.texts as any[];
+                const ti = Math.min(readStep, texts.length - 1);
+                const t = texts[ti];
+                const exFor = (i: number, tx: any) => openEx.filter((e: any) => (e as any).textId ? (e as any).textId === tx.id : (e.title || "").startsWith(`Text ${i + 1}`));
+                const tex = exFor(ti, t);
+                const lastT = ti >= texts.length - 1;
+                return (
+                  <div className="space-y-5">
+                    <div className="flex items-center justify-center gap-2">
+                      {texts.map((x: any, i: number) => {
+                        const xex = exFor(i, x);
+                        const xDone = xex.length > 0 && xex.every((e) => done.includes(e.code));
+                        return (
+                          <button key={x.id} onClick={() => setReadStep(i)} aria-label={`Tekst ${i + 1}`}
+                            className={`w-9 h-9 rounded-full text-sm font-semibold border transition-colors ${i === ti ? "bg-primary text-primary-foreground border-primary" : xDone ? "bg-forest/15 text-forest border-forest/40" : "bg-cream/90 border-border text-primary"}`}>
+                            {i + 1}
+                          </button>
+                        );
+                      })}
+                    </div>
+                    <div className="rounded-2xl border border-border/60 bg-cream/90 p-5 shadow-card-soft">
+                      <div className="flex items-center justify-between gap-2 mb-2">
+                        <h3 className="font-display font-semibold text-lg text-primary">{t.title}</h3>
+                        <Button size="sm" variant="outline" onClick={() => speakLines([{ speaker: "n", text: t.body }], lang)}><Volume2 className="w-4 h-4" /> Slušaj</Button>
+                      </div>
+                      {t.image && ITEM_IMAGES[t.image] && <img src={ITEM_IMAGES[t.image]} alt={t.title} loading="lazy" className="w-full max-w-md h-auto rounded-xl border border-border/60 mb-3" />}
+                      <p className="leading-relaxed whitespace-pre-line">{t.body}</p>
+                      {t.note && <p className="text-xs text-muted-foreground mt-2">{t.note}</p>}
+                    </div>
+                    {tex.length > 0 && <div className="space-y-4">{renderExercises(tex)}</div>}
+                    <div className="flex items-center justify-between gap-2">
+                      <Button variant="outline" size="sm" disabled={ti === 0} onClick={() => setReadStep(ti - 1)}><ChevronLeft className="w-4 h-4" /> Prethodni tekst</Button>
+                      {!lastT ? (
+                        <Button variant="hero" size="sm" onClick={() => setReadStep(ti + 1)}>Sledeći tekst <ChevronRight className="w-4 h-4" /></Button>
+                      ) : (
+                        <Button variant="hero" size="sm" onClick={() => openModule(null)}>Završi čitanje <CheckCircle2 className="w-4 h-4" /></Button>
+                      )}
+                    </div>
+                  </div>
+                );
+              })()
+            ) : open === "review" && m.review?.quiz ? (
               <LessonReviewQuiz quiz={m.review.quiz} lang={lang} lessonCode={content.code || row.lesson_code || "lesson"} passed={done.includes("REVIEW-PASS")} onPass={() => markDone("REVIEW-PASS")} />
             ) : view === "practice" || !hasMaterial(open) ? (
               <ExerciseStepper list={openEx} done={done} render={(ex) => renderExercises([ex])} onFinish={() => openModule(null)} />
