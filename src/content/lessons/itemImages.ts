@@ -1,6 +1,7 @@
 import a2rd1 from "@/assets/lessons/en-a2-l01-rd1.webp.asset.json";
 import a2rd2 from "@/assets/lessons/en-a2-l01-rd2.webp.asset.json";
 import a2rd3 from "@/assets/lessons/en-a2-l01-rd3.webp.asset.json";
+import a2wr01 from "@/assets/lessons/en-a2-l01-wr01.webp.asset.json";
 import a2mix01 from "@/assets/lessons/en-a2-l01-mix01.webp.asset.json";
 import a2mix02 from "@/assets/lessons/en-a2-l01-mix02.webp.asset.json";
 import a2mix03 from "@/assets/lessons/en-a2-l01-mix03.webp.asset.json";
@@ -41,7 +42,8 @@ export const ITEM_IMAGES: Record<string, string> = {
   "pr08-1": p1.url,
   "pr08-2": p2.url,
   "pr08-3": p3.url,
-  "pr08-4": p4.url,
+"pr08-4": p4.url,
+  "a2:wr01": a2wr01.url,
 };
 
 import vocabImgs from "./EN-A1-L01.vocab-images.json";

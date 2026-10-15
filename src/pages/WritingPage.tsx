@@ -103,10 +103,10 @@ export default function WritingPage() {
         <div className="container max-w-5xl py-6 sm:py-8">
           <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="mb-6">
             <div className="rounded-3xl border border-border/50 bg-cream/90 shadow-postcard p-5 sm:p-6">
-              <p className="font-script italic text-primary/60 text-sm">Skriving & bildebeskrivelse</p>
-              <h1 className="text-display text-2xl sm:text-3xl text-primary mt-1">Vežbaj pisanje na norveškom</h1>
+              <p className="font-script italic text-primary/60 text-sm">Skriving & writing</p>
+              <h1 className="text-display text-2xl sm:text-3xl text-primary mt-1">Vežbaj pisanje</h1>
               <p className="text-sm text-muted-foreground mt-2 max-w-2xl">
-                Učitaj sliku za bildebeskrivelse ili napiši slobodan tekst i dobi detaljan AI feedback, predloge vokabulara i PDF analizu.
+                Obavezna vežbanja iz lekcije i samostalna vežba — opis slike ili slobodan tekst sa detaljnim AI feedbackom, predlozima vokabulara i PDF analizom.
               </p>
             </div>
           </motion.div>
@@ -115,15 +115,23 @@ export default function WritingPage() {
             <TabsList className="w-full flex gap-0.5 overflow-x-auto scrollbar-hide">
               {lessonId && (
                 <TabsTrigger value="lesson" className="gap-1 text-[11px] sm:text-xs px-2 sm:px-3">
-                  <Sparkles className="w-3.5 h-3.5 shrink-0 hidden sm:block" /> Lekcija
+                  <Sparkles className="w-3.5 h-3.5 shrink-0 hidden sm:block" /> Obavezna vežbanja
                 </TabsTrigger>
               )}
-              <TabsTrigger value="bildebeskrivelse" className="gap-1 text-[11px] sm:text-xs px-2 sm:px-3">
-                <ImagePlus className="w-3.5 h-3.5 shrink-0 hidden sm:block" /> Bildebeskrivelse
-              </TabsTrigger>
-              <TabsTrigger value="correction" className="gap-1 text-[11px] sm:text-xs px-2 sm:px-3">
-                <PenLine className="w-3.5 h-3.5 shrink-0 hidden sm:block" /> Korekcija teksta
-              </TabsTrigger>
+              {lessonId ? (
+                <TabsTrigger value="samostalna" className="gap-1 text-[11px] sm:text-xs px-2 sm:px-3">
+                  <PenLine className="w-3.5 h-3.5 shrink-0 hidden sm:block" /> Samostalna vežba
+                </TabsTrigger>
+              ) : (
+                <>
+                  <TabsTrigger value="bildebeskrivelse" className="gap-1 text-[11px] sm:text-xs px-2 sm:px-3">
+                    <ImagePlus className="w-3.5 h-3.5 shrink-0 hidden sm:block" /> Bildebeskrivelse
+                  </TabsTrigger>
+                  <TabsTrigger value="correction" className="gap-1 text-[11px] sm:text-xs px-2 sm:px-3">
+                    <PenLine className="w-3.5 h-3.5 shrink-0 hidden sm:block" /> Korekcija teksta
+                  </TabsTrigger>
+                </>
+              )}
               <TabsTrigger value="history" className="gap-1 text-[11px] sm:text-xs px-2 sm:px-3">
                 <History className="w-3.5 h-3.5 shrink-0 hidden sm:block" /> Istorija
               </TabsTrigger>
@@ -131,16 +139,44 @@ export default function WritingPage() {
 
             {lessonId && (
               <TabsContent value="lesson">
-                <LessonWritingTab lessonId={lessonId} language={getCurrentLanguageCode() as "no" | "en" | "de"} level={level} onOpenFree={() => setTab("correction")} />
+                <LessonWritingTab lessonId={lessonId} language={getCurrentLanguageCode() as "no" | "en" | "de"} level={level} onOpenFree={() => setTab("samostalna")} />
               </TabsContent>
             )}
-            <TabsContent value="bildebeskrivelse"><BildebeskrivelseTab level={level} /></TabsContent>
-            <TabsContent value="correction"><CorrectionTab level={level} /></TabsContent>
+            {lessonId ? (
+              <TabsContent value="samostalna">
+                <SamostalnaTab level={level} />
+              </TabsContent>
+            ) : (
+              <>
+                <TabsContent value="bildebeskrivelse"><BildebeskrivelseTab level={level} /></TabsContent>
+                <TabsContent value="correction"><CorrectionTab level={level} /></TabsContent>
+              </>
+            )}
             <TabsContent value="history"><HistoryTab onReopen={(t) => setTab(t)} /></TabsContent>
           </Tabs>
         </div>
       </div>
     </StudentLayout>
+  );
+}
+
+// ═══════════════════════════════════════
+// Samostalna vežba: opis slike + korekcija teksta
+// ═══════════════════════════════════════
+function SamostalnaTab({ level }: { level: string }) {
+  const [sub, setSub] = useState<"opis" | "korekcija">("opis");
+  return (
+    <div className="space-y-4">
+      <div className="flex gap-1.5 overflow-x-auto scrollbar-hide">
+        {([["opis", "Opis slike"], ["korekcija", "Korekcija teksta"]] as const).map(([id, label]) => (
+          <button key={id} onClick={() => setSub(id)}
+            className={`shrink-0 rounded-full px-4 py-1.5 text-sm border transition-colors ${sub === id ? "bg-primary text-primary-foreground border-primary" : "bg-cream/60 border-border/50 hover:border-primary/40"}`}>
+            {label}
+          </button>
+        ))}
+      </div>
+      {sub === "opis" ? <BildebeskrivelseTab level={level} /> : <CorrectionTab level={level} />}
+    </div>
   );
 }
 
