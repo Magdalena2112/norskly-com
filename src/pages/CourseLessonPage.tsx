@@ -13,7 +13,7 @@ import LessonCultureTab from "@/components/lesson/LessonCultureTab";
 import LessonReviewQuiz from "@/components/lesson/LessonReviewQuiz";
 import LessonExercise from "@/components/lesson/LessonExercise";
 import { Button } from "@/components/ui/button";
-import { Volume2, Mic, MessageSquare, CheckCircle2, ChevronLeft, ChevronRight, BookOpen, Languages, BookOpenText, Headphones, PenLine, Globe2, Trophy } from "lucide-react";
+import { Volume2, Mic, MessageSquare, CheckCircle2, ChevronLeft, ChevronRight, BookOpen, Languages, BookOpenText, Headphones, PenLine, Globe2, Trophy, Play, Square, Eye, EyeOff, Turtle } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import PostcardVignette from "@/components/student/PostcardVignette";
@@ -30,7 +30,7 @@ const MODULE_META: Record<string, { title: string; subtitle: string; description
   culture: { title: "Kultura", subtitle: "Culture & Society", description: "Kako se ljudi upoznaju i pozdravljaju.", icon: Globe2, iconBg: "bg-forest", vignette: "cabins" },
   review: { title: "Ponavljanje", subtitle: "Review", description: "Završna provera cele lekcije.", icon: Trophy, iconBg: "bg-sunset", vignette: "cabins" },
 };
-import { LESSON_TABS, allExercises, loadLessonContent, speakLines, type Exercise, type LessonContent } from "@/lib/courseLessons";
+import { LESSON_TABS, allExercises, loadLessonContent, speakLines, stopSpeaking, type DialogueLine, type Exercise, type LessonContent } from "@/lib/courseLessons";
 
 type Lang = "no" | "en" | "de";
 
@@ -174,8 +174,14 @@ export default function CourseLessonPage() {
               </div>
               <AnimatePresence mode="wait">
                 <motion.div key={t.id} initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -24 }} transition={{ duration: 0.3 }} className="space-y-3">
-                  {img && <img src={img} alt={t.title} loading="lazy" className="w-full h-auto rounded-3xl border border-border/50 shadow-postcard" />}
-                  <DialoguePlayer title={t.title} scene={t.scene} lines={t.lines} language={lang} />
+                  {img && t.type === "email" ? (
+                    <EmailTextCard image={img} title={t.title} scene={t.scene} lines={t.lines} language={lang} />
+                  ) : (
+                    <>
+                      {img && <img src={img} alt={t.title} loading="lazy" className="w-full h-auto rounded-3xl border border-border/50 shadow-postcard" />}
+                      <DialoguePlayer title={t.title} scene={t.scene} lines={t.lines} language={lang} />
+                    </>
+                  )}
                 </motion.div>
               </AnimatePresence>
               <div className="flex items-center justify-between gap-2 mt-4">
@@ -362,6 +368,63 @@ export default function CourseLessonPage() {
         </div>
     );
   }
+}
+
+// Email-type intro text: the illustration already contains the full text, so the
+// image stands alone with a floating play button; the transcript stays hidden by default.
+function EmailTextCard({ image, title, scene, lines, language }: { image: string; title: string; scene?: string; lines: DialogueLine[]; language: string }) {
+  const [playing, setPlaying] = useState(false);
+  const [slow, setSlow] = useState(false);
+  const [showText, setShowText] = useState(false);
+
+  useEffect(() => () => stopSpeaking(), []);
+
+  const play = () => {
+    setPlaying(true);
+    speakLines(lines, language, { slow, onEnd: () => setPlaying(false) });
+  };
+  const stop = () => { stopSpeaking(); setPlaying(false); };
+
+  return (
+    <div className="space-y-3">
+      <div className="relative">
+        <img src={image} alt={title} loading="lazy" className="w-full h-auto rounded-3xl border border-border/50 shadow-postcard" />
+        <div className="absolute bottom-3 right-3 flex gap-2">
+          <button
+            type="button"
+            onClick={() => setSlow((s) => !s)}
+            title="Sporije"
+            aria-label="Sporije"
+            className={`w-11 h-11 rounded-full flex items-center justify-center shadow-card-soft backdrop-blur-md border transition-transform hover:scale-105 ${slow ? "bg-primary text-primary-foreground border-primary" : "bg-cream/90 text-primary border-border/60"}`}
+          >
+            <Turtle className="w-5 h-5" />
+          </button>
+          <button
+            type="button"
+            onClick={playing ? stop : play}
+            aria-label={playing ? "Zaustavi" : "Slušaj"}
+            className="w-14 h-14 rounded-full bg-primary text-primary-foreground flex items-center justify-center shadow-card-soft transition-transform hover:scale-105"
+          >
+            {playing ? <Square className="w-5 h-5" /> : <Play className="w-6 h-6 ml-0.5" />}
+          </button>
+        </div>
+      </div>
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <div>
+          <h4 className="font-display font-semibold text-primary">{title}</h4>
+          {scene && <p className="text-xs italic text-primary/70">{scene}</p>}
+        </div>
+        <button type="button" onClick={() => setShowText((s) => !s)} className="text-xs text-primary/70 hover:text-primary flex items-center gap-1">
+          {showText ? <EyeOff className="w-3.5 h-3.5" /> : <Eye className="w-3.5 h-3.5" />} {showText ? "Sakrij tekst" : "Prikaži tekst"}
+        </button>
+      </div>
+      {showText && (
+        <ul className="space-y-1.5 rounded-2xl border border-border/60 bg-cream/90 p-4 shadow-card-soft">
+          {lines.map((l, i) => <li key={i} className="text-sm text-foreground">{l.text}</li>)}
+        </ul>
+      )}
+    </div>
+  );
 }
 
 function ExerciseStepper({ list, done, render, onFinish }: { list: Exercise[]; done: string[]; render: (e: Exercise) => React.ReactNode; onFinish: () => void }) {

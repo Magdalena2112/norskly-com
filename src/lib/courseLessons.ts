@@ -3,7 +3,7 @@
 // back to the row's `modules`/`intro_texts` columns when no file exists.
 
 export interface DialogueLine { speaker: string; text: string }
-export interface IntroText { id: string; title: string; type: "dialogue" | "narrative"; scene?: string; lines: DialogueLine[] }
+export interface IntroText { id: string; title: string; type: "dialogue" | "narrative" | "monologue" | "email"; scene?: string; lines: DialogueLine[] }
 export interface ExerciseItem { prompt: string; answers?: string[]; options?: string[]; open?: boolean; guide?: string; image?: string; audio?: string }
 export interface Exercise { id: string; code: string; title: string; instruction: string; kind: string; items: ExerciseItem[] }
 
