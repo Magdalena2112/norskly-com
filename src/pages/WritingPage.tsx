@@ -115,15 +115,23 @@ export default function WritingPage() {
             <TabsList className="w-full flex gap-0.5 overflow-x-auto scrollbar-hide">
               {lessonId && (
                 <TabsTrigger value="lesson" className="gap-1 text-[11px] sm:text-xs px-2 sm:px-3">
-                  <Sparkles className="w-3.5 h-3.5 shrink-0 hidden sm:block" /> Lekcija
+                  <Sparkles className="w-3.5 h-3.5 shrink-0 hidden sm:block" /> Obavezna vežbanja
                 </TabsTrigger>
               )}
-              <TabsTrigger value="bildebeskrivelse" className="gap-1 text-[11px] sm:text-xs px-2 sm:px-3">
-                <ImagePlus className="w-3.5 h-3.5 shrink-0 hidden sm:block" /> Bildebeskrivelse
-              </TabsTrigger>
-              <TabsTrigger value="correction" className="gap-1 text-[11px] sm:text-xs px-2 sm:px-3">
-                <PenLine className="w-3.5 h-3.5 shrink-0 hidden sm:block" /> Korekcija teksta
-              </TabsTrigger>
+              {lessonId ? (
+                <TabsTrigger value="samostalna" className="gap-1 text-[11px] sm:text-xs px-2 sm:px-3">
+                  <PenLine className="w-3.5 h-3.5 shrink-0 hidden sm:block" /> Samostalna vežba
+                </TabsTrigger>
+              ) : (
+                <>
+                  <TabsTrigger value="bildebeskrivelse" className="gap-1 text-[11px] sm:text-xs px-2 sm:px-3">
+                    <ImagePlus className="w-3.5 h-3.5 shrink-0 hidden sm:block" /> Bildebeskrivelse
+                  </TabsTrigger>
+                  <TabsTrigger value="correction" className="gap-1 text-[11px] sm:text-xs px-2 sm:px-3">
+                    <PenLine className="w-3.5 h-3.5 shrink-0 hidden sm:block" /> Korekcija teksta
+                  </TabsTrigger>
+                </>
+              )}
               <TabsTrigger value="history" className="gap-1 text-[11px] sm:text-xs px-2 sm:px-3">
                 <History className="w-3.5 h-3.5 shrink-0 hidden sm:block" /> Istorija
               </TabsTrigger>
@@ -131,11 +139,19 @@ export default function WritingPage() {
 
             {lessonId && (
               <TabsContent value="lesson">
-                <LessonWritingTab lessonId={lessonId} language={getCurrentLanguageCode() as "no" | "en" | "de"} level={level} onOpenFree={() => setTab("correction")} />
+                <LessonWritingTab lessonId={lessonId} language={getCurrentLanguageCode() as "no" | "en" | "de"} level={level} onOpenFree={() => setTab("samostalna")} />
               </TabsContent>
             )}
-            <TabsContent value="bildebeskrivelse"><BildebeskrivelseTab level={level} /></TabsContent>
-            <TabsContent value="correction"><CorrectionTab level={level} /></TabsContent>
+            {lessonId ? (
+              <TabsContent value="samostalna">
+                <SamostalnaTab level={level} />
+              </TabsContent>
+            ) : (
+              <>
+                <TabsContent value="bildebeskrivelse"><BildebeskrivelseTab level={level} /></TabsContent>
+                <TabsContent value="correction"><CorrectionTab level={level} /></TabsContent>
+              </>
+            )}
             <TabsContent value="history"><HistoryTab onReopen={(t) => setTab(t)} /></TabsContent>
           </Tabs>
         </div>
