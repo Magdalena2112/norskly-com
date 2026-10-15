@@ -2857,6 +2857,7 @@
                 "make the bed"
               ],
               "answers": [
+                "tidy up",
                 "make the bed"
               ]
             },
@@ -2869,7 +2870,7 @@
                 "make the bed"
               ],
               "answers": [
-                "cook dinner"
+                "make the bed"
               ]
             }
           ]
@@ -3214,7 +3215,8 @@
                 "catch the bus"
               ],
               "answers": [
-                "catch the bus"
+                "catch the bus",
+                "finish work"
               ]
             }
           ]
