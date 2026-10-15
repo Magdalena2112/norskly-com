@@ -1007,7 +1007,7 @@
         {
           "id": "EN-A2-L01-MIX-01",
           "code": "MIX-01",
-          "title": "Usually vs. Today",
+          "title": "Usually vs. Today (1/2)",
           "instruction": "Izaberi tačan odgovor.",
           "kind": "closed",
           "image": "a2:mix01",
@@ -1033,7 +1033,17 @@
                 "is working",
                 "work"
               ]
-            },
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-MIX-02",
+          "code": "MIX-02",
+          "title": "Usually vs. Today (2/2)",
+          "instruction": "Izaberi tačan odgovor.",
+          "kind": "closed",
+          "image": "a2:mix01",
+          "items": [
             {
               "prompt": "She usually ___ to the office by bus.",
               "answers": [
@@ -1059,9 +1069,9 @@
           ]
         },
         {
-          "id": "EN-A2-L01-MIX-02",
-          "code": "MIX-02",
-          "title": "A Different Week",
+          "id": "EN-A2-L01-MIX-03",
+          "code": "MIX-03",
+          "title": "A Different Week (1/2)",
           "instruction": "Dopuni rečenice tačnim oblikom glagola u zagradi.",
           "kind": "closed",
           "image": "a2:mix02",
@@ -1081,7 +1091,17 @@
                 "is not going / is recovering",
                 "isn't going, is recovering"
               ]
-            },
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-MIX-04",
+          "code": "MIX-04",
+          "title": "A Different Week (2/2)",
+          "instruction": "Dopuni rečenice tačnim oblikom glagola u zagradi.",
+          "kind": "closed",
+          "image": "a2:mix02",
+          "items": [
             {
               "prompt": "He still ___ (do) some exercises at home.",
               "answers": [
@@ -1098,9 +1118,9 @@
           ]
         },
         {
-          "id": "EN-A2-L01-MIX-03",
-          "code": "MIX-03",
-          "title": "Routine, Fact or Temporary?",
+          "id": "EN-A2-L01-MIX-05",
+          "code": "MIX-05",
+          "title": "Routine, Fact or Temporary? (1/2)",
           "instruction": "Izaberi tačnu opciju.",
           "kind": "closed",
           "image": "a2:mix03",
@@ -1134,7 +1154,17 @@
                 "listen",
                 "am listening"
               ]
-            },
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-MIX-06",
+          "code": "MIX-06",
+          "title": "Routine, Fact or Temporary? (2/2)",
+          "instruction": "Izaberi tačnu opciju.",
+          "kind": "closed",
+          "image": "a2:mix03",
+          "items": [
             {
               "prompt": "We ___ in Belgrade this year.",
               "answers": [
@@ -1158,9 +1188,9 @@
           ]
         },
         {
-          "id": "EN-A2-L01-MIX-04",
-          "code": "MIX-04",
-          "title": "Sentence & Meaning",
+          "id": "EN-A2-L01-MIX-07",
+          "code": "MIX-07",
+          "title": "Sentence & Meaning (1/2)",
           "instruction": "Poveži rečenicu sa značenjem (A–D).",
           "kind": "closed",
           "image": "a2:mix04",
@@ -1188,7 +1218,17 @@
                 "C – a temporary situation",
                 "D – a regular habit"
               ]
-            },
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-MIX-08",
+          "code": "MIX-08",
+          "title": "Sentence & Meaning (2/2)",
+          "instruction": "Poveži rečenicu sa značenjem (A–D).",
+          "kind": "closed",
+          "image": "a2:mix04",
+          "items": [
             {
               "prompt": "She's living in Berlin this year.",
               "answers": [
@@ -1216,9 +1256,9 @@
           ]
         },
         {
-          "id": "EN-A2-L01-MIX-05",
-          "code": "MIX-05",
-          "title": "Grammar Detective",
+          "id": "EN-A2-L01-MIX-09",
+          "code": "MIX-09",
+          "title": "Grammar Detective (1/2)",
           "instruction": "Pronađi i ispravi grešku u svakoj rečenici. Napiši celu tačnu rečenicu.",
           "kind": "closed",
           "image": "a2:mix05",
@@ -1235,7 +1275,17 @@
               "answers": [
                 "She goes to the gym every day."
               ]
-            },
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-MIX-10",
+          "code": "MIX-10",
+          "title": "Grammar Detective (2/2)",
+          "instruction": "Pronađi i ispravi grešku u svakoj rečenici. Napiši celu tačnu rečenicu.",
+          "kind": "closed",
+          "image": "a2:mix05",
+          "items": [
             {
               "prompt": "We are live with our parents this week.",
               "answers": [
@@ -1253,9 +1303,9 @@
           ]
         },
         {
-          "id": "EN-A2-L01-MIX-06",
-          "code": "MIX-06",
-          "title": "A New Job",
+          "id": "EN-A2-L01-MIX-11",
+          "code": "MIX-11",
+          "title": "A New Job (1/2)",
           "instruction": "Dopuni dijalog tačnim oblikom glagola u zagradi.",
           "kind": "closed",
           "image": "a2:mix06",
@@ -1278,7 +1328,17 @@
                 "am working",
                 "'m working"
               ]
-            },
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-MIX-12",
+          "code": "MIX-12",
+          "title": "A New Job (2/2)",
+          "instruction": "Dopuni dijalog tačnim oblikom glagola u zagradi.",
+          "kind": "closed",
+          "image": "a2:mix06",
+          "items": [
             {
               "prompt": "Liam: Oh, nice! What ___ (you / do) now?",
               "answers": [
@@ -1303,9 +1363,9 @@
           ]
         },
         {
-          "id": "EN-A2-L01-MIX-07",
-          "code": "MIX-07",
-          "title": "Community Centre Notice",
+          "id": "EN-A2-L01-MIX-13",
+          "code": "MIX-13",
+          "title": "Community Centre Notice (1/2)",
           "instruction": "Pročitaj obaveštenje i odgovori na pitanja.",
           "kind": "closed",
           "image": "a2:mix07",
@@ -1319,7 +1379,17 @@
               "prompt": "What is happening this week?",
               "open": true,
               "guide": "Odgovor: They are organising a special art exhibition. (Present Continuous)"
-            },
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-MIX-14",
+          "code": "MIX-14",
+          "title": "Community Centre Notice (2/2)",
+          "instruction": "Pročitaj obaveštenje i odgovori na pitanja.",
+          "kind": "closed",
+          "image": "a2:mix07",
+          "items": [
             {
               "prompt": "How many days is the exhibition running?",
               "open": true,
@@ -1328,9 +1398,9 @@
           ]
         },
         {
-          "id": "EN-A2-L01-MIX-08",
-          "code": "MIX-08",
-          "title": "Plans for This Week",
+          "id": "EN-A2-L01-MIX-15",
+          "code": "MIX-15",
+          "title": "Plans for This Week (1/2)",
           "instruction": "Dopuni poruke tačnim oblikom glagola u zagradi.",
           "kind": "closed",
           "image": "a2:mix08",
@@ -1348,7 +1418,17 @@
                 "am not coming",
                 "'m not coming"
               ]
-            },
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-MIX-16",
+          "code": "MIX-16",
+          "title": "Plans for This Week (2/2)",
+          "instruction": "Dopuni poruke tačnim oblikom glagola u zagradi.",
+          "kind": "closed",
+          "image": "a2:mix08",
+          "items": [
             {
               "prompt": "I ___ (work) on a big project.",
               "answers": [
@@ -1366,9 +1446,9 @@
           ]
         },
         {
-          "id": "EN-A2-L01-MIX-09",
-          "code": "MIX-09",
-          "title": "The Language School",
+          "id": "EN-A2-L01-MIX-17",
+          "code": "MIX-17",
+          "title": "The Language School (1/2)",
           "instruction": "Pogledaj raspored i dopuni rečenice.",
           "kind": "closed",
           "image": "a2:mix09",
@@ -1383,7 +1463,17 @@
               "prompt": "This week we ___ (have) extra speaking sessions on ___.",
               "open": true,
               "guide": "Odgovor: are having … Wednesday and Friday"
-            },
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-MIX-18",
+          "code": "MIX-18",
+          "title": "The Language School (2/2)",
+          "instruction": "Pogledaj raspored i dopuni rečenice.",
+          "kind": "closed",
+          "image": "a2:mix09",
+          "items": [
             {
               "prompt": "I ___ (not attend) the Exam Preparation class on Tuesday.",
               "answers": [
@@ -1396,9 +1486,9 @@
           ]
         },
         {
-          "id": "EN-A2-L01-MIX-10",
-          "code": "MIX-10",
-          "title": "Working From Home",
+          "id": "EN-A2-L01-MIX-19",
+          "code": "MIX-19",
+          "title": "Working From Home (1/2)",
           "instruction": "Izaberi tačan odgovor.",
           "kind": "closed",
           "image": "a2:mix10",
@@ -1424,7 +1514,17 @@
                 "am working",
                 "works"
               ]
-            },
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-MIX-20",
+          "code": "MIX-20",
+          "title": "Working From Home (2/2)",
+          "instruction": "Izaberi tačan odgovor.",
+          "kind": "closed",
+          "image": "a2:mix10",
+          "items": [
             {
               "prompt": "I ___ a report at the moment.",
               "answers": [
