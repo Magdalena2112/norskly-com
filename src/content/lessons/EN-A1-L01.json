@@ -4098,7 +4098,8 @@
               "prompt": "Ko bi mogao da bude njen nastavnik?",
               "open": true
             }
-          ]
+          ],
+          "textId": "EN-A1-L01-RD"
         },
         {
           "id": "EN-A1-L01-RD-02",
@@ -4118,7 +4119,8 @@
                 "hrana"
               ]
             }
-          ]
+          ],
+          "textId": "EN-A1-L01-RD"
         },
         {
           "id": "EN-A1-L01-RD-03",
@@ -4167,7 +4169,8 @@
                 "False"
               ]
             }
-          ]
+          ],
+          "textId": "EN-A1-L01-RD"
         },
         {
           "id": "EN-A1-L01-RD-04",
@@ -4198,7 +4201,8 @@
                 "At a shop"
               ]
             }
-          ]
+          ],
+          "textId": "EN-A1-L01-RD"
         },
         {
           "id": "EN-A1-L01-RD-05",
@@ -4219,7 +4223,8 @@
               "open": true,
               "guide": "Oliver, Sophie (i Emma)"
             }
-          ]
+          ],
+          "textId": "EN-A1-L01-RD"
         },
         {
           "id": "EN-A1-L01-RD-06",
@@ -4272,7 +4277,8 @@
                 "student"
               ]
             }
-          ]
+          ],
+          "textId": "EN-A1-L01-RD"
         },
         {
           "id": "EN-A1-L01-RD-07",
@@ -4314,7 +4320,8 @@
                 "Emma is happy"
               ]
             }
-          ]
+          ],
+          "textId": "EN-A1-L01-RD"
         },
         {
           "id": "EN-A1-L01-RD-08",
@@ -4343,7 +4350,8 @@
               "open": true,
               "guide": "isti razred / ista grupa"
             }
-          ]
+          ],
+          "textId": "EN-A1-L01-RD"
         },
         {
           "id": "EN-A1-L01-RD-09",
@@ -4367,7 +4375,8 @@
               "open": true,
               "guide": "Yes, she is."
             }
-          ]
+          ],
+          "textId": "EN-A1-L01-RD"
         },
         {
           "id": "EN-A1-L01-RD-10",
@@ -4384,7 +4393,8 @@
               "prompt": "Napiši jednu rečenicu o svom profesoru.",
               "open": true
             }
-          ]
+          ],
+          "textId": "EN-A1-L01-RD"
         }
       ]
     },
