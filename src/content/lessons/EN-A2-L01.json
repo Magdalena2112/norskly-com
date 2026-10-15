@@ -612,63 +612,64 @@
         {
           "id": "EN-A2-L01-PS-01",
           "code": "PS-01",
-          "title": "Third person -s",
-          "instruction": "Izaberi tačan oblik glagola.",
+          "title": "Everyday habits",
+          "instruction": "Izaberi tačan odgovor.",
           "kind": "closed",
+          "image": "a2:ps01",
           "items": [
             {
-              "prompt": "Emma ___ in an office.",
+              "prompt": "My sister ___ to work by bus every day.",
               "answers": [
-                "works"
+                "goes"
               ],
               "options": [
-                "work",
-                "works",
-                "working"
+                "go",
+                "goes",
+                "is going"
               ]
             },
             {
-              "prompt": "They ___ near the station.",
+              "prompt": "We usually ___ lunch at home on Sundays.",
               "answers": [
-                "live"
+                "have"
               ],
               "options": [
-                "live",
-                "lives",
-                "living"
+                "have",
+                "has",
+                "are having"
               ]
             },
             {
-              "prompt": "My brother ___ football on Sundays.",
+              "prompt": "Oliver ___ English classes twice a week.",
               "answers": [
-                "plays"
+                "takes"
               ],
               "options": [
-                "plaies",
-                "plays",
-                "play"
+                "take",
+                "takes",
+                "is taking"
               ]
             },
             {
-              "prompt": "Oliver ___ English twice a week.",
+              "prompt": "Emma and Sophie ___ in the library after class.",
               "answers": [
-                "studies"
-              ],
-              "options": [
-                "studys",
-                "studies",
                 "study"
+              ],
+              "options": [
+                "study",
+                "studies",
+                "are studying"
               ]
             },
             {
-              "prompt": "The shop ___ at nine.",
+              "prompt": "Our teacher ___ the lesson at 6 p.m.",
               "answers": [
-                "opens"
+                "starts"
               ],
               "options": [
-                "open",
-                "opens",
-                "opening"
+                "start",
+                "starts",
+                "is starting"
               ]
             }
           ]
@@ -676,38 +677,33 @@
         {
           "id": "EN-A2-L01-PS-02",
           "code": "PS-02",
-          "title": "Spelling: -s, -es, -ies",
-          "instruction": "Napiši glagol u trećem licu jednine.",
+          "title": "The weekly schedule",
+          "instruction": "Dopuni rečenice tačnim oblikom glagola u zagradi.",
           "kind": "closed",
+          "image": "a2:ps02",
           "items": [
             {
-              "prompt": "watch → she ___",
-              "answers": [
-                "watches"
-              ]
-            },
-            {
-              "prompt": "go → he ___",
-              "answers": [
-                "goes"
-              ]
-            },
-            {
-              "prompt": "study → Emma ___",
+              "prompt": "Emma usually ___ (study) in the evening.",
               "answers": [
                 "studies"
               ]
             },
             {
-              "prompt": "play → Oliver ___",
+              "prompt": "My father ___ (watch) the news after dinner.",
               "answers": [
-                "plays"
+                "watches"
               ]
             },
             {
-              "prompt": "have → Sophie ___",
+              "prompt": "Sophie ___ (go) to the gym on Tuesdays.",
               "answers": [
-                "has"
+                "goes"
+              ]
+            },
+            {
+              "prompt": "The baby often ___ (cry) at night.",
+              "answers": [
+                "cries"
               ]
             }
           ]
@@ -715,58 +711,35 @@
         {
           "id": "EN-A2-L01-PS-03",
           "code": "PS-03",
-          "title": "Don't or doesn't?",
-          "instruction": "Dopuni rečenicu sa don't ili doesn't.",
+          "title": "Questions & negatives",
+          "instruction": "Preoblikuj rečenice prema uputstvu.",
           "kind": "closed",
+          "image": "a2:ps03",
           "items": [
             {
-              "prompt": "I ___ drink coffee in the evening.",
+              "prompt": "Emma works in a café. → odrično",
               "answers": [
-                "don't"
-              ],
-              "options": [
-                "don't",
-                "doesn't"
+                "Emma doesn't work in a café.",
+                "Emma does not work in a café."
               ]
             },
             {
-              "prompt": "Sophie ___ work on Fridays.",
+              "prompt": "They live near the city centre. → odrično",
               "answers": [
-                "doesn't"
-              ],
-              "options": [
-                "don't",
-                "doesn't"
+                "They don't live near the city centre.",
+                "They do not live near the city centre."
               ]
             },
             {
-              "prompt": "We ___ have classes at weekends.",
+              "prompt": "Oliver plays football on Saturdays. → pitanje",
               "answers": [
-                "don't"
-              ],
-              "options": [
-                "don't",
-                "doesn't"
+                "Does Oliver play football on Saturdays?"
               ]
             },
             {
-              "prompt": "The bus ___ stop here.",
+              "prompt": "You study English every day. → pitanje",
               "answers": [
-                "doesn't"
-              ],
-              "options": [
-                "don't",
-                "doesn't"
-              ]
-            },
-            {
-              "prompt": "My parents ___ live in London.",
-              "answers": [
-                "don't"
-              ],
-              "options": [
-                "don't",
-                "doesn't"
+                "Do you study English every day?"
               ]
             }
           ]
@@ -774,44 +747,27 @@
         {
           "id": "EN-A2-L01-PS-04",
           "code": "PS-04",
-          "title": "Make it negative",
-          "instruction": "Napiši odričnu rečenicu.",
+          "title": "How often?",
+          "instruction": "Poređaj reči u tačan redosled.",
           "kind": "closed",
+          "image": "a2:ps04",
           "items": [
             {
-              "prompt": "Emma takes the bus.",
+              "prompt": "usually / I / before class / coffee / drink",
               "answers": [
-                "Emma doesn't take the bus.",
-                "Emma does not take the bus."
+                "I usually drink coffee before class."
               ]
             },
             {
-              "prompt": "I get up early.",
+              "prompt": "is / rarely / late / Ms Taylor",
               "answers": [
-                "I don't get up early.",
-                "I do not get up early."
+                "Ms Taylor is rarely late."
               ]
             },
             {
-              "prompt": "Oliver lives with his parents.",
+              "prompt": "does / how often / your brother / travel / abroad / ?",
               "answers": [
-                "Oliver doesn't live with his parents.",
-                "Oliver does not live with his parents."
-              ]
-            },
-            {
-              "prompt": "They watch TV in the morning.",
-              "answers": [
-                "They don't watch TV in the morning.",
-                "They do not watch TV in the morning."
-              ]
-            },
-            {
-              "prompt": "She is tired.",
-              "answers": [
-                "She isn't tired.",
-                "She is not tired.",
-                "She's not tired."
+                "How often does your brother travel abroad?"
               ]
             }
           ]
@@ -819,63 +775,36 @@
         {
           "id": "EN-A2-L01-PS-05",
           "code": "PS-05",
-          "title": "Questions with do/does",
-          "instruction": "Izaberi početak pitanja.",
+          "title": "Meeting a new colleague",
+          "instruction": "Dopuni dijalog tačnim oblikom glagola u zagradi.",
           "kind": "closed",
+          "image": "a2:ps05",
           "items": [
             {
-              "prompt": "___ you like your new job?",
+              "prompt": "Anna: Hi! I'm Anna. What do you do? — Ben: I ___ (work) for a travel company.",
               "answers": [
-                "Do"
-              ],
-              "options": [
-                "Do",
-                "Does",
-                "Are"
+                "work"
               ]
             },
             {
-              "prompt": "___ Emma work from home?",
+              "prompt": "Anna: Nice! ___ you ___ (work) in the office every day?",
               "answers": [
-                "Does"
-              ],
-              "options": [
-                "Do",
-                "Does",
-                "Is"
+                "Do work",
+                "Do / work",
+                "do work"
               ]
             },
             {
-              "prompt": "___ they meet after class?",
+              "prompt": "Ben: No, I ___. I usually work from home.",
               "answers": [
-                "Do"
-              ],
-              "options": [
-                "Do",
-                "Does",
-                "Are"
+                "don't",
+                "do not"
               ]
             },
             {
-              "prompt": "___ Oliver happy in London?",
+              "prompt": "Ben: …but my manager ___ (come) to the office every day.",
               "answers": [
-                "Is"
-              ],
-              "options": [
-                "Does",
-                "Do",
-                "Is"
-              ]
-            },
-            {
-              "prompt": "Where ___ Sophie live?",
-              "answers": [
-                "does"
-              ],
-              "options": [
-                "do",
-                "does",
-                "is"
+                "comes"
               ]
             }
           ]
@@ -1094,63 +1023,53 @@
         {
           "id": "EN-A2-L01-PC-01",
           "code": "PC-01",
-          "title": "am, is or are?",
-          "instruction": "Izaberi tačan pomoćni glagol.",
+          "title": "What's happening?",
+          "instruction": "Izaberi tačan odgovor.",
           "kind": "closed",
+          "image": "a2:pc01",
           "items": [
             {
-              "prompt": "I ___ studying right now.",
+              "prompt": "He ___ a game right now.",
               "answers": [
-                "am"
+                "is playing"
               ],
               "options": [
-                "am",
-                "is",
-                "are"
+                "play",
+                "plays",
+                "is playing"
               ]
             },
             {
-              "prompt": "Emma ___ talking to Sophie.",
+              "prompt": "She ___ to music at the moment.",
               "answers": [
-                "is"
+                "is listening"
               ],
               "options": [
-                "am",
-                "is",
-                "are"
+                "listen",
+                "listens",
+                "is listening"
               ]
             },
             {
-              "prompt": "We ___ having lunch.",
+              "prompt": "They ___ dinner now.",
               "answers": [
-                "are"
+                "are making"
               ],
               "options": [
-                "am",
-                "is",
-                "are"
+                "make",
+                "makes",
+                "are making"
               ]
             },
             {
-              "prompt": "They ___ waiting for the bus.",
+              "prompt": "I ___ my homework at the moment.",
               "answers": [
-                "are"
+                "am doing"
               ],
               "options": [
-                "is",
-                "are",
-                "am"
-              ]
-            },
-            {
-              "prompt": "Oliver ___ working from home today.",
-              "answers": [
-                "is"
-              ],
-              "options": [
-                "are",
-                "is",
-                "am"
+                "do",
+                "does",
+                "am doing"
               ]
             }
           ]
@@ -1158,38 +1077,40 @@
         {
           "id": "EN-A2-L01-PC-02",
           "code": "PC-02",
-          "title": "-ing spelling",
-          "instruction": "Napiši oblik sa -ing.",
+          "title": "-ing forms",
+          "instruction": "Napiši -ing oblik glagola.",
           "kind": "closed",
+          "image": "a2:pc02",
           "items": [
             {
-              "prompt": "write → ___",
+              "prompt": "study →",
+              "answers": [
+                "studying"
+              ]
+            },
+            {
+              "prompt": "run →",
+              "answers": [
+                "running"
+              ]
+            },
+            {
+              "prompt": "write →",
               "answers": [
                 "writing"
               ]
             },
             {
-              "prompt": "sit → ___",
+              "prompt": "travel →",
               "answers": [
-                "sitting"
+                "travelling",
+                "traveling"
               ]
             },
             {
-              "prompt": "lie → ___",
+              "prompt": "lie →",
               "answers": [
                 "lying"
-              ]
-            },
-            {
-              "prompt": "see → ___",
-              "answers": [
-                "seeing"
-              ]
-            },
-            {
-              "prompt": "open → ___",
-              "answers": [
-                "opening"
               ]
             }
           ]
@@ -1197,43 +1118,30 @@
         {
           "id": "EN-A2-L01-PC-03",
           "code": "PC-03",
-          "title": "Complete the sentence",
-          "instruction": "Dopuni rečenicu Present Continuous oblikom.",
+          "title": "This month",
+          "instruction": "Dopuni rečenice tačnim oblikom glagola u zagradi.",
           "kind": "closed",
+          "image": "a2:pc03",
           "items": [
             {
-              "prompt": "Look! It ___ (rain).",
+              "prompt": "I ___ (live) with a friend this month.",
               "answers": [
-                "is raining",
-                "'s raining"
+                "am living",
+                "'m living"
               ]
             },
             {
-              "prompt": "Sophie ___ (stay) with a friend this week.",
+              "prompt": "My parents ___ (visit) us next week.",
               "answers": [
-                "is staying",
-                "'s staying"
+                "are visiting",
+                "'re visiting"
               ]
             },
             {
-              "prompt": "I ___ (read) an interesting book.",
+              "prompt": "She ___ (work) on a new project at the moment.",
               "answers": [
-                "am reading",
-                "'m reading"
-              ]
-            },
-            {
-              "prompt": "They ___ (run) in the park.",
-              "answers": [
-                "are running",
-                "'re running"
-              ]
-            },
-            {
-              "prompt": "We ___ (prepare) for the exam.",
-              "answers": [
-                "are preparing",
-                "'re preparing"
+                "is working",
+                "'s working"
               ]
             }
           ]
@@ -1241,110 +1149,68 @@
         {
           "id": "EN-A2-L01-PC-04",
           "code": "PC-04",
-          "title": "Make it negative",
-          "instruction": "Napiši odričnu rečenicu.",
-          "kind": "closed",
+          "title": "A busy afternoon",
+          "instruction": "Pogledaj sliku i dopuni rečenice.",
+          "kind": "mixed",
+          "image": "a2:pc04",
           "items": [
             {
-              "prompt": "Emma is studying.",
-              "answers": [
-                "Emma isn't studying.",
-                "Emma is not studying.",
-                "Emma's not studying."
-              ]
+              "prompt": "The girl ___ on her laptop.",
+              "open": true,
+              "guide": "Present Continuous: is + glagol-ing (npr. is working / is typing)"
             },
             {
-              "prompt": "I am working today.",
-              "answers": [
-                "I'm not working today.",
-                "I am not working today."
-              ]
+              "prompt": "The boy ___ in a book.",
+              "open": true,
+              "guide": "Present Continuous: is + glagol-ing (npr. is writing / is reading)"
             },
             {
-              "prompt": "They are watching TV.",
-              "answers": [
-                "They aren't watching TV.",
-                "They are not watching TV.",
-                "They're not watching TV."
-              ]
+              "prompt": "The boy with headphones ___.",
+              "open": true,
+              "guide": "Present Continuous: is + glagol-ing (npr. is walking / is leaving)"
             },
             {
-              "prompt": "Oliver is cooking dinner.",
-              "answers": [
-                "Oliver isn't cooking dinner.",
-                "Oliver is not cooking dinner."
-              ]
-            },
-            {
-              "prompt": "We are having a break.",
-              "answers": [
-                "We aren't having a break.",
-                "We are not having a break.",
-                "We're not having a break."
-              ]
+              "prompt": "They ___ at a café.",
+              "open": true,
+              "guide": "Present Continuous: are + glagol-ing (npr. are studying / are sitting)"
             }
           ]
         },
         {
           "id": "EN-A2-L01-PC-05",
           "code": "PC-05",
-          "title": "Questions and short answers",
-          "instruction": "Izaberi tačan odgovor.",
+          "title": "Can you talk now?",
+          "instruction": "Dopuni dijalog tačnim oblikom glagola u zagradi.",
           "kind": "closed",
+          "image": "a2:pc05",
           "items": [
             {
-              "prompt": "Is Emma studying? – Yes, she ___.",
+              "prompt": "Emma: Hi, it's Emma. ___ you ___ (have) time to talk now?",
               "answers": [
-                "is"
-              ],
-              "options": [
-                "is",
-                "does",
-                "studies"
+                "Do have",
+                "Do / have",
+                "do have"
               ]
             },
             {
-              "prompt": "Are you working? – No, I'm ___.",
+              "prompt": "Oliver: Hi! Yes, I ___ (call) from the library.",
               "answers": [
-                "not"
-              ],
-              "options": [
-                "not",
-                "don't",
-                "isn't"
+                "am calling",
+                "'m calling"
               ]
             },
             {
-              "prompt": "___ they waiting for us?",
+              "prompt": "Emma: Great! What ___ you ___ (do)?",
               "answers": [
-                "Are"
-              ],
-              "options": [
-                "Do",
-                "Are",
-                "Is"
+                "are doing",
+                "are / doing"
               ]
             },
             {
-              "prompt": "What ___ Oliver doing?",
+              "prompt": "Oliver: I ___ (work) on a project, but I can talk for a few minutes.",
               "answers": [
-                "is"
-              ],
-              "options": [
-                "does",
-                "is",
-                "are"
-              ]
-            },
-            {
-              "prompt": "Are we meeting at six? – Yes, we ___.",
-              "answers": [
-                "are"
-              ],
-              "options": [
-                "do",
-                "are",
-                "meet"
+                "am working",
+                "'m working"
               ]
             }
           ]
