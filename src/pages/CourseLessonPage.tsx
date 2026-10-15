@@ -165,7 +165,7 @@ export default function CourseLessonPage() {
         </header>
 
         {/* 1) Intro texts — one at a time, with illustrations */}
-        {content.intro.length > 0 && (() => {
+        {content.intro.length > 0 && !open && (() => {
           const t = content.intro[Math.min(textIdx, content.intro.length - 1)];
           const img = imgs?.texts[t.id];
           const last = textIdx >= content.intro.length - 1;
