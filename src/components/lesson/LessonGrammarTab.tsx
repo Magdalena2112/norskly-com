@@ -37,6 +37,16 @@ export const LESSON_GRAMMAR_TOPICS: Record<string, Topic[]> = {
     { label: "Članovi a / an", sectionIdx: [2], exercises: ["AR-01","AR-02","AR-03","AR-04","AR-05","AR-06","AR-07","AR-08","AR-09","AR-10"], aiTopic: "Indefinite articles a / an",
       related: [{ title: "Množina imenica", query: "Plural nouns in English" }, { title: "Određeni član the", query: "Definite article the" }] },
   ],
+  "EN-A2-L01": [
+    { label: "Present Simple", sectionIdx: [0, 1], exercises: ["PS-01","PS-02","PS-03","PS-04","PS-05","PS-06","PS-07","PS-08","PS-09","PS-10"], aiTopic: "Present Simple – habits, routines, third person -s, do/does, adverbs of frequency",
+      related: [{ title: "Prilozi učestalosti", query: "Adverbs of frequency position" }, { title: "Do / does pitanja", query: "Present Simple questions with do and does" }] },
+    { label: "Present Continuous", sectionIdx: [2, 3], exercises: ["PC-01","PC-02","PC-03","PC-04","PC-05","PC-06","PC-07","PC-08","PC-09","PC-10"], aiTopic: "Present Continuous – actions now, temporary situations, -ing spelling",
+      related: [{ title: "Pravopis -ing oblika", query: "Spelling rules for -ing forms" }, { title: "Present Continuous za budućnost", query: "Present Continuous for future arrangements" }] },
+    { label: "Simple vs. Continuous", sectionIdx: [4], exercises: ["SC-01","SC-02","SC-03","SC-04","SC-05","SC-06","SC-07","SC-08","SC-09","SC-10"], aiTopic: "Present Simple vs Present Continuous – choosing the tense by meaning and context",
+      related: [{ title: "Vremenski izrazi", query: "Time expressions Present Simple vs Present Continuous" }] },
+    { label: "Stative verbs", sectionIdx: [5, 6], exercises: ["ST-01","ST-02","ST-03","ST-04","ST-05","ST-06","ST-07","ST-08","ST-09","ST-10"], aiTopic: "Stative verbs (know, like, want, need, understand) and think/have state vs action",
+      related: [{ title: "Think i have – dva značenja", query: "Think and have as stative and action verbs" }] },
+  ],
 };
 
 export default function LessonGrammarTab({ lessonId, onPractice, onExplain, mode = "theory", initialTopic = 0, onTopicChange, renderMore }: {

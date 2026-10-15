@@ -1,184 +1,2621 @@
 {
- "code": "EN-A2-L01",
- "intro": [
-  {
-   "id": "EN-A2-L01-T01",
-   "title": "Text 1 · A New Routine",
-   "type": "monologue",
-   "scene": "Emma writes about her new life in London.",
-   "lines": [
+  "code": "EN-A2-L01",
+  "intro": [
     {
-     "speaker": "Emma",
-     "text": "Hi! I'm Emma. I've lived in London for a few months now, and my life is quite different."
+      "id": "EN-A2-L01-T01",
+      "title": "Text 1 · A New Routine",
+      "type": "monologue",
+      "scene": "Emma writes about her new life in London.",
+      "lines": [
+        {
+          "speaker": "Emma",
+          "text": "Hi! I'm Emma. I've lived in London for a few months now, and my life is quite different."
+        },
+        {
+          "speaker": "Emma",
+          "text": "I usually get up at seven and have breakfast before I leave home. I take the bus to work three days a week. On other days, I study English and work on my own projects."
+        },
+        {
+          "speaker": "Emma",
+          "text": "At the moment, I'm preparing for a new English course. I'm also looking for a new flat because my current room is quite small."
+        },
+        {
+          "speaker": "Emma",
+          "text": "My friends Oliver and Sophie are helping me. Oliver knows a lot about London, and Sophie is always finding interesting places to visit."
+        },
+        {
+          "speaker": "Emma",
+          "text": "Life in a big city isn't always easy, but I'm learning something new every day. I'm excited about this new chapter!"
+        }
+      ]
     },
     {
-     "speaker": "Emma",
-     "text": "I usually get up at seven and have breakfast before I leave home. I take the bus to work three days a week. On other days, I study English and work on my own projects."
+      "id": "EN-A2-L01-T02",
+      "title": "Text 2 · Catching Up",
+      "type": "dialogue",
+      "scene": "Emma, Oliver and Sophie meet in a café.",
+      "lines": [
+        {
+          "speaker": "Oliver",
+          "text": "Emma! It's good to see you again. How's everything going?"
+        },
+        {
+          "speaker": "Emma",
+          "text": "Pretty well, thanks! I'm really busy these days."
+        },
+        {
+          "speaker": "Sophie",
+          "text": "Really? What are you doing?"
+        },
+        {
+          "speaker": "Emma",
+          "text": "I'm working part-time, and I'm studying English. I'm also looking for a bigger flat."
+        },
+        {
+          "speaker": "Oliver",
+          "text": "That's exciting! Do you still live near the park?"
+        },
+        {
+          "speaker": "Emma",
+          "text": "Yes, I do, but I want to move closer to work."
+        },
+        {
+          "speaker": "Sophie",
+          "text": "I understand. I usually cycle to work, but this week I'm taking the bus because my bike isn't working."
+        },
+        {
+          "speaker": "Oliver",
+          "text": "I'm taking a photography course at the moment. It's great fun!"
+        },
+        {
+          "speaker": "Emma",
+          "text": "That sounds interesting! Are you enjoying it?"
+        },
+        {
+          "speaker": "Oliver",
+          "text": "Yes, I am. I meet interesting people every week."
+        },
+        {
+          "speaker": "Sophie",
+          "text": "We all have something new to talk about!"
+        },
+        {
+          "speaker": "Emma",
+          "text": "Exactly! And our English course starts again soon."
+        }
+      ]
     },
     {
-     "speaker": "Emma",
-     "text": "At the moment, I'm preparing for a new English course. I'm also looking for a new flat because my current room is quite small."
-    },
-    {
-     "speaker": "Emma",
-     "text": "My friends Oliver and Sophie are helping me. Oliver knows a lot about London, and Sophie is always finding interesting places to visit."
-    },
-    {
-     "speaker": "Emma",
-     "text": "Life in a big city isn't always easy, but I'm learning something new every day. I'm excited about this new chapter!"
+      "id": "EN-A2-L01-T03",
+      "title": "Text 3 · Back to Class",
+      "type": "email",
+      "scene": "Subject: Welcome to Your A2 English Course! · From: Ms Taylor · To: A2 English Group",
+      "lines": [
+        {
+          "speaker": "Ms Taylor",
+          "text": "Hello everyone!"
+        },
+        {
+          "speaker": "Ms Taylor",
+          "text": "I hope you're all doing well."
+        },
+        {
+          "speaker": "Ms Taylor",
+          "text": "Our new English course starts on Monday at 6 p.m. We meet every Monday and Wednesday in Classroom 4."
+        },
+        {
+          "speaker": "Ms Taylor",
+          "text": "This month, we're focusing on everyday life, personal experiences and communication."
+        },
+        {
+          "speaker": "Ms Taylor",
+          "text": "Please bring your notebook and prepare a short introduction about your life now. Think about these questions:"
+        },
+        {
+          "speaker": "Ms Taylor",
+          "text": "What do you usually do during the week?"
+        },
+        {
+          "speaker": "Ms Taylor",
+          "text": "What are you doing differently these days?"
+        },
+        {
+          "speaker": "Ms Taylor",
+          "text": "What are you looking forward to?"
+        },
+        {
+          "speaker": "Ms Taylor",
+          "text": "I'm looking forward to seeing you all again!"
+        },
+        {
+          "speaker": "Ms Taylor",
+          "text": "Best wishes, Ms Taylor"
+        }
+      ]
     }
-   ]
-  },
-  {
-   "id": "EN-A2-L01-T02",
-   "title": "Text 2 · Catching Up",
-   "type": "dialogue",
-   "scene": "Emma, Oliver and Sophie meet in a café.",
-   "lines": [
-    {
-     "speaker": "Oliver",
-     "text": "Emma! It's good to see you again. How's everything going?"
+  ],
+  "modules": {
+    "intro": {
+      "exercises": []
     },
-    {
-     "speaker": "Emma",
-     "text": "Pretty well, thanks! I'm really busy these days."
+    "grammar": {
+      "sections": [
+        {
+          "title": "1.1 Present Simple – građenje i nastavci",
+          "explanation": "Present Simple koristimo za navike, rutine, opšte činjenice, relativno stalna stanja i događaje prema utvrđenom rasporedu.\nObrazac: SUBJEKAT + GLAGOL (he / she / it + -s). Odrični: don't / doesn't + glagol. Upitni: Do / Does + subjekat + glagol?",
+          "table": [
+            [
+              "I / You / We / They",
+              "work",
+              "I don't work. · Do you work?"
+            ],
+            [
+              "He / She / It",
+              "works",
+              "She doesn't work. · Does she work?"
+            ]
+          ],
+          "rules": [
+            "Najčešće dodajemo -s: work → works",
+            "Posle -s, -sh, -ch, -x, -z i kod go/do dodajemo -es: watch → watches, go → goes",
+            "Suglasnik + y → -ies: study → studies",
+            "Samoglasnik + y → -s: play → plays",
+            "Poseban oblik: have → has",
+            "Posle doesn't / does glagol nema -s: She doesn't work. Does she work?"
+          ],
+          "compare": "Glagol to be ne koristi do/does: She is happy. → She isn't happy. → Is she happy? Ne kažemo „Does she be happy?”.",
+          "examples": [
+            [
+              "Emma works in an office.",
+              "Emma radi u kancelariji."
+            ],
+            [
+              "Oliver studies English.",
+              "Oliver uči engleski."
+            ],
+            [
+              "The course starts at six.",
+              "Kurs počinje u šest."
+            ],
+            [
+              "Does Sophie live in London?",
+              "Da li Sophie živi u Londonu?"
+            ],
+            [
+              "We don't have classes on Fridays.",
+              "Petkom nemamo časove."
+            ]
+          ],
+          "mistakes": [
+            [
+              "She work in a café.",
+              "She works in a café.",
+              "Treće lice jednine dobija -s."
+            ],
+            [
+              "He studys a lot.",
+              "He studies a lot.",
+              "Suglasnik + y → -ies."
+            ],
+            [
+              "She doesn't works.",
+              "She doesn't work.",
+              "Posle doesn't glagol je u osnovnom obliku."
+            ],
+            [
+              "Does she be happy?",
+              "Is she happy?",
+              "To be ne koristi does."
+            ]
+          ],
+          "remember": "he / she / it → glagol + -s; pitanja i negacija → do / does + osnovni glagol."
+        },
+        {
+          "title": "1.2 Prilozi učestalosti i vremenski izrazi",
+          "explanation": "Uz Present Simple često stoje reči koje pokazuju koliko često se nešto dešava. Prilozi učestalosti obično stoje ISPRED glavnog glagola, ali POSLE glagola to be.",
+          "table": [
+            [
+              "Uvek",
+              "always",
+              "I always have breakfast."
+            ],
+            [
+              "Obično",
+              "usually, normally, generally",
+              "Emma usually takes the bus."
+            ],
+            [
+              "Često",
+              "often, frequently",
+              "We often meet after class."
+            ],
+            [
+              "Ponekad",
+              "sometimes, occasionally",
+              "Sophie sometimes works from home."
+            ],
+            [
+              "Retko",
+              "rarely, seldom, hardly ever",
+              "Oliver rarely gets up late."
+            ],
+            [
+              "Nikada",
+              "never",
+              "I never skip breakfast."
+            ],
+            [
+              "Periodično",
+              "every day, once a week, twice a month",
+              "We meet twice a week."
+            ],
+            [
+              "Određenim danima",
+              "on Mondays, at weekends",
+              "She works on Mondays."
+            ]
+          ],
+          "examples": [
+            [
+              "I usually go to work by bus.",
+              "Obično idem na posao autobusom."
+            ],
+            [
+              "She is always friendly.",
+              "Ona je uvek ljubazna."
+            ],
+            [
+              "We meet twice a week.",
+              "Viđamo se dva puta nedeljno."
+            ]
+          ],
+          "mistakes": [
+            [
+              "I go usually to work by bus.",
+              "I usually go to work by bus.",
+              "Prilog stoji ispred glavnog glagola."
+            ],
+            [
+              "She always is friendly.",
+              "She is always friendly.",
+              "Uz to be prilog stoji posle glagola."
+            ]
+          ],
+          "remember": "Prilog ispred glavnog glagola, a posle am / is / are."
+        },
+        {
+          "title": "2.1 Present Continuous – građenje i -ing",
+          "explanation": "Present Continuous koristimo za radnju koja traje u trenutku govora, privremenu situaciju ili promenu koja se odvija.\nObrazac: SUBJEKAT + AM / IS / ARE + GLAGOL-ING.",
+          "table": [
+            [
+              "Potvrdni (+)",
+              "Subject + am/is/are + -ing",
+              "Emma is studying."
+            ],
+            [
+              "Odrični (−)",
+              "Subject + am/is/are + not + -ing",
+              "Emma isn't studying."
+            ],
+            [
+              "Upitni (?)",
+              "Am/Is/Are + subject + -ing?",
+              "Is Emma studying?"
+            ],
+            [
+              "Kratak odgovor",
+              "Yes/No + subject + am/is/are",
+              "Yes, she is. / No, she isn't."
+            ]
+          ],
+          "rules": [
+            "Većina glagola: + ing → work → working",
+            "Završno -e uglavnom otpada → write → writing",
+            "Kratak naglašen samoglasnik + suglasnik: udvajanje → sit → sitting, run → running",
+            "-ie prelazi u -y → lie → lying",
+            "-ee se zadržava → see → seeing",
+            "Ne udvajamo svaki suglasnik: open → opening, visit → visiting"
+          ],
+          "examples": [
+            [
+              "Emma is talking to Sophie right now.",
+              "Emma upravo sada razgovara sa Sophie."
+            ],
+            [
+              "Are you working today?",
+              "Da li radiš danas?"
+            ],
+            [
+              "They aren't watching TV.",
+              "Oni ne gledaju TV."
+            ]
+          ],
+          "mistakes": [
+            [
+              "She studying now.",
+              "She is studying now.",
+              "Potreban je am / is / are."
+            ],
+            [
+              "I am writeing.",
+              "I am writing.",
+              "Završno -e otpada."
+            ],
+            [
+              "He is siting.",
+              "He is sitting.",
+              "Kod sit udvajamo t."
+            ]
+          ],
+          "remember": "am / is / are + glagol-ing — bez pomoćnog glagola nema Continuous-a."
+        },
+        {
+          "title": "2.2 Kada koristimo Present Continuous?",
+          "explanation": "Četiri glavne upotrebe:\n1. Radnja se odvija upravo sada.\n2. Privremena situacija.\n3. Promena ili razvoj.\n4. Dogovorena bliska budućnost (kratko podsećanje; detaljnije u kasnijoj lekciji).\nVažno: vremenski izrazi su tragovi, a ne automatska pravila.",
+          "table": [
+            [
+              "now",
+              "sada",
+              "I'm studying now."
+            ],
+            [
+              "right now",
+              "upravo sada",
+              "She's working right now."
+            ],
+            [
+              "at the moment",
+              "trenutno",
+              "We're having lunch at the moment."
+            ],
+            [
+              "currently",
+              "trenutno",
+              "Oliver is currently looking for a job."
+            ],
+            [
+              "today",
+              "danas",
+              "I'm working from home today."
+            ],
+            [
+              "this week / month / year",
+              "ove nedelje / meseca / godine",
+              "Emma is taking a new course this month."
+            ],
+            [
+              "these days",
+              "ovih dana",
+              "I'm learning a lot these days."
+            ],
+            [
+              "for the time being",
+              "zasad",
+              "She's staying with a friend for the time being."
+            ],
+            [
+              "at present",
+              "trenutno",
+              "We're preparing for the exam at present."
+            ]
+          ],
+          "examples": [
+            [
+              "I'm staying with my aunt this week.",
+              "Ove nedelje boravim kod tetke."
+            ],
+            [
+              "My English is getting better.",
+              "Moj engleski postaje sve bolji."
+            ],
+            [
+              "We're meeting Ms Taylor tomorrow.",
+              "Sutra se nalazimo sa Ms Taylor (dogovoreno)."
+            ]
+          ],
+          "remember": "Sada, privremeno, promena, dogovor → Present Continuous."
+        },
+        {
+          "title": "3.1 Present Simple vs. Present Continuous",
+          "explanation": "Ovo je centralna gramatička oblast lekcije: vreme biramo prema značenju i kontekstu.\nPostavi sebi tri pitanja:\n1. Da li je to navika ili redovna činjenica? → Present Simple.\n2. Da li se radnja odvija sada ili je situacija privremena? → Present Continuous.\n3. Da li glagol opisuje stanje, osećanje, posedovanje ili znanje? → Proveri stative verbs.",
+          "table": [
+            [
+              "I work in an office.",
+              "I'm working from home this week.",
+              "Stalno mesto rada / privremena promena"
+            ],
+            [
+              "Emma takes the bus to work.",
+              "Emma is walking to work today.",
+              "Navika / današnja aktivnost"
+            ],
+            [
+              "Oliver studies English.",
+              "Oliver is studying for a test right now.",
+              "Opšta aktivnost / radnja u toku"
+            ],
+            [
+              "Sophie lives in London.",
+              "Sophie is staying with a friend this month.",
+              "Stalno prebivalište / privremeni boravak"
+            ],
+            [
+              "I usually get up at seven.",
+              "I'm getting up earlier this week.",
+              "Navika / privremena promena"
+            ],
+            [
+              "We have English classes twice a week.",
+              "We're having an extra class today.",
+              "Raspored / posebna aktivnost"
+            ],
+            [
+              "She works in a café.",
+              "She's working on a new project.",
+              "Posao / trenutni projekat"
+            ],
+            [
+              "The course starts at six.",
+              "We're meeting the teacher at six.",
+              "Utvrđeni raspored / lični dogovor"
+            ]
+          ],
+          "compare": "U srpskom prezent pokriva oba značenja, a razliku pravimo prilozima i kontekstom („svaki dan učim” / „trenutno učim”). Engleski razliku pokazuje oblikom glagola.",
+          "examples": [
+            [
+              "I study English every day.",
+              "Svaki dan učim engleski."
+            ],
+            [
+              "I'm studying English at the moment.",
+              "Trenutno učim engleski."
+            ],
+            [
+              "I live in London.",
+              "Živim u Londonu."
+            ],
+            [
+              "I'm staying with a friend these days.",
+              "Ovih dana živim kod prijateljice."
+            ]
+          ],
+          "mistakes": [
+            [
+              "I am living in London since 2010.",
+              "I live in London.",
+              "Stalno prebivalište → Present Simple."
+            ],
+            [
+              "Look! It rains.",
+              "Look! It's raining.",
+              "Radnja se odvija sada."
+            ],
+            [
+              "She is going to the gym every day.",
+              "She goes to the gym every day.",
+              "Navika → Present Simple."
+            ]
+          ],
+          "remember": "Navika i činjenica → Simple; sada i privremeno → Continuous."
+        },
+        {
+          "title": "4.1 Stative verbs – šta su i glavne kategorije",
+          "explanation": "Stative verbs označavaju stanje, mišljenje, osećanje, posedovanje ili opažanje, a ne aktivnost. Zato ih u tim značenjima koristimo u Present Simple, čak i kada govorimo o sadašnjem trenutku.\nNa A2 nivou najvažniji su: like, know, want, need, understand, have i think.",
+          "table": [
+            [
+              "Mišljenje i znanje",
+              "know, believe, understand, remember, think",
+              "I understand the lesson."
+            ],
+            [
+              "Želje i osećanja",
+              "want, need, like, love, hate, prefer",
+              "Emma wants a new flat."
+            ],
+            [
+              "Posedovanje",
+              "have, own, belong",
+              "Oliver has a bike."
+            ],
+            [
+              "Čulni utisci",
+              "see, hear, smell, taste",
+              "This soup tastes good."
+            ],
+            [
+              "Izgled i stanje",
+              "seem, appear, be",
+              "Sophie seems happy."
+            ]
+          ],
+          "examples": [
+            [
+              "I know the answer.",
+              "Znam odgovor."
+            ],
+            [
+              "She wants a new flat.",
+              "Ona želi novi stan."
+            ],
+            [
+              "We like this course.",
+              "Sviđa nam se ovaj kurs."
+            ],
+            [
+              "I need some help.",
+              "Potrebna mi je pomoć."
+            ],
+            [
+              "Do you remember his name?",
+              "Da li se sećaš njegovog imena?"
+            ]
+          ],
+          "compare": "U srpskom kažemo „Sada razumem”, ali to ne znači Continuous u engleskom: Now I understand. Reči now i at the moment ne zahtevaju automatski Present Continuous: I want to go home now. I know the answer now.",
+          "mistakes": [
+            [
+              "I'm knowing the answer.",
+              "I know the answer.",
+              "Know izražava znanje."
+            ],
+            [
+              "She isn't understanding.",
+              "She doesn't understand.",
+              "Understand je glagol stanja."
+            ],
+            [
+              "I'm liking this café.",
+              "I like this café.",
+              "Like izražava ukus."
+            ],
+            [
+              "I'm needing help now.",
+              "I need help now.",
+              "Now ne menja pravilo za need."
+            ]
+          ],
+          "remember": "Znanje, želje, osećanja, posedovanje → Present Simple, i kad je „sada”."
+        },
+        {
+          "title": "4.2 Glagoli koji mogu biti stative i action",
+          "explanation": "Neki glagoli stoje u oba vremena, ali tada imaju različito značenje. Za ovu lekciju najvažniji su think i have; ostali su korisna napomena.\nNapomena: u neformalnom engleskom čuje se i „I'm loving it”, ali za A2 važi osnovno pravilo – like / love / prefer u Present Simple.",
+          "table": [
+            [
+              "think",
+              "I think this is a good idea. – Mislim da je ovo dobra ideja.",
+              "I'm thinking about moving. – Razmišljam o selidbi."
+            ],
+            [
+              "have",
+              "I have a car. – Imam automobil.",
+              "I'm having lunch. – Ručam."
+            ],
+            [
+              "see",
+              "I see the bus. – Vidim autobus.",
+              "I'm seeing my doctor tomorrow. – Sutra imam pregled."
+            ],
+            [
+              "taste",
+              "The soup tastes good. – Supa ima dobar ukus.",
+              "I'm tasting the soup. – Probam supu."
+            ],
+            [
+              "be",
+              "Oliver is friendly. – Oliver je ljubazan.",
+              "Oliver is being very quiet today. – Danas se ponaša neobično tiho."
+            ]
+          ],
+          "remember": "think = mišljenje (Simple) / razmišljanje (Continuous); have = posedovanje (Simple) / aktivnost (Continuous)."
+        }
+      ],
+      "exercises": [
+        {
+          "id": "EN-A2-L01-PS-01",
+          "code": "PS-01",
+          "title": "Third person -s",
+          "instruction": "Izaberi tačan oblik glagola.",
+          "kind": "closed",
+          "items": [
+            {
+              "prompt": "Emma ___ in an office.",
+              "answers": [
+                "works"
+              ],
+              "options": [
+                "work",
+                "works",
+                "working"
+              ]
+            },
+            {
+              "prompt": "They ___ near the station.",
+              "answers": [
+                "live"
+              ],
+              "options": [
+                "live",
+                "lives",
+                "living"
+              ]
+            },
+            {
+              "prompt": "My brother ___ football on Sundays.",
+              "answers": [
+                "plays"
+              ],
+              "options": [
+                "plaies",
+                "plays",
+                "play"
+              ]
+            },
+            {
+              "prompt": "Oliver ___ English twice a week.",
+              "answers": [
+                "studies"
+              ],
+              "options": [
+                "studys",
+                "studies",
+                "study"
+              ]
+            },
+            {
+              "prompt": "The shop ___ at nine.",
+              "answers": [
+                "opens"
+              ],
+              "options": [
+                "open",
+                "opens",
+                "opening"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-PS-02",
+          "code": "PS-02",
+          "title": "Spelling: -s, -es, -ies",
+          "instruction": "Napiši glagol u trećem licu jednine.",
+          "kind": "closed",
+          "items": [
+            {
+              "prompt": "watch → she ___",
+              "answers": [
+                "watches"
+              ]
+            },
+            {
+              "prompt": "go → he ___",
+              "answers": [
+                "goes"
+              ]
+            },
+            {
+              "prompt": "study → Emma ___",
+              "answers": [
+                "studies"
+              ]
+            },
+            {
+              "prompt": "play → Oliver ___",
+              "answers": [
+                "plays"
+              ]
+            },
+            {
+              "prompt": "have → Sophie ___",
+              "answers": [
+                "has"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-PS-03",
+          "code": "PS-03",
+          "title": "Don't or doesn't?",
+          "instruction": "Dopuni rečenicu sa don't ili doesn't.",
+          "kind": "closed",
+          "items": [
+            {
+              "prompt": "I ___ drink coffee in the evening.",
+              "answers": [
+                "don't"
+              ],
+              "options": [
+                "don't",
+                "doesn't"
+              ]
+            },
+            {
+              "prompt": "Sophie ___ work on Fridays.",
+              "answers": [
+                "doesn't"
+              ],
+              "options": [
+                "don't",
+                "doesn't"
+              ]
+            },
+            {
+              "prompt": "We ___ have classes at weekends.",
+              "answers": [
+                "don't"
+              ],
+              "options": [
+                "don't",
+                "doesn't"
+              ]
+            },
+            {
+              "prompt": "The bus ___ stop here.",
+              "answers": [
+                "doesn't"
+              ],
+              "options": [
+                "don't",
+                "doesn't"
+              ]
+            },
+            {
+              "prompt": "My parents ___ live in London.",
+              "answers": [
+                "don't"
+              ],
+              "options": [
+                "don't",
+                "doesn't"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-PS-04",
+          "code": "PS-04",
+          "title": "Make it negative",
+          "instruction": "Napiši odričnu rečenicu.",
+          "kind": "closed",
+          "items": [
+            {
+              "prompt": "Emma takes the bus.",
+              "answers": [
+                "Emma doesn't take the bus.",
+                "Emma does not take the bus."
+              ]
+            },
+            {
+              "prompt": "I get up early.",
+              "answers": [
+                "I don't get up early.",
+                "I do not get up early."
+              ]
+            },
+            {
+              "prompt": "Oliver lives with his parents.",
+              "answers": [
+                "Oliver doesn't live with his parents.",
+                "Oliver does not live with his parents."
+              ]
+            },
+            {
+              "prompt": "They watch TV in the morning.",
+              "answers": [
+                "They don't watch TV in the morning.",
+                "They do not watch TV in the morning."
+              ]
+            },
+            {
+              "prompt": "She is tired.",
+              "answers": [
+                "She isn't tired.",
+                "She is not tired.",
+                "She's not tired."
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-PS-05",
+          "code": "PS-05",
+          "title": "Questions with do/does",
+          "instruction": "Izaberi početak pitanja.",
+          "kind": "closed",
+          "items": [
+            {
+              "prompt": "___ you like your new job?",
+              "answers": [
+                "Do"
+              ],
+              "options": [
+                "Do",
+                "Does",
+                "Are"
+              ]
+            },
+            {
+              "prompt": "___ Emma work from home?",
+              "answers": [
+                "Does"
+              ],
+              "options": [
+                "Do",
+                "Does",
+                "Is"
+              ]
+            },
+            {
+              "prompt": "___ they meet after class?",
+              "answers": [
+                "Do"
+              ],
+              "options": [
+                "Do",
+                "Does",
+                "Are"
+              ]
+            },
+            {
+              "prompt": "___ Oliver happy in London?",
+              "answers": [
+                "Is"
+              ],
+              "options": [
+                "Does",
+                "Do",
+                "Is"
+              ]
+            },
+            {
+              "prompt": "Where ___ Sophie live?",
+              "answers": [
+                "does"
+              ],
+              "options": [
+                "do",
+                "does",
+                "is"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-PS-06",
+          "code": "PS-06",
+          "title": "Adverb position",
+          "instruction": "Napiši rečenicu sa prilogom na pravom mestu.",
+          "kind": "closed",
+          "items": [
+            {
+              "prompt": "I / always / have breakfast",
+              "answers": [
+                "I always have breakfast."
+              ]
+            },
+            {
+              "prompt": "Emma / usually / takes the bus",
+              "answers": [
+                "Emma usually takes the bus."
+              ]
+            },
+            {
+              "prompt": "She / is / always / friendly",
+              "answers": [
+                "She is always friendly."
+              ]
+            },
+            {
+              "prompt": "We / often / meet after class",
+              "answers": [
+                "We often meet after class."
+              ]
+            },
+            {
+              "prompt": "Oliver / is / never / late",
+              "answers": [
+                "Oliver is never late."
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-PS-07",
+          "code": "PS-07",
+          "title": "How often?",
+          "instruction": "Izaberi izraz koji odgovara značenju.",
+          "kind": "closed",
+          "items": [
+            {
+              "prompt": "Svakog dana: I check my email ___.",
+              "answers": [
+                "every day"
+              ],
+              "options": [
+                "every day",
+                "once a year",
+                "never"
+              ]
+            },
+            {
+              "prompt": "Dva puta nedeljno: We meet ___.",
+              "answers": [
+                "twice a week"
+              ],
+              "options": [
+                "twice a month",
+                "twice a week",
+                "once a week"
+              ]
+            },
+            {
+              "prompt": "Skoro nikad: He ___ eats meat.",
+              "answers": [
+                "hardly ever"
+              ],
+              "options": [
+                "usually",
+                "hardly ever",
+                "often"
+              ]
+            },
+            {
+              "prompt": "Ponedeljkom: She works ___.",
+              "answers": [
+                "on Mondays"
+              ],
+              "options": [
+                "on Mondays",
+                "this Monday",
+                "in Monday"
+              ]
+            },
+            {
+              "prompt": "100%: I ___ brush my teeth before bed.",
+              "answers": [
+                "always"
+              ],
+              "options": [
+                "sometimes",
+                "always",
+                "rarely"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-PS-08",
+          "code": "PS-08",
+          "title": "Find the mistake",
+          "instruction": "Ispravi rečenicu.",
+          "kind": "closed",
+          "items": [
+            {
+              "prompt": "She work in a café.",
+              "answers": [
+                "She works in a café."
+              ]
+            },
+            {
+              "prompt": "He studys every evening.",
+              "answers": [
+                "He studies every evening."
+              ]
+            },
+            {
+              "prompt": "Does she likes tea?",
+              "answers": [
+                "Does she like tea?"
+              ]
+            },
+            {
+              "prompt": "I go usually to bed at eleven.",
+              "answers": [
+                "I usually go to bed at eleven."
+              ]
+            },
+            {
+              "prompt": "Does Emma be at home?",
+              "answers": [
+                "Is Emma at home?"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-PS-09",
+          "code": "PS-09",
+          "title": "Emma's routine",
+          "instruction": "Dopuni tekst glagolom u zagradi.",
+          "kind": "closed",
+          "items": [
+            {
+              "prompt": "Emma ___ (get) up at seven.",
+              "answers": [
+                "gets"
+              ]
+            },
+            {
+              "prompt": "She ___ (have) breakfast with her flatmate.",
+              "answers": [
+                "has"
+              ]
+            },
+            {
+              "prompt": "She ___ (not / drive) to work.",
+              "answers": [
+                "doesn't drive",
+                "does not drive"
+              ]
+            },
+            {
+              "prompt": "Her course ___ (start) at six.",
+              "answers": [
+                "starts"
+              ]
+            },
+            {
+              "prompt": "She ___ (finish) work at five.",
+              "answers": [
+                "finishes"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-PS-10",
+          "code": "PS-10",
+          "title": "Your routine",
+          "instruction": "Napiši pet rečenica o svojoj rutini u Present Simple.",
+          "kind": "open",
+          "items": [
+            {
+              "prompt": "Kada ustaješ?",
+              "open": true
+            },
+            {
+              "prompt": "Šta obično radiš ujutru?",
+              "open": true
+            },
+            {
+              "prompt": "Kako ideš na posao ili školu?",
+              "open": true
+            },
+            {
+              "prompt": "Šta nikada ne radiš?",
+              "open": true
+            },
+            {
+              "prompt": "Šta radiš vikendom?",
+              "open": true
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-PC-01",
+          "code": "PC-01",
+          "title": "am, is or are?",
+          "instruction": "Izaberi tačan pomoćni glagol.",
+          "kind": "closed",
+          "items": [
+            {
+              "prompt": "I ___ studying right now.",
+              "answers": [
+                "am"
+              ],
+              "options": [
+                "am",
+                "is",
+                "are"
+              ]
+            },
+            {
+              "prompt": "Emma ___ talking to Sophie.",
+              "answers": [
+                "is"
+              ],
+              "options": [
+                "am",
+                "is",
+                "are"
+              ]
+            },
+            {
+              "prompt": "We ___ having lunch.",
+              "answers": [
+                "are"
+              ],
+              "options": [
+                "am",
+                "is",
+                "are"
+              ]
+            },
+            {
+              "prompt": "They ___ waiting for the bus.",
+              "answers": [
+                "are"
+              ],
+              "options": [
+                "is",
+                "are",
+                "am"
+              ]
+            },
+            {
+              "prompt": "Oliver ___ working from home today.",
+              "answers": [
+                "is"
+              ],
+              "options": [
+                "are",
+                "is",
+                "am"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-PC-02",
+          "code": "PC-02",
+          "title": "-ing spelling",
+          "instruction": "Napiši oblik sa -ing.",
+          "kind": "closed",
+          "items": [
+            {
+              "prompt": "write → ___",
+              "answers": [
+                "writing"
+              ]
+            },
+            {
+              "prompt": "sit → ___",
+              "answers": [
+                "sitting"
+              ]
+            },
+            {
+              "prompt": "lie → ___",
+              "answers": [
+                "lying"
+              ]
+            },
+            {
+              "prompt": "see → ___",
+              "answers": [
+                "seeing"
+              ]
+            },
+            {
+              "prompt": "open → ___",
+              "answers": [
+                "opening"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-PC-03",
+          "code": "PC-03",
+          "title": "Complete the sentence",
+          "instruction": "Dopuni rečenicu Present Continuous oblikom.",
+          "kind": "closed",
+          "items": [
+            {
+              "prompt": "Look! It ___ (rain).",
+              "answers": [
+                "is raining",
+                "'s raining"
+              ]
+            },
+            {
+              "prompt": "Sophie ___ (stay) with a friend this week.",
+              "answers": [
+                "is staying",
+                "'s staying"
+              ]
+            },
+            {
+              "prompt": "I ___ (read) an interesting book.",
+              "answers": [
+                "am reading",
+                "'m reading"
+              ]
+            },
+            {
+              "prompt": "They ___ (run) in the park.",
+              "answers": [
+                "are running",
+                "'re running"
+              ]
+            },
+            {
+              "prompt": "We ___ (prepare) for the exam.",
+              "answers": [
+                "are preparing",
+                "'re preparing"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-PC-04",
+          "code": "PC-04",
+          "title": "Make it negative",
+          "instruction": "Napiši odričnu rečenicu.",
+          "kind": "closed",
+          "items": [
+            {
+              "prompt": "Emma is studying.",
+              "answers": [
+                "Emma isn't studying.",
+                "Emma is not studying.",
+                "Emma's not studying."
+              ]
+            },
+            {
+              "prompt": "I am working today.",
+              "answers": [
+                "I'm not working today.",
+                "I am not working today."
+              ]
+            },
+            {
+              "prompt": "They are watching TV.",
+              "answers": [
+                "They aren't watching TV.",
+                "They are not watching TV.",
+                "They're not watching TV."
+              ]
+            },
+            {
+              "prompt": "Oliver is cooking dinner.",
+              "answers": [
+                "Oliver isn't cooking dinner.",
+                "Oliver is not cooking dinner."
+              ]
+            },
+            {
+              "prompt": "We are having a break.",
+              "answers": [
+                "We aren't having a break.",
+                "We are not having a break.",
+                "We're not having a break."
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-PC-05",
+          "code": "PC-05",
+          "title": "Questions and short answers",
+          "instruction": "Izaberi tačan odgovor.",
+          "kind": "closed",
+          "items": [
+            {
+              "prompt": "Is Emma studying? – Yes, she ___.",
+              "answers": [
+                "is"
+              ],
+              "options": [
+                "is",
+                "does",
+                "studies"
+              ]
+            },
+            {
+              "prompt": "Are you working? – No, I'm ___.",
+              "answers": [
+                "not"
+              ],
+              "options": [
+                "not",
+                "don't",
+                "isn't"
+              ]
+            },
+            {
+              "prompt": "___ they waiting for us?",
+              "answers": [
+                "Are"
+              ],
+              "options": [
+                "Do",
+                "Are",
+                "Is"
+              ]
+            },
+            {
+              "prompt": "What ___ Oliver doing?",
+              "answers": [
+                "is"
+              ],
+              "options": [
+                "does",
+                "is",
+                "are"
+              ]
+            },
+            {
+              "prompt": "Are we meeting at six? – Yes, we ___.",
+              "answers": [
+                "are"
+              ],
+              "options": [
+                "do",
+                "are",
+                "meet"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-PC-06",
+          "code": "PC-06",
+          "title": "Why Continuous?",
+          "instruction": "Izaberi zašto koristimo Present Continuous.",
+          "kind": "closed",
+          "items": [
+            {
+              "prompt": "I'm staying with my aunt this week.",
+              "answers": [
+                "privremena situacija"
+              ],
+              "options": [
+                "navika",
+                "privremena situacija",
+                "opšta činjenica"
+              ]
+            },
+            {
+              "prompt": "My English is getting better.",
+              "answers": [
+                "promena ili razvoj"
+              ],
+              "options": [
+                "promena ili razvoj",
+                "raspored",
+                "navika"
+              ]
+            },
+            {
+              "prompt": "Emma is talking on the phone right now.",
+              "answers": [
+                "radnja upravo sada"
+              ],
+              "options": [
+                "radnja upravo sada",
+                "navika",
+                "stanje"
+              ]
+            },
+            {
+              "prompt": "We're meeting Ms Taylor tomorrow.",
+              "answers": [
+                "dogovorena bliska budućnost"
+              ],
+              "options": [
+                "navika",
+                "dogovorena bliska budućnost",
+                "opšta činjenica"
+              ]
+            },
+            {
+              "prompt": "Oliver is currently looking for a job.",
+              "answers": [
+                "privremena situacija"
+              ],
+              "options": [
+                "stalno stanje",
+                "privremena situacija",
+                "raspored"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-PC-07",
+          "code": "PC-07",
+          "title": "Time expressions",
+          "instruction": "Izaberi izraz koji najbolje odgovara.",
+          "kind": "closed",
+          "items": [
+            {
+              "prompt": "We're having lunch ___.",
+              "answers": [
+                "at the moment"
+              ],
+              "options": [
+                "every day",
+                "at the moment",
+                "usually"
+              ]
+            },
+            {
+              "prompt": "I'm learning a lot ___.",
+              "answers": [
+                "these days"
+              ],
+              "options": [
+                "these days",
+                "always",
+                "once a week"
+              ]
+            },
+            {
+              "prompt": "She's working from home ___.",
+              "answers": [
+                "today"
+              ],
+              "options": [
+                "often",
+                "today",
+                "never"
+              ]
+            },
+            {
+              "prompt": "Emma is taking a new course ___.",
+              "answers": [
+                "this month"
+              ],
+              "options": [
+                "every month",
+                "this month",
+                "sometimes"
+              ]
+            },
+            {
+              "prompt": "He's staying with friends ___.",
+              "answers": [
+                "for the time being"
+              ],
+              "options": [
+                "for the time being",
+                "on Mondays",
+                "rarely"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-PC-08",
+          "code": "PC-08",
+          "title": "Find the mistake",
+          "instruction": "Ispravi rečenicu.",
+          "kind": "closed",
+          "items": [
+            {
+              "prompt": "She studying now.",
+              "answers": [
+                "She is studying now.",
+                "She's studying now."
+              ]
+            },
+            {
+              "prompt": "I am writeing an email.",
+              "answers": [
+                "I am writing an email.",
+                "I'm writing an email."
+              ]
+            },
+            {
+              "prompt": "He is runing in the park.",
+              "answers": [
+                "He is running in the park.",
+                "He's running in the park."
+              ]
+            },
+            {
+              "prompt": "They is waiting outside.",
+              "answers": [
+                "They are waiting outside.",
+                "They're waiting outside."
+              ]
+            },
+            {
+              "prompt": "Are you visitting your aunt?",
+              "answers": [
+                "Are you visiting your aunt?"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-PC-09",
+          "code": "PC-09",
+          "title": "Right now",
+          "instruction": "Napiši rečenicu u Present Continuous.",
+          "kind": "closed",
+          "items": [
+            {
+              "prompt": "Emma / talk / to Sophie",
+              "answers": [
+                "Emma is talking to Sophie.",
+                "Emma's talking to Sophie."
+              ]
+            },
+            {
+              "prompt": "I / not / watch / TV",
+              "answers": [
+                "I'm not watching TV.",
+                "I am not watching TV."
+              ]
+            },
+            {
+              "prompt": "Oliver / cook / dinner",
+              "answers": [
+                "Oliver is cooking dinner.",
+                "Oliver's cooking dinner."
+              ]
+            },
+            {
+              "prompt": "we / wait / for the bus",
+              "answers": [
+                "We are waiting for the bus.",
+                "We're waiting for the bus."
+              ]
+            },
+            {
+              "prompt": "they / sit / in the café",
+              "answers": [
+                "They are sitting in the café.",
+                "They're sitting in the café."
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-PC-10",
+          "code": "PC-10",
+          "title": "What's happening?",
+          "instruction": "Napiši pet rečenica o tome šta se dešava sada ili ovih dana.",
+          "kind": "open",
+          "items": [
+            {
+              "prompt": "Šta radiš upravo sada?",
+              "open": true
+            },
+            {
+              "prompt": "Šta radi neko pored tebe ili tvoj prijatelj?",
+              "open": true
+            },
+            {
+              "prompt": "Šta je privremeno drugačije ove nedelje?",
+              "open": true
+            },
+            {
+              "prompt": "Šta se menja u tvom životu ovih dana?",
+              "open": true
+            },
+            {
+              "prompt": "Koji dogovor imaš za sutra?",
+              "open": true
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-SC-01",
+          "code": "SC-01",
+          "title": "Habit or now?",
+          "instruction": "Izaberi tačno vreme.",
+          "kind": "closed",
+          "items": [
+            {
+              "prompt": "I ___ in an office.",
+              "answers": [
+                "work"
+              ],
+              "options": [
+                "work",
+                "am working"
+              ]
+            },
+            {
+              "prompt": "This week I ___ from home.",
+              "answers": [
+                "'m working"
+              ],
+              "options": [
+                "work",
+                "'m working"
+              ]
+            },
+            {
+              "prompt": "Emma usually ___ the bus.",
+              "answers": [
+                "takes"
+              ],
+              "options": [
+                "takes",
+                "is taking"
+              ]
+            },
+            {
+              "prompt": "Today she ___ to work.",
+              "answers": [
+                "is walking"
+              ],
+              "options": [
+                "walks",
+                "is walking"
+              ]
+            },
+            {
+              "prompt": "Listen! Somebody ___.",
+              "answers": [
+                "is singing"
+              ],
+              "options": [
+                "sings",
+                "is singing"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-SC-02",
+          "code": "SC-02",
+          "title": "Which tense and why?",
+          "instruction": "Izaberi vreme koje rečenica koristi.",
+          "kind": "closed",
+          "items": [
+            {
+              "prompt": "Sophie lives in London.",
+              "answers": [
+                "Present Simple"
+              ],
+              "options": [
+                "Present Simple",
+                "Present Continuous"
+              ]
+            },
+            {
+              "prompt": "Sophie is staying with a friend this month.",
+              "answers": [
+                "Present Continuous"
+              ],
+              "options": [
+                "Present Simple",
+                "Present Continuous"
+              ]
+            },
+            {
+              "prompt": "The course starts at six.",
+              "answers": [
+                "Present Simple"
+              ],
+              "options": [
+                "Present Simple",
+                "Present Continuous"
+              ]
+            },
+            {
+              "prompt": "We're meeting the teacher at six.",
+              "answers": [
+                "Present Continuous"
+              ],
+              "options": [
+                "Present Simple",
+                "Present Continuous"
+              ]
+            },
+            {
+              "prompt": "She works in a café.",
+              "answers": [
+                "Present Simple"
+              ],
+              "options": [
+                "Present Simple",
+                "Present Continuous"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-SC-03",
+          "code": "SC-03",
+          "title": "Complete the pairs",
+          "instruction": "Dopuni glagolom u odgovarajućem vremenu.",
+          "kind": "closed",
+          "items": [
+            {
+              "prompt": "Oliver ___ (study) English. Right now he ___ for a test.",
+              "answers": [
+                "studies, is studying",
+                "studies / is studying",
+                "studies; is studying"
+              ]
+            },
+            {
+              "prompt": "I usually ___ (get) up at seven.",
+              "answers": [
+                "get"
+              ]
+            },
+            {
+              "prompt": "This week I ___ (get) up earlier.",
+              "answers": [
+                "'m getting",
+                "am getting"
+              ]
+            },
+            {
+              "prompt": "We ___ (have) English classes twice a week.",
+              "answers": [
+                "have"
+              ]
+            },
+            {
+              "prompt": "Today we ___ (have) an extra class.",
+              "answers": [
+                "'re having",
+                "are having"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-SC-04",
+          "code": "SC-04",
+          "title": "Signal words",
+          "instruction": "Izaberi vreme koje obično ide uz izraz.",
+          "kind": "closed",
+          "items": [
+            {
+              "prompt": "every morning",
+              "answers": [
+                "Present Simple"
+              ],
+              "options": [
+                "Present Simple",
+                "Present Continuous"
+              ]
+            },
+            {
+              "prompt": "right now",
+              "answers": [
+                "Present Continuous"
+              ],
+              "options": [
+                "Present Simple",
+                "Present Continuous"
+              ]
+            },
+            {
+              "prompt": "twice a month",
+              "answers": [
+                "Present Simple"
+              ],
+              "options": [
+                "Present Simple",
+                "Present Continuous"
+              ]
+            },
+            {
+              "prompt": "these days",
+              "answers": [
+                "Present Continuous"
+              ],
+              "options": [
+                "Present Simple",
+                "Present Continuous"
+              ]
+            },
+            {
+              "prompt": "on Saturdays",
+              "answers": [
+                "Present Simple"
+              ],
+              "options": [
+                "Present Simple",
+                "Present Continuous"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-SC-05",
+          "code": "SC-05",
+          "title": "Translate",
+          "instruction": "Prevedi na engleski.",
+          "kind": "closed",
+          "items": [
+            {
+              "prompt": "Svaki dan učim engleski.",
+              "answers": [
+                "I study English every day.",
+                "Every day I study English."
+              ]
+            },
+            {
+              "prompt": "Trenutno učim engleski.",
+              "answers": [
+                "I'm studying English at the moment.",
+                "I am studying English at the moment.",
+                "I'm studying English now.",
+                "I am studying English now."
+              ]
+            },
+            {
+              "prompt": "Živim u Beogradu.",
+              "answers": [
+                "I live in Belgrade."
+              ]
+            },
+            {
+              "prompt": "Ovih dana živim kod prijateljice.",
+              "answers": [
+                "I'm staying with a friend these days.",
+                "I am staying with a friend these days.",
+                "These days I'm staying with a friend."
+              ]
+            },
+            {
+              "prompt": "Ona radi u kafiću.",
+              "answers": [
+                "She works in a café.",
+                "She works in a cafe."
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-SC-06",
+          "code": "SC-06",
+          "title": "Find the mistake",
+          "instruction": "Ispravi rečenicu.",
+          "kind": "closed",
+          "items": [
+            {
+              "prompt": "Look! It rains.",
+              "answers": [
+                "Look! It's raining.",
+                "Look! It is raining."
+              ]
+            },
+            {
+              "prompt": "She is going to the gym every day.",
+              "answers": [
+                "She goes to the gym every day."
+              ]
+            },
+            {
+              "prompt": "I'm living in Belgrade all my life.",
+              "answers": [
+                "I live in Belgrade."
+              ]
+            },
+            {
+              "prompt": "Be quiet! The baby sleeps.",
+              "answers": [
+                "Be quiet! The baby is sleeping.",
+                "Be quiet! The baby's sleeping."
+              ]
+            },
+            {
+              "prompt": "He usually is walking to work.",
+              "answers": [
+                "He usually walks to work."
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-SC-07",
+          "code": "SC-07",
+          "title": "Choose the verb form",
+          "instruction": "Izaberi tačan oblik.",
+          "kind": "closed",
+          "items": [
+            {
+              "prompt": "Oliver ___ on a new project at the moment.",
+              "answers": [
+                "is working"
+              ],
+              "options": [
+                "works",
+                "is working"
+              ]
+            },
+            {
+              "prompt": "Water ___ at 100 degrees.",
+              "answers": [
+                "boils"
+              ],
+              "options": [
+                "boils",
+                "is boiling"
+              ]
+            },
+            {
+              "prompt": "My sister ___ in Oslo.",
+              "answers": [
+                "lives"
+              ],
+              "options": [
+                "lives",
+                "is living"
+              ]
+            },
+            {
+              "prompt": "I ___ my grandparents this weekend.",
+              "answers": [
+                "'m visiting"
+              ],
+              "options": [
+                "visit",
+                "'m visiting"
+              ]
+            },
+            {
+              "prompt": "How often ___ to the cinema?",
+              "answers": [
+                "do you go"
+              ],
+              "options": [
+                "do you go",
+                "are you going"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-SC-08",
+          "code": "SC-08",
+          "title": "A message from Emma",
+          "instruction": "Dopuni Emmin mejl.",
+          "kind": "closed",
+          "items": [
+            {
+              "prompt": "Hi Sophie! I ___ (write) to you from the train.",
+              "answers": [
+                "'m writing",
+                "am writing"
+              ]
+            },
+            {
+              "prompt": "I usually ___ (drive) to work.",
+              "answers": [
+                "drive"
+              ]
+            },
+            {
+              "prompt": "But this week my car ___ (not / work).",
+              "answers": [
+                "isn't working",
+                "is not working"
+              ]
+            },
+            {
+              "prompt": "So I ___ (take) the train every day this week.",
+              "answers": [
+                "'m taking",
+                "am taking"
+              ]
+            },
+            {
+              "prompt": "The train ___ (leave) at 7:30.",
+              "answers": [
+                "leaves"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-SC-09",
+          "code": "SC-09",
+          "title": "Question forms",
+          "instruction": "Napiši pitanje.",
+          "kind": "closed",
+          "items": [
+            {
+              "prompt": "you / usually / have / breakfast?",
+              "answers": [
+                "Do you usually have breakfast?"
+              ]
+            },
+            {
+              "prompt": "what / Emma / do / now?",
+              "answers": [
+                "What is Emma doing now?",
+                "What's Emma doing now?"
+              ]
+            },
+            {
+              "prompt": "where / Oliver / work?",
+              "answers": [
+                "Where does Oliver work?"
+              ]
+            },
+            {
+              "prompt": "they / wait / for us?",
+              "answers": [
+                "Are they waiting for us?"
+              ]
+            },
+            {
+              "prompt": "how often / she / go / to the gym?",
+              "answers": [
+                "How often does she go to the gym?"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-SC-10",
+          "code": "SC-10",
+          "title": "Usually… but this week…",
+          "instruction": "Napiši pet parova rečenica: šta obično radiš i šta je drugačije ove nedelje.",
+          "kind": "open",
+          "items": [
+            {
+              "prompt": "Posao ili škola: usually… / this week…",
+              "open": true
+            },
+            {
+              "prompt": "Prevoz: usually… / today…",
+              "open": true
+            },
+            {
+              "prompt": "Jutarnja rutina: usually… / these days…",
+              "open": true
+            },
+            {
+              "prompt": "Vikend: usually… / this weekend…",
+              "open": true
+            },
+            {
+              "prompt": "Ishrana ili slobodno vreme: usually… / at the moment…",
+              "open": true
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-ST-01",
+          "code": "ST-01",
+          "title": "Simple or Continuous?",
+          "instruction": "Izaberi tačan oblik.",
+          "kind": "closed",
+          "items": [
+            {
+              "prompt": "I ___ the answer.",
+              "answers": [
+                "know"
+              ],
+              "options": [
+                "know",
+                "am knowing"
+              ]
+            },
+            {
+              "prompt": "She ___ a new flat.",
+              "answers": [
+                "wants"
+              ],
+              "options": [
+                "wants",
+                "is wanting"
+              ]
+            },
+            {
+              "prompt": "We ___ this course.",
+              "answers": [
+                "like"
+              ],
+              "options": [
+                "like",
+                "are liking"
+              ]
+            },
+            {
+              "prompt": "Emma ___ a letter now.",
+              "answers": [
+                "is writing"
+              ],
+              "options": [
+                "writes",
+                "is writing"
+              ]
+            },
+            {
+              "prompt": "I ___ some help at the moment.",
+              "answers": [
+                "need"
+              ],
+              "options": [
+                "need",
+                "am needing"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-ST-02",
+          "code": "ST-02",
+          "title": "State or action?",
+          "instruction": "Da li glagol opisuje stanje (stative) ili aktivnost (action)?",
+          "kind": "closed",
+          "items": [
+            {
+              "prompt": "believe",
+              "answers": [
+                "stative"
+              ],
+              "options": [
+                "stative",
+                "action"
+              ]
+            },
+            {
+              "prompt": "run",
+              "answers": [
+                "action"
+              ],
+              "options": [
+                "stative",
+                "action"
+              ]
+            },
+            {
+              "prompt": "prefer",
+              "answers": [
+                "stative"
+              ],
+              "options": [
+                "stative",
+                "action"
+              ]
+            },
+            {
+              "prompt": "cook",
+              "answers": [
+                "action"
+              ],
+              "options": [
+                "stative",
+                "action"
+              ]
+            },
+            {
+              "prompt": "belong",
+              "answers": [
+                "stative"
+              ],
+              "options": [
+                "stative",
+                "action"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-ST-03",
+          "code": "ST-03",
+          "title": "Complete with the right form",
+          "instruction": "Dopuni glagolom u zagradi.",
+          "kind": "closed",
+          "items": [
+            {
+              "prompt": "I ___ (understand) the lesson now.",
+              "answers": [
+                "understand"
+              ]
+            },
+            {
+              "prompt": "Oliver ___ (have) a bike.",
+              "answers": [
+                "has"
+              ]
+            },
+            {
+              "prompt": "This soup ___ (taste) good.",
+              "answers": [
+                "tastes"
+              ]
+            },
+            {
+              "prompt": "Sophie ___ (seem) happy today.",
+              "answers": [
+                "seems"
+              ]
+            },
+            {
+              "prompt": "___ you ___ (remember) his name?",
+              "answers": [
+                "Do, remember",
+                "Do / remember",
+                "Do; remember"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-ST-04",
+          "code": "ST-04",
+          "title": "Find the mistake",
+          "instruction": "Ispravi rečenicu.",
+          "kind": "closed",
+          "items": [
+            {
+              "prompt": "I'm knowing the answer.",
+              "answers": [
+                "I know the answer."
+              ]
+            },
+            {
+              "prompt": "She isn't understanding.",
+              "answers": [
+                "She doesn't understand.",
+                "She does not understand."
+              ]
+            },
+            {
+              "prompt": "Are you remembering his name?",
+              "answers": [
+                "Do you remember his name?"
+              ]
+            },
+            {
+              "prompt": "I'm believing you.",
+              "answers": [
+                "I believe you."
+              ]
+            },
+            {
+              "prompt": "I'm liking this café.",
+              "answers": [
+                "I like this café.",
+                "I like this cafe."
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-ST-05",
+          "code": "ST-05",
+          "title": "Think",
+          "instruction": "Izaberi tačan oblik glagola think.",
+          "kind": "closed",
+          "items": [
+            {
+              "prompt": "I ___ this is a good idea.",
+              "answers": [
+                "think"
+              ],
+              "options": [
+                "think",
+                "am thinking"
+              ]
+            },
+            {
+              "prompt": "I ___ about moving to London.",
+              "answers": [
+                "'m thinking"
+              ],
+              "options": [
+                "think",
+                "'m thinking"
+              ]
+            },
+            {
+              "prompt": "What ___ of the new teacher?",
+              "answers": [
+                "do you think"
+              ],
+              "options": [
+                "do you think",
+                "are you thinking"
+              ]
+            },
+            {
+              "prompt": "Be quiet, she ___.",
+              "answers": [
+                "'s thinking"
+              ],
+              "options": [
+                "thinks",
+                "'s thinking"
+              ]
+            },
+            {
+              "prompt": "We ___ the course is useful.",
+              "answers": [
+                "think"
+              ],
+              "options": [
+                "think",
+                "are thinking"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-ST-06",
+          "code": "ST-06",
+          "title": "Have",
+          "instruction": "Izaberi tačan oblik glagola have.",
+          "kind": "closed",
+          "items": [
+            {
+              "prompt": "I ___ a car.",
+              "answers": [
+                "have"
+              ],
+              "options": [
+                "have",
+                "'m having"
+              ]
+            },
+            {
+              "prompt": "I ___ lunch with Emma right now.",
+              "answers": [
+                "'m having"
+              ],
+              "options": [
+                "have",
+                "'m having"
+              ]
+            },
+            {
+              "prompt": "Oliver ___ two sisters.",
+              "answers": [
+                "has"
+              ],
+              "options": [
+                "has",
+                "is having"
+              ]
+            },
+            {
+              "prompt": "We ___ a great time at the party!",
+              "answers": [
+                "'re having"
+              ],
+              "options": [
+                "have",
+                "'re having"
+              ]
+            },
+            {
+              "prompt": "She ___ a shower at the moment.",
+              "answers": [
+                "'s having"
+              ],
+              "options": [
+                "has",
+                "'s having"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-ST-07",
+          "code": "ST-07",
+          "title": "Now doesn't always mean Continuous",
+          "instruction": "Izaberi tačno.",
+          "kind": "closed",
+          "items": [
+            {
+              "prompt": "I ___ to go home now.",
+              "answers": [
+                "want"
+              ],
+              "options": [
+                "want",
+                "am wanting"
+              ]
+            },
+            {
+              "prompt": "I ___ an email now.",
+              "answers": [
+                "'m writing"
+              ],
+              "options": [
+                "write",
+                "'m writing"
+              ]
+            },
+            {
+              "prompt": "She ___ the answer now.",
+              "answers": [
+                "knows"
+              ],
+              "options": [
+                "knows",
+                "is knowing"
+              ]
+            },
+            {
+              "prompt": "She ___ for a flat at the moment.",
+              "answers": [
+                "'s looking"
+              ],
+              "options": [
+                "looks",
+                "'s looking"
+              ]
+            },
+            {
+              "prompt": "We ___ help at the moment.",
+              "answers": [
+                "need"
+              ],
+              "options": [
+                "need",
+                "are needing"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-ST-08",
+          "code": "ST-08",
+          "title": "Meaning",
+          "instruction": "Izaberi značenje rečenice.",
+          "kind": "closed",
+          "items": [
+            {
+              "prompt": "I'm seeing my doctor tomorrow.",
+              "answers": [
+                "Imam zakazan pregled."
+              ],
+              "options": [
+                "Vidim doktora.",
+                "Imam zakazan pregled."
+              ]
+            },
+            {
+              "prompt": "I'm tasting the soup.",
+              "answers": [
+                "Probam supu."
+              ],
+              "options": [
+                "Supa ima dobar ukus.",
+                "Probam supu."
+              ]
+            },
+            {
+              "prompt": "Oliver is being very quiet today.",
+              "answers": [
+                "Danas se ponaša neobično tiho."
+              ],
+              "options": [
+                "Uvek je tih.",
+                "Danas se ponaša neobično tiho."
+              ]
+            },
+            {
+              "prompt": "I see the bus.",
+              "answers": [
+                "Vidim autobus."
+              ],
+              "options": [
+                "Vidim autobus.",
+                "Imam sastanak u autobusu."
+              ]
+            },
+            {
+              "prompt": "I think it's a good idea.",
+              "answers": [
+                "Mislim da je dobra ideja."
+              ],
+              "options": [
+                "Razmišljam o ideji.",
+                "Mislim da je dobra ideja."
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-ST-09",
+          "code": "ST-09",
+          "title": "Translate",
+          "instruction": "Prevedi na engleski.",
+          "kind": "closed",
+          "items": [
+            {
+              "prompt": "Sada razumem.",
+              "answers": [
+                "Now I understand.",
+                "I understand now."
+              ]
+            },
+            {
+              "prompt": "Znam odgovor.",
+              "answers": [
+                "I know the answer."
+              ]
+            },
+            {
+              "prompt": "Emma želi da se preseli.",
+              "answers": [
+                "Emma wants to move."
+              ]
+            },
+            {
+              "prompt": "Njoj ne treba novi telefon.",
+              "answers": [
+                "She doesn't need a new phone.",
+                "She does not need a new phone."
+              ]
+            },
+            {
+              "prompt": "Razmišljam o selidbi.",
+              "answers": [
+                "I'm thinking about moving.",
+                "I am thinking about moving."
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EN-A2-L01-ST-10",
+          "code": "ST-10",
+          "title": "About you",
+          "instruction": "Napiši pet rečenica o sebi koristeći stative verbs.",
+          "kind": "open",
+          "items": [
+            {
+              "prompt": "Šta ti se sviđa ili šta više voliš (like / prefer)?",
+              "open": true
+            },
+            {
+              "prompt": "Šta želiš ili šta ti treba (want / need)?",
+              "open": true
+            },
+            {
+              "prompt": "Šta poseduješ (have)?",
+              "open": true
+            },
+            {
+              "prompt": "Šta misliš o ovom kursu (think)?",
+              "open": true
+            },
+            {
+              "prompt": "Napiši jednu rečenicu sa think ili have u Continuous značenju.",
+              "open": true
+            }
+          ]
+        }
+      ]
     },
-    {
-     "speaker": "Sophie",
-     "text": "Really? What are you doing?"
+    "vocabulary": {
+      "areas": [],
+      "words": [],
+      "collections": [],
+      "exercises": []
     },
-    {
-     "speaker": "Emma",
-     "text": "I'm working part-time, and I'm studying English. I'm also looking for a bigger flat."
+    "reading": {
+      "texts": [],
+      "exercises": []
     },
-    {
-     "speaker": "Oliver",
-     "text": "That's exciting! Do you still live near the park?"
+    "listening": {
+      "scenes": []
     },
-    {
-     "speaker": "Emma",
-     "text": "Yes, I do, but I want to move closer to work."
+    "writing": {
+      "exercises": []
     },
-    {
-     "speaker": "Sophie",
-     "text": "I understand. I usually cycle to work, but this week I'm taking the bus because my bike isn't working."
+    "pronunciation": {
+      "alphabet": [],
+      "note": "",
+      "drills": [],
+      "letters": [],
+      "spelling": [],
+      "exercises": []
     },
-    {
-     "speaker": "Oliver",
-     "text": "I'm taking a photography course at the moment. It's great fun!"
+    "speaking": {
+      "tasks": [],
+      "roleswitch": []
     },
-    {
-     "speaker": "Emma",
-     "text": "That sounds interesting! Are you enjoying it?"
+    "culture": {
+      "title": "",
+      "body": "",
+      "note": "",
+      "customs": [],
+      "comparison": []
     },
-    {
-     "speaker": "Oliver",
-     "text": "Yes, I am. I meet interesting people every week."
-    },
-    {
-     "speaker": "Sophie",
-     "text": "We all have something new to talk about!"
-    },
-    {
-     "speaker": "Emma",
-     "text": "Exactly! And our English course starts again soon."
+    "review": {
+      "quiz": []
     }
-   ]
-  },
-  {
-   "id": "EN-A2-L01-T03",
-   "title": "Text 3 · Back to Class",
-   "type": "email",
-   "scene": "Subject: Welcome to Your A2 English Course! · From: Ms Taylor · To: A2 English Group",
-   "lines": [
-    {
-     "speaker": "Ms Taylor",
-     "text": "Hello everyone!"
-    },
-    {
-     "speaker": "Ms Taylor",
-     "text": "I hope you're all doing well."
-    },
-    {
-     "speaker": "Ms Taylor",
-     "text": "Our new English course starts on Monday at 6 p.m. We meet every Monday and Wednesday in Classroom 4."
-    },
-    {
-     "speaker": "Ms Taylor",
-     "text": "This month, we're focusing on everyday life, personal experiences and communication."
-    },
-    {
-     "speaker": "Ms Taylor",
-     "text": "Please bring your notebook and prepare a short introduction about your life now. Think about these questions:"
-    },
-    {
-     "speaker": "Ms Taylor",
-     "text": "What do you usually do during the week?"
-    },
-    {
-     "speaker": "Ms Taylor",
-     "text": "What are you doing differently these days?"
-    },
-    {
-     "speaker": "Ms Taylor",
-     "text": "What are you looking forward to?"
-    },
-    {
-     "speaker": "Ms Taylor",
-     "text": "I'm looking forward to seeing you all again!"
-    },
-    {
-     "speaker": "Ms Taylor",
-     "text": "Best wishes, Ms Taylor"
-    }
-   ]
   }
- ],
- "modules": {
-  "intro": {
-   "exercises": []
-  },
-  "grammar": {
-   "sections": [],
-   "exercises": []
-  },
-  "vocabulary": {
-   "areas": [],
-   "words": [],
-   "collections": [],
-   "exercises": []
-  },
-  "reading": {
-   "texts": [],
-   "exercises": []
-  },
-  "listening": {
-   "scenes": []
-  },
-  "writing": {
-   "exercises": []
-  },
-  "pronunciation": {
-   "alphabet": [],
-   "note": "",
-   "drills": [],
-   "letters": [],
-   "spelling": [],
-   "exercises": []
-  },
-  "speaking": {
-   "tasks": [],
-   "roleswitch": []
-  },
-  "culture": {
-   "title": "",
-   "body": "",
-   "note": "",
-   "customs": [],
-   "comparison": []
-  },
-  "review": {
-   "quiz": []
-  }
- }
 }
