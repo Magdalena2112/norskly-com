@@ -105,6 +105,7 @@ export default function LessonExercise({
         </div>
         {(done || finished) && <CheckCircle2 className="w-5 h-5 text-forest shrink-0" />}
       </div>
+      {exercise.image && ITEM_IMAGES[exercise.image] && <img src={ITEM_IMAGES[exercise.image]} alt={exercise.title} loading="lazy" className="w-full max-w-sm h-auto rounded-xl border border-border/60 mb-3" />}
       <p className="text-sm text-muted-foreground mb-4">{exercise.instruction}</p>
       <ol className={exercise.items.some((x) => x.image) ? "grid sm:grid-cols-2 gap-4" : "space-y-3"}>
         {exercise.items.map((item, i) => {
