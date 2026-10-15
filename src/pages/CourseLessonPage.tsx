@@ -136,6 +136,7 @@ export default function CourseLessonPage() {
   const hasMaterial = (k: string) => !["writing", "review"].includes(k);
   const openEx: Exercise[] = open ? m[open]?.exercises || [] : [];
   const openModule = (k: string | null) => {
+    setReadStep(0);
     if (k === "grammar") { navigate(`/grammar?lesson=${row.id}`); return; }
     if (k === "vocabulary") { navigate(`/vocabulary?lesson=${row.id}`); return; }
     if (k === "writing") { navigate(`/writing?lesson=${row.id}`); return; }
