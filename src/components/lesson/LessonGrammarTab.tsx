@@ -42,7 +42,7 @@ export const LESSON_GRAMMAR_TOPICS: Record<string, Topic[]> = {
       related: [{ title: "Prilozi učestalosti", query: "Adverbs of frequency position" }, { title: "Do / does pitanja", query: "Present Simple questions with do and does" }] },
     { label: "Present Continuous", sectionIdx: [2, 3], exercises: ["PC-01","PC-02","PC-03","PC-04","PC-05"], aiTopic: "Present Continuous – actions now, temporary situations, -ing spelling",
       related: [{ title: "Pravopis -ing oblika", query: "Spelling rules for -ing forms" }, { title: "Present Continuous za budućnost", query: "Present Continuous for future arrangements" }] },
-    { label: "Simple vs. Continuous", sectionIdx: [4], exercises: ["MIX-01","MIX-02","MIX-03","MIX-04","MIX-05","MIX-06","MIX-07","MIX-08","MIX-09","MIX-10"], aiTopic: "Present Simple vs Present Continuous – choosing the tense by meaning and context",
+    { label: "Simple vs. Continuous", sectionIdx: [4], exercises: Array.from({ length: 20 }, (_, i) => `MIX-${String(i + 1).padStart(2, "0")}`), aiTopic: "Present Simple vs Present Continuous – choosing the tense by meaning and context",
       related: [{ title: "Vremenski izrazi", query: "Time expressions Present Simple vs Present Continuous" }] },
     { label: "Stative verbs", sectionIdx: [5, 6], exercises: ["ST-01","ST-02","ST-03","ST-04","ST-05","ST-06","ST-07","ST-08","ST-09","ST-10"], aiTopic: "Stative verbs (know, like, want, need, understand) and think/have state vs action",
       related: [{ title: "Think i have – dva značenja", query: "Think and have as stative and action verbs" }] },
