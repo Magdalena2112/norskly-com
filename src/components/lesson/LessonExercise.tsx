@@ -239,20 +239,15 @@ export default function LessonExercise({
           <div className="flex justify-between items-center">
             <span className="text-xs text-muted-foreground">{words} reči{wTarget ? ` · cilj ${wTarget[1]}–${wTarget[2]}` : ""}</span>
           </div>
-          {wState.status === "correct" && <p className="text-xs text-forest flex items-center gap-1"><CheckCircle2 className="w-3.5 h-3.5" /> Tačno!{wState.feedback ? ` ${wState.feedback}` : ""}</p>}
-          {(wState.status === "partial" || wState.status === "wrong") && (
-            <div className="text-xs rounded-lg bg-secondary/50 p-2 space-y-1">
-              <p className="flex items-start gap-1"><AlertCircle className="w-3.5 h-3.5 mt-0.5 text-sunset shrink-0" /> {wState.feedback}</p>
-              {wState.improved && <p className="italic text-primary">→ {wState.improved}</p>}
-            </div>
-          )}
-          {wState.status === "pending" && <p className="text-xs text-muted-foreground flex items-center gap-1"><Loader2 className="w-3.5 h-3.5 animate-spin" /> AI tutor proverava…</p>}
+          {wState.status === "correct" && !analysis && <p className="text-xs text-forest flex items-center gap-1"><CheckCircle2 className="w-3.5 h-3.5" /> Tačno!{wState.feedback ? ` ${wState.feedback}` : ""}</p>}
+          {wState.status === "pending" && <p className="text-xs text-muted-foreground flex items-center gap-1"><Loader2 className="w-3.5 h-3.5 animate-spin" /> AI tutor analizira tekst…</p>}
           <div>
-            <Button size="sm" variant="hero" onClick={check} disabled={checking}>
+            <Button size="sm" variant="hero" onClick={check} disabled={checking || wState.status === "pending"}>
               {checking ? <Loader2 className="w-4 h-4 animate-spin" /> : <Sparkles className="w-4 h-4" />}
-              Proveri
+              {analysis ? "Proveri ponovo" : "Proveri"}
             </Button>
           </div>
+          {analysis && <CorrectionResultView result={analysis} />}
         </div>
       </div>
     </div>
