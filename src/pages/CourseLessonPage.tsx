@@ -148,6 +148,7 @@ export default function CourseLessonPage() {
       <NordicBackdrop />
       <div className="container max-w-4xl py-6 sm:py-8 relative z-10">
         <BackButton />
+        {!open && (
         <header className="mt-3 mb-6 rounded-3xl border border-border/50 bg-cream/90 backdrop-blur-md shadow-postcard overflow-hidden">
           {imgs?.cover && <img src={imgs.cover} alt={row.title_target} className="w-full aspect-[16/9] object-cover" />}
           <div className="p-5 sm:p-7">
@@ -163,6 +164,7 @@ export default function CourseLessonPage() {
           <p className="text-[11px] text-muted-foreground mt-1">Urađeno {done.length} / {exercises.length} vežbi</p>
           </div>
         </header>
+        )}
 
         {/* 1) Intro texts — one at a time, with illustrations */}
         {content.intro.length > 0 && !open && (() => {
