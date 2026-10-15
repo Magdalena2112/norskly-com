@@ -42,7 +42,8 @@ export const ITEM_IMAGES: Record<string, string> = {
   "pr08-1": p1.url,
   "pr08-2": p2.url,
   "pr08-3": p3.url,
-  "pr08-4": p4.url,
+"pr08-4": p4.url,
+  "a2:wr01": a2wr01.url,
 };
 
 import vocabImgs from "./EN-A1-L01.vocab-images.json";
