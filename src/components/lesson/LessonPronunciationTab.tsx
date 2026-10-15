@@ -36,7 +36,7 @@ export default function LessonPronunciationTab({ data, lang, level, lessonCode }
       { dedupKey: `lesson_pron_${lessonCode}_${code}_${lang}`, language: lang });
   };
   const key = (i: number) => `${ex?.code}_${i}`;
-  const exComplete = ex && ex.items.every((_, i) => ex.type === "choose" ? picked[key(i)] !== undefined : ok[key(i)]);
+  const exComplete = ex && (ex.items || []).every((_, i) => ex.type === "choose" ? picked[key(i)] !== undefined : ok[key(i)]);
   if (ex && exComplete && !done.includes(ex.code)) setTimeout(() => finishEx(ex.code), 0);
 
   const card = "rounded-3xl border border-border/50 bg-cream/90 shadow-postcard p-5";
@@ -71,7 +71,7 @@ export default function LessonPronunciationTab({ data, lang, level, lessonCode }
             {data.note && <p className="text-xs text-muted-foreground mt-4">{data.note}</p>}
           </div>
 
-          {data.spelling && (
+          {data.spelling?.examples?.length > 0 && (
             <div className={card}>
               <h3 className="text-display text-xl text-primary">{data.spelling.title}</h3>
               <p className="text-sm leading-relaxed mt-2">{data.spelling.text}</p>
@@ -111,7 +111,7 @@ export default function LessonPronunciationTab({ data, lang, level, lessonCode }
               <p className="text-sm text-muted-foreground">{ex.instruction}</p>
             </div>
             <div className="flex gap-1.5">
-              {ex.items.map((_, i) => (
+              {(ex.items || []).map((_, i) => (
                 <button key={i} onClick={() => setItem(i)}
                   className={`w-7 h-7 rounded-full text-xs border ${i === item ? "bg-primary text-primary-foreground border-primary" : (ex.type === "choose" ? picked[key(i)] !== undefined : ok[key(i)]) ? "bg-accent/30 border-accent" : "bg-background border-border"}`}>{i + 1}</button>
               ))}
