@@ -59,6 +59,52 @@ export const TALK_SCENARIOS: Record<string, TalkScenario[]> = {
       instructions: "Play Liam introducing Oliver. Use he/she/they with to be. Ask the learner questions and encourage them to ask about Oliver. Stay at A1 level.",
     },
   ],
+  "EN-A2-L01": [
+    {
+      id: "S-01",
+      voice: "f",
+      title: "Tell Me About Your Day",
+      description: "Piješ kafu sa novim prijateljem i pričaš o svom tipičnom radnom danu.",
+      aiRole: "Novi prijatelj na kafi",
+      studentRole: "Učenik opisuje svoj uobičajeni dan",
+      opening: "Hey! It's nice to meet you! Tell me, what does a typical weekday look like for you?",
+      goals: ["Opiši jutarnju rutinu", "Reci šta radiš na poslu ili u školi", "Nabroj slobodne aktivnosti", "Koristi priloge učestalosti (usually, always, sometimes)"],
+      instructions: "Play a friendly new friend having coffee with the learner. Ask about their typical weekday: morning routine, work or school, free-time activities. Ask one question per turn, react to what the learner actually says, and adapt follow-ups. Encourage Present Simple and frequency adverbs. Keep language at A2 level. Don't interrupt for every grammar mistake; rephrase simply if the learner doesn't understand. About 6–8 exchanges.",
+    },
+    {
+      id: "S-02",
+      voice: "m",
+      title: "Let's Share the Housework",
+      description: "Deliš stan sa AI sagovornikom i dogovarate ko će koji kućni posao raditi.",
+      aiRole: "Cimer/cimerka u zajedničkom stanu",
+      studentRole: "Učenik dogovara raspodelu kućnih poslova",
+      opening: "Hey! We have quite a lot to do this weekend. I can cook dinner, but we also need to clean the flat. What would you like to do?",
+      goals: ["Predloži koji posao možeš da uradiš (can)", "Reci šta mora da se uradi (need to)", "Dogovori raspodelu poslova", "Koristi vokabular za kućne poslove"],
+      instructions: "Play the learner's flatmate. You both have a busy weekend and must divide the household chores. Have your own obligations, opinions and suggestions (e.g. you can cook dinner but you need to work on Saturday morning). Encourage can, need to, household vocabulary and making suggestions. Ask one question per turn, stay at A2 level, about 6–8 exchanges.",
+    },
+    {
+      id: "S-03",
+      voice: "f",
+      title: "What Are You Doing These Days?",
+      description: "Nailaziš na starog prijatelja i pričate o navikama i promenama u životu.",
+      aiRole: "Stari prijatelj kojeg dugo nisi video/la",
+      studentRole: "Učenik priča o navikama i trenutnim promenama",
+      opening: "Hey! It's been a while! How are things going? Are you doing anything new these days?",
+      goals: ["Opiši svakodnevne navike (Present Simple)", "Reci šta se trenutno menja (Present Continuous)", "Koristi at the moment, these days, usually", "Razlikuj stalne od privremenih aktivnosti"],
+      instructions: "Play an old friend catching up with the learner. Talk about usual activities and what is changing in the learner's life at the moment. Encourage the contrast between Present Simple (habits) and Present Continuous (temporary, at the moment, these days). Ask one question per turn, react naturally, stay at A2 level, about 6–8 exchanges.",
+    },
+    {
+      id: "S-04",
+      voice: "m",
+      title: "Making Weekend Plans",
+      description: "Sa prijateljem planiraš subotu, ali oboje imate obaveze — nađite zajednički termin i aktivnost.",
+      aiRole: "Prijatelj koji planira subotu",
+      studentRole: "Učenik predlaže aktivnosti i dogovara termin",
+      opening: "Hey! Do you want to do something together on Saturday? I'm busy in the morning, but I might be free later. What are your plans?",
+      goals: ["Predloži aktivnost", "Postavi pitanja o terminu", "Reci kada si slobodan/na", "Promeni plan ako treba i postigni dogovor"],
+      instructions: "Play a friend planning Saturday with the learner. You are busy in the morning but might be free later; have your own preferences and suggest alternatives. Encourage making suggestions, asking questions, expressing availability and everyday activities. Ask one question per turn, stay at A2 level, about 8–10 exchanges.",
+    },
+  ],
 };
 
 export function getTalkScenarios(code?: string | null): TalkScenario[] {
@@ -70,6 +116,10 @@ export const LESSON_MATERIAL: Record<string, string> = {
   "EN-A1-L01": `Course level A1, Lesson 1.
 Grammar: personal pronouns (I, you, he, she, it, we, they); verb to be in present (am/is/are, negative isn't/aren't, questions Are you...? Is she...?, short forms I'm/you're/he's); articles a/an (a book, an eraser, an apple).
 Vocabulary: greetings & introductions (hello, hi, good morning, goodbye, see you, nice to meet you, my name is, I'm from, how are you, I'm fine/great/OK, thank you); people & feelings (friend, student, teacher, classmate, boy, girl, happy, sad, tired, fine, hungry, new); classroom objects (book, pen, pencil, eraser, notebook, bag/backpack, desk, chair, board, phone, ruler); numbers 0–20 (age, phone numbers); spelling names with the alphabet ("How do you spell that?").`,
+  "EN-A2-L01": `Course level A2, Lesson 1: A New Chapter.
+Grammar: Present Simple (habits, routines, facts); Present Continuous (actions now, temporary situations); Present Simple vs. Present Continuous; stative verbs (know, like, want, need, understand, believe — usually not in continuous).
+Vocabulary: daily routines (wake up, get up, have breakfast, go to work/school, finish work, cook dinner, go to bed); household chores (clean the flat, do the laundry, do the dishes, take out the rubbish, tidy up, cook); changes in daily life (move to a new city, start a new job, learn something new, at the moment, these days, usually).
+Frequency adverbs: always, usually, often, sometimes, never.`,
 };
 
 export function getLessonMaterial(code?: string | null): string | undefined {
