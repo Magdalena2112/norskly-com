@@ -161,6 +161,26 @@ export default function WritingPage() {
 }
 
 // ═══════════════════════════════════════
+// Samostalna vežba: opis slike + korekcija teksta
+// ═══════════════════════════════════════
+function SamostalnaTab({ level }: { level: string }) {
+  const [sub, setSub] = useState<"opis" | "korekcija">("opis");
+  return (
+    <div className="space-y-4">
+      <div className="flex gap-1.5 overflow-x-auto scrollbar-hide">
+        {([["opis", "Opis slike"], ["korekcija", "Korekcija teksta"]] as const).map(([id, label]) => (
+          <button key={id} onClick={() => setSub(id)}
+            className={`shrink-0 rounded-full px-4 py-1.5 text-sm border transition-colors ${sub === id ? "bg-primary text-primary-foreground border-primary" : "bg-cream/60 border-border/50 hover:border-primary/40"}`}>
+            {label}
+          </button>
+        ))}
+      </div>
+      {sub === "opis" ? <BildebeskrivelseTab level={level} /> : <CorrectionTab level={level} />}
+    </div>
+  );
+}
+
+// ═══════════════════════════════════════
 // Bildebeskrivelse
 // ═══════════════════════════════════════
 function BildebeskrivelseTab({ level }: { level: string }) {
