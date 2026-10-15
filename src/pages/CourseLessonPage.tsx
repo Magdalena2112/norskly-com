@@ -71,6 +71,7 @@ export default function CourseLessonPage() {
   const [textIdx, setTextIdx] = useState(0);
   const [open, setOpen] = useState<string | null>(null);
   const [view, setView] = useState<"learn" | "practice">("learn");
+  const [readStep, setReadStep] = useState(0);
   const [done, setDone] = useState<string[]>([]);
   const [notFound, setNotFound] = useState(false);
 
