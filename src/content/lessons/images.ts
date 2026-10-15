@@ -13,6 +13,9 @@ import i11 from "@/assets/lessons/en-a1-l01-11.webp.asset.json";
 import i12 from "@/assets/lessons/en-a1-l01-12.webp.asset.json";
 import i13 from "@/assets/lessons/en-a1-l01-13.webp.asset.json";
 import i14 from "@/assets/lessons/en-a1-l01-14.webp.asset.json";
+import a2t1 from "@/assets/lessons/en-a2-l01-t1.webp.asset.json";
+import a2t2 from "@/assets/lessons/en-a2-l01-t2.webp.asset.json";
+import a2t3 from "@/assets/lessons/en-a2-l01-t3.webp.asset.json";
 
 export interface LessonImages {
   cover?: string;
