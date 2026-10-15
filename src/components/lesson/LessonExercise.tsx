@@ -96,7 +96,9 @@ export default function LessonExercise({
     if (allDone) onDone(exercise.code);
   }
 
-  return (
+  // Writing tasks (a single open answer) get a dedicated layout; everything else keeps the standard one.
+  const isWriting = exercise.items.length === 1 && !!exercise.items[0].open;
+  if (!isWriting) return (
     <div className="rounded-2xl border border-border/60 bg-cream/90 p-4 sm:p-5 shadow-card-soft">
       <div className="flex items-start justify-between gap-2 mb-1">
         <div>
