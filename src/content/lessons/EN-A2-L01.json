@@ -4090,7 +4090,7 @@
           ],
           "questions": [
             {
-              "prompt": "Order number",
+              "prompt": "What is the order number?",
               "options": [
                 "4821",
                 "4281",
@@ -4099,7 +4099,7 @@
               "answer": "4821"
             },
             {
-              "prompt": "Reason for the delay",
+              "prompt": "Why is the parcel late?",
               "options": [
                 "There's a lot of traffic.",
                 "The driver is ill.",
@@ -4108,7 +4108,7 @@
               "answer": "There's a lot of traffic."
             },
             {
-              "prompt": "New delivery time",
+              "prompt": "When will the parcel arrive now?",
               "options": [
                 "Between 2 and 3 p.m.",
                 "Between 12 and 2 p.m.",
@@ -4155,7 +4155,7 @@
           ],
           "questions": [
             {
-              "prompt": "Who is doing this? Do the laundry",
+              "prompt": "Who is doing the laundry?",
               "options": [
                 "Jack",
                 "Maya"
@@ -4163,7 +4163,7 @@
               "answer": "Maya"
             },
             {
-              "prompt": "Who is doing this? Vacuum the living room",
+              "prompt": "Who is vacuuming the living room?",
               "options": [
                 "Jack",
                 "Maya"
@@ -4171,7 +4171,7 @@
               "answer": "Jack"
             },
             {
-              "prompt": "Who is doing this? Go grocery shopping",
+              "prompt": "Who is going grocery shopping?",
               "options": [
                 "Jack",
                 "Maya"
@@ -4179,7 +4179,7 @@
               "answer": "Jack"
             },
             {
-              "prompt": "Who is doing this? Cook dinner",
+              "prompt": "Who is cooking dinner?",
               "options": [
                 "Jack",
                 "Maya"
@@ -4187,7 +4187,7 @@
               "answer": "Jack"
             },
             {
-              "prompt": "Who is doing this? Do the washing-up",
+              "prompt": "Who is doing the washing-up?",
               "options": [
                 "Jack",
                 "Maya"
@@ -4195,7 +4195,7 @@
               "answer": "Maya"
             },
             {
-              "prompt": "Who is doing this? Take out the rubbish",
+              "prompt": "Who is taking out the rubbish?",
               "options": [
                 "Jack",
                 "Maya"
@@ -4439,7 +4439,7 @@
           ],
           "questions": [
             {
-              "prompt": "Usual closing time",
+              "prompt": "What time does the library usually close?",
               "options": [
                 "6 p.m.",
                 "4 p.m.",
@@ -4448,7 +4448,7 @@
               "answer": "6 p.m."
             },
             {
-              "prompt": "Thursday closing time",
+              "prompt": "What time is the library closing this Thursday?",
               "options": [
                 "4 p.m.",
                 "6 p.m.",
@@ -4457,7 +4457,7 @@
               "answer": "4 p.m."
             },
             {
-              "prompt": "Saturday book exchange (start–finish)",
+              "prompt": "When is the book exchange on Saturday?",
               "options": [
                 "10:00–1:00",
                 "9:00–1:00",
@@ -4500,7 +4500,7 @@
           ],
           "questions": [
             {
-              "prompt": "Who? Cooking lunch",
+              "prompt": "Who is cooking lunch?",
               "options": [
                 "Dad",
                 "The speaker",
@@ -4511,7 +4511,7 @@
               "answer": "Dad"
             },
             {
-              "prompt": "Who? Making a cake",
+              "prompt": "Who is making a cake?",
               "options": [
                 "Dad",
                 "The speaker",
@@ -4522,7 +4522,7 @@
               "answer": "The speaker"
             },
             {
-              "prompt": "Who? Decorating the living room",
+              "prompt": "Who is decorating the living room?",
               "options": [
                 "Dad",
                 "The speaker",
@@ -4533,7 +4533,7 @@
               "answer": "The brother"
             },
             {
-              "prompt": "Who? Preparing the table",
+              "prompt": "Who is preparing the table?",
               "options": [
                 "Dad",
                 "The speaker",
@@ -4544,7 +4544,7 @@
               "answer": "Mum"
             },
             {
-              "prompt": "Who? Bringing drinks",
+              "prompt": "Who is bringing drinks?",
               "options": [
                 "Dad",
                 "The speaker",
@@ -4581,7 +4581,7 @@
           ],
           "questions": [
             {
-              "prompt": "Choose a category: Didn't know where the shops were",
+              "prompt": "When? The speaker didn't know where the shops were.",
               "options": [
                 "At first",
                 "Now / usually",
@@ -4590,7 +4590,7 @@
               "answer": "At first"
             },
             {
-              "prompt": "Choose a category: Goes for a walk after dinner",
+              "prompt": "When? The speaker goes for a walk after dinner.",
               "options": [
                 "At first",
                 "Now / usually",
@@ -4599,7 +4599,7 @@
               "answer": "Now / usually"
             },
             {
-              "prompt": "Choose a category: Is joining a yoga class this month",
+              "prompt": "When? The speaker is joining a yoga class.",
               "options": [
                 "At first",
                 "Now / usually",
@@ -4608,7 +4608,7 @@
               "answer": "This month"
             },
             {
-              "prompt": "Choose a category: Feels more comfortable in the area",
+              "prompt": "When? The speaker feels more comfortable in the area.",
               "options": [
                 "At first",
                 "Now / usually",
@@ -4617,7 +4617,7 @@
               "answer": "Now / usually"
             },
             {
-              "prompt": "Choose a category: Found the neighbourhood unfamiliar",
+              "prompt": "When? The speaker found the neighbourhood unfamiliar.",
               "options": [
                 "At first",
                 "Now / usually",
@@ -4648,7 +4648,7 @@
           ],
           "questions": [
             {
-              "prompt": "Which speaker? Is learning how to prepare new dishes.",
+              "prompt": "Who is learning how to prepare new dishes?",
               "options": [
                 "Rachel",
                 "James",
@@ -4657,7 +4657,7 @@
               "answer": "Rachel"
             },
             {
-              "prompt": "Which speaker? Has changed the way they travel to work.",
+              "prompt": "Who has changed the way they travel to work?",
               "options": [
                 "Rachel",
                 "James",
@@ -4666,7 +4666,7 @@
               "answer": "James"
             },
             {
-              "prompt": "Which speaker? Lives further away from school now.",
+              "prompt": "Who lives further away from school now?",
               "options": [
                 "Rachel",
                 "James",
@@ -4675,7 +4675,7 @@
               "answer": "Olivia"
             },
             {
-              "prompt": "Which speaker? Is doing a new activity in the evening.",
+              "prompt": "Who is doing a new activity in the evening?",
               "options": [
                 "Rachel",
                 "James",
@@ -4684,7 +4684,7 @@
               "answer": "Rachel"
             },
             {
-              "prompt": "Which speaker? Enjoys having a garden.",
+              "prompt": "Who enjoys having a garden?",
               "options": [
                 "Rachel",
                 "James",
