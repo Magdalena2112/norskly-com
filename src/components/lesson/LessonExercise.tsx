@@ -96,7 +96,9 @@ export default function LessonExercise({
     if (allDone) onDone(exercise.code);
   }
 
-  return (
+  // Writing tasks (a single open answer) get a dedicated layout; everything else keeps the standard one.
+  const isWriting = exercise.items.length === 1 && !!exercise.items[0].open;
+  if (!isWriting) return (
     <div className="rounded-2xl border border-border/60 bg-cream/90 p-4 sm:p-5 shadow-card-soft">
       <div className="flex items-start justify-between gap-2 mb-1">
         <div>
@@ -160,6 +162,63 @@ export default function LessonExercise({
         {checking ? <Loader2 className="w-4 h-4 animate-spin" /> : exercise.items.some((x) => x.open) ? <Sparkles className="w-4 h-4" /> : null}
         Proveri
       </Button>
+    </div>
+  );
+
+  // ── Writing layout: image left, instruction + guiding questions + answer right ──
+  const wItem = exercise.items[0];
+  const wState = state[0];
+  const wImg = exercise.image ? ITEM_IMAGES[exercise.image] : undefined;
+  const wTarget = exercise.instruction.match(/(\d+)\s*[–-]\s*(\d+)/);
+  const words = wState.value.trim() ? wState.value.trim().split(/\s+/).length : 0;
+
+  return (
+    <div className="rounded-2xl border border-border/60 bg-cream/90 p-4 sm:p-5 shadow-card-soft">
+      <div className="flex items-start justify-between gap-2 mb-3">
+        <div>
+          <span className="text-[11px] font-mono text-primary/50">{exercise.code}</span>
+          <h4 className="font-display font-semibold text-primary leading-tight">{exercise.title}</h4>
+        </div>
+        {(done || finished) && <CheckCircle2 className="w-5 h-5 text-forest shrink-0" />}
+      </div>
+      <div className={wImg ? "grid gap-5 sm:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] items-start" : "space-y-3"}>
+        {wImg && (
+          <img src={wImg} alt={exercise.title} loading="lazy"
+            className="w-full h-auto object-contain rounded-xl border border-border/60 bg-background" />
+        )}
+        <div className="space-y-3">
+          <p className="text-sm text-muted-foreground">{exercise.instruction}</p>
+          {wItem.guiding?.length ? (
+            <div className="rounded-xl border border-border/50 bg-secondary/40 p-3">
+              <p className="text-[11px] font-semibold uppercase tracking-wider text-primary/70 mb-1.5">Pitanja vodilje</p>
+              <ul className="space-y-1 text-sm text-foreground/90">
+                {wItem.guiding.map((q, i) => (
+                  <li key={i} className="flex gap-2"><span className="text-primary/60 shrink-0">•</span><span>{q}</span></li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
+          <Textarea value={wState.value} disabled={wState.status === "pending"} rows={8}
+            onChange={(e) => set(0, { value: e.target.value })} placeholder="Tvoj odgovor…" className="bg-background resize-y" />
+          <div className="flex justify-between items-center">
+            <span className="text-xs text-muted-foreground">{words} reči{wTarget ? ` · cilj ${wTarget[1]}–${wTarget[2]}` : ""}</span>
+          </div>
+          {wState.status === "correct" && <p className="text-xs text-forest flex items-center gap-1"><CheckCircle2 className="w-3.5 h-3.5" /> Tačno!{wState.feedback ? ` ${wState.feedback}` : ""}</p>}
+          {(wState.status === "partial" || wState.status === "wrong") && (
+            <div className="text-xs rounded-lg bg-secondary/50 p-2 space-y-1">
+              <p className="flex items-start gap-1"><AlertCircle className="w-3.5 h-3.5 mt-0.5 text-sunset shrink-0" /> {wState.feedback}</p>
+              {wState.improved && <p className="italic text-primary">→ {wState.improved}</p>}
+            </div>
+          )}
+          {wState.status === "pending" && <p className="text-xs text-muted-foreground flex items-center gap-1"><Loader2 className="w-3.5 h-3.5 animate-spin" /> AI tutor proverava…</p>}
+          <div>
+            <Button size="sm" variant="hero" onClick={check} disabled={checking}>
+              {checking ? <Loader2 className="w-4 h-4 animate-spin" /> : <Sparkles className="w-4 h-4" />}
+              Proveri
+            </Button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
