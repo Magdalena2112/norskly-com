@@ -16,6 +16,7 @@ import NordicBackdrop from "@/components/student/NordicBackdrop";
 import { logErrors } from "@/lib/logErrors";
 import { getCurrentLanguageCode, getCurrentPersonalization } from "@/lib/currentLanguage";
 import { generateWritingPdf } from "@/lib/writingPdf";
+import CorrectionResultView, { type CorrectionResult } from "@/components/writing/CorrectionResultView";
 import { format } from "date-fns";
 
 // ─── Shared types ───
