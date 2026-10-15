@@ -22,6 +22,11 @@ export interface LessonImages {
 }
 
 export const LESSON_IMAGES: Record<string, LessonImages> = {
+  "EN-A2-L01": {
+    cover: a2t1.url,
+    texts: { "EN-A2-L01-T01": a2t1.url, "EN-A2-L01-T02": a2t2.url, "EN-A2-L01-T03": a2t3.url },
+    modules: {},
+  },
   "EN-A1-L01": {
     cover: i1.url,
     texts: { "EN-A1-L01-T01": i2.url, "EN-A1-L01-T02": i3.url, "EN-A1-L01-T03": i4.url },
