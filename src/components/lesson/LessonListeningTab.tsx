@@ -80,7 +80,6 @@ export default function LessonListeningTab({ scenes, lang, lessonCode, completed
       </nav>
       <div className="space-y-4">
         <header>
-          <p className="text-xs text-muted-foreground mb-1">Aktivnost {index + 1} od {scenes.length}</p>
           <h3 className="font-display font-semibold text-xl text-primary">{scene.title}</h3>
         </header>
         <div className="flex flex-wrap items-center gap-2 border-y border-border/60 py-3">
