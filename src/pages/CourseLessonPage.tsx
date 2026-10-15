@@ -12,6 +12,7 @@ import LessonPronunciationTab from "@/components/lesson/LessonPronunciationTab";
 import LessonCultureTab from "@/components/lesson/LessonCultureTab";
 import LessonReviewQuiz from "@/components/lesson/LessonReviewQuiz";
 import LessonExercise from "@/components/lesson/LessonExercise";
+import { ITEM_IMAGES } from "@/content/lessons/itemImages";
 import { Button } from "@/components/ui/button";
 import { Volume2, Mic, MessageSquare, CheckCircle2, ChevronLeft, ChevronRight, BookOpen, Languages, BookOpenText, Headphones, PenLine, Globe2, Trophy, Play, Square, Eye, EyeOff, Turtle } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -326,6 +327,7 @@ export default function CourseLessonPage() {
                     <h3 className="font-display font-semibold text-lg text-primary">{t.title}</h3>
                     <Button size="sm" variant="outline" onClick={() => speakLines([{ speaker: "n", text: t.body }], lang)}><Volume2 className="w-4 h-4" /> Slušaj</Button>
                   </div>
+                  {t.image && ITEM_IMAGES[t.image] && <img src={ITEM_IMAGES[t.image]} alt={t.title} loading="lazy" className="w-full max-w-md h-auto rounded-xl border border-border/60 mb-3" />}
                   <p className="leading-relaxed whitespace-pre-line">{t.body}</p>
                   {t.note && <p className="text-xs text-muted-foreground mt-2">{t.note}</p>}
                 </div>
