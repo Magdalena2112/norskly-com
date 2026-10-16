@@ -5295,11 +5295,38 @@
       "roleswitch": []
     },
     "culture": {
-      "title": "",
-      "body": "",
-      "note": "",
-      "customs": [],
-      "comparison": []
+      "title": "Everyday Life in the UK",
+      "body": "Discover how people live, work and spend their free time in the UK – and see how it compares to life in Serbia.",
+      "topics": [
+        {
+          "title": "Daily Life & Working Habits",
+          "image": "a2:cu1",
+          "text": "In the UK, many people start work between 8 and 9 a.m. A typical working day is about 8 hours. Most people have a lunch break around 1 p.m. They often go to work by train, bus or bike. In recent years, more people work from home. In the evening, people usually spend time with their family, friends or on hobbies.",
+          "comparison": "In the UK, working hours are often more fixed, and people are usually very punctual. In Serbia, working hours can be more flexible, and social life often plays a bigger role after work.",
+          "fact": "Many people in the UK use a \"lunch break\" to quickly get a sandwich or salad, or to visit a café near their office."
+        },
+        {
+          "title": "Everyday Etiquette",
+          "image": "a2:cu2",
+          "text": "British people are generally polite and use phrases like please, thank you and sorry every day. It's common to wait in a line (queue) for your turn, for example in shops or at the bus stop. People usually keep a bit of personal space and tend to be polite rather than very direct. Small talk about the weather, work or weekend plans is a common way to start a conversation.",
+          "comparison": "Queuing is very common in the UK, and people usually wait patiently. In Serbia, queues are less common, and communication can be more direct. Both cultures are friendly, but British people often use polite phrases more often, even in casual situations.",
+          "fact": "The weather is a very popular topic in the UK. It's a safe and friendly way to start a conversation, even with people you don't know."
+        },
+        {
+          "title": "Housing & Flatsharing",
+          "image": "a2:cu3",
+          "text": "Many young people in the UK, especially students and young professionals, live in shared houses or flats with flatmates. They share the rent and household bills, as well as common areas like the kitchen and living room. It's important to be considerate, keep shared spaces clean and agree on house rules. Living with flatmates can be a great way to meet new people and learn to be more independent.",
+          "comparison": "In the UK, it's very common for young adults to live with flatmates, especially in cities. In Serbia, many young people still live with their families for a longer time, and shared living is less common, although it is becoming more popular.",
+          "fact": "Some shared houses have a rota – a schedule for household chores, so everyone knows when to clean, cook or take out the bins."
+        },
+        {
+          "title": "Free Time & Social Life",
+          "image": "a2:cu4",
+          "text": "British people enjoy a wide range of hobbies and leisure activities. Many join local clubs, go to the gym, play sports or take evening classes to learn something new. Pubs, cafés and parks are popular places to meet friends. When people move to a new city, joining a club or a course is a great way to meet new people and feel part of the community.",
+          "comparison": "In both the UK and Serbia, people enjoy spending time with family and friends. In the UK, joining clubs and evening classes is a popular way to meet new people, especially after moving to a new city. In Serbia, social life often revolves around family, friends and local cafés.",
+          "fact": "Many UK towns and cities offer evening courses – from cooking and photography to languages and creative writing."
+        }
+      ]
     },
     "review": {
       "quiz": []
