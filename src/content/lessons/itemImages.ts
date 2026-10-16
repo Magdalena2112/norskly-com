@@ -130,3 +130,13 @@ ITEM_IMAGES["a2:vo20"] = a2vo20.url;
 ITEM_IMAGES["a2:rd1"] = a2rd1.url;
 ITEM_IMAGES["a2:rd2"] = a2rd2.url;
 ITEM_IMAGES["a2:rd3"] = a2rd3.url;
+
+// EN-A2-L01 culture topic illustrations.
+import a2cu1 from "@/assets/lessons/en-a2-l01-cu1.webp.asset.json";
+import a2cu2 from "@/assets/lessons/en-a2-l01-cu2.webp.asset.json";
+import a2cu3 from "@/assets/lessons/en-a2-l01-cu3.webp.asset.json";
+import a2cu4 from "@/assets/lessons/en-a2-l01-cu4.webp.asset.json";
+ITEM_IMAGES["a2:cu1"] = a2cu1.url;
+ITEM_IMAGES["a2:cu2"] = a2cu2.url;
+ITEM_IMAGES["a2:cu3"] = a2cu3.url;
+ITEM_IMAGES["a2:cu4"] = a2cu4.url;

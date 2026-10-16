@@ -1,17 +1,83 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { CheckCircle2, ChevronLeft, ChevronRight, MessageSquare, Volume2 } from "lucide-react";
-import { speakLines, type Exercise } from "@/lib/courseLessons";
+import { CheckCircle2, ChevronLeft, ChevronRight, Lightbulb, MessageSquare, Volume2 } from "lucide-react";
+import { speakLines, stopSpeaking, type Exercise } from "@/lib/courseLessons";
+import { ITEM_IMAGES } from "@/content/lessons/itemImages";
 import LessonExercise from "./LessonExercise";
 
 // Universal culture tab: all content comes from the lesson's `modules.culture` data.
 interface CultureCard { title: string; text: string; example?: string }
+interface CultureTopic { title: string; image?: string; text: string; comparison?: string; fact?: string }
 export interface CultureData {
   title: string; body: string; note?: string;
   customs?: CultureCard[]; comparison?: CultureCard[]; exercises?: Exercise[];
+  topics?: CultureTopic[];
 }
 
-export default function LessonCultureTab({ data, lang, level, lessonTitle, done, onDone, onTalk }: {
+export default function LessonCultureTab(props: {
+  data: CultureData; lang: "no" | "en" | "de"; level: string; lessonTitle: string;
+  done: string[]; onDone: (code: string) => void; onTalk: () => void; onFinish?: () => void;
+}) {
+  if (props.data.topics?.length) return <CultureTopics data={props.data} lang={props.lang} onFinish={props.onFinish} />;
+  return <ClassicCulture {...props} />;
+}
+
+function CultureTopics({ data, lang, onFinish }: { data: CultureData; lang: string; onFinish?: () => void }) {
+  const topics = data.topics!;
+  const [i, setI] = useState(0);
+  const t = topics[i];
+  const go = (n: number) => { stopSpeaking(); setI(n); window.scrollTo({ top: 0, behavior: "smooth" }); };
+  return (
+    <div className="space-y-5">
+      <div>
+        <h3 className="font-display font-semibold text-xl text-primary">{data.title}</h3>
+        {data.body && <p className="text-sm text-muted-foreground mt-1">{data.body}</p>}
+      </div>
+      <div className="flex gap-2 overflow-x-auto scrollbar-hide pb-1">
+        {topics.map((x, n) => (
+          <button key={x.title} onClick={() => go(n)}
+            className={`shrink-0 rounded-full px-4 py-2 text-sm font-medium border transition ${n === i ? "bg-primary text-primary-foreground border-primary" : "bg-background text-muted-foreground border-border"}`}>
+            {n + 1}. {x.title}
+          </button>
+        ))}
+      </div>
+      <section className="rounded-2xl border border-border/60 bg-cream/90 p-5 shadow-card-soft grid md:grid-cols-2 gap-5 items-start">
+        {t.image && ITEM_IMAGES[t.image] && (
+          <img src={ITEM_IMAGES[t.image]} alt={t.title} className="w-full rounded-xl object-cover" loading="lazy" />
+        )}
+        <div>
+          <div className="flex items-center justify-between gap-2 mb-2">
+            <h4 className="font-display font-semibold text-lg text-primary">{t.title}</h4>
+            <Button size="sm" variant="outline" onClick={() => speakLines([{ speaker: "n", text: t.text }], lang)}><Volume2 className="w-4 h-4" /> Slušaj</Button>
+          </div>
+          <p className="leading-relaxed">{t.text}</p>
+        </div>
+      </section>
+      <div className="grid sm:grid-cols-2 gap-3">
+        {t.comparison && (
+          <div className="rounded-2xl border border-primary/20 bg-primary/5 p-4">
+            <p className="font-semibold text-primary mb-1">🇬🇧 UK vs. Serbia 🇷🇸</p>
+            <p className="text-sm">{t.comparison}</p>
+          </div>
+        )}
+        {t.fact && (
+          <div className="rounded-2xl border border-accent/40 bg-accent/10 p-4">
+            <p className="font-semibold text-primary mb-1 flex items-center gap-1"><Lightbulb className="w-4 h-4" /> Da li znaš?</p>
+            <p className="text-sm">{t.fact}</p>
+          </div>
+        )}
+      </div>
+      <div className="flex items-center justify-between gap-2">
+        <Button variant="outline" size="sm" disabled={i === 0} onClick={() => go(i - 1)}><ChevronLeft className="w-4 h-4" /> Prethodna tema</Button>
+        {i < topics.length - 1
+          ? <Button size="sm" onClick={() => go(i + 1)}>Sledeća tema <ChevronRight className="w-4 h-4" /></Button>
+          : <Button size="sm" variant="hero" onClick={() => { stopSpeaking(); onFinish?.(); }}><CheckCircle2 className="w-4 h-4" /> Završi kulturu</Button>}
+      </div>
+    </div>
+  );
+}
+
+function ClassicCulture({ data, lang, level, lessonTitle, done, onDone, onTalk }: {
   data: CultureData; lang: "no" | "en" | "de"; level: string; lessonTitle: string;
   done: string[]; onDone: (code: string) => void; onTalk: () => void;
 }) {
