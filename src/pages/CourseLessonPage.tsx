@@ -398,7 +398,7 @@ export default function CourseLessonPage() {
 
           {tab === "culture" && m.culture && (
             <LessonCultureTab key={`${row.id}_${lang}`} data={m.culture} lang={lang} level={level}
-              lessonTitle={row.title_target || ""} done={done} onDone={markDone}
+              lessonTitle={row.title_target || ""} done={done} onDone={markDone} onFinish={() => openModule(null)}
               onTalk={() => navigate(`/talk?lesson=${encodeURIComponent(content?.code || "")}`)} />
           )}
 
