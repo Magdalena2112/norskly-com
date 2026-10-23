@@ -1273,7 +1273,7 @@
      "title": "Endringer i hverdagen",
      "instruction": "Poveži svaku sliku sa tačnim izrazom.",
      "kind": "vocabulary",
-     "image": "a2:vo07",
+     "image": "no:vo07",
      "items": [
       {
        "prompt": "Slika 1 (gore levo)",
@@ -1976,7 +1976,7 @@
     {
      "id": "NO-A2-L01-RD1",
      "title": "Tekst 1 · En travel uke",
-     "image": "a2:rd1",
+     "image": "no:rd1",
      "body": "Nora har en travel uke. Hun jobber deltid i en bokhandel på mandager, onsdager og fredager. Vanligvis står hun opp klokka sju, spiser frokost og tar bussen til jobb.\n\nPå tirsdager og torsdager går hun på norskkurs om kvelden, så hun studerer hjemme om ettermiddagen. Denne uka er litt annerledes fordi hun forbereder en presentasjon til kurset. Hun leter også etter en ny leilighet, så etter middag bruker hun tid på nettet.\n\nPå lørdag rydder hun rommet sitt, vasker klær og treffer Ingrid for å ta en kaffe. På søndag går hun en tur med Jonas og planlegger den nye uka."
     },
     {
@@ -1988,7 +1988,7 @@
     {
      "id": "NO-A2-L01-RD3",
      "title": "Tekst 3 · En ny start i Oslo",
-     "image": "a2:rd3",
+     "image": "no:rd3",
      "body": "Da Lukas flyttet til Oslo for to måneder siden, var alt nytt og litt forvirrende. Hjemme bodde han i en liten by og kjente alle. I Oslo går livet fortere, bussene er alltid fulle, og det virker som folk har det travelt.\n\nI starten syntes Lukas det var vanskelig å venne seg til den nye rutinen sin. Han begynte i ny jobb på et hotell, jobbet ulike vakter og studerte norsk om kvelden. Han ville også få nye venner, så han ble med i en lokal fotballgruppe som spiller på søndager.\n\nLitt etter litt ble ting lettere. Han lærte å planlegge tiden sin, fant en hyggelig kafé i nærheten av leiligheten sin og begynte å trives i byen. Nå savner han fortsatt familien sin, men han er mer selvsikker og trives bedre med det nye livet sitt."
     }
    ],

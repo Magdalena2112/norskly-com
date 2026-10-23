@@ -140,3 +140,11 @@ ITEM_IMAGES["a2:cu1"] = a2cu1.url;
 ITEM_IMAGES["a2:cu2"] = a2cu2.url;
 ITEM_IMAGES["a2:cu3"] = a2cu3.url;
 ITEM_IMAGES["a2:cu4"] = a2cu4.url;
+
+// NO-A2-L01: Norwegian copies of pictures that contain English words.
+import noRd1 from "@/assets/lessons/no-a2-l01-rd1.webp";
+import noRd3 from "@/assets/lessons/no-a2-l01-rd3.webp";
+import noVo07 from "@/assets/lessons/no-a2-l01-vo07.webp";
+ITEM_IMAGES["no:rd1"] = noRd1;
+ITEM_IMAGES["no:rd3"] = noRd3;
+ITEM_IMAGES["no:vo07"] = noVo07;
