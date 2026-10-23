@@ -105,6 +105,52 @@ export const TALK_SCENARIOS: Record<string, TalkScenario[]> = {
       instructions: "Play a friend planning Saturday with the learner. You are busy in the morning but might be free later; have your own preferences and suggest alternatives. Encourage making suggestions, asking questions, expressing availability and everyday activities. Ask one question per turn, stay at A2 level, about 8–10 exchanges.",
     },
   ],
+  "NO-A2-L01": [
+    {
+      id: "S-01",
+      voice: "f",
+      title: "Fortell om dagen din",
+      description: "Piješ kafu sa novom prijateljicom u Oslu i pričaš o svom tipičnom radnom danu.",
+      aiRole: "Ingrid, nova prijateljica na kafi",
+      studentRole: "Učenik opisuje svoj uobičajeni dan",
+      opening: "Hei! Så hyggelig å treffe deg! Fortell meg, hvordan ser en vanlig dag ut for deg?",
+      goals: ["Opiši jutarnju rutinu", "Reci šta radiš na poslu ili u školi", "Počni bar jednu rečenicu vremenom (I dag…, Om morgenen…)", "Koristi priloge učestalosti (alltid, vanligvis, ofte, aldri)"],
+      instructions: "Play Ingrid, a friendly new friend having coffee with the learner in Oslo. Speak only Norwegian Bokmål at A2 level. Ask about their typical weekday: morning routine, work or school, free time. Ask one question per turn, react to what the learner says. Encourage V2 word order with inversion and frequency adverbs. Rephrase simply if the learner doesn't understand. About 6–8 exchanges.",
+    },
+    {
+      id: "S-02",
+      voice: "m",
+      title: "La oss dele husarbeidet",
+      description: "Deliš stan u Oslu sa Jonasom i dogovarate ko će koji kućni posao raditi.",
+      aiRole: "Jonas, cimer u zajedničkom stanu",
+      studentRole: "Učenik dogovara raspodelu kućnih poslova",
+      opening: "Hei! Vi har ganske mye å gjøre i helgen. Jeg kan lage middag, men vi må også rydde leiligheten. Hva vil du gjøre?",
+      goals: ["Predloži koji posao možeš da uradiš (Jeg kan…)", "Reci šta mora da se uradi (Vi må…)", "Upotrebi ikke bar jednom", "Koristi vokabular za kućne poslove"],
+      instructions: "Play Jonas, the learner's flatmate in Oslo. Speak only Norwegian Bokmål at A2 level. You both have a busy weekend and must divide chores (støvsuge, ta oppvasken, vaske klær, gå ut med søpla, handle matvarer). Have your own obligations (e.g. På lørdag jobber jeg ikke, men på søndag trener jeg). Encourage kan/må, ikke placement and household vocabulary. One question per turn, about 6–8 exchanges.",
+    },
+    {
+      id: "S-03",
+      voice: "f",
+      title: "Hva driver du med nå om dagen?",
+      description: "Nailaziš na staru prijateljicu i pričate o navikama i promenama u životu.",
+      aiRole: "Nora, stara prijateljica koju dugo nisi video/la",
+      studentRole: "Učenik priča o navikama i trenutnim promenama",
+      opening: "Hei! Det er lenge siden! Hvordan går det? Gjør du noe nytt nå om dagen?",
+      goals: ["Opiši svakodnevne navike", "Reci šta se sada menja (akkurat nå, nå om dagen)", "Postavi bar jedno pitanje upitnom reči (Hvor…? Når…?)", "Koristi vokabular promena (flytte, begynne i ny jobb, prøve noe nytt)"],
+      instructions: "Play Nora, an old friend catching up with the learner in Oslo. Speak only Norwegian Bokmål at A2 level. Talk about usual habits and what is changing now (new job, moving, new hobby). Encourage inversion after time expressions, correct question word order and ikke. One question per turn, react naturally, about 6–8 exchanges.",
+    },
+    {
+      id: "S-04",
+      voice: "m",
+      title: "Planer for helgen",
+      description: "Sa Jonasom planiraš subotu u Oslu, ali oboje imate obaveze — nađite zajednički termin i aktivnost.",
+      aiRole: "Jonas, prijatelj koji planira subotu",
+      studentRole: "Učenik predlaže aktivnosti i dogovara termin",
+      opening: "Hei! Skal vi gjøre noe sammen på lørdag? Om morgenen jobber jeg, men senere er jeg kanskje ledig. Hva har du lyst til?",
+      goals: ["Predloži aktivnost", "Pitaj kada je slobodan (Når…?)", "Reci kada si slobodan/na uz inverziju (På lørdag kan jeg…)", "Promeni plan ako treba i postigni dogovor"],
+      instructions: "Play Jonas planning Saturday in Oslo with the learner. Speak only Norwegian Bokmål at A2 level. You are busy in the morning but free later; suggest places in Oslo (Frognerparken, Aker Brygge, a café on Grünerløkka). Encourage suggestions, questions, inversion and frequency adverbs. One question per turn, about 8–10 exchanges.",
+    },
+  ],
 };
 
 export function getTalkScenarios(code?: string | null): TalkScenario[] {
@@ -120,6 +166,9 @@ Vocabulary: greetings & introductions (hello, hi, good morning, goodbye, see you
 Grammar: Present Simple (habits, routines, facts); Present Continuous (actions now, temporary situations); Present Simple vs. Present Continuous; stative verbs (know, like, want, need, understand, believe — usually not in continuous).
 Vocabulary: daily routines (wake up, get up, have breakfast, go to work/school, finish work, cook dinner, go to bed); household chores (clean the flat, do the laundry, do the dishes, take out the rubbish, tidy up, cook); changes in daily life (move to a new city, start a new job, learn something new, at the moment, these days, usually).
 Frequency adverbs: always, usually, often, sometimes, never.`,
+  "NO-A2-L01": `Course level A2 (Norwegian Bokmål), Lesson 1. Characters: Nora, Jonas, Ingrid, Anne; city: Oslo.
+Grammar: V2 rule (finite verb in second position); inversion after time/place expressions (I dag jobber Nora hjemme); placement of ikke (Nora jobber ikke; I dag jobber hun ikke); question word order (Bor du i Oslo? Hvor jobber Ingrid? Hvorfor sykler du ikke?); frequency adverbs alltid, vanligvis, ofte, av og til / noen ganger, sjelden, aldri.
+Vocabulary: daily routine (våkne, stå opp, spise frokost, ta bussen, begynne på jobb, ta en pause, slutte på jobb, legge seg); chores (rydde, vaske klær, ta oppvasken, handle matvarer, lage middag, støvsuge, gå ut med søpla); changes (flytte til et nytt sted, begynne i ny jobb, lete etter en ny leilighet, venne seg til noe, prøve noe nytt, få nye venner, ta en beslutning).`,
 };
 
 export function getLessonMaterial(code?: string | null): string | undefined {
