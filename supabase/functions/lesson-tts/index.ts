@@ -4,7 +4,7 @@ import { corsHeaders } from "npm:@supabase/supabase-js@2/cors";
 const GATEWAY = "https://ai.gateway.lovable.dev";
 const TTS_MODEL = "google/gemini-3.1-flash-tts-preview";
 const BUCKET = "lesson-audio";
-const MAX_CHARS = 600;
+const MAX_CHARS = 3000;
 const LANG_NAME: Record<string, string> = { no: "Norwegian Bokmål", de: "German", en: "English" };
 // Distinct natural voices: female / male / neutral narrator
 const VOICES: Record<string, string> = { f: "Aoede", m: "Charon", n: "Kore" };
