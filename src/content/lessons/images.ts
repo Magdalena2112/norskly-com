@@ -16,6 +16,7 @@ import i14 from "@/assets/lessons/en-a1-l01-14.webp.asset.json";
 import a2t1 from "@/assets/lessons/en-a2-l01-t1.webp.asset.json";
 import a2t2 from "@/assets/lessons/en-a2-l01-t2.webp.asset.json";
 import a2t3 from "@/assets/lessons/en-a2-l01-t3.webp.asset.json";
+import noT3 from "@/assets/lessons/no-a2-l01-t3.webp";
 
 export interface LessonImages {
   cover?: string;
@@ -25,6 +26,11 @@ export interface LessonImages {
 }
 
 export const LESSON_IMAGES: Record<string, LessonImages> = {
+  "NO-A2-L01": {
+    cover: a2t1.url,
+    texts: { "NO-A2-L01-T01": a2t1.url, "NO-A2-L01-T02": a2t2.url, "NO-A2-L01-T03": noT3 },
+    modules: {},
+  },
   "EN-A2-L01": {
     cover: a2t1.url,
     texts: { "EN-A2-L01-T01": a2t1.url, "EN-A2-L01-T02": a2t2.url, "EN-A2-L01-T03": a2t3.url },
