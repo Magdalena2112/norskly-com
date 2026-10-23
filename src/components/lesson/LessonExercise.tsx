@@ -64,7 +64,7 @@ export default function LessonExercise({
       })), lessonTitle, MAX_ATTEMPTS, language);
     }
 
-    // Writing tasks (single open answer) get the full writing-correct analysis, same as free writing.
+    // Explicitly open writing tasks get the full analysis, same as free writing.
     if (isWriting) {
       const s = next[0];
       if (!s.value.trim() || s.status === "correct") { setState(next); return; }
@@ -132,8 +132,8 @@ export default function LessonExercise({
     if (allDone) onDone(exercise.code);
   }
 
-  // Writing tasks (a single open answer) get a dedicated layout; everything else keeps the standard one.
-  const isWriting = exercise.items.length === 1 && !!exercise.items[0].open;
+  // Shape alone is not enough: short comprehension questions can also have one open item.
+  const isWriting = exercise.kind === "open" && exercise.items.length === 1 && !!exercise.items[0].open;
   if (!isWriting) return (
     <div className="rounded-2xl border border-border/60 bg-cream/90 p-4 sm:p-5 shadow-card-soft">
       <div className="flex items-start justify-between gap-2 mb-1">
