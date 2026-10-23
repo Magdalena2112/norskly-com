@@ -1,15 +1,18 @@
-# Norwegian A2 Lesson 1: same pictures as the English lesson
+# Norwegian A2 Lesson 1: the English pictures with Norwegian words
+
+## Goal
+The Norwegian lesson uses the same pictures as English A2 Lesson 1. Wherever a picture contains English words (labels, signs, the email, captions on exercise pictures), the Norwegian lesson gets its own copy with those words in Norwegian. The English lesson keeps its original pictures unchanged.
 
 ## What will change
-- **Intro texts:** Text 1 (Nora's monologue) and Text 2 (the café chat) show the same pictures as English Texts 1 and 2. They also become the lesson's cover picture.
-- **Text 3 (Anne's message):** gets a picture too. The English picture shows an English email on a laptop, so you can pick one of these:
-  - use the English picture anyway, or
-  - make a matching picture with the email text in Norwegian (same style, same laptop).
-  Until you decide, I'll use the English picture.
-- **Vocabulary flashcards:** each of the 42 Norwegian words gets the picture of its English word (våkne = wake up, stå opp = get up, and so on). Right now the flashcards look up pictures by English word, so the Norwegian cards have none.
-- **Exercises, Reading and Writing** already use the English pictures and stay as they are.
+1. **Intro texts:** Text 1 and Text 2 show the English pictures, and Text 1 also becomes the lesson cover. Text 3 shows the laptop email picture, with the email rewritten as Anne's Norwegian message.
+2. **Vocabulary flashcards:** every Norwegian word gets the picture of its English word (våkne = wake up, and so on). Any English label on a card is replaced with the Norwegian word.
+3. **Exercise pictures (Grammar, Vocabulary, Reading, Writing):** I'll go through every picture used in these modules. Pictures that contain English text get a Norwegian copy with the text translated to match the lesson's Norwegian answers. Pictures without text stay shared.
+4. **Check:** I'll compare each edited picture with the original to make sure only the words changed and the drawing stays the same. Any picture where the words don't come out clean will be listed for you.
 
 ## Technical details
-- `src/content/lessons/images.ts`: add a `NO-A2-L01` entry that reuses the `a2t1`/`a2t2`/`a2t3` imports (cover = a2t1).
-- New `src/content/lessons/NO-A2-L01.vocab-images.json`: the same areas (a2v1/a2v2/a2v3) with Norwegian word keys. The URLs come from the EN file, matched by word position. Merge it into `PICS` in `LessonVocabularyTab.tsx`.
-- Check: build log, and open the lesson's Intro and Vocabulary in the preview to confirm the pictures show.
+- Find text-bearing images: OCR (pytesseract) on every `a2:*` item image, the `a2t1..t3` intro images and the `a2v1..3` vocab images.
+- Edit only those with `imagegen--edit_image`, keeping the original dimensions and a prompt along the lines of "replace only the English text with this Norwegian text, keep everything else identical". Save as `src/assets/lessons/no-a2-l01-*.webp`.
+- Register the new images under `no:*` keys in `itemImages.ts` and point `NO-A2-L01.json` at those keys (text-free images keep their `a2:*` keys).
+- `images.ts`: add a `NO-A2-L01` entry (T01/T02 = a2t1/a2t2, T03 = the Norwegian email image, cover = a2t1).
+- New `NO-A2-L01.vocab-images.json` mapping Norwegian words to images by position, merged into `PICS` in `LessonVocabularyTab.tsx`.
+- Verify: build log, then OCR the new images and view the Intro, Vocabulary and exercises in the preview.
