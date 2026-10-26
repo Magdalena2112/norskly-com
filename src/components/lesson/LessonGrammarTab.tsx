@@ -12,7 +12,7 @@ import { LESSON_IMAGES } from "@/content/lessons/images";
 import { earnedXp, type PracticeExercise } from "@/lib/grammarPractice";
 import { logActivity } from "@/lib/logActivity";
 
-const g = (...n: number[]) => n.map((x) => `G-${String(x).padStart(2, "0")}`);
+const gc = (...n: number[]) => n.map((x) => `G-${String(x).padStart(2, "0")}`);
 
 function Table({ head, rows }: { head?: string[]; rows: string[][] }) {
   return (
@@ -54,11 +54,11 @@ export const LESSON_GRAMMAR_TOPICS: Record<string, Topic[]> = {
       related: [{ title: "Think i have – dva značenja", query: "Think and have as stative and action verbs" }] },
   ],
   "NO-A2-L01": [
-    { label: "V2 i inverzija", sectionIdx: [0, 1], exercises: g(1, 2, 7, 11, 15, 17, 18, 21, 22, 24, 27), aiTopic: "Norwegian V2 rule and inversion after time expressions", related: [] },
-    { label: "Negacija ikke", sectionIdx: [2], exercises: g(4, 13, 20, 23), aiTopic: "Position of ikke in Norwegian main clauses", related: [] },
-    { label: "Pitanja", sectionIdx: [3], exercises: g(3, 5, 8, 10, 12, 16, 25, 26), aiTopic: "Norwegian yes/no questions and question words", related: [] },
-    { label: "Prilozi učestalosti", sectionIdx: [4], exercises: g(6, 9, 14, 19), aiTopic: "Norwegian adverbs of frequency and their position", related: [] },
-    { label: "Kombinovano", sectionIdx: [0, 1, 2, 3, 4], exercises: g(28, 29, 30), aiTopic: "Norwegian V2, inversion, ikke and questions combined", related: [] },
+    { label: "V2 i inverzija", sectionIdx: [0, 1], exercises: gc(1, 2, 7, 11, 15, 17, 18, 21, 22, 24, 27), aiTopic: "Norwegian V2 rule and inversion after time expressions", related: [] },
+    { label: "Negacija ikke", sectionIdx: [2], exercises: gc(4, 13, 20, 23), aiTopic: "Position of ikke in Norwegian main clauses", related: [] },
+    { label: "Pitanja", sectionIdx: [3], exercises: gc(3, 5, 8, 10, 12, 16, 25, 26), aiTopic: "Norwegian yes/no questions and question words", related: [] },
+    { label: "Prilozi učestalosti", sectionIdx: [4], exercises: gc(6, 9, 14, 19), aiTopic: "Norwegian adverbs of frequency and their position", related: [] },
+    { label: "Kombinovano", sectionIdx: [0, 1, 2, 3, 4], exercises: gc(28, 29, 30), aiTopic: "Norwegian V2, inversion, ikke and questions combined", related: [] },
   ],
 };
 
