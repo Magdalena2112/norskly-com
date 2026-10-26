@@ -98,8 +98,6 @@ export default function LessonGrammarTab({ lessonId, onPractice, onExplain, mode
         if (p && Array.isArray(p.completed_steps)) setDone(p.completed_steps as string[]);
       }
       setLoaded(true);
-      if (false) {
-      }
     })();
   }, [lessonId, user]);
 
