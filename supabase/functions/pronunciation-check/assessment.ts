@@ -1,17 +1,20 @@
 // Official locale list: https://learn.microsoft.com/azure/ai-services/speech-service/language-support?tabs=pronunciation-assessment
 export const LOCALES = { no: "nb-NO", en: "en-GB", de: "de-DE" } as const;
-export type AzureWord = { Word: string; PronunciationAssessment?: { AccuracyScore?: number; ErrorType?: string }; Phonemes?: unknown[] };
-export type AzureResult = { RecognitionStatus?: string; NBest?: { Display?: string; PronunciationAssessment?: { PronScore?: number; AccuracyScore?: number; FluencyScore?: number; CompletenessScore?: number }; Words?: AzureWord[] }[] };
+type WordMetrics = { AccuracyScore?: number; ErrorType?: string };
+type Metrics = { PronScore?: number; AccuracyScore?: number; FluencyScore?: number; CompletenessScore?: number };
+export type AzureWord = WordMetrics & { Word: string; PronunciationAssessment?: WordMetrics; Phonemes?: unknown[] };
+export type AzureResult = { RecognitionStatus?: string; NBest?: (Metrics & { Display?: string; PronunciationAssessment?: Metrics; Words?: AzureWord[] })[] };
 
 export function assessmentResult(data: AzureResult) {
   const best = data.NBest?.[0];
-  const metric = best?.PronunciationAssessment;
+  // REST uses flat metrics; the Speech SDK uses a nested assessment object.
+  const metric = best?.PronunciationAssessment ?? best;
   if (data.RecognitionStatus !== "Success") return null;
   if (!metric || !Number.isFinite(metric.PronScore) || !best?.Words?.length) throw new Error("Missing assessment");
   const score = Math.max(0, Math.min(100, Math.round(metric.PronScore ?? 0)));
-  const words = best.Words.filter((w) => w.PronunciationAssessment?.ErrorType !== "Insertion").map((w) => ({
+  const words = best.Words.filter((w) => (w.PronunciationAssessment ?? w).ErrorType !== "Insertion").map((w) => ({
     word: w.Word,
-    ok: w.PronunciationAssessment?.ErrorType !== "Omission" && w.PronunciationAssessment?.ErrorType !== "Mispronunciation" && (w.PronunciationAssessment?.AccuracyScore ?? 0) >= 70,
+    ok: (w.PronunciationAssessment ?? w).ErrorType !== "Omission" && (w.PronunciationAssessment ?? w).ErrorType !== "Mispronunciation" && ((w.PronunciationAssessment ?? w).AccuracyScore ?? 0) >= 70,
   }));
   return { score, verdict: score >= 90 ? "excellent" : score >= 70 ? "good" : "retry", words };
 }

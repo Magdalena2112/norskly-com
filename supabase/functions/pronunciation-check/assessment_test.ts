@@ -21,3 +21,10 @@ Deno.test("silence and missing metrics never produce a successful score", () => 
 Deno.test("compressed recording cannot be disguised as WAV", () => {
   assert(!validWav(new TextEncoder().encode("fake WebM recording").buffer));
 });
+Deno.test("live REST flat metrics grade words without relying on SDK nesting", () => {
+  const r = assessmentResult({ RecognitionStatus: "Success", NBest: [{ PronScore: 94, Words: [
+    { Word: "Takk", AccuracyScore: 97, ErrorType: "None" },
+    { Word: "hjelpen", AccuracyScore: 55, ErrorType: "Mispronunciation" },
+  ] }] });
+  assert(r?.score === 94 && r.verdict === "excellent" && r.words[0].ok && !r.words[1].ok);
+});
