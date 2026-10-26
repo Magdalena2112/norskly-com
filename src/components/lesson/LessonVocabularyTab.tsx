@@ -25,13 +25,18 @@ const PICS: Record<string, Record<string, string>> = {};
 for (const src of [wordPics, wordPicsA2, wordPicsNoA2] as Record<string, Record<string, string>>[]) {
   for (const [k, v] of Object.entries(src)) PICS[k] = { ...PICS[k], ...v };
 }
-const picFor = (w: string, imgs: string[] = []) => {
+const HC_PICS: Record<string, string> = Object.fromEntries(
+  Object.entries(import.meta.glob("@/assets/lessons/hc/hc-vo-*.jpg", { eager: true, import: "default" }) as Record<string, string>)
+    .map(([path, url]) => [path.split("/").pop()!.replace(".jpg", ""), url]),
+);
+const picFor = (w: string, imgs: string[] = [], img?: string) => {
+  if (img && HC_PICS[img]) return HC_PICS[img];
   for (const k of imgs) { const u = PICS[k]?.[w]; if (u) return u; }
   for (const k of Object.keys(PICS)) { const u = PICS[k][w]; if (u) return u; }
   return undefined;
 };
 
-interface Word { word: string; translation: string; example?: string; active?: boolean }
+interface Word { word: string; translation: string; example?: string; active?: boolean; img?: string }
 interface Area { key: string; title: string; sr: string; images?: string[]; words: Word[]; examples?: string[]; exercises: string[] }
 
 let sharedIdx = 0;
@@ -104,7 +109,7 @@ export default function LessonVocabularyTab({ lessonId, mode, onPractice, onFlas
   }
 
   const WordCard = ({ w }: { w: Word }) => {
-    const pic = picFor(w.word, a.images);
+    const pic = picFor(w.word, a.images, w.img);
     if (pic) return (
       <li className="rounded-2xl border border-border/50 bg-background/80 overflow-hidden shadow-card-soft">
         <button type="button" onClick={() => say(w.word)} aria-label={`Izgovori ${w.word}`}
@@ -115,7 +120,7 @@ export default function LessonVocabularyTab({ lessonId, mode, onPractice, onFlas
           </span>
         </button>
         <div className="px-3 py-2">
-          <p className="font-semibold text-primary leading-tight">{w.word}</p>
+          <p className="font-semibold text-primary leading-snug break-words hyphens-auto">{w.word}</p>
           <p className="text-xs text-muted-foreground">{w.translation}</p>
           {w.example && <p className="text-xs italic text-primary/70 mt-0.5">„{w.example}“</p>}
         </div>
@@ -133,7 +138,7 @@ export default function LessonVocabularyTab({ lessonId, mode, onPractice, onFlas
       </li>
     );
   };
-  const grid = "grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3";
+  const grid = a.words.some((w) => w.word.length > 16) ? "grid grid-cols-1 min-[420px]:grid-cols-2 lg:grid-cols-3 gap-3" : "grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3";
 
   return (
     <div className="space-y-5">
@@ -262,6 +267,6 @@ export async function loadLessonFlashcards(lessonId: string): Promise<{ lang: st
   const raw: Area[] = Array.isArray(v?.areas) ? v.areas : [{ key: "_", title: "Reči", sr: "Reči", exercises: [], words: v?.words || [] }];
   return {
     lang: (data as any).language || "en",
-    areas: raw.map((x) => ({ key: x.key, sr: x.sr, words: x.words.map((w) => ({ ...w, pic: picFor(w.word, x.images) ?? (x.images?.[0] ? IMAGES[x.images[0]] : undefined) })) })),
+    areas: raw.map((x) => ({ key: x.key, sr: x.sr, words: x.words.map((w) => ({ ...w, pic: picFor(w.word, x.images, (w as Word).img) ?? (x.images?.[0] ? IMAGES[x.images[0]] : undefined) })) })),
   };
 }
