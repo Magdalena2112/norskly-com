@@ -16,6 +16,9 @@ import i14 from "@/assets/lessons/en-a1-l01-14.webp.asset.json";
 import a2t1 from "@/assets/lessons/en-a2-l01-t1.webp.asset.json";
 import a2t2 from "@/assets/lessons/en-a2-l01-t2.webp.asset.json";
 import a2t3 from "@/assets/lessons/en-a2-l01-t3.webp.asset.json";
+import hcT1 from "@/assets/lessons/hc-b1-l01-t1.jpg";
+import hcT2 from "@/assets/lessons/hc-b1-l01-t2.jpg";
+import hcT3 from "@/assets/lessons/hc-b1-l01-t3.jpg";
 import noT3 from "@/assets/lessons/no-a2-l01-t3.webp";
 
 export interface LessonImages {
@@ -26,6 +29,16 @@ export interface LessonImages {
 }
 
 export const LESSON_IMAGES: Record<string, LessonImages> = {
+  "NO-HC-B1-L01": {
+    cover: hcT1,
+    texts: { "NO-HC-B1-L01-T01": hcT1, "NO-HC-B1-L01-T02": hcT2, "NO-HC-B1-L01-T03": hcT3 },
+    modules: {},
+  },
+  "DE-HC-B1-L01": {
+    cover: hcT1,
+    texts: { "DE-HC-B1-L01-T01": hcT1, "DE-HC-B1-L01-T02": hcT2, "DE-HC-B1-L01-T03": hcT3 },
+    modules: {},
+  },
   "NO-A2-L01": {
     cover: a2t1.url,
     texts: { "NO-A2-L01-T01": a2t1.url, "NO-A2-L01-T02": a2t2.url, "NO-A2-L01-T03": noT3 },
