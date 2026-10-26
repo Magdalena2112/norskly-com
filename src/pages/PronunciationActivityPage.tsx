@@ -13,6 +13,7 @@ import StudentLayout from "@/components/student/StudentLayout";
 import NordicBackdrop from "@/components/student/NordicBackdrop";
 import BackButton from "@/components/BackButton";
 import { logActivity } from "@/lib/logActivity";
+import { recordingToWav, incorrectWords } from "@/lib/pronunciationRecording";
 import {
   ACTIVITY_TYPE_LABELS, CATEGORY_LABEL, activityItems, isPair, playPronunciation, stopPronunciation,
   type PronItem, type PronPair, type PronunciationActivity,
@@ -127,9 +128,10 @@ export function RecordSlot({ item, lang, level, onSuccess, compareOnly = false, 
     if (compareOnly) { setState("idle"); onSuccess(); return; }
     try {
       const { data: { session } } = await supabase.auth.getSession();
-      const ext = blob.type.includes("mp4") ? "m4a" : blob.type.includes("ogg") ? "ogg" : "webm";
+      if (!session) throw new Error("Prijavi se da proveriš izgovor.");
+      const wav = await recordingToWav(blob);
       const fd = new FormData();
-      fd.append("file", blob, `rec.${ext}`);
+      fd.append("file", wav, "rec.wav");
       fd.append("expected", item.text);
       fd.append("language", lang);
       fd.append("level", level);
@@ -145,8 +147,8 @@ export function RecordSlot({ item, lang, level, onSuccess, compareOnly = false, 
     }
   };
 
-  const tone = result?.verdict === "excellent" ? "border-emerald-500/40 bg-emerald-500/10 text-emerald-700"
-    : result?.verdict === "good" ? "border-amber-500/40 bg-amber-500/10 text-amber-700"
+  const tone = result?.verdict === "excellent" ? "border-accent/40 bg-accent/10 text-primary"
+    : result?.verdict === "good" ? "border-sunset/40 bg-sunset/10 text-primary"
     : "border-destructive/40 bg-destructive/10 text-destructive";
   const label = result?.verdict === "excellent" ? "Odlično!" : result?.verdict === "good" ? "Vrlo dobro" : "Pokušaj ponovo";
 
@@ -178,14 +180,13 @@ export function RecordSlot({ item, lang, level, onSuccess, compareOnly = false, 
             <span className="font-semibold">{label}</span>
             <span className="text-lg font-display">{result.score}%</span>
           </div>
-          {result.words.length > 0 && (
+          {incorrectWords(result.words).length > 0 && (
             <p className="text-base mb-2 text-foreground">
-              {result.words.map((w, i) => (
-                <span key={i} className={w.ok ? "text-emerald-700" : "text-orange-600 underline decoration-wavy underline-offset-4"}>{w.word} </span>
+              {incorrectWords(result.words).map((w, i) => (
+                <span key={i} className="text-destructive underline decoration-wavy underline-offset-4">{w.word} </span>
               ))}
             </p>
           )}
-          {result.heard && <p className="text-xs text-muted-foreground mb-2">Čuli smo: „{result.heard}“</p>}
           {result.feedback && <p className="text-sm text-foreground">{result.feedback}</p>}
           {result.tip && (
             <p className="mt-2 flex items-start gap-1.5 text-sm text-foreground">
