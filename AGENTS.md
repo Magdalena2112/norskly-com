@@ -12,3 +12,5 @@
 - CEFR level unlock rule lives in src/lib/levels.ts (start level from onboarding open, next level at LEVEL_UNLOCK_THRESHOLD of previous), so the threshold changes in one place.
 - LessonExercise uses the dedicated writing layout and grader only for single open items in exercises explicitly marked `kind: "open"`; short comprehension items in closed exercises retain their question and answer guide through `lesson-check`.
 - Structured grammar practice items carry `type` + `xp` and render via `GrammarPracticeExercise` with pure grading in `src/lib/grammarPractice.ts`; XP is logged once per lesson+code dedup key, so retries never double-count.
+- Pronunciation recordings use mono 16 kHz PCM WAV and authenticated Azure assessment for each explicit locale; Azure alone determines scores/errors, while AI only explains supplied errors in Serbian, so transcript guesses cannot award phonetic success.
+- Gateway calls use the server-only SDK with generated contracts under the functions shared directory, so Deno deployments and the frontend type augmentation share the same model definitions.
