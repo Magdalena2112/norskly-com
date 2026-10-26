@@ -19,14 +19,16 @@ export function assessmentResult(data: AzureResult) {
   const words = best.Words.filter((w) => (w.PronunciationAssessment ?? w).ErrorType !== "Insertion").map((w) => {
     const m = w.PronunciationAssessment ?? w;
     const phonemeOk = (w.Phonemes ?? []).every((p) => ((p.PronunciationAssessment ?? p).AccuracyScore ?? 100) >= PHONEME_MIN);
-    return { word: w.Word, ok: m.ErrorType !== "Omission" && m.ErrorType !== "Mispronunciation" && (m.AccuracyScore ?? 0) >= PASS_THRESHOLD && phonemeOk };
+    const ok = m.ErrorType !== "Omission" && m.ErrorType !== "Mispronunciation" && (m.AccuracyScore ?? 0) >= PASS_THRESHOLD && phonemeOk;
+    const issue = ok ? undefined : m.ErrorType === "Omission" ? "omitted" : !phonemeOk ? "sound" : "unclear";
+    return { word: w.Word, ok, issue };
   });
   // Accuracy drives the score so fluency/completeness cannot inflate weak sounds.
   const raw = Math.min(metric.PronScore ?? 0, metric.AccuracyScore ?? metric.PronScore ?? 0);
   const score = Math.max(0, Math.min(100, Math.round(raw)));
   const anyError = words.some((w) => !w.ok);
   const verdict = score >= 90 && !anyError ? "excellent" : score >= PASS_THRESHOLD && !anyError ? "good" : "retry";
-  return { score, verdict, words };
+  return { score, verdict, words, fluency: Math.round(metric.FluencyScore ?? 0), completeness: Math.round(metric.CompletenessScore ?? 0) };
 }
 
 export function validWav(buffer: ArrayBuffer): boolean {
