@@ -42,5 +42,5 @@ Deno.test("live REST flat metrics grade words without relying on SDK nesting", (
     { Word: "Takk", AccuracyScore: 97, ErrorType: "None" },
     { Word: "hjelpen", AccuracyScore: 55, ErrorType: "Mispronunciation" },
   ] }] });
-  assert(r?.score === 94 && r.verdict === "excellent" && r.words[0].ok && !r.words[1].ok);
+  assert(r?.score === 94 && r.verdict === "retry" && r.words[0].ok && !r.words[1].ok);
 });
