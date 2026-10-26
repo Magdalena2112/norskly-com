@@ -4052,7 +4052,8 @@
               "answer": "Lang vokal",
               "reveal": "pen"
             }
-          ]
+          ],
+          "compareOnly": true
         },
         {
           "code": "P-02",
@@ -4134,7 +4135,8 @@
               ],
               "answer": "penn"
             }
-          ]
+          ],
+          "compareOnly": true
         },
         {
           "code": "P-03",
@@ -4229,7 +4231,8 @@
               "answer": "Forskjellig",
               "reveal": "hat – hatt"
             }
-          ]
+          ],
+          "compareOnly": true
         },
         {
           "code": "P-05",
@@ -4287,7 +4290,8 @@
               "answer": "de",
               "reveal": "stu-DE-re"
             }
-          ]
+          ],
+          "compareOnly": true
         },
         {
           "code": "P-06",
@@ -4357,7 +4361,8 @@
               "reveal": "Vi møtes på FREDAG.",
               "explain": "Naglašena reč „fredag“ ističe kada je sastanak."
             }
-          ]
+          ],
+          "compareOnly": true
         },
         {
           "code": "P-07",
