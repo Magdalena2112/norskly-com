@@ -8,6 +8,16 @@ const MAX_CHARS = 3000;
 const LANG_NAME: Record<string, string> = { no: "Norwegian Bokmål", de: "German", en: "English" };
 // Distinct natural voices: female / male / neutral narrator
 const VOICES: Record<string, string> = { f: "Aoede", m: "Charon", n: "Kore" };
+// Azure neural voices per language: female / male / narrator
+const AZURE_LOCALE: Record<string, string> = { no: "nb-NO", de: "de-DE", en: "en-GB" };
+const AZURE_VOICES: Record<string, Record<string, string>> = {
+  no: { f: "nb-NO-PernilleNeural", m: "nb-NO-FinnNeural", n: "nb-NO-IselinNeural" },
+  de: { f: "de-DE-KatjaNeural", m: "de-DE-ConradNeural", n: "de-DE-AmalaNeural" },
+  en: { f: "en-GB-SoniaNeural", m: "en-GB-RyanNeural", n: "en-GB-LibbyNeural" },
+};
+const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+// Words written in CAPITALS carry contrastive stress.
+const toSsml = (t: string) => esc(t).replace(/\b\p{Lu}{2,}\b/gu, (w) => `<emphasis level="strong">${w.toLowerCase()}</emphasis>`);
 
 const json = (body: unknown, status = 200) =>
   new Response(JSON.stringify(body), { status, headers: { ...corsHeaders, "Content-Type": "application/json" } });
@@ -38,30 +48,49 @@ Deno.serve(async (req) => {
     if (!text || text.length > MAX_CHARS) return json({ error: "Neispravan tekst." }, 400);
 
     const admin = createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!);
-    const key = `${lang}/${await sha1(`${voice}|${text}`)}.wav`;
+    const azureKey = Deno.env.get("AZURE_SPEECH_KEY");
+    const region = Deno.env.get("AZURE_SPEECH_REGION")?.trim();
+    const useAzure = !!azureKey && !!region && /^[a-z0-9-]+$/.test(region);
+    const vk = ["f", "m", "n"].includes(body?.voice) ? body.voice : "n";
+    const azureVoice = AZURE_VOICES[lang][vk];
+    const key = useAzure
+      ? `${lang}/az-${await sha1(`${azureVoice}|${text}`)}.wav`
+      : `${lang}/${await sha1(`${voice}|${text}`)}.wav`;
 
     // Reuse cached clip when it already exists.
     const { data: existing } = await admin.storage.from(BUCKET).list(key.split("/")[0], { search: key.split("/")[1] });
     if (!existing?.some((f) => f.name === key.split("/")[1])) {
-      const r = await fetch(`${GATEWAY}/v1/audio/speech`, {
-        method: "POST",
-        headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
-        body: JSON.stringify({
-          model: TTS_MODEL,
-          contents: [{ role: "user", parts: [{ text: `Say naturally and clearly in ${LANG_NAME[lang]}${lang === "no" ? " with standard Eastern Norwegian (Oslo) pronunciation, keeping long and short vowels clearly distinct" : ""}.${/\b\p{Lu}{2,}\b/u.test(text) ? " The word written in CAPITAL letters carries strong contrastive stress; say it in normal case, only louder and longer." : ""} Text: ${text}` }] }],
-          generationConfig: {
-            responseModalities: ["AUDIO"],
-            speechConfig: { voiceConfig: { prebuiltVoiceConfig: { voiceName: voice } } },
-          },
-          stream_format: "audio",
-        }),
-      });
-      if (!r.ok) {
-        const t = await r.text();
-        console.error("TTS error", r.status, t);
-        return json({ error: "Izgovor nije uspeo." }, r.status);
+      let audio: Uint8Array | null = null;
+      if (useAzure) {
+        const ssml = `<speak version="1.0" xmlns="http://www.w3.org/2001/10/synthesis" xml:lang="${AZURE_LOCALE[lang]}"><voice name="${azureVoice}"><prosody rate="-8%">${toSsml(text)}</prosody></voice></speak>`;
+        const r = await fetch(`https://${region}.tts.speech.microsoft.com/cognitiveservices/v1`, {
+          method: "POST",
+          headers: { "Ocp-Apim-Subscription-Key": azureKey!, "Content-Type": "application/ssml+xml", "X-Microsoft-OutputFormat": "riff-24khz-16bit-mono-pcm", "User-Agent": "norskly" },
+          body: ssml,
+        });
+        if (r.ok) audio = new Uint8Array(await r.arrayBuffer());
+        else console.error("Azure TTS error", r.status);
       }
-      const audio = new Uint8Array(await r.arrayBuffer());
+      if (!audio) {
+        const r = await fetch(`${GATEWAY}/v1/audio/speech`, {
+          method: "POST",
+          headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
+          body: JSON.stringify({
+            model: TTS_MODEL,
+            contents: [{ role: "user", parts: [{ text: `Say naturally and clearly in ${LANG_NAME[lang]}${lang === "no" ? " with standard Eastern Norwegian (Oslo) pronunciation, keeping long and short vowels clearly distinct" : ""}.${/\b\p{Lu}{2,}\b/u.test(text) ? " The word written in CAPITAL letters carries strong contrastive stress; say it in normal case, only louder and longer." : ""} Text: ${text}` }] }],
+            generationConfig: {
+              responseModalities: ["AUDIO"],
+              speechConfig: { voiceConfig: { prebuiltVoiceConfig: { voiceName: voice } } },
+            },
+            stream_format: "audio",
+          }),
+        });
+        if (!r.ok) {
+          console.error("TTS error", r.status, await r.text());
+          return json({ error: "Izgovor nije uspeo." }, r.status);
+        }
+        audio = new Uint8Array(await r.arrayBuffer());
+      }
       const { error: upErr } = await admin.storage.from(BUCKET).upload(key, audio, { contentType: "audio/wav", upsert: true });
       if (upErr) console.error("upload error", upErr);
     }
