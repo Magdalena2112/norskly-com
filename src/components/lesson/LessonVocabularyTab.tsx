@@ -88,8 +88,8 @@ export default function LessonVocabularyTab({ lessonId, mode, onPractice, onFlas
   if (!row || !areas.length) return <p className="text-sm text-muted-foreground text-center py-8">Učitavanje reči lekcije…</p>;
   const lang = row.language || "en";
   const a = areas[Math.min(idx, areas.length - 1)];
-  const areaEx = exercises.filter((e) => a.exercises.includes(e.code));
-  const isAreaDone = (x: Area) => x.exercises.length > 0 && x.exercises.every((c) => done.includes(c));
+  const areaEx = exercises.filter((e) => (a.exercises ?? []).includes(e.code));
+  const isAreaDone = (x: Area) => (x.exercises?.length ?? 0) > 0 && x.exercises!.every((c) => done.includes(c));
   const active = a.words.filter((w) => w.active !== false);
   const passive = a.words.filter((w) => w.active === false);
   const say = (t: string) => speakLines([{ speaker: "m", text: t.split(" / ")[0].replace("…", "") }], lang);
