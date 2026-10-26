@@ -2,11 +2,17 @@ import React, { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/context/AuthContext";
 import LessonExercise from "@/components/lesson/LessonExercise";
+import GrammarPracticeExercise from "@/components/lesson/GrammarPracticeExercise";
 import { Button } from "@/components/ui/button";
+import { Progress } from "@/components/ui/progress";
 import { Volume2, BookOpen, CheckCircle2, Sparkles, ArrowRight, Lightbulb, AlertTriangle } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { loadLessonContent, speakLines, type Exercise, type LessonContent } from "@/lib/courseLessons";
 import { LESSON_IMAGES } from "@/content/lessons/images";
+import { earnedXp, type PracticeExercise } from "@/lib/grammarPractice";
+import { logActivity } from "@/lib/logActivity";
+
+const gc = (...n: number[]) => n.map((x) => `G-${String(x).padStart(2, "0")}`);
 
 function Table({ head, rows }: { head?: string[]; rows: string[][] }) {
   return (
@@ -47,6 +53,13 @@ export const LESSON_GRAMMAR_TOPICS: Record<string, Topic[]> = {
     { label: "Stative verbs", sectionIdx: [5, 6], exercises: ["ST-01","ST-02","ST-03","ST-04","ST-05","ST-06","ST-07","ST-08","ST-09","ST-10"], aiTopic: "Stative verbs (know, like, want, need, understand) and think/have state vs action",
       related: [{ title: "Think i have – dva značenja", query: "Think and have as stative and action verbs" }] },
   ],
+  "NO-A2-L01": [
+    { label: "V2 i inverzija", sectionIdx: [0, 1], exercises: gc(1, 2, 7, 11, 15, 17, 18, 21, 22, 24, 27), aiTopic: "Norwegian V2 rule and inversion after time expressions", related: [] },
+    { label: "Negacija ikke", sectionIdx: [2], exercises: gc(4, 13, 20, 23), aiTopic: "Position of ikke in Norwegian main clauses", related: [] },
+    { label: "Pitanja", sectionIdx: [3], exercises: gc(3, 5, 8, 10, 12, 16, 25, 26), aiTopic: "Norwegian yes/no questions and question words", related: [] },
+    { label: "Prilozi učestalosti", sectionIdx: [4], exercises: gc(6, 9, 14, 19), aiTopic: "Norwegian adverbs of frequency and their position", related: [] },
+    { label: "Kombinovano", sectionIdx: [0, 1, 2, 3, 4], exercises: gc(28, 29, 30), aiTopic: "Norwegian V2, inversion, ikke and questions combined", related: [] },
+  ],
 };
 
 export default function LessonGrammarTab({ lessonId, onPractice, onExplain, mode = "theory", initialTopic = 0, onTopicChange, renderMore }: {
@@ -62,7 +75,16 @@ export default function LessonGrammarTab({ lessonId, onPractice, onExplain, mode
   const [active, setActive] = useState(initialTopic);
   useEffect(() => { setActive(initialTopic); }, [initialTopic]);
   const [exIdx, setExIdx] = useState(0);
-  useEffect(() => { setExIdx(0); }, [active]);
+  const [loaded, setLoaded] = useState(false);
+  useEffect(() => {
+    // Resume at the first unfinished exercise of the topic.
+    const t = (content && row && LESSON_GRAMMAR_TOPICS[row.lesson_code]?.[active]);
+    const ex: Exercise[] = content?.modules.grammar?.exercises || [];
+    const list = t ? ex.filter((e) => t.exercises.includes(e.code)) : [];
+    const first = list.findIndex((e) => !done.includes(e.code));
+    setExIdx(first > 0 ? first : 0);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [active, loaded]);
   useEffect(() => { setShowMore(false); }, [active]);
 
   useEffect(() => {
@@ -75,6 +97,7 @@ export default function LessonGrammarTab({ lessonId, onPractice, onExplain, mode
         const { data: p } = await supabase.from("course_lesson_progress").select("completed_steps").eq("user_id", user.id).eq("lesson_id", lessonId).maybeSingle();
         if (p && Array.isArray(p.completed_steps)) setDone(p.completed_steps as string[]);
       }
+      setLoaded(true);
     })();
   }, [lessonId, user]);
 
@@ -99,6 +122,11 @@ export default function LessonGrammarTab({ lessonId, onPractice, onExplain, mode
     await supabase.from("course_lesson_progress").upsert({
       user_id: user.id, lesson_id: row.id, language: row.language, completed_steps: next, status: "in_progress",
     }, { onConflict: "user_id,lesson_id" });
+    const ex = exercises.find((e) => e.code === code) as any;
+    if (ex?.xp) {
+      await logActivity(user.id, "grammar", "lesson_grammar_exercise", ex.xp, { lesson_id: row.id, code },
+        { dedupKey: `lesson:${row.id}:${code}`, language: row.language });
+    }
   }
 
   if (!topics.length) return <p className="text-sm text-muted-foreground">Gramatički sadržaj ove lekcije je u pripremi.</p>;
@@ -106,6 +134,10 @@ export default function LessonGrammarTab({ lessonId, onPractice, onExplain, mode
   const topicEx = topic ? exercises.filter((e) => topic.exercises.includes(e.code)) : [];
   const isTopicDone = (t: Topic) => t.exercises.length > 0 && t.exercises.every((c) => done.includes(c));
   const img = images.length ? images[active % images.length] : undefined;
+  const xpExercises = exercises.filter((e: any) => e.xp) as any[];
+  const xpTotal = xpExercises.reduce((s, e) => s + e.xp, 0);
+  const xpEarned = earnedXp(xpExercises, done);
+  const xpDone = xpExercises.filter((e) => done.includes(e.code)).length;
 
   return (
     <div className="space-y-5">
@@ -215,6 +247,15 @@ export default function LessonGrammarTab({ lessonId, onPractice, onExplain, mode
       </>) : (<>
       {topicEx.length > 0 && (
         <div className="space-y-4">
+          {xpTotal > 0 && (
+            <div className="rounded-xl border border-border/60 bg-cream/90 p-3 space-y-2">
+              <div className="flex justify-between text-sm font-medium text-primary">
+                <span>Urađeno {xpDone}/{xpExercises.length}</span>
+                <span>{xpEarned}/{xpTotal} XP</span>
+              </div>
+              <Progress value={(xpEarned / xpTotal) * 100} className="h-2" />
+            </div>
+          )}
           <h3 className="font-display text-xl text-primary">Pripremljene vežbe ({topicEx.filter((e) => done.includes(e.code)).length}/{topicEx.length})</h3>
           <div className="flex flex-wrap gap-2">
             {topicEx.map((ex, i) => {
@@ -228,7 +269,9 @@ export default function LessonGrammarTab({ lessonId, onPractice, onExplain, mode
             })}
           </div>
           {topicEx[exIdx] && (
-            <LessonExercise key={topicEx[exIdx].id} exercise={topicEx[exIdx]} language={lang} level={row.cefr_level} lessonTitle={row.title_target || row.title} done={done.includes(topicEx[exIdx].code)} onDone={markDone} />
+            (topicEx[exIdx] as any).type
+              ? <GrammarPracticeExercise key={topicEx[exIdx].id} exercise={topicEx[exIdx] as unknown as PracticeExercise} done={done.includes(topicEx[exIdx].code)} onDone={markDone} />
+              : <LessonExercise key={topicEx[exIdx].id} exercise={topicEx[exIdx]} language={lang} level={row.cefr_level} lessonTitle={row.title_target || row.title} done={done.includes(topicEx[exIdx].code)} onDone={markDone} />
           )}
           <div className="flex justify-between gap-2">
             <Button variant="outline" size="sm" disabled={exIdx === 0} onClick={() => setExIdx(exIdx - 1)}>← Prethodna</Button>

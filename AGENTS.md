@@ -11,3 +11,4 @@
 - Lesson listening uses one typed scene array with stable completion codes and audio/questions together; include these codes in lesson progress and deduplicate XP per language so navigation and reloads cannot multiply rewards.
 - CEFR level unlock rule lives in src/lib/levels.ts (start level from onboarding open, next level at LEVEL_UNLOCK_THRESHOLD of previous), so the threshold changes in one place.
 - LessonExercise uses the dedicated writing layout and grader only for single open items in exercises explicitly marked `kind: "open"`; short comprehension items in closed exercises retain their question and answer guide through `lesson-check`.
+- Structured grammar practice items carry `type` + `xp` and render via `GrammarPracticeExercise` with pure grading in `src/lib/grammarPractice.ts`; XP is logged once per lesson+code dedup key, so retries never double-count.
