@@ -48,7 +48,7 @@ Deno.serve(async (req) => {
         headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
         body: JSON.stringify({
           model: TTS_MODEL,
-          contents: [{ role: "user", parts: [{ text: `Say naturally and clearly in ${LANG_NAME[lang]}: ${text}` }] }],
+          contents: [{ role: "user", parts: [{ text: `Say naturally and clearly in ${LANG_NAME[lang]}${lang === "no" ? " with standard Eastern Norwegian (Oslo) pronunciation, keeping long and short vowels clearly distinct" : ""}.${/\b\p{Lu}{2,}\b/u.test(text) ? " The word written in CAPITAL letters carries strong contrastive stress; say it in normal case, only louder and longer." : ""} Text: ${text}` }] }],
           generationConfig: {
             responseModalities: ["AUDIO"],
             speechConfig: { voiceConfig: { prebuiltVoiceConfig: { voiceName: voice } } },
