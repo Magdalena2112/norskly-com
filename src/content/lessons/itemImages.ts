@@ -148,3 +148,11 @@ import noVo07 from "@/assets/lessons/no-a2-l01-vo07.webp";
 ITEM_IMAGES["no:rd1"] = noRd1;
 ITEM_IMAGES["no:rd3"] = noRd3;
 ITEM_IMAGES["no:vo07"] = noVo07;
+
+// Health-care B1 lessons (NO/DE share illustrations without text).
+import hcRd1 from "@/assets/lessons/hc-b1-l01-rd1.jpg";
+import hcWr1 from "@/assets/lessons/hc-b1-l01-wr1.jpg";
+import hcT3 from "@/assets/lessons/hc-b1-l01-t3.jpg";
+ITEM_IMAGES["hc:rd1"] = hcRd1;
+ITEM_IMAGES["hc:wr1"] = hcWr1;
+ITEM_IMAGES["hc:t3"] = hcT3;

@@ -151,6 +151,22 @@ export const TALK_SCENARIOS: Record<string, TalkScenario[]> = {
       instructions: "Play Jonas planning Saturday in Oslo with the learner. Speak only Norwegian Bokmål at A2 level. You are busy in the morning but free later; suggest places in Oslo (Frognerparken, Aker Brygge, a café on Grünerløkka). Encourage suggestions, questions, inversion and frequency adverbs. One question per turn, about 8–10 exchanges.",
     },
   ],
+  "NO-HC-B1-L01": [
+    { id: "S-01", voice: "m", title: "Innkomstsamtale", description: "Primaš starijeg pacijenta sa bolom u grudima i vodiš prijemni razgovor.", aiRole: "Per Hansen (72), pasient med brystsmerter", studentRole: "Sykepleier koji vodi prijemni razgovor",
+      opening: "Hei… unnskyld, jeg har så vondt i brystet. Jeg vet ikke helt hva som skjer.", goals: ["Predstavi se i umiri pacijenta", "Pitaj gde boli, od kada i koliko jako (0–10)", "Pitaj o lekovima i alergijama", "Upotrebi bar jedno indirektno pitanje (Kan du fortelle meg…)"],
+      instructions: "Play Per Hansen, a 72-year-old patient admitted with chest pain in Oslo. Speak only Norwegian Bokmål at B1 level. You are a bit worried. Pain started at 3 a.m., radiates to the left arm, 6/10; you take blood pressure medication and are allergic to penicillin – reveal details only when asked. React naturally, about 8–10 exchanges." },
+    { id: "S-02", voice: "f", title: "Rapport ved vaktskifte", description: "Predaješ smenu koleginici Anne i izveštavaš o pacijentu.", aiRole: "Anne, sykepleier på kveldsvakt", studentRole: "Sykepleier koja predaje smenu",
+      opening: "Hei! Da er jeg klar for rapport. Hvem skal vi begynne med?", goals: ["Reci ime, sobu i razlog prijema", "Navedi merenja i stanje", "Pomeni alergiju i plan", "Odgovori na pitanja koleginice"],
+      instructions: "Play Anne, a nurse starting the evening shift in a Norwegian hospital. Speak only Norwegian Bokmål at B1 level. Ask follow-up questions about vital signs, pain, allergies and the doctor's plan. Use 'du'. One question per turn, about 6–8 exchanges." },
+  ],
+  "DE-HC-B1-L01": [
+    { id: "S-01", voice: "m", title: "Aufnahmegespräch", description: "Primaš starijeg pacijenta sa bolom u grudima i vodiš prijemni razgovor.", aiRole: "Herr Schmidt (72), Patient mit Brustschmerzen", studentRole: "Pflegekraft koja vodi prijemni razgovor",
+      opening: "Guten Tag… entschuldigen Sie, ich habe so starke Schmerzen in der Brust.", goals: ["Predstavi se i umiri pacijenta (Sie)", "Pitaj gde boli, od kada i koliko jako (0–10)", "Pitaj o lekovima i alergijama", "Upotrebi bar jedno indirektno pitanje (Könnten Sie mir sagen…)"],
+      instructions: "Play Herr Klaus Schmidt, a 72-year-old patient admitted with chest pain in a Berlin hospital. Speak only German at B1 level, always use 'Sie'. Pain since 3 a.m., radiates to the left arm, 6/10; you take a blood pressure pill and are allergic to penicillin – reveal details only when asked. About 8–10 exchanges." },
+    { id: "S-02", voice: "f", title: "Übergabe beim Schichtwechsel", description: "Predaješ smenu koleginici Anni i izveštavaš o pacijentu.", aiRole: "Anna, Pflegekraft im Spätdienst", studentRole: "Pflegekraft koja predaje smenu",
+      opening: "Hallo! Ich bin bereit für die Übergabe. Mit wem fangen wir an?", goals: ["Reci ime, sobu i razlog prijema", "Navedi vrednosti i stanje", "Pomeni alergiju i plan", "Odgovori na pitanja koleginice"],
+      instructions: "Play Anna, a nurse starting the late shift in a German hospital. Speak only German at B1 level, use 'du' with the colleague. Ask follow-up questions about vital signs, pain, allergies and the doctor's orders. One question per turn, about 6–8 exchanges." },
+  ],
 };
 
 export function getTalkScenarios(code?: string | null): TalkScenario[] {
@@ -169,6 +185,12 @@ Frequency adverbs: always, usually, often, sometimes, never.`,
   "NO-A2-L01": `Course level A2 (Norwegian Bokmål), Lesson 1. Characters: Nora, Jonas, Ingrid, Anne; city: Oslo.
 Grammar: V2 rule (finite verb in second position); inversion after time/place expressions (I dag jobber Nora hjemme); placement of ikke (Nora jobber ikke; I dag jobber hun ikke); question word order (Bor du i Oslo? Hvor jobber Ingrid? Hvorfor sykler du ikke?); frequency adverbs alltid, vanligvis, ofte, av og til / noen ganger, sjelden, aldri.
 Vocabulary: daily routine (våkne, stå opp, spise frokost, ta bussen, begynne på jobb, ta en pause, slutte på jobb, legge seg); chores (rydde, vaske klær, ta oppvasken, handle matvarer, lage middag, støvsuge, gå ut med søpla); changes (flytte til et nytt sted, begynne i ny jobb, lete etter en ny leilighet, venne seg til noe, prøve noe nytt, få nye venner, ta en beslutning).`,
+  "NO-HC-B1-L01": `Health-care course B1 (Norwegian Bokmål), Lesson 1: admission interview and medical history. Characters: Nora (nurse), Jonas (doctor), Ingrid, Anne; Ullevål sykehus, Oslo.
+Grammar: indirect questions (Kan du si hvor det gjør vondt? Jeg lurer på om…); ikke/adverbs before the verb in subordinate clauses; polite modals kunne, ville, skulle, burde.
+Vocabulary: symptoms (vondt i brystet, kvalm, svimmel, tungpustet, feber, utslett, stråle ut), measurements (blodtrykk, puls, oksygenmetning, blodprøve, EKG, smerteskala), history (bli innlagt, faste medisiner, allergisk mot, tåle, smertestillende, pårørende, journal, vaktskifte, taushetsplikt).`,
+  "DE-HC-B1-L01": `Health-care course B1 (German), Lesson 1: admission interview and anamnesis. Characters: Lena (nurse), Dr. Weber, Anna, Monika; hospital in Berlin.
+Grammar: indirect questions with W-words and ob (verb at the end); subordinate clauses with weil, dass, wenn; Konjunktiv II politeness (könnten, würden, sollten).
+Vocabulary: symptoms (Schmerzen in der Brust, mir ist übel, schwindlig, Atemnot, Fieber, Ausschlag, ausstrahlen), measurements (Blutdruck, Puls, Sauerstoffsättigung, Blutabnahme, EKG, Schmerzskala, Befund), anamnesis (aufgenommen werden, Dauermedikation, allergisch gegen, vertragen, Schmerzmittel, Angehörige, Patientenakte, Übergabe, Schweigepflicht).`,
 };
 
 export function getLessonMaterial(code?: string | null): string | undefined {

@@ -168,6 +168,7 @@ export type Database = {
       course_lessons: {
         Row: {
           cefr_level: string
+          course: string
           created_at: string
           goals: Json
           grammar: Json
@@ -190,6 +191,7 @@ export type Database = {
         }
         Insert: {
           cefr_level: string
+          course?: string
           created_at?: string
           goals?: Json
           grammar?: Json
@@ -212,6 +214,7 @@ export type Database = {
         }
         Update: {
           cefr_level?: string
+          course?: string
           created_at?: string
           goals?: Json
           grammar?: Json

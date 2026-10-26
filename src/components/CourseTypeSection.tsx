@@ -15,12 +15,12 @@ type Course = {
 const COURSES: Record<string, Course[]> = {
   norveski: [
     { id: "general", title: "Opšti kurs", description: "Sistematske lekcije od početnog do naprednog nivoa.", level: "A1–C1", status: "active", icon: BookOpen },
-    { id: "health", title: "Norveški za zdravstvene radnike", description: "Jezik za rad sa pacijentima, kolegama i dokumentacijom.", level: "Preporučeno A2+", status: "soon", icon: HeartPulse },
+    { id: "health", title: "Norveški za zdravstvene radnike", description: "Jezik za rad sa pacijentima, kolegama i dokumentacijom.", level: "B1", status: "active", icon: HeartPulse },
     { id: "norskprove", title: "Norskprøve priprema", description: "Ciljana priprema za zvanični test norveškog jezika.", level: "A2–B2", status: "soon", icon: ClipboardCheck },
   ],
   nemacki: [
     { id: "general", title: "Opšti kurs", description: "Sistematske lekcije od početnog do naprednog nivoa.", level: "A1–C1", status: "active", icon: BookOpen },
-    { id: "health", title: "Nemački za zdravstvene radnike", description: "Jezik za rad sa pacijentima, kolegama i dokumentacijom.", level: "Preporučeno A2+", status: "soon", icon: HeartPulse },
+    { id: "health", title: "Nemački za zdravstvene radnike", description: "Jezik za rad sa pacijentima, kolegama i dokumentacijom.", level: "B1", status: "active", icon: HeartPulse },
   ],
   engleski: [
     { id: "general", title: "Opšti kurs", description: "Sistematske lekcije od početnog do naprednog nivoa.", level: "A1–C1", status: "active", icon: BookOpen },

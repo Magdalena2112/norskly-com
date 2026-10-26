@@ -1,0 +1,2 @@
+ALTER TABLE public.course_lessons ADD COLUMN IF NOT EXISTS course text NOT NULL DEFAULT 'general';
+CREATE INDEX IF NOT EXISTS course_lessons_lang_course_idx ON public.course_lessons(language, course, cefr_level, sort_order);
