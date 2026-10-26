@@ -75,7 +75,16 @@ export default function LessonGrammarTab({ lessonId, onPractice, onExplain, mode
   const [active, setActive] = useState(initialTopic);
   useEffect(() => { setActive(initialTopic); }, [initialTopic]);
   const [exIdx, setExIdx] = useState(0);
-  useEffect(() => { setExIdx(0); }, [active]);
+  const [loaded, setLoaded] = useState(false);
+  useEffect(() => {
+    // Resume at the first unfinished exercise of the topic.
+    const t = (content && row && LESSON_GRAMMAR_TOPICS[row.lesson_code]?.[active]);
+    const ex: Exercise[] = content?.modules.grammar?.exercises || [];
+    const list = t ? ex.filter((e) => t.exercises.includes(e.code)) : [];
+    const first = list.findIndex((e) => !done.includes(e.code));
+    setExIdx(first > 0 ? first : 0);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [active, loaded]);
   useEffect(() => { setShowMore(false); }, [active]);
 
   useEffect(() => {
@@ -87,6 +96,9 @@ export default function LessonGrammarTab({ lessonId, onPractice, onExplain, mode
       if (user) {
         const { data: p } = await supabase.from("course_lesson_progress").select("completed_steps").eq("user_id", user.id).eq("lesson_id", lessonId).maybeSingle();
         if (p && Array.isArray(p.completed_steps)) setDone(p.completed_steps as string[]);
+      }
+      setLoaded(true);
+      if (false) {
       }
     })();
   }, [lessonId, user]);
