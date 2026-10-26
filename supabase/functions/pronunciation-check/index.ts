@@ -38,7 +38,9 @@ Deno.serve(async (req) => {
       console.error("Azure assessment status", response.status);
       return json({ error: response.status === 429 ? "Previše zahteva. Pokušaj malo kasnije." : "Azure provera trenutno nije dostupna. Pokušaj ponovo kasnije." }, response.status === 429 ? 429 : 502);
     }
-    const result = assessmentResult(await response.json() as AzureResult);
+    const azure = await response.json() as AzureResult;
+    console.info("Azure result structure", azure.RecognitionStatus, Object.keys(azure.NBest?.[0] || {}));
+    const result = assessmentResult(azure);
     if (!result) return json({ score: 0, verdict: "retry", provider: "azure", words: [], feedback: "Govor nije prepoznat. Približi se mikrofonu i pokušaj ponovo.", tip: "" });
     const errors = result.words.filter((w) => !w.ok).map((w) => w.word);
     let feedback = errors.length ? "Ponovi označene reči polako, pa poslušaj svoj snimak." : result.verdict === "retry" ? "Ponovi celu rečenicu mirnije, uz kraće pauze." : "Vrlo dobro! Nastavi da vežbaš uz model izgovora.";
@@ -57,7 +59,8 @@ Deno.serve(async (req) => {
       } catch { console.warn("Pronunciation advice unavailable; Azure result preserved"); }
     }
     return json({ ...result, provider: "azure", feedback, tip });
-  } catch {
+  } catch (e) {
+    console.error("Assessment failure category", e instanceof TypeError ? "transport-or-shape" : e instanceof SyntaxError ? "json" : e instanceof Error && e.message === "Missing assessment" ? "missing-metrics" : "other");
     return json({ error: "Procena izgovora nije uspela. Pokušaj ponovo." }, 502);
   }
 });
