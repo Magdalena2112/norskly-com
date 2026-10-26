@@ -112,6 +112,11 @@ export default function LessonGrammarTab({ lessonId, onPractice, onExplain, mode
     await supabase.from("course_lesson_progress").upsert({
       user_id: user.id, lesson_id: row.id, language: row.language, completed_steps: next, status: "in_progress",
     }, { onConflict: "user_id,lesson_id" });
+    const ex = exercises.find((e) => e.code === code) as any;
+    if (ex?.xp) {
+      await logActivity(user.id, "grammar", "lesson_grammar_exercise", ex.xp, { lesson_id: row.id, code },
+        { dedupKey: `lesson:${row.id}:${code}`, language: row.language });
+    }
   }
 
   if (!topics.length) return <p className="text-sm text-muted-foreground">Gramatički sadržaj ove lekcije je u pripremi.</p>;
@@ -119,6 +124,10 @@ export default function LessonGrammarTab({ lessonId, onPractice, onExplain, mode
   const topicEx = topic ? exercises.filter((e) => topic.exercises.includes(e.code)) : [];
   const isTopicDone = (t: Topic) => t.exercises.length > 0 && t.exercises.every((c) => done.includes(c));
   const img = images.length ? images[active % images.length] : undefined;
+  const xpExercises = exercises.filter((e: any) => e.xp) as any[];
+  const xpTotal = xpExercises.reduce((s, e) => s + e.xp, 0);
+  const xpEarned = earnedXp(xpExercises, done);
+  const xpDone = xpExercises.filter((e) => done.includes(e.code)).length;
 
   return (
     <div className="space-y-5">
@@ -228,6 +237,15 @@ export default function LessonGrammarTab({ lessonId, onPractice, onExplain, mode
       </>) : (<>
       {topicEx.length > 0 && (
         <div className="space-y-4">
+          {xpTotal > 0 && (
+            <div className="rounded-xl border border-border/60 bg-cream/90 p-3 space-y-2">
+              <div className="flex justify-between text-sm font-medium text-primary">
+                <span>Urađeno {xpDone}/{xpExercises.length}</span>
+                <span>{xpEarned}/{xpTotal} XP</span>
+              </div>
+              <Progress value={(xpEarned / xpTotal) * 100} className="h-2" />
+            </div>
+          )}
           <h3 className="font-display text-xl text-primary">Pripremljene vežbe ({topicEx.filter((e) => done.includes(e.code)).length}/{topicEx.length})</h3>
           <div className="flex flex-wrap gap-2">
             {topicEx.map((ex, i) => {
@@ -241,7 +259,9 @@ export default function LessonGrammarTab({ lessonId, onPractice, onExplain, mode
             })}
           </div>
           {topicEx[exIdx] && (
-            <LessonExercise key={topicEx[exIdx].id} exercise={topicEx[exIdx]} language={lang} level={row.cefr_level} lessonTitle={row.title_target || row.title} done={done.includes(topicEx[exIdx].code)} onDone={markDone} />
+            (topicEx[exIdx] as any).type
+              ? <GrammarPracticeExercise key={topicEx[exIdx].id} exercise={topicEx[exIdx] as unknown as PracticeExercise} done={done.includes(topicEx[exIdx].code)} onDone={markDone} />
+              : <LessonExercise key={topicEx[exIdx].id} exercise={topicEx[exIdx]} language={lang} level={row.cefr_level} lessonTitle={row.title_target || row.title} done={done.includes(topicEx[exIdx].code)} onDone={markDone} />
           )}
           <div className="flex justify-between gap-2">
             <Button variant="outline" size="sm" disabled={exIdx === 0} onClick={() => setExIdx(exIdx - 1)}>← Prethodna</Button>
