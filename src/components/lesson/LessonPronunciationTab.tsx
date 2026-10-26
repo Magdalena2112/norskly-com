@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { CheckCircle2, ChevronLeft, ChevronRight, Mic, RotateCcw, Volume2, XCircle } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
@@ -8,19 +8,27 @@ import { RecordSlot } from "@/pages/PronunciationActivityPage";
 
 type Letter = { letter: string; ipa: string; word: string; meaning: string };
 type Opt = string | { label: string; say?: string };
-type Item = { prompt?: string; say?: string; hint?: string; options?: Opt[]; answer?: string; answers?: string[]; repeat?: string; stressNote?: string };
-type PEx = { code: string; title: string; instruction: string; type: "choose" | "record" | "stress"; noAudio?: boolean; items: Item[] };
-type TheoryExample = { word?: string; sentence: string; stressed?: string[] };
+type Item = { prompt?: string; say?: string; sayB?: string; hint?: string; options?: Opt[]; answer?: string; answers?: string[]; repeat?: string; stressNote?: string; reveal?: string; explain?: string; focus?: string; sentences?: string[]; showText?: boolean };
+type PEx = {
+  code: string; title: string; instruction: string; type: "choose" | "record" | "stress"; noAudio?: boolean; items: Item[];
+  /** XP for finishing the exercise (default 10). */ xp?: number;
+  /** Objective: done only when every item is answered correctly; wrong answers can be retried. */ requireCorrect?: boolean;
+  /** Recording without automatic score: learner compares with the model. */ compareOnly?: boolean;
+  checklist?: string[]; maxMs?: number; shuffle?: boolean; optionAudio?: "after"; okMsg?: string; wrongMsg?: string; tip?: string;
+};
+type TheoryExample = { word?: string; sentence: string; say?: string; display?: string; meaning?: string; stressed?: string[] };
 type TheoryGroup = { label: string; rule: string; examples?: TheoryExample[] };
-type TheoryPair = { full: string; short: string };
-type Theory = { title: string; text?: string; compare?: string; groups?: TheoryGroup[]; examples?: TheoryExample[]; pairs?: TheoryPair[]; note?: string };
+type TheoryPair = { full: string; short: string; fullNote?: string; shortNote?: string };
+type Theory = { title: string; text?: string; compare?: string; groups?: TheoryGroup[]; examples?: TheoryExample[]; pairs?: TheoryPair[]; pairHeads?: [string, string]; note?: string };
+
+const hash = (s: string) => { let h = 0; for (const c of s) h = (h * 31 + c.charCodeAt(0)) | 0; return h; };
 
 const say = (text: string, lang: string, slow = false) => speakLines([{ speaker: "n", text }], lang, { slow });
 const optLabel = (o: Opt) => (typeof o === "string" ? o : o.label);
 
 /** Sentence with stressed words visually emphasised. */
 function Stressed({ text, stressed }: { text: string; stressed?: string[] }) {
-  const clean = (s: string) => s.toLowerCase().replace(/[^a-z'’]/g, "");
+  const clean = (s: string) => s.toLowerCase().replace(/[^\p{L}'’]/gu, "");
   const words = text.split(/\s+/);
   const marks = new Array(words.length).fill(false);
   if (stressed?.length) {
@@ -65,11 +73,21 @@ export default function LessonPronunciationTab({ data, lang, level, lessonCode }
     const next = [...done, code];
     setDone(next);
     localStorage.setItem(storeKey, JSON.stringify(next));
-    if (user) void logActivity(user.id, "pronunciation", "lesson_pronunciation", 10, { lesson: lessonCode, exercise: code },
+    if (user) void logActivity(user.id, "pronunciation", "lesson_pronunciation", exercises.find((e) => e.code === code)?.xp ?? 10, { lesson: lessonCode, exercise: code },
       { dedupKey: `lesson_pron_${lessonCode}_${code}_${lang}`, language: lang });
   };
   const key = (i: number) => `${ex?.code}_${i}`;
-  const exComplete = ex && (ex.items || []).every((_, i) => ex.type === "choose" ? picked[key(i)] !== undefined : ok[key(i)]);
+  const itemDone = (i: number) => ex.type === "choose"
+    ? (ex.requireCorrect ? picked[key(i)] === ex.items[i].answer : picked[key(i)] !== undefined)
+    : !!ok[key(i)];
+  const exComplete = ex && (ex.items || []).every((_, i) => itemDone(i));
+  const order = useMemo(() => {
+    const m: Record<string, Opt[]> = {};
+    exercises.forEach((e) => e.shuffle && e.items.forEach((it, i) => {
+      m[`${e.code}_${i}`] = [...(it.options || [])].sort((a, b) => hash(e.code + i + optLabel(a)) - hash(e.code + i + optLabel(b)));
+    }));
+    return m;
+  }, [exercises]);
   if (ex && exComplete && !done.includes(ex.code)) setTimeout(() => finishEx(ex.code), 0);
 
   const card = "rounded-3xl border border-border/50 bg-cream/90 shadow-postcard p-5";
@@ -111,9 +129,12 @@ export default function LessonPronunciationTab({ data, lang, level, lessonCode }
               {t.examples && (
                 <div className="space-y-2">
                   {t.examples.map((e) => (
-                    <button key={e.sentence} onClick={() => say(e.sentence, lang)}
+                    <button key={(e.say || e.sentence) + (e.display || "")} onClick={() => say(e.say || e.sentence, lang)}
                       className="w-full rounded-xl border border-border bg-background p-3 text-left hover:border-primary/50 transition flex items-center justify-between gap-3">
-                      <p className="text-sm sm:text-base"><Stressed text={e.sentence} stressed={e.stressed} /></p>
+                      <span>
+                        <span className="block text-sm sm:text-base">{e.display ? <span className="font-semibold text-primary">{e.display}</span> : <Stressed text={e.sentence} stressed={e.stressed} />}</span>
+                        {e.meaning && <span className="block text-xs text-muted-foreground mt-0.5">{e.meaning}</span>}
+                      </span>
                       <Volume2 className="w-4 h-4 text-primary/60 shrink-0" />
                     </button>
                   ))}
@@ -121,7 +142,21 @@ export default function LessonPronunciationTab({ data, lang, level, lessonCode }
               )}
               {t.pairs && (
                 <div className="space-y-2">
-                  {t.pairs.map((p) => (
+                  {t.pairHeads && (
+                    <div className="grid grid-cols-2 gap-2 px-3 text-xs font-medium text-muted-foreground">
+                      <span>{t.pairHeads[0]}</span><span>{t.pairHeads[1]}</span>
+                    </div>
+                  )}
+                  {t.pairs.map((p) => t.pairHeads ? (
+                    <div key={p.full} className="grid grid-cols-2 gap-2">
+                      {([[p.full, p.fullNote], [p.short, p.shortNote]] as const).map(([w, n]) => (
+                        <button key={w} onClick={() => say(w, lang)} className="rounded-xl border border-border bg-background p-3 text-left hover:border-primary/50 transition">
+                          <span className="font-semibold text-primary inline-flex items-center gap-1"><Volume2 className="w-3.5 h-3.5" /> {w}</span>
+                          {n && <span className="block text-xs text-muted-foreground">{n}</span>}
+                        </button>
+                      ))}
+                    </div>
+                  ) : (
                     <div key={p.full} className="rounded-xl border border-border bg-background p-3 flex flex-wrap items-center gap-2">
                       <button onClick={() => say(p.full, lang)} className="px-3 py-1.5 rounded-full border border-border text-sm hover:border-primary/50">{p.full}</button>
                       <ChevronRight className="w-4 h-4 text-muted-foreground" />
@@ -201,7 +236,7 @@ export default function LessonPronunciationTab({ data, lang, level, lessonCode }
             <div className="flex gap-1.5">
               {(ex.items || []).map((_, i) => (
                 <button key={i} onClick={() => setItem(i)}
-                  className={`w-7 h-7 rounded-full text-xs border ${i === item ? "bg-primary text-primary-foreground border-primary" : (ex.type === "choose" ? picked[key(i)] !== undefined : ok[key(i)]) ? "bg-accent/30 border-accent" : "bg-background border-border"}`}>{i + 1}</button>
+                  className={`w-7 h-7 rounded-full text-xs border ${i === item ? "bg-primary text-primary-foreground border-primary" : itemDone(i) ? "bg-accent/30 border-accent" : "bg-background border-border"}`}>{i + 1}</button>
               ))}
             </div>
             {(() => {
@@ -217,15 +252,33 @@ export default function LessonPronunciationTab({ data, lang, level, lessonCode }
                   {ex.type === "stress" && it.say && (
                     <p className="font-display text-lg sm:text-xl text-primary text-center py-2">{it.say}</p>
                   )}
-                  {!ex.noAudio && audioText && (
-                    <div className="flex gap-2">
-                      <Button size="sm" variant="outline" onClick={() => say(audioText, lang)}><Volume2 className="w-4 h-4" /> Poslušaj</Button>
+                  {it.showText && <p className="text-base leading-relaxed rounded-2xl bg-background/60 border border-border/60 p-4">{it.say}</p>}
+                  {ex.type === "record" && it.focus && <p className="text-sm text-muted-foreground">„<Stressed text={it.say || ""} stressed={[it.focus]} />“</p>}
+                  {!ex.noAudio && audioText && it.sayB ? (
+                    <div className="flex flex-wrap gap-2">
+                      <Button size="sm" variant="outline" onClick={() => say(audioText, lang)}><Volume2 className="w-4 h-4" /> Audio A</Button>
+                      <Button size="sm" variant="outline" onClick={() => say(it.sayB!, lang)}><Volume2 className="w-4 h-4" /> Audio B</Button>
+                      <Button size="sm" variant="ghost" onClick={() => speakLines([{ speaker: "n", text: audioText }, { speaker: "n", text: it.sayB! }], lang, { slow: true })}>Sporije oba</Button>
+                    </div>
+                  ) : !ex.noAudio && audioText && (
+                    <div className="flex flex-wrap gap-2">
+                      <Button size="sm" variant="outline" onClick={() => say(audioText, lang)}><Volume2 className="w-4 h-4" /> {it.sentences ? "Ceo tekst" : "Poslušaj"}</Button>
                       <Button size="sm" variant="ghost" onClick={() => say(audioText, lang, true)}>Sporije</Button>
+                    </div>
+                  )}
+                  {it.sentences && (
+                    <div className="space-y-1.5">
+                      <p className="text-xs text-muted-foreground">Rečenicu po rečenicu:</p>
+                      {it.sentences.map((s2) => (
+                        <button key={s2} onClick={() => say(s2, lang)} className="w-full text-left text-sm rounded-xl border border-border bg-background px-3 py-2 hover:border-primary/50 flex items-center gap-2">
+                          <Volume2 className="w-3.5 h-3.5 text-primary/60 shrink-0" /> {s2}
+                        </button>
+                      ))}
                     </div>
                   )}
                   {(ex.type === "choose" || ex.type === "stress") && it.options && (
                     <div className="flex flex-wrap gap-2">
-                      {it.options.map((o) => {
+                      {(order[k] || it.options).map((o) => {
                         const label = optLabel(o);
                         const oSay = typeof o === "object" ? o.say : undefined;
                         if (ex.type === "stress") {
@@ -242,7 +295,7 @@ export default function LessonPronunciationTab({ data, lang, level, lessonCode }
                         const state = p === undefined ? "" : label === p && label === it.answer ? "border-emerald-500 bg-emerald-500/10" : label === p ? "border-destructive bg-destructive/10" : "opacity-60";
                         return (
                           <span key={label} className={`px-4 py-2 rounded-full border border-border bg-background text-sm inline-flex items-center gap-2 ${state}`}>
-                            {oSay && p === undefined && (
+                            {oSay && (ex.optionAudio === "after" ? p !== undefined : p === undefined) && (
                               <button onClick={(e) => { e.stopPropagation(); say(oSay, lang); }} aria-label={`Poslušaj ${label}`} className="text-primary/70 hover:text-primary">
                                 <Volume2 className="w-3.5 h-3.5" />
                               </button>
@@ -273,12 +326,24 @@ export default function LessonPronunciationTab({ data, lang, level, lessonCode }
                   {ex.type === "choose" && p !== undefined && (
                     <p className={`text-sm flex items-center gap-1 ${p === it.answer ? "text-emerald-700" : "text-destructive"}`}>
                       {p === it.answer ? <CheckCircle2 className="w-4 h-4" /> : <XCircle className="w-4 h-4" />}
-                      {p === it.answer ? "Tačno!" : "Netačno"}
+                      {p === it.answer ? (ex.okMsg || "Tačno!") : (ex.wrongMsg || "Netačno")}
                     </p>
                   )}
-                  {(ex.type === "record" || (ex.type === "choose" && p !== undefined && repeatText) || (ex.type === "stress" && stressOk === true)) && (
+                  {ex.type === "choose" && p === it.answer && (it.reveal || it.explain) && (
+                    <div className="text-sm rounded-xl bg-secondary/40 p-3 space-y-1">
+                      {it.reveal && <p className="font-display text-lg text-primary">{it.reveal}</p>}
+                      {it.explain && <p className="text-muted-foreground">{it.explain}</p>}
+                    </div>
+                  )}
+                  {ex.type === "choose" && ex.requireCorrect && p !== undefined && p !== it.answer && (
+                    <Button size="sm" variant="outline" onClick={() => { const n = { ...picked }; delete n[k]; setPicked(n); }}>
+                      <RotateCcw className="w-4 h-4" /> Pokušaj ponovo
+                    </Button>
+                  )}
+                  {(ex.type === "record" || (ex.type === "choose" && p !== undefined && (!ex.requireCorrect || p === it.answer) && repeatText) || (ex.type === "stress" && stressOk === true)) && (
                     <div className="rounded-2xl border border-border/60 bg-background/60 p-3">
-                      <RecordSlot item={{ text: ex.type === "record" ? (it.say || it.hint || "") : repeatText }} lang={lang} level={level} onSuccess={() => setOk((o) => ({ ...o, [k]: true }))} />
+                      <RecordSlot item={{ text: ex.type === "record" ? (it.say || it.hint || "") : repeatText }} lang={lang} level={level} compareOnly={ex.compareOnly} maxMs={ex.maxMs} checklist={ex.checklist} onSuccess={() => setOk((o) => ({ ...o, [k]: true }))} />
+                      {ex.tip && ok[k] && <p className="text-sm text-primary/80 mt-2">{ex.tip}</p>}
                     </div>
                   )}
                   {ex.type === "record" && it.stressNote && ok[k] && (
