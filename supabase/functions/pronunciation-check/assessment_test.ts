@@ -9,8 +9,24 @@ Deno.test("Azure scores determine verdict, omissions remain errors", () => {
     { Word: "bor", PronunciationAssessment: { AccuracyScore: 50, ErrorType: "Mispronunciation" } },
     { Word: "Oslo", PronunciationAssessment: { AccuracyScore: 99, ErrorType: "Omission" } },
   ] }] });
-  assert(r?.score === 74 && r.verdict === "good");
+  assert(r?.score === 74 && r.verdict === "retry");
   assert(r?.words[0].ok === true && r.words[1].ok === false && r.words[2].ok === false);
+});
+Deno.test("pass threshold is 80: word at 78 accuracy must be retried", () => {
+  const r = assessmentResult({ RecognitionStatus: "Success", NBest: [{ PronScore: 85, AccuracyScore: 85, Words: [
+    { Word: "tak", AccuracyScore: 78, ErrorType: "None" },
+  ] }] });
+  assert(r?.words[0].ok === false && r.verdict === "retry");
+});
+Deno.test("one weak sound fails the word even with good word accuracy", () => {
+  const r = assessmentResult({ RecognitionStatus: "Success", NBest: [{ PronScore: 92, AccuracyScore: 92, Words: [
+    { Word: "takk", AccuracyScore: 88, ErrorType: "None", Phonemes: [{ Phoneme: "t", AccuracyScore: 95 }, { Phoneme: "a", AccuracyScore: 40 }] },
+  ] }] });
+  assert(r?.words[0].ok === false && r.verdict === "retry");
+});
+Deno.test("fluency cannot lift score above accuracy", () => {
+  const r = assessmentResult({ RecognitionStatus: "Success", NBest: [{ PronScore: 90, AccuracyScore: 76, Words: [{ Word: "hei", AccuracyScore: 85 }] }] });
+  assert(r?.score === 76 && r.verdict === "retry");
 });
 Deno.test("silence and missing metrics never produce a successful score", () => {
   assert(assessmentResult({ RecognitionStatus: "NoMatch" }) === null);

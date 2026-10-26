@@ -29,7 +29,7 @@ Deno.serve(async (req) => {
     const region = Deno.env.get("AZURE_SPEECH_REGION")?.trim();
     if (!key || !region || !/^[a-z0-9-]+$/.test(region)) return json({ error: "Azure provera izgovora nije podešena." }, 503);
     const { expected, language, level } = parsed.data;
-    const config = { ReferenceText: expected, GradingSystem: "HundredMark", Granularity: "Word", Dimension: "Comprehensive", EnableMiscue: true };
+    const config = { ReferenceText: expected, GradingSystem: "HundredMark", Granularity: "Phoneme", Dimension: "Comprehensive", EnableMiscue: true };
     const encoded = btoa(String.fromCharCode(...new TextEncoder().encode(JSON.stringify(config))));
     const response = await fetch(`https://${region}.stt.speech.microsoft.com/speech/recognition/conversation/cognitiveservices/v1?language=${LOCALES[language]}&format=detailed`, {
       method: "POST", headers: { "Ocp-Apim-Subscription-Key": key, "Pronunciation-Assessment": encoded, "Content-Type": "audio/wav; codecs=audio/pcm; samplerate=16000", Accept: "application/json" }, body: audio,
