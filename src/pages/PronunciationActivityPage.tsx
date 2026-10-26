@@ -114,7 +114,7 @@ export function RecordSlot({ item, lang, level, onSuccess, compareOnly = false, 
       timerRef.current = window.setInterval(() => {
         const s = Date.now() - t0;
         setSecs(Math.floor(s / 1000));
-        if (s >= maxMs && rec.state === "recording") rec.stop();
+        if (s >= (compareOnly ? maxMs : Math.min(maxMs, 30000)) && rec.state === "recording") rec.stop();
       }, 250);
     } catch {
       toast.error("Dozvoli pristup mikrofonu da bi snimio/la izgovor.");
