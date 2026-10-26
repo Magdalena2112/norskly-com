@@ -14,3 +14,4 @@
 - Structured grammar practice items carry `type` + `xp` and render via `GrammarPracticeExercise` with pure grading in `src/lib/grammarPractice.ts`; XP is logged once per lesson+code dedup key, so retries never double-count.
 - Pronunciation recordings use mono 16 kHz PCM WAV and authenticated Azure assessment for each explicit locale; Azure alone determines scores/errors, while AI only explains supplied errors in Serbian, so transcript guesses cannot award phonetic success.
 - Gateway calls use the server-only SDK with generated contracts under the functions shared directory, so Deno deployments and the frontend type augmentation share the same model definitions.
+- Course lessons carry a `course` key (`general` default, `health` for the B1 health-care courses); the dashboard switches courses and applies the CEFR unlock rule only to `general`, so specialised courses stay separate from general progression.
