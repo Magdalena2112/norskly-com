@@ -3905,8 +3905,631 @@
       ]
     },
     "pronunciation": {
-      "theory": [],
-      "exercises": []
+      "theory": [
+        {
+          "title": "Vokallengde – dužina samoglasnika",
+          "text": "U norveškom jeziku dužina samoglasnika može promeniti značenje reči. U naglašenim slogovima kratki vokali se često nalaze ispred dva ista suglasnička slova, a dugi ispred jednog. To je korisna pravopisno-fonetska smernica, ne univerzalno pravilo. Klikni na reč da je čuješ.",
+          "pairHeads": [
+            "Dugi vokal",
+            "Kratki vokal"
+          ],
+          "pairs": [
+            {
+              "full": "tak",
+              "fullNote": "krov",
+              "short": "takk",
+              "shortNote": "hvala"
+            },
+            {
+              "full": "hat",
+              "fullNote": "mržnja",
+              "short": "hatt",
+              "shortNote": "šešir"
+            },
+            {
+              "full": "fin",
+              "fullNote": "lep",
+              "short": "finn",
+              "shortNote": "pronađi (imperativ)"
+            },
+            {
+              "full": "mat",
+              "fullNote": "hrana",
+              "short": "matt",
+              "shortNote": "matiran / bez sjaja"
+            },
+            {
+              "full": "pen",
+              "fullNote": "lep, uredan",
+              "short": "penn",
+              "shortNote": "olovka"
+            }
+          ]
+        },
+        {
+          "title": "Ordtrykk – naglasak reči",
+          "text": "U norveškim rečima jedan slog je obično naglašeniji od ostalih. Klikni na reč da je čuješ.",
+          "examples": [
+            {
+              "sentence": "morgen",
+              "display": "MOR-gen"
+            },
+            {
+              "sentence": "arbeid",
+              "display": "AR-beid"
+            },
+            {
+              "sentence": "leilighet",
+              "display": "LEI-lig-het"
+            },
+            {
+              "sentence": "begynne",
+              "display": "be-GYN-ne"
+            },
+            {
+              "sentence": "studere",
+              "display": "stu-DE-re"
+            }
+          ],
+          "note": "Pisano isticanje je samo nastavno pomagalo — merodavan je izgovor u audio-modelu."
+        },
+        {
+          "title": "Setningsrytme – ritam rečenice",
+          "text": "Određene reči ili delovi rečenice mogu biti istaknutiji, u zavisnosti od informacije koju govornik želi da naglasi.",
+          "examples": [
+            {
+              "sentence": "Jeg tar bussen til jobb.",
+              "say": "Jeg tar BUSSEN til jobb.",
+              "stressed": [
+                "bussen"
+              ],
+              "meaning": "Naglašava se prevozno sredstvo."
+            },
+            {
+              "sentence": "Jeg tar bussen til jobb.",
+              "say": "Jeg tar bussen til JOBB.",
+              "stressed": [
+                "jobb"
+              ],
+              "meaning": "Naglašava se odredište."
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "code": "P-01",
+          "title": "Lang eller kort vokal?",
+          "type": "choose",
+          "xp": 1,
+          "requireCorrect": true,
+          "instruction": "Poslušaj reč i odredi da li čuješ dug ili kratak samoglasnik.",
+          "okMsg": "Tačno! Prepoznao/la si dužinu samoglasnika.",
+          "wrongMsg": "Obrati pažnju na trajanje naglašenog samoglasnika. Poslušaj još jednom.",
+          "items": [
+            {
+              "say": "tak",
+              "options": [
+                "Lang vokal",
+                "Kort vokal"
+              ],
+              "answer": "Lang vokal",
+              "reveal": "tak"
+            },
+            {
+              "say": "takk",
+              "options": [
+                "Lang vokal",
+                "Kort vokal"
+              ],
+              "answer": "Kort vokal",
+              "reveal": "takk"
+            },
+            {
+              "say": "fin",
+              "options": [
+                "Lang vokal",
+                "Kort vokal"
+              ],
+              "answer": "Lang vokal",
+              "reveal": "fin"
+            },
+            {
+              "say": "finn",
+              "options": [
+                "Lang vokal",
+                "Kort vokal"
+              ],
+              "answer": "Kort vokal",
+              "reveal": "finn"
+            },
+            {
+              "say": "pen",
+              "options": [
+                "Lang vokal",
+                "Kort vokal"
+              ],
+              "answer": "Lang vokal",
+              "reveal": "pen"
+            }
+          ],
+          "compareOnly": true
+        },
+        {
+          "code": "P-02",
+          "title": "Hvilket ord hører du?",
+          "type": "choose",
+          "xp": 1,
+          "requireCorrect": true,
+          "shuffle": true,
+          "optionAudio": "after",
+          "instruction": "Poslušaj audio-snimak i izaberi reč koju čuješ. Posle odgovora možeš da poslušaš obe reči iz para.",
+          "items": [
+            {
+              "say": "takk",
+              "options": [
+                {
+                  "label": "tak",
+                  "say": "tak"
+                },
+                {
+                  "label": "takk",
+                  "say": "takk"
+                }
+              ],
+              "answer": "takk"
+            },
+            {
+              "say": "hatt",
+              "options": [
+                {
+                  "label": "hat",
+                  "say": "hat"
+                },
+                {
+                  "label": "hatt",
+                  "say": "hatt"
+                }
+              ],
+              "answer": "hatt"
+            },
+            {
+              "say": "fin",
+              "options": [
+                {
+                  "label": "fin",
+                  "say": "fin"
+                },
+                {
+                  "label": "finn",
+                  "say": "finn"
+                }
+              ],
+              "answer": "fin"
+            },
+            {
+              "say": "matt",
+              "options": [
+                {
+                  "label": "mat",
+                  "say": "mat"
+                },
+                {
+                  "label": "matt",
+                  "say": "matt"
+                }
+              ],
+              "answer": "matt"
+            },
+            {
+              "say": "penn",
+              "options": [
+                {
+                  "label": "pen",
+                  "say": "pen"
+                },
+                {
+                  "label": "penn",
+                  "say": "penn"
+                }
+              ],
+              "answer": "penn"
+            }
+          ],
+          "compareOnly": true
+        },
+        {
+          "code": "P-03",
+          "title": "Lytt, gjenta og ta opp",
+          "type": "record",
+          "xp": 1,
+          "compareOnly": true,
+          "checklist": [
+            "Razumljivost",
+            "Dužina ciljanog vokala",
+            "Jasnoća izgovora cele rečenice"
+          ],
+          "instruction": "Poslušaj rečenicu, ponovi je naglas i snimi svoj izgovor. Obrati posebnu pažnju na istaknutu reč.",
+          "items": [
+            {
+              "say": "Takk for hjelpen!",
+              "focus": "Takk"
+            },
+            {
+              "say": "Hun har en fin leilighet.",
+              "focus": "fin"
+            },
+            {
+              "say": "Kan du finne en penn?",
+              "focus": "penn"
+            },
+            {
+              "say": "Vi lager mat hjemme.",
+              "focus": "mat"
+            },
+            {
+              "say": "Han har en svart hatt.",
+              "focus": "hatt"
+            }
+          ]
+        },
+        {
+          "code": "P-04",
+          "title": "Samme eller forskjellig?",
+          "type": "choose",
+          "xp": 1,
+          "requireCorrect": true,
+          "instruction": "Poslušaj dve reči i odredi da li zvuče isto ili različito.",
+          "items": [
+            {
+              "say": "tak",
+              "sayB": "takk",
+              "options": [
+                "Samme",
+                "Forskjellig"
+              ],
+              "answer": "Forskjellig",
+              "reveal": "tak – takk"
+            },
+            {
+              "say": "fin",
+              "sayB": "fin",
+              "options": [
+                "Samme",
+                "Forskjellig"
+              ],
+              "answer": "Samme",
+              "reveal": "fin – fin"
+            },
+            {
+              "say": "mat",
+              "sayB": "matt",
+              "options": [
+                "Samme",
+                "Forskjellig"
+              ],
+              "answer": "Forskjellig",
+              "reveal": "mat – matt"
+            },
+            {
+              "say": "penn",
+              "sayB": "penn",
+              "options": [
+                "Samme",
+                "Forskjellig"
+              ],
+              "answer": "Samme",
+              "reveal": "penn – penn"
+            },
+            {
+              "say": "hat",
+              "sayB": "hatt",
+              "options": [
+                "Samme",
+                "Forskjellig"
+              ],
+              "answer": "Forskjellig",
+              "reveal": "hat – hatt"
+            }
+          ],
+          "compareOnly": true
+        },
+        {
+          "code": "P-05",
+          "title": "Hvor ligger trykket?",
+          "type": "choose",
+          "xp": 1,
+          "requireCorrect": true,
+          "instruction": "Poslušaj reč i izaberi slog koji nosi glavni naglasak.",
+          "items": [
+            {
+              "say": "morgen",
+              "options": [
+                "mor",
+                "gen"
+              ],
+              "answer": "mor",
+              "reveal": "MOR-gen"
+            },
+            {
+              "say": "arbeid",
+              "options": [
+                "ar",
+                "beid"
+              ],
+              "answer": "ar",
+              "reveal": "AR-beid"
+            },
+            {
+              "say": "leilighet",
+              "options": [
+                "lei",
+                "lig",
+                "het"
+              ],
+              "answer": "lei",
+              "reveal": "LEI-lig-het"
+            },
+            {
+              "say": "begynne",
+              "options": [
+                "be",
+                "gyn",
+                "ne"
+              ],
+              "answer": "gyn",
+              "reveal": "be-GYN-ne"
+            },
+            {
+              "say": "studere",
+              "options": [
+                "stu",
+                "de",
+                "re"
+              ],
+              "answer": "de",
+              "reveal": "stu-DE-re"
+            }
+          ],
+          "compareOnly": true
+        },
+        {
+          "code": "P-06",
+          "title": "Hva legger personen vekt på?",
+          "type": "choose",
+          "xp": 1,
+          "requireCorrect": true,
+          "instruction": "Poslušaj rečenicu i odredi koju informaciju govornik posebno naglašava.",
+          "items": [
+            {
+              "prompt": "Šta govornik naglašava?",
+              "say": "Jeg tar BUSSEN til jobb.",
+              "options": [
+                "Prevozno sredstvo",
+                "Odredište",
+                "Ko ide na posao"
+              ],
+              "answer": "Prevozno sredstvo",
+              "reveal": "Jeg tar BUSSEN til jobb.",
+              "explain": "Naglašena reč „bussen“ stavlja fokus na prevozno sredstvo — autobus, a ne nešto drugo."
+            },
+            {
+              "prompt": "Šta govornik naglašava?",
+              "say": "Jeg tar bussen til JOBB.",
+              "options": [
+                "Kada putuje",
+                "Kuda putuje",
+                "Kojim prevozom putuje"
+              ],
+              "answer": "Kuda putuje",
+              "reveal": "Jeg tar bussen til JOBB.",
+              "explain": "Naglašena reč „jobb“ stavlja fokus na odredište — na posao, a ne negde drugde."
+            },
+            {
+              "prompt": "Šta govornik naglašava?",
+              "say": "MARIA lager middag i dag.",
+              "options": [
+                "Ko sprema večeru",
+                "Šta sprema",
+                "Kada sprema večeru"
+              ],
+              "answer": "Ko sprema večeru",
+              "reveal": "MARIA lager middag i dag.",
+              "explain": "Naglašeno ime „Maria“ ističe ko sprema večeru."
+            },
+            {
+              "prompt": "Šta govornik naglašava?",
+              "say": "Maria lager MIDDAG i dag.",
+              "options": [
+                "Ko sprema hranu",
+                "Šta sprema",
+                "Gde sprema hranu"
+              ],
+              "answer": "Šta sprema",
+              "reveal": "Maria lager MIDDAG i dag.",
+              "explain": "Naglašena reč „middag“ ističe šta Maria sprema."
+            },
+            {
+              "prompt": "Šta govornik naglašava?",
+              "say": "Vi møtes på FREDAG.",
+              "options": [
+                "Ko se sastaje",
+                "Gde se sastaju",
+                "Kada se sastaju"
+              ],
+              "answer": "Kada se sastaju",
+              "reveal": "Vi møtes på FREDAG.",
+              "explain": "Naglašena reč „fredag“ ističe kada je sastanak."
+            }
+          ],
+          "compareOnly": true
+        },
+        {
+          "code": "P-07",
+          "title": "Følg rytmen",
+          "type": "record",
+          "xp": 1,
+          "compareOnly": true,
+          "checklist": [
+            "Tečnost",
+            "Pauze",
+            "Ritam",
+            "Razumljivost"
+          ],
+          "instruction": "Poslušaj rečenicu i odmah je ponovi, pokušavajući da pratiš tempo i ritam govornika.",
+          "items": [
+            {
+              "say": "Jeg står vanligvis opp klokka sju.",
+              "stressNote": "STÅR · OPP · SJU"
+            },
+            {
+              "say": "Etter jobb går vi en tur.",
+              "stressNote": "JOBB · TUR"
+            },
+            {
+              "say": "På mandager tar jeg bussen.",
+              "stressNote": "MANDAGER · BUSSEN"
+            },
+            {
+              "say": "I dag jobber søsteren min hjemme.",
+              "stressNote": "DAG · SØSTEREN · HJEMME"
+            },
+            {
+              "say": "Om kvelden leser jeg ofte en bok.",
+              "stressNote": "KVELDEN · LESER · BOK"
+            }
+          ]
+        },
+        {
+          "code": "P-08",
+          "title": "Ordtrykk i hverdagen",
+          "type": "choose",
+          "xp": 1,
+          "requireCorrect": true,
+          "compareOnly": true,
+          "instruction": "Poslušaj reč, označi naglašeni slog i ponovi je naglas.",
+          "items": [
+            {
+              "say": "frokost",
+              "options": [
+                "fro",
+                "kost"
+              ],
+              "answer": "fro",
+              "reveal": "FRO-kost",
+              "repeat": "frokost",
+              "explain": "Naglasak je na slogu „fro“: FRO-kost."
+            },
+            {
+              "say": "middag",
+              "options": [
+                "mid",
+                "dag"
+              ],
+              "answer": "mid",
+              "reveal": "MID-dag",
+              "repeat": "middag",
+              "explain": "Naglasak je na slogu „mid“: MID-dag."
+            },
+            {
+              "say": "leilighet",
+              "options": [
+                "lei",
+                "lig",
+                "het"
+              ],
+              "answer": "lei",
+              "reveal": "LEI-lig-het",
+              "repeat": "leilighet",
+              "explain": "Naglasak je na slogu „lei“: LEI-lig-het."
+            },
+            {
+              "say": "arbeid",
+              "options": [
+                "ar",
+                "beid"
+              ],
+              "answer": "ar",
+              "reveal": "AR-beid",
+              "repeat": "arbeid",
+              "explain": "Naglasak je na slogu „ar“: AR-beid."
+            },
+            {
+              "say": "universitet",
+              "options": [
+                "u",
+                "ni",
+                "ver",
+                "si",
+                "tet"
+              ],
+              "answer": "tet",
+              "reveal": "u-ni-ver-si-TET",
+              "repeat": "universitet",
+              "explain": "Naglasak je na slogu „tet“: u-ni-ver-si-TET."
+            }
+          ]
+        },
+        {
+          "code": "P-09",
+          "title": "Snakk naturlig!",
+          "type": "record",
+          "xp": 1,
+          "compareOnly": true,
+          "checklist": [
+            "Da li je iskaz razumljiv?",
+            "Da li je naglašavanje prirodno?",
+            "Da li je ritam približan modelu?",
+            "Da li su ciljani vokali dovoljno jasno izgovoreni?"
+          ],
+          "instruction": "Poslušaj rečenice i ponovi ih što prirodnije. Obrati pažnju na izgovor važnih reči, ali nemoj izgovarati svaku reč podjednako naglašeno.",
+          "items": [
+            {
+              "say": "Takk, vi ses i morgen!"
+            },
+            {
+              "say": "Kan du finne en penn til meg?"
+            },
+            {
+              "say": "Etter middag går vi en tur."
+            },
+            {
+              "say": "På tirsdager trener jeg på treningssenteret."
+            },
+            {
+              "say": "I helgen skal vi besøke familien."
+            }
+          ]
+        },
+        {
+          "code": "P-10",
+          "title": "Min hverdag – Final Pronunciation Challenge",
+          "type": "record",
+          "xp": 1,
+          "compareOnly": true,
+          "maxMs": 60000,
+          "checklist": [
+            "Vokallengde: da li se čuje razlika između dugih i kratkih samoglasnika (npr. „tar“, „middag“)?",
+            "Ordtrykk: da li je naglasak na pravom slogu (FRO-kost, MID-dag)?",
+            "Setningsrytme: da li važne reči nose naglasak, a ostale teku brže i slabije?"
+          ],
+          "tip": "Savet za sledeći pokušaj: snimi tekst rečenicu po rečenicu uz model, pa ceo tekst još jednom bez zaustavljanja.",
+          "instruction": "Poslušaj kratak tekst. Zatim ga pročitaj naglas i snimi ceo iskaz. Obrati pažnju na dužinu samoglasnika, naglasak reči i prirodan ritam.",
+          "items": [
+            {
+              "say": "Jeg står vanligvis opp klokka sju. Etter frokost tar jeg bussen til jobb. I lunsjpausen møter jeg ofte kollegene mine. Etter jobb lager jeg middag hjemme. Om kvelden leser jeg en bok eller går en tur.",
+              "sentences": [
+                "Jeg står vanligvis opp klokka sju.",
+                "Etter frokost tar jeg bussen til jobb.",
+                "I lunsjpausen møter jeg ofte kollegene mine.",
+                "Etter jobb lager jeg middag hjemme.",
+                "Om kvelden leser jeg en bok eller går en tur."
+              ],
+              "showText": true
+            }
+          ]
+        }
+      ]
     },
     "speaking": {
       "tasks": [],

@@ -76,7 +76,8 @@ const CHECK_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/pronunciati
 const MAX_REC_MS = 15000;
 
 /** Record the learner, then get an AI pronunciation score and feedback. */
-export function RecordSlot({ item, lang, level, onSuccess }: { item: PronItem; lang: string; level: string; onSuccess: () => void }) {
+/** `compareOnly`: record and replay against the model, no automatic score (for targets without reliable acoustic analysis). */
+export function RecordSlot({ item, lang, level, onSuccess, compareOnly = false, maxMs = MAX_REC_MS, checklist }: { item: PronItem; lang: string; level: string; onSuccess: () => void; compareOnly?: boolean; maxMs?: number; checklist?: string[] }) {
   const [state, setState] = useState<"idle" | "rec" | "busy">("idle");
   const [secs, setSecs] = useState(0);
   const [result, setResult] = useState<CheckResult | null>(null);
@@ -112,7 +113,7 @@ export function RecordSlot({ item, lang, level, onSuccess }: { item: PronItem; l
       timerRef.current = window.setInterval(() => {
         const s = Date.now() - t0;
         setSecs(Math.floor(s / 1000));
-        if (s >= MAX_REC_MS && rec.state === "recording") rec.stop();
+        if (s >= maxMs && rec.state === "recording") rec.stop();
       }, 250);
     } catch {
       toast.error("Dozvoli pristup mikrofonu da bi snimio/la izgovor.");
@@ -123,6 +124,7 @@ export function RecordSlot({ item, lang, level, onSuccess }: { item: PronItem; l
     if (blob.size < 1000) { setState("idle"); toast.error("Snimak je prekratak."); return; }
     setState("busy");
     setMyUrl(URL.createObjectURL(blob));
+    if (compareOnly) { setState("idle"); onSuccess(); return; }
     try {
       const { data: { session } } = await supabase.auth.getSession();
       const ext = blob.type.includes("mp4") ? "m4a" : blob.type.includes("ogg") ? "ogg" : "webm";
@@ -157,11 +159,19 @@ export function RecordSlot({ item, lang, level, onSuccess }: { item: PronItem; l
       ) : (
         <Button variant={result ? "outline" : "hero"} className="rounded-full" disabled={state === "busy"} onClick={start}>
           {state === "busy" ? <><Loader2 className="w-4 h-4 mr-1 animate-spin" /> Analiziram izgovor…</>
-            : <><Mic className="w-4 h-4 mr-1" /> {result ? "Snimi ponovo" : "Izgovori i proveri"}</>}
+            : <><Mic className="w-4 h-4 mr-1" /> {result || (compareOnly && myUrl) ? "Snimi ponovo" : compareOnly ? "Snimi izgovor" : "Izgovori i proveri"}</>}
         </Button>
       )}
       {state === "rec" && <span className="text-xs text-destructive animate-pulse">● Snimanje… izgovori naglas</span>}
 
+      {compareOnly && myUrl && state === "idle" && (
+        <div className="w-full max-w-md rounded-2xl border border-border/60 bg-background/80 p-4 text-left space-y-2">
+          <p className="text-sm font-semibold text-primary">Tvoj snimak</p>
+          <audio controls src={myUrl} className="w-full h-9" aria-label="Tvoj snimak" />
+          <p className="text-sm text-muted-foreground">Uporedi svoj snimak sa modelom iznad.{checklist?.length ? " Proveri:" : ""}</p>
+          {checklist?.length ? <ul className="text-sm list-disc pl-5 space-y-0.5">{checklist.map((c) => <li key={c}>{c}</li>)}</ul> : null}
+        </div>
+      )}
       {result && (
         <div className={`w-full max-w-md rounded-2xl border p-4 text-left ${tone}`}>
           <div className="flex items-center justify-between mb-2">
