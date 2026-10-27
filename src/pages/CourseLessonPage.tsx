@@ -36,6 +36,11 @@ const MODULE_META: Record<string, { title: string; subtitle: string; description
   culture: { title: "Kultura", subtitle: "Culture & Society", description: "Kako se ljudi upoznaju i pozdravljaju.", vignette: "cabins" },
   review: { title: "Ponavljanje", subtitle: "Review", description: "Završna provera cele lekcije.", vignette: "cabins" },
 };
+const MODULE_SUBTITLES: Record<"no" | "en" | "de", Record<string, string>> = {
+  no: { grammar: "Grammatikk", vocabulary: "Ordforråd", reading: "Lesing", listening: "Lytting", writing: "Skriving", pronunciation: "Uttale", speaking: "Samtale", culture: "Kultur og samfunn", review: "Repetisjon" },
+  de: { grammar: "Grammatik", vocabulary: "Wortschatz", reading: "Lesen", listening: "Hören", writing: "Schreiben", pronunciation: "Aussprache", speaking: "Sprechen", culture: "Kultur & Gesellschaft", review: "Wiederholung" },
+  en: { grammar: "Grammar", vocabulary: "Vocabulary", reading: "Reading", listening: "Listening", writing: "Writing", pronunciation: "Pronunciation", speaking: "Speaking", culture: "Culture & Society", review: "Review" },
+};
 import { LESSON_TABS, allExercises, loadLessonContent, speakLines, stopSpeaking, type DialogueLine, type Exercise, type LessonContent } from "@/lib/courseLessons";
 
 type Lang = "no" | "en" | "de";
@@ -241,9 +246,8 @@ export default function CourseLessonPage() {
                         {modDone(key) && <span className="absolute top-2 right-2 bg-forest text-cream text-[11px] px-2 py-0.5 rounded-full flex items-center gap-1"><CheckCircle2 className="w-3 h-3" /> Završeno</span>}
                       </div>
                       <CardContent className="pt-5 pb-5 px-5">
-                        <p className="font-script italic text-xs text-primary/55 mb-0.5">{meta.subtitle}</p>
+                        <p className="font-script italic text-xs text-primary/55 mb-0.5">{MODULE_SUBTITLES[lang][key] ?? meta.subtitle}</p>
                         <h3 className="font-display font-semibold text-lg text-primary leading-tight">{meta.title}</h3>
-                        <p className="text-sm text-muted-foreground mt-1.5 leading-relaxed">{meta.description}</p>
                         {ex.length > 0 && <p className="text-xs text-primary/70 mt-2">Vežbe: {n} / {ex.length}</p>}
                       </CardContent>
                     </Card>
@@ -259,7 +263,7 @@ export default function CourseLessonPage() {
               <div className="flex gap-1 overflow-x-auto">{moduleKeys.map((k) => <button key={k} onClick={() => openModule(k)} className={`shrink-0 text-xs px-2.5 py-1 rounded-full border ${k === open ? "bg-primary text-primary-foreground border-primary" : "bg-cream/90 border-border"}`}>{MODULE_META[k].title}</button>)}</div>
             </div>
             <div className="rounded-3xl border border-border/50 bg-cream/90 backdrop-blur-md shadow-postcard p-5">
-              <p className="font-script italic text-primary/60 text-sm">{MODULE_META[open].subtitle}</p>
+              <p className="font-script italic text-primary/60 text-sm">{MODULE_SUBTITLES[lang][open] ?? MODULE_META[open].subtitle}</p>
               <h2 className="font-display text-2xl text-primary">{MODULE_META[open].title}</h2>
               {!["reading", "listening", "pronunciation"].includes(open) && hasMaterial(open) && openEx.length > 0 && (
                 <div className="mt-4 inline-flex rounded-full bg-secondary/60 p-1">
