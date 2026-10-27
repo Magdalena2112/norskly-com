@@ -205,6 +205,13 @@ export default function LessonGrammarTab({ lessonId, onPractice, onExplain, mode
           <Card className="border-accent/30 bg-accent/5">
             <CardContent className="pt-5 pb-5"><h3 className="font-display font-bold text-lg text-foreground">{s.title}</h3></CardContent>
           </Card>
+          {/* Short, welcoming intro before the practical cards — never a wall of text. */}
+          {s.intro && (
+            <Card className="border-primary/25 bg-primary/5">
+              <CardHeader className="pb-1 pt-4"><CardTitle className="text-sm flex items-center gap-2"><Lightbulb className="w-4 h-4 text-primary" /> O čemu se radi</CardTitle></CardHeader>
+              <CardContent className="pt-0 pb-4"><p className="text-sm leading-relaxed">{s.intro}</p></CardContent>
+            </Card>
+          )}
           {/* Sections with the enriched card format (dialogue, formula, traps…)
               already cover the explanation in visual steps — skip the heavy
               paragraph there so content isn't duplicated. */}
