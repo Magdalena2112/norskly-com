@@ -1472,8 +1472,464 @@
       ]
     },
     "pronunciation": {
-      "theory": [],
-      "exercises": []
+      "theory": [
+        {
+          "title": "Vokallengde i fagord – dužina samoglasnika",
+          "text": "I u stručnim rečima dužina samoglasnika menja značenje i razumljivost. Kratak vokal je obično ispred dvostrukog suglasnika. Klikni na reč da je čuješ.",
+          "pairHeads": [
+            "Dugi vokal",
+            "Kratki vokal"
+          ],
+          "pairs": [
+            {
+              "full": "vet",
+              "fullNote": "zna",
+              "short": "vett",
+              "shortNote": "razum"
+            },
+            {
+              "full": "tak",
+              "fullNote": "krov",
+              "short": "takk",
+              "shortNote": "hvala"
+            },
+            {
+              "full": "lege",
+              "fullNote": "lekar",
+              "short": "legge",
+              "shortNote": "položiti"
+            },
+            {
+              "full": "skyte",
+              "fullNote": "pucati",
+              "short": "skytte",
+              "shortNote": "strelac"
+            },
+            {
+              "full": "vise",
+              "fullNote": "pokazati",
+              "short": "visse",
+              "shortNote": "određeni"
+            }
+          ]
+        },
+        {
+          "title": "Ordtrykk i medisinske ord – naglasak",
+          "text": "Mnoge medicinske reči su strane i naglasak je često na kraju. Domaće složenice imaju naglasak na prvom delu. Klikni na reč da je čuješ.",
+          "examples": [
+            {
+              "sentence": "sykepleier",
+              "display": "SY-ke-plei-er"
+            },
+            {
+              "sentence": "pasient",
+              "display": "pa-si-ENT"
+            },
+            {
+              "sentence": "medisin",
+              "display": "me-di-SIN"
+            },
+            {
+              "sentence": "blodtrykk",
+              "display": "BLOD-trykk"
+            },
+            {
+              "sentence": "temperatur",
+              "display": "tem-pe-ra-TUR"
+            },
+            {
+              "sentence": "smertestillende",
+              "display": "SMER-te-stil-len-de"
+            }
+          ],
+          "note": "Pisano isticanje je samo pomagalo — merodavan je audio-model."
+        },
+        {
+          "title": "Tydelig tale med pasienten – jasan i smiren govor",
+          "text": "Sa pacijentom govori sporije, jasno izgovori važne reči (bol, lek, vreme) i napravi kratke pauze između delova rečenice.",
+          "examples": [
+            {
+              "sentence": "Har du vondt i brystet?",
+              "say": "Har du VONDT i BRYSTET?",
+              "stressed": [
+                "vondt",
+                "brystet"
+              ],
+              "meaning": "Ističu se simptom i mesto bola."
+            },
+            {
+              "sentence": "Jeg skal måle blodtrykket ditt nå.",
+              "say": "Jeg skal MÅLE BLODTRYKKET ditt nå.",
+              "stressed": [
+                "måle",
+                "blodtrykket"
+              ],
+              "meaning": "Ističe se postupak."
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "code": "P-01",
+          "title": "Lang eller kort vokal?",
+          "type": "choose",
+          "xp": 1,
+          "requireCorrect": true,
+          "instruction": "Poslušaj reč i odredi da li čuješ dug ili kratak samoglasnik.",
+          "okMsg": "Tačno!",
+          "wrongMsg": "Poslušaj još jednom i pokušaj ponovo.",
+          "items": [
+            {
+              "say": "lege",
+              "options": [
+                "Lang vokal",
+                "Kort vokal"
+              ],
+              "answer": "Lang vokal"
+            },
+            {
+              "say": "legge",
+              "options": [
+                "Lang vokal",
+                "Kort vokal"
+              ],
+              "answer": "Kort vokal"
+            },
+            {
+              "say": "vet",
+              "options": [
+                "Lang vokal",
+                "Kort vokal"
+              ],
+              "answer": "Lang vokal"
+            },
+            {
+              "say": "takk",
+              "options": [
+                "Lang vokal",
+                "Kort vokal"
+              ],
+              "answer": "Kort vokal"
+            },
+            {
+              "say": "vise",
+              "options": [
+                "Lang vokal",
+                "Kort vokal"
+              ],
+              "answer": "Lang vokal"
+            }
+          ]
+        },
+        {
+          "code": "P-02",
+          "title": "Hvilket ord hører du?",
+          "type": "choose",
+          "xp": 1,
+          "requireCorrect": true,
+          "instruction": "Poslušaj i izaberi reč koju čuješ.",
+          "okMsg": "Tačno!",
+          "wrongMsg": "Poslušaj još jednom i pokušaj ponovo.",
+          "items": [
+            {
+              "say": "lege",
+              "options": [
+                "lege",
+                "legge"
+              ],
+              "answer": "lege"
+            },
+            {
+              "say": "vett",
+              "options": [
+                "vet",
+                "vett"
+              ],
+              "answer": "vett"
+            },
+            {
+              "say": "takk",
+              "options": [
+                "tak",
+                "takk"
+              ],
+              "answer": "takk"
+            },
+            {
+              "say": "visse",
+              "options": [
+                "vise",
+                "visse"
+              ],
+              "answer": "visse"
+            },
+            {
+              "say": "skyte",
+              "options": [
+                "skyte",
+                "skytte"
+              ],
+              "answer": "skyte"
+            }
+          ]
+        },
+        {
+          "code": "P-03",
+          "title": "Lytt, gjenta og ta opp",
+          "type": "record",
+          "xp": 1,
+          "compareOnly": false,
+          "checklist": [
+            "Razumljivost",
+            "Dužina ciljanog vokala",
+            "Jasnoća cele rečenice"
+          ],
+          "instruction": "Poslušaj rečenicu, ponovi je i snimi. Pazi na istaknutu reč.",
+          "items": [
+            {
+              "say": "Legen kommer snart.",
+              "focus": "Legen"
+            },
+            {
+              "say": "Takk for at du venter.",
+              "focus": "Takk"
+            },
+            {
+              "say": "Jeg vet hvor det gjør vondt.",
+              "focus": "vet"
+            }
+          ]
+        },
+        {
+          "code": "P-04",
+          "title": "Hvor ligger trykket?",
+          "type": "choose",
+          "xp": 1,
+          "requireCorrect": true,
+          "instruction": "Poslušaj reč i izaberi naglašeni slog.",
+          "okMsg": "Tačno!",
+          "wrongMsg": "Poslušaj još jednom i pokušaj ponovo.",
+          "items": [
+            {
+              "say": "pasient",
+              "options": [
+                "PA-si-ent",
+                "pa-si-ENT"
+              ],
+              "answer": "pa-si-ENT"
+            },
+            {
+              "say": "sykepleier",
+              "options": [
+                "SY-ke-plei-er",
+                "sy-ke-PLEI-er"
+              ],
+              "answer": "SY-ke-plei-er"
+            },
+            {
+              "say": "medisin",
+              "options": [
+                "ME-di-sin",
+                "me-di-SIN"
+              ],
+              "answer": "me-di-SIN"
+            },
+            {
+              "say": "blodtrykk",
+              "options": [
+                "BLOD-trykk",
+                "blod-TRYKK"
+              ],
+              "answer": "BLOD-trykk"
+            },
+            {
+              "say": "temperatur",
+              "options": [
+                "TEM-pe-ra-tur",
+                "tem-pe-ra-TUR"
+              ],
+              "answer": "tem-pe-ra-TUR"
+            }
+          ]
+        },
+        {
+          "code": "P-05",
+          "title": "Fagord",
+          "type": "record",
+          "xp": 1,
+          "compareOnly": false,
+          "checklist": [
+            "Naglasak",
+            "Jasnoća glasova"
+          ],
+          "instruction": "Snimi svaku stručnu reč jasno, sa naglaskom na pravom slogu.",
+          "items": [
+            {
+              "say": "sykepleier"
+            },
+            {
+              "say": "pasient"
+            },
+            {
+              "say": "smertestillende"
+            },
+            {
+              "say": "blodtrykk"
+            },
+            {
+              "say": "innleggelse"
+            }
+          ]
+        },
+        {
+          "code": "P-06",
+          "title": "Hva legger personen vekt på?",
+          "type": "choose",
+          "xp": 1,
+          "requireCorrect": true,
+          "instruction": "Poslušaj rečenicu i odredi koja informacija je istaknuta.",
+          "okMsg": "Tačno!",
+          "wrongMsg": "Poslušaj još jednom i pokušaj ponovo.",
+          "items": [
+            {
+              "say": "Har du VONDT i brystet?",
+              "options": [
+                "Simptom (bol)",
+                "Mesto (grudi)"
+              ],
+              "answer": "Simptom (bol)"
+            },
+            {
+              "say": "Har du vondt i BRYSTET?",
+              "options": [
+                "Simptom (bol)",
+                "Mesto (grudi)"
+              ],
+              "answer": "Mesto (grudi)"
+            },
+            {
+              "say": "Du får medisinen KLOKKA ÅTTE.",
+              "options": [
+                "Lek",
+                "Vreme"
+              ],
+              "answer": "Vreme"
+            },
+            {
+              "say": "Du får MEDISINEN klokka åtte.",
+              "options": [
+                "Lek",
+                "Vreme"
+              ],
+              "answer": "Lek"
+            }
+          ]
+        },
+        {
+          "code": "P-07",
+          "title": "Spørsmål til pasienten",
+          "type": "record",
+          "xp": 1,
+          "compareOnly": false,
+          "checklist": [
+            "Razumljivost",
+            "Smiren tempo",
+            "Intonacija pitanja"
+          ],
+          "instruction": "Snimi pitanja kao da ih postavljaš pacijentu: smireno i jasno.",
+          "items": [
+            {
+              "say": "Hvordan har du det i dag?"
+            },
+            {
+              "say": "Kan du vise meg hvor det gjør vondt?"
+            },
+            {
+              "say": "Er du allergisk mot noen medisiner?"
+            },
+            {
+              "say": "Hvor sterke er smertene fra en til ti?"
+            }
+          ]
+        },
+        {
+          "code": "P-08",
+          "title": "Rapport",
+          "type": "record",
+          "xp": 1,
+          "compareOnly": false,
+          "checklist": [
+            "Jasnoća brojeva i vremena",
+            "Tečnost",
+            "Stručni termini"
+          ],
+          "instruction": "Snimi kratke rečenice iz predaje smene.",
+          "items": [
+            {
+              "say": "Pasienten har feber og høyt blodtrykk."
+            },
+            {
+              "say": "Han fikk smertestillende klokka seks."
+            },
+            {
+              "say": "Hun må faste fra midnatt."
+            }
+          ]
+        },
+        {
+          "code": "P-09",
+          "title": "Snakk naturlig!",
+          "type": "record",
+          "xp": 1,
+          "compareOnly": false,
+          "checklist": [
+            "Prirodan ritam",
+            "Naglasak važnih reči",
+            "Razumljivost"
+          ],
+          "instruction": "Ponovi što prirodnije, kao u pravom razgovoru sa pacijentom.",
+          "items": [
+            {
+              "say": "Jeg skal måle blodtrykket ditt nå."
+            },
+            {
+              "say": "Bare si ifra hvis du trenger noe."
+            },
+            {
+              "say": "Legen kommer innom etter lunsj."
+            }
+          ]
+        },
+        {
+          "code": "P-10",
+          "title": "Innkomstsamtale – Final Pronunciation Challenge",
+          "type": "record",
+          "xp": 1,
+          "compareOnly": false,
+          "checklist": [
+            "Stručni termini",
+            "Dužina vokala",
+            "Ritam i pauze"
+          ],
+          "instruction": "Pročitaj ceo tekst naglas i snimi ga. Pazi na stručne reči, dužinu vokala i ritam.",
+          "items": [
+            {
+              "say": "God morgen, jeg heter Nora og er sykepleier her på avdelingen. Jeg skal stille deg noen spørsmål. Har du vondt noe sted? Når begynte smertene? Jeg måler også blodtrykket og temperaturen din.",
+              "sentences": [
+                "God morgen, jeg heter Nora og er sykepleier her på avdelingen.",
+                "Jeg skal stille deg noen spørsmål.",
+                "Har du vondt noe sted?",
+                "Når begynte smertene?",
+                "Jeg måler også blodtrykket og temperaturen din."
+              ],
+              "showText": true
+            }
+          ],
+          "maxMs": 30000,
+          "tip": "Snimi tekst rečenicu po rečenicu uz model, pa ceo tekst bez zaustavljanja."
+        }
+      ]
     },
     "speaking": {
       "tasks": [],
