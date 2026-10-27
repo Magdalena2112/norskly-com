@@ -1110,6 +1110,15 @@
               "active": true,
               "img": "hc-vo-1-12"
             }
+          ],
+          "exercises": [
+            "VO-01",
+            "VO-02",
+            "VO-03",
+            "VO-04",
+            "VO-05",
+            "VO-06",
+            "VO-07"
           ]
         },
         {
@@ -1190,6 +1199,15 @@
               "active": true,
               "img": "hc-vo-2-10"
             }
+          ],
+          "exercises": [
+            "VO-08",
+            "VO-09",
+            "VO-10",
+            "VO-11",
+            "VO-12",
+            "VO-13",
+            "VO-14"
           ]
         },
         {
@@ -1298,6 +1316,14 @@
               "active": true,
               "img": "hc-vo-3-14"
             }
+          ],
+          "exercises": [
+            "VO-15",
+            "VO-16",
+            "VO-17",
+            "VO-18",
+            "VO-19",
+            "VO-20"
           ]
         }
       ],
@@ -1528,172 +1554,570 @@
         {
           "id": "NO-HC-B1-L01-VO-01",
           "code": "VO-01",
-          "title": "Symptomer",
-          "instruction": "Izaberi tačan izraz.",
+          "title": "Tegoba na ilustraciji",
+          "instruction": "Izaberi izraz koji najpreciznije odgovara opisu.",
+          "type": "choice",
+          "xp": 1,
+          "vocabularyFocus": "SYM",
           "kind": "vocabulary",
-          "items": [
-            {
-              "prompt": "Pasienten har ___ og må kaste opp.",
-              "options": [
-                "kvalm",
-                "svimmel",
-                "hoven"
-              ],
-              "answers": [
-                "kvalm"
-              ]
-            },
-            {
-              "prompt": "Han får lite luft og er ___.",
-              "options": [
-                "tungpustet",
-                "blø",
-                "utslett"
-              ],
-              "answers": [
-                "tungpustet"
-              ]
-            },
-            {
-              "prompt": "Smertene ___ ut i venstre arm.",
-              "options": [
-                "stråler",
-                "hoster",
-                "tåler"
-              ],
-              "answers": [
-                "stråler"
-              ]
-            },
-            {
-              "prompt": "Hun har rødt ___ på armene.",
-              "options": [
-                "utslett",
-                "puls",
-                "journal"
-              ],
-              "answers": [
-                "utslett"
-              ]
-            }
-          ]
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "context": "Pacijent pokazuje mesto bola na grudima. Koji izraz opisuje i tegobu i njeno mesto?",
+          "options": [
+            "ha vondt i brystet",
+            "hodepine",
+            "tungpustet"
+          ],
+          "correct": [
+            0
+          ],
+          "image": "hc-vo-1-01"
         },
         {
           "id": "NO-HC-B1-L01-VO-02",
           "code": "VO-02",
-          "title": "Målinger",
-          "instruction": "Dopuni rečenicu.",
+          "title": "Tri slike, tri tegobe",
+          "instruction": "Poveži svaku stavku sa odgovarajućim izrazom. Svaki izraz koristi jednom.",
+          "type": "match",
+          "xp": 1,
+          "vocabularyFocus": "SYM",
           "kind": "vocabulary",
-          "items": [
-            {
-              "prompt": "Jeg skal måle ___ ditt nå. (pritisak)",
-              "answers": [
-                "blodtrykket"
-              ]
-            },
-            {
-              "prompt": "Legen har bestilt en ny ___. (analiza krvi)",
-              "answers": [
-                "blodprøve"
-              ]
-            },
-            {
-              "prompt": "Vi må ta et ___ av hjertet.",
-              "answers": [
-                "EKG"
-              ]
-            },
-            {
-              "prompt": "På en ___ fra 0 til 10, hvor vondt har du? (skala bola)",
-              "answers": [
-                "smerteskala"
-              ]
-            }
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "left": [
+            "Slika A",
+            "Slika B",
+            "Slika C"
+          ],
+          "right": [
+            "utslett",
+            "hoven",
+            "hoste"
+          ],
+          "pairs": [
+            2,
+            0,
+            1
+          ],
+          "leftImages": [
+            "hc-vo-1-09",
+            "hc-vo-1-08",
+            "hc-vo-1-10"
           ]
         },
         {
           "id": "NO-HC-B1-L01-VO-03",
           "code": "VO-03",
-          "title": "Sykehistorie",
-          "instruction": "Izaberi tačan izraz.",
+          "title": "Šta pacijent opisuje?",
+          "instruction": "Izaberi izraz koji najpreciznije odgovara opisu.",
+          "type": "choice",
+          "xp": 1,
+          "vocabularyFocus": "SYM",
           "kind": "vocabulary",
-          "items": [
-            {
-              "prompt": "Han ___ ikke penicillin.",
-              "options": [
-                "tåler",
-                "måler",
-                "blør"
-              ],
-              "answers": [
-                "tåler"
-              ]
-            },
-            {
-              "prompt": "Bruker du noen ___?",
-              "options": [
-                "faste medisiner",
-                "vaktskifter",
-                "prøvesvar"
-              ],
-              "answers": [
-                "faste medisiner"
-              ]
-            },
-            {
-              "prompt": "Sykepleiere har ___ og kan ikke fortelle om pasienter til andre.",
-              "options": [
-                "taushetsplikt",
-                "bivirkning",
-                "utskrivelse"
-              ],
-              "answers": [
-                "taushetsplikt"
-              ]
-            },
-            {
-              "prompt": "Datteren hans er nærmeste ___.",
-              "options": [
-                "pårørende",
-                "journal",
-                "rapport"
-              ],
-              "answers": [
-                "pårørende"
-              ]
-            }
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "context": "Per: Når jeg reiser meg, føles det som om rommet snurrer. Jeg har ikke vondt i hodet.",
+          "options": [
+            "kvalm",
+            "svimmel",
+            "tungpustet"
+          ],
+          "correct": [
+            1
           ]
         },
         {
           "id": "NO-HC-B1-L01-VO-04",
           "code": "VO-04",
-          "title": "Prevedi",
-          "instruction": "Napiši izraz na norveškom.",
+          "title": "Bol koji se širi",
+          "instruction": "Dopuni zapis izrazima koji odgovaraju kontekstu.",
+          "type": "gaps",
+          "xp": 1,
+          "vocabularyFocus": "SYM",
           "kind": "vocabulary",
-          "items": [
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "text": "Per har ___ i brystet. Smerten ___ i venstre arm.",
+          "gaps": [
             {
-              "prompt": "biti primljen u bolnicu",
+              "options": [
+                "smerte",
+                "hodepine",
+                "feber"
+              ],
+              "answer": "smerte"
+            },
+            {
+              "options": [
+                "stråler ut",
+                "blør",
+                "hoster"
+              ],
+              "answer": "stråler ut"
+            }
+          ]
+        },
+        {
+          "id": "NO-HC-B1-L01-VO-05",
+          "code": "VO-05",
+          "title": "Od izjave do termina",
+          "instruction": "Poveži svaku stavku sa odgovarajućim izrazom. Svaki izraz koristi jednom.",
+          "type": "match",
+          "xp": 1,
+          "vocabularyFocus": "SYM",
+          "kind": "vocabulary",
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "left": [
+            "Jeg føler at jeg må kaste opp.",
+            "Jeg får ikke nok luft.",
+            "Jeg har vondt i hodet."
+          ],
+          "right": [
+            "hodepine",
+            "kvalm",
+            "tungpustet"
+          ],
+          "pairs": [
+            1,
+            2,
+            0
+          ]
+        },
+        {
+          "id": "NO-HC-B1-L01-VO-06",
+          "code": "VO-06",
+          "title": "Šta zapisati kao tegobe?",
+          "instruction": "Izaberi sve izraze koji odgovaraju opisu.",
+          "type": "multi",
+          "xp": 1,
+          "vocabularyFocus": "SYM",
+          "kind": "vocabulary",
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "context": "Pacijent kaže da mu je mučno i da je zadihan. Ne prijavljuje vrtoglavicu ni glavobolju.",
+          "options": [
+            "svimmel",
+            "kvalm",
+            "hodepine",
+            "tungpustet"
+          ],
+          "correct": [
+            1,
+            3
+          ]
+        },
+        {
+          "id": "NO-HC-B1-L01-VO-07",
+          "code": "VO-07",
+          "title": "Dve kratke beleške",
+          "instruction": "Upiši traženi izraz na jeziku lekcije.",
+          "type": "text",
+          "xp": 1,
+          "vocabularyFocus": "SYM",
+          "kind": "vocabulary",
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "inputs": [
+            {
+              "prompt": "Navedi imenicu iz lekcije za povišenu telesnu temperaturu.",
               "answers": [
-                "bli innlagt"
+                "feber"
               ]
             },
             {
-              "prompt": "lek protiv bolova",
+              "prompt": "Upiši infinitiv iz lekcije: iz rane izlazi krv.",
               "answers": [
-                "smertestillende"
+                "blø"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "NO-HC-B1-L01-VO-08",
+          "code": "VO-08",
+          "title": "Prepoznaj postupak",
+          "instruction": "Poveži svaku stavku sa odgovarajućim izrazom. Svaki izraz koristi jednom.",
+          "type": "match",
+          "xp": 1,
+          "vocabularyFocus": "MAL",
+          "kind": "vocabulary",
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "left": [
+            "Slika A",
+            "Slika B",
+            "Slika C"
+          ],
+          "right": [
+            "ta et EKG",
+            "måle blodtrykket",
+            "blodprøve"
+          ],
+          "pairs": [
+            1,
+            2,
+            0
+          ],
+          "leftImages": [
+            "hc-vo-2-01",
+            "hc-vo-2-04",
+            "hc-vo-2-08"
+          ]
+        },
+        {
+          "id": "NO-HC-B1-L01-VO-09",
+          "code": "VO-09",
+          "title": "Šta pokazuje senzor?",
+          "instruction": "Izaberi izraz koji najpreciznije odgovara opisu.",
+          "type": "choice",
+          "xp": 1,
+          "vocabularyFocus": "MAL",
+          "kind": "vocabulary",
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "context": "Nora setter en sensor på fingeren for å se hvor mye oksygen blodet er mettet med.",
+          "options": [
+            "puls",
+            "blodtrykk",
+            "oksygenmetning",
+            "temperatur"
+          ],
+          "correct": [
+            2
+          ],
+          "image": "hc-vo-2-05"
+        },
+        {
+          "id": "NO-HC-B1-L01-VO-10",
+          "code": "VO-10",
+          "title": "Kontroll før legen kommer",
+          "instruction": "Dopuni zapis izrazima koji odgovaraju kontekstu.",
+          "type": "gaps",
+          "xp": 1,
+          "vocabularyFocus": "MAL",
+          "kind": "vocabulary",
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "text": "Nora måler ___ for å se om Per har feber. Hun teller hjerteslagene og noterer hans ___.",
+          "gaps": [
+            {
+              "options": [
+                "temperaturen",
+                "vekten",
+                "oksygenmetningen"
+              ],
+              "answer": "temperaturen"
+            },
+            {
+              "options": [
+                "puls",
+                "vekt",
+                "temperatur"
+              ],
+              "answer": "puls"
+            }
+          ]
+        },
+        {
+          "id": "NO-HC-B1-L01-VO-11",
+          "code": "VO-11",
+          "title": "Vrednost i odgovarajuća rubrika",
+          "instruction": "Poveži svaku stavku sa odgovarajućim izrazom. Svaki izraz koristi jednom.",
+          "type": "match",
+          "xp": 1,
+          "vocabularyFocus": "MAL",
+          "kind": "vocabulary",
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "left": [
+            "72 kg",
+            "3 av 10: hvor vondt pasienten har",
+            "Svaret fra laboratoriet er klart."
+          ],
+          "right": [
+            "prøvesvar",
+            "vekt",
+            "smerteskala"
+          ],
+          "pairs": [
+            1,
+            2,
+            0
+          ]
+        },
+        {
+          "id": "NO-HC-B1-L01-VO-12",
+          "code": "VO-12",
+          "title": "Najava pregleda",
+          "instruction": "Složi sve delove u smislenu rečenicu. Počni zadatim delom.",
+          "type": "order",
+          "xp": 1,
+          "vocabularyFocus": "MAL",
+          "kind": "vocabulary",
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "context": "Početak: Legen",
+          "tokens": [
+            "Legen",
+            "skal",
+            "undersøke",
+            "pasienten."
+          ],
+          "answer": [
+            "Legen skal undersøke pasienten."
+          ]
+        },
+        {
+          "id": "NO-HC-B1-L01-VO-13",
+          "code": "VO-13",
+          "title": "Postupak ili rezultat?",
+          "instruction": "Izaberi izraz koji najpreciznije odgovara opisu.",
+          "type": "choice",
+          "xp": 1,
+          "vocabularyFocus": "MAL",
+          "kind": "vocabulary",
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "context": "Blodprøven er allerede tatt. Nora venter på informasjonen fra laboratoriet, ikke på en ny prøve.",
+          "options": [
+            "blodprøve",
+            "prøvesvar",
+            "smerteskala"
+          ],
+          "correct": [
+            1
+          ]
+        },
+        {
+          "id": "NO-HC-B1-L01-VO-14",
+          "code": "VO-14",
+          "title": "Dopuni dve rubrike",
+          "instruction": "Upiši traženi izraz na jeziku lekcije.",
+          "type": "text",
+          "xp": 1,
+          "vocabularyFocus": "MAL",
+          "kind": "vocabulary",
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "inputs": [
+            {
+              "prompt": "Upiši jednu reč koja nedostaje: Nora skal måle ___ med mansjetten på armen.",
+              "answers": [
+                "blodtrykket"
               ]
             },
             {
-              "prompt": "neželjeno dejstvo",
+              "prompt": "Upiši izraz za merenje električne aktivnosti srca, iz lekcije (infinitiv).",
               "answers": [
+                "ta et EKG"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "NO-HC-B1-L01-VO-15",
+          "code": "VO-15",
+          "title": "Postupci tokom boravka",
+          "instruction": "Poveži svaku stavku sa odgovarajućim izrazom. Svaki izraz koristi jednom.",
+          "type": "match",
+          "xp": 1,
+          "vocabularyFocus": "SYK",
+          "kind": "vocabulary",
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "left": [
+            "Pasienten kommer til avdelingen og får en seng.",
+            "Sykepleieren spør om plager, medisiner og tidligere sykdommer.",
+            "Pasienten får reise hjem fra sykehuset."
+          ],
+          "right": [
+            "utskrivelse",
+            "bli innlagt",
+            "innkomstsamtale"
+          ],
+          "pairs": [
+            1,
+            2,
+            0
+          ]
+        },
+        {
+          "id": "NO-HC-B1-L01-VO-16",
+          "code": "VO-16",
+          "title": "Redovna terapija",
+          "instruction": "Izaberi izraz koji najpreciznije odgovara opisu.",
+          "type": "choice",
+          "xp": 1,
+          "vocabularyFocus": "SYK",
+          "kind": "vocabulary",
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "context": "Per: Jeg tar denne tabletten hver morgen, også når jeg ikke har vondt.",
+          "options": [
+            "smertestillende",
+            "faste medisiner",
+            "bivirkning"
+          ],
+          "correct": [
+            1
+          ],
+          "image": "hc-vo-3-04"
+        },
+        {
+          "id": "NO-HC-B1-L01-VO-17",
+          "code": "VO-17",
+          "title": "Podnošenje leka",
+          "instruction": "Dopuni zapis izrazima koji odgovaraju kontekstu.",
+          "type": "gaps",
+          "xp": 1,
+          "vocabularyFocus": "SYK",
+          "kind": "vocabulary",
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "text": "Per ___ ikke penicillin. Han er allergisk ___ det. Etter et annet legemiddel fikk han en uønsket ___. Legen noterte dette i Pers ___.",
+          "gaps": [
+            {
+              "options": [
+                "tåler",
+                "bruker",
+                "tar"
+              ],
+              "answer": "tåler"
+            },
+            {
+              "options": [
+                "mot",
+                "med",
+                "på"
+              ],
+              "answer": "mot"
+            },
+            {
+              "options": [
+                "bivirkning",
+                "sykehistorie",
+                "utskrivelse"
+              ],
+              "answer": "bivirkning"
+            },
+            {
+              "options": [
+                "sykehistorie",
+                "rapport",
+                "innkomstsamtale"
+              ],
+              "answer": "sykehistorie"
+            }
+          ]
+        },
+        {
+          "id": "NO-HC-B1-L01-VO-18",
+          "code": "VO-18",
+          "title": "Ljudi i dokumentacija",
+          "instruction": "Poveži svaku stavku sa odgovarajućim izrazom. Svaki izraz koristi jednom.",
+          "type": "match",
+          "xp": 1,
+          "vocabularyFocus": "SYK",
+          "kind": "vocabulary",
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "left": [
+            "Datteren og ektefellen til Per",
+            "Dokumentet med opplysninger om pasientens helse",
+            "Legemiddel som gis mot smerter etter legens ordinasjon"
+          ],
+          "right": [
+            "journal",
+            "smertestillende",
+            "pårørende"
+          ],
+          "pairs": [
+            2,
+            0,
+            1
+          ],
+          "image": "hc-vo-3-09"
+        },
+        {
+          "id": "NO-HC-B1-L01-VO-19",
+          "code": "VO-19",
+          "title": "Na kraju smene",
+          "instruction": "Poveži svaku stavku sa odgovarajućim izrazom. Svaki izraz koristi jednom.",
+          "type": "match",
+          "xp": 1,
+          "vocabularyFocus": "SYK",
+          "kind": "vocabulary",
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "left": [
+            "Anne overtar kveldsvakten etter Nora.",
+            "Nora forteller Anne hva som har skjedd med Per.",
+            "Nora deler ikke pasientopplysninger med uvedkommende."
+          ],
+          "right": [
+            "taushetsplikt",
+            "vaktskifte",
+            "rapport"
+          ],
+          "pairs": [
+            1,
+            2,
+            0
+          ]
+        },
+        {
+          "id": "NO-HC-B1-L01-VO-20",
+          "code": "VO-20",
+          "title": "Završna beleška sa prijema",
+          "instruction": "Dopuni zapis izrazima koji odgovaraju kontekstu.",
+          "type": "gaps",
+          "xp": 1,
+          "vocabularyFocus": "SYK",
+          "kind": "vocabulary",
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "text": "Per ble ___ på avdelingen i morges. Nora hadde en ___ med ham. Hans datter er nærmeste ___. Ved ___ gir Nora en ___ til Anne.",
+          "gaps": [
+            {
+              "options": [
+                "innlagt",
+                "utskrevet",
+                "undersøkt"
+              ],
+              "answer": "innlagt"
+            },
+            {
+              "options": [
+                "innkomstsamtale",
+                "utskrivelse",
                 "bivirkning"
-              ]
+              ],
+              "answer": "innkomstsamtale"
             },
             {
-              "prompt": "smena dežurstva",
-              "answers": [
-                "vaktskifte"
-              ]
+              "options": [
+                "pårørende",
+                "sykehistorie",
+                "journal"
+              ],
+              "answer": "pårørende"
+            },
+            {
+              "options": [
+                "vaktskiftet",
+                "utskrivelsen",
+                "undersøkelsen"
+              ],
+              "answer": "vaktskiftet"
+            },
+            {
+              "options": [
+                "rapport",
+                "journal",
+                "sykehistorie"
+              ],
+              "answer": "rapport"
             }
           ]
         }
