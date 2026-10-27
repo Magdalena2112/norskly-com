@@ -2250,184 +2250,506 @@
         {
           "id": "L-01",
           "code": "NO-HC-B1-L01-L01",
-          "title": "L-01 · Morgenrunden",
-          "context": "Sykepleier og pasient",
+          "title": "L-01 · Ny pasient på avdelingen",
+          "context": "Sykepleier forteller (monolog)",
+          "xp": 1,
           "lines": [
             {
               "speaker": "Nora",
-              "text": "God morgen, Anne Larsen. Hvordan har du sovet i natt?"
-            },
-            {
-              "speaker": "Pasient",
-              "text": "Ikke så godt. Jeg våknet flere ganger fordi jeg hostet mye."
-            },
-            {
-              "speaker": "Nora",
-              "text": "Har du feber, tror du?"
-            },
-            {
-              "speaker": "Pasient",
-              "text": "Jeg vet ikke, men jeg føler meg varm og litt svimmel."
-            },
-            {
-              "speaker": "Nora",
-              "text": "Da måler jeg temperaturen først. Den er 38,4, så du har litt feber. Jeg sier fra til legen."
+              "text": "God morgen. Jeg heter Nora, og jeg er sykepleier på medisinsk avdeling på Ullevål. I dag kom det en ny pasient klokka sju. Han heter Arne Hansen og er sytti år gammel. Han har hatt brystsmerter siden i går kveld, og han er litt kortpustet. Først målte jeg blodtrykket og pulsen hans. Blodtrykket var høyt, men pulsen var normal. Etterpå ble det tatt blodprøver, og legen skal se på ham før lunsj."
             }
           ],
           "questions": [
             {
-              "prompt": "Hvorfor sov pasienten dårlig?",
+              "prompt": "Hvorfor ble Arne Hansen lagt inn?",
               "options": [
-                "Hun hostet mye",
-                "Hun hadde vondt i magen",
-                "Det var bråkete"
+                "Han har hatt brystsmerter og er kortpustet.",
+                "Han har brukket armen og har vondt.",
+                "Han har feber og hoster mye."
               ],
-              "answer": "Hun hostet mye"
+              "answer": "Han har hatt brystsmerter og er kortpustet."
             },
             {
-              "prompt": "Hva gjør Nora etter målingen?",
+              "prompt": "Hva var unormalt da Nora målte?",
               "options": [
-                "Hun sier fra til legen",
-                "Hun gir antibiotika",
-                "Hun skriver ut pasienten"
+                "Blodtrykket var høyt.",
+                "Pulsen var veldig rask.",
+                "Temperaturen var høy."
               ],
-              "answer": "Hun sier fra til legen"
+              "answer": "Blodtrykket var høyt."
+            },
+            {
+              "prompt": "Hva skjer før lunsj?",
+              "options": [
+                "Legen skal undersøke pasienten.",
+                "Pasienten skal reise hjem.",
+                "Pasienten skal opereres."
+              ],
+              "answer": "Legen skal undersøke pasienten."
             }
           ]
         },
         {
           "id": "L-02",
           "code": "NO-HC-B1-L01-L02",
-          "title": "L-02 · Telefon fra pårørende",
-          "context": "Datter ringer avdelingen",
+          "title": "L-02 · Måling av blodtrykk",
+          "context": "Sykepleier og nervøs pasient",
+          "xp": 1,
           "lines": [
             {
-              "speaker": "Datter",
-              "text": "Hei, jeg ringer for å høre hvordan faren min, Per Hansen, har det."
+              "speaker": "Nora",
+              "text": "Hei, herr Hansen. Nå skal jeg måle blodtrykket ditt. Kan du brette opp ermet?"
+            },
+            {
+              "speaker": "Arne",
+              "text": "Ja da. Men jeg er litt nervøs. Er det noe galt med hjertet mitt?"
             },
             {
               "speaker": "Nora",
-              "text": "Hei. Før jeg kan gi informasjon, må jeg sjekke om pasienten har gitt samtykke. Hva heter du?"
+              "text": "Det vet vi ikke ennå. Målingen tar bare ett minutt. Du må sitte stille og ikke snakke mens mansjetten blåses opp."
             },
             {
-              "speaker": "Datter",
-              "text": "Jeg heter Kari Hansen, jeg er datteren hans."
+              "speaker": "Arne",
+              "text": "Greit. Det strammer litt i armen."
             },
             {
               "speaker": "Nora",
-              "text": "Takk, Kari. Han har sagt at du kan få informasjon. Han har det bedre i dag, og smertene har gått ned."
+              "text": "Det er helt normalt. Sånn, ferdig. Blodtrykket er hundre og femti over nitti. Det er litt høyt, så jeg måler igjen om en time."
             }
           ],
           "questions": [
             {
-              "prompt": "Hva må Nora sjekke først?",
+              "prompt": "Hva må pasienten gjøre under målingen?",
               "options": [
-                "Om pasienten har gitt samtykke",
-                "Om datteren er lege",
-                "Når besøkstiden er"
+                "Sitte stille og ikke snakke.",
+                "Puste dypt og reise seg.",
+                "Holde armen over hodet."
               ],
-              "answer": "Om pasienten har gitt samtykke"
+              "answer": "Sitte stille og ikke snakke."
             },
             {
-              "prompt": "Hvordan har Per det?",
+              "prompt": "Hva gjør Nora fordi blodtrykket er høyt?",
               "options": [
-                "Bedre, smertene har gått ned",
-                "Verre",
-                "Han er utskrevet"
+                "Hun måler igjen om en time.",
+                "Hun ringer legen med en gang.",
+                "Hun gir pasienten medisin."
               ],
-              "answer": "Bedre, smertene har gått ned"
+              "answer": "Hun måler igjen om en time."
             }
           ]
         },
         {
           "id": "L-03",
           "code": "NO-HC-B1-L01-L03",
-          "title": "L-03 · Legen forklarer",
-          "context": "Lege og pasient",
+          "title": "L-03 · Allergier og faste medisiner",
+          "context": "Anamnesesamtale",
+          "xp": 1,
           "lines": [
             {
-              "speaker": "Jonas",
-              "text": "Prøvesvarene dine er ganske gode, men blodtrykket er fortsatt litt høyt."
+              "speaker": "Nora",
+              "text": "Jeg må stille deg noen spørsmål. Kan du fortelle meg om du er allergisk mot noe?"
             },
             {
-              "speaker": "Per",
-              "text": "Betyr det at jeg må bli her lenger?"
+              "speaker": "Arne",
+              "text": "Ja, jeg tåler ikke penicillin. Jeg fikk utslett over hele kroppen for noen år siden."
             },
             {
-              "speaker": "Jonas",
-              "text": "Vi vil gjerne observere deg ett døgn til. Hvis alt er stabilt, kan du sannsynligvis reise hjem i morgen."
+              "speaker": "Nora",
+              "text": "Takk, det skriver jeg i journalen. Bruker du noen faste medisiner?"
             },
             {
-              "speaker": "Per",
-              "text": "Og hva med medisinene mine?"
+              "speaker": "Arne",
+              "text": "Jeg tar en blodtrykkstablett hver morgen, og noen ganger tar jeg sovetabletter."
             },
             {
-              "speaker": "Jonas",
-              "text": "Du burde fortsette med blodtrykksmedisinen, men vi øker dosen litt."
+              "speaker": "Nora",
+              "text": "Vet du hva tablettene heter? Ellers kan jeg spørre fastlegen din."
             }
           ],
           "questions": [
             {
-              "prompt": "Hvorfor må Per bli ett døgn til?",
+              "prompt": "Hva er pasienten allergisk mot?",
               "options": [
-                "Blodtrykket er litt høyt",
-                "Han har feber",
-                "Han trenger operasjon"
+                "Penicillin",
+                "Paracetamol",
+                "Nøtter"
               ],
-              "answer": "Blodtrykket er litt høyt"
+              "answer": "Penicillin"
             },
             {
-              "prompt": "Hva skjer med medisinen?",
+              "prompt": "Hvilken medisin tar han hver dag?",
               "options": [
-                "Dosen økes litt",
-                "Han slutter med den",
-                "Han får ny medisin"
+                "En blodtrykkstablett",
+                "En sovetablett",
+                "En smertestillende tablett"
               ],
-              "answer": "Dosen økes litt"
+              "answer": "En blodtrykkstablett"
+            },
+            {
+              "prompt": "Hvilket indirekte spørsmål stiller Nora?",
+              "options": [
+                "Kan du fortelle meg om du er allergisk mot noe?",
+                "Er du allergisk mot noe?",
+                "Allergisk mot noe du er?"
+              ],
+              "answer": "Kan du fortelle meg om du er allergisk mot noe?"
             }
           ]
         },
         {
           "id": "L-04",
           "code": "NO-HC-B1-L01-L04",
-          "title": "L-04 · Vaktskifte",
-          "context": "To sykepleiere",
+          "title": "L-04 · Datteren ringer",
+          "context": "Telefonsamtale",
+          "xp": 1,
           "lines": [
             {
-              "speaker": "Ingrid",
-              "text": "Rom 14: pasienten er nyoperert og har fått smertestillende klokka to."
-            },
-            {
-              "speaker": "Anne",
-              "text": "Er hun tungpustet?"
+              "speaker": "Nora",
+              "text": "Medisinsk avdeling, det er Nora."
             },
             {
               "speaker": "Ingrid",
-              "text": "Nei, oksygenmetningen er 97 prosent. Men hun er redd og spør ofte om hun kan få snakke med legen."
+              "text": "Hei, jeg heter Ingrid Hansen. Faren min ble lagt inn i natt. Kan du si meg hvordan han har det?"
             },
             {
-              "speaker": "Anne",
-              "text": "Greit, jeg spør Jonas om han kan komme innom før middag."
+              "speaker": "Nora",
+              "text": "Jeg forstår at du er bekymret. Men av hensyn til taushetsplikten kan jeg ikke gi opplysninger på telefon før jeg vet hvem du er."
+            },
+            {
+              "speaker": "Ingrid",
+              "text": "Selvfølgelig. Jeg står oppført som nærmeste pårørende."
+            },
+            {
+              "speaker": "Nora",
+              "text": "Da sjekker jeg det. Faren din er stabil og hviler nå. Du er velkommen på besøk mellom klokka fire og sju."
             }
           ],
           "questions": [
             {
-              "prompt": "Når fikk pasienten smertestillende?",
+              "prompt": "Hvorfor er Nora forsiktig i begynnelsen?",
               "options": [
-                "Klokka to",
-                "Klokka fire",
-                "I natt"
+                "Hun har taushetsplikt.",
+                "Hun har ikke tid til å snakke.",
+                "Hun kjenner ikke pasienten."
               ],
-              "answer": "Klokka to"
+              "answer": "Hun har taushetsplikt."
             },
             {
-              "prompt": "Hva vil pasienten?",
+              "prompt": "Når kan Ingrid besøke faren?",
               "options": [
-                "Snakke med legen",
-                "Gå hjem",
-                "Spise middag"
+                "Mellom fire og sju",
+                "Mellom ti og tolv",
+                "Hele døgnet"
               ],
-              "answer": "Snakke med legen"
+              "answer": "Mellom fire og sju"
+            }
+          ]
+        },
+        {
+          "id": "L-05",
+          "code": "NO-HC-B1-L01-L05",
+          "title": "L-05 · Legevisitt",
+          "context": "Lege og pasient",
+          "xp": 1,
+          "lines": [
+            {
+              "speaker": "Per",
+              "text": "God dag, herr Hansen. Jeg er doktor Per Lund. Vi har fått svar på blodprøvene."
+            },
+            {
+              "speaker": "Arne",
+              "text": "Er det noe alvorlig?"
+            },
+            {
+              "speaker": "Per",
+              "text": "Prøvene viser ikke tegn på hjerteinfarkt. Men vi må ta et EKG og en ultralyd av hjertet for å være sikre."
+            },
+            {
+              "speaker": "Arne",
+              "text": "Må jeg bli her lenge?"
+            },
+            {
+              "speaker": "Per",
+              "text": "Sannsynligvis to dager. Du bør ikke anstrenge deg, og du skal ringe på sykepleieren hvis smertene kommer tilbake."
+            }
+          ],
+          "questions": [
+            {
+              "prompt": "Hva viser blodprøvene?",
+              "options": [
+                "Ingen tegn på hjerteinfarkt.",
+                "At pasienten har infeksjon.",
+                "At pasienten har diabetes."
+              ],
+              "answer": "Ingen tegn på hjerteinfarkt."
+            },
+            {
+              "prompt": "Hva skal pasienten gjøre hvis smertene kommer tilbake?",
+              "options": [
+                "Ringe på sykepleieren.",
+                "Ta en ekstra tablett.",
+                "Gå en tur i gangen."
+              ],
+              "answer": "Ringe på sykepleieren."
+            }
+          ]
+        },
+        {
+          "id": "L-06",
+          "code": "NO-HC-B1-L01-L06",
+          "title": "L-06 · Rapport ved vaktskifte",
+          "context": "To sykepleiere",
+          "xp": 1,
+          "lines": [
+            {
+              "speaker": "Anne",
+              "text": "Hei Nora. Kan du gi meg rapport om rom fire før du går?"
+            },
+            {
+              "speaker": "Nora",
+              "text": "Ja. Herr Hansen ble innlagt i morges med brystsmerter. Han er allergisk mot penicillin."
+            },
+            {
+              "speaker": "Anne",
+              "text": "Hvordan er han nå?"
+            },
+            {
+              "speaker": "Nora",
+              "text": "Han har ikke hatt smerter siden klokka ti. Blodtrykket har gått ned, men det må måles hver fjerde time."
+            },
+            {
+              "speaker": "Anne",
+              "text": "Er det noe annet jeg må huske?"
+            },
+            {
+              "speaker": "Nora",
+              "text": "Han skal faste fra midnatt fordi han skal ta ultralyd i morgen tidlig."
+            }
+          ],
+          "questions": [
+            {
+              "prompt": "Hvor ofte skal blodtrykket måles?",
+              "options": [
+                "Hver fjerde time",
+                "Hver time",
+                "En gang om dagen"
+              ],
+              "answer": "Hver fjerde time"
+            },
+            {
+              "prompt": "Hvorfor skal pasienten faste fra midnatt?",
+              "options": [
+                "Han skal ta ultralyd i morgen.",
+                "Han skal opereres i natt.",
+                "Han har vondt i magen."
+              ],
+              "answer": "Han skal ta ultralyd i morgen."
+            }
+          ]
+        },
+        {
+          "id": "L-07",
+          "code": "NO-HC-B1-L01-L07",
+          "title": "L-07 · Overlevering fra ambulansen",
+          "context": "Ambulansearbeider og sykepleier",
+          "xp": 1,
+          "lines": [
+            {
+              "speaker": "Lars",
+              "text": "Hei, vi har med en kvinne på åttito år. Hun falt hjemme på badet i kveld."
+            },
+            {
+              "speaker": "Nora",
+              "text": "Var hun bevisstløs?"
+            },
+            {
+              "speaker": "Lars",
+              "text": "Nei, hun var våken hele tiden, men hun klager over smerter i høyre hofte. Vi har gitt henne smertestillende."
+            },
+            {
+              "speaker": "Nora",
+              "text": "Har dere målt metningen?"
+            },
+            {
+              "speaker": "Lars",
+              "text": "Ja, den er nittisju prosent. Datteren hennes kommer om en halvtime med medisinlista."
+            }
+          ],
+          "questions": [
+            {
+              "prompt": "Hva har skjedd med kvinnen?",
+              "options": [
+                "Hun falt på badet.",
+                "Hun ble syk på bussen.",
+                "Hun fikk et slag på jobb."
+              ],
+              "answer": "Hun falt på badet."
+            },
+            {
+              "prompt": "Hvor har hun vondt?",
+              "options": [
+                "I høyre hofte",
+                "I venstre skulder",
+                "I hodet"
+              ],
+              "answer": "I høyre hofte"
+            },
+            {
+              "prompt": "Hvem tar med medisinlista?",
+              "options": [
+                "Datteren",
+                "Fastlegen",
+                "Ambulansearbeideren"
+              ],
+              "answer": "Datteren"
+            }
+          ]
+        },
+        {
+          "id": "L-08",
+          "code": "NO-HC-B1-L01-L08",
+          "title": "L-08 · Smerteskala",
+          "context": "Sykepleier og pasient",
+          "xp": 1,
+          "lines": [
+            {
+              "speaker": "Nora",
+              "text": "Hvordan har du det nå? Har du fortsatt vondt?"
+            },
+            {
+              "speaker": "Arne",
+              "text": "Ja, det verker litt i brystet."
+            },
+            {
+              "speaker": "Nora",
+              "text": "Kan du si hvor sterke smertene er på en skala fra null til ti?"
+            },
+            {
+              "speaker": "Arne",
+              "text": "Kanskje fire. I natt var det åtte."
+            },
+            {
+              "speaker": "Nora",
+              "text": "Er smerten stikkende eller trykkende?"
+            },
+            {
+              "speaker": "Arne",
+              "text": "Mer trykkende. Den kommer når jeg går i trappa."
+            }
+          ],
+          "questions": [
+            {
+              "prompt": "Hvor sterke er smertene nå?",
+              "options": [
+                "Fire av ti",
+                "Åtte av ti",
+                "Null av ti"
+              ],
+              "answer": "Fire av ti"
+            },
+            {
+              "prompt": "Når kommer smerten?",
+              "options": [
+                "Når han går i trappa.",
+                "Når han ligger i senga.",
+                "Når han spiser."
+              ],
+              "answer": "Når han går i trappa."
+            }
+          ]
+        },
+        {
+          "id": "L-09",
+          "code": "NO-HC-B1-L01-L09",
+          "title": "L-09 · Forberedelse til undersøkelse",
+          "context": "Sykepleier gir beskjed",
+          "xp": 1,
+          "lines": [
+            {
+              "speaker": "Nora",
+              "text": "I morgen klokka åtte skal du ta en blodprøve og en ultralyd av magen. Du må ikke spise eller drikke etter midnatt. Du kan ta medisinene dine med litt vann. En portør henter deg på rommet, så du trenger ikke å gå selv. Etter undersøkelsen får du frokost."
+            }
+          ],
+          "questions": [
+            {
+              "prompt": "Hva er ikke lov etter midnatt?",
+              "options": [
+                "Å spise og drikke",
+                "Å ta medisiner med vann",
+                "Å sove"
+              ],
+              "answer": "Å spise og drikke"
+            },
+            {
+              "prompt": "Hvordan kommer pasienten til undersøkelsen?",
+              "options": [
+                "En portør henter ham.",
+                "Han går selv.",
+                "Datteren kjører ham."
+              ],
+              "answer": "En portør henter ham."
+            }
+          ]
+        },
+        {
+          "id": "L-10",
+          "code": "NO-HC-B1-L01-L10",
+          "title": "L-10 · Planlegging av utskrivning",
+          "context": "Lege, sykepleier og pasient",
+          "xp": 1,
+          "lines": [
+            {
+              "speaker": "Per",
+              "text": "Herr Hansen, undersøkelsene var fine. Du kan reise hjem i morgen."
+            },
+            {
+              "speaker": "Arne",
+              "text": "Så bra! Må jeg ta nye medisiner?"
+            },
+            {
+              "speaker": "Per",
+              "text": "Ja, du skal ta en ny blodtrykkstablett i tillegg. Fastlegen må kontrollere blodtrykket om to uker."
+            },
+            {
+              "speaker": "Nora",
+              "text": "Jeg skriver ned alle medisinene for deg, og hjemmesykepleien kommer innom de første dagene."
+            },
+            {
+              "speaker": "Arne",
+              "text": "Takk. Kan datteren min hente meg?"
+            },
+            {
+              "speaker": "Nora",
+              "text": "Ja, hun kan komme etter klokka elleve."
+            }
+          ],
+          "questions": [
+            {
+              "prompt": "Når skal blodtrykket kontrolleres?",
+              "options": [
+                "Om to uker hos fastlegen",
+                "I morgen på sykehuset",
+                "Om et halvt år"
+              ],
+              "answer": "Om to uker hos fastlegen"
+            },
+            {
+              "prompt": "Hvem hjelper pasienten hjemme de første dagene?",
+              "options": [
+                "Hjemmesykepleien",
+                "Doktor Lund",
+                "Ingen"
+              ],
+              "answer": "Hjemmesykepleien"
+            },
+            {
+              "prompt": "Hvem henter pasienten?",
+              "options": [
+                "Datteren hans",
+                "En ambulanse",
+                "En taxi fra sykehuset"
+              ],
+              "answer": "Datteren hans"
             }
           ]
         }

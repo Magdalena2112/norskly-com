@@ -2435,184 +2435,506 @@
         {
           "id": "L-01",
           "code": "DE-HC-B1-L01-L01",
-          "title": "L-01 · Die Morgenrunde",
-          "context": "Pflegekraft und Patientin",
+          "title": "L-01 · Neuaufnahme auf Station",
+          "context": "Pflegekraft berichtet (Monolog)",
+          "xp": 1,
           "lines": [
             {
               "speaker": "Lena",
-              "text": "Guten Morgen, Frau Becker. Wie haben Sie heute Nacht geschlafen?"
-            },
-            {
-              "speaker": "Patientin",
-              "text": "Nicht so gut. Ich bin mehrmals aufgewacht, weil ich viel husten musste."
-            },
-            {
-              "speaker": "Lena",
-              "text": "Glauben Sie, dass Sie Fieber haben?"
-            },
-            {
-              "speaker": "Patientin",
-              "text": "Ich weiß nicht, aber mir ist warm und etwas schwindlig."
-            },
-            {
-              "speaker": "Lena",
-              "text": "Dann messe ich zuerst die Temperatur. Sie haben 38,4 – also leichtes Fieber. Ich sage dem Arzt Bescheid."
+              "text": "Guten Morgen. Ich bin Lena, Pflegefachkraft auf der Inneren Station der Charité. Heute um sieben Uhr ist ein neuer Patient gekommen. Er heißt Klaus Schmidt und ist siebzig Jahre alt. Seit gestern Abend hat er Brustschmerzen und ist etwas kurzatmig. Zuerst habe ich Blutdruck und Puls gemessen. Der Blutdruck war erhöht, der Puls war normal. Danach wurde Blut abgenommen, und der Arzt untersucht ihn noch vor dem Mittagessen."
             }
           ],
           "questions": [
             {
-              "prompt": "Warum hat die Patientin schlecht geschlafen?",
+              "prompt": "Warum wurde Herr Schmidt aufgenommen?",
               "options": [
-                "Sie musste viel husten",
-                "Sie hatte Bauchschmerzen",
-                "Es war laut"
+                "Er hat Brustschmerzen und ist kurzatmig.",
+                "Er hat sich den Arm gebrochen.",
+                "Er hat Fieber und Husten."
               ],
-              "answer": "Sie musste viel husten"
+              "answer": "Er hat Brustschmerzen und ist kurzatmig."
             },
             {
-              "prompt": "Was macht Lena nach der Messung?",
+              "prompt": "Welcher Wert war auffällig?",
               "options": [
-                "Sie sagt dem Arzt Bescheid",
-                "Sie gibt Antibiotika",
-                "Sie entlässt die Patientin"
+                "Der Blutdruck war erhöht.",
+                "Der Puls war sehr schnell.",
+                "Die Temperatur war hoch."
               ],
-              "answer": "Sie sagt dem Arzt Bescheid"
+              "answer": "Der Blutdruck war erhöht."
+            },
+            {
+              "prompt": "Was passiert vor dem Mittagessen?",
+              "options": [
+                "Der Arzt untersucht den Patienten.",
+                "Der Patient wird entlassen.",
+                "Der Patient wird operiert."
+              ],
+              "answer": "Der Arzt untersucht den Patienten."
             }
           ]
         },
         {
           "id": "L-02",
           "code": "DE-HC-B1-L01-L02",
-          "title": "L-02 · Anruf einer Angehörigen",
-          "context": "Tochter ruft auf Station an",
+          "title": "L-02 · Blutdruckmessung",
+          "context": "Pflegekraft und nervöser Patient",
+          "xp": 1,
           "lines": [
             {
-              "speaker": "Tochter",
-              "text": "Guten Tag, ich möchte gern wissen, wie es meinem Vater, Klaus Schmidt, geht."
+              "speaker": "Lena",
+              "text": "Herr Schmidt, ich möchte jetzt Ihren Blutdruck messen. Könnten Sie bitte den Ärmel hochkrempeln?"
+            },
+            {
+              "speaker": "Herr Schmidt",
+              "text": "Ja, gern. Aber ich bin ein bisschen nervös. Stimmt etwas nicht mit meinem Herzen?"
             },
             {
               "speaker": "Lena",
-              "text": "Guten Tag. Bevor ich Auskunft gebe, muss ich prüfen, ob Ihr Vater eingewilligt hat. Wie ist Ihr Name?"
+              "text": "Das wissen wir noch nicht. Die Messung dauert nur eine Minute. Bitte sitzen Sie ruhig und sprechen Sie nicht, während die Manschette aufgepumpt wird."
             },
             {
-              "speaker": "Tochter",
-              "text": "Sabine Schmidt, ich bin seine Tochter."
+              "speaker": "Herr Schmidt",
+              "text": "In Ordnung. Es drückt ein bisschen am Arm."
             },
             {
               "speaker": "Lena",
-              "text": "Danke, Frau Schmidt. Ihr Vater ist einverstanden. Es geht ihm heute besser, die Schmerzen sind zurückgegangen."
+              "text": "Das ist ganz normal. So, fertig. Hundertfünfzig zu neunzig. Das ist etwas hoch, deshalb messe ich in einer Stunde noch einmal."
             }
           ],
           "questions": [
             {
-              "prompt": "Was muss Lena zuerst prüfen?",
+              "prompt": "Was soll der Patient während der Messung tun?",
               "options": [
-                "Ob der Patient eingewilligt hat",
-                "Ob die Tochter Ärztin ist",
-                "Wann Besuchszeit ist"
+                "Ruhig sitzen und nicht sprechen.",
+                "Tief atmen und aufstehen.",
+                "Den Arm über den Kopf halten."
               ],
-              "answer": "Ob der Patient eingewilligt hat"
+              "answer": "Ruhig sitzen und nicht sprechen."
             },
             {
-              "prompt": "Wie geht es Herrn Schmidt?",
+              "prompt": "Was macht Lena, weil der Wert hoch ist?",
               "options": [
-                "Besser, die Schmerzen sind zurückgegangen",
-                "Schlechter",
-                "Er ist entlassen"
+                "Sie misst in einer Stunde noch einmal.",
+                "Sie ruft sofort den Notarzt.",
+                "Sie gibt ihm ein Medikament."
               ],
-              "answer": "Besser, die Schmerzen sind zurückgegangen"
+              "answer": "Sie misst in einer Stunde noch einmal."
             }
           ]
         },
         {
           "id": "L-03",
           "code": "DE-HC-B1-L01-L03",
-          "title": "L-03 · Der Arzt erklärt",
-          "context": "Arzt und Patient",
+          "title": "L-03 · Allergien und Dauermedikation",
+          "context": "Anamnesegespräch",
+          "xp": 1,
           "lines": [
             {
-              "speaker": "Dr. Weber",
-              "text": "Ihre Befunde sind recht gut, aber der Blutdruck ist immer noch etwas hoch."
+              "speaker": "Lena",
+              "text": "Ich muss Ihnen ein paar Fragen stellen. Können Sie mir sagen, ob Sie gegen etwas allergisch sind?"
             },
             {
               "speaker": "Herr Schmidt",
-              "text": "Heißt das, dass ich länger bleiben muss?"
+              "text": "Ja, ich vertrage kein Penicillin. Vor ein paar Jahren hatte ich davon einen Ausschlag am ganzen Körper."
             },
             {
-              "speaker": "Dr. Weber",
-              "text": "Wir würden Sie gern noch einen Tag beobachten. Wenn alles stabil ist, können Sie wahrscheinlich morgen nach Hause."
+              "speaker": "Lena",
+              "text": "Danke, das trage ich in die Akte ein. Nehmen Sie regelmäßig Medikamente?"
             },
             {
               "speaker": "Herr Schmidt",
-              "text": "Und meine Tabletten?"
+              "text": "Jeden Morgen eine Blutdrucktablette, und manchmal eine Schlaftablette."
             },
             {
-              "speaker": "Dr. Weber",
-              "text": "Sie sollten den Blutdrucksenker weiter nehmen, aber wir erhöhen die Dosis etwas."
+              "speaker": "Lena",
+              "text": "Wissen Sie, wie die Tabletten heißen? Sonst könnte ich Ihren Hausarzt anrufen."
             }
           ],
           "questions": [
             {
-              "prompt": "Warum muss Herr Schmidt noch bleiben?",
+              "prompt": "Wogegen ist der Patient allergisch?",
               "options": [
-                "Der Blutdruck ist etwas hoch",
-                "Er hat Fieber",
-                "Er braucht eine Operation"
+                "Penicillin",
+                "Paracetamol",
+                "Nüsse"
               ],
-              "answer": "Der Blutdruck ist etwas hoch"
+              "answer": "Penicillin"
             },
             {
-              "prompt": "Was passiert mit dem Medikament?",
+              "prompt": "Welches Medikament nimmt er täglich?",
               "options": [
-                "Die Dosis wird etwas erhöht",
-                "Er setzt es ab",
-                "Er bekommt ein neues"
+                "Eine Blutdrucktablette",
+                "Eine Schlaftablette",
+                "Ein Schmerzmittel"
               ],
-              "answer": "Die Dosis wird etwas erhöht"
+              "answer": "Eine Blutdrucktablette"
+            },
+            {
+              "prompt": "Welche Frage ist eine indirekte Frage?",
+              "options": [
+                "Können Sie mir sagen, ob Sie gegen etwas allergisch sind?",
+                "Sind Sie gegen etwas allergisch?",
+                "Allergisch gegen etwas Sie sind?"
+              ],
+              "answer": "Können Sie mir sagen, ob Sie gegen etwas allergisch sind?"
             }
           ]
         },
         {
           "id": "L-04",
           "code": "DE-HC-B1-L01-L04",
-          "title": "L-04 · Schichtwechsel",
-          "context": "Zwei Pflegekräfte",
+          "title": "L-04 · Die Tochter ruft an",
+          "context": "Telefongespräch",
+          "xp": 1,
           "lines": [
             {
-              "speaker": "Monika",
-              "text": "Zimmer 14: Die Patientin ist frisch operiert und hat um 14 Uhr ein Schmerzmittel bekommen."
+              "speaker": "Lena",
+              "text": "Innere Station, Lena am Apparat."
             },
             {
               "speaker": "Anna",
-              "text": "Hat sie Atemnot?"
+              "text": "Guten Tag, hier ist Anna Schmidt. Mein Vater wurde heute Nacht aufgenommen. Könnten Sie mir sagen, wie es ihm geht?"
             },
             {
-              "speaker": "Monika",
-              "text": "Nein, die Sättigung liegt bei 97 Prozent. Aber sie hat Angst und fragt oft, ob sie mit dem Arzt sprechen kann."
+              "speaker": "Lena",
+              "text": "Ich verstehe, dass Sie sich Sorgen machen. Wegen der Schweigepflicht darf ich am Telefon aber erst Auskunft geben, wenn ich weiß, wer Sie sind."
             },
             {
               "speaker": "Anna",
-              "text": "Gut, ich frage Dr. Weber, ob er vor dem Abendessen vorbeikommen könnte."
+              "text": "Natürlich. Ich bin als nächste Angehörige eingetragen."
+            },
+            {
+              "speaker": "Lena",
+              "text": "Dann schaue ich nach. Ihr Vater ist stabil und ruht sich aus. Besuchszeit ist von sechzehn bis neunzehn Uhr."
             }
           ],
           "questions": [
             {
-              "prompt": "Wann hat die Patientin das Schmerzmittel bekommen?",
+              "prompt": "Warum ist Lena am Anfang vorsichtig?",
               "options": [
-                "Um 14 Uhr",
-                "Um 16 Uhr",
-                "In der Nacht"
+                "Sie hat Schweigepflicht.",
+                "Sie hat keine Zeit.",
+                "Sie kennt den Patienten nicht."
               ],
-              "answer": "Um 14 Uhr"
+              "answer": "Sie hat Schweigepflicht."
             },
             {
-              "prompt": "Was möchte die Patientin?",
+              "prompt": "Wann darf Anna ihren Vater besuchen?",
               "options": [
-                "Mit dem Arzt sprechen",
-                "Nach Hause gehen",
-                "Abendessen"
+                "Von sechzehn bis neunzehn Uhr",
+                "Von zehn bis zwölf Uhr",
+                "Rund um die Uhr"
               ],
-              "answer": "Mit dem Arzt sprechen"
+              "answer": "Von sechzehn bis neunzehn Uhr"
+            }
+          ]
+        },
+        {
+          "id": "L-05",
+          "code": "DE-HC-B1-L01-L05",
+          "title": "L-05 · Die Visite",
+          "context": "Arzt und Patient",
+          "xp": 1,
+          "lines": [
+            {
+              "speaker": "Dr. Weber",
+              "text": "Guten Tag, Herr Schmidt. Ich bin Dr. Weber. Die Blutergebnisse sind da."
+            },
+            {
+              "speaker": "Herr Schmidt",
+              "text": "Ist es etwas Ernstes?"
+            },
+            {
+              "speaker": "Dr. Weber",
+              "text": "Es gibt keine Hinweise auf einen Herzinfarkt. Trotzdem sollten wir ein EKG und einen Herzultraschall machen, um sicher zu sein."
+            },
+            {
+              "speaker": "Herr Schmidt",
+              "text": "Muss ich lange bleiben?"
+            },
+            {
+              "speaker": "Dr. Weber",
+              "text": "Wahrscheinlich zwei Tage. Sie sollten sich nicht anstrengen, und wenn die Schmerzen wiederkommen, klingeln Sie bitte sofort."
+            }
+          ],
+          "questions": [
+            {
+              "prompt": "Was zeigen die Blutergebnisse?",
+              "options": [
+                "Keine Hinweise auf einen Herzinfarkt.",
+                "Eine Infektion.",
+                "Diabetes."
+              ],
+              "answer": "Keine Hinweise auf einen Herzinfarkt."
+            },
+            {
+              "prompt": "Was soll der Patient bei neuen Schmerzen tun?",
+              "options": [
+                "Sofort klingeln.",
+                "Eine zusätzliche Tablette nehmen.",
+                "Auf dem Flur spazieren gehen."
+              ],
+              "answer": "Sofort klingeln."
+            }
+          ]
+        },
+        {
+          "id": "L-06",
+          "code": "DE-HC-B1-L01-L06",
+          "title": "L-06 · Übergabe beim Schichtwechsel",
+          "context": "Zwei Pflegekräfte",
+          "xp": 1,
+          "lines": [
+            {
+              "speaker": "Monika",
+              "text": "Hallo Lena. Kannst du mir noch die Übergabe für Zimmer vier machen?"
+            },
+            {
+              "speaker": "Lena",
+              "text": "Klar. Herr Schmidt wurde heute Morgen mit Brustschmerzen aufgenommen. Er ist allergisch gegen Penicillin."
+            },
+            {
+              "speaker": "Monika",
+              "text": "Wie geht es ihm jetzt?"
+            },
+            {
+              "speaker": "Lena",
+              "text": "Seit zehn Uhr hat er keine Schmerzen mehr. Der Blutdruck ist gesunken, muss aber alle vier Stunden gemessen werden."
+            },
+            {
+              "speaker": "Monika",
+              "text": "Muss ich sonst noch an etwas denken?"
+            },
+            {
+              "speaker": "Lena",
+              "text": "Ab Mitternacht muss er nüchtern bleiben, weil morgen früh ein Ultraschall gemacht wird."
+            }
+          ],
+          "questions": [
+            {
+              "prompt": "Wie oft wird der Blutdruck gemessen?",
+              "options": [
+                "Alle vier Stunden",
+                "Jede Stunde",
+                "Einmal am Tag"
+              ],
+              "answer": "Alle vier Stunden"
+            },
+            {
+              "prompt": "Warum muss er ab Mitternacht nüchtern bleiben?",
+              "options": [
+                "Morgen früh wird ein Ultraschall gemacht.",
+                "Er wird heute Nacht operiert.",
+                "Er hat Bauchschmerzen."
+              ],
+              "answer": "Morgen früh wird ein Ultraschall gemacht."
+            }
+          ]
+        },
+        {
+          "id": "L-07",
+          "code": "DE-HC-B1-L01-L07",
+          "title": "L-07 · Übergabe vom Rettungsdienst",
+          "context": "Sanitäter und Pflegekraft",
+          "xp": 1,
+          "lines": [
+            {
+              "speaker": "Markus",
+              "text": "Hallo, wir bringen eine zweiundachtzigjährige Frau. Sie ist heute Abend zu Hause im Bad gestürzt."
+            },
+            {
+              "speaker": "Lena",
+              "text": "War sie bewusstlos?"
+            },
+            {
+              "speaker": "Markus",
+              "text": "Nein, sie war die ganze Zeit wach, klagt aber über Schmerzen in der rechten Hüfte. Wir haben ihr ein Schmerzmittel gegeben."
+            },
+            {
+              "speaker": "Lena",
+              "text": "Haben Sie die Sauerstoffsättigung gemessen?"
+            },
+            {
+              "speaker": "Markus",
+              "text": "Ja, siebenundneunzig Prozent. Ihre Tochter kommt in einer halben Stunde mit dem Medikamentenplan."
+            }
+          ],
+          "questions": [
+            {
+              "prompt": "Was ist mit der Frau passiert?",
+              "options": [
+                "Sie ist im Bad gestürzt.",
+                "Ihr wurde im Bus schlecht.",
+                "Sie hatte einen Unfall bei der Arbeit."
+              ],
+              "answer": "Sie ist im Bad gestürzt."
+            },
+            {
+              "prompt": "Wo hat sie Schmerzen?",
+              "options": [
+                "In der rechten Hüfte",
+                "In der linken Schulter",
+                "Im Kopf"
+              ],
+              "answer": "In der rechten Hüfte"
+            },
+            {
+              "prompt": "Wer bringt den Medikamentenplan?",
+              "options": [
+                "Die Tochter",
+                "Der Hausarzt",
+                "Der Sanitäter"
+              ],
+              "answer": "Die Tochter"
+            }
+          ]
+        },
+        {
+          "id": "L-08",
+          "code": "DE-HC-B1-L01-L08",
+          "title": "L-08 · Die Schmerzskala",
+          "context": "Pflegekraft und Patient",
+          "xp": 1,
+          "lines": [
+            {
+              "speaker": "Lena",
+              "text": "Wie geht es Ihnen jetzt? Haben Sie noch Schmerzen?"
+            },
+            {
+              "speaker": "Herr Schmidt",
+              "text": "Ja, es tut ein bisschen in der Brust weh."
+            },
+            {
+              "speaker": "Lena",
+              "text": "Könnten Sie mir sagen, wie stark die Schmerzen auf einer Skala von null bis zehn sind?"
+            },
+            {
+              "speaker": "Herr Schmidt",
+              "text": "Vielleicht vier. Heute Nacht war es acht."
+            },
+            {
+              "speaker": "Lena",
+              "text": "Ist der Schmerz eher stechend oder drückend?"
+            },
+            {
+              "speaker": "Herr Schmidt",
+              "text": "Eher drückend. Er kommt, wenn ich Treppen steige."
+            }
+          ],
+          "questions": [
+            {
+              "prompt": "Wie stark sind die Schmerzen jetzt?",
+              "options": [
+                "Vier von zehn",
+                "Acht von zehn",
+                "Null von zehn"
+              ],
+              "answer": "Vier von zehn"
+            },
+            {
+              "prompt": "Wann kommt der Schmerz?",
+              "options": [
+                "Wenn er Treppen steigt.",
+                "Wenn er im Bett liegt.",
+                "Wenn er isst."
+              ],
+              "answer": "Wenn er Treppen steigt."
+            }
+          ]
+        },
+        {
+          "id": "L-09",
+          "code": "DE-HC-B1-L01-L09",
+          "title": "L-09 · Vorbereitung auf die Untersuchung",
+          "context": "Pflegekraft informiert",
+          "xp": 1,
+          "lines": [
+            {
+              "speaker": "Lena",
+              "text": "Morgen um acht Uhr wird Ihnen Blut abgenommen, und danach wird ein Ultraschall vom Bauch gemacht. Ab Mitternacht dürfen Sie nichts essen und nichts trinken. Ihre Medikamente können Sie mit einem Schluck Wasser nehmen. Ein Mitarbeiter vom Patiententransport holt Sie im Zimmer ab, Sie müssen also nicht selbst gehen. Nach der Untersuchung bekommen Sie Frühstück."
+            }
+          ],
+          "questions": [
+            {
+              "prompt": "Was ist ab Mitternacht nicht erlaubt?",
+              "options": [
+                "Essen und trinken",
+                "Medikamente mit Wasser nehmen",
+                "Schlafen"
+              ],
+              "answer": "Essen und trinken"
+            },
+            {
+              "prompt": "Wie kommt der Patient zur Untersuchung?",
+              "options": [
+                "Der Patiententransport holt ihn ab.",
+                "Er geht allein.",
+                "Seine Tochter fährt ihn."
+              ],
+              "answer": "Der Patiententransport holt ihn ab."
+            }
+          ]
+        },
+        {
+          "id": "L-10",
+          "code": "DE-HC-B1-L01-L10",
+          "title": "L-10 · Planung der Entlassung",
+          "context": "Arzt, Pflegekraft und Patient",
+          "xp": 1,
+          "lines": [
+            {
+              "speaker": "Dr. Weber",
+              "text": "Herr Schmidt, die Untersuchungen waren unauffällig. Sie können morgen nach Hause."
+            },
+            {
+              "speaker": "Herr Schmidt",
+              "text": "Wunderbar! Muss ich neue Medikamente nehmen?"
+            },
+            {
+              "speaker": "Dr. Weber",
+              "text": "Ja, zusätzlich eine neue Blutdrucktablette. Ihr Hausarzt sollte den Blutdruck in zwei Wochen kontrollieren."
+            },
+            {
+              "speaker": "Lena",
+              "text": "Ich schreibe Ihnen alle Medikamente auf, und der ambulante Pflegedienst kommt in den ersten Tagen vorbei."
+            },
+            {
+              "speaker": "Herr Schmidt",
+              "text": "Danke. Kann meine Tochter mich abholen?"
+            },
+            {
+              "speaker": "Lena",
+              "text": "Ja, sie kann ab elf Uhr kommen."
+            }
+          ],
+          "questions": [
+            {
+              "prompt": "Wann wird der Blutdruck kontrolliert?",
+              "options": [
+                "In zwei Wochen beim Hausarzt",
+                "Morgen im Krankenhaus",
+                "In einem halben Jahr"
+              ],
+              "answer": "In zwei Wochen beim Hausarzt"
+            },
+            {
+              "prompt": "Wer hilft dem Patienten zu Hause?",
+              "options": [
+                "Der ambulante Pflegedienst",
+                "Dr. Weber",
+                "Niemand"
+              ],
+              "answer": "Der ambulante Pflegedienst"
+            },
+            {
+              "prompt": "Wer holt den Patienten ab?",
+              "options": [
+                "Seine Tochter",
+                "Ein Krankenwagen",
+                "Ein Taxi vom Krankenhaus"
+              ],
+              "answer": "Seine Tochter"
             }
           ]
         }
