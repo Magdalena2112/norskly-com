@@ -1695,6 +1695,10 @@ export type Database = {
         Returns: string
       }
       claim_teacher_account: { Args: never; Returns: boolean }
+      complete_medical_vocabulary: {
+        Args: { _code: string; _lesson_id: string }
+        Returns: Json
+      }
       current_teacher_id: { Args: never; Returns: string }
       delete_email: {
         Args: { message_id: number; queue_name: string }

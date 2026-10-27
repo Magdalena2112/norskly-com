@@ -1295,6 +1295,15 @@
               "active": true,
               "img": "hc-vo-1-12"
             }
+          ],
+          "exercises": [
+            "VO-01",
+            "VO-02",
+            "VO-03",
+            "VO-04",
+            "VO-05",
+            "VO-06",
+            "VO-07"
           ]
         },
         {
@@ -1375,6 +1384,15 @@
               "active": true,
               "img": "hc-vo-2-10"
             }
+          ],
+          "exercises": [
+            "VO-08",
+            "VO-09",
+            "VO-10",
+            "VO-11",
+            "VO-12",
+            "VO-13",
+            "VO-14"
           ]
         },
         {
@@ -1483,6 +1501,14 @@
               "active": true,
               "img": "hc-vo-3-14"
             }
+          ],
+          "exercises": [
+            "VO-15",
+            "VO-16",
+            "VO-17",
+            "VO-18",
+            "VO-19",
+            "VO-20"
           ]
         }
       ],
@@ -1713,176 +1739,570 @@
         {
           "id": "DE-HC-B1-L01-VO-01",
           "code": "VO-01",
-          "title": "Symptome",
-          "instruction": "Izaberi tačan izraz.",
+          "title": "Tegoba na ilustraciji",
+          "instruction": "Izaberi izraz koji najpreciznije odgovara opisu.",
+          "type": "choice",
+          "xp": 1,
+          "vocabularyFocus": "SYM",
           "kind": "vocabulary",
-          "items": [
-            {
-              "prompt": "Dem Patienten ist ___, er muss sich übergeben.",
-              "options": [
-                "übel",
-                "schwindlig",
-                "geschwollen"
-              ],
-              "answers": [
-                "übel"
-              ]
-            },
-            {
-              "prompt": "Sie bekommt schlecht Luft und hat ___.",
-              "options": [
-                "Atemnot",
-                "Fieber",
-                "Ausschlag"
-              ],
-              "answers": [
-                "Atemnot"
-              ]
-            },
-            {
-              "prompt": "Die Schmerzen strahlen in den linken Arm ___.",
-              "options": [
-                "aus",
-                "an",
-                "ab"
-              ],
-              "answers": [
-                "aus"
-              ]
-            },
-            {
-              "prompt": "Er hat einen roten ___ an den Armen.",
-              "options": [
-                "Ausschlag",
-                "Puls",
-                "Befund"
-              ],
-              "answers": [
-                "Ausschlag"
-              ]
-            }
-          ]
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "context": "Pacijent pokazuje mesto bola na grudima. Koji izraz opisuje i tegobu i njeno mesto?",
+          "options": [
+            "Schmerzen in der Brust haben",
+            "die Kopfschmerzen",
+            "Atemnot haben"
+          ],
+          "correct": [
+            0
+          ],
+          "image": "hc-vo-1-01"
         },
         {
           "id": "DE-HC-B1-L01-VO-02",
           "code": "VO-02",
-          "title": "Messungen",
-          "instruction": "Dopuni rečenicu.",
+          "title": "Tri slike, tri tegobe",
+          "instruction": "Poveži svaku stavku sa odgovarajućim izrazom. Svaki izraz koristi jednom.",
+          "type": "match",
+          "xp": 1,
+          "vocabularyFocus": "SYM",
           "kind": "vocabulary",
-          "items": [
-            {
-              "prompt": "Ich messe jetzt Ihren ___. (pritisak)",
-              "answers": [
-                "Blutdruck"
-              ]
-            },
-            {
-              "prompt": "Der Arzt hat eine neue ___ angeordnet. (vađenje krvi)",
-              "answers": [
-                "Blutabnahme"
-              ]
-            },
-            {
-              "prompt": "Wir müssen ein ___ schreiben.",
-              "answers": [
-                "EKG"
-              ]
-            },
-            {
-              "prompt": "Der ___ ist unauffällig. (nalaz)",
-              "answers": [
-                "Befund"
-              ]
-            }
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "left": [
+            "Slika A",
+            "Slika B",
+            "Slika C"
+          ],
+          "right": [
+            "der Ausschlag",
+            "geschwollen",
+            "husten"
+          ],
+          "pairs": [
+            2,
+            0,
+            1
+          ],
+          "leftImages": [
+            "hc-vo-1-09",
+            "hc-vo-1-08",
+            "hc-vo-1-10"
           ]
         },
         {
           "id": "DE-HC-B1-L01-VO-03",
           "code": "VO-03",
-          "title": "Anamnese",
-          "instruction": "Izaberi tačan izraz.",
+          "title": "Šta pacijent opisuje?",
+          "instruction": "Izaberi izraz koji najpreciznije odgovara opisu.",
+          "type": "choice",
+          "xp": 1,
+          "vocabularyFocus": "SYM",
           "kind": "vocabulary",
-          "items": [
-            {
-              "prompt": "Er ___ kein Penicillin.",
-              "options": [
-                "verträgt",
-                "misst",
-                "blutet"
-              ],
-              "answers": [
-                "verträgt"
-              ]
-            },
-            {
-              "prompt": "Welche ___ nehmen Sie?",
-              "options": [
-                "Dauermedikation",
-                "Übergabe",
-                "Entlassung"
-              ],
-              "answers": [
-                "Dauermedikation"
-              ]
-            },
-            {
-              "prompt": "Pflegekräfte haben ___ und dürfen nichts weitererzählen.",
-              "options": [
-                "Schweigepflicht",
-                "Nebenwirkung",
-                "Atemnot"
-              ],
-              "answers": [
-                "Schweigepflicht"
-              ]
-            },
-            {
-              "prompt": "Die Tochter gehört zu den ___.",
-              "options": [
-                "Angehörigen",
-                "Befunden",
-                "Patientenakten"
-              ],
-              "answers": [
-                "Angehörigen"
-              ]
-            }
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "context": "Herr Schmidt: Wenn ich aufstehe, dreht sich alles. Mein Kopf tut nicht weh.",
+          "options": [
+            "mir ist übel",
+            "schwindlig",
+            "Atemnot haben"
+          ],
+          "correct": [
+            1
           ]
         },
         {
           "id": "DE-HC-B1-L01-VO-04",
           "code": "VO-04",
-          "title": "Prevedi",
-          "instruction": "Napiši izraz na nemačkom (sa članom za imenice).",
+          "title": "Bol koji se širi",
+          "instruction": "Dopuni zapis izrazima koji odgovaraju kontekstu.",
+          "type": "gaps",
+          "xp": 1,
+          "vocabularyFocus": "SYM",
           "kind": "vocabulary",
-          "items": [
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "text": "Herr Schmidt hat einen ___ in der Brust. Die Schmerzen ___ in den linken Arm.",
+          "gaps": [
             {
-              "prompt": "lek protiv bolova",
+              "options": [
+                "Schmerz",
+                "Ausschlag",
+                "Husten"
+              ],
+              "answer": "Schmerz"
+            },
+            {
+              "options": [
+                "strahlen aus",
+                "schwellen an",
+                "lassen nach"
+              ],
+              "answer": "strahlen aus"
+            }
+          ]
+        },
+        {
+          "id": "DE-HC-B1-L01-VO-05",
+          "code": "VO-05",
+          "title": "Od izjave do termina",
+          "instruction": "Poveži svaku stavku sa odgovarajućim izrazom. Svaki izraz koristi jednom.",
+          "type": "match",
+          "xp": 1,
+          "vocabularyFocus": "SYM",
+          "kind": "vocabulary",
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "left": [
+            "Ich habe das Gefühl, dass ich mich übergeben muss.",
+            "Ich bekomme nicht genug Luft.",
+            "Mein Kopf tut weh."
+          ],
+          "right": [
+            "die Kopfschmerzen",
+            "mir ist übel",
+            "Atemnot haben"
+          ],
+          "pairs": [
+            1,
+            2,
+            0
+          ]
+        },
+        {
+          "id": "DE-HC-B1-L01-VO-06",
+          "code": "VO-06",
+          "title": "Šta zapisati kao tegobe?",
+          "instruction": "Izaberi sve izraze koji odgovaraju opisu.",
+          "type": "multi",
+          "xp": 1,
+          "vocabularyFocus": "SYM",
+          "kind": "vocabulary",
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "context": "Pacijent kaže da mu je mučno i da je zadihan. Ne prijavljuje vrtoglavicu ni glavobolju.",
+          "options": [
+            "schwindlig",
+            "mir ist übel",
+            "die Kopfschmerzen",
+            "Atemnot haben"
+          ],
+          "correct": [
+            1,
+            3
+          ]
+        },
+        {
+          "id": "DE-HC-B1-L01-VO-07",
+          "code": "VO-07",
+          "title": "Dve kratke beleške",
+          "instruction": "Upiši traženi izraz na jeziku lekcije.",
+          "type": "text",
+          "xp": 1,
+          "vocabularyFocus": "SYM",
+          "kind": "vocabulary",
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "inputs": [
+            {
+              "prompt": "Navedi imenicu iz lekcije za povišenu telesnu temperaturu, sa članom.",
               "answers": [
-                "das Schmerzmittel",
-                "Schmerzmittel"
+                "das Fieber"
               ]
             },
             {
-              "prompt": "neželjeno dejstvo",
+              "prompt": "Upiši infinitiv iz lekcije: iz rane izlazi krv.",
               "answers": [
-                "die Nebenwirkung",
-                "Nebenwirkung"
+                "bluten"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "DE-HC-B1-L01-VO-08",
+          "code": "VO-08",
+          "title": "Prepoznaj postupak",
+          "instruction": "Poveži svaku stavku sa odgovarajućim izrazom. Svaki izraz koristi jednom.",
+          "type": "match",
+          "xp": 1,
+          "vocabularyFocus": "MES",
+          "kind": "vocabulary",
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "left": [
+            "Slika A",
+            "Slika B",
+            "Slika C"
+          ],
+          "right": [
+            "ein EKG schreiben",
+            "den Blutdruck messen",
+            "die Blutabnahme"
+          ],
+          "pairs": [
+            1,
+            2,
+            0
+          ],
+          "leftImages": [
+            "hc-vo-2-01",
+            "hc-vo-2-04",
+            "hc-vo-2-08"
+          ]
+        },
+        {
+          "id": "DE-HC-B1-L01-VO-09",
+          "code": "VO-09",
+          "title": "Šta pokazuje senzor?",
+          "instruction": "Izaberi izraz koji najpreciznije odgovara opisu.",
+          "type": "choice",
+          "xp": 1,
+          "vocabularyFocus": "MES",
+          "kind": "vocabulary",
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "context": "Lena legt einen Sensor an den Finger, um zu sehen, wie gut das Blut mit Sauerstoff gesättigt ist.",
+          "options": [
+            "der Puls",
+            "der Blutdruck",
+            "die Sauerstoffsättigung",
+            "die Temperatur"
+          ],
+          "correct": [
+            2
+          ],
+          "image": "hc-vo-2-05"
+        },
+        {
+          "id": "DE-HC-B1-L01-VO-10",
+          "code": "VO-10",
+          "title": "Kontroll før legen kommer",
+          "instruction": "Dopuni zapis izrazima koji odgovaraju kontekstu.",
+          "type": "gaps",
+          "xp": 1,
+          "vocabularyFocus": "MES",
+          "kind": "vocabulary",
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "text": "Lena misst die ___, um zu sehen, ob Herr Schmidt Fieber hat. Sie zählt die Herzschläge und notiert seinen ___.",
+          "gaps": [
+            {
+              "options": [
+                "Temperatur",
+                "Sauerstoffsättigung",
+                "Atemfrequenz"
+              ],
+              "answer": "Temperatur"
+            },
+            {
+              "options": [
+                "Puls",
+                "Blutdruck",
+                "Befund"
+              ],
+              "answer": "Puls"
+            }
+          ]
+        },
+        {
+          "id": "DE-HC-B1-L01-VO-11",
+          "code": "VO-11",
+          "title": "Vrednost i odgovarajuća rubrika",
+          "instruction": "Poveži svaku stavku sa odgovarajućim izrazom. Svaki izraz koristi jednom.",
+          "type": "match",
+          "xp": 1,
+          "vocabularyFocus": "MES",
+          "kind": "vocabulary",
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "left": [
+            "72 kg",
+            "3 von 10: Wie stark sind die Schmerzen?",
+            "Das Ergebnis der Untersuchung liegt vor."
+          ],
+          "right": [
+            "der Befund",
+            "das Gewicht",
+            "die Schmerzskala"
+          ],
+          "pairs": [
+            1,
+            2,
+            0
+          ]
+        },
+        {
+          "id": "DE-HC-B1-L01-VO-12",
+          "code": "VO-12",
+          "title": "Najava pregleda",
+          "instruction": "Složi sve delove u smislenu rečenicu. Počni zadatim delom.",
+          "type": "order",
+          "xp": 1,
+          "vocabularyFocus": "MES",
+          "kind": "vocabulary",
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "context": "Početak: Der Arzt",
+          "tokens": [
+            "Der Arzt",
+            "möchte",
+            "den Patienten",
+            "untersuchen."
+          ],
+          "answer": [
+            "Der Arzt möchte den Patienten untersuchen."
+          ]
+        },
+        {
+          "id": "DE-HC-B1-L01-VO-13",
+          "code": "VO-13",
+          "title": "Postupak ili rezultat?",
+          "instruction": "Izaberi izraz koji najpreciznije odgovara opisu.",
+          "type": "choice",
+          "xp": 1,
+          "vocabularyFocus": "MES",
+          "kind": "vocabulary",
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "context": "Die Untersuchung ist beendet. Lena wartet auf das schriftliche Ergebnis, nicht auf eine weitere Blutabnahme.",
+          "options": [
+            "die Blutabnahme",
+            "der Befund",
+            "die Schmerzskala"
+          ],
+          "correct": [
+            1
+          ]
+        },
+        {
+          "id": "DE-HC-B1-L01-VO-14",
+          "code": "VO-14",
+          "title": "Dopuni dve rubrike",
+          "instruction": "Upiši traženi izraz na jeziku lekcije.",
+          "type": "text",
+          "xp": 1,
+          "vocabularyFocus": "MES",
+          "kind": "vocabulary",
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "inputs": [
+            {
+              "prompt": "Upiši jednu reč koja nedostaje: Lena möchte mit der Manschette am Arm den ___ messen.",
+              "answers": [
+                "Blutdruck"
               ]
             },
             {
-              "prompt": "otpust iz bolnice",
+              "prompt": "Upiši izraz za merenje električne aktivnosti srca, iz lekcije (infinitiv).",
               "answers": [
-                "die Entlassung",
+                "ein EKG schreiben"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "DE-HC-B1-L01-VO-15",
+          "code": "VO-15",
+          "title": "Postupci tokom boravka",
+          "instruction": "Poveži svaku stavku sa odgovarajućim izrazom. Svaki izraz koristi jednom.",
+          "type": "match",
+          "xp": 1,
+          "vocabularyFocus": "ANA",
+          "kind": "vocabulary",
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "left": [
+            "Der Patient kommt auf die Station und bekommt ein Bett.",
+            "Die Pflegekraft fragt nach Beschwerden, Medikamenten und früheren Krankheiten.",
+            "Der Patient darf das Krankenhaus verlassen."
+          ],
+          "right": [
+            "die Entlassung",
+            "aufgenommen werden",
+            "das Aufnahmegespräch"
+          ],
+          "pairs": [
+            1,
+            2,
+            0
+          ]
+        },
+        {
+          "id": "DE-HC-B1-L01-VO-16",
+          "code": "VO-16",
+          "title": "Redovna terapija",
+          "instruction": "Izaberi izraz koji najpreciznije odgovara opisu.",
+          "type": "choice",
+          "xp": 1,
+          "vocabularyFocus": "ANA",
+          "kind": "vocabulary",
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "context": "Herr Schmidt: Diese Tablette nehme ich jeden Morgen, auch wenn ich keine Schmerzen habe.",
+          "options": [
+            "das Schmerzmittel",
+            "die Dauermedikation",
+            "die Nebenwirkung"
+          ],
+          "correct": [
+            1
+          ],
+          "image": "hc-vo-3-04"
+        },
+        {
+          "id": "DE-HC-B1-L01-VO-17",
+          "code": "VO-17",
+          "title": "Podnošenje leka",
+          "instruction": "Dopuni zapis izrazima koji odgovaraju kontekstu.",
+          "type": "gaps",
+          "xp": 1,
+          "vocabularyFocus": "ANA",
+          "kind": "vocabulary",
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "text": "Herr Schmidt ___ kein Penicillin. Er ist allergisch ___ dieses Medikament. Nach einem anderen Medikament trat eine unerwünschte ___ auf. Lena notiert auch eine bekannte ___, die schon vor der Aufnahme bestand.",
+          "gaps": [
+            {
+              "options": [
+                "verträgt",
+                "nimmt",
+                "erhält"
+              ],
+              "answer": "verträgt"
+            },
+            {
+              "options": [
+                "gegen",
+                "mit",
+                "bei"
+              ],
+              "answer": "gegen"
+            },
+            {
+              "options": [
+                "Nebenwirkung",
+                "Vorerkrankung",
+                "Dauermedikation"
+              ],
+              "answer": "Nebenwirkung"
+            },
+            {
+              "options": [
+                "Vorerkrankung",
+                "Nebenwirkung",
                 "Entlassung"
-              ]
+              ],
+              "answer": "Vorerkrankung"
+            }
+          ]
+        },
+        {
+          "id": "DE-HC-B1-L01-VO-18",
+          "code": "VO-18",
+          "title": "Ljudi i dokumentacija",
+          "instruction": "Poveži svaku stavku sa odgovarajućim izrazom. Svaki izraz koristi jednom.",
+          "type": "match",
+          "xp": 1,
+          "vocabularyFocus": "ANA",
+          "kind": "vocabulary",
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "left": [
+            "Die Tochter und die Ehefrau von Herrn Schmidt",
+            "Die Dokumentation mit Informationen über den Patienten",
+            "Medikament gegen Schmerzen nach ärztlicher Anordnung"
+          ],
+          "right": [
+            "die Patientenakte",
+            "das Schmerzmittel",
+            "die Angehörigen"
+          ],
+          "pairs": [
+            2,
+            0,
+            1
+          ],
+          "image": "hc-vo-3-09"
+        },
+        {
+          "id": "DE-HC-B1-L01-VO-19",
+          "code": "VO-19",
+          "title": "Na kraju smene",
+          "instruction": "Poveži svaku stavku sa odgovarajućim izrazom. Svaki izraz koristi jednom.",
+          "type": "match",
+          "xp": 1,
+          "vocabularyFocus": "ANA",
+          "kind": "vocabulary",
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "left": [
+            "Anna beginnt den Spätdienst, Lena beendet den Frühdienst.",
+            "Lena informiert Anna über Herrn Schmidts Zustand.",
+            "Lena gibt keine Patientendaten an unbefugte Personen weiter."
+          ],
+          "right": [
+            "die Schweigepflicht",
+            "der Schichtwechsel",
+            "die Übergabe"
+          ],
+          "pairs": [
+            1,
+            2,
+            0
+          ]
+        },
+        {
+          "id": "DE-HC-B1-L01-VO-20",
+          "code": "VO-20",
+          "title": "Završna beleška sa prijema",
+          "instruction": "Dopuni zapis izrazima koji odgovaraju kontekstu.",
+          "type": "gaps",
+          "xp": 1,
+          "vocabularyFocus": "ANA",
+          "kind": "vocabulary",
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "text": "Herr Schmidt wurde auf der Station ___. Lena führt das ___ mit ihm. Seine Tochter gehört zu den ___. Beim ___ informiert Lena Anna während der ___.",
+          "gaps": [
+            {
+              "options": [
+                "aufgenommen",
+                "entlassen",
+                "untersucht"
+              ],
+              "answer": "aufgenommen"
             },
             {
-              "prompt": "primopredaja smene",
-              "answers": [
-                "die Übergabe",
-                "Übergabe"
-              ]
+              "options": [
+                "Aufnahmegespräch",
+                "Entlassungsgespräch",
+                "Übergabegespräch"
+              ],
+              "answer": "Aufnahmegespräch"
+            },
+            {
+              "options": [
+                "Angehörigen",
+                "Vorerkrankungen",
+                "Nebenwirkungen"
+              ],
+              "answer": "Angehörigen"
+            },
+            {
+              "options": [
+                "Schichtwechsel",
+                "Aufnahmegespräch",
+                "Arztgespräch"
+              ],
+              "answer": "Schichtwechsel"
+            },
+            {
+              "options": [
+                "Übergabe",
+                "Entlassung",
+                "Blutabnahme"
+              ],
+              "answer": "Übergabe"
             }
           ]
         }
