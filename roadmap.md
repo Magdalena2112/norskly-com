@@ -1,5 +1,5 @@
 # Tasks
-- [ ] Replace user-facing AI branding with guided learning, practice and feedback wording; verify public pages and learning views without changing functionality.
+- [x] Replace user-facing AI branding with guided learning, practice and feedback wording; verified five public pages and six signed-in learning views, with 16 existing tests passing and no runtime errors.
 - [x] Replace proposed subscription prices with free promo access on homepage and language pages; retain separate teacher lessons and verify buttons/layout.
 - [x] Add strict-admin legacy enrollment review and audited recovery; verify candidates, confirmation, student denial and server invariants without reopening switching.
 - [ ] Confirm desired course for the two legacy profiles in Admin → Raniji upisi, then verify restored health access end to end (waits for administrator's per-profile decision; no enrollment changed automatically).
