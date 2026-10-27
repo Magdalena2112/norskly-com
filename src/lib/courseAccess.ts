@@ -7,6 +7,7 @@ export type CourseType = "general" | "health";
 const PROMO_LEVELS: Record<string, Partial<Record<CourseType, CefrLevel[]>>> = {
   en: { general: ["A2"] },
   de: { general: ["A2"] },
+  no: { general: ["A2"] },
 };
 
 export function promoAvailableLevels(language: string, course: CourseType): CefrLevel[] | null {
