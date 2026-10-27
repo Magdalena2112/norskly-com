@@ -582,7 +582,8 @@
             1
           ],
           "kind": "closed",
-          "items": []
+          "items": [],
+          "context": "Lena proverava alergije, Anna vreme dolaska lekara, a gospodin Schmidt ko je danas dežuran."
         },
         {
           "id": "DE-HC-B1-L01-G-07",
@@ -778,7 +779,7 @@
           "type": "text",
           "xp": 1,
           "grammarFocus": "subordinate",
-          "instruction": "Prenesi sa početkom «Der Patient sagt, dass». Promeni «Ich» u «er» i zadrži ostale reči. Napiši celu rečenicu.",
+          "instruction": "Prenesi sa početkom «Der Patient sagt, dass». Promeni «Ich» u «er» i prilagodi oblik glagola novom subjektu. Ostale reči zadrži i napiši celu rečenicu.",
           "hint": "Zamenica i oblik pomoćnog glagola moraju odgovarati pacijentu.",
           "explanation": "«ich habe» postaje «er…hat»; «hat» ide na kraj.",
           "context": "Ich habe nicht geschlafen.",
@@ -819,7 +820,8 @@
             1
           ],
           "kind": "closed",
-          "items": []
+          "items": [],
+          "context": "Pacijent ostaje zbog dodatnog pregleda. Lena prenosi da ne podnosi penicilin. Pacijent treba da pozove ako mu zatreba pomoć."
         },
         {
           "id": "DE-HC-B1-L01-G-16",

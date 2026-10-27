@@ -301,9 +301,9 @@
             },
             {
               "options": [
-                "om",
                 "hvis",
-                "at"
+                "at",
+                "som"
               ],
               "answer": "hvis"
             }
@@ -405,7 +405,8 @@
             1
           ],
           "kind": "closed",
-          "items": []
+          "items": [],
+          "context": "Nora proverava temperaturu, Anne vreme dolaska lekara, a Per ko je u večernjoj smeni."
         },
         {
           "id": "NO-HC-B1-L01-G-07",
@@ -634,7 +635,8 @@
             1
           ],
           "kind": "closed",
-          "items": []
+          "items": [],
+          "context": "Per objašnjava umor nespavanjem. Nora najavljuje dolazak lekara. Pacijent treba da pozvoni ako bolovi ne prođu."
         },
         {
           "id": "NO-HC-B1-L01-G-16",
@@ -849,11 +851,11 @@
           "grammarFocus": "polite",
           "instruction": "Izaberi jedan odgovor koji je gramatički tačan i odgovara situaciji.",
           "hint": "Koji modalni glagol najjasnije znači «trebalo bi»?",
-          "explanation": "«burde» prenosi preporuku; «må» obavezu, «kunne» mogućnost.",
-          "context": "Lekar je preporučio odmor. Nora prenosi preporuku, a ne obavezu niti pitanje o mogućnosti.",
+          "explanation": "«burde» prenosi preporuku; «må» obavezu, a «vil» ovde želju ili buduću radnju.",
+          "context": "Lekar je preporučio odmor. Nora prenosi preporuku, ne obavezu niti pacijentovu nameru.",
           "options": [
             "Du må hvile litt.",
-            "Du kunne hvile litt.",
+            "Du vil hvile litt.",
             "Du burde hvile litt."
           ],
           "correct": [
