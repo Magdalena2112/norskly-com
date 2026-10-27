@@ -1,6 +1,6 @@
 # Tasks
-- [ ] Add 20 varied illustrated vocabulary exercises worth 20 XP to each health B1 lesson.
-- [ ] Test vocabulary grading and XP deduplication; verify both languages in practice.
+- [x] Add 20 varied illustrated vocabulary exercises worth 20 XP to each health B1 lesson.
+- [x] Test vocabulary grading and XP deduplication; verify both languages in practice.
 - [x] Add 30 varied grammar exercises worth 40 XP to each Norwegian/German health B1 lesson.
 - [x] Test grading, grouping and XP totals; verify both lesson exercise views.
 - [x] Unify lesson listening into ten audio-first activities and preserve progress/XP.

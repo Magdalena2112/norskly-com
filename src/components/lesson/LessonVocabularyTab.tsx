@@ -4,7 +4,7 @@ import { useAuth } from "@/context/AuthContext";
 import { loadLessonContent, speakLines, type Exercise } from "@/lib/courseLessons";
 import LessonExercise from "@/components/lesson/LessonExercise";
 import VocabularyPracticeExercise from "@/components/lesson/VocabularyPracticeExercise";
-import { vocabularyDedupKey, vocabularyXp, type VocabularyPracticeExercise as Practice } from "@/lib/vocabularyPractice";
+import { vocabularyXp, type VocabularyPracticeExercise as Practice } from "@/lib/vocabularyPractice";
 import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
