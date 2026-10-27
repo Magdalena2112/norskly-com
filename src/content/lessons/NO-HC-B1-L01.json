@@ -3272,21 +3272,63 @@
           "image": "hc:t3",
           "text": "I norske sykehus sier nesten alle «du» til hverandre – også til legen og avdelingslederen. Hierarkiet er flatt, og alle forventes å si fra hvis de ser et problem.",
           "comparison": "U Srbiji je hijerarhija u bolnici često izraženija i lekarima se obraća sa «vi» i titulom.",
-          "fact": "Mange avdelinger har faste tavlemøter hvor alle yrkesgrupper deltar likt."
+          "fact": "Mange avdelinger har faste tavlemøter hvor alle yrkesgrupper deltar likt.",
+          "keywords": [
+            {
+              "term": "flat struktur",
+              "meaning": "ravna hijerarhija"
+            },
+            {
+              "term": "å si du",
+              "meaning": "persiranje na „ti“"
+            },
+            {
+              "term": "kollega",
+              "meaning": "kolega"
+            }
+          ]
         },
         {
           "title": "Pasientens medvirkning",
           "image": "hc:rd1",
           "text": "Pasienten skal være med på å bestemme. Sykepleieren forklarer, spør og respekterer pasientens valg – også når pasienten sier nei.",
           "comparison": "U Norveškoj se veći naglasak stavlja na saglasnost i informisanost pacijenta.",
-          "fact": "Pasient- og brukerrettighetsloven gir alle rett til informasjon og tolk."
+          "fact": "Pasient- og brukerrettighetsloven gir alle rett til informasjon og tolk.",
+          "keywords": [
+            {
+              "term": "brukermedvirkning",
+              "meaning": "učešće pacijenta"
+            },
+            {
+              "term": "samtykke",
+              "meaning": "pristanak"
+            },
+            {
+              "term": "pasientrettigheter",
+              "meaning": "prava pacijenta"
+            }
+          ]
         },
         {
           "title": "Taushetsplikt",
           "image": "hc:wr1",
           "text": "Helsepersonell har streng taushetsplikt. Man snakker ikke om pasienter i heisen, i kantina eller på sosiale medier.",
           "comparison": "Pravila su slična, ali se u Norveškoj kršenje shvata veoma ozbiljno i može dovesti do gubitka licence.",
-          "fact": "Også pårørende får bare informasjon med pasientens samtykke."
+          "fact": "Også pårørende får bare informasjon med pasientens samtykke.",
+          "keywords": [
+            {
+              "term": "taushetsplikt",
+              "meaning": "obaveza čuvanja tajne"
+            },
+            {
+              "term": "personvern",
+              "meaning": "zaštita privatnosti"
+            },
+            {
+              "term": "pårørende",
+              "meaning": "bliski srodnici"
+            }
+          ]
         }
       ]
     },

@@ -7,7 +7,12 @@ import LessonExercise from "./LessonExercise";
 
 // Universal culture tab: all content comes from the lesson's `modules.culture` data.
 interface CultureCard { title: string; text: string; example?: string }
-interface CultureTopic { title: string; image?: string; text: string; comparison?: string; fact?: string }
+interface CultureTopic { title: string; image?: string; text: string; comparison?: string; fact?: string; keywords?: { term: string; meaning: string }[] }
+const COMPARE_LABEL: Record<string, string> = {
+  en: "🇬🇧 Velika Britanija vs. Srbija 🇷🇸",
+  no: "🇳🇴 Norveška vs. Srbija 🇷🇸",
+  de: "🇩🇪 Nemačka vs. Srbija 🇷🇸",
+};
 export interface CultureData {
   title: string; body: string; note?: string;
   customs?: CultureCard[]; comparison?: CultureCard[]; exercises?: Exercise[];
@@ -53,10 +58,23 @@ function CultureTopics({ data, lang, onFinish }: { data: CultureData; lang: stri
           <p className="leading-relaxed">{t.text}</p>
         </div>
       </section>
+      {!!t.keywords?.length && (
+        <div className="rounded-2xl border border-border/60 bg-background/70 p-4">
+          <p className="font-semibold text-primary mb-2">Ključne reči i izrazi</p>
+          <div className="flex flex-wrap gap-2">
+            {t.keywords.map((k) => (
+              <button key={k.term} onClick={() => speakLines([{ speaker: "n", text: k.term }], lang)}
+                className="rounded-full border border-primary/30 bg-primary/5 px-3 py-1 text-sm text-left">
+                <span className="font-medium text-primary">{k.term}</span> <span className="text-muted-foreground">– {k.meaning}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
       <div className="grid sm:grid-cols-2 gap-3">
         {t.comparison && (
           <div className="rounded-2xl border border-primary/20 bg-primary/5 p-4">
-            <p className="font-semibold text-primary mb-1">🇬🇧 UK vs. Serbia 🇷🇸</p>
+            <p className="font-semibold text-primary mb-1">{COMPARE_LABEL[lang] || "Poređenje sa Srbijom"}</p>
             <p className="text-sm">{t.comparison}</p>
           </div>
         )}
