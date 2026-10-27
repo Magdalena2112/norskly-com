@@ -1,4 +1,5 @@
 # Tasks
+- [ ] Separate general/health enrollment per language, protect lesson data and direct links, and verify both directions.
 - [x] Add 20 varied illustrated vocabulary exercises worth 20 XP to each health B1 lesson.
 - [x] Test vocabulary grading and XP deduplication; verify both languages in practice.
 - [x] Add 30 varied grammar exercises worth 40 XP to each Norwegian/German health B1 lesson.
