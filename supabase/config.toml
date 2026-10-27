@@ -25,3 +25,6 @@ verify_jwt = false
 
 [functions.writing-topics]
 verify_jwt = false
+
+[functions.word-lookup]
+verify_jwt = false
