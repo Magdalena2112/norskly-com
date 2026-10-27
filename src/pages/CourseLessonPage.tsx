@@ -237,7 +237,7 @@ export default function CourseLessonPage() {
                   <motion.div key={key} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.04 }}>
                     <Card className="cursor-pointer group h-full bg-cream border border-border/60 shadow-postcard overflow-hidden relative transition-all duration-500 hover:-translate-y-1.5" onClick={() => openModule(key)}>
                       <div className="relative w-full h-36 overflow-hidden border-b border-border/40">
-                        {cover ? <img src={cover} alt="" loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" /> : <PostcardVignette variant={meta.vignette} className="absolute inset-0 w-full h-full" />}
+                        {cover ? <img src={cover} alt="" loading="lazy" className="absolute inset-0 w-full h-full object-contain bg-cream transition-transform duration-700 group-hover:scale-105" /> : <PostcardVignette variant={meta.vignette} className="absolute inset-0 w-full h-full" />}
                         <div className={`absolute -bottom-5 left-5 w-12 h-12 rounded-2xl ${meta.iconBg} flex items-center justify-center shadow-card-soft ring-2 ring-cream`}>
                           <meta.icon className="w-5 h-5 text-cream" />
                         </div>
