@@ -6,6 +6,7 @@ export type CourseType = "general" | "health";
 // null znači da su svi CEFR nivoi dostupni.
 const PROMO_LEVELS: Record<string, Partial<Record<CourseType, CefrLevel[]>>> = {
   en: { general: ["A2"] },
+  de: { general: ["A2"] },
 };
 
 export function promoAvailableLevels(language: string, course: CourseType): CefrLevel[] | null {

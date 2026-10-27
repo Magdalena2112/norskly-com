@@ -16,10 +16,10 @@ describe("isolated course access", () => {
     expect(courseStartLevel(null, "general")).toBe("A1");
     expect(courseStartLevel("invalid", "general")).toBe("A1");
   });
-  it("English general course is limited to A2 in the promo period", () => {
+  it("English and German general courses are limited to A2 in the promo period", () => {
     expect(promoAvailableLevels("en", "general")).toEqual(["A2"]);
+    expect(promoAvailableLevels("de", "general")).toEqual(["A2"]);
     expect(promoAvailableLevels("no", "general")).toBeNull();
-    expect(promoAvailableLevels("de", "general")).toBeNull();
     expect(promoAvailableLevels("en", "health")).toBeNull();
   });
   it("promo levels clamp any incoming start level to the allowed one", () => {
