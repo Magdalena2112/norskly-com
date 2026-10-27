@@ -215,6 +215,7 @@ export default function LanguagePage() {
       </section>
 
       <CourseTypeSection
+        key={lang.slug}
         slug={lang.slug}
         onSelect={(course, level) => {
           localStorage.setItem("norskly_selected_course", course);

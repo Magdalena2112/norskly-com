@@ -48,9 +48,11 @@ export default function AuthPage() {
     if (!langProf?.onboarding_completed) {
       const { data: authData } = await supabase.auth.getUser();
       const savedIntent = authData.user?.user_metadata;
-      const intendedCourse = searchParams.get("course") || (savedIntent?.signup_language === lang ? savedIntent?.signup_course : "general");
+      const explicitIntent = lockedLang === lang && (searchParams.has("course") || searchParams.has("level"));
+      const matchingIntent = savedIntent?.signup_language === lang ? savedIntent : null;
+      const intendedCourse = explicitIntent ? searchParams.get("course") : matchingIntent?.signup_course;
       const course = courseIntent(intendedCourse, code);
-      const level = courseStartLevel(lockedLang === lang ? searchParams.get("level") ?? (savedIntent?.signup_language === lang ? savedIntent?.signup_level : null) : savedIntent?.signup_language === lang ? savedIntent?.signup_level : null, course);
+      const level = courseStartLevel(explicitIntent ? searchParams.get("level") : matchingIntent?.signup_level, course);
       navigate(`/onboarding?lang=${lang}&course=${course}&level=${level}`);
       return;
     }

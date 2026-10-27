@@ -187,8 +187,9 @@ export default function OnboardingPage() {
   const selectedLang = params.get("lang") || (typeof window !== "undefined" && localStorage.getItem("norskly_selected_language")) || "norveski";
   const langCode: LangCode = SLUG_TO_CODE[selectedLang] || "no";
   const savedIntent = user?.user_metadata?.signup_language === selectedLang ? user.user_metadata : null;
-  const chosenCourse = courseIntent(params.get("course") ?? savedIntent?.signup_course, langCode);
-  const chosenLevel = courseStartLevel(params.get("level") ?? savedIntent?.signup_level, chosenCourse);
+  const explicitIntent = params.has("course") || params.has("level");
+  const chosenCourse = courseIntent(explicitIntent ? params.get("course") : savedIntent?.signup_course, langCode);
+  const chosenLevel = courseStartLevel(explicitIntent ? params.get("level") : savedIntent?.signup_level, chosenCourse);
   const t = COPY[langCode];
 
   const [step, setStep] = useState(0);
