@@ -1,4 +1,5 @@
 # Tasks
+- [x] Move level selection to course cards; test level validation and registration links for all languages, and verify six-step authenticated onboarding without changing an existing enrollment.
 - [x] Separate general/health enrollment per language; protect content, direct links, progress and immutable enrollment; test both access rules and verify general-student access end to end.
 - [ ] Verify health-student access end to end (requires an enrolled health student; none exists yet).
 - [x] Add 20 varied illustrated vocabulary exercises worth 20 XP to each health B1 lesson.

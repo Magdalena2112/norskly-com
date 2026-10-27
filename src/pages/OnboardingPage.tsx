@@ -11,7 +11,7 @@ import { UserProfile } from "@/types/profile";
 import { ChevronRight, ChevronLeft, User, Target, MessageSquare, BookOpen, Gauge, Globe } from "lucide-react";
 import BackButton from "@/components/BackButton";
 import JourneyStepper from "@/components/onboarding/JourneyStepper";
-import { courseIntent } from "@/lib/courseAccess";
+import { courseIntent, courseStartLevel } from "@/lib/courseAccess";
 import { useToast } from "@/hooks/use-toast";
 
 type LangCode = "no" | "en" | "de";
@@ -29,8 +29,6 @@ type Copy = {
   nameTitle: string;
   nameDesc: string;
   namePlaceholder: string;
-  levelTitle: string;
-  levelDesc: string;
   goalTitle: string;
   goalDesc: string;
   goals: string[];
@@ -55,13 +53,11 @@ type Copy = {
 const COPY: Record<LangCode, Copy> = {
   no: {
     brand: "Norskly",
-    steps: ["Ime", "Nivo", "Cilj", "Stil", "Fokus", "Samopouzdanje", "Norveška"],
+    steps: ["Ime", "Cilj", "Stil", "Fokus", "Samopouzdanje", "Norveška"],
     stepCounter: (i, t) => `Korak ${i} od ${t}`,
     nameTitle: "Kako se zoveš?",
     nameDesc: "AI će koristiti tvoje ime za personalizovanu komunikaciju.",
     namePlaceholder: "Tvoje ime",
-    levelTitle: "Koji je tvoj nivo?",
-    levelDesc: "Odaberi nivo koji najbolje opisuje tvoje znanje norveškog.",
     goalTitle: "Zašto učiš norveški?",
     goalDesc: "Ovo pomaže AI-u da prilagodi sadržaj tvom cilju.",
     goals: ["posao", "preseljenje", "studije", "svakodnevna komunikacija", "ispit", "lični razvoj"],
@@ -83,13 +79,11 @@ const COPY: Record<LangCode, Copy> = {
   },
   en: {
     brand: "Norskly · English",
-    steps: ["Ime", "Nivo", "Cilj", "Stil", "Fokus", "Samopouzdanje", "Engleski u životu"],
+    steps: ["Ime", "Cilj", "Stil", "Fokus", "Samopouzdanje", "Engleski u životu"],
     stepCounter: (i, t) => `Korak ${i} od ${t}`,
     nameTitle: "Kako se zoveš?",
     nameDesc: "AI tutor će ti se obraćati ličnim imenom kroz ceo kurs.",
     namePlaceholder: "Tvoje ime",
-    levelTitle: "Koji je tvoj nivo engleskog?",
-    levelDesc: "Odaberi CEFR nivo koji najbliže opisuje tvoje trenutno znanje.",
     goalTitle: "Šta želiš da postigneš sa engleskim?",
     goalDesc: "AI prilagođava materijal i feedback ovom cilju.",
     goals: [
@@ -125,13 +119,11 @@ const COPY: Record<LangCode, Copy> = {
   },
   de: {
     brand: "Norskly · Deutsch",
-    steps: ["Ime", "Nivo", "Cilj", "Stil", "Fokus", "Samopouzdanje", "Nemački u životu"],
+    steps: ["Ime", "Cilj", "Stil", "Fokus", "Samopouzdanje", "Nemački u životu"],
     stepCounter: (i, t) => `Korak ${i} od ${t}`,
     nameTitle: "Kako se zoveš?",
     nameDesc: "AI tutor će koristiti tvoje ime u svim lekcijama.",
     namePlaceholder: "Tvoje ime",
-    levelTitle: "Koji je tvoj nivo nemačkog?",
-    levelDesc: "Izaberi CEFR nivo koji najbolje opisuje tvoje znanje.",
     goalTitle: "Zašto učiš nemački?",
     goalDesc: "AI prilagođava sadržaj tvom cilju.",
     goals: ["posao", "preseljenje", "studije", "svakodnevna komunikacija", "ispit", "lični razvoj"],
@@ -194,13 +186,16 @@ export default function OnboardingPage() {
   // Resolve the language being onboarded from the selection made earlier in the journey.
   const selectedLang = params.get("lang") || (typeof window !== "undefined" && localStorage.getItem("norskly_selected_language")) || "norveski";
   const langCode: LangCode = SLUG_TO_CODE[selectedLang] || "no";
-  const chosenCourse = courseIntent(params.get("course"), langCode);
+  const savedIntent = user?.user_metadata?.signup_language === selectedLang ? user.user_metadata : null;
+  const explicitIntent = params.has("course") || params.has("level");
+  const chosenCourse = courseIntent(explicitIntent ? params.get("course") : savedIntent?.signup_course, langCode);
+  const chosenLevel = courseStartLevel(explicitIntent ? params.get("level") : savedIntent?.signup_level, chosenCourse);
   const t = COPY[langCode];
 
   const [step, setStep] = useState(0);
   const [form, setForm] = useState<Partial<UserProfile> & { life_context?: string }>({
     name: profile.name || "",
-    level: chosenCourse === "health" ? "B1" : profile.level || "A1",
+    level: chosenLevel,
     learning_goal: t.goals[0],
     preferred_tone: t.tones[0],
     focus_area: t.focuses[0],
@@ -228,15 +223,17 @@ export default function OnboardingPage() {
             ...(selectedPlan ? { subscription_type: selectedPlan } : {}),
           }, { onConflict: "user_id" });
         if (profileError) throw profileError;
-        const { data: existing, error: enrollmentError } = await supabase.from("language_profiles").select("course_type").eq("user_id", user.id).eq("language", langCode).maybeSingle();
+        const { data: existing, error: enrollmentError } = await supabase.from("language_profiles").select("course_type, level, onboarding_completed").eq("user_id", user.id).eq("language", langCode).maybeSingle();
         if (enrollmentError) throw enrollmentError;
+        const enrolledCourse = courseIntent(existing?.course_type ?? chosenCourse, langCode);
+        const enrolledLevel = existing?.onboarding_completed || (existing && enrolledCourse !== chosenCourse) ? courseStartLevel(existing.level, enrolledCourse) : courseStartLevel(chosenLevel, enrolledCourse);
         const { error: languageError } = await supabase
           .from("language_profiles")
           .upsert({
             user_id: user.id,
             language: langCode,
             course_type: existing?.course_type || chosenCourse,
-            level: form.level || "A1",
+            level: enrolledLevel,
             learning_goal: form.learning_goal || "",
             focus_area: form.focus_area || "",
             confidence_level: form.confidence_level ?? 3,
@@ -247,7 +244,7 @@ export default function OnboardingPage() {
             onboarding_completed: true,
           }, { onConflict: "user_id,language" });
         if (languageError) throw languageError;
-        updateProfile({ ...form, life_context: form.life_context || "" });
+        updateProfile({ ...form, level: enrolledLevel, life_context: form.life_context || "" });
         localStorage.setItem("norskly_selected_language", selectedLang);
         localStorage.setItem("norskly_onboarding_done", "true");
         await queryClient.invalidateQueries({ queryKey: ["course-enrollment"] });
@@ -263,7 +260,7 @@ export default function OnboardingPage() {
   };
   const prev = () => step > 0 && setStep(step - 1);
 
-  const stepIcons = [User, Target, Target, MessageSquare, BookOpen, Gauge, Globe];
+  const stepIcons = [User, Target, MessageSquare, BookOpen, Gauge, Globe];
   const StepIcon = stepIcons[step];
 
   const sidebarBg = langCode === "no" ? "bg-nordic-gradient" : "bg-gradient-to-br from-primary via-fjord to-accent";
@@ -336,19 +333,6 @@ export default function OnboardingPage() {
 
               {step === 1 && (
                 <div>
-                  <h2 className="text-2xl font-display font-bold text-foreground mb-2">{t.levelTitle}</h2>
-                  <p className="text-muted-foreground mb-6">{t.levelDesc}</p>
-                  {chosenCourse === "health" && <p className="text-sm text-primary mb-4">U promotivnom periodu aktivan je B1; ostali nivoi su u pripremi.</p>}
-                  <div className="flex flex-wrap gap-3">
-                    {(["A1", "A2", "B1", "B2", "C1"] as const).map((l) => (
-                      <Button key={l} variant={form.level === l ? "default" : "outline"} disabled={chosenCourse === "health" && l !== "B1"} onClick={() => setForm({ ...form, level: l })}>{l}{chosenCourse === "health" && l !== "B1" ? " · U pripremi" : ""}</Button>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {step === 2 && (
-                <div>
                   <h2 className="text-2xl font-display font-bold text-foreground mb-2">{t.goalTitle}</h2>
                   <p className="text-muted-foreground mb-6">{t.goalDesc}</p>
                   <div className="flex flex-wrap gap-3">
@@ -359,7 +343,7 @@ export default function OnboardingPage() {
                 </div>
               )}
 
-              {step === 3 && (
+              {step === 2 && (
                 <div>
                   <h2 className="text-2xl font-display font-bold text-foreground mb-2">{t.toneTitle}</h2>
                   <p className="text-muted-foreground mb-6">{t.toneDesc}</p>
@@ -371,7 +355,7 @@ export default function OnboardingPage() {
                 </div>
               )}
 
-              {step === 4 && (
+              {step === 3 && (
                 <div>
                   <h2 className="text-2xl font-display font-bold text-foreground mb-2">{t.focusTitle}</h2>
                   <p className="text-muted-foreground mb-6">{t.focusDesc}</p>
@@ -383,7 +367,7 @@ export default function OnboardingPage() {
                 </div>
               )}
 
-              {step === 5 && (
+              {step === 4 && (
                 <div>
                   <h2 className="text-2xl font-display font-bold text-foreground mb-2">{t.confidenceTitle}</h2>
                   <p className="text-muted-foreground mb-6">{t.confidenceDesc}</p>
@@ -405,7 +389,7 @@ export default function OnboardingPage() {
                 </div>
               )}
 
-              {step === 6 && (
+              {step === 5 && (
                 <div>
                   <h2 className="text-2xl font-display font-bold text-foreground mb-2">{t.lifeTitle}</h2>
                   <p className="text-muted-foreground mb-6">{t.lifeDesc}</p>
