@@ -5,7 +5,6 @@ import { loadLessonContent, speakLines, type Exercise } from "@/lib/courseLesson
 import LessonExercise from "@/components/lesson/LessonExercise";
 import VocabularyPracticeExercise from "@/components/lesson/VocabularyPracticeExercise";
 import { vocabularyDedupKey, vocabularyXp, type VocabularyPracticeExercise as Practice } from "@/lib/vocabularyPractice";
-import { logActivity } from "@/lib/logActivity";
 import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -122,22 +121,12 @@ export default function LessonVocabularyTab({ lessonId, mode, onPractice, onFlas
       if (!user || awardedCodes.includes(code) || pendingAwards.current.has(code)) return;
       pendingAwards.current.add(code);
       try {
-        const reward = await logActivity(user.id, "vocabulary", "lesson_vocabulary_exercise", ex.xp,
-          { lesson_id: row.id, code }, { dedupKey: vocabularyDedupKey(row.id, code), language: row.language });
-        if (!reward) {
-          const { data: existing } = await supabase.from("activities").select("id").eq("user_id", user.id)
-            .eq("language", row.language).eq("dedup_key", vocabularyDedupKey(row.id, code)).maybeSingle();
-          if (!existing) { toast.error("Poeni nisu sačuvani. Pokušaj ponovo."); return; }
-        }
+        const { error: rewardError } = await supabase.rpc("complete_medical_vocabulary", { _lesson_id: row.id, _code: code });
+        if (rewardError) { toast.error("Poeni nisu sačuvani. Pokušaj ponovo."); return; }
         setAwardedCodes((previous) => [...new Set([...previous, code])]);
         const { data: current } = await supabase.from("course_lesson_progress").select("completed_steps")
           .eq("user_id", user.id).eq("lesson_id", row.id).maybeSingle();
-        const next = [...new Set([...(Array.isArray(current?.completed_steps) ? current.completed_steps as string[] : done), code])];
-        const { error } = await supabase.from("course_lesson_progress").upsert({
-          user_id: user.id, lesson_id: row.id, language: row.language, completed_steps: next, status: "in_progress",
-        }, { onConflict: "user_id,lesson_id" });
-        if (error) toast.error("Poeni su sačuvani, ali napredak nije. Pokušaj ponovo.");
-        else setDone(next);
+        setDone(Array.isArray(current?.completed_steps) ? current.completed_steps as string[] : [...new Set([...done, code])]);
       } finally { pendingAwards.current.delete(code); }
       return;
     }
