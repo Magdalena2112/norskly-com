@@ -2,11 +2,12 @@ import { createClient } from "jsr:@supabase/supabase-js@2";
 import en1 from "../_shared/course-content/EN-A1-L01.json" with { type: "json" };
 import en2 from "../_shared/course-content/EN-A2-L01.json" with { type: "json" };
 import no2 from "../_shared/course-content/NO-A2-L01.json" with { type: "json" };
+import de2 from "../_shared/course-content/DE-A2-L01.json" with { type: "json" };
 import noHealth from "../_shared/course-content/NO-HC-B1-L01.json" with { type: "json" };
 import deHealth from "../_shared/course-content/DE-HC-B1-L01.json" with { type: "json" };
 import { getTalkScenarios, getLessonMaterial } from "../_shared/course-content/talkScenarios.ts";
 
-const lessons: Record<string, unknown> = { "EN-A1-L01": en1, "EN-A2-L01": en2, "NO-A2-L01": no2, "NO-HC-B1-L01": noHealth, "DE-HC-B1-L01": deHealth };
+const lessons: Record<string, unknown> = { "EN-A1-L01": en1, "EN-A2-L01": en2, "NO-A2-L01": no2, "DE-A2-L01": de2, "NO-HC-B1-L01": noHealth, "DE-HC-B1-L01": deHealth };
 const headers = { "Access-Control-Allow-Origin": "*", "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type", "Content-Type": "application/json", "Cache-Control": "no-store" };
 const reply = (body: unknown, status = 200) => new Response(JSON.stringify(body), { status, headers });
 Deno.serve(async (req) => {
