@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { BookmarkPlus, Check, Loader2, Volume2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/context/AuthContext";
-import { saveToMyDictionary, type LessonWord } from "@/lib/myDictionary";
+import { saveToMyDictionary, phraseRanges, type LessonWord } from "@/lib/myDictionary";
 import { speakLines } from "@/lib/courseLessons";
 import { toast } from "sonner";
 
