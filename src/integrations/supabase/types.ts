@@ -121,6 +121,53 @@ export type Database = {
           },
         ]
       }
+      course_enrollment_recoveries: {
+        Row: {
+          id: string
+          language: string
+          previous_course: string
+          previous_level: string | null
+          profile_id: string
+          reviewed_at: string
+          reviewed_by: string
+          selected_course: string
+          selected_level: string | null
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          language: string
+          previous_course: string
+          previous_level?: string | null
+          profile_id: string
+          reviewed_at?: string
+          reviewed_by: string
+          selected_course: string
+          selected_level?: string | null
+          user_id: string
+        }
+        Update: {
+          id?: string
+          language?: string
+          previous_course?: string
+          previous_level?: string | null
+          profile_id?: string
+          reviewed_at?: string
+          reviewed_by?: string
+          selected_course?: string
+          selected_level?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "course_enrollment_recoveries_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: true
+            referencedRelation: "language_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       course_lesson_progress: {
         Row: {
           completed_at: string | null
@@ -1833,6 +1880,7 @@ export type Database = {
       }
       is_strict_admin: { Args: { _user_id: string }; Returns: boolean }
       is_teacher_of_student: { Args: { _student_id: string }; Returns: boolean }
+      legacy_course_recovery_candidates: { Args: never; Returns: Json }
       move_to_dlq: {
         Args: {
           dlq_name: string
@@ -1853,6 +1901,10 @@ export type Database = {
       reject_teacher_application: {
         Args: { _application_id: string; _notes?: string }
         Returns: undefined
+      }
+      resolve_legacy_course_enrollment: {
+        Args: { p_course: string; p_profile_id: string }
+        Returns: Json
       }
       submit_survey: {
         Args: { p_answers: Json; p_language: string }

@@ -1,5 +1,6 @@
 # Tasks
-- [ ] Recover legacy healthcare enrollment without reopening course switching (confirmed NO/DE historical progress; mixed-course history needs an explicit recovery decision).
+- [x] Add strict-admin legacy enrollment review and audited recovery; verify candidates, confirmation, student denial and server invariants without reopening switching.
+- [ ] Confirm desired course for the two legacy profiles in Admin → Raniji upisi, then verify restored health access end to end (waits for administrator's per-profile decision; no enrollment changed automatically).
 - [x] Update survey course choices, multi-select modules, required question 9 and continuation/notification questions; include new answers in admin/export and verify UI plus server validation without overwriting existing responses.
 - [x] Add approved promo banner and learner survey with dashboard/menu/completed-lesson links.
 - [x] Secure survey responses, admin statistics/filters/spreadsheet export, and single-recipient email notifications; verify submission and readback.

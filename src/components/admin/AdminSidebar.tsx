@@ -28,6 +28,7 @@ const groups = [
       { title: "Prijave profesora", url: "/admin/teacher-applications", icon: GraduationCap, badge: true },
       { title: "Profesori", url: "/admin/teachers", icon: UserCheck },
       { title: "Učenici", url: "/admin/students", icon: Users },
+      { title: "Raniji upisi", url: "/admin/course-recovery", icon: GraduationCap },
     ],
   },
   {
