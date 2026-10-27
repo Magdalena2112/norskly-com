@@ -291,6 +291,13 @@ export default function LessonGrammarTab({ lessonId, onPractice, onExplain, mode
               </CardContent>
             </Card>
           )}
+          {s.quickCheck && <QuickCheckCard qc={s.quickCheck} />}
+          {s.mnemonic && (
+            <Card className="border-forest/30 bg-forest/5">
+              <CardHeader className="pb-2"><CardTitle className="text-base flex items-center gap-2"><span>🪄</span> Štos za pamćenje</CardTitle></CardHeader>
+              <CardContent><p className="text-sm leading-relaxed">{s.mnemonic}</p></CardContent>
+            </Card>
+          )}
           {s.remember && (
             <Card className="border-accent/30 bg-accent/5">
               <CardContent className="pt-5 pb-5"><p className="text-sm font-medium">📌 <strong>Zapamti:</strong> {s.remember}</p></CardContent>
