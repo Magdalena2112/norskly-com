@@ -2769,15 +2769,35 @@
     {
      "id": "DE-A2-L01-VO-20",
      "code": "VO-20",
-     "title": "Mein neuer Alltag",
-     "instruction": "Napiši kratak tekst (4–5 rečenica) o promenama u svom svakodnevnom životu. Upotrebi bar tri izraza iz lekcije.",
+     "title": "Situationen im Alltag",
+     "instruction": "Napiši tačan izraz.",
      "kind": "vocabulary",
      "image": "a2:vo20",
      "items": [
       {
-       "prompt": "Tvoj tekst (na nemačkom)",
-       "open": true,
-       "guide": "Primer: Seit einem Monat wohne ich in einer neuen Stadt. Jeden Morgen stehe ich früh auf … Upotrebi trennbare Verben (aufstehen, einkaufen, anfangen)."
+       "prompt": "Du fängst in einer neuen Firma an zu arbeiten.",
+       "answers": [
+        "eine neue Stelle anfangen"
+       ]
+      },
+      {
+       "prompt": "Du suchst eine andere Wohnung.",
+       "answers": [
+        "eine neue Wohnung suchen"
+       ]
+      },
+      {
+       "prompt": "Du fühlst dich in deinem neuen Zuhause langsam wohl.",
+       "answers": [
+        "sich in der neuen Wohnung einleben",
+        "sich an etwas gewöhnen"
+       ]
+      },
+      {
+       "prompt": "Du machst Dinge jetzt zu anderen Zeiten als früher.",
+       "answers": [
+        "die Routine ändern"
+       ]
       }
      ]
     }
