@@ -10,8 +10,9 @@ function shuffle<T>(arr: T[]) {
   return a;
 }
 
-export default function GrammarPracticeExercise({ exercise: ex, done, onDone }: {
+export default function GrammarPracticeExercise({ exercise: ex, done, onDone, images, vocabulary = false }: {
   exercise: PracticeExercise; done: boolean; onDone: (code: string) => void;
+  images?: { prompt?: string; left?: (string | undefined)[] }; vocabulary?: boolean;
 }) {
   const [attempt, setAttempt] = useState(0);
   const [result, setResult] = useState<"idle" | "correct" | "wrong">("idle");
@@ -35,7 +36,7 @@ export default function GrammarPracticeExercise({ exercise: ex, done, onDone }: 
 
   const value = (): number[] | string[] => {
     switch (ex.type) {
-      case "order": return placed.map((i) => ex.tokens![i]);
+      case "order": return placed.map((i) => ex.tokens?.[i] ?? "");
       case "gaps": return gapVals;
       case "text": return texts;
       case "match": return matches;
@@ -98,14 +99,15 @@ export default function GrammarPracticeExercise({ exercise: ex, done, onDone }: 
       <p className="text-sm text-muted-foreground">{ex.instruction}</p>
       {ex.context && <div className="rounded-xl bg-secondary/40 border border-border/50 p-3 text-sm whitespace-pre-line">{ex.context}</div>}
       {ex.prompt && <p className="text-sm font-medium text-foreground">{ex.prompt}</p>}
+      {images?.prompt && <img src={images.prompt} alt="Ilustracija zadatka" className="w-full max-w-xs mx-auto aspect-[4/3] object-contain rounded-lg bg-background" />}
 
       {(ex.type === "choice" || ex.type === "truefalse" || ex.type === "multi") && (
         <div className="grid gap-2">
           {optOrder.map((i) => (
-            <button key={i} type="button" disabled={locked} className={chip(picked.includes(i))}
+            <Button key={i} type="button" variant="outline" disabled={locked} className={`${chip(picked.includes(i))} h-auto whitespace-normal justify-start`}
               onClick={() => { touch(); setPicked(ex.type === "multi" ? (picked.includes(i) ? picked.filter((x) => x !== i) : [...picked, i]) : [i]); }}>
-              {ex.options![i]}
-            </button>
+              {ex.options?.[i]}
+            </Button>
           ))}
           {ex.type === "multi" && <p className="text-xs text-muted-foreground">Izaberi tačno {ex.correct?.length} odgovora.</p>}
         </div>
@@ -119,8 +121,8 @@ export default function GrammarPracticeExercise({ exercise: ex, done, onDone }: 
               <button key={ti} type="button" disabled={locked} draggable={!locked}
                 onDragStart={() => setDragFrom(pos)} onDragOver={(e) => e.preventDefault()} onDrop={() => dropAt(pos)}
                 onClick={() => { setPlaced(placed.filter((_, j) => j !== pos)); touch(); }}
-                className="px-3 py-1.5 rounded-lg text-sm bg-primary text-primary-foreground cursor-grab" aria-label={`Ukloni ${ex.tokens![ti]}`}>
-                {ex.tokens![ti]}
+                className="px-3 py-1.5 rounded-lg text-sm bg-primary text-primary-foreground cursor-grab" aria-label={`Ukloni ${ex.tokens?.[ti]}`}>
+                {ex.tokens?.[ti]}
               </button>
             ))}
           </div>
@@ -128,7 +130,7 @@ export default function GrammarPracticeExercise({ exercise: ex, done, onDone }: 
             {tokenOrder.filter((ti) => !placed.includes(ti)).map((ti) => (
               <button key={ti} type="button" disabled={locked} onClick={() => { setPlaced([...placed, ti]); touch(); }}
                 className="px-3 py-1.5 rounded-lg text-sm border border-border bg-background hover:border-primary/50">
-                {ex.tokens![ti]}
+                {ex.tokens?.[ti]}
               </button>
             ))}
           </div>
@@ -154,8 +156,8 @@ export default function GrammarPracticeExercise({ exercise: ex, done, onDone }: 
         <div className="space-y-3">
           {(ex.inputs ?? []).map((inp, i) => (
             <div key={i} className="space-y-1">
-              {(ex.inputs?.length ?? 0) > 1 || !ex.context ? <p className="text-sm text-foreground/80">{inp.prompt}</p> : null}
-              <Input value={texts[i]} disabled={locked} placeholder="Napiši ispravnu rečenicu…" className="bg-background"
+              {vocabulary || (ex.inputs?.length ?? 0) > 1 || !ex.context ? <p className="text-sm text-foreground/80">{inp.prompt}</p> : null}
+              <Input value={texts[i]} disabled={locked} placeholder={vocabulary ? "Tvoj odgovor…" : "Napiši ispravnu rečenicu…"} className="bg-background"
                 onChange={(e) => { const n = [...texts]; n[i] = e.target.value; setTexts(n); touch(); }}
                 onKeyDown={(e) => e.key === "Enter" && check()} />
             </div>
@@ -166,23 +168,24 @@ export default function GrammarPracticeExercise({ exercise: ex, done, onDone }: 
       {ex.type === "match" && (
         <div className="grid sm:grid-cols-2 gap-3">
           <div className="space-y-2">
-            {ex.left!.map((q, i) => (
-              <button key={i} type="button" disabled={locked} onClick={() => setActiveLeft(i)}
-                className={`${chip(activeLeft === i)} w-full flex justify-between gap-2`}>
-                <span>{i + 1}. {q}</span>
+            {(ex.left ?? []).map((q, i) => (
+              <Button key={i} type="button" variant="outline" disabled={locked} onClick={() => setActiveLeft(i)}
+                aria-label={images?.left?.[i] ? `Slika ${i + 1}` : q}
+                className={`${chip(activeLeft === i)} w-full h-auto whitespace-normal flex justify-between gap-2`}>
+                <span className="min-w-0 text-left">{images?.left?.[i] && <img src={images.left[i]} alt={`Ilustracija ${i + 1}`} className="w-full max-w-[160px] aspect-[4/3] object-contain rounded-lg bg-background mb-1" />}{i + 1}. {q}</span>
                 {matches[i] >= 0 && <span className="font-semibold shrink-0">→ {String.fromCharCode(65 + rightOrder.indexOf(matches[i]))}</span>}
-              </button>
+              </Button>
             ))}
           </div>
           <div className="space-y-2">
             {rightOrder.map((ri, k) => (
-              <button key={ri} type="button" disabled={locked || activeLeft === null}
-                onClick={() => { const n = matches.map((m) => (m === ri ? -1 : m)); n[activeLeft!] = ri; setMatches(n); setActiveLeft(null); touch(); }}
-                className={`${chip(matches.includes(ri))} w-full`}>
-                {String.fromCharCode(65 + k)}. {ex.right![ri]}
-              </button>
+              <Button key={ri} type="button" variant="outline" disabled={locked || activeLeft === null}
+                onClick={() => { if (activeLeft === null) return; const n = matches.map((m) => (m === ri ? -1 : m)); n[activeLeft] = ri; setMatches(n); setActiveLeft(null); touch(); }}
+                className={`${chip(matches.includes(ri))} w-full h-auto whitespace-normal justify-start`}>
+                {String.fromCharCode(65 + k)}. {ex.right?.[ri]}
+              </Button>
             ))}
-            <p className="text-xs text-muted-foreground">Izaberi pitanje levo, pa odgovor desno.</p>
+            <p className="text-xs text-muted-foreground">{vocabulary ? "Izaberi stavku levo, pa njen par desno." : "Izaberi pitanje levo, pa odgovor desno."}</p>
           </div>
         </div>
       )}
