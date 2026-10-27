@@ -19,10 +19,46 @@ export function lessonWords(vocab: unknown): LessonWord[] {
   return [...out.values()];
 }
 
-/** Lesson words/phrases that literally appear in the text (case-insensitive, whole words). */
-export function phrasesInText(text: string, words: LessonWord[], max = 8): LessonWord[] {
-  const t = ` ${text.toLowerCase().replace(/[.,!?;:"“”„()]/g, " ").replace(/\s+/g, " ")} `;
-  return words.filter((w) => t.includes(` ${w.word.toLowerCase()} `)).sort((a, b) => b.word.length - a.word.length).slice(0, max);
+const DE_ARTICLE = /^(der|die|das|den|dem|des|ein|eine|einen|einem|einer|eines)\s+/i;
+const DE_TRAILING_VERB = /\s+(haben|sein|werden|machen|schreiben|messen)$/i;
+
+/** Text forms to look for: the base form, plus (German) the phrase without article / trailing helper verb. */
+export function searchForms(word: string, language?: string): string[] {
+  const w = word.toLowerCase().trim();
+  const forms = new Set([w]);
+  if (language === "de") {
+    const noArt = w.replace(DE_ARTICLE, "");
+    forms.add(noArt);
+    forms.add(noArt.replace(DE_TRAILING_VERB, ""));
+    forms.add(w.replace(DE_TRAILING_VERB, ""));
+  }
+  return [...forms].filter((f) => f.length > 2);
+}
+
+const isL = (c?: string) => !!c && /[\p{L}\p{M}'’-]/u.test(c);
+
+/** Character ranges in `text` where lesson words appear in any form (German allows inflection endings). */
+export function phraseRanges(text: string, words: LessonWord[], language?: string): { range: [number, number]; word: LessonWord }[] {
+  const lower = text.toLowerCase();
+  const out: { range: [number, number]; word: LessonWord }[] = [];
+  const items = words.flatMap((w) => searchForms(w.word, language).map((f) => ({ f, w }))).sort((a, b) => b.f.length - a.f.length);
+  for (const { f, w } of items) {
+    let from = 0, at: number;
+    while ((at = lower.indexOf(f, from)) !== -1) {
+      let end = at + f.length;
+      if (language === "de") { let n = 0; while (n < 3 && isL(lower[end]) && lower[end] !== "-") { end++; n++; } }
+      if (!isL(lower[at - 1]) && !isL(lower[end]) && !out.some(({ range: [s, e] }) => at < e && end > s)) out.push({ range: [at, end], word: w });
+      from = at + f.length;
+    }
+  }
+  return out;
+}
+
+/** Lesson words/phrases found in the text, listed in their base (dictionary) form. */
+export function phrasesInText(text: string, words: LessonWord[], max = 8, language?: string): LessonWord[] {
+  const found = new Map<string, LessonWord>();
+  phraseRanges(text, words, language).forEach(({ word }) => found.set(word.word, word));
+  return [...found.values()].sort((a, b) => b.word.length - a.word.length).slice(0, max);
 }
 
 export async function saveToMyDictionary(userId: string, language: string, entry: { word: string; translation: string; example?: string; pos?: string; topic?: string }) {

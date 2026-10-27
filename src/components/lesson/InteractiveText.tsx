@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { BookmarkPlus, Check, Loader2, Volume2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/context/AuthContext";
-import { saveToMyDictionary, type LessonWord } from "@/lib/myDictionary";
+import { saveToMyDictionary, phraseRanges, type LessonWord } from "@/lib/myDictionary";
 import { speakLines } from "@/lib/courseLessons";
 import { toast } from "sonner";
 
@@ -66,38 +66,20 @@ function WordPop({ word, sentence, language, known, lessonCode }: { word: string
   );
 }
 
-/** Character ranges in `text` covered by lesson key phrases (whole-word, case-insensitive). */
-function keyRanges(text: string, known: LessonWord[]): [number, number][] {
-  const lower = text.toLowerCase();
-  const ranges: [number, number][] = [];
-  const isL = (c?: string) => !!c && /[\p{L}\p{M}'’-]/u.test(c);
-  [...known].sort((a, b) => b.word.length - a.word.length).forEach((k) => {
-    const w = k.word.toLowerCase().trim();
-    if (!w) return;
-    let from = 0, at: number;
-    while ((at = lower.indexOf(w, from)) !== -1) {
-      const end = at + w.length;
-      if (!isL(lower[at - 1]) && !isL(lower[end]) && !ranges.some(([s, e]) => at < e && end > s)) ranges.push([at, end]);
-      from = end;
-    }
-  });
-  return ranges;
-}
-
-/** Renders a sentence where every word opens its meaning; lesson key words/phrases are highlighted. */
+/** Renders a sentence where every word opens its meaning; lesson key words/phrases are highlighted in any form. */
 export default function InteractiveText({ text, language, known, lessonCode }: { text: string; language: string; known: LessonWord[]; lessonCode?: string }) {
   const parts = text.split(/([\p{L}\p{M}'’-]+)/u);
-  const ranges = keyRanges(text, known);
+  const hits = phraseRanges(text, known, language);
   let pos = 0;
   return (
     <>
       {parts.map((p, i) => {
         const start = pos; pos += p.length;
-        const hit = ranges.some(([s, e]) => start >= s && start < e);
+        const hit = hits.find(({ range: [s, e] }) => start >= s && start < e);
         if (!/[\p{L}]/u.test(p)) return <span key={i} className={hit ? "bg-sunset/20 text-foreground" : ""}>{p}</span>;
         return (
           <span key={i} className={hit ? "bg-sunset/20 font-medium rounded-sm" : ""}>
-            <WordPop word={p} sentence={text} language={language} lessonCode={lessonCode} known={known.find((k) => k.word.toLowerCase() === p.toLowerCase())} />
+            <WordPop word={p} sentence={text} language={language} lessonCode={lessonCode} known={hit?.word} />
           </span>
         );
       })}

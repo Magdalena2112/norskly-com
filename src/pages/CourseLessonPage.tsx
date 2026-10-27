@@ -204,7 +204,7 @@ export default function CourseLessonPage() {
                       <p className="text-[11px] text-muted-foreground">Klikni na bilo koju reč da vidiš značenje i sačuvaš je u „Moj rečnik”.</p>
                     </>
                   )}
-                  <KeyPhrases items={phrasesInText(t.lines.map((l) => l.text).join(" "), knownWords)} language={lang} lessonCode={content.code} />
+                  <KeyPhrases items={phrasesInText(t.lines.map((l) => l.text).join(" "), knownWords, 8, lang)} language={lang} lessonCode={content.code} />
                 </motion.div>
               </AnimatePresence>
               <div className="flex items-center justify-between gap-2 mt-4">
