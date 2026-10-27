@@ -148,6 +148,13 @@
       "when": 1793138690549,
       "tag": "0020_update_survey_questions",
       "breakpoints": true
+    },
+    {
+      "idx": 21,
+      "version": "7",
+      "when": 1793139497768,
+      "tag": "0021_legacy_course_recovery",
+      "breakpoints": true
     }
   ]
 }
