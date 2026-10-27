@@ -436,179 +436,768 @@
       ],
       "exercises": [
         {
-          "id": "DE-HC-B1-L01-GR-01",
-          "code": "GR-01",
-          "title": "Indirekte Fragen",
-          "instruction": "Izaberi tačan red reči.",
+          "id": "DE-HC-B1-L01-G-01",
+          "code": "G-01",
+          "title": "Pitanje tokom prijema",
+          "type": "choice",
+          "xp": 1,
+          "grammarFocus": "indirect",
+          "instruction": "Izaberi jedan odgovor koji je gramatički tačan i odgovara situaciji.",
+          "hint": "U indirektnom pitanju lični glagol menja mesto.",
+          "explanation": "U «seit wann Sie Schmerzen haben» lični glagol «haben» stoji na kraju.",
+          "context": "Lena želi da sazna od kada pacijent ima bolove.",
+          "options": [
+            "Könnten Sie mir sagen, seit wann haben Sie Schmerzen?",
+            "Könnten Sie mir sagen, seit wann Sie Schmerzen haben?",
+            "Könnten Sie mir sagen, seit wann Sie haben Schmerzen?"
+          ],
+          "correct": [
+            1
+          ],
           "kind": "closed",
-          "items": [
+          "items": []
+        },
+        {
+          "id": "DE-HC-B1-L01-G-02",
+          "code": "G-02",
+          "title": "Pitanje ili uslov?",
+          "type": "gaps",
+          "xp": 1,
+          "grammarFocus": "indirect",
+          "instruction": "Dopuni svaku prazninu odgovarajućim oblikom.",
+          "hint": "Razlikuj da/ne pitanje od uslova.",
+          "explanation": "«ob» = da li; «wenn» = ako/kada.",
+          "text": "Lena fragt, ___ Herr Schmidt Fieber hat. Sie informiert den Arzt, ___ die Schmerzen stärker werden.",
+          "gaps": [
             {
-              "prompt": "Könnten Sie mir zeigen, wo ___?",
-              "options": [
-                "es wehtut",
-                "tut es weh",
-                "wehtut es"
-              ],
-              "answers": [
-                "es wehtut"
-              ]
-            },
-            {
-              "prompt": "Ich möchte wissen, ___ Sie Fieber haben.",
               "options": [
                 "ob",
                 "wenn",
                 "dass"
               ],
-              "answers": [
-                "ob"
-              ]
+              "answer": "ob"
             },
             {
-              "prompt": "Wissen Sie, wann ___?",
               "options": [
-                "er das Medikament bekommen hat",
-                "hat er das Medikament bekommen",
-                "er hat das Medikament bekommen"
+                "ob",
+                "wenn",
+                "dass"
               ],
-              "answers": [
-                "er das Medikament bekommen hat"
-              ]
-            },
-            {
-              "prompt": "Können Sie mir sagen, seit wann Sie Schmerzen ___?",
-              "options": [
-                "haben",
-                "hat",
-                "haben Sie"
-              ],
-              "answers": [
-                "haben"
-              ]
+              "answer": "wenn"
             }
-          ]
+          ],
+          "kind": "closed",
+          "items": []
         },
         {
-          "id": "DE-HC-B1-L01-GR-02",
-          "code": "GR-02",
-          "title": "Indirekte Fragen bilden",
-          "instruction": "Prepravi u indirektno pitanje (počni sa «Können Sie mir sagen,…»).",
+          "id": "DE-HC-B1-L01-G-03",
+          "code": "G-03",
+          "title": "Vreme vađenja krvi",
+          "type": "order",
+          "xp": 1,
+          "grammarFocus": "indirect",
+          "instruction": "Složi sve delove u jednu rečenicu. Zadrži zadati početak.",
+          "hint": "Odvojivi glagol u zavisnoj rečenici ostaje spojen na kraju.",
+          "explanation": "«stattfindet» se u indirektnom pitanju ne razdvaja.",
+          "tokens": [
+            "Wissen Sie,",
+            "wann",
+            "die Blutabnahme",
+            "stattfindet?"
+          ],
+          "answer": [
+            "Wissen Sie, wann die Blutabnahme stattfindet?"
+          ],
+          "context": "Početak: Wissen Sie,",
           "kind": "closed",
-          "items": [
-            {
-              "prompt": "Seit wann haben Sie Schmerzen? → Können Sie mir sagen, seit wann ___?",
-              "answers": [
-                "Sie Schmerzen haben"
-              ]
-            },
-            {
-              "prompt": "Sind Sie allergisch? → Können Sie mir sagen, ob ___?",
-              "answers": [
-                "Sie allergisch sind"
-              ]
-            },
-            {
-              "prompt": "Wann haben Sie zuletzt gegessen? → Können Sie mir sagen, wann ___?",
-              "answers": [
-                "Sie zuletzt gegessen haben"
-              ]
-            }
-          ]
+          "items": []
         },
         {
-          "id": "DE-HC-B1-L01-GR-03",
-          "code": "GR-03",
-          "title": "Nebensätze",
-          "instruction": "Izaberi tačnu rečenicu.",
-          "kind": "closed",
-          "items": [
+          "id": "DE-HC-B1-L01-G-04",
+          "code": "G-04",
+          "title": "Od direktnog do indirektnog",
+          "type": "text",
+          "xp": 1,
+          "grammarFocus": "indirect",
+          "instruction": "Preoblikuj sa početkom «Können Sie mir sagen, ob». Napiši celu rečenicu i zadrži sve reči polaznog pitanja.",
+          "hint": "Da/ne pitanje uvodi «ob»; lični glagol ide na kraj.",
+          "explanation": "«ob Sie regelmäßig Medikamente nehmen» ima pravilan zavisni red reči.",
+          "context": "Nehmen Sie regelmäßig Medikamente?",
+          "inputs": [
             {
-              "prompt": "Er sagt, dass…",
-              "options": [
-                "er kein Penicillin verträgt.",
-                "er verträgt kein Penicillin.",
-                "verträgt er kein Penicillin."
-              ],
+              "prompt": "Nehmen Sie regelmäßig Medikamente?",
               "answers": [
-                "er kein Penicillin verträgt."
-              ]
-            },
-            {
-              "prompt": "Klingeln Sie, wenn…",
-              "options": [
-                "die Schmerzen nicht besser werden.",
-                "die Schmerzen werden nicht besser.",
-                "werden die Schmerzen nicht besser."
-              ],
-              "answers": [
-                "die Schmerzen nicht besser werden."
-              ]
-            },
-            {
-              "prompt": "Sie ist müde, weil…",
-              "options": [
-                "sie nicht geschlafen hat.",
-                "sie hat nicht geschlafen.",
-                "hat sie nicht geschlafen."
-              ],
-              "answers": [
-                "sie nicht geschlafen hat."
+                "Können Sie mir sagen, ob Sie regelmäßig Medikamente nehmen?"
               ]
             }
-          ]
+          ],
+          "kind": "closed",
+          "items": []
         },
         {
-          "id": "DE-HC-B1-L01-GR-04",
-          "code": "GR-04",
-          "title": "Höflichkeit",
-          "instruction": "Izaberi najljubazniji i tačan oblik.",
+          "id": "DE-HC-B1-L01-G-05",
+          "code": "G-05",
+          "title": "Dva glagola na kraju",
+          "type": "choice",
+          "xp": 1,
+          "grammarFocus": "indirect",
+          "instruction": "Izaberi jedan odgovor koji je gramatički tačan i odgovara situaciji.",
+          "hint": "U perfektu razlikuj particip od ličnog pomoćnog glagola.",
+          "explanation": "Na kraju stoje «bekommen hat»: pomoćni glagol je poslednji.",
+          "context": "Anna pita kada je pacijent dobio lek.",
+          "options": [
+            "Weißt du, wann er hat das Medikament bekommen?",
+            "Weißt du, wann er das Medikament hat bekommen?",
+            "Weißt du, wann er das Medikament bekommen hat?"
+          ],
+          "correct": [
+            2
+          ],
           "kind": "closed",
-          "items": [
+          "items": []
+        },
+        {
+          "id": "DE-HC-B1-L01-G-06",
+          "code": "G-06",
+          "title": "Tri pitanja, tri završetka",
+          "type": "match",
+          "xp": 1,
+          "grammarFocus": "indirect",
+          "instruction": "Poveži početak sa završetkom tako da svaka rečenica bude gramatički tačna i smislena.",
+          "hint": "Poveži da/ne, vreme i osobu kao subjekat.",
+          "explanation": "«ob» traži da/ne sadržaj, «wann» vreme, «wer» osobu.",
+          "left": [
+            "Lena fragt, ob",
+            "Anna möchte wissen, wann",
+            "Herr Schmidt fragt, wer"
+          ],
+          "right": [
+            "der Arzt kommt.",
+            "heute Dienst hat.",
+            "der Patient Allergien hat."
+          ],
+          "pairs": [
+            2,
+            0,
+            1
+          ],
+          "kind": "closed",
+          "items": [],
+          "context": "Lena proverava alergije, Anna vreme dolaska lekara, a gospodin Schmidt ko je danas dežuran."
+        },
+        {
+          "id": "DE-HC-B1-L01-G-07",
+          "code": "G-07",
+          "title": "Pitanja u predaji smene",
+          "type": "multi",
+          "xp": 1,
+          "grammarFocus": "indirect",
+          "instruction": "Izaberi sve tačne odgovore.",
+          "hint": "Oba pitanja imaju perfekt: gde stoji «hat»?",
+          "explanation": "Lični pomoćni glagol «hat» stoji na kraju oba indirektna pitanja.",
+          "context": "Izaberi dve pravilno oblikovane indirektne rečenice.",
+          "options": [
+            "Anna fragt, ob hat er gut geschlafen.",
+            "Anna fragt, ob er gut geschlafen hat.",
+            "Anna fragt, wann er die Tablette genommen hat.",
+            "Anna fragt, wann hat er die Tablette genommen."
+          ],
+          "correct": [
+            1,
+            2
+          ],
+          "kind": "closed",
+          "items": []
+        },
+        {
+          "id": "DE-HC-B1-L01-G-08",
+          "code": "G-08",
+          "title": "Ispravi red reči",
+          "type": "text",
+          "xp": 2,
+          "grammarFocus": "indirect",
+          "instruction": "Ispravi samo red reči u zavisnoj rečenici. Napiši celu rečenicu.",
+          "hint": "Odvojivi glagol «wehtun» u zavisnoj rečenici piše se zajedno.",
+          "explanation": "«wo es wehtut» je indirektno pitanje; «tut…weh» pripada direktnom pitanju.",
+          "context": "Können Sie mir sagen, wo tut es weh?",
+          "inputs": [
             {
-              "prompt": "___ Sie sich bitte auf den Rücken legen?",
+              "prompt": "Können Sie mir sagen, wo tut es weh?",
+              "answers": [
+                "Können Sie mir sagen, wo es wehtut?"
+              ]
+            }
+          ],
+          "kind": "closed",
+          "items": []
+        },
+        {
+          "id": "DE-HC-B1-L01-G-09",
+          "code": "G-09",
+          "title": "Negacija i perfekt",
+          "type": "gaps",
+          "xp": 2,
+          "grammarFocus": "indirect",
+          "instruction": "Dopuni svaku prazninu odgovarajućim oblikom.",
+          "hint": "Traži se da/ne pitanje: da li pacijent nije spavao.",
+          "explanation": "«ob der Patient nicht geschlafen hat» završava participom i pomoćnim glagolom.",
+          "text": "Anna fragt, ___ der Patient ___ ___.",
+          "gaps": [
+            {
+              "options": [
+                "ob",
+                "wenn",
+                "dass"
+              ],
+              "answer": "ob"
+            },
+            {
+              "options": [
+                "nicht",
+                "kein",
+                "keine"
+              ],
+              "answer": "nicht"
+            },
+            {
+              "options": [
+                "geschlafen hat",
+                "hat geschlafen",
+                "geschlafen er hat"
+              ],
+              "answer": "geschlafen hat"
+            }
+          ],
+          "kind": "closed",
+          "items": []
+        },
+        {
+          "id": "DE-HC-B1-L01-G-10",
+          "code": "G-10",
+          "title": "Izjava nije direktno pitanje",
+          "type": "text",
+          "xp": 2,
+          "grammarFocus": "indirect",
+          "instruction": "Preoblikuj sa početkom «Ich möchte wissen, wann». Napiši celu rečenicu i zadrži sve reči polaznog pitanja.",
+          "hint": "Uvodiš izjavu o tome šta želiš da znaš, ne direktno pitanje.",
+          "explanation": "«wann der Arzt kommt» ima glagol na kraju; glavna rečenica je izjava.",
+          "context": "Wann kommt der Arzt?",
+          "inputs": [
+            {
+              "prompt": "Wann kommt der Arzt?",
+              "answers": [
+                "Ich möchte wissen, wann der Arzt kommt."
+              ]
+            }
+          ],
+          "kind": "closed",
+          "items": []
+        },
+        {
+          "id": "DE-HC-B1-L01-G-11",
+          "code": "G-11",
+          "title": "Alergija u kartonu",
+          "type": "choice",
+          "xp": 1,
+          "grammarFocus": "subordinate",
+          "instruction": "Izaberi jedan odgovor koji je gramatički tačan i odgovara situaciji.",
+          "hint": "Posle «dass» lični glagol ide na kraj.",
+          "explanation": "«kein Penicillin» ostaje objekat; «verträgt» završava zavisnu rečenicu.",
+          "context": "Lena prenosi pacijentovu izjavu da ne podnosi penicilin.",
+          "options": [
+            "Er sagt, dass er verträgt kein Penicillin.",
+            "Er sagt, dass er kein Penicillin verträgt.",
+            "Er sagt, dass verträgt er kein Penicillin."
+          ],
+          "correct": [
+            1
+          ],
+          "kind": "closed",
+          "items": []
+        },
+        {
+          "id": "DE-HC-B1-L01-G-12",
+          "code": "G-12",
+          "title": "Razlog i uslov",
+          "type": "gaps",
+          "xp": 1,
+          "grammarFocus": "subordinate",
+          "instruction": "Dopuni svaku prazninu odgovarajućim oblikom.",
+          "hint": "Prva rečenica navodi razlog, druga situaciju u kojoj traži pomoć.",
+          "explanation": "«weil» uvodi razlog, «wenn» uslov/vreme.",
+          "text": "Herr Schmidt ist müde, ___ er nicht geschlafen hat. Er klingelt, ___ er Hilfe braucht.",
+          "gaps": [
+            {
+              "options": [
+                "weil",
+                "wenn",
+                "dass"
+              ],
+              "answer": "weil"
+            },
+            {
+              "options": [
+                "weil",
+                "wenn",
+                "dass"
+              ],
+              "answer": "wenn"
+            }
+          ],
+          "kind": "closed",
+          "items": []
+        },
+        {
+          "id": "DE-HC-B1-L01-G-13",
+          "code": "G-13",
+          "title": "Umor posle noći",
+          "type": "order",
+          "xp": 1,
+          "grammarFocus": "subordinate",
+          "instruction": "Složi sve delove u jednu rečenicu. Zadrži zadati početak.",
+          "hint": "Pomoćni glagol perfekta stoji iza participa u zavisnoj rečenici.",
+          "explanation": "«weil er nicht geschlafen hat» završava sa «geschlafen hat».",
+          "tokens": [
+            "Er ist müde,",
+            "weil",
+            "er",
+            "nicht",
+            "geschlafen",
+            "hat."
+          ],
+          "answer": [
+            "Er ist müde, weil er nicht geschlafen hat."
+          ],
+          "context": "Početak: Er ist müde,",
+          "kind": "closed",
+          "items": []
+        },
+        {
+          "id": "DE-HC-B1-L01-G-14",
+          "code": "G-14",
+          "title": "Prenesi izjavu",
+          "type": "text",
+          "xp": 1,
+          "grammarFocus": "subordinate",
+          "instruction": "Prenesi sa početkom «Der Patient sagt, dass». Promeni «Ich» u «er» i prilagodi oblik glagola novom subjektu. Ostale reči zadrži i napiši celu rečenicu.",
+          "hint": "Zamenica i oblik pomoćnog glagola moraju odgovarati pacijentu.",
+          "explanation": "«ich habe» postaje «er…hat»; «hat» ide na kraj.",
+          "context": "Ich habe nicht geschlafen.",
+          "inputs": [
+            {
+              "prompt": "Ich habe nicht geschlafen.",
+              "answers": [
+                "Der Patient sagt, dass er nicht geschlafen hat."
+              ]
+            }
+          ],
+          "kind": "closed",
+          "items": []
+        },
+        {
+          "id": "DE-HC-B1-L01-G-15",
+          "code": "G-15",
+          "title": "Razlog, izjava, uslov",
+          "type": "match",
+          "xp": 1,
+          "grammarFocus": "subordinate",
+          "instruction": "Poveži početak sa završetkom tako da svaka rečenica bude gramatički tačna i smislena.",
+          "hint": "Svaki završetak ima glagol na kraju; proveri i značenje veze.",
+          "explanation": "«weil» navodi razlog, «dass» sadržaj izveštaja, «wenn» uslov.",
+          "left": [
+            "Er bleibt auf Station, weil",
+            "Lena berichtet, dass",
+            "Rufen Sie mich, wenn"
+          ],
+          "right": [
+            "der Patient kein Penicillin verträgt.",
+            "Sie Hilfe brauchen.",
+            "der Arzt ihn noch untersuchen möchte."
+          ],
+          "pairs": [
+            2,
+            0,
+            1
+          ],
+          "kind": "closed",
+          "items": [],
+          "context": "Pacijent ostaje zbog dodatnog pregleda. Lena prenosi da ne podnosi penicilin. Pacijent treba da pozove ako mu zatreba pomoć."
+        },
+        {
+          "id": "DE-HC-B1-L01-G-16",
+          "code": "G-16",
+          "title": "Zavisna rečenica na početku",
+          "type": "multi",
+          "xp": 1,
+          "grammarFocus": "subordinate",
+          "instruction": "Izaberi sve tačne odgovore.",
+          "hint": "Cela zavisna rečenica zauzima prvo mesto glavne rečenice.",
+          "explanation": "Glavna rečenica posle zareza počinje ličnim glagolom: «kommt» ili «ist».",
+          "context": "Izaberi dve gramatički pravilne rečenice.",
+          "options": [
+            "Wenn Herr Schmidt klingelt, kommt Lena ins Zimmer.",
+            "Wenn Herr Schmidt klingelt, Lena kommt ins Zimmer.",
+            "Weil er nicht geschlafen hat, ist er müde.",
+            "Weil er nicht geschlafen hat, er ist müde."
+          ],
+          "correct": [
+            0,
+            2
+          ],
+          "kind": "closed",
+          "items": []
+        },
+        {
+          "id": "DE-HC-B1-L01-G-17",
+          "code": "G-17",
+          "title": "Jednom ili svaki put?",
+          "type": "gaps",
+          "xp": 1,
+          "grammarFocus": "subordinate",
+          "instruction": "Dopuni svaku prazninu odgovarajućim oblikom.",
+          "hint": "Prva situacija se desila jednom juče; druga opisuje uobičajen uslov.",
+          "explanation": "«als» = jednokratni događaj u prošlosti; «wenn» = ponovljena ili sadašnja/buduća situacija.",
+          "text": "___ Herr Schmidt gestern aufgenommen wurde, war er nervös. ___ er Hilfe braucht, klingelt er.",
+          "gaps": [
+            {
+              "options": [
+                "Als",
+                "Wenn",
+                "Weil"
+              ],
+              "answer": "Als"
+            },
+            {
+              "options": [
+                "Als",
+                "Wenn",
+                "Dass"
+              ],
+              "answer": "Wenn"
+            }
+          ],
+          "kind": "closed",
+          "items": []
+        },
+        {
+          "id": "DE-HC-B1-L01-G-18",
+          "code": "G-18",
+          "title": "Ispravi izveštaj",
+          "type": "text",
+          "xp": 2,
+          "grammarFocus": "subordinate",
+          "instruction": "Ispravi samo red reči u zavisnoj rečenici. Napiši celu rečenicu.",
+          "hint": "U perfektu završetak zavisne rečenice čine particip i pomoćni glagol.",
+          "explanation": "«nicht gegessen hat» je pravilan završetak.",
+          "context": "Lena berichtet, dass der Patient hat nicht gegessen.",
+          "inputs": [
+            {
+              "prompt": "Lena berichtet, dass der Patient hat nicht gegessen.",
+              "answers": [
+                "Lena berichtet, dass der Patient nicht gegessen hat."
+              ]
+            }
+          ],
+          "kind": "closed",
+          "items": []
+        },
+        {
+          "id": "DE-HC-B1-L01-G-19",
+          "code": "G-19",
+          "title": "Uslov pa postupak",
+          "type": "order",
+          "xp": 2,
+          "grammarFocus": "subordinate",
+          "instruction": "Složi sve delove u jednu rečenicu. Zadrži zadati početak.",
+          "hint": "Proveri glagol na kraju zavisne rečenice i početku glavne.",
+          "explanation": "«braucht» zatvara zavisnu, «kommt» započinje glavnu rečenicu.",
+          "tokens": [
+            "Wenn",
+            "der Patient",
+            "Hilfe",
+            "braucht,",
+            "kommt",
+            "Lena",
+            "ins Zimmer."
+          ],
+          "answer": [
+            "Wenn der Patient Hilfe braucht, kommt Lena ins Zimmer."
+          ],
+          "context": "Početak: Wenn",
+          "kind": "closed",
+          "items": []
+        },
+        {
+          "id": "DE-HC-B1-L01-G-20",
+          "code": "G-20",
+          "title": "Promeni početak rečenice",
+          "type": "text",
+          "xp": 2,
+          "grammarFocus": "subordinate",
+          "instruction": "Počni istu rečenicu celom zavisnom rečenicom «Wenn Herr Schmidt klingelt». Zadrži sve reči i napiši celu rečenicu.",
+          "hint": "Posle početne zavisne rečenice glavna počinje ličnim glagolom.",
+          "explanation": "«kommt Lena» čuva glagol na drugom mestu glavne rečenice.",
+          "context": "Lena kommt ins Zimmer, wenn Herr Schmidt klingelt.",
+          "inputs": [
+            {
+              "prompt": "Lena kommt ins Zimmer, wenn Herr Schmidt klingelt.",
+              "answers": [
+                "Wenn Herr Schmidt klingelt, kommt Lena ins Zimmer."
+              ]
+            }
+          ],
+          "kind": "closed",
+          "items": []
+        },
+        {
+          "id": "DE-HC-B1-L01-G-21",
+          "code": "G-21",
+          "title": "Ljubazna molba",
+          "type": "choice",
+          "xp": 1,
+          "grammarFocus": "polite",
+          "instruction": "Izaberi jedan odgovor koji je gramatički tačan i odgovara situaciji.",
+          "hint": "Koji oblik služi ljubaznoj molbi, a ne obavezi ili savetu?",
+          "explanation": "«Könnten Sie…?» je ljubazna molba; druga dva oblika imaju druga značenja.",
+          "context": "Lena moli pacijenta da zavrne rukav, bez pitanja o obavezi ili preporuci.",
+          "options": [
+            "Müssten Sie den Ärmel hochkrempeln?",
+            "Sollten Sie den Ärmel hochkrempeln?",
+            "Könnten Sie den Ärmel hochkrempeln?"
+          ],
+          "correct": [
+            2
+          ],
+          "kind": "closed",
+          "items": []
+        },
+        {
+          "id": "DE-HC-B1-L01-G-22",
+          "code": "G-22",
+          "title": "Oblik molbe",
+          "type": "gaps",
+          "xp": 1,
+          "grammarFocus": "polite",
+          "instruction": "Dopuni svaku prazninu odgovarajućim oblikom.",
+          "hint": "«Sie» traži odgovarajući lični oblik; posle modalnog glagola nema «zu».",
+          "explanation": "«Könnten Sie…einatmen?» koristi infinitiv bez «zu» na kraju.",
+          "text": "___ Sie bitte tief ___?",
+          "gaps": [
+            {
               "options": [
                 "Könnten",
-                "Müssen",
-                "Sollen"
+                "Könnte",
+                "Könntest"
               ],
-              "answers": [
-                "Könnten"
-              ]
+              "answer": "Könnten"
             },
             {
-              "prompt": "Nach der Operation ___ Sie sich ausruhen.",
-              "options": [
-                "sollten",
-                "könnten",
-                "hätten"
-              ],
-              "answers": [
-                "sollten"
-              ]
-            },
-            {
-              "prompt": "Ich ___ gern mit dem Arzt sprechen.",
-              "options": [
-                "würde",
-                "sollte",
-                "muss"
-              ],
-              "answers": [
-                "würde"
-              ]
-            },
-            {
-              "prompt": "Könnten Sie tief ___?",
               "options": [
                 "einatmen",
-                "zu einatmen",
+                "einzuatmen",
                 "atmen ein"
               ],
+              "answer": "einatmen"
+            }
+          ],
+          "kind": "closed",
+          "items": []
+        },
+        {
+          "id": "DE-HC-B1-L01-G-23",
+          "code": "G-23",
+          "title": "Želja pacijenta",
+          "type": "order",
+          "xp": 1,
+          "grammarFocus": "polite",
+          "instruction": "Složi sve delove u jednu rečenicu. Zadrži zadati početak.",
+          "hint": "Ljubazna želja sa «würde» traži infinitiv na kraju.",
+          "explanation": "«würde» stoji na drugom mestu, «sprechen» na kraju.",
+          "tokens": [
+            "Ich",
+            "würde",
+            "gern",
+            "mit dem Arzt",
+            "sprechen."
+          ],
+          "answer": [
+            "Ich würde gern mit dem Arzt sprechen."
+          ],
+          "context": "Početak: Ich",
+          "kind": "closed",
+          "items": []
+        },
+        {
+          "id": "DE-HC-B1-L01-G-24",
+          "code": "G-24",
+          "title": "Preporuka lekara",
+          "type": "choice",
+          "xp": 1,
+          "grammarFocus": "polite",
+          "instruction": "Izaberi jedan odgovor koji je gramatički tačan i odgovara situaciji.",
+          "hint": "Izaberi modalni oblik koji jasno znači «trebalo bi».",
+          "explanation": "«sollten» prenosi preporuku; «müssten» obavezu, «würden» hipotetičku radnju.",
+          "context": "Lekar je preporučio odmor. Lena prenosi savet, a ne obavezu ili hipotetičku mogućnost.",
+          "options": [
+            "Sie müssten sich ausruhen.",
+            "Sie sollten sich ausruhen.",
+            "Sie würden sich ausruhen."
+          ],
+          "correct": [
+            1
+          ],
+          "kind": "closed",
+          "items": []
+        },
+        {
+          "id": "DE-HC-B1-L01-G-25",
+          "code": "G-25",
+          "title": "Namera govornika",
+          "type": "match",
+          "xp": 1,
+          "grammarFocus": "polite",
+          "instruction": "Poveži početak sa završetkom tako da svaka rečenica bude gramatički tačna i smislena.",
+          "hint": "Razlikuj molbu, savet i želju.",
+          "explanation": "«könnten» = molba; «sollten» = savet; «hätte gern» = želja.",
+          "left": [
+            "Ljubazna molba da pacijent sedne",
+            "Preporuka prema planu lekara",
+            "Ljubazna želja pacijenta"
+          ],
+          "right": [
+            "Ich hätte gern ein Gespräch mit dem Arzt.",
+            "Könnten Sie sich hier hinsetzen?",
+            "Sie sollten sich ausruhen, wie der Arzt empfohlen hat."
+          ],
+          "pairs": [
+            1,
+            2,
+            0
+          ],
+          "kind": "closed",
+          "items": []
+        },
+        {
+          "id": "DE-HC-B1-L01-G-26",
+          "code": "G-26",
+          "title": "Dve pravilne molbe",
+          "type": "multi",
+          "xp": 1,
+          "grammarFocus": "polite",
+          "instruction": "Izaberi sve tačne odgovore.",
+          "hint": "Infinitiv ide ceo na kraj, bez «zu».",
+          "explanation": "«einatmen» i «hochkrempeln» ostaju celi infinitivi.",
+          "context": "Izaberi dve gramatički pravilne ljubazne molbe.",
+          "options": [
+            "Könnten Sie bitte tief einzuatmen?",
+            "Könnten Sie bitte tief einatmen?",
+            "Würden Sie bitte den Ärmel hochkrempeln?",
+            "Würden Sie bitte den Ärmel krempeln hoch?"
+          ],
+          "correct": [
+            1,
+            2
+          ],
+          "kind": "closed",
+          "items": []
+        },
+        {
+          "id": "DE-HC-B1-L01-G-27",
+          "code": "G-27",
+          "title": "Iz naredbe u molbu",
+          "type": "text",
+          "xp": 2,
+          "grammarFocus": "polite",
+          "instruction": "Pretvori u molbu sa početkom «Könnten Sie». Zadrži «sich bitte hinlegen» i napiši celu rečenicu.",
+          "hint": "Povratna zamenica ostaje, a odvojivi glagol postaje ceo infinitiv.",
+          "explanation": "«sich» ostaje uz subjekat; «hinlegen» se ne razdvaja posle modalnog glagola.",
+          "context": "Legen Sie sich bitte hin.",
+          "inputs": [
+            {
+              "prompt": "Legen Sie sich bitte hin.",
               "answers": [
-                "einatmen"
+                "Könnten Sie sich bitte hinlegen?"
               ]
             }
-          ]
+          ],
+          "kind": "closed",
+          "items": []
+        },
+        {
+          "id": "DE-HC-B1-L01-G-28",
+          "code": "G-28",
+          "title": "Ispravi infinitiv",
+          "type": "text",
+          "xp": 2,
+          "grammarFocus": "polite",
+          "instruction": "Ispravi samo oblik infinitiva. Napiši celu rečenicu.",
+          "hint": "Modalni glagol ne traži «zu» uz infinitiv.",
+          "explanation": "Posle «könnten» stoji «einatmen», ne «einzuatmen».",
+          "context": "Könnten Sie bitte einzuatmen?",
+          "inputs": [
+            {
+              "prompt": "Könnten Sie bitte einzuatmen?",
+              "answers": [
+                "Könnten Sie bitte einatmen?"
+              ]
+            }
+          ],
+          "kind": "closed",
+          "items": []
+        },
+        {
+          "id": "DE-HC-B1-L01-G-29",
+          "code": "G-29",
+          "title": "Želja i savet",
+          "type": "gaps",
+          "xp": 2,
+          "grammarFocus": "polite",
+          "instruction": "Dopuni svaku prazninu odgovarajućim oblikom.",
+          "hint": "Prva replika već ima infinitiv «sprechen»; druga prenosi izričit savet.",
+          "explanation": "«würde gern sprechen» izražava želju; «sollten sich ausruhen» preporuku.",
+          "text": "Herr Schmidt: Ich ___ gern mit dem Arzt sprechen. Lena: Sie ___ sich ausruhen, wie der Arzt empfohlen hat.",
+          "gaps": [
+            {
+              "options": [
+                "würde",
+                "hätte",
+                "wäre"
+              ],
+              "answer": "würde"
+            },
+            {
+              "options": [
+                "sollten",
+                "würden",
+                "hätten"
+              ],
+              "answer": "sollten"
+            }
+          ],
+          "kind": "closed",
+          "items": []
+        },
+        {
+          "id": "DE-HC-B1-L01-G-30",
+          "code": "G-30",
+          "title": "Molba sa indirektnim pitanjem",
+          "type": "text",
+          "xp": 2,
+          "grammarFocus": "polite",
+          "instruction": "Preoblikuj sa početkom «Könnten Sie mir sagen, ob». Napiši celu rečenicu i zadrži sve reči polaznog pitanja.",
+          "hint": "Proveri molbu, negaciju i oba glagola perfekta na kraju zavisne rečenice.",
+          "explanation": "«Könnten Sie mir sagen» je molba; «ob Sie nicht geschlafen haben» je pravilno indirektno pitanje.",
+          "context": "Haben Sie nicht geschlafen?",
+          "inputs": [
+            {
+              "prompt": "Haben Sie nicht geschlafen?",
+              "answers": [
+                "Könnten Sie mir sagen, ob Sie nicht geschlafen haben?"
+              ]
+            }
+          ],
+          "kind": "closed",
+          "items": []
         }
       ]
     },

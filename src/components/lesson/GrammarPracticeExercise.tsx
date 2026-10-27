@@ -152,9 +152,9 @@ export default function GrammarPracticeExercise({ exercise: ex, done, onDone }: 
 
       {ex.type === "text" && (
         <div className="space-y-3">
-          {ex.inputs!.map((inp, i) => (
+          {(ex.inputs ?? []).map((inp, i) => (
             <div key={i} className="space-y-1">
-              {ex.inputs!.length > 1 || !ex.context ? <p className="text-sm text-foreground/80 line-through decoration-destructive/50">{inp.prompt}</p> : null}
+              {(ex.inputs?.length ?? 0) > 1 || !ex.context ? <p className="text-sm text-foreground/80">{inp.prompt}</p> : null}
               <Input value={texts[i]} disabled={locked} placeholder="Napiši ispravnu rečenicu…" className="bg-background"
                 onChange={(e) => { const n = [...texts]; n[i] = e.target.value; setTexts(n); touch(); }}
                 onKeyDown={(e) => e.key === "Enter" && check()} />
