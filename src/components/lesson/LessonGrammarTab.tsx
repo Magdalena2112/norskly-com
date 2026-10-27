@@ -384,7 +384,7 @@ export default function LessonGrammarTab({ lessonId, onPractice, onExplain, mode
         <div className="rounded-2xl border border-primary/20 bg-primary/5 p-4 space-y-3">
           {!showMore ? (
             <div className="flex flex-col sm:flex-row sm:items-center gap-3">
-              <p className="text-sm flex-1">Želiš još? AI pravi nove slične vežbe za ovu oblast i tvoj nivo.</p>
+              <p className="text-sm flex-1">Želiš još? Pripremi dodatne vežbe za ovu oblast i svoj nivo.</p>
               <Button variant="hero" size="sm" onClick={() => setShowMore(true)}><Sparkles className="w-4 h-4" /> Provežbaj još</Button>
             </div>
           ) : renderMore(topic.aiTopic)}

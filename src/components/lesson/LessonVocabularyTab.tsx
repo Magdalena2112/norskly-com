@@ -98,7 +98,7 @@ export default function LessonVocabularyTab({ lessonId, mode, onPractice, onFlas
       body: { action: "generate_lesson_exercises", theme: cur.title, exclude_words: cur.words.map((w) => w.word), level: row?.cefr_level || "A1", language: row?.language || "en" },
     });
     setAiLoading(false);
-    if (error || !Array.isArray(data?.exercises)) { toast.error("AI vežbe trenutno nisu dostupne. Pokušaj ponovo."); return; }
+    if (error || !Array.isArray(data?.exercises)) { toast.error("Dodatne vežbe trenutno nisu dostupne. Pokušaj ponovo."); return; }
     const t = Date.now();
     setAiEx(data.exercises.map((e: any, i: number) => ({ id: `ai-${t}-${i}`, code: `AI-${t}-${i}`, kind: "vocabulary", title: e.title || "Vežba", instruction: e.instruction || "", items: e.items || [] })));
   }
@@ -269,7 +269,7 @@ export default function LessonVocabularyTab({ lessonId, mode, onPractice, onFlas
           <div className="rounded-2xl border border-primary/20 bg-primary/5 p-4 space-y-3">
             {!aiEx ? (
               <div className="flex flex-col sm:flex-row sm:items-center gap-3">
-                <p className="text-sm flex-1">Želiš još? AI pravi nove slične vežbe od reči ove oblasti za tvoj nivo.</p>
+                <p className="text-sm flex-1">Želiš još? Pripremi dodatne vežbe sa rečima ove oblasti za svoj nivo.</p>
                 <Button variant="hero" size="sm" disabled={aiLoading} onClick={genMore}>
                   {aiLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Sparkles className="w-4 h-4" />} Provežbaj još
                 </Button>

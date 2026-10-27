@@ -60,7 +60,7 @@ async function callFn<T>(name: string, body: Record<string, unknown>): Promise<T
     body,
     headers: { Authorization: `Bearer ${session?.access_token}` },
   });
-  if (res.error) throw new Error(res.error.message || "AI greška");
+  if (res.error) throw new Error(res.error.message || "Provera trenutno nije dostupna.");
   return res.data as T;
 }
 
@@ -95,7 +95,7 @@ export default function WritingPage() {
               <p className="font-script italic text-primary/60 text-sm">{({ no: "Skriving", en: "Writing", de: "Schreiben" } as Record<string, string>)[getCurrentLanguageCode()]}</p>
               <h1 className="text-display text-2xl sm:text-3xl text-primary mt-1">Vežbaj pisanje</h1>
               <p className="text-sm text-muted-foreground mt-2 max-w-2xl">
-                Obavezna vežbanja iz lekcije i samostalna vežba — opis slike ili slobodan tekst sa detaljnim AI feedbackom, predlozima vokabulara i PDF analizom.
+                Obavezna vežbanja iz lekcije i samostalna vežba — opis slike ili slobodan tekst sa detaljnim povratnim informacijama, predlozima vokabulara i PDF analizom.
               </p>
             </div>
           </motion.div>
@@ -287,7 +287,7 @@ function BildebeskrivelseTab({ level }: { level: string }) {
       <Card className="bg-cream/90 border-border/50 shadow-card-soft">
         <CardHeader>
           <CardTitle className="text-base font-display text-primary">1. Slika</CardTitle>
-          <CardDescription>Učitaj sliku i AI će predložiti reči, izraze i početke rečenica.</CardDescription>
+          <CardDescription>Učitaj sliku i dobićeš predloge reči, izraza i početaka rečenica.</CardDescription>
         </CardHeader>
         <CardContent className="space-y-3">
           <input
@@ -642,7 +642,7 @@ function CorrectionTab({ level }: { level: string }) {
     <Card className="bg-cream/90 border-border/50 shadow-card-soft max-w-3xl mx-auto">
       <CardHeader>
         <CardTitle className="text-base font-display text-primary">Slobodno pisanje</CardTitle>
-        <CardDescription>Napiši tekst — AI će ga ispraviti i objasniti greške. Ako nemaš ideju, izaberi temu.</CardDescription>
+        <CardDescription>Napiši tekst i dobićeš ispravke i objašnjenja grešaka. Ako nemaš ideju, izaberi temu.</CardDescription>
       </CardHeader>
       <CardContent className="space-y-3">
         <TopicInspiration level={level} selected={topic} onSelect={setTopic} />

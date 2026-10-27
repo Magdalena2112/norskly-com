@@ -64,7 +64,7 @@ export default function PricingSection({
             <h3 className="font-display text-2xl font-bold text-primary">Tvoj kurs, tvoj tempo</h3>
             <p className="mt-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
               Dobijaš pun pristup spremnim lekcijama i alatima svog izabranog kursa,
-              uz praćenje napretka i AI podršku u učenju.
+              uz praćenje napretka i vođeno učenje.
             </p>
             <p className="mt-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
               Podeli utiske u anketi i pomozi nam da kreiramo kurseve baš po tvojoj meri.

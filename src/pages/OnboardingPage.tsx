@@ -56,13 +56,13 @@ const COPY: Record<LangCode, Copy> = {
     steps: ["Ime", "Cilj", "Stil", "Fokus", "Samopouzdanje", "Norveška"],
     stepCounter: (i, t) => `Korak ${i} od ${t}`,
     nameTitle: "Kako se zoveš?",
-    nameDesc: "AI će koristiti tvoje ime za personalizovanu komunikaciju.",
+    nameDesc: "Kako želiš da ti se obraćamo tokom učenja?",
     namePlaceholder: "Tvoje ime",
     goalTitle: "Zašto učiš norveški?",
-    goalDesc: "Ovo pomaže AI-u da prilagodi sadržaj tvom cilju.",
+    goalDesc: "Tvoj cilj usmerava povratne informacije i savete tokom učenja.",
     goals: ["posao", "preseljenje", "studije", "svakodnevna komunikacija", "ispit", "lični razvoj"],
     toneTitle: "Koji stil komunikacije preferiraš?",
-    toneDesc: "AI prilagođava ton odgovora prema tvojim preferencijama.",
+    toneDesc: "Izaberi stil povratnih informacija koji ti odgovara.",
     tones: ["opušten", "neutralan", "profesionalan"],
     focusTitle: "Na šta želiš da se fokusiraš?",
     focusDesc: "Izaberi primarnu oblast na kojoj želiš da radiš.",
@@ -70,7 +70,7 @@ const COPY: Record<LangCode, Copy> = {
     confidenceTitle: "Koliko si siguran/a u svoj norveški?",
     confidenceDesc: "Na skali od 1 do 5, koliko se samouvereno osećaš?",
     lifeTitle: "Živiš li u Norveškoj?",
-    lifeDesc: "Ovo pomaže AI-u da daje relevantnije primere i savete.",
+    lifeDesc: "Ovo nam pomaže da saveti budu bliži tvojim potrebama.",
     lifeOptions: ["Da", "Ne"],
     lifeYesNo: true,
     back: "Nazad",
@@ -82,10 +82,10 @@ const COPY: Record<LangCode, Copy> = {
     steps: ["Ime", "Cilj", "Stil", "Fokus", "Samopouzdanje", "Engleski u životu"],
     stepCounter: (i, t) => `Korak ${i} od ${t}`,
     nameTitle: "Kako se zoveš?",
-    nameDesc: "AI tutor će ti se obraćati ličnim imenom kroz ceo kurs.",
+    nameDesc: "Kako želiš da ti se obraćamo tokom učenja?",
     namePlaceholder: "Tvoje ime",
     goalTitle: "Šta želiš da postigneš sa engleskim?",
-    goalDesc: "AI prilagođava materijal i feedback ovom cilju.",
+    goalDesc: "Tvoj cilj usmerava povratne informacije i savete tokom učenja.",
     goals: [
       "putovanja",
       "karijera u inostranstvu",
@@ -95,7 +95,7 @@ const COPY: Record<LangCode, Copy> = {
       "lični razvoj",
     ],
     toneTitle: "Koji stil komunikacije ti odgovara?",
-    toneDesc: "AI bira ton — od casual chata do business engleskog.",
+    toneDesc: "Izaberi stil povratnih informacija koji ti odgovara.",
     tones: ["casual", "neutralan", "business"],
     focusTitle: "Na šta želiš da se fokusiraš?",
     focusDesc: "Tvoj primarni fokus za naredne sesije.",
@@ -122,13 +122,13 @@ const COPY: Record<LangCode, Copy> = {
     steps: ["Ime", "Cilj", "Stil", "Fokus", "Samopouzdanje", "Nemački u životu"],
     stepCounter: (i, t) => `Korak ${i} od ${t}`,
     nameTitle: "Kako se zoveš?",
-    nameDesc: "AI tutor će koristiti tvoje ime u svim lekcijama.",
+    nameDesc: "Kako želiš da ti se obraćamo tokom učenja?",
     namePlaceholder: "Tvoje ime",
     goalTitle: "Zašto učiš nemački?",
-    goalDesc: "AI prilagođava sadržaj tvom cilju.",
+    goalDesc: "Tvoj cilj usmerava povratne informacije i savete tokom učenja.",
     goals: ["posao", "preseljenje", "studije", "svakodnevna komunikacija", "ispit", "lični razvoj"],
     toneTitle: "Koji stil komunikacije preferiraš?",
-    toneDesc: "AI prilagođava ton odgovora.",
+    toneDesc: "Izaberi stil povratnih informacija koji ti odgovara.",
     tones: ["opušten", "neutralan", "profesionalan"],
     focusTitle: "Na šta želiš da se fokusiraš?",
     focusDesc: "Izaberi primarnu oblast.",
@@ -384,7 +384,7 @@ export default function OnboardingPage() {
               {step === 2 && (
                 <div>
                   <h2 className="text-2xl font-display font-bold text-foreground mb-2">{t.goalTitle}</h2>
-                  <p className="text-muted-foreground mb-6">Zadaci u lekcijama su isti za sve; cilj usmerava povratne informacije AI partnera.</p>
+                  <p className="text-muted-foreground mb-6">Zadaci u lekcijama su isti za sve; cilj usmerava povratne informacije i savete tokom učenja.</p>
                   <div className="grid gap-3">
                     {goals.map((g) => (
                       <ChoiceRow key={g.value} title={g.title} desc={g.desc} selected={form.learning_goal === g.value} onClick={() => setForm({ ...form, learning_goal: g.value })} />
@@ -396,7 +396,7 @@ export default function OnboardingPage() {
               {step === 3 && (
                 <div>
                   <h2 className="text-2xl font-display font-bold text-foreground mb-2">{t.confidenceTitle}</h2>
-                  <p className="text-muted-foreground mb-6">1 = nesiguran/na, 5 = vrlo siguran/na. Prema tome AI partner prilagođava tempo i složenost.</p>
+                  <p className="text-muted-foreground mb-6">1 = nesiguran/na, 5 = vrlo siguran/na. Na osnovu toga prilagođavamo stil podrške i detaljnost objašnjenja.</p>
                   <div className="flex gap-3">
                     {[1, 2, 3, 4, 5].map((n) => (
                       <button

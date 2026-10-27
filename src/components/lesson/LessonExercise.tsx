@@ -84,7 +84,7 @@ export default function LessonExercise({
       if (error || data?.error) {
         let msg = data?.error;
         try { msg = msg || (await (error as any)?.context?.json?.())?.error; } catch { /* noop */ }
-        toast.error(msg || "AI provera nije uspela.");
+        toast.error(msg || "Provera odgovora nije uspela.");
         next[0] = { ...next[0], status: "idle" };
         setState([...next]);
         return;
@@ -114,7 +114,7 @@ export default function LessonExercise({
       if (error || data?.error) {
         let msg = data?.error;
         try { msg = msg || (await (error as any)?.context?.json?.())?.error; } catch { /* noop */ }
-        toast.error(msg || "AI provera nije uspela.");
+        toast.error(msg || "Provera odgovora nije uspela.");
         openIdx.forEach((i) => (next[i] = { ...next[i], status: "idle" }));
         setState([...next]);
         return;
@@ -189,7 +189,7 @@ export default function LessonExercise({
                   {s.improved && <p className="italic text-primary">→ {s.improved}</p>}
                 </div>
               )}
-              {s.status === "pending" && <p className="text-xs text-muted-foreground flex items-center gap-1"><Loader2 className="w-3.5 h-3.5 animate-spin" /> AI tutor proverava…</p>}
+              {s.status === "pending" && <p className="text-xs text-muted-foreground flex items-center gap-1"><Loader2 className="w-3.5 h-3.5 animate-spin" /> Provera odgovora…</p>}
             </li>
           );
         })}
@@ -240,7 +240,7 @@ export default function LessonExercise({
             <span className="text-xs text-muted-foreground">{words} reči{wTarget ? ` · cilj ${wTarget[1]}–${wTarget[2]}` : ""}</span>
           </div>
           {wState.status === "correct" && !analysis && <p className="text-xs text-forest flex items-center gap-1"><CheckCircle2 className="w-3.5 h-3.5" /> Tačno!{wState.feedback ? ` ${wState.feedback}` : ""}</p>}
-          {wState.status === "pending" && <p className="text-xs text-muted-foreground flex items-center gap-1"><Loader2 className="w-3.5 h-3.5 animate-spin" /> AI tutor analizira tekst…</p>}
+          {wState.status === "pending" && <p className="text-xs text-muted-foreground flex items-center gap-1"><Loader2 className="w-3.5 h-3.5 animate-spin" /> Analiza teksta…</p>}
           <div>
             <Button size="sm" variant="hero" onClick={check} disabled={checking || wState.status === "pending"}>
               {checking ? <Loader2 className="w-4 h-4 animate-spin" /> : <Sparkles className="w-4 h-4" />}
