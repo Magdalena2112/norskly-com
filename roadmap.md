@@ -1,4 +1,5 @@
 # Tasks
+- [ ] Recover legacy healthcare enrollment without reopening course switching (confirmed NO/DE historical progress; mixed-course history needs an explicit recovery decision).
 - [x] Update survey course choices, multi-select modules, required question 9 and continuation/notification questions; include new answers in admin/export and verify UI plus server validation without overwriting existing responses.
 - [x] Add approved promo banner and learner survey with dashboard/menu/completed-lesson links.
 - [x] Secure survey responses, admin statistics/filters/spreadsheet export, and single-recipient email notifications; verify submission and readback.
