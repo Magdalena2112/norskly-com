@@ -1,4 +1,6 @@
 # Tasks
+- [ ] Add 30 varied grammar exercises worth 40 XP to each Norwegian/German health B1 lesson.
+- [ ] Test grading, grouping and XP totals; verify both lesson exercise views.
 - [x] Unify lesson listening into ten audio-first activities and preserve progress/XP.
 - [x] Verify navigation, playback controls, completion, and narrow-screen layout.
 - [x] Connect Azure assessment for Norwegian Bokmål, British English and German; verify live responses for all three locales.
