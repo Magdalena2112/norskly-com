@@ -1,0 +1,3464 @@
+{
+  "code": "NO-HC-B1-L01",
+  "intro": [
+    {
+      "id": "NO-HC-B1-L01-T01",
+      "title": "Tekst 1 · Første vakt på Ullevål",
+      "type": "monologue",
+      "scene": "Nora, ny sykepleier, forteller om sin første uke på sykehuset i Oslo.",
+      "lines": [
+        {
+          "speaker": "Nora",
+          "text": "Hei, jeg heter Nora, og jeg har nettopp begynt som sykepleier på medisinsk avdeling på Ullevål sykehus i Oslo."
+        },
+        {
+          "speaker": "Nora",
+          "text": "Den første uka var travel, men veldig lærerik. Hver morgen starter vi med en rapport der nattevakten forteller hvordan pasientene har hatt det."
+        },
+        {
+          "speaker": "Nora",
+          "text": "Etterpå går jeg runden og måler blodtrykk, puls og temperatur. Jeg spør også pasientene om de har vondt, og om de har sovet godt."
+        },
+        {
+          "speaker": "Nora",
+          "text": "Det vanskeligste for meg er å snakke med pasienter som er redde eller forvirret. Da prøver jeg å snakke rolig, bruke enkle ord og gi dem god tid."
+        },
+        {
+          "speaker": "Nora",
+          "text": "Kollegaene mine er hjelpsomme. Hvis jeg er usikker, spør jeg Ingrid, som har jobbet på avdelingen i mange år. Hun sier alltid at det er bedre å spørre én gang for mye enn én gang for lite."
+        }
+      ]
+    },
+    {
+      "id": "NO-HC-B1-L01-T02",
+      "title": "Tekst 2 · Innkomstsamtale",
+      "type": "dialogue",
+      "scene": "Nora tar imot pasienten Per Hansen (72) som er innlagt med brystsmerter.",
+      "lines": [
+        {
+          "speaker": "Nora",
+          "text": "God dag, jeg heter Nora og er sykepleier her. Kan du fortelle meg hva som har skjedd?"
+        },
+        {
+          "speaker": "Per",
+          "text": "I natt våknet jeg med vondt i brystet, og jeg følte meg veldig kvalm."
+        },
+        {
+          "speaker": "Nora",
+          "text": "Hvor lenge har du hatt smertene? Og kan du vise meg hvor det gjør vondt?"
+        },
+        {
+          "speaker": "Per",
+          "text": "Omtrent fire timer. Det gjør vondt her, midt i brystet, og noen ganger stråler det ut i venstre arm."
+        },
+        {
+          "speaker": "Nora",
+          "text": "På en skala fra null til ti, hvor sterke er smertene nå?"
+        },
+        {
+          "speaker": "Per",
+          "text": "Kanskje seks. Det var verre i natt."
+        },
+        {
+          "speaker": "Nora",
+          "text": "Takk. Bruker du noen faste medisiner, og er du allergisk mot noe?"
+        },
+        {
+          "speaker": "Per",
+          "text": "Jeg tar blodtrykksmedisin hver morgen, og jeg tåler ikke penicillin."
+        },
+        {
+          "speaker": "Nora",
+          "text": "Det er viktig å vite. Nå skal jeg måle blodtrykket og pulsen din, og så kommer legen, Jonas, om noen minutter."
+        }
+      ]
+    },
+    {
+      "id": "NO-HC-B1-L01-T03",
+      "title": "Tekst 3 · Rapport ved vaktskifte",
+      "type": "dialogue",
+      "scene": "Ved vaktskiftet gir Nora rapport til Anne, som skal ha kveldsvakt.",
+      "lines": [
+        {
+          "speaker": "Nora",
+          "text": "Per Hansen på rom 12 ble innlagt i dag morges med brystsmerter. Han er allergisk mot penicillin."
+        },
+        {
+          "speaker": "Anne",
+          "text": "Hvordan har han det nå? Har han fortsatt vondt?"
+        },
+        {
+          "speaker": "Nora",
+          "text": "Smertene har gått ned fra seks til tre etter at han fikk smertestillende. Blodtrykket var litt høyt, 160 over 95."
+        },
+        {
+          "speaker": "Anne",
+          "text": "Vet du om legen har bestilt flere prøver?"
+        },
+        {
+          "speaker": "Nora",
+          "text": "Ja, Jonas har bestilt nye blodprøver klokka 18. Han lurer også på om pasienten bør ta EKG en gang til i kveld."
+        },
+        {
+          "speaker": "Anne",
+          "text": "Greit. Jeg følger med på blodtrykket og sier fra hvis han får mer vondt."
+        }
+      ]
+    }
+  ],
+  "modules": {
+    "intro": {
+      "exercises": []
+    },
+    "grammar": {
+      "sections": [
+        {
+          "title": "1.1 Indirekte spørsmål (spørreord og «om»)",
+          "explanation": "Kada pitanje stavimo u zavisnu rečenicu (Kan du fortelle meg…, Jeg lurer på…, Vet du…), dobijamo indirektno pitanje. Ako pitanje ima upitnu reč (hva, hvor, når, hvor lenge), ona uvodi zavisnu rečenicu. Ako je pitanje da/ne, koristimo «om».\nVAŽNO: u indirektnom pitanju NEMA inverzije — subjekat stoji pre glagola.",
+          "table": [
+            [
+              "Direktno",
+              "Hvor gjør det vondt?"
+            ],
+            [
+              "Indirektno",
+              "Kan du vise meg hvor det gjør vondt?"
+            ],
+            [
+              "Direktno",
+              "Har du sovet godt?"
+            ],
+            [
+              "Indirektno",
+              "Jeg lurer på om du har sovet godt."
+            ]
+          ],
+          "rules": [
+            "Upitna reč (hva, hvor, når…) ili «om» uvodi indirektno pitanje.",
+            "Red reči: subjekat + glagol (bez inverzije).",
+            "Kad je upitna reč sama subjekat, dodaje se «som»: Vet du hvem som har vakt?"
+          ],
+          "compare": "Isto kao u srpskom «da li»: «Pitam se da li ste dobro spavali» → «Jeg lurer på om du har sovet godt».",
+          "examples": [
+            [
+              "Kan du fortelle meg hva som har skjedd?",
+              "Možete li mi reći šta se desilo?"
+            ],
+            [
+              "Vet du når pasienten fikk medisinen?",
+              "Znaš li kada je pacijent dobio lek?"
+            ],
+            [
+              "Jeg lurer på om han er allergisk.",
+              "Pitam se da li je alergičan."
+            ]
+          ],
+          "mistakes": [
+            [
+              "Kan du si hvor gjør det vondt?",
+              "Kan du si hvor det gjør vondt?",
+              "U indirektnom pitanju subjekat ide pre glagola."
+            ],
+            [
+              "Jeg lurer på hvis du har vondt.",
+              "Jeg lurer på om du har vondt.",
+              "Za da/ne pitanja koristi se «om», ne «hvis»."
+            ]
+          ]
+        },
+        {
+          "title": "1.2 «Ikke» i leddsetninger",
+          "explanation": "U zavisnoj rečenici (at, om, fordi, hvis, når…) prilozi kao ikke, alltid, aldri, ofte stoje ISPRED ličnog glagola — za razliku od glavne rečenice.",
+          "table": [
+            [
+              "Glavna",
+              "Han tåler ikke penicillin."
+            ],
+            [
+              "Zavisna",
+              "Han sier at han ikke tåler penicillin."
+            ],
+            [
+              "Glavna",
+              "Hun har aldri vært innlagt."
+            ],
+            [
+              "Zavisna",
+              "Jeg vet at hun aldri har vært innlagt."
+            ]
+          ],
+          "rules": [
+            "Zavisna rečenica: veznik + subjekat + IKKE + glagol.",
+            "Isto važi za alltid, aldri, ofte, vanligvis."
+          ],
+          "compare": "U srpskom «ne» uvek stoji ispred glagola; u norveškom samo u zavisnoj rečenici.",
+          "examples": [
+            [
+              "Pasienten sier at han ikke har sovet.",
+              "Pacijent kaže da nije spavao."
+            ],
+            [
+              "Ring meg hvis smertene ikke går over.",
+              "Pozovi me ako bolovi ne prođu."
+            ]
+          ],
+          "mistakes": [
+            [
+              "…fordi han har ikke spist.",
+              "…fordi han ikke har spist.",
+              "U zavisnoj rečenici «ikke» ide pre glagola."
+            ]
+          ]
+        },
+        {
+          "title": "1.3 Høflige spørsmål og råd (kunne, ville, burde)",
+          "explanation": "U radu sa pacijentima i kolegama koristimo preterit modalnih glagola da zvučimo ljubaznije: kunne, ville, skulle. Za savet koristimo burde (trebalo bi).",
+          "table": [
+            [
+              "Kan du…?",
+              "Kunne du…? (ljubaznije)"
+            ],
+            [
+              "Vil du…?",
+              "Ville du…? / Har du lyst til å…?"
+            ],
+            [
+              "Du må…",
+              "Du burde… (savet)"
+            ]
+          ],
+          "rules": [
+            "Kunne du + infinitiv bez «å»: Kunne du legge deg ned?",
+            "Burde = preporuka, ne naredba.",
+            "Jeg skulle gjerne… = ljubazna želja."
+          ],
+          "compare": "Kao srpski kondicional: «Da li biste mogli…?»",
+          "examples": [
+            [
+              "Kunne du brette opp ermet?",
+              "Da li biste mogli da zavrnete rukav?"
+            ],
+            [
+              "Du burde drikke mer vann.",
+              "Trebalo bi da pijete više vode."
+            ],
+            [
+              "Jeg skulle gjerne snakke med legen.",
+              "Želeo bih da razgovaram sa lekarom."
+            ]
+          ],
+          "mistakes": [
+            [
+              "Kunne du å puste dypt?",
+              "Kunne du puste dypt?",
+              "Posle modalnog glagola nema «å»."
+            ]
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "id": "NO-HC-B1-L01-G-01",
+          "code": "G-01",
+          "title": "Pitanje tokom prijema",
+          "type": "choice",
+          "xp": 1,
+          "grammarFocus": "indirect",
+          "instruction": "Izaberi jedan odgovor koji je gramatički tačan i odgovara situaciji.",
+          "hint": "Uporedi red subjekta i ličnog glagola u indirektnom pitanju.",
+          "explanation": "Posle «når» u indirektnom pitanju stoji «du spiste», bez inverzije.",
+          "context": "Nora želi da sazna kada je Per poslednji put jeo.",
+          "options": [
+            "Kan du si når spiste du sist?",
+            "Kan du si når du spiste sist?",
+            "Kan du si når du spiste du sist?"
+          ],
+          "correct": [
+            1
+          ],
+          "kind": "closed",
+          "items": []
+        },
+        {
+          "id": "NO-HC-B1-L01-G-02",
+          "code": "G-02",
+          "title": "Da li ili ako?",
+          "type": "gaps",
+          "xp": 1,
+          "grammarFocus": "indirect",
+          "instruction": "Dopuni svaku prazninu odgovarajućim oblikom.",
+          "hint": "Razlikuj pitanje da/ne od uslova.",
+          "explanation": "«om» uvodi da/ne pitanje; «hvis» uvodi uslov.",
+          "text": "Nora spør ___ Per er allergisk. Hun kontakter legen ___ han får utslett.",
+          "gaps": [
+            {
+              "options": [
+                "om",
+                "hvis",
+                "at"
+              ],
+              "answer": "om"
+            },
+            {
+              "options": [
+                "hvis",
+                "at",
+                "som"
+              ],
+              "answer": "hvis"
+            }
+          ],
+          "kind": "closed",
+          "items": []
+        },
+        {
+          "id": "NO-HC-B1-L01-G-03",
+          "code": "G-03",
+          "title": "Rezultat analize",
+          "type": "order",
+          "xp": 1,
+          "grammarFocus": "indirect",
+          "instruction": "Složi sve delove u jednu rečenicu. Zadrži zadati početak.",
+          "hint": "Posle upitne reči nema inverzije.",
+          "explanation": "«legen» stoji pre «får».",
+          "tokens": [
+            "Vet du",
+            "når",
+            "legen",
+            "får",
+            "prøvesvaret?"
+          ],
+          "answer": [
+            "Vet du når legen får prøvesvaret?"
+          ],
+          "context": "Početak: Vet du",
+          "kind": "closed",
+          "items": []
+        },
+        {
+          "id": "NO-HC-B1-L01-G-04",
+          "code": "G-04",
+          "title": "Od direktnog do indirektnog",
+          "type": "text",
+          "xp": 1,
+          "grammarFocus": "indirect",
+          "instruction": "Preoblikuj pitanje. Napiši celu rečenicu sa početkom «Kan du si om». Ne menjaj ostale reči.",
+          "hint": "Da/ne pitanje dobija «om» i red subjekat–glagol.",
+          "explanation": "«Bruker du» postaje «om du bruker».",
+          "context": "Bruker du faste medisiner?",
+          "inputs": [
+            {
+              "prompt": "Bruker du faste medisiner?",
+              "answers": [
+                "Kan du si om du bruker faste medisiner?"
+              ]
+            }
+          ],
+          "kind": "closed",
+          "items": []
+        },
+        {
+          "id": "NO-HC-B1-L01-G-05",
+          "code": "G-05",
+          "title": "Ko je dežuran?",
+          "type": "choice",
+          "xp": 1,
+          "grammarFocus": "indirect",
+          "instruction": "Izaberi jedan odgovor koji je gramatički tačan i odgovara situaciji.",
+          "hint": "Da li upitna reč predstavlja osobu koja vrši radnju?",
+          "explanation": "Kada «hvem» predstavlja subjekat indirektnog pitanja, dodaje se «som».",
+          "context": "Anne pita Ingrid ko je večeras dežuran.",
+          "options": [
+            "Vet du hvem har vakt i kveld?",
+            "Vet du hvem som har vakt i kveld?",
+            "Vet du hvem om har vakt i kveld?"
+          ],
+          "correct": [
+            1
+          ],
+          "kind": "closed",
+          "items": []
+        },
+        {
+          "id": "NO-HC-B1-L01-G-06",
+          "code": "G-06",
+          "title": "Tri pitanja, tri završetka",
+          "type": "match",
+          "xp": 1,
+          "grammarFocus": "indirect",
+          "instruction": "Poveži početak sa završetkom tako da svaka rečenica bude gramatički tačna i smislena.",
+          "hint": "Razlikuj da/ne, vreme i osobu kao subjekat.",
+          "explanation": "«om» traži da/ne sadržaj, «når» vreme, a «hvem som» osobu koja vrši radnju.",
+          "left": [
+            "Nora spør om",
+            "Anne vil vite når",
+            "Per spør hvem som"
+          ],
+          "right": [
+            "legen kommer.",
+            "har kveldsvakt.",
+            "pasienten har feber."
+          ],
+          "pairs": [
+            2,
+            0,
+            1
+          ],
+          "kind": "closed",
+          "items": [],
+          "context": "Nora proverava temperaturu, Anne vreme dolaska lekara, a Per ko je u večernjoj smeni."
+        },
+        {
+          "id": "NO-HC-B1-L01-G-07",
+          "code": "G-07",
+          "title": "Predaja smene",
+          "type": "multi",
+          "xp": 1,
+          "grammarFocus": "indirect",
+          "instruction": "Izaberi sve tačne odgovore.",
+          "hint": "U oba indirektna pitanja proveri gde stoji subjekat.",
+          "explanation": "«han» stoji pre «fikk» i «har».",
+          "context": "Izaberi dve pravilno oblikovane indirektne rečenice.",
+          "options": [
+            "Anne spør når fikk han medisinen.",
+            "Anne spør når han fikk medisinen.",
+            "Anne spør om han har sovet.",
+            "Anne spør om har han sovet."
+          ],
+          "correct": [
+            1,
+            2
+          ],
+          "kind": "closed",
+          "items": []
+        },
+        {
+          "id": "NO-HC-B1-L01-G-08",
+          "code": "G-08",
+          "title": "Ispravi zapisano pitanje",
+          "type": "text",
+          "xp": 2,
+          "grammarFocus": "indirect",
+          "instruction": "Ispravi samo red reči. Napiši celu rečenicu, bez dodavanja ili izostavljanja reči.",
+          "hint": "Zavisna rečenica ne zadržava red direktnog pitanja.",
+          "explanation": "«hvor journalen ligger» ima red upitna reč–subjekat–glagol.",
+          "context": "Vet du hvor ligger journalen?",
+          "inputs": [
+            {
+              "prompt": "Vet du hvor ligger journalen?",
+              "answers": [
+                "Vet du hvor journalen ligger?"
+              ]
+            }
+          ],
+          "kind": "closed",
+          "items": []
+        },
+        {
+          "id": "NO-HC-B1-L01-G-09",
+          "code": "G-09",
+          "title": "Negacija u indirektnom pitanju",
+          "type": "gaps",
+          "xp": 2,
+          "grammarFocus": "indirect",
+          "instruction": "Dopuni svaku prazninu odgovarajućim oblikom.",
+          "hint": "Pitanje je da/ne; «Per» je već naveden kao subjekat.",
+          "explanation": "«om Per ikke har fått medisinen» koristi negaciju pre pomoćnog glagola.",
+          "text": "Vet du ___ Per ___ har fått medisinen?",
+          "gaps": [
+            {
+              "options": [
+                "om",
+                "hvis",
+                "at"
+              ],
+              "answer": "om"
+            },
+            {
+              "options": [
+                "ikke",
+                "ikke han",
+                "han ikke"
+              ],
+              "answer": "ikke"
+            }
+          ],
+          "kind": "closed",
+          "items": []
+        },
+        {
+          "id": "NO-HC-B1-L01-G-10",
+          "code": "G-10",
+          "title": "Šta se desilo?",
+          "type": "text",
+          "xp": 2,
+          "grammarFocus": "indirect",
+          "instruction": "Pretvori pitanje u indirektno. Napiši celu rečenicu sa početkom «Kan du fortelle meg». Zadrži ostale reči i dodaj potrebnu vezu.",
+          "hint": "Upitna reč je subjekat; razmisli o vezi koja je prati.",
+          "explanation": "«hva som har skjedd» je pravilno indirektno pitanje o događaju.",
+          "context": "Hva har skjedd?",
+          "inputs": [
+            {
+              "prompt": "Hva har skjedd?",
+              "answers": [
+                "Kan du fortelle meg hva som har skjedd?"
+              ]
+            }
+          ],
+          "kind": "closed",
+          "items": []
+        },
+        {
+          "id": "NO-HC-B1-L01-G-11",
+          "code": "G-11",
+          "title": "Alergija u kartonu",
+          "type": "choice",
+          "xp": 1,
+          "grammarFocus": "subordinate",
+          "instruction": "Izaberi jedan odgovor koji je gramatički tačan i odgovara situaciji.",
+          "hint": "U zavisnoj rečenici negacija stoji ispred ličnog glagola.",
+          "explanation": "«at han ikke tåler» ima red veznik–subjekat–negacija–glagol.",
+          "context": "Nora prenosi Perovu izjavu da ne podnosi penicilin.",
+          "options": [
+            "Per sier at han tåler ikke penicillin.",
+            "Per sier at ikke han tåler penicillin.",
+            "Per sier at han ikke tåler penicillin."
+          ],
+          "correct": [
+            2
+          ],
+          "kind": "closed",
+          "items": []
+        },
+        {
+          "id": "NO-HC-B1-L01-G-12",
+          "code": "G-12",
+          "title": "Noć bez sna",
+          "type": "gaps",
+          "xp": 1,
+          "grammarFocus": "subordinate",
+          "instruction": "Dopuni svaku prazninu odgovarajućim oblikom.",
+          "hint": "Kod perfekta negacija dolazi pre pomoćnog glagola.",
+          "explanation": "«fordi han ikke har sovet» čuva red negacija–pomoćni glagol–particip.",
+          "text": "Per er trøtt fordi han ___ ___.",
+          "gaps": [
+            {
+              "options": [
+                "ikke",
+                "ikke han",
+                "han ikke"
+              ],
+              "answer": "ikke"
+            },
+            {
+              "options": [
+                "har sovet",
+                "sovet har",
+                "har han sovet"
+              ],
+              "answer": "har sovet"
+            }
+          ],
+          "kind": "closed",
+          "items": []
+        },
+        {
+          "id": "NO-HC-B1-L01-G-13",
+          "code": "G-13",
+          "title": "Zapis o anamnezi",
+          "type": "order",
+          "xp": 1,
+          "grammarFocus": "subordinate",
+          "instruction": "Složi sve delove u jednu rečenicu. Zadrži zadati početak.",
+          "hint": "«aldri» u zavisnoj rečenici stoji na mestu negacije.",
+          "explanation": "«at Per aldri har vært» ima prilog pre ličnog glagola.",
+          "tokens": [
+            "Nora vet",
+            "at",
+            "Per",
+            "aldri",
+            "har",
+            "vært innlagt før."
+          ],
+          "answer": [
+            "Nora vet at Per aldri har vært innlagt før."
+          ],
+          "context": "Početak: Nora vet",
+          "kind": "closed",
+          "items": []
+        },
+        {
+          "id": "NO-HC-B1-L01-G-14",
+          "code": "G-14",
+          "title": "Izjava pacijenta",
+          "type": "text",
+          "xp": 1,
+          "grammarFocus": "subordinate",
+          "instruction": "Prenesi izjavu sa početkom «Per sier at». Napiši celu rečenicu; promeni «Jeg» u «han», a ostale reči zadrži.",
+          "hint": "Negacija menja položaj kada glavna rečenica postane zavisna.",
+          "explanation": "U «at han ikke har spist» negacija prethodi «har».",
+          "context": "Jeg har ikke spist.",
+          "inputs": [
+            {
+              "prompt": "Jeg har ikke spist.",
+              "answers": [
+                "Per sier at han ikke har spist."
+              ]
+            }
+          ],
+          "kind": "closed",
+          "items": []
+        },
+        {
+          "id": "NO-HC-B1-L01-G-15",
+          "code": "G-15",
+          "title": "Razlog, uslov, izjava",
+          "type": "match",
+          "xp": 1,
+          "grammarFocus": "subordinate",
+          "instruction": "Poveži početak sa završetkom tako da svaka rečenica bude gramatički tačna i smislena.",
+          "hint": "Poveži smisao početka sa pravilnim redom reči u završetku.",
+          "explanation": "«fordi» uvodi razlog, «at» prenetu izjavu, a «hvis» uslov.",
+          "left": [
+            "Per er trøtt fordi",
+            "Nora sier at",
+            "Ring på klokka hvis"
+          ],
+          "right": [
+            "legen kommer snart.",
+            "smertene ikke går over.",
+            "han ikke har sovet."
+          ],
+          "pairs": [
+            2,
+            0,
+            1
+          ],
+          "kind": "closed",
+          "items": [],
+          "context": "Per objašnjava umor nespavanjem. Nora najavljuje dolazak lekara. Pacijent treba da pozvoni ako bolovi ne prođu."
+        },
+        {
+          "id": "NO-HC-B1-L01-G-16",
+          "code": "G-16",
+          "title": "Nikada ili ne?",
+          "type": "multi",
+          "xp": 1,
+          "grammarFocus": "subordinate",
+          "instruction": "Izaberi sve tačne odgovore.",
+          "hint": "«aldri» i «ikke» imaju isto osnovno mesto u zavisnoj rečenici.",
+          "explanation": "U obe tačne rečenice prilog stoji ispred ličnog glagola.",
+          "context": "Izaberi dve gramatički pravilne rečenice o anamnezi.",
+          "options": [
+            "Nora vet at Per har aldri vært innlagt.",
+            "Nora vet at Per aldri har vært innlagt.",
+            "Per sier at han ikke bruker faste medisiner.",
+            "Per sier at han bruker ikke faste medisiner."
+          ],
+          "correct": [
+            1,
+            2
+          ],
+          "kind": "closed",
+          "items": []
+        },
+        {
+          "id": "NO-HC-B1-L01-G-17",
+          "code": "G-17",
+          "title": "Uslov za poziv",
+          "type": "gaps",
+          "xp": 1,
+          "grammarFocus": "subordinate",
+          "instruction": "Dopuni svaku prazninu odgovarajućim oblikom.",
+          "hint": "Subjekat «smertene» već stoji posle veznika.",
+          "explanation": "«hvis smertene ikke går over» ima negaciju pre glagola.",
+          "text": "Ring på klokka hvis smertene ___ ___.",
+          "gaps": [
+            {
+              "options": [
+                "ikke",
+                "ikke de",
+                "de ikke"
+              ],
+              "answer": "ikke"
+            },
+            {
+              "options": [
+                "går over",
+                "over går",
+                "går de over"
+              ],
+              "answer": "går over"
+            }
+          ],
+          "kind": "closed",
+          "items": []
+        },
+        {
+          "id": "NO-HC-B1-L01-G-18",
+          "code": "G-18",
+          "title": "Ispravi predaju smene",
+          "type": "text",
+          "xp": 2,
+          "grammarFocus": "subordinate",
+          "instruction": "Ispravi samo položaj «ikke». Napiši celu rečenicu.",
+          "hint": "Proveri negaciju u zavisnoj rečenici sa pomoćnim glagolom.",
+          "explanation": "«ikke» stoji ispred «har», ne između «har» i participa.",
+          "context": "Anne sier at Per har ikke fått medisinen.",
+          "inputs": [
+            {
+              "prompt": "Anne sier at Per har ikke fått medisinen.",
+              "answers": [
+                "Anne sier at Per ikke har fått medisinen."
+              ]
+            }
+          ],
+          "kind": "closed",
+          "items": []
+        },
+        {
+          "id": "NO-HC-B1-L01-G-19",
+          "code": "G-19",
+          "title": "Uslov na početku",
+          "type": "order",
+          "xp": 2,
+          "grammarFocus": "subordinate",
+          "instruction": "Složi sve delove u jednu rečenicu. Zadrži zadati početak.",
+          "hint": "U zavisnoj rečenici proveri negaciju; cela zavisna rečenica zauzima prvo mesto glavne.",
+          "explanation": "«ikke» prethodi «har»; posle zavisne rečenice dolazi «fortsetter Nora».",
+          "tokens": [
+            "Hvis Per",
+            "ikke",
+            "har",
+            "spørsmål,",
+            "fortsetter",
+            "Nora",
+            "samtalen."
+          ],
+          "answer": [
+            "Hvis Per ikke har spørsmål, fortsetter Nora samtalen."
+          ],
+          "context": "Početak: Hvis Per",
+          "kind": "closed",
+          "items": []
+        },
+        {
+          "id": "NO-HC-B1-L01-G-20",
+          "code": "G-20",
+          "title": "Dva reda reči",
+          "type": "text",
+          "xp": 2,
+          "grammarFocus": "subordinate",
+          "instruction": "Počni istu rečenicu sa celom zavisnom rečenicom «Hvis pasienten ikke forstår». Zadrži sve reči.",
+          "hint": "Posle zavisne rečenice na početku sledi lični glagol glavne rečenice.",
+          "explanation": "«Hvis pasienten ikke forstår» zauzima prvo mesto, pa sledi «forklarer Nora».",
+          "context": "Nora forklarer på nytt hvis pasienten ikke forstår.",
+          "inputs": [
+            {
+              "prompt": "Nora forklarer på nytt hvis pasienten ikke forstår.",
+              "answers": [
+                "Hvis pasienten ikke forstår, forklarer Nora på nytt."
+              ]
+            }
+          ],
+          "kind": "closed",
+          "items": []
+        },
+        {
+          "id": "NO-HC-B1-L01-G-21",
+          "code": "G-21",
+          "title": "Ljubazna molba",
+          "type": "choice",
+          "xp": 1,
+          "grammarFocus": "polite",
+          "instruction": "Izaberi jedan odgovor koji je gramatički tačan i odgovara situaciji.",
+          "hint": "Razlikuj mogućnost i molbu, obavezu i preporuku.",
+          "explanation": "«Kunne du…?» je ljubazna molba; «må» pita o obavezi, a «burde» o preporuci.",
+          "context": "Nora želi da pacijent zavrne rukav radi merenja. Izaberi ljubaznu molbu, ne pitanje o obavezi.",
+          "options": [
+            "Må du brette opp ermet?",
+            "Kunne du brette opp ermet?",
+            "Burde du brette opp ermet?"
+          ],
+          "correct": [
+            1
+          ],
+          "kind": "closed",
+          "items": []
+        },
+        {
+          "id": "NO-HC-B1-L01-G-22",
+          "code": "G-22",
+          "title": "Bez infinitivne oznake",
+          "type": "gaps",
+          "xp": 1,
+          "grammarFocus": "polite",
+          "instruction": "Dopuni svaku prazninu odgovarajućim oblikom.",
+          "hint": "Razlikuj infinitiv posle modalnog glagola od ličnog glagola u indirektnom pitanju.",
+          "explanation": "Posle «kunne» stoji infinitiv «vise»; u indirektnom pitanju «det gjør vondt» subjekat stoji pre ličnog glagola.",
+          "text": "Kunne du ___ meg hvor det ___ vondt?",
+          "gaps": [
+            {
+              "options": [
+                "vise",
+                "å vise",
+                "viser"
+              ],
+              "answer": "vise"
+            },
+            {
+              "options": [
+                "gjør",
+                "gjøre",
+                "å gjøre"
+              ],
+              "answer": "gjør"
+            }
+          ],
+          "kind": "closed",
+          "items": []
+        },
+        {
+          "id": "NO-HC-B1-L01-G-23",
+          "code": "G-23",
+          "title": "Želja pacijenta",
+          "type": "order",
+          "xp": 1,
+          "grammarFocus": "polite",
+          "instruction": "Složi sve delove u jednu rečenicu. Zadrži zadati početak.",
+          "hint": "Ljubazna želja zadržava modalni glagol na drugom mestu.",
+          "explanation": "«Jeg skulle gjerne snakke…» izražava ljubaznu želju, bez «å».",
+          "tokens": [
+            "Jeg",
+            "skulle",
+            "gjerne",
+            "snakke",
+            "med legen."
+          ],
+          "answer": [
+            "Jeg skulle gjerne snakke med legen."
+          ],
+          "context": "Početak: Jeg",
+          "kind": "closed",
+          "items": []
+        },
+        {
+          "id": "NO-HC-B1-L01-G-24",
+          "code": "G-24",
+          "title": "Savet ili obaveza?",
+          "type": "choice",
+          "xp": 1,
+          "grammarFocus": "polite",
+          "instruction": "Izaberi jedan odgovor koji je gramatički tačan i odgovara situaciji.",
+          "hint": "Koji modalni glagol najjasnije znači «trebalo bi»?",
+          "explanation": "«burde» prenosi preporuku; «må» obavezu, a «vil» ovde želju ili buduću radnju.",
+          "context": "Lekar je preporučio odmor. Nora prenosi preporuku, ne obavezu niti pacijentovu nameru.",
+          "options": [
+            "Du må hvile litt.",
+            "Du vil hvile litt.",
+            "Du burde hvile litt."
+          ],
+          "correct": [
+            2
+          ],
+          "kind": "closed",
+          "items": []
+        },
+        {
+          "id": "NO-HC-B1-L01-G-25",
+          "code": "G-25",
+          "title": "Namera govornika",
+          "type": "match",
+          "xp": 1,
+          "grammarFocus": "polite",
+          "instruction": "Poveži početak sa završetkom tako da svaka rečenica bude gramatički tačna i smislena.",
+          "hint": "Razlikuj molbu, savet i ličnu želju.",
+          "explanation": "«kunne du» = molba; «burde» = savet; «skulle gjerne» = želja.",
+          "left": [
+            "Ljubazna molba da pacijent sedne",
+            "Preporuka prema planu lekara",
+            "Ljubazna želja pacijenta"
+          ],
+          "right": [
+            "Jeg skulle gjerne snakke med legen.",
+            "Kunne du sette deg her?",
+            "Du burde hvile litt, slik legen anbefalte."
+          ],
+          "pairs": [
+            1,
+            2,
+            0
+          ],
+          "kind": "closed",
+          "items": []
+        },
+        {
+          "id": "NO-HC-B1-L01-G-26",
+          "code": "G-26",
+          "title": "Dve profesionalne molbe",
+          "type": "multi",
+          "xp": 1,
+          "grammarFocus": "polite",
+          "instruction": "Izaberi sve tačne odgovore.",
+          "hint": "Posle oba modalna glagola potreban je infinitiv bez «å».",
+          "explanation": "«vise» i «vente» su infinitivi; modalni glagol ne traži «å».",
+          "context": "Izaberi dve gramatički pravilne ljubazne molbe.",
+          "options": [
+            "Kunne du å vise meg hvor det gjør vondt?",
+            "Kunne du vise meg hvor det gjør vondt?",
+            "Ville du vente her et øyeblikk?",
+            "Ville du venter her et øyeblikk?"
+          ],
+          "correct": [
+            1,
+            2
+          ],
+          "kind": "closed",
+          "items": []
+        },
+        {
+          "id": "NO-HC-B1-L01-G-27",
+          "code": "G-27",
+          "title": "Iz naredbe u molbu",
+          "type": "text",
+          "xp": 2,
+          "grammarFocus": "polite",
+          "instruction": "Pretvori u molbu sa početkom «Kunne du». Zadrži izraz «sette deg her». Napiši celu rečenicu.",
+          "hint": "Povratna zamenica ostaje uz infinitiv.",
+          "explanation": "«sette deg» ostaje povratna konstrukcija posle modalnog glagola.",
+          "context": "Sett deg her.",
+          "inputs": [
+            {
+              "prompt": "Sett deg her.",
+              "answers": [
+                "Kunne du sette deg her?"
+              ]
+            }
+          ],
+          "kind": "closed",
+          "items": []
+        },
+        {
+          "id": "NO-HC-B1-L01-G-28",
+          "code": "G-28",
+          "title": "Ispravi ljubazno pitanje",
+          "type": "text",
+          "xp": 2,
+          "grammarFocus": "polite",
+          "instruction": "Ukloni samo nepotrebnu reč. Napiši celu rečenicu.",
+          "hint": "Posle modalnog glagola proveri infinitivnu oznaku.",
+          "explanation": "Posle «kunne» nema «å»; «om du er» ostaje indirektno pitanje.",
+          "context": "Kunne du å fortelle meg om du er allergisk?",
+          "inputs": [
+            {
+              "prompt": "Kunne du å fortelle meg om du er allergisk?",
+              "answers": [
+                "Kunne du fortelle meg om du er allergisk?"
+              ]
+            }
+          ],
+          "kind": "closed",
+          "items": []
+        },
+        {
+          "id": "NO-HC-B1-L01-G-29",
+          "code": "G-29",
+          "title": "Želja i preporuka",
+          "type": "gaps",
+          "xp": 2,
+          "grammarFocus": "polite",
+          "instruction": "Dopuni svaku prazninu odgovarajućim oblikom.",
+          "hint": "Prva replika je želja, druga izričito prenosi preporuku.",
+          "explanation": "«skulle gjerne» izražava želju, «burde» preporuku.",
+          "text": "Per: Jeg ___ gjerne snakke med legen. Nora: Du ___ hvile litt, slik legen anbefalte.",
+          "gaps": [
+            {
+              "options": [
+                "skulle",
+                "må",
+                "burde"
+              ],
+              "answer": "skulle"
+            },
+            {
+              "options": [
+                "burde",
+                "ville",
+                "må"
+              ],
+              "answer": "burde"
+            }
+          ],
+          "kind": "closed",
+          "items": []
+        },
+        {
+          "id": "NO-HC-B1-L01-G-30",
+          "code": "G-30",
+          "title": "Molba sa indirektnim pitanjem",
+          "type": "text",
+          "xp": 2,
+          "grammarFocus": "polite",
+          "instruction": "Napiši molbu sa početkom «Kunne du fortelle meg om». Polazno pitanje preoblikuj u zavisnu rečenicu; zadrži sve njegove reči.",
+          "hint": "Proveri infinitiv posle modalnog glagola, red subjekta i položaj negacije.",
+          "explanation": "«kunne…fortelle» je molba; «om du ikke har fått» ima subjekat i negaciju pre pomoćnog glagola.",
+          "context": "Har du ikke fått medisinen?",
+          "inputs": [
+            {
+              "prompt": "Har du ikke fått medisinen?",
+              "answers": [
+                "Kunne du fortelle meg om du ikke har fått medisinen?"
+              ]
+            }
+          ],
+          "kind": "closed",
+          "items": []
+        }
+      ]
+    },
+    "vocabulary": {
+      "areas": [
+        {
+          "key": "SYM",
+          "title": "Symptomer og plager",
+          "sr": "Simptomi i tegobe",
+          "images": [
+            "hcvo1"
+          ],
+          "words": [
+            {
+              "word": "ha vondt i brystet",
+              "translation": "imati bol u grudima",
+              "collection": "SYM",
+              "active": true,
+              "img": "hc-vo-1-01"
+            },
+            {
+              "word": "smerte",
+              "translation": "bol",
+              "collection": "SYM",
+              "active": true,
+              "img": "hc-vo-1-02"
+            },
+            {
+              "word": "kvalm",
+              "translation": "mučno (osećati mučninu)",
+              "collection": "SYM",
+              "active": true,
+              "img": "hc-vo-1-03"
+            },
+            {
+              "word": "svimmel",
+              "translation": "ošamućen, vrtoglav",
+              "collection": "SYM",
+              "active": true,
+              "img": "hc-vo-1-04"
+            },
+            {
+              "word": "tungpustet",
+              "translation": "zadihan, otežano diše",
+              "collection": "SYM",
+              "active": true,
+              "img": "hc-vo-1-05"
+            },
+            {
+              "word": "feber",
+              "translation": "temperatura (groznica)",
+              "collection": "SYM",
+              "active": true,
+              "img": "hc-vo-1-06"
+            },
+            {
+              "word": "hodepine",
+              "translation": "glavobolja",
+              "collection": "SYM",
+              "active": true,
+              "img": "hc-vo-1-07"
+            },
+            {
+              "word": "utslett",
+              "translation": "osip",
+              "collection": "SYM",
+              "active": true,
+              "img": "hc-vo-1-08"
+            },
+            {
+              "word": "hoste",
+              "translation": "kašljati",
+              "collection": "SYM",
+              "active": true,
+              "img": "hc-vo-1-09"
+            },
+            {
+              "word": "hoven",
+              "translation": "otečen",
+              "collection": "SYM",
+              "active": true,
+              "img": "hc-vo-1-10"
+            },
+            {
+              "word": "stråle ut",
+              "translation": "širiti se (o bolu)",
+              "collection": "SYM",
+              "active": true,
+              "img": "hc-vo-1-11"
+            },
+            {
+              "word": "blø",
+              "translation": "krvariti",
+              "collection": "SYM",
+              "active": true,
+              "img": "hc-vo-1-12"
+            }
+          ],
+          "exercises": [
+            "VO-01",
+            "VO-02",
+            "VO-03",
+            "VO-04",
+            "VO-05",
+            "VO-06",
+            "VO-07"
+          ]
+        },
+        {
+          "key": "MAL",
+          "title": "Målinger og undersøkelser",
+          "sr": "Merenja i pregledi",
+          "images": [
+            "hcvo1"
+          ],
+          "words": [
+            {
+              "word": "måle blodtrykket",
+              "translation": "izmeriti pritisak",
+              "collection": "MAL",
+              "active": true,
+              "img": "hc-vo-2-01"
+            },
+            {
+              "word": "puls",
+              "translation": "puls",
+              "collection": "MAL",
+              "active": true,
+              "img": "hc-vo-2-02"
+            },
+            {
+              "word": "temperatur",
+              "translation": "temperatura",
+              "collection": "MAL",
+              "active": true,
+              "img": "hc-vo-2-03"
+            },
+            {
+              "word": "blodprøve",
+              "translation": "analiza krvi",
+              "collection": "MAL",
+              "active": true,
+              "img": "hc-vo-2-04"
+            },
+            {
+              "word": "oksygenmetning",
+              "translation": "zasićenost kiseonikom",
+              "collection": "MAL",
+              "active": true,
+              "img": "hc-vo-2-05"
+            },
+            {
+              "word": "vekt",
+              "translation": "težina",
+              "collection": "MAL",
+              "active": true,
+              "img": "hc-vo-2-06"
+            },
+            {
+              "word": "undersøke",
+              "translation": "pregledati",
+              "collection": "MAL",
+              "active": true,
+              "img": "hc-vo-2-07"
+            },
+            {
+              "word": "ta et EKG",
+              "translation": "snimiti EKG",
+              "collection": "MAL",
+              "active": true,
+              "img": "hc-vo-2-08"
+            },
+            {
+              "word": "smerteskala",
+              "translation": "skala bola",
+              "collection": "MAL",
+              "active": true,
+              "img": "hc-vo-2-09"
+            },
+            {
+              "word": "prøvesvar",
+              "translation": "rezultat analiza",
+              "collection": "MAL",
+              "active": true,
+              "img": "hc-vo-2-10"
+            }
+          ],
+          "exercises": [
+            "VO-08",
+            "VO-09",
+            "VO-10",
+            "VO-11",
+            "VO-12",
+            "VO-13",
+            "VO-14"
+          ]
+        },
+        {
+          "key": "SYK",
+          "title": "Sykehistorie og behandling",
+          "sr": "Anamneza i lečenje",
+          "images": [
+            "hcvo1"
+          ],
+          "words": [
+            {
+              "word": "bli innlagt",
+              "translation": "biti primljen u bolnicu",
+              "collection": "SYK",
+              "active": true,
+              "img": "hc-vo-3-01"
+            },
+            {
+              "word": "innkomstsamtale",
+              "translation": "prijemni razgovor",
+              "collection": "SYK",
+              "active": true,
+              "img": "hc-vo-3-02"
+            },
+            {
+              "word": "sykehistorie",
+              "translation": "istorija bolesti",
+              "collection": "SYK",
+              "active": true,
+              "img": "hc-vo-3-03"
+            },
+            {
+              "word": "faste medisiner",
+              "translation": "stalni lekovi",
+              "collection": "SYK",
+              "active": true,
+              "img": "hc-vo-3-04"
+            },
+            {
+              "word": "være allergisk mot",
+              "translation": "biti alergičan na",
+              "collection": "SYK",
+              "active": true,
+              "img": "hc-vo-3-05"
+            },
+            {
+              "word": "tåle",
+              "translation": "podnositi (lek)",
+              "collection": "SYK",
+              "active": true,
+              "img": "hc-vo-3-06"
+            },
+            {
+              "word": "smertestillende",
+              "translation": "lek protiv bolova",
+              "collection": "SYK",
+              "active": true,
+              "img": "hc-vo-3-07"
+            },
+            {
+              "word": "bivirkning",
+              "translation": "neželjeno dejstvo",
+              "collection": "SYK",
+              "active": true,
+              "img": "hc-vo-3-08"
+            },
+            {
+              "word": "pårørende",
+              "translation": "članovi porodice / bližnji",
+              "collection": "SYK",
+              "active": true,
+              "img": "hc-vo-3-09"
+            },
+            {
+              "word": "journal",
+              "translation": "medicinski karton",
+              "collection": "SYK",
+              "active": true,
+              "img": "hc-vo-3-10"
+            },
+            {
+              "word": "rapport",
+              "translation": "izveštaj",
+              "collection": "SYK",
+              "active": true,
+              "img": "hc-vo-3-11"
+            },
+            {
+              "word": "vaktskifte",
+              "translation": "smena dežurstva",
+              "collection": "SYK",
+              "active": true,
+              "img": "hc-vo-3-12"
+            },
+            {
+              "word": "taushetsplikt",
+              "translation": "obaveza čuvanja tajne",
+              "collection": "SYK",
+              "active": true,
+              "img": "hc-vo-3-13"
+            },
+            {
+              "word": "utskrivelse",
+              "translation": "otpust iz bolnice",
+              "collection": "SYK",
+              "active": true,
+              "img": "hc-vo-3-14"
+            }
+          ],
+          "exercises": [
+            "VO-15",
+            "VO-16",
+            "VO-17",
+            "VO-18",
+            "VO-19",
+            "VO-20"
+          ]
+        }
+      ],
+      "words": [
+        {
+          "word": "ha vondt i brystet",
+          "translation": "imati bol u grudima",
+          "collection": "SYM",
+          "active": true
+        },
+        {
+          "word": "smerte",
+          "translation": "bol",
+          "collection": "SYM",
+          "active": true
+        },
+        {
+          "word": "kvalm",
+          "translation": "mučno (osećati mučninu)",
+          "collection": "SYM",
+          "active": true
+        },
+        {
+          "word": "svimmel",
+          "translation": "ošamućen, vrtoglav",
+          "collection": "SYM",
+          "active": true
+        },
+        {
+          "word": "tungpustet",
+          "translation": "zadihan, otežano diše",
+          "collection": "SYM",
+          "active": true
+        },
+        {
+          "word": "feber",
+          "translation": "temperatura (groznica)",
+          "collection": "SYM",
+          "active": true
+        },
+        {
+          "word": "hodepine",
+          "translation": "glavobolja",
+          "collection": "SYM",
+          "active": true
+        },
+        {
+          "word": "utslett",
+          "translation": "osip",
+          "collection": "SYM",
+          "active": true
+        },
+        {
+          "word": "hoste",
+          "translation": "kašljati",
+          "collection": "SYM",
+          "active": true
+        },
+        {
+          "word": "hoven",
+          "translation": "otečen",
+          "collection": "SYM",
+          "active": true
+        },
+        {
+          "word": "stråle ut",
+          "translation": "širiti se (o bolu)",
+          "collection": "SYM",
+          "active": true
+        },
+        {
+          "word": "blø",
+          "translation": "krvariti",
+          "collection": "SYM",
+          "active": true
+        },
+        {
+          "word": "måle blodtrykket",
+          "translation": "izmeriti pritisak",
+          "collection": "MAL",
+          "active": true
+        },
+        {
+          "word": "puls",
+          "translation": "puls",
+          "collection": "MAL",
+          "active": true
+        },
+        {
+          "word": "temperatur",
+          "translation": "temperatura",
+          "collection": "MAL",
+          "active": true
+        },
+        {
+          "word": "blodprøve",
+          "translation": "analiza krvi",
+          "collection": "MAL",
+          "active": true
+        },
+        {
+          "word": "oksygenmetning",
+          "translation": "zasićenost kiseonikom",
+          "collection": "MAL",
+          "active": true
+        },
+        {
+          "word": "vekt",
+          "translation": "težina",
+          "collection": "MAL",
+          "active": true
+        },
+        {
+          "word": "undersøke",
+          "translation": "pregledati",
+          "collection": "MAL",
+          "active": true
+        },
+        {
+          "word": "ta et EKG",
+          "translation": "snimiti EKG",
+          "collection": "MAL",
+          "active": true
+        },
+        {
+          "word": "smerteskala",
+          "translation": "skala bola",
+          "collection": "MAL",
+          "active": true
+        },
+        {
+          "word": "prøvesvar",
+          "translation": "rezultat analiza",
+          "collection": "MAL",
+          "active": true
+        },
+        {
+          "word": "bli innlagt",
+          "translation": "biti primljen u bolnicu",
+          "collection": "SYK",
+          "active": true
+        },
+        {
+          "word": "innkomstsamtale",
+          "translation": "prijemni razgovor",
+          "collection": "SYK",
+          "active": true
+        },
+        {
+          "word": "sykehistorie",
+          "translation": "istorija bolesti",
+          "collection": "SYK",
+          "active": true
+        },
+        {
+          "word": "faste medisiner",
+          "translation": "stalni lekovi",
+          "collection": "SYK",
+          "active": true
+        },
+        {
+          "word": "være allergisk mot",
+          "translation": "biti alergičan na",
+          "collection": "SYK",
+          "active": true
+        },
+        {
+          "word": "tåle",
+          "translation": "podnositi (lek)",
+          "collection": "SYK",
+          "active": true
+        },
+        {
+          "word": "smertestillende",
+          "translation": "lek protiv bolova",
+          "collection": "SYK",
+          "active": true
+        },
+        {
+          "word": "bivirkning",
+          "translation": "neželjeno dejstvo",
+          "collection": "SYK",
+          "active": true
+        },
+        {
+          "word": "pårørende",
+          "translation": "članovi porodice / bližnji",
+          "collection": "SYK",
+          "active": true
+        },
+        {
+          "word": "journal",
+          "translation": "medicinski karton",
+          "collection": "SYK",
+          "active": true
+        },
+        {
+          "word": "rapport",
+          "translation": "izveštaj",
+          "collection": "SYK",
+          "active": true
+        },
+        {
+          "word": "vaktskifte",
+          "translation": "smena dežurstva",
+          "collection": "SYK",
+          "active": true
+        },
+        {
+          "word": "taushetsplikt",
+          "translation": "obaveza čuvanja tajne",
+          "collection": "SYK",
+          "active": true
+        },
+        {
+          "word": "utskrivelse",
+          "translation": "otpust iz bolnice",
+          "collection": "SYK",
+          "active": true
+        }
+      ],
+      "collections": {
+        "SYM": "Symptomer og plager",
+        "MAL": "Målinger og undersøkelser",
+        "SYK": "Sykehistorie og behandling"
+      },
+      "exercises": [
+        {
+          "id": "NO-HC-B1-L01-VO-01",
+          "code": "VO-01",
+          "title": "Tegoba na ilustraciji",
+          "instruction": "Izaberi izraz koji najpreciznije odgovara opisu.",
+          "type": "choice",
+          "xp": 1,
+          "vocabularyFocus": "SYM",
+          "kind": "vocabulary",
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "context": "Pacijent pokazuje mesto bola na grudima. Koji izraz opisuje i tegobu i njeno mesto?",
+          "options": [
+            "ha vondt i brystet",
+            "hodepine",
+            "tungpustet"
+          ],
+          "correct": [
+            0
+          ],
+          "image": "hc-vo-1-01"
+        },
+        {
+          "id": "NO-HC-B1-L01-VO-02",
+          "code": "VO-02",
+          "title": "Tri slike, tri tegobe",
+          "instruction": "Poveži svaku stavku sa odgovarajućim izrazom. Svaki izraz koristi jednom.",
+          "type": "match",
+          "xp": 1,
+          "vocabularyFocus": "SYM",
+          "kind": "vocabulary",
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "left": [
+            "Slika A",
+            "Slika B",
+            "Slika C"
+          ],
+          "right": [
+            "utslett",
+            "hoven",
+            "hoste"
+          ],
+          "pairs": [
+            2,
+            0,
+            1
+          ],
+          "leftImages": [
+            "hc-vo-1-09",
+            "hc-vo-1-08",
+            "hc-vo-1-10"
+          ]
+        },
+        {
+          "id": "NO-HC-B1-L01-VO-03",
+          "code": "VO-03",
+          "title": "Šta pacijent opisuje?",
+          "instruction": "Izaberi izraz koji najpreciznije odgovara opisu.",
+          "type": "choice",
+          "xp": 1,
+          "vocabularyFocus": "SYM",
+          "kind": "vocabulary",
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "context": "Per: Når jeg reiser meg, føles det som om rommet snurrer. Jeg har ikke vondt i hodet.",
+          "options": [
+            "kvalm",
+            "svimmel",
+            "tungpustet"
+          ],
+          "correct": [
+            1
+          ]
+        },
+        {
+          "id": "NO-HC-B1-L01-VO-04",
+          "code": "VO-04",
+          "title": "Bol koji se širi",
+          "instruction": "Dopuni zapis izrazima koji odgovaraju kontekstu.",
+          "type": "gaps",
+          "xp": 1,
+          "vocabularyFocus": "SYM",
+          "kind": "vocabulary",
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "text": "Per har ___ i brystet. Smerten ___ i venstre arm.",
+          "gaps": [
+            {
+              "options": [
+                "smerte",
+                "hodepine",
+                "feber"
+              ],
+              "answer": "smerte"
+            },
+            {
+              "options": [
+                "stråler ut",
+                "blør",
+                "hoster"
+              ],
+              "answer": "stråler ut"
+            }
+          ]
+        },
+        {
+          "id": "NO-HC-B1-L01-VO-05",
+          "code": "VO-05",
+          "title": "Od izjave do termina",
+          "instruction": "Poveži svaku stavku sa odgovarajućim izrazom. Svaki izraz koristi jednom.",
+          "type": "match",
+          "xp": 1,
+          "vocabularyFocus": "SYM",
+          "kind": "vocabulary",
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "left": [
+            "Jeg føler at jeg må kaste opp.",
+            "Jeg får ikke nok luft.",
+            "Jeg har vondt i hodet."
+          ],
+          "right": [
+            "hodepine",
+            "kvalm",
+            "tungpustet"
+          ],
+          "pairs": [
+            1,
+            2,
+            0
+          ]
+        },
+        {
+          "id": "NO-HC-B1-L01-VO-06",
+          "code": "VO-06",
+          "title": "Šta zapisati kao tegobe?",
+          "instruction": "Izaberi sve izraze koji odgovaraju opisu.",
+          "type": "multi",
+          "xp": 1,
+          "vocabularyFocus": "SYM",
+          "kind": "vocabulary",
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "context": "Pacijent kaže da mu je mučno i da je zadihan. Ne prijavljuje vrtoglavicu ni glavobolju.",
+          "options": [
+            "svimmel",
+            "kvalm",
+            "hodepine",
+            "tungpustet"
+          ],
+          "correct": [
+            1,
+            3
+          ]
+        },
+        {
+          "id": "NO-HC-B1-L01-VO-07",
+          "code": "VO-07",
+          "title": "Dve kratke beleške",
+          "instruction": "Upiši traženi izraz na jeziku lekcije.",
+          "type": "text",
+          "xp": 1,
+          "vocabularyFocus": "SYM",
+          "kind": "vocabulary",
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "inputs": [
+            {
+              "prompt": "Navedi imenicu iz lekcije za povišenu telesnu temperaturu.",
+              "answers": [
+                "feber"
+              ]
+            },
+            {
+              "prompt": "Upiši infinitiv iz lekcije: iz rane izlazi krv.",
+              "answers": [
+                "blø"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "NO-HC-B1-L01-VO-08",
+          "code": "VO-08",
+          "title": "Prepoznaj postupak",
+          "instruction": "Poveži svaku stavku sa odgovarajućim izrazom. Svaki izraz koristi jednom.",
+          "type": "match",
+          "xp": 1,
+          "vocabularyFocus": "MAL",
+          "kind": "vocabulary",
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "left": [
+            "Slika A",
+            "Slika B",
+            "Slika C"
+          ],
+          "right": [
+            "ta et EKG",
+            "måle blodtrykket",
+            "blodprøve"
+          ],
+          "pairs": [
+            1,
+            2,
+            0
+          ],
+          "leftImages": [
+            "hc-vo-2-01",
+            "hc-vo-2-04",
+            "hc-vo-2-08"
+          ]
+        },
+        {
+          "id": "NO-HC-B1-L01-VO-09",
+          "code": "VO-09",
+          "title": "Šta pokazuje senzor?",
+          "instruction": "Izaberi izraz koji najpreciznije odgovara opisu.",
+          "type": "choice",
+          "xp": 1,
+          "vocabularyFocus": "MAL",
+          "kind": "vocabulary",
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "context": "Nora setter en sensor på fingeren for å se hvor mye oksygen blodet er mettet med.",
+          "options": [
+            "puls",
+            "blodtrykk",
+            "oksygenmetning",
+            "temperatur"
+          ],
+          "correct": [
+            2
+          ],
+          "image": "hc-vo-2-05"
+        },
+        {
+          "id": "NO-HC-B1-L01-VO-10",
+          "code": "VO-10",
+          "title": "Kontroll før legen kommer",
+          "instruction": "Dopuni zapis izrazima koji odgovaraju kontekstu.",
+          "type": "gaps",
+          "xp": 1,
+          "vocabularyFocus": "MAL",
+          "kind": "vocabulary",
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "text": "Nora måler ___ for å se om Per har feber. Hun teller hjerteslagene og noterer hans ___.",
+          "gaps": [
+            {
+              "options": [
+                "temperaturen",
+                "vekten",
+                "oksygenmetningen"
+              ],
+              "answer": "temperaturen"
+            },
+            {
+              "options": [
+                "puls",
+                "vekt",
+                "temperatur"
+              ],
+              "answer": "puls"
+            }
+          ]
+        },
+        {
+          "id": "NO-HC-B1-L01-VO-11",
+          "code": "VO-11",
+          "title": "Vrednost i odgovarajuća rubrika",
+          "instruction": "Poveži svaku stavku sa odgovarajućim izrazom. Svaki izraz koristi jednom.",
+          "type": "match",
+          "xp": 1,
+          "vocabularyFocus": "MAL",
+          "kind": "vocabulary",
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "left": [
+            "72 kg",
+            "3 av 10: hvor vondt pasienten har",
+            "Svaret fra laboratoriet er klart."
+          ],
+          "right": [
+            "prøvesvar",
+            "vekt",
+            "smerteskala"
+          ],
+          "pairs": [
+            1,
+            2,
+            0
+          ]
+        },
+        {
+          "id": "NO-HC-B1-L01-VO-12",
+          "code": "VO-12",
+          "title": "Najava pregleda",
+          "instruction": "Složi sve delove u smislenu rečenicu. Počni zadatim delom.",
+          "type": "order",
+          "xp": 1,
+          "vocabularyFocus": "MAL",
+          "kind": "vocabulary",
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "context": "Početak: Legen",
+          "tokens": [
+            "Legen",
+            "skal",
+            "undersøke",
+            "pasienten."
+          ],
+          "answer": [
+            "Legen skal undersøke pasienten."
+          ]
+        },
+        {
+          "id": "NO-HC-B1-L01-VO-13",
+          "code": "VO-13",
+          "title": "Postupak ili rezultat?",
+          "instruction": "Izaberi izraz koji najpreciznije odgovara opisu.",
+          "type": "choice",
+          "xp": 1,
+          "vocabularyFocus": "MAL",
+          "kind": "vocabulary",
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "context": "Blodprøven er allerede tatt. Nora venter på informasjonen fra laboratoriet, ikke på en ny prøve.",
+          "options": [
+            "blodprøve",
+            "prøvesvar",
+            "smerteskala"
+          ],
+          "correct": [
+            1
+          ]
+        },
+        {
+          "id": "NO-HC-B1-L01-VO-14",
+          "code": "VO-14",
+          "title": "Dopuni dve rubrike",
+          "instruction": "Upiši traženi izraz na jeziku lekcije.",
+          "type": "text",
+          "xp": 1,
+          "vocabularyFocus": "MAL",
+          "kind": "vocabulary",
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "inputs": [
+            {
+              "prompt": "Upiši jednu reč koja nedostaje: Nora skal måle ___ med mansjetten på armen.",
+              "answers": [
+                "blodtrykket"
+              ]
+            },
+            {
+              "prompt": "Upiši izraz za merenje električne aktivnosti srca, iz lekcije (infinitiv).",
+              "answers": [
+                "ta et EKG"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "NO-HC-B1-L01-VO-15",
+          "code": "VO-15",
+          "title": "Postupci tokom boravka",
+          "instruction": "Poveži svaku stavku sa odgovarajućim izrazom. Svaki izraz koristi jednom.",
+          "type": "match",
+          "xp": 1,
+          "vocabularyFocus": "SYK",
+          "kind": "vocabulary",
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "left": [
+            "Pasienten kommer til avdelingen og får en seng.",
+            "Sykepleieren spør om plager, medisiner og tidligere sykdommer.",
+            "Pasienten får reise hjem fra sykehuset."
+          ],
+          "right": [
+            "utskrivelse",
+            "bli innlagt",
+            "innkomstsamtale"
+          ],
+          "pairs": [
+            1,
+            2,
+            0
+          ]
+        },
+        {
+          "id": "NO-HC-B1-L01-VO-16",
+          "code": "VO-16",
+          "title": "Redovna terapija",
+          "instruction": "Izaberi izraz koji najpreciznije odgovara opisu.",
+          "type": "choice",
+          "xp": 1,
+          "vocabularyFocus": "SYK",
+          "kind": "vocabulary",
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "context": "Per: Jeg tar denne tabletten hver morgen, også når jeg ikke har vondt.",
+          "options": [
+            "smertestillende",
+            "faste medisiner",
+            "bivirkning"
+          ],
+          "correct": [
+            1
+          ],
+          "image": "hc-vo-3-04"
+        },
+        {
+          "id": "NO-HC-B1-L01-VO-17",
+          "code": "VO-17",
+          "title": "Podnošenje leka",
+          "instruction": "Dopuni zapis izrazima koji odgovaraju kontekstu.",
+          "type": "gaps",
+          "xp": 1,
+          "vocabularyFocus": "SYK",
+          "kind": "vocabulary",
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "text": "Per ___ ikke penicillin. Han er allergisk ___ det. Etter et annet legemiddel fikk han en uønsket ___. Legen noterte dette i Pers ___.",
+          "gaps": [
+            {
+              "options": [
+                "tåler",
+                "bruker",
+                "tar"
+              ],
+              "answer": "tåler"
+            },
+            {
+              "options": [
+                "mot",
+                "med",
+                "på"
+              ],
+              "answer": "mot"
+            },
+            {
+              "options": [
+                "bivirkning",
+                "sykehistorie",
+                "utskrivelse"
+              ],
+              "answer": "bivirkning"
+            },
+            {
+              "options": [
+                "sykehistorie",
+                "rapport",
+                "innkomstsamtale"
+              ],
+              "answer": "sykehistorie"
+            }
+          ]
+        },
+        {
+          "id": "NO-HC-B1-L01-VO-18",
+          "code": "VO-18",
+          "title": "Ljudi i dokumentacija",
+          "instruction": "Poveži svaku stavku sa odgovarajućim izrazom. Svaki izraz koristi jednom.",
+          "type": "match",
+          "xp": 1,
+          "vocabularyFocus": "SYK",
+          "kind": "vocabulary",
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "left": [
+            "Datteren og ektefellen til Per",
+            "Dokumentet med opplysninger om pasientens helse",
+            "Legemiddel som gis mot smerter etter legens ordinasjon"
+          ],
+          "right": [
+            "journal",
+            "smertestillende",
+            "pårørende"
+          ],
+          "pairs": [
+            2,
+            0,
+            1
+          ],
+          "image": "hc-vo-3-09"
+        },
+        {
+          "id": "NO-HC-B1-L01-VO-19",
+          "code": "VO-19",
+          "title": "Na kraju smene",
+          "instruction": "Poveži svaku stavku sa odgovarajućim izrazom. Svaki izraz koristi jednom.",
+          "type": "match",
+          "xp": 1,
+          "vocabularyFocus": "SYK",
+          "kind": "vocabulary",
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "left": [
+            "Anne overtar kveldsvakten etter Nora.",
+            "Nora forteller Anne hva som har skjedd med Per.",
+            "Nora deler ikke pasientopplysninger med uvedkommende."
+          ],
+          "right": [
+            "taushetsplikt",
+            "vaktskifte",
+            "rapport"
+          ],
+          "pairs": [
+            1,
+            2,
+            0
+          ]
+        },
+        {
+          "id": "NO-HC-B1-L01-VO-20",
+          "code": "VO-20",
+          "title": "Završna beleška sa prijema",
+          "instruction": "Dopuni zapis izrazima koji odgovaraju kontekstu.",
+          "type": "gaps",
+          "xp": 1,
+          "vocabularyFocus": "SYK",
+          "kind": "vocabulary",
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "text": "Per ble ___ på avdelingen i morges. Nora hadde en ___ med ham. Hans datter er nærmeste ___. Ved ___ gir Nora en ___ til Anne.",
+          "gaps": [
+            {
+              "options": [
+                "innlagt",
+                "utskrevet",
+                "undersøkt"
+              ],
+              "answer": "innlagt"
+            },
+            {
+              "options": [
+                "innkomstsamtale",
+                "utskrivelse",
+                "bivirkning"
+              ],
+              "answer": "innkomstsamtale"
+            },
+            {
+              "options": [
+                "pårørende",
+                "sykehistorie",
+                "journal"
+              ],
+              "answer": "pårørende"
+            },
+            {
+              "options": [
+                "vaktskiftet",
+                "utskrivelsen",
+                "undersøkelsen"
+              ],
+              "answer": "vaktskiftet"
+            },
+            {
+              "options": [
+                "rapport",
+                "journal",
+                "sykehistorie"
+              ],
+              "answer": "rapport"
+            }
+          ]
+        }
+      ]
+    },
+    "reading": {
+      "texts": [
+        {
+          "id": "NO-HC-B1-L01-RD1",
+          "title": "Tekst 1 · Pasientens rettigheter",
+          "image": "hc:rd1",
+          "body": "I Norge har alle pasienter rett til informasjon om sin egen helse. Det betyr at helsepersonell må forklare diagnosen og behandlingen på en måte som pasienten forstår. Hvis pasienten ikke snakker godt norsk, har han eller hun rett til tolk.\n\nPasienten har også rett til å være med på å bestemme. Legen kan foreslå en behandling, men pasienten kan si nei. Derfor er det viktig at sykepleieren spør om pasienten har forstått informasjonen, og om han har spørsmål.\n\nPårørende får bare informasjon hvis pasienten sier ja til det. Alle som jobber i helsevesenet har taushetsplikt. Det gjelder også når man snakker med kolleger i pausen eller på bussen hjem."
+        },
+        {
+          "id": "NO-HC-B1-L01-RD2",
+          "title": "Tekst 2 · Journalnotat",
+          "image": "hc:wr1",
+          "body": "Per Hansen, 72 år. Innlagt kl. 07.30 med brystsmerter siden kl. 03. Smerten sitter midt i brystet og stråler ut i venstre arm. Smerteskala 6/10 ved innkomst. Pasienten er kvalm, men har ikke kastet opp.\n\nFaste medisiner: blodtrykksmedisin om morgenen. Allergi: penicillin (utslett).\n\nBT 160/95, puls 92, temp 36,8, oksygenmetning 96 %. EKG tatt kl. 07.45. Fikk smertestillende kl. 08.10 etter avtale med lege. Smerteskala 3/10 kl. 09.00. Nye blodprøver bestilt til kl. 18. Datteren er informert etter samtykke fra pasienten."
+        }
+      ],
+      "exercises": [
+        {
+          "id": "NO-HC-B1-L01-R-01",
+          "code": "R-01",
+          "title": "Tekst 1 · Riktig eller galt",
+          "instruction": "Izaberi Riktig ili Galt.",
+          "kind": "closed",
+          "items": [
+            {
+              "prompt": "Pasienten har rett til tolk hvis han ikke snakker godt norsk.",
+              "answers": [
+                "Riktig"
+              ],
+              "options": [
+                "Riktig",
+                "Galt"
+              ]
+            },
+            {
+              "prompt": "Pasienten må alltid si ja til behandlingen legen foreslår.",
+              "answers": [
+                "Galt"
+              ],
+              "options": [
+                "Riktig",
+                "Galt"
+              ]
+            },
+            {
+              "prompt": "Pårørende får alltid informasjon om pasienten.",
+              "answers": [
+                "Galt"
+              ],
+              "options": [
+                "Riktig",
+                "Galt"
+              ]
+            },
+            {
+              "prompt": "Taushetsplikten gjelder også i pausen.",
+              "answers": [
+                "Riktig"
+              ],
+              "options": [
+                "Riktig",
+                "Galt"
+              ]
+            }
+          ],
+          "textId": "NO-HC-B1-L01-RD1"
+        },
+        {
+          "id": "NO-HC-B1-L01-R-02",
+          "code": "R-02",
+          "title": "Tekst 2 · Journalnotat",
+          "instruction": "Izaberi tačan odgovor.",
+          "kind": "closed",
+          "items": [
+            {
+              "prompt": "Hvor lenge hadde Per hatt smerter da han ble innlagt?",
+              "options": [
+                "Omtrent fire og en halv time",
+                "To dager",
+                "En time"
+              ],
+              "answers": [
+                "Omtrent fire og en halv time"
+              ]
+            },
+            {
+              "prompt": "Hva skjer hvis Per får penicillin?",
+              "options": [
+                "Han får utslett",
+                "Han blir svimmel",
+                "Han får feber"
+              ],
+              "answers": [
+                "Han får utslett"
+              ]
+            },
+            {
+              "prompt": "Hvordan var smertene kl. 09.00?",
+              "options": [
+                "3 av 10",
+                "6 av 10",
+                "Ingen smerter"
+              ],
+              "answers": [
+                "3 av 10"
+              ]
+            },
+            {
+              "prompt": "Hvorfor kunne datteren få informasjon?",
+              "options": [
+                "Pasienten ga samtykke",
+                "Hun er lege",
+                "Hun ringte sykehuset"
+              ],
+              "answers": [
+                "Pasienten ga samtykke"
+              ]
+            }
+          ],
+          "textId": "NO-HC-B1-L01-RD2"
+        }
+      ]
+    },
+    "listening": {
+      "scenes": [
+        {
+          "id": "L-01",
+          "code": "NO-HC-B1-L01-L01",
+          "title": "L-01 · Ny pasient på avdelingen",
+          "context": "Sykepleier forteller (monolog)",
+          "xp": 1,
+          "lines": [
+            {
+              "speaker": "Nora",
+              "text": "God morgen. Jeg heter Nora, og jeg er sykepleier på medisinsk avdeling på Ullevål. I dag kom det en ny pasient klokka sju. Han heter Arne Hansen og er sytti år gammel. Han har hatt brystsmerter siden i går kveld, og han er litt kortpustet. Først målte jeg blodtrykket og pulsen hans. Blodtrykket var høyt, men pulsen var normal. Etterpå ble det tatt blodprøver, og legen skal se på ham før lunsj."
+            }
+          ],
+          "questions": [
+            {
+              "prompt": "Hvorfor ble Arne Hansen lagt inn?",
+              "options": [
+                "Han har hatt brystsmerter og er kortpustet.",
+                "Han har brukket armen og har vondt.",
+                "Han har feber og hoster mye."
+              ],
+              "answer": "Han har hatt brystsmerter og er kortpustet."
+            },
+            {
+              "prompt": "Hva var unormalt da Nora målte?",
+              "options": [
+                "Blodtrykket var høyt.",
+                "Pulsen var veldig rask.",
+                "Temperaturen var høy."
+              ],
+              "answer": "Blodtrykket var høyt."
+            },
+            {
+              "prompt": "Hva skjer før lunsj?",
+              "options": [
+                "Legen skal undersøke pasienten.",
+                "Pasienten skal reise hjem.",
+                "Pasienten skal opereres."
+              ],
+              "answer": "Legen skal undersøke pasienten."
+            }
+          ]
+        },
+        {
+          "id": "L-02",
+          "code": "NO-HC-B1-L01-L02",
+          "title": "L-02 · Måling av blodtrykk",
+          "context": "Sykepleier og nervøs pasient",
+          "xp": 1,
+          "lines": [
+            {
+              "speaker": "Nora",
+              "text": "Hei, herr Hansen. Nå skal jeg måle blodtrykket ditt. Kan du brette opp ermet?"
+            },
+            {
+              "speaker": "Arne",
+              "text": "Ja da. Men jeg er litt nervøs. Er det noe galt med hjertet mitt?"
+            },
+            {
+              "speaker": "Nora",
+              "text": "Det vet vi ikke ennå. Målingen tar bare ett minutt. Du må sitte stille og ikke snakke mens mansjetten blåses opp."
+            },
+            {
+              "speaker": "Arne",
+              "text": "Greit. Det strammer litt i armen."
+            },
+            {
+              "speaker": "Nora",
+              "text": "Det er helt normalt. Sånn, ferdig. Blodtrykket er hundre og femti over nitti. Det er litt høyt, så jeg måler igjen om en time."
+            }
+          ],
+          "questions": [
+            {
+              "prompt": "Hva må pasienten gjøre under målingen?",
+              "options": [
+                "Sitte stille og ikke snakke.",
+                "Puste dypt og reise seg.",
+                "Holde armen over hodet."
+              ],
+              "answer": "Sitte stille og ikke snakke."
+            },
+            {
+              "prompt": "Hva gjør Nora fordi blodtrykket er høyt?",
+              "options": [
+                "Hun måler igjen om en time.",
+                "Hun ringer legen med en gang.",
+                "Hun gir pasienten medisin."
+              ],
+              "answer": "Hun måler igjen om en time."
+            }
+          ]
+        },
+        {
+          "id": "L-03",
+          "code": "NO-HC-B1-L01-L03",
+          "title": "L-03 · Allergier og faste medisiner",
+          "context": "Anamnesesamtale",
+          "xp": 1,
+          "lines": [
+            {
+              "speaker": "Nora",
+              "text": "Jeg må stille deg noen spørsmål. Kan du fortelle meg om du er allergisk mot noe?"
+            },
+            {
+              "speaker": "Arne",
+              "text": "Ja, jeg tåler ikke penicillin. Jeg fikk utslett over hele kroppen for noen år siden."
+            },
+            {
+              "speaker": "Nora",
+              "text": "Takk, det skriver jeg i journalen. Bruker du noen faste medisiner?"
+            },
+            {
+              "speaker": "Arne",
+              "text": "Jeg tar en blodtrykkstablett hver morgen, og noen ganger tar jeg sovetabletter."
+            },
+            {
+              "speaker": "Nora",
+              "text": "Vet du hva tablettene heter? Ellers kan jeg spørre fastlegen din."
+            }
+          ],
+          "questions": [
+            {
+              "prompt": "Hva er pasienten allergisk mot?",
+              "options": [
+                "Penicillin",
+                "Paracetamol",
+                "Nøtter"
+              ],
+              "answer": "Penicillin"
+            },
+            {
+              "prompt": "Hvilken medisin tar han hver dag?",
+              "options": [
+                "En blodtrykkstablett",
+                "En sovetablett",
+                "En smertestillende tablett"
+              ],
+              "answer": "En blodtrykkstablett"
+            },
+            {
+              "prompt": "Hvilket indirekte spørsmål stiller Nora?",
+              "options": [
+                "Kan du fortelle meg om du er allergisk mot noe?",
+                "Er du allergisk mot noe?",
+                "Allergisk mot noe du er?"
+              ],
+              "answer": "Kan du fortelle meg om du er allergisk mot noe?"
+            }
+          ]
+        },
+        {
+          "id": "L-04",
+          "code": "NO-HC-B1-L01-L04",
+          "title": "L-04 · Datteren ringer",
+          "context": "Telefonsamtale",
+          "xp": 1,
+          "lines": [
+            {
+              "speaker": "Nora",
+              "text": "Medisinsk avdeling, det er Nora."
+            },
+            {
+              "speaker": "Ingrid",
+              "text": "Hei, jeg heter Ingrid Hansen. Faren min ble lagt inn i natt. Kan du si meg hvordan han har det?"
+            },
+            {
+              "speaker": "Nora",
+              "text": "Jeg forstår at du er bekymret. Men av hensyn til taushetsplikten kan jeg ikke gi opplysninger på telefon før jeg vet hvem du er."
+            },
+            {
+              "speaker": "Ingrid",
+              "text": "Selvfølgelig. Jeg står oppført som nærmeste pårørende."
+            },
+            {
+              "speaker": "Nora",
+              "text": "Da sjekker jeg det. Faren din er stabil og hviler nå. Du er velkommen på besøk mellom klokka fire og sju."
+            }
+          ],
+          "questions": [
+            {
+              "prompt": "Hvorfor er Nora forsiktig i begynnelsen?",
+              "options": [
+                "Hun har taushetsplikt.",
+                "Hun har ikke tid til å snakke.",
+                "Hun kjenner ikke pasienten."
+              ],
+              "answer": "Hun har taushetsplikt."
+            },
+            {
+              "prompt": "Når kan Ingrid besøke faren?",
+              "options": [
+                "Mellom fire og sju",
+                "Mellom ti og tolv",
+                "Hele døgnet"
+              ],
+              "answer": "Mellom fire og sju"
+            }
+          ]
+        },
+        {
+          "id": "L-05",
+          "code": "NO-HC-B1-L01-L05",
+          "title": "L-05 · Legevisitt",
+          "context": "Lege og pasient",
+          "xp": 1,
+          "lines": [
+            {
+              "speaker": "Per",
+              "text": "God dag, herr Hansen. Jeg er doktor Per Lund. Vi har fått svar på blodprøvene."
+            },
+            {
+              "speaker": "Arne",
+              "text": "Er det noe alvorlig?"
+            },
+            {
+              "speaker": "Per",
+              "text": "Prøvene viser ikke tegn på hjerteinfarkt. Men vi må ta et EKG og en ultralyd av hjertet for å være sikre."
+            },
+            {
+              "speaker": "Arne",
+              "text": "Må jeg bli her lenge?"
+            },
+            {
+              "speaker": "Per",
+              "text": "Sannsynligvis to dager. Du bør ikke anstrenge deg, og du skal ringe på sykepleieren hvis smertene kommer tilbake."
+            }
+          ],
+          "questions": [
+            {
+              "prompt": "Hva viser blodprøvene?",
+              "options": [
+                "Ingen tegn på hjerteinfarkt.",
+                "At pasienten har infeksjon.",
+                "At pasienten har diabetes."
+              ],
+              "answer": "Ingen tegn på hjerteinfarkt."
+            },
+            {
+              "prompt": "Hva skal pasienten gjøre hvis smertene kommer tilbake?",
+              "options": [
+                "Ringe på sykepleieren.",
+                "Ta en ekstra tablett.",
+                "Gå en tur i gangen."
+              ],
+              "answer": "Ringe på sykepleieren."
+            }
+          ]
+        },
+        {
+          "id": "L-06",
+          "code": "NO-HC-B1-L01-L06",
+          "title": "L-06 · Rapport ved vaktskifte",
+          "context": "To sykepleiere",
+          "xp": 1,
+          "lines": [
+            {
+              "speaker": "Anne",
+              "text": "Hei Nora. Kan du gi meg rapport om rom fire før du går?"
+            },
+            {
+              "speaker": "Nora",
+              "text": "Ja. Herr Hansen ble innlagt i morges med brystsmerter. Han er allergisk mot penicillin."
+            },
+            {
+              "speaker": "Anne",
+              "text": "Hvordan er han nå?"
+            },
+            {
+              "speaker": "Nora",
+              "text": "Han har ikke hatt smerter siden klokka ti. Blodtrykket har gått ned, men det må måles hver fjerde time."
+            },
+            {
+              "speaker": "Anne",
+              "text": "Er det noe annet jeg må huske?"
+            },
+            {
+              "speaker": "Nora",
+              "text": "Han skal faste fra midnatt fordi han skal ta ultralyd i morgen tidlig."
+            }
+          ],
+          "questions": [
+            {
+              "prompt": "Hvor ofte skal blodtrykket måles?",
+              "options": [
+                "Hver fjerde time",
+                "Hver time",
+                "En gang om dagen"
+              ],
+              "answer": "Hver fjerde time"
+            },
+            {
+              "prompt": "Hvorfor skal pasienten faste fra midnatt?",
+              "options": [
+                "Han skal ta ultralyd i morgen.",
+                "Han skal opereres i natt.",
+                "Han har vondt i magen."
+              ],
+              "answer": "Han skal ta ultralyd i morgen."
+            }
+          ]
+        },
+        {
+          "id": "L-07",
+          "code": "NO-HC-B1-L01-L07",
+          "title": "L-07 · Overlevering fra ambulansen",
+          "context": "Ambulansearbeider og sykepleier",
+          "xp": 1,
+          "lines": [
+            {
+              "speaker": "Lars",
+              "text": "Hei, vi har med en kvinne på åttito år. Hun falt hjemme på badet i kveld."
+            },
+            {
+              "speaker": "Nora",
+              "text": "Var hun bevisstløs?"
+            },
+            {
+              "speaker": "Lars",
+              "text": "Nei, hun var våken hele tiden, men hun klager over smerter i høyre hofte. Vi har gitt henne smertestillende."
+            },
+            {
+              "speaker": "Nora",
+              "text": "Har dere målt metningen?"
+            },
+            {
+              "speaker": "Lars",
+              "text": "Ja, den er nittisju prosent. Datteren hennes kommer om en halvtime med medisinlista."
+            }
+          ],
+          "questions": [
+            {
+              "prompt": "Hva har skjedd med kvinnen?",
+              "options": [
+                "Hun falt på badet.",
+                "Hun ble syk på bussen.",
+                "Hun fikk et slag på jobb."
+              ],
+              "answer": "Hun falt på badet."
+            },
+            {
+              "prompt": "Hvor har hun vondt?",
+              "options": [
+                "I høyre hofte",
+                "I venstre skulder",
+                "I hodet"
+              ],
+              "answer": "I høyre hofte"
+            },
+            {
+              "prompt": "Hvem tar med medisinlista?",
+              "options": [
+                "Datteren",
+                "Fastlegen",
+                "Ambulansearbeideren"
+              ],
+              "answer": "Datteren"
+            }
+          ]
+        },
+        {
+          "id": "L-08",
+          "code": "NO-HC-B1-L01-L08",
+          "title": "L-08 · Smerteskala",
+          "context": "Sykepleier og pasient",
+          "xp": 1,
+          "lines": [
+            {
+              "speaker": "Nora",
+              "text": "Hvordan har du det nå? Har du fortsatt vondt?"
+            },
+            {
+              "speaker": "Arne",
+              "text": "Ja, det verker litt i brystet."
+            },
+            {
+              "speaker": "Nora",
+              "text": "Kan du si hvor sterke smertene er på en skala fra null til ti?"
+            },
+            {
+              "speaker": "Arne",
+              "text": "Kanskje fire. I natt var det åtte."
+            },
+            {
+              "speaker": "Nora",
+              "text": "Er smerten stikkende eller trykkende?"
+            },
+            {
+              "speaker": "Arne",
+              "text": "Mer trykkende. Den kommer når jeg går i trappa."
+            }
+          ],
+          "questions": [
+            {
+              "prompt": "Hvor sterke er smertene nå?",
+              "options": [
+                "Fire av ti",
+                "Åtte av ti",
+                "Null av ti"
+              ],
+              "answer": "Fire av ti"
+            },
+            {
+              "prompt": "Når kommer smerten?",
+              "options": [
+                "Når han går i trappa.",
+                "Når han ligger i senga.",
+                "Når han spiser."
+              ],
+              "answer": "Når han går i trappa."
+            }
+          ]
+        },
+        {
+          "id": "L-09",
+          "code": "NO-HC-B1-L01-L09",
+          "title": "L-09 · Forberedelse til undersøkelse",
+          "context": "Sykepleier gir beskjed",
+          "xp": 1,
+          "lines": [
+            {
+              "speaker": "Nora",
+              "text": "I morgen klokka åtte skal du ta en blodprøve og en ultralyd av magen. Du må ikke spise eller drikke etter midnatt. Du kan ta medisinene dine med litt vann. En portør henter deg på rommet, så du trenger ikke å gå selv. Etter undersøkelsen får du frokost."
+            }
+          ],
+          "questions": [
+            {
+              "prompt": "Hva er ikke lov etter midnatt?",
+              "options": [
+                "Å spise og drikke",
+                "Å ta medisiner med vann",
+                "Å sove"
+              ],
+              "answer": "Å spise og drikke"
+            },
+            {
+              "prompt": "Hvordan kommer pasienten til undersøkelsen?",
+              "options": [
+                "En portør henter ham.",
+                "Han går selv.",
+                "Datteren kjører ham."
+              ],
+              "answer": "En portør henter ham."
+            }
+          ]
+        },
+        {
+          "id": "L-10",
+          "code": "NO-HC-B1-L01-L10",
+          "title": "L-10 · Planlegging av utskrivning",
+          "context": "Lege, sykepleier og pasient",
+          "xp": 1,
+          "lines": [
+            {
+              "speaker": "Per",
+              "text": "Herr Hansen, undersøkelsene var fine. Du kan reise hjem i morgen."
+            },
+            {
+              "speaker": "Arne",
+              "text": "Så bra! Må jeg ta nye medisiner?"
+            },
+            {
+              "speaker": "Per",
+              "text": "Ja, du skal ta en ny blodtrykkstablett i tillegg. Fastlegen må kontrollere blodtrykket om to uker."
+            },
+            {
+              "speaker": "Nora",
+              "text": "Jeg skriver ned alle medisinene for deg, og hjemmesykepleien kommer innom de første dagene."
+            },
+            {
+              "speaker": "Arne",
+              "text": "Takk. Kan datteren min hente meg?"
+            },
+            {
+              "speaker": "Nora",
+              "text": "Ja, hun kan komme etter klokka elleve."
+            }
+          ],
+          "questions": [
+            {
+              "prompt": "Når skal blodtrykket kontrolleres?",
+              "options": [
+                "Om to uker hos fastlegen",
+                "I morgen på sykehuset",
+                "Om et halvt år"
+              ],
+              "answer": "Om to uker hos fastlegen"
+            },
+            {
+              "prompt": "Hvem hjelper pasienten hjemme de første dagene?",
+              "options": [
+                "Hjemmesykepleien",
+                "Doktor Lund",
+                "Ingen"
+              ],
+              "answer": "Hjemmesykepleien"
+            },
+            {
+              "prompt": "Hvem henter pasienten?",
+              "options": [
+                "Datteren hans",
+                "En ambulanse",
+                "En taxi fra sykehuset"
+              ],
+              "answer": "Datteren hans"
+            }
+          ]
+        }
+      ]
+    },
+    "writing": {
+      "exercises": [
+        {
+          "id": "NO-HC-B1-L01-WR-01",
+          "code": "WR-01",
+          "title": "Skriv et journalnotat",
+          "instruction": "Pogledaj sliku i napiši kratak zapis u karton za novog pacijenta (80–100 reči).",
+          "kind": "open",
+          "items": [
+            {
+              "prompt": "Tvoj zapis u karton (80–100 reči, na norveškom)",
+              "open": true,
+              "guiding": [
+                "Hvem er pasienten, og når ble han/hun innlagt?",
+                "Hvilke symptomer har pasienten?",
+                "Hvilke målinger har du tatt?",
+                "Allergier og faste medisiner?",
+                "Hva er planen videre?"
+              ]
+            }
+          ],
+          "image": "hc:wr1"
+        },
+        {
+          "id": "NO-HC-B1-L01-WR-02",
+          "code": "WR-02",
+          "title": "Melding til pårørende",
+          "instruction": "Napiši ljubaznu poruku ćerki pacijenta (pacijent je dao saglasnost) o tome kako se otac oseća (70–90 reči).",
+          "kind": "open",
+          "items": [
+            {
+              "prompt": "Tvoja poruka (70–90 reči, na norveškom)",
+              "open": true,
+              "guiding": [
+                "Hils høflig og presenter deg.",
+                "Fortell hvordan pasienten har det.",
+                "Forklar hva som skjer videre.",
+                "Bruk minst ett indirekte spørsmål og én leddsetning med «ikke»."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "pronunciation": {
+      "theory": [
+        {
+          "title": "Vokallengde i fagord – dužina samoglasnika",
+          "text": "I u stručnim rečima dužina samoglasnika menja značenje i razumljivost. Kratak vokal je obično ispred dvostrukog suglasnika. Klikni na reč da je čuješ.",
+          "pairHeads": [
+            "Dugi vokal",
+            "Kratki vokal"
+          ],
+          "pairs": [
+            {
+              "full": "vet",
+              "fullNote": "zna",
+              "short": "vett",
+              "shortNote": "razum"
+            },
+            {
+              "full": "tak",
+              "fullNote": "krov",
+              "short": "takk",
+              "shortNote": "hvala"
+            },
+            {
+              "full": "lege",
+              "fullNote": "lekar",
+              "short": "legge",
+              "shortNote": "položiti"
+            },
+            {
+              "full": "skyte",
+              "fullNote": "pucati",
+              "short": "skytte",
+              "shortNote": "strelac"
+            },
+            {
+              "full": "vise",
+              "fullNote": "pokazati",
+              "short": "visse",
+              "shortNote": "određeni"
+            }
+          ]
+        },
+        {
+          "title": "Ordtrykk i medisinske ord – naglasak",
+          "text": "Mnoge medicinske reči su strane i naglasak je često na kraju. Domaće složenice imaju naglasak na prvom delu. Klikni na reč da je čuješ.",
+          "examples": [
+            {
+              "sentence": "sykepleier",
+              "display": "SY-ke-plei-er"
+            },
+            {
+              "sentence": "pasient",
+              "display": "pa-si-ENT"
+            },
+            {
+              "sentence": "medisin",
+              "display": "me-di-SIN"
+            },
+            {
+              "sentence": "blodtrykk",
+              "display": "BLOD-trykk"
+            },
+            {
+              "sentence": "temperatur",
+              "display": "tem-pe-ra-TUR"
+            },
+            {
+              "sentence": "smertestillende",
+              "display": "SMER-te-stil-len-de"
+            }
+          ],
+          "note": "Pisano isticanje je samo pomagalo — merodavan je audio-model."
+        },
+        {
+          "title": "Tydelig tale med pasienten – jasan i smiren govor",
+          "text": "Sa pacijentom govori sporije, jasno izgovori važne reči (bol, lek, vreme) i napravi kratke pauze između delova rečenice.",
+          "examples": [
+            {
+              "sentence": "Har du vondt i brystet?",
+              "say": "Har du VONDT i BRYSTET?",
+              "stressed": [
+                "vondt",
+                "brystet"
+              ],
+              "meaning": "Ističu se simptom i mesto bola."
+            },
+            {
+              "sentence": "Jeg skal måle blodtrykket ditt nå.",
+              "say": "Jeg skal MÅLE BLODTRYKKET ditt nå.",
+              "stressed": [
+                "måle",
+                "blodtrykket"
+              ],
+              "meaning": "Ističe se postupak."
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "code": "P-01",
+          "title": "Lang eller kort vokal?",
+          "type": "choose",
+          "xp": 1,
+          "requireCorrect": true,
+          "instruction": "Poslušaj reč i odredi da li čuješ dug ili kratak samoglasnik.",
+          "okMsg": "Tačno!",
+          "wrongMsg": "Poslušaj još jednom i pokušaj ponovo.",
+          "items": [
+            {
+              "say": "lege",
+              "options": [
+                "Lang vokal",
+                "Kort vokal"
+              ],
+              "answer": "Lang vokal"
+            },
+            {
+              "say": "legge",
+              "options": [
+                "Lang vokal",
+                "Kort vokal"
+              ],
+              "answer": "Kort vokal"
+            },
+            {
+              "say": "vet",
+              "options": [
+                "Lang vokal",
+                "Kort vokal"
+              ],
+              "answer": "Lang vokal"
+            },
+            {
+              "say": "takk",
+              "options": [
+                "Lang vokal",
+                "Kort vokal"
+              ],
+              "answer": "Kort vokal"
+            },
+            {
+              "say": "vise",
+              "options": [
+                "Lang vokal",
+                "Kort vokal"
+              ],
+              "answer": "Lang vokal"
+            }
+          ]
+        },
+        {
+          "code": "P-02",
+          "title": "Hvilket ord hører du?",
+          "type": "choose",
+          "xp": 1,
+          "requireCorrect": true,
+          "instruction": "Poslušaj i izaberi reč koju čuješ.",
+          "okMsg": "Tačno!",
+          "wrongMsg": "Poslušaj još jednom i pokušaj ponovo.",
+          "items": [
+            {
+              "say": "lege",
+              "options": [
+                "lege",
+                "legge"
+              ],
+              "answer": "lege"
+            },
+            {
+              "say": "vett",
+              "options": [
+                "vet",
+                "vett"
+              ],
+              "answer": "vett"
+            },
+            {
+              "say": "takk",
+              "options": [
+                "tak",
+                "takk"
+              ],
+              "answer": "takk"
+            },
+            {
+              "say": "visse",
+              "options": [
+                "vise",
+                "visse"
+              ],
+              "answer": "visse"
+            },
+            {
+              "say": "skyte",
+              "options": [
+                "skyte",
+                "skytte"
+              ],
+              "answer": "skyte"
+            }
+          ]
+        },
+        {
+          "code": "P-03",
+          "title": "Lytt, gjenta og ta opp",
+          "type": "record",
+          "xp": 1,
+          "compareOnly": false,
+          "checklist": [
+            "Razumljivost",
+            "Dužina ciljanog vokala",
+            "Jasnoća cele rečenice"
+          ],
+          "instruction": "Poslušaj rečenicu, ponovi je i snimi. Pazi na istaknutu reč.",
+          "items": [
+            {
+              "say": "Legen kommer snart.",
+              "focus": "Legen"
+            },
+            {
+              "say": "Takk for at du venter.",
+              "focus": "Takk"
+            },
+            {
+              "say": "Jeg vet hvor det gjør vondt.",
+              "focus": "vet"
+            }
+          ]
+        },
+        {
+          "code": "P-04",
+          "title": "Hvor ligger trykket?",
+          "type": "choose",
+          "xp": 1,
+          "requireCorrect": true,
+          "instruction": "Poslušaj reč i izaberi naglašeni slog.",
+          "okMsg": "Tačno!",
+          "wrongMsg": "Poslušaj još jednom i pokušaj ponovo.",
+          "items": [
+            {
+              "say": "pasient",
+              "options": [
+                "PA-si-ent",
+                "pa-si-ENT"
+              ],
+              "answer": "pa-si-ENT"
+            },
+            {
+              "say": "sykepleier",
+              "options": [
+                "SY-ke-plei-er",
+                "sy-ke-PLEI-er"
+              ],
+              "answer": "SY-ke-plei-er"
+            },
+            {
+              "say": "medisin",
+              "options": [
+                "ME-di-sin",
+                "me-di-SIN"
+              ],
+              "answer": "me-di-SIN"
+            },
+            {
+              "say": "blodtrykk",
+              "options": [
+                "BLOD-trykk",
+                "blod-TRYKK"
+              ],
+              "answer": "BLOD-trykk"
+            },
+            {
+              "say": "temperatur",
+              "options": [
+                "TEM-pe-ra-tur",
+                "tem-pe-ra-TUR"
+              ],
+              "answer": "tem-pe-ra-TUR"
+            }
+          ]
+        },
+        {
+          "code": "P-05",
+          "title": "Fagord",
+          "type": "record",
+          "xp": 1,
+          "compareOnly": false,
+          "checklist": [
+            "Naglasak",
+            "Jasnoća glasova"
+          ],
+          "instruction": "Snimi svaku stručnu reč jasno, sa naglaskom na pravom slogu.",
+          "items": [
+            {
+              "say": "sykepleier"
+            },
+            {
+              "say": "pasient"
+            },
+            {
+              "say": "smertestillende"
+            },
+            {
+              "say": "blodtrykk"
+            },
+            {
+              "say": "innleggelse"
+            }
+          ]
+        },
+        {
+          "code": "P-06",
+          "title": "Hva legger personen vekt på?",
+          "type": "choose",
+          "xp": 1,
+          "requireCorrect": true,
+          "instruction": "Poslušaj rečenicu i odredi koja informacija je istaknuta.",
+          "okMsg": "Tačno!",
+          "wrongMsg": "Poslušaj još jednom i pokušaj ponovo.",
+          "items": [
+            {
+              "say": "Har du VONDT i brystet?",
+              "options": [
+                "Simptom (bol)",
+                "Mesto (grudi)"
+              ],
+              "answer": "Simptom (bol)"
+            },
+            {
+              "say": "Har du vondt i BRYSTET?",
+              "options": [
+                "Simptom (bol)",
+                "Mesto (grudi)"
+              ],
+              "answer": "Mesto (grudi)"
+            },
+            {
+              "say": "Du får medisinen KLOKKA ÅTTE.",
+              "options": [
+                "Lek",
+                "Vreme"
+              ],
+              "answer": "Vreme"
+            },
+            {
+              "say": "Du får MEDISINEN klokka åtte.",
+              "options": [
+                "Lek",
+                "Vreme"
+              ],
+              "answer": "Lek"
+            }
+          ]
+        },
+        {
+          "code": "P-07",
+          "title": "Spørsmål til pasienten",
+          "type": "record",
+          "xp": 1,
+          "compareOnly": false,
+          "checklist": [
+            "Razumljivost",
+            "Smiren tempo",
+            "Intonacija pitanja"
+          ],
+          "instruction": "Snimi pitanja kao da ih postavljaš pacijentu: smireno i jasno.",
+          "items": [
+            {
+              "say": "Hvordan har du det i dag?"
+            },
+            {
+              "say": "Kan du vise meg hvor det gjør vondt?"
+            },
+            {
+              "say": "Er du allergisk mot noen medisiner?"
+            },
+            {
+              "say": "Hvor sterke er smertene fra en til ti?"
+            }
+          ]
+        },
+        {
+          "code": "P-08",
+          "title": "Rapport",
+          "type": "record",
+          "xp": 1,
+          "compareOnly": false,
+          "checklist": [
+            "Jasnoća brojeva i vremena",
+            "Tečnost",
+            "Stručni termini"
+          ],
+          "instruction": "Snimi kratke rečenice iz predaje smene.",
+          "items": [
+            {
+              "say": "Pasienten har feber og høyt blodtrykk."
+            },
+            {
+              "say": "Han fikk smertestillende klokka seks."
+            },
+            {
+              "say": "Hun må faste fra midnatt."
+            }
+          ]
+        },
+        {
+          "code": "P-09",
+          "title": "Snakk naturlig!",
+          "type": "record",
+          "xp": 1,
+          "compareOnly": false,
+          "checklist": [
+            "Prirodan ritam",
+            "Naglasak važnih reči",
+            "Razumljivost"
+          ],
+          "instruction": "Ponovi što prirodnije, kao u pravom razgovoru sa pacijentom.",
+          "items": [
+            {
+              "say": "Jeg skal måle blodtrykket ditt nå."
+            },
+            {
+              "say": "Bare si ifra hvis du trenger noe."
+            },
+            {
+              "say": "Legen kommer innom etter lunsj."
+            }
+          ]
+        },
+        {
+          "code": "P-10",
+          "title": "Innkomstsamtale – Final Pronunciation Challenge",
+          "type": "record",
+          "xp": 1,
+          "compareOnly": false,
+          "checklist": [
+            "Stručni termini",
+            "Dužina vokala",
+            "Ritam i pauze"
+          ],
+          "instruction": "Pročitaj ceo tekst naglas i snimi ga. Pazi na stručne reči, dužinu vokala i ritam.",
+          "items": [
+            {
+              "say": "God morgen, jeg heter Nora og er sykepleier her på avdelingen. Jeg skal stille deg noen spørsmål. Har du vondt noe sted? Når begynte smertene? Jeg måler også blodtrykket og temperaturen din.",
+              "sentences": [
+                "God morgen, jeg heter Nora og er sykepleier her på avdelingen.",
+                "Jeg skal stille deg noen spørsmål.",
+                "Har du vondt noe sted?",
+                "Når begynte smertene?",
+                "Jeg måler også blodtrykket og temperaturen din."
+              ],
+              "showText": true
+            }
+          ],
+          "maxMs": 30000,
+          "tip": "Snimi tekst rečenicu po rečenicu uz model, pa ceo tekst bez zaustavljanja."
+        }
+      ]
+    },
+    "speaking": {
+      "tasks": [],
+      "roleswitch": []
+    },
+    "culture": {
+      "title": "Arbeidskultur i norsk helsevesen",
+      "body": "Kako izgleda saradnja u norveškoj bolnici i šta se očekuje od zdravstvenog radnika.",
+      "topics": [
+        {
+          "title": "Flat struktur og «du»",
+          "image": "hc:t3",
+          "text": "I norske sykehus sier nesten alle «du» til hverandre – også til legen og avdelingslederen. Hierarkiet er flatt, og alle forventes å si fra hvis de ser et problem.",
+          "comparison": "U Srbiji je hijerarhija u bolnici često izraženija i lekarima se obraća sa «vi» i titulom.",
+          "fact": "Mange avdelinger har faste tavlemøter hvor alle yrkesgrupper deltar likt.",
+          "keywords": [
+            {
+              "term": "flat struktur",
+              "meaning": "ravna hijerarhija"
+            },
+            {
+              "term": "å si du",
+              "meaning": "persiranje na „ti“"
+            },
+            {
+              "term": "kollega",
+              "meaning": "kolega"
+            }
+          ]
+        },
+        {
+          "title": "Pasientens medvirkning",
+          "image": "hc:rd1",
+          "text": "Pasienten skal være med på å bestemme. Sykepleieren forklarer, spør og respekterer pasientens valg – også når pasienten sier nei.",
+          "comparison": "U Norveškoj se veći naglasak stavlja na saglasnost i informisanost pacijenta.",
+          "fact": "Pasient- og brukerrettighetsloven gir alle rett til informasjon og tolk.",
+          "keywords": [
+            {
+              "term": "brukermedvirkning",
+              "meaning": "učešće pacijenta"
+            },
+            {
+              "term": "samtykke",
+              "meaning": "pristanak"
+            },
+            {
+              "term": "pasientrettigheter",
+              "meaning": "prava pacijenta"
+            }
+          ]
+        },
+        {
+          "title": "Taushetsplikt",
+          "image": "hc:wr1",
+          "text": "Helsepersonell har streng taushetsplikt. Man snakker ikke om pasienter i heisen, i kantina eller på sosiale medier.",
+          "comparison": "Pravila su slična, ali se u Norveškoj kršenje shvata veoma ozbiljno i može dovesti do gubitka licence.",
+          "fact": "Også pårørende får bare informasjon med pasientens samtykke.",
+          "keywords": [
+            {
+              "term": "taushetsplikt",
+              "meaning": "obaveza čuvanja tajne"
+            },
+            {
+              "term": "personvern",
+              "meaning": "zaštita privatnosti"
+            },
+            {
+              "term": "pårørende",
+              "meaning": "bliski srodnici"
+            }
+          ]
+        }
+      ]
+    },
+    "review": {
+      "quiz": {
+        "passScore": 8,
+        "bonusXp": 50,
+        "questions": [
+          {
+            "area": "grammar",
+            "prompt": "Kan du si hvor ___?",
+            "options": [
+              "det gjør vondt",
+              "gjør det vondt",
+              "vondt gjør det",
+              "gjør vondt det"
+            ],
+            "answer": "det gjør vondt",
+            "explain": "Indirektno pitanje: subjekat pre glagola."
+          },
+          {
+            "area": "grammar",
+            "prompt": "Jeg lurer på ___ du har sovet godt.",
+            "options": [
+              "om",
+              "hvis",
+              "at",
+              "når"
+            ],
+            "answer": "om",
+            "explain": "Za da/ne pitanja koristi se «om»."
+          },
+          {
+            "area": "grammar",
+            "prompt": "Han sier at han ___ penicillin.",
+            "options": [
+              "ikke tåler",
+              "tåler ikke",
+              "tåler",
+              "ikke tålte ikke"
+            ],
+            "answer": "ikke tåler",
+            "explain": "U zavisnoj rečenici «ikke» ide pre glagola."
+          },
+          {
+            "area": "grammar",
+            "prompt": "___ du brette opp ermet?",
+            "options": [
+              "Kunne",
+              "Burde",
+              "Må",
+              "Skal"
+            ],
+            "answer": "Kunne",
+            "explain": "Kunne du…? je ljubazna molba."
+          },
+          {
+            "area": "vocabulary",
+            "prompt": "«Mučno mi je» =",
+            "options": [
+              "Jeg er kvalm",
+              "Jeg er svimmel",
+              "Jeg er hoven",
+              "Jeg er tungpustet"
+            ],
+            "answer": "Jeg er kvalm",
+            "explain": "kvalm = mučnina."
+          },
+          {
+            "area": "vocabulary",
+            "prompt": "«stalni lekovi» =",
+            "options": [
+              "faste medisiner",
+              "smertestillende",
+              "bivirkninger",
+              "prøvesvar"
+            ],
+            "answer": "faste medisiner",
+            "explain": "faste = stalni."
+          },
+          {
+            "area": "vocabulary",
+            "prompt": "Familie og nære venner av pasienten =",
+            "options": [
+              "pårørende",
+              "kolleger",
+              "helsepersonell",
+              "tolker"
+            ],
+            "answer": "pårørende",
+            "explain": "pårørende = bližnji."
+          },
+          {
+            "area": "vocabulary",
+            "prompt": "Hva betyr «taushetsplikt»?",
+            "options": [
+              "obaveza čuvanja tajne",
+              "smena",
+              "otpust",
+              "pregled"
+            ],
+            "answer": "obaveza čuvanja tajne",
+            "explain": "Ne smeš deliti podatke o pacijentu."
+          },
+          {
+            "area": "reading",
+            "prompt": "Når får pårørende informasjon?",
+            "options": [
+              "Når pasienten sier ja",
+              "Alltid",
+              "Aldri",
+              "Bare om natta"
+            ],
+            "answer": "Når pasienten sier ja",
+            "explain": "Potrebna je saglasnost pacijenta."
+          },
+          {
+            "area": "culture",
+            "prompt": "Hvordan snakker man vanligvis til legen i Norge?",
+            "options": [
+              "Man sier «du»",
+              "Man sier «De» og tittel",
+              "Man sier bare etternavn",
+              "Man snakker ikke til legen"
+            ],
+            "answer": "Man sier «du»",
+            "explain": "Norveška ima ravnu strukturu."
+          }
+        ]
+      }
+    }
+  }
+}

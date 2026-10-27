@@ -1,6 +1,6 @@
 import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
 import { useProfile } from "@/context/ProfileContext";
 import { useAuth } from "@/context/AuthContext";
@@ -11,6 +11,8 @@ import { UserProfile } from "@/types/profile";
 import { ChevronRight, ChevronLeft, User, Target, MessageSquare, BookOpen, Gauge, Globe } from "lucide-react";
 import BackButton from "@/components/BackButton";
 import JourneyStepper from "@/components/onboarding/JourneyStepper";
+import { courseIntent } from "@/lib/courseAccess";
+import { useToast } from "@/hooks/use-toast";
 
 type LangCode = "no" | "en" | "de";
 
@@ -185,16 +187,20 @@ export default function OnboardingPage() {
   const { updateProfile, profile } = useProfile();
   const { user } = useAuth();
   const queryClient = useQueryClient();
+  const [params] = useSearchParams();
+  const { toast } = useToast();
+  const [saving, setSaving] = useState(false);
 
   // Resolve the language being onboarded from the selection made earlier in the journey.
-  const selectedLang = (typeof window !== "undefined" && localStorage.getItem("norskly_selected_language")) || "norveski";
+  const selectedLang = params.get("lang") || (typeof window !== "undefined" && localStorage.getItem("norskly_selected_language")) || "norveski";
   const langCode: LangCode = SLUG_TO_CODE[selectedLang] || "no";
+  const chosenCourse = courseIntent(params.get("course"), langCode);
   const t = COPY[langCode];
 
   const [step, setStep] = useState(0);
   const [form, setForm] = useState<Partial<UserProfile> & { life_context?: string }>({
     name: profile.name || "",
-    level: profile.level || "A1",
+    level: chosenCourse === "health" ? "B1" : profile.level || "A1",
     learning_goal: t.goals[0],
     preferred_tone: t.tones[0],
     focus_area: t.focuses[0],
@@ -208,19 +214,12 @@ export default function OnboardingPage() {
   const next = async () => {
     if (step < steps.length - 1) setStep(step + 1);
     else {
-      updateProfile({
-        name: form.name,
-        level: form.level,
-        learning_goal: form.learning_goal,
-        preferred_tone: form.preferred_tone,
-        focus_area: form.focus_area,
-        confidence_level: form.confidence_level,
-        lives_in_norway: form.lives_in_norway,
-      });
-      localStorage.setItem("norskly_onboarding_done", "true");
+      if (!user || saving) return;
+      setSaving(true);
+      try {
       const selectedPlan = localStorage.getItem("norskly_selected_plan");
       if (user) {
-        await supabase
+        const { error: profileError } = await supabase
           .from("profiles")
           .upsert({
             user_id: user.id,
@@ -228,12 +227,15 @@ export default function OnboardingPage() {
             preferred_language: selectedLang,
             ...(selectedPlan ? { subscription_type: selectedPlan } : {}),
           }, { onConflict: "user_id" });
-
-        await supabase
+        if (profileError) throw profileError;
+        const { data: existing, error: enrollmentError } = await supabase.from("language_profiles").select("course_type").eq("user_id", user.id).eq("language", langCode).maybeSingle();
+        if (enrollmentError) throw enrollmentError;
+        const { error: languageError } = await supabase
           .from("language_profiles")
           .upsert({
             user_id: user.id,
             language: langCode,
+            course_type: existing?.course_type || chosenCourse,
             level: form.level || "A1",
             learning_goal: form.learning_goal || "",
             focus_area: form.focus_area || "",
@@ -244,12 +246,19 @@ export default function OnboardingPage() {
             subscription_type: selectedPlan,
             onboarding_completed: true,
           }, { onConflict: "user_id,language" });
-
+        if (languageError) throw languageError;
+        updateProfile({ ...form, life_context: form.life_context || "" });
+        localStorage.setItem("norskly_selected_language", selectedLang);
+        localStorage.setItem("norskly_onboarding_done", "true");
+        await queryClient.invalidateQueries({ queryKey: ["course-enrollment"] });
         await queryClient.invalidateQueries({ queryKey: ["onboarding-status"] });
       }
       const target = `/ucenje/${selectedLang}`;
       const qs = selectedPlan ? `?plan=${selectedPlan}` : "";
       navigate(`${target}${qs}`);
+      } catch {
+        toast({ title: "Profil nije sačuvan", description: "Pokušaj ponovo. Upisani kurs ostaje nepromenjen.", variant: "destructive" });
+      } finally { setSaving(false); }
     }
   };
   const prev = () => step > 0 && setStep(step - 1);
@@ -329,9 +338,10 @@ export default function OnboardingPage() {
                 <div>
                   <h2 className="text-2xl font-display font-bold text-foreground mb-2">{t.levelTitle}</h2>
                   <p className="text-muted-foreground mb-6">{t.levelDesc}</p>
+                  {chosenCourse === "health" && <p className="text-sm text-primary mb-4">U promotivnom periodu aktivan je B1; ostali nivoi su u pripremi.</p>}
                   <div className="flex flex-wrap gap-3">
                     {(["A1", "A2", "B1", "B2", "C1"] as const).map((l) => (
-                      <OptionCard key={l} label={l} selected={form.level === l} onClick={() => setForm({ ...form, level: l })} />
+                      <Button key={l} variant={form.level === l ? "default" : "outline"} disabled={chosenCourse === "health" && l !== "B1"} onClick={() => setForm({ ...form, level: l })}>{l}{chosenCourse === "health" && l !== "B1" ? " · U pripremi" : ""}</Button>
                     ))}
                   </div>
                 </div>
@@ -422,15 +432,15 @@ export default function OnboardingPage() {
           </AnimatePresence>
 
           <div className="flex items-center justify-between mt-10">
-            <Button variant="ghost" onClick={prev} disabled={step === 0}>
+            <Button variant="ghost" onClick={prev} disabled={step === 0 || saving}>
               <ChevronLeft className="w-4 h-4 mr-1" /> {t.back}
             </Button>
             <Button
               variant="hero"
               onClick={next}
-              disabled={(step === 0 && !form.name?.trim()) || lastStepDisabled}
+              disabled={saving || (step === 0 && !form.name?.trim()) || lastStepDisabled}
             >
-              {step === steps.length - 1 ? t.finish : t.next} <ChevronRight className="w-4 h-4 ml-1" />
+              {saving ? "Čuvanje…" : step === steps.length - 1 ? t.finish : t.next} <ChevronRight className="w-4 h-4 ml-1" />
             </Button>
           </div>
         </div>

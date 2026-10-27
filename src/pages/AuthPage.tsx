@@ -45,7 +45,10 @@ export default function AuthPage() {
       .eq("language", code)
       .maybeSingle();
     if (!langProf?.onboarding_completed) {
-      navigate(`/onboarding?lang=${lang}`);
+      const { data: authData } = await supabase.auth.getUser();
+      const savedIntent = authData.user?.user_metadata;
+      const intendedCourse = searchParams.get("course") || (savedIntent?.signup_language === lang ? savedIntent?.signup_course : "general");
+      navigate(`/onboarding?lang=${lang}&course=${intendedCourse === "health" ? "health" : "general"}`);
       return;
     }
     navigate(`/ucenje/${lang}${plan ? `?plan=${plan}` : ""}`);
@@ -145,7 +148,10 @@ export default function AuthPage() {
         const { data, error } = await supabase.auth.signUp({
           email,
           password,
-          options: { emailRedirectTo: window.location.origin },
+          options: {
+            emailRedirectTo: window.location.origin,
+            data: { signup_language: signupLang, signup_course: searchParams.get("course") === "health" ? "health" : "general" },
+          },
         });
         if (error) throw error;
         // Sačuvaj izabrani jezik na profil novog korisnika
@@ -161,7 +167,7 @@ export default function AuthPage() {
             title: "Dobrodošao 👋",
             description: "Hajde da podesimo tvoj profil za ovaj jezik.",
           });
-          navigate("/onboarding");
+          navigate(`/onboarding?lang=${signupLang}&course=${searchParams.get("course") === "health" ? "health" : "general"}`);
           return;
         }
         toast({

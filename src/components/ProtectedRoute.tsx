@@ -3,6 +3,8 @@ import { useAuth } from "@/context/AuthContext";
 import { useUserRole } from "@/hooks/useUserRole";
 import { useQuery } from "@tanstack/react-query";
 import { getActiveLanguageCode, isLanguageOnboarded } from "@/lib/onboardingStatus";
+import { supabase } from "@/integrations/supabase/client";
+import { codeToSlug } from "@/lib/onboardingStatus";
 
 export function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const { user, loading } = useAuth();
@@ -10,6 +12,17 @@ export function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const location = useLocation();
   const activeLang = getActiveLanguageCode(location.pathname);
   const skipOnboarding = isAdmin || isTeacher;
+  const lessonRef = new URLSearchParams(location.search).get("lesson") || location.pathname.match(/^\/lekcija\/([^/]+)/)?.[1];
+  const { data: lessonAllowed, isLoading: lessonLoading } = useQuery({
+    queryKey: ["lesson-access", user?.id, lessonRef, activeLang],
+    enabled: !!user && !skipOnboarding && !!lessonRef,
+    queryFn: async () => {
+      const field = /^[0-9a-f-]{36}$/i.test(lessonRef || "") ? "id" : "lesson_code";
+      const { data, error } = await supabase.from("course_lessons").select("id,language").eq(field, lessonRef || "").maybeSingle();
+      return !error && !!data && data.language === activeLang;
+    },
+    staleTime: 0,
+  });
 
   const { data: onboardingCompleted, isLoading: onboardingLoading } = useQuery({
     queryKey: ["onboarding-status", user?.id, activeLang],
@@ -18,7 +31,7 @@ export function ProtectedRoute({ children }: { children: React.ReactNode }) {
     staleTime: Infinity,
   });
 
-  if (loading || roleLoading || (!!user && !skipOnboarding && onboardingLoading)) {
+  if (loading || roleLoading || (!!user && !skipOnboarding && (onboardingLoading || (!!lessonRef && lessonLoading)))) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="flex gap-1.5">
@@ -45,8 +58,9 @@ export function ProtectedRoute({ children }: { children: React.ReactNode }) {
   }
 
   if (!onboardingCompleted && location.pathname !== "/onboarding") {
-    return <Navigate to="/onboarding" replace />;
+    return <Navigate to={`/onboarding?lang=${codeToSlug(activeLang)}`} replace />;
   }
+  if (lessonRef && !lessonAllowed) return <Navigate to={`/ucenje/${codeToSlug(activeLang)}`} state={{ courseDenied: true }} replace />;
 
   return <>{children}</>;
 }

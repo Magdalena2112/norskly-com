@@ -450,6 +450,7 @@ export type Database = {
       language_profiles: {
         Row: {
           confidence_level: number | null
+          course_type: string
           created_at: string
           focus_area: string | null
           id: string
@@ -466,6 +467,7 @@ export type Database = {
         }
         Insert: {
           confidence_level?: number | null
+          course_type?: string
           created_at?: string
           focus_area?: string | null
           id?: string
@@ -482,6 +484,7 @@ export type Database = {
         }
         Update: {
           confidence_level?: number | null
+          course_type?: string
           created_at?: string
           focus_area?: string | null
           id?: string
@@ -1693,6 +1696,10 @@ export type Database = {
           p_teacher_id: string
         }
         Returns: string
+      }
+      can_access_course: {
+        Args: { _course: string; _language: string }
+        Returns: boolean
       }
       claim_teacher_account: { Args: never; Returns: boolean }
       complete_medical_vocabulary: {

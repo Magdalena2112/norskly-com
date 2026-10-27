@@ -87,17 +87,25 @@ export default function CourseLessonPage() {
 
   useEffect(() => {
     if (!lessonId) return;
+    setRow(null); setContent(null); setDone([]); setNotFound(false);
+    let alive = true;
     (async () => {
+      try {
       const { data } = await supabase.from("course_lessons").select("*").eq("id", lessonId).maybeSingle();
-      if (!data) { setNotFound(true); return; }
+      if (!alive) return;
+      if (!data) { navigate("/practice", { replace: true, state: { courseDenied: true } }); return; }
+      const loaded = await loadLessonContent(data as any);
+      if (!alive) return;
       setRow(data);
-      setContent(await loadLessonContent(data as any));
+      setContent(loaded);
       if (user) {
         const { data: p } = await supabase.from("course_lesson_progress").select("completed_steps").eq("user_id", user.id).eq("lesson_id", lessonId).maybeSingle();
-        if (p && Array.isArray(p.completed_steps)) setDone(p.completed_steps as string[]);
+        if (alive && p && Array.isArray(p.completed_steps)) setDone(p.completed_steps as string[]);
       }
+      } catch { if (alive) setNotFound(true); }
     })();
-  }, [lessonId, user]);
+    return () => { alive = false; };
+  }, [lessonId, user, navigate]);
 
   const exercises = useMemo(() => content ? [
     ...allExercises(content),

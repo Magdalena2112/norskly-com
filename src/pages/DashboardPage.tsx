@@ -7,7 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { BookOpen, Languages, MessageSquare, GraduationCap, CalendarCheck, PenLine, BookOpenText, Headphones, Mic, Lock } from "lucide-react";
 import { computeLevelStates, normalizeLevel, LEVEL_UNLOCK_THRESHOLD, type CefrLevel, type LevelState } from "@/lib/levels";
 import XpProgressCard from "@/components/XpProgressCard";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import WeeklyDigest from "@/components/WeeklyDigest";
 import TeacherWorkWidget from "@/components/student/TeacherWorkWidget";
@@ -18,6 +18,7 @@ import FjordHero from "@/components/student/FjordHero";
 import PostcardVignette from "@/components/student/PostcardVignette";
 import { useSelectedLanguage } from "@/hooks/useSelectedLanguage";
 import { getLanguageBySlug, getLanguageByCode, type LanguageSlug } from "@/lib/languages";
+import { useCourseEnrollment } from "@/hooks/useCourseEnrollment";
 
 type ModuleDef = {
   title: string;
@@ -38,6 +39,7 @@ export default function DashboardPage() {
   const { profile, loading: profileLoading } = useProfile();
   const { user } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   const { slug: routeSlug } = useParams<{ slug: string }>();
   const { slug: storedSlug, code, setLanguage } = useSelectedLanguage();
 
@@ -74,7 +76,7 @@ export default function DashboardPage() {
   const [upcomingLesson, setUpcomingLesson] = useState<{ start_time: string; end_time: string; status: string } | null>(null);
   const [lessonLoaded, setLessonLoaded] = useState(false);
   const [courseLessons, setCourseLessons] = useState<{ id: string; sort_order: number; cefr_level: string; title_target: string; summary: string; course: string }[]>([]);
-  const [course, setCourse] = useState<"general" | "health">(() => (localStorage.getItem("norskly_selected_course") === "health" ? "health" : "general"));
+  const { data: course, isLoading: enrollmentLoading } = useCourseEnrollment(code);
   const [lessonProgress, setLessonProgress] = useState<Record<string, string>>({});
   const [lessonsLoaded, setLessonsLoaded] = useState(false);
 
@@ -84,23 +86,25 @@ export default function DashboardPage() {
   useEffect(() => { setSelectedLevel(startLevel); setLockedMsg(null); }, [startLevel, code]);
 
   useEffect(() => {
-    if (!user) return;
+    setCourseLessons([]); setLessonsLoaded(false);
+    if (!user || !course) return;
+    let alive = true;
     (async () => {
       const [{ data: ls }, { data: pr }] = await Promise.all([
-        supabase.from("course_lessons").select("id, sort_order, cefr_level, title_target, summary, course").eq("language", code).eq("is_published", true).order("sort_order"),
+        supabase.from("course_lessons").select("id, sort_order, cefr_level, title_target, summary, course").eq("language", code).eq("course", course).eq("is_published", true).order("sort_order"),
         supabase.from("course_lesson_progress").select("lesson_id, status").eq("user_id", user.id).eq("language", code),
       ]);
+      if (!alive) return;
       setCourseLessons(ls || []);
       setLessonProgress(Object.fromEntries((pr || []).map((p) => [p.lesson_id, p.status])));
       setLessonsLoaded(true);
     })();
-  }, [user, code]);
+    return () => { alive = false; };
+  }, [user, code, course]);
 
   const generalLessons = useMemo(() => courseLessons.filter((l) => (l.course || "general") === "general"), [courseLessons]);
   const healthLessons = useMemo(() => courseLessons.filter((l) => l.course === "health"), [courseLessons]);
-  const hasHealth = healthLessons.length > 0;
-  const activeCourse = hasHealth ? course : "general";
-  const pickCourse = (c: "general" | "health") => { setCourse(c); localStorage.setItem("norskly_selected_course", c); setLockedMsg(null); };
+  const activeCourse = course;
   const levelStates = useMemo(() => computeLevelStates(startLevel, generalLessons, lessonProgress), [startLevel, generalLessons, lessonProgress]);
   const visibleLessons = activeCourse === "health" ? healthLessons : generalLessons.filter((l) => l.cefr_level === selectedLevel);
 
@@ -131,7 +135,7 @@ export default function DashboardPage() {
     })();
   }, [user, code]);
 
-  if (profileLoading) {
+  if (profileLoading || enrollmentLoading) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary" />
@@ -185,6 +189,7 @@ export default function DashboardPage() {
         )}
 
         <WeeklyDigest />
+        {location.state?.courseDenied && <p role="alert" className="my-4 text-sm text-destructive">Ova lekcija nije deo kursa na koji si upisan/a.</p>}
 
         <TeacherWorkWidget language={code} />
 
@@ -198,16 +203,7 @@ export default function DashboardPage() {
           <span className="h-px flex-1 bg-border" />
         </div>
 
-        {hasHealth && (
-          <div className="flex gap-2 overflow-x-auto pb-2 mb-3 -mx-1 px-1">
-            {([["general", "Opšti kurs"], ["health", "Za zdravstvene radnike · B1"]] as const).map(([k, label]) => (
-              <button key={k} onClick={() => pickCourse(k)}
-                className={`shrink-0 rounded-2xl border px-4 py-2 text-sm font-semibold transition-colors ${activeCourse === k ? "bg-primary text-primary-foreground border-primary" : "bg-cream text-primary border-border hover:border-primary/50"}`}>
-                {label}
-              </button>
-            ))}
-          </div>
-        )}
+        {activeCourse === "health" && <h2 className="font-display text-xl text-primary mb-4">Za zdravstvene radnike · B1</h2>}
 
         {activeCourse === "general" && <div className="flex gap-2 overflow-x-auto pb-2 mb-4 -mx-1 px-1">
           {levelStates.map((s, i) => {

@@ -39,7 +39,7 @@ import {
   Volume2,
 } from "lucide-react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { getTalkScenarios, getLessonMaterial, type TalkScenario } from "@/content/lessons/talkScenarios";
+import type { TalkScenario } from "@/content/lessons/talkScenarios";
 import BackButton from "@/components/BackButton";
 import ReactMarkdown from "react-markdown";
 import { logActivity } from "@/lib/logActivity";
@@ -270,7 +270,18 @@ export default function PracticePage() {
   const [role, setRole] = useState("sagovornik");
   const [searchParams] = useSearchParams();
   const lessonCode = searchParams.get("lesson");
-  const lessonScenarios = getTalkScenarios(lessonCode);
+  const [lessonScenarios, setLessonScenarios] = useState<TalkScenario[]>([]);
+  const [lessonMaterial, setLessonMaterial] = useState<string | undefined>();
+  useEffect(() => {
+    let alive = true;
+    setLessonScenarios([]); setLessonMaterial(undefined); setScenario(null);
+    if (lessonCode) void supabase.functions.invoke("course-content", { body: { lesson_code: lessonCode } }).then(({ data, error }) => {
+      if (!alive) return;
+      if (error) { navigate("/practice", { replace: true }); return; }
+      setLessonScenarios(data?.scenarios || []); setLessonMaterial(data?.material);
+    });
+    return () => { alive = false; };
+  }, [lessonCode, user?.id, navigate]);
   const [scenario, setScenario] = useState<TalkScenario | null>(null);
   const [scenarioPicked, setScenarioPicked] = useState(false);
   const doneKey = `talk_lesson_done_${langCode}_${lessonCode}`;
@@ -545,7 +556,7 @@ export default function PracticePage() {
             situation: situationPresets.find((s) => s.value === situation)?.label,
             formality: formalityOptions.find((f) => f.value === formality)?.label,
             role: scenario ? scenario.aiRole : roleOptions.find((r) => r.value === role)?.label,
-            ...(scenario ? { situation: scenario.title, formality: undefined, scenario: { title: scenario.title, ai_role: scenario.aiRole, student_role: scenario.studentRole, goals: scenario.goals, instructions: scenario.instructions, lesson_material: getLessonMaterial(lessonCode) } } : {}),
+            ...(scenario ? { situation: scenario.title, formality: undefined, scenario: { title: scenario.title, ai_role: scenario.aiRole, student_role: scenario.studentRole, goals: scenario.goals, instructions: scenario.instructions, lesson_material: lessonMaterial } } : {}),
           },
         }),
       });
