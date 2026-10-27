@@ -92,7 +92,7 @@ let session = 0;
 let currentAudio: HTMLAudioElement | null = null;
 
 // On-demand natural TTS (server-side, cached in storage) for lines without a pre-recorded clip.
-const MALE_SPEAKERS = new Set(["oliver", "tom", "jack", "mr brown", "ben", "dan", "leo", "max", "sam", "liam", "jonas", "markus", "erik", "ola", "lars", "ahmed", "programleder", "arne", "per", "herr schmidt", "dr. weber", "henrik"]);
+const MALE_SPEAKERS = new Set(["oliver", "tom", "jack", "mr brown", "ben", "dan", "leo", "max", "sam", "liam", "jonas", "markus", "erik", "ola", "lars", "ahmed", "programleder", "arne", "per", "herr schmidt", "dr. weber", "henrik", "lukas", "felix", "moderator", "mitarbeiter", "patient", "paul", "max", "tobias"]);
 const ttsCache = new Map<string, Promise<string | null>>();
 
 function naturalClip(line: DialogueLine, lang: string): Promise<string | null> {

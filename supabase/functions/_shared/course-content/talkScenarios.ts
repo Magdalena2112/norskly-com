@@ -151,6 +151,40 @@ export const TALK_SCENARIOS: Record<string, TalkScenario[]> = {
       instructions: "Play Jonas planning Saturday in Oslo with the learner. Speak only Norwegian Bokmål at A2 level. You are busy in the morning but free later; suggest places in Oslo (Frognerparken, Aker Brygge, a café on Grünerløkka). Encourage suggestions, questions, inversion and frequency adverbs. One question per turn, about 8–10 exchanges.",
     },
   ],
+  "DE-A2-L01": [
+    {
+      id: "S-01", voice: "f", title: "Erzähl von deinem Tag",
+      description: "Piješ kafu sa novom prijateljicom u Berlinu i pričaš o svom tipičnom radnom danu.",
+      aiRole: "Mia, nova prijateljica na kafi", studentRole: "Učenik opisuje svoj uobičajeni dan",
+      opening: "Hallo! Schön, dich zu treffen! Erzähl mal, wie sieht ein normaler Tag bei dir aus?",
+      goals: ["Opiši jutarnju rutinu (aufstehen, frühstücken)", "Reci šta radiš na poslu ili u školi", "Počni bar jednu rečenicu vremenom (Heute…, Am Morgen…)", "Upotrebi bar dva odvojiva glagola (aufstehen, anfangen, einkaufen)"],
+      instructions: "Play Mia, a friendly new friend having coffee with the learner in Berlin (Prenzlauer Berg). Speak only German at A2 level, use 'du'. Ask about their typical weekday: morning routine, work or school, free time. Ask one question per turn and react to what the learner says. Encourage Präsens, V2 word order with inversion and separable verbs (aufstehen, anfangen, einkaufen). Rephrase simply if the learner doesn't understand. About 6–8 exchanges.",
+    },
+    {
+      id: "S-02", voice: "m", title: "Wir teilen die Hausarbeit",
+      description: "Deliš stan (WG) u Berlinu sa Lukasom i dogovarate ko će koji kućni posao raditi.",
+      aiRole: "Lukas, cimer u zajedničkom stanu", studentRole: "Učenik dogovara raspodelu kućnih poslova",
+      opening: "Hey! Am Wochenende haben wir ziemlich viel zu tun. Ich kann kochen, aber wir müssen auch die Wohnung aufräumen. Was möchtest du machen?",
+      goals: ["Predloži koji posao možeš da uradiš (Ich kann…)", "Reci šta mora da se uradi (Wir müssen…)", "Upotrebi nicht bar jednom", "Koristi odvojive glagole (aufräumen, einkaufen, rausbringen)"],
+      instructions: "Play Lukas, the learner's flatmate in a Berlin WG. Speak only German at A2 level, use 'du'. You both have a busy weekend and must divide chores (staubsaugen, abwaschen, Wäsche waschen, den Müll rausbringen, einkaufen, aufräumen). Have your own obligations (e.g. Am Samstag arbeite ich nicht, aber am Sonntag trainiere ich). Encourage können/müssen with infinitive at the end, separable verbs and nicht. One question per turn, about 6–8 exchanges.",
+    },
+    {
+      id: "S-03", voice: "f", title: "Was machst du gerade so?",
+      description: "Nailaziš na staru prijateljicu Lenu i pričate o navikama i promenama u životu.",
+      aiRole: "Lena, stara prijateljica koju dugo nisi video/la", studentRole: "Učenik priča o navikama i trenutnim promenama",
+      opening: "Hallo! Lange nicht gesehen! Wie geht's dir? Machst du gerade etwas Neues?",
+      goals: ["Opiši svakodnevne navike", "Reci šta se sada menja (gerade, im Moment, zurzeit)", "Postavi bar jedno pitanje upitnom reči (Wo…? Wann…?)", "Koristi vokabular promena (umziehen, eine neue Stelle anfangen, etwas Neues ausprobieren)"],
+      instructions: "Play Lena, an old friend catching up with the learner in Berlin. Speak only German at A2 level, use 'du'. Talk about usual habits and what is changing now (new job, moving, new hobby). Encourage Präsens with stem-vowel changes, inversion after time expressions, correct question word order and separable verbs. One question per turn, react naturally, about 6–8 exchanges.",
+    },
+    {
+      id: "S-04", voice: "m", title: "Pläne fürs Wochenende",
+      description: "Sa Lukasom planiraš subotu u Berlinu, ali oboje imate obaveze — nađite zajednički termin i aktivnost.",
+      aiRole: "Lukas, prijatelj koji planira subotu", studentRole: "Učenik predlaže aktivnosti i dogovara termin",
+      opening: "Hey! Wollen wir am Samstag etwas zusammen machen? Vormittags arbeite ich, aber später habe ich vielleicht Zeit. Worauf hast du Lust?",
+      goals: ["Predloži aktivnost", "Pitaj kada je slobodan (Wann…?)", "Reci kada si slobodan/na uz inverziju (Am Samstag kann ich…)", "Upotrebi mitkommen ili abholen i postigni dogovor"],
+      instructions: "Play Lukas planning Saturday in Berlin with the learner. Speak only German at A2 level, use 'du'. You are busy in the morning but free later; suggest places in Berlin (Mauerpark, Tempelhofer Feld, a café in Kreuzberg, the Spree). Encourage suggestions, questions, inversion and separable verbs (mitkommen, abholen, anrufen). One question per turn, about 8–10 exchanges.",
+    },
+  ],
   "NO-HC-B1-L01": [
     { id: "S-01", voice: "m", title: "Innkomstsamtale", description: "Primaš starijeg pacijenta sa bolom u grudima i vodiš prijemni razgovor.", aiRole: "Per Hansen (72), pasient med brystsmerter", studentRole: "Sykepleier koji vodi prijemni razgovor",
       opening: "Hei… unnskyld, jeg har så vondt i brystet. Jeg vet ikke helt hva som skjer.", goals: ["Predstavi se i umiri pacijenta", "Pitaj gde boli, od kada i koliko jako (0–10)", "Pitaj o lekovima i alergijama", "Upotrebi bar jedno indirektno pitanje (Kan du fortelle meg…)"],
@@ -185,6 +219,9 @@ Frequency adverbs: always, usually, often, sometimes, never.`,
   "NO-A2-L01": `Course level A2 (Norwegian Bokmål), Lesson 1. Characters: Nora, Jonas, Ingrid, Anne; city: Oslo.
 Grammar: V2 rule (finite verb in second position); inversion after time/place expressions (I dag jobber Nora hjemme); placement of ikke (Nora jobber ikke; I dag jobber hun ikke); question word order (Bor du i Oslo? Hvor jobber Ingrid? Hvorfor sykler du ikke?); frequency adverbs alltid, vanligvis, ofte, av og til / noen ganger, sjelden, aldri.
 Vocabulary: daily routine (våkne, stå opp, spise frokost, ta bussen, begynne på jobb, ta en pause, slutte på jobb, legge seg); chores (rydde, vaske klær, ta oppvasken, handle matvarer, lage middag, støvsuge, gå ut med søpla); changes (flytte til et nytt sted, begynne i ny jobb, lete etter en ny leilighet, venne seg til noe, prøve noe nytt, få nye venner, ta en beslutning).`,
+  "DE-A2-L01": `Course level A2 (German), Lesson 1: Ein neuer Alltag. Characters: Lena, Lukas, Mia, Frau Weber (teacher); city: Berlin (Prenzlauer Berg, Kreuzberg, Volkshochschule).
+Grammar: Präsens (regular endings -e/-st/-t/-en/-t/-en, arbeiten → du arbeitest; stem-vowel change fahren/fährt, schlafen/schläft, nehmen/nimmt, treffen/trifft, lesen/liest; sein, haben); V2 rule and inversion after time/place expressions (Heute arbeitet Lena zu Hause); separable verbs with prefix at the end (Ich stehe um sieben Uhr auf; Der Kurs fängt um 18 Uhr an), in questions (Kommst du mit? Wann rufst du an?), with nicht (Ich kaufe heute nicht ein) and with modal verbs (Ich muss früh aufstehen).
+Vocabulary: daily routine (aufwachen, aufstehen, frühstücken, den Bus nehmen, mit der Arbeit anfangen, eine Pause machen, Feierabend machen, ins Bett gehen); chores (aufräumen, Wäsche waschen, abwaschen, Lebensmittel einkaufen, Abendessen kochen, staubsaugen, den Müll rausbringen); changes (umziehen, eine neue Stelle anfangen, eine neue Wohnung suchen, sich an etwas gewöhnen, sich einleben, etwas Neues ausprobieren, neue Freunde finden, eine Entscheidung treffen).`,
   "NO-HC-B1-L01": `Health-care course B1 (Norwegian Bokmål), Lesson 1: admission interview and medical history. Characters: Nora (nurse), Jonas (doctor), Ingrid, Anne; Ullevål sykehus, Oslo.
 Grammar: indirect questions (Kan du si hvor det gjør vondt? Jeg lurer på om…); ikke/adverbs before the verb in subordinate clauses; polite modals kunne, ville, skulle, burde.
 Vocabulary: symptoms (vondt i brystet, kvalm, svimmel, tungpustet, feber, utslett, stråle ut), measurements (blodtrykk, puls, oksygenmetning, blodprøve, EKG, smerteskala), history (bli innlagt, faste medisiner, allergisk mot, tåle, smertestillende, pårørende, journal, vaktskifte, taushetsplikt).`,

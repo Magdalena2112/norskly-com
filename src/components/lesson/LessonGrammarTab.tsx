@@ -92,6 +92,12 @@ export const LESSON_GRAMMAR_TOPICS: Record<string, Topic[]> = {
     { label: "Prilozi učestalosti", sectionIdx: [4], exercises: gc(6, 9, 14, 19), aiTopic: "Norwegian adverbs of frequency and their position", related: [] },
     { label: "Kombinovano", sectionIdx: [0, 1, 2, 3, 4], exercises: gc(28, 29, 30), aiTopic: "Norwegian V2, inversion, ikke and questions combined", related: [] },
   ],
+  "DE-A2-L01": [
+    { label: "Präsens", sectionIdx: [0, 1], exercises: gc(2, 4, 7, 10, 13, 16, 20, 23, 26), aiTopic: "German Präsens: regular endings, stem-vowel change (fahren, nehmen, treffen), sein and haben", related: [] },
+    { label: "V2 i inverzija", sectionIdx: [2], exercises: gc(1, 5, 8, 11, 15, 21, 24), aiTopic: "German V2 rule and inversion after time and place expressions", related: [] },
+    { label: "Trennbare Verben", sectionIdx: [3, 4], exercises: gc(3, 6, 9, 12, 14, 17, 19, 22, 25, 27), aiTopic: "German separable verbs: prefix at the end, in questions, with nicht and modal verbs", related: [] },
+    { label: "Kombinovano", sectionIdx: [0, 1, 2, 3, 4], exercises: gc(18, 28, 29, 30), aiTopic: "German Präsens, V2 and separable verbs combined", related: [] },
+  ],
   "NO-HC-B1-L01": [
     { label: "Indirekte spørsmål", sectionIdx: [0], exercises: practiceRange(1), aiTopic: "Norwegian indirect questions with question words and om (no inversion)", related: [] },
     { label: "Ikke i leddsetninger", sectionIdx: [1], exercises: practiceRange(11), aiTopic: "Position of ikke and adverbs in Norwegian subordinate clauses", related: [] },

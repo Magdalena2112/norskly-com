@@ -1,0 +1,3982 @@
+{
+ "code": "DE-A2-L01",
+ "intro": [
+  {
+   "id": "DE-A2-L01-T01",
+   "title": "Text 1 · Ein neuer Alltag",
+   "type": "monologue",
+   "scene": "Lena erzählt von ihrem neuen Leben in Berlin.",
+   "lines": [
+    {
+     "speaker": "Lena",
+     "text": "Hallo! Ich heiße Lena. Ich wohne jetzt seit drei Monaten in Berlin, und mein Leben ist ganz anders."
+    },
+    {
+     "speaker": "Lena",
+     "text": "Normalerweise stehe ich um sieben Uhr auf und frühstücke, bevor ich aus dem Haus gehe. Drei Tage pro Woche fahre ich mit der U-Bahn zur Arbeit. An den anderen Tagen lerne ich und arbeite an eigenen Projekten."
+    },
+    {
+     "speaker": "Lena",
+     "text": "Gerade bereite ich mich auf einen neuen Deutschkurs vor. Ich suche auch eine neue Wohnung, denn mein Zimmer ist ziemlich klein."
+    },
+    {
+     "speaker": "Lena",
+     "text": "Meine Freunde Lukas und Mia helfen mir sehr. Lukas kennt Berlin sehr gut, und Mia findet immer schöne Orte für uns."
+    }
+   ]
+  },
+  {
+   "id": "DE-A2-L01-T02",
+   "title": "Text 2 · Eine Kaffeepause zusammen",
+   "type": "dialogue",
+   "scene": "Lena, Lukas und Mia treffen sich in einem Café in Prenzlauer Berg.",
+   "lines": [
+    {
+     "speaker": "Lukas",
+     "text": "Lena! Schön, dich wiederzusehen. Wie geht's dir?"
+    },
+    {
+     "speaker": "Lena",
+     "text": "Ziemlich gut, danke! Ich habe im Moment viel zu tun."
+    },
+    {
+     "speaker": "Mia",
+     "text": "Wirklich? Was machst du denn gerade so?"
+    },
+    {
+     "speaker": "Lena",
+     "text": "Ich arbeite Teilzeit und lerne Deutsch. Heute arbeite ich nicht, also suche ich jetzt eine größere Wohnung."
+    },
+    {
+     "speaker": "Lukas",
+     "text": "Suchst du in der Innenstadt, oder möchtest du lieber etwas außerhalb wohnen?"
+    },
+    {
+     "speaker": "Lena",
+     "text": "Ich möchte gern in der Nähe der U-Bahn wohnen. Dann komme ich viel leichter zur Arbeit."
+    },
+    {
+     "speaker": "Mia",
+     "text": "Das verstehe ich gut. Frau Weber und ich kennen jemanden, der ab nächstem Monat ein Zimmer vermietet!"
+    }
+   ]
+  },
+  {
+   "id": "DE-A2-L01-T03",
+   "title": "Text 3 · Willkommen im Kurs",
+   "type": "email",
+   "scene": "Betreff: Willkommen im Deutschkurs A2 · Von: Frau Weber · An: Gruppe A2",
+   "lines": [
+    {
+     "speaker": "Frau Weber",
+     "text": "Liebe Kursteilnehmerinnen und Kursteilnehmer, ich hoffe, es geht Ihnen gut."
+    },
+    {
+     "speaker": "Frau Weber",
+     "text": "Unser neuer Deutschkurs fängt am Montag um 18 Uhr an. Wir treffen uns jeden Montag und Mittwoch in Raum 4 der Volkshochschule."
+    },
+    {
+     "speaker": "Frau Weber",
+     "text": "In diesem Monat sprechen wir über den Alltag, über persönliche Erfahrungen und darüber, wie wir im Alltag miteinander sprechen."
+    },
+    {
+     "speaker": "Frau Weber",
+     "text": "Morgen schicke ich Ihnen die Übersicht über die Texte. Ich freue mich auf Sie!"
+    }
+   ]
+  }
+ ],
+ "modules": {
+  "intro": {
+   "exercises": []
+  },
+  "grammar": {
+   "sections": [
+    {
+     "title": "1.1 Präsens – pravilni glagoli",
+     "explanation": "Präsens (sadašnje vreme) koristimo za navike, rutine, činjenice i ono što se dešava sada. Glagol gubi nastavak -en, a na osnovu dodajemo lični nastavak.\nObrazac: OSNOVA + -e / -st / -t / -en / -t / -en.",
+     "table": [
+      [
+       "ich",
+       "wohne",
+       "lerne"
+      ],
+      [
+       "du",
+       "wohnst",
+       "lernst"
+      ],
+      [
+       "er / sie / es",
+       "wohnt",
+       "lernt"
+      ],
+      [
+       "wir",
+       "wohnen",
+       "lernen"
+      ],
+      [
+       "ihr",
+       "wohnt",
+       "lernt"
+      ],
+      [
+       "sie / Sie",
+       "wohnen",
+       "lernen"
+      ]
+     ],
+     "rules": [
+      "Nastavci: -e, -st, -t, -en, -t, -en.",
+      "Osnova na -t/-d dobija -e-: du arbeitest, er arbeitet.",
+      "Isti oblik za navike i za ono što se dešava sada."
+     ],
+     "compare": "Srpski razlikuje „radim” i „radim upravo sada” samo kontekstom — nemački takođe ima jedno sadašnje vreme, nema posebnog trajnog oblika kao engleski.",
+     "examples": [
+      [
+       "Lena wohnt in Berlin.",
+       "Lena živi u Berlinu."
+      ],
+      [
+       "Wir lernen jeden Montag Deutsch.",
+       "Svakog ponedeljka učimo nemački."
+      ],
+      [
+       "Mia arbeitet heute im Café.",
+       "Mia danas radi u kafiću."
+      ]
+     ],
+     "mistakes": [
+      [
+       "Du arbeitst viel.",
+       "Du arbeitest viel.",
+       "Osnova arbeit- dobija -e- ispred -st i -t."
+      ],
+      [
+       "Ich wohnen in Berlin.",
+       "Ich wohne in Berlin.",
+       "Uz ich nastavak je -e."
+      ]
+     ],
+     "remember": "Nađi osnovu (wohn-), pa dodaj nastavak koji odgovara licu."
+    },
+    {
+     "title": "1.2 Präsens – nepravilni glagoli i promena vokala",
+     "explanation": "Neki glagoli menjaju vokal u 2. i 3. licu jednine (du, er/sie/es): a → ä, e → i, e → ie. Glagoli sein i haben su potpuno nepravilni i moraju se naučiti napamet.",
+     "table": [
+      [
+       "fahren",
+       "du fährst",
+       "er fährt"
+      ],
+      [
+       "schlafen",
+       "du schläfst",
+       "sie schläft"
+      ],
+      [
+       "nehmen",
+       "du nimmst",
+       "er nimmt"
+      ],
+      [
+       "treffen",
+       "du triffst",
+       "sie trifft"
+      ],
+      [
+       "lesen / sehen",
+       "du liest / siehst",
+       "er liest / sieht"
+      ],
+      [
+       "sein",
+       "ich bin, du bist, er ist",
+       "wir sind, ihr seid, sie sind"
+      ],
+      [
+       "haben",
+       "ich habe, du hast, er hat",
+       "wir haben, ihr habt, sie haben"
+      ]
+     ],
+     "rules": [
+      "Promena vokala samo kod du i er/sie/es.",
+      "ich, wir, ihr, sie zadržavaju osnovni vokal: ich fahre, wir fahren.",
+      "sein i haben uči kao celinu."
+     ],
+     "compare": "U srpskom se glagol menja kroz nastavke, ali vokal u osnovi retko; u nemačkom „fahren → fährt” je česta zamka.",
+     "examples": [
+      [
+       "Lukas fährt mit dem Fahrrad zur Arbeit.",
+       "Lukas ide biciklom na posao."
+      ],
+      [
+       "Triffst du heute Mia?",
+       "Da li se danas viđaš sa Mijom?"
+      ],
+      [
+       "Lena hat heute frei.",
+       "Lena je danas slobodna."
+      ]
+     ],
+     "mistakes": [
+      [
+       "Er fahrt mit der U-Bahn.",
+       "Er fährt mit der U-Bahn.",
+       "Kod er/sie/es: a → ä."
+      ],
+      [
+       "Sie nehmt den Bus.",
+       "Sie nimmt den Bus.",
+       "Kod er/sie/es: e → i (nimmt)."
+      ]
+     ],
+     "remember": "du i er/sie/es – proveri promenu vokala; sein i haben – napamet."
+    },
+    {
+     "title": "2. V2 pravilo i inverzija",
+     "explanation": "U nemačkoj izjavnoj rečenici lični glagol stoji na drugom mestu (V2). Drugo mesto znači drugi rečenični član, ne nužno druga reč. Ako rečenica počinje vremenom, mestom ili prilogom, subjekat dolazi odmah iza glagola – to je inverzija.\nObrazac: PRVI ČLAN + LIČNI GLAGOL + (subjekat) + ostatak.",
+     "table": [
+      [
+       "Lena",
+       "fährt",
+       "mit der U-Bahn zur Arbeit."
+      ],
+      [
+       "Normalerweise",
+       "fährt",
+       "Lena mit der U-Bahn zur Arbeit."
+      ],
+      [
+       "Drei Tage pro Woche",
+       "arbeitet",
+       "sie im Büro."
+      ],
+      [
+       "Heute nach der Arbeit",
+       "treffen",
+       "wir Frau Weber."
+      ]
+     ],
+     "rules": [
+      "Lični glagol je uvek drugi rečenični član.",
+      "Prvi član može biti subjekat, vreme, mesto ili prilog.",
+      "Ne počinješ subjektom? Onda: glagol, pa subjekat."
+     ],
+     "compare": "Na srpskom kažemo „Danas Lena radi od kuće”, ali na nemačkom ne može „Heute Lena arbeitet” – mora „Heute arbeitet Lena”.",
+     "examples": [
+      [
+       "Heute arbeitet Lena zu Hause.",
+       "Danas Lena radi od kuće."
+      ],
+      [
+       "Am Dienstag trainiert Lukas.",
+       "Utorkom Lukas trenira."
+      ],
+      [
+       "Nach dem Kurs gehen wir ins Café.",
+       "Posle kursa idemo u kafić."
+      ]
+     ],
+     "mistakes": [
+      [
+       "Heute Lena arbeitet zu Hause.",
+       "Heute arbeitet Lena zu Hause.",
+       "Posle početnog izraza dolazi glagol, pa subjekat."
+      ],
+      [
+       "Am Montag wir haben Kurs.",
+       "Am Montag haben wir Kurs.",
+       "Glagol mora biti na drugom mestu."
+      ]
+     ],
+     "remember": "Prvo pronađi prvi rečenični član, pa odmah stavi lični glagol."
+    },
+    {
+     "title": "3. Trennbare Verben – glagoli sa odvojivim prefiksom",
+     "explanation": "Mnogi glagoli svakodnevne rutine imaju odvojiv prefiks: aufstehen, einkaufen, anfangen, aufräumen, anrufen, ankommen, fernsehen, mitkommen. U Präsensu lični deo glagola stoji na drugom mestu (V2), a prefiks ide na sam kraj rečenice. Tako nastaje „rečenični okvir” (Satzklammer).\nObrazac: … GLAGOL … … PREFIKS.",
+     "table": [
+      [
+       "aufstehen",
+       "Ich stehe um sieben Uhr auf.",
+       "Ustajem u sedam."
+      ],
+      [
+       "einkaufen",
+       "Lena kauft am Samstag ein.",
+       "Lena kupuje u subotu."
+      ],
+      [
+       "anfangen",
+       "Der Kurs fängt um 18 Uhr an.",
+       "Kurs počinje u 18 h."
+      ],
+      [
+       "aufräumen",
+       "Mia räumt ihr Zimmer auf.",
+       "Mia sređuje sobu."
+      ],
+      [
+       "anrufen",
+       "Lukas ruft seine Mutter an.",
+       "Lukas zove majku."
+      ]
+     ],
+     "rules": [
+      "Lični deo glagola – drugo mesto.",
+      "Prefiks – kraj rečenice.",
+      "Naglasak je na prefiksu: AUFstehen, EINkaufen.",
+      "Promena vokala važi i ovde: er fängt … an, sie fährt … ab."
+     ],
+     "compare": "U srpskom „ustajem” je jedna reč; u nemačkom se „aufstehen” razdvaja: „Ich stehe … auf”. Između dva dela može stajati mnogo informacija.",
+     "examples": [
+      [
+       "Normalerweise stehe ich um sieben Uhr auf.",
+       "Obično ustajem u sedam."
+      ],
+      [
+       "Am Wochenende räumen wir die Wohnung auf.",
+       "Vikendom sređujemo stan."
+      ],
+      [
+       "Frau Weber schickt morgen die Übersicht ab.",
+       "Frau Weber sutra šalje pregled."
+      ]
+     ],
+     "mistakes": [
+      [
+       "Ich aufstehe um sieben Uhr.",
+       "Ich stehe um sieben Uhr auf.",
+       "Prefiks ide na kraj rečenice."
+      ],
+      [
+       "Der Kurs anfängt am Montag.",
+       "Der Kurs fängt am Montag an.",
+       "Lični deo (fängt) na drugom mestu, an na kraju."
+      ]
+     ],
+     "remember": "Glagol na drugo mesto, prefiks na kraj – kao zagrada oko rečenice."
+    },
+    {
+     "title": "4. Trennbare Verben u pitanjima, negaciji i sa modalnim glagolima",
+     "explanation": "U da/ne pitanju lični deo glagola dolazi prvi, a prefiks ostaje na kraju: „Stehst du früh auf?” U pitanju sa upitnom reči: „Wann fängt der Kurs an?” Negacija nicht obično stoji ispred prefiksa: „Ich stehe heute nicht früh auf.” Sa modalnim glagolom (können, müssen, möchten) glagol se NE razdvaja – ide ceo u infinitivu na kraj: „Ich muss heute einkaufen.”",
+     "table": [
+      [
+       "Da/ne pitanje",
+       "Glagol + subjekat + … + prefiks?",
+       "Kommst du heute mit?"
+      ],
+      [
+       "Upitna reč",
+       "Upitna reč + glagol + subjekat + … + prefiks?",
+       "Wann rufst du Mia an?"
+      ],
+      [
+       "Negacija",
+       "… glagol … nicht + prefiks",
+       "Lena kauft heute nicht ein."
+      ],
+      [
+       "Modalni glagol",
+       "Modal (2. mesto) … infinitiv na kraju",
+       "Ich muss morgen früh aufstehen."
+      ]
+     ],
+     "rules": [
+      "U pitanju prefiks ostaje na kraju.",
+      "nicht stoji ispred prefiksa.",
+      "Sa modalnim glagolom: ceo infinitiv na kraj (aufstehen, einkaufen)."
+     ],
+     "compare": "Na srpskom pitanje često počinje sa „da li”; na nemačkom ga gradimo redom reči: glagol prvi, prefiks na kraju.",
+     "examples": [
+      [
+       "Kommst du am Samstag mit?",
+       "Ideš li sa nama u subotu?"
+      ],
+      [
+       "Wann fängt dein Kurs an?",
+       "Kada počinje tvoj kurs?"
+      ],
+      [
+       "Ich kann heute nicht einkaufen.",
+       "Danas ne mogu da kupujem."
+      ]
+     ],
+     "mistakes": [
+      [
+       "Wann anfängt der Kurs?",
+       "Wann fängt der Kurs an?",
+       "U pitanju se glagol takođe razdvaja."
+      ],
+      [
+       "Ich muss heute kaufe ein.",
+       "Ich muss heute einkaufen.",
+       "Uz modalni glagol: ceo infinitiv na kraju."
+      ]
+     ],
+     "remember": "Pitanje: glagol napred, prefiks nazad; modal: infinitiv zajedno na kraj."
+    }
+   ],
+   "exercises": [
+    {
+     "id": "G-01",
+     "code": "G-01",
+     "title": "Ein normaler Arbeitstag",
+     "instruction": "Izaberi rečenicu koja pravilno opisuje šta se dešava posle ručka.",
+     "kind": "closed",
+     "items": [],
+     "type": "choice",
+     "xp": 1,
+     "grammarFocus": "V2 / inverzija",
+     "hint": "Obrati pažnju na početni izraz. Šta mora da stoji odmah iza njega?",
+     "hint2": "V2 pravilo: lični glagol je uvek drugi rečenični član. Ako rečenica počinje vremenom ili mestom, subjekat dolazi tek iza glagola.",
+     "explanation": "„Nach dem Mittagessen” zauzima prvo mesto, „hat” drugo, zatim subjekat „Jonas”.",
+     "context": "Jonas arbeitet in einem Büro. Nach dem Mittagessen hat er normalerweise ein Meeting.",
+     "options": [
+      "Nach dem Mittagessen Jonas hat normalerweise ein Meeting.",
+      "Nach dem Mittagessen hat Jonas normalerweise ein Meeting.",
+      "Nach dem Mittagessen hat normalerweise ein Meeting Jonas."
+     ],
+     "correct": [
+      1
+     ]
+    },
+    {
+     "id": "G-02",
+     "code": "G-02",
+     "title": "Lena in Berlin",
+     "instruction": "Dopuni rečenicu pravilnim oblikom glagola.",
+     "kind": "closed",
+     "items": [],
+     "type": "gaps",
+     "xp": 1,
+     "grammarFocus": "Präsens",
+     "hint": "Proveri ko je subjekat i koji nastavak mu odgovara.",
+     "hint2": "Präsens: ich -e, du -st, er/sie/es -t, wir -en, ihr -t, sie/Sie -en. Kod nekih glagola u du i er/sie/es menja se vokal (fahren → fährt, nehmen → nimmt).",
+     "explanation": "Uz „sie” (ona) nastavak je -t: sie wohnt.",
+     "context": "Lena ist neu in der Stadt.",
+     "text": "Lena ___ seit drei Monaten in Berlin.",
+     "gaps": [
+      {
+       "options": [
+        "wohne",
+        "wohnst",
+        "wohnt",
+        "wohnen"
+       ],
+       "answer": "wohnt"
+      }
+     ]
+    },
+    {
+     "id": "G-03",
+     "code": "G-03",
+     "title": "Früh am Morgen",
+     "instruction": "Poređaj delove tako da dobiješ pravilnu rečenicu.",
+     "kind": "closed",
+     "items": [],
+     "type": "order",
+     "xp": 1,
+     "grammarFocus": "Trennbare Verben",
+     "hint": "Da li je glagol sa odvojivim prefiksom? Gde stoji prefiks?",
+     "hint2": "Trennbare Verben: lični deo glagola na drugom mestu, prefiks (auf, ein, an, mit…) na kraju rečenice. Uz modalni glagol infinitiv ostaje ceo na kraju.",
+     "explanation": "Lični deo „stehe” na drugom mestu, prefiks „auf” na kraju.",
+     "context": "Lena opisuje svoje jutro.",
+     "tokens": [
+      "Normalerweise",
+      "stehe",
+      "ich",
+      "um sieben Uhr",
+      "auf"
+     ],
+     "answer": [
+      "Normalerweise stehe ich um sieben Uhr auf"
+     ]
+    },
+    {
+     "id": "G-04",
+     "code": "G-04",
+     "title": "Mit dem Fahrrad",
+     "instruction": "Izaberi pravilan oblik glagola.",
+     "kind": "closed",
+     "items": [],
+     "type": "choice",
+     "xp": 1,
+     "grammarFocus": "Präsens",
+     "hint": "Proveri ko je subjekat i koji nastavak mu odgovara.",
+     "hint2": "Präsens: ich -e, du -st, er/sie/es -t, wir -en, ihr -t, sie/Sie -en. Kod nekih glagola u du i er/sie/es menja se vokal (fahren → fährt, nehmen → nimmt).",
+     "explanation": "fahren menja vokal kod er/sie/es: er fährt.",
+     "context": "Lukas wohnt in Kreuzberg und fährt jeden Tag mit dem Fahrrad.",
+     "options": [
+      "Lukas fahrt mit dem Fahrrad zur Arbeit.",
+      "Lukas fährt mit dem Fahrrad zur Arbeit.",
+      "Lukas fähren mit dem Fahrrad zur Arbeit."
+     ],
+     "correct": [
+      1
+     ]
+    },
+    {
+     "id": "G-05",
+     "code": "G-05",
+     "title": "Auf dem Weg zur Uni",
+     "instruction": "Poređaj delove tako da dobiješ pravilnu rečenicu.",
+     "kind": "closed",
+     "items": [],
+     "type": "order",
+     "xp": 1,
+     "grammarFocus": "V2 / inverzija",
+     "hint": "Obrati pažnju na početni izraz. Šta mora da stoji odmah iza njega?",
+     "hint2": "V2 pravilo: lični glagol je uvek drugi rečenični član. Ako rečenica počinje vremenom ili mestom, subjekat dolazi tek iza glagola.",
+     "explanation": "Kada vremenski izraz stoji na početku, glagol dolazi ispred subjekta.",
+     "context": "Studentkinja svakog jutra ide tramvajem na fakultet.",
+     "tokens": [
+      "Jeden Morgen",
+      "nimmt",
+      "die Studentin",
+      "die Straßenbahn",
+      "zur Uni"
+     ],
+     "answer": [
+      "Jeden Morgen nimmt die Studentin die Straßenbahn zur Uni"
+     ]
+    },
+    {
+     "id": "G-06",
+     "code": "G-06",
+     "title": "Der Kurs beginnt",
+     "instruction": "Dopuni rečenicu.",
+     "kind": "closed",
+     "items": [],
+     "type": "gaps",
+     "xp": 1,
+     "grammarFocus": "Trennbare Verben",
+     "hint": "Da li je glagol sa odvojivim prefiksom? Gde stoji prefiks?",
+     "hint2": "Trennbare Verben: lični deo glagola na drugom mestu, prefiks (auf, ein, an, mit…) na kraju rečenice. Uz modalni glagol infinitiv ostaje ceo na kraju.",
+     "explanation": "anfangen: lični deo „fängt” (a → ä) na drugom mestu, „an” na kraju.",
+     "context": "Frau Weber piše grupi.",
+     "text": "Der Deutschkurs ___ am Montag um 18 Uhr ___.",
+     "gaps": [
+      {
+       "options": [
+        "fängt",
+        "anfängt",
+        "fangt",
+        "fangen"
+       ],
+       "answer": "fängt"
+      },
+      {
+       "options": [
+        "an",
+        "auf",
+        "ein",
+        "mit"
+       ],
+       "answer": "an"
+      }
+     ]
+    },
+    {
+     "id": "G-07",
+     "code": "G-07",
+     "title": "Sein oder haben?",
+     "instruction": "Dopuni rečenicu pravilnim oblikom glagola sein.",
+     "kind": "closed",
+     "items": [],
+     "type": "gaps",
+     "xp": 1,
+     "grammarFocus": "Präsens",
+     "hint": "Proveri ko je subjekat i koji nastavak mu odgovara.",
+     "hint2": "Präsens: ich -e, du -st, er/sie/es -t, wir -en, ihr -t, sie/Sie -en. Kod nekih glagola u du i er/sie/es menja se vokal (fahren → fährt, nehmen → nimmt).",
+     "explanation": "sein: ich bin, du bist, er ist, wir sind, ihr seid, sie sind.",
+     "context": "Mia pita Lenu i Lukasa.",
+     "text": "Ihr ___ heute aber früh im Café!",
+     "gaps": [
+      {
+       "options": [
+        "seid",
+        "sind",
+        "seit",
+        "bist"
+       ],
+       "answer": "seid"
+      }
+     ]
+    },
+    {
+     "id": "G-08",
+     "code": "G-08",
+     "title": "Am Wochenende",
+     "instruction": "Izaberi pravilnu rečenicu.",
+     "kind": "closed",
+     "items": [],
+     "type": "choice",
+     "xp": 1,
+     "grammarFocus": "V2 / inverzija",
+     "hint": "Obrati pažnju na početni izraz. Šta mora da stoji odmah iza njega?",
+     "hint2": "V2 pravilo: lični glagol je uvek drugi rečenični član. Ako rečenica počinje vremenom ili mestom, subjekat dolazi tek iza glagola.",
+     "explanation": "„Am Samstag” je prvi član, „trifft” drugi, pa subjekat „Mia”.",
+     "context": "Mia hat am Samstag frei.",
+     "options": [
+      "Am Samstag Mia trifft ihre Freunde im Mauerpark.",
+      "Am Samstag trifft Mia ihre Freunde im Mauerpark.",
+      "Am Samstag trifft ihre Freunde Mia im Mauerpark."
+     ],
+     "correct": [
+      1
+     ]
+    },
+    {
+     "id": "G-09",
+     "code": "G-09",
+     "title": "Einkaufen",
+     "instruction": "Izaberi pravilnu rečenicu.",
+     "kind": "closed",
+     "items": [],
+     "type": "choice",
+     "xp": 1,
+     "grammarFocus": "Trennbare Verben",
+     "hint": "Da li je glagol sa odvojivim prefiksom? Gde stoji prefiks?",
+     "hint2": "Trennbare Verben: lični deo glagola na drugom mestu, prefiks (auf, ein, an, mit…) na kraju rečenice. Uz modalni glagol infinitiv ostaje ceo na kraju.",
+     "explanation": "einkaufen se razdvaja: „kauft … ein”.",
+     "context": "Lena hat am Freitag Zeit für den Supermarkt.",
+     "options": [
+      "Lena einkauft am Freitag.",
+      "Lena kauft am Freitag ein.",
+      "Lena kauft ein am Freitag."
+     ],
+     "correct": [
+      1
+     ]
+    },
+    {
+     "id": "G-10",
+     "code": "G-10",
+     "title": "Was liest du?",
+     "instruction": "Izaberi pravilno pitanje.",
+     "kind": "closed",
+     "items": [],
+     "type": "choice",
+     "xp": 1,
+     "grammarFocus": "Präsens",
+     "hint": "Proveri ko je subjekat i koji nastavak mu odgovara.",
+     "hint2": "Präsens: ich -e, du -st, er/sie/es -t, wir -en, ihr -t, sie/Sie -en. Kod nekih glagola u du i er/sie/es menja se vokal (fahren → fährt, nehmen → nimmt).",
+     "explanation": "lesen menja vokal kod du: du liest.",
+     "context": "Lukas vidi knjigu u Leninoj torbi.",
+     "options": [
+      "Was lest du gerade?",
+      "Was liest du gerade?",
+      "Was lesen du gerade?"
+     ],
+     "correct": [
+      1
+     ]
+    },
+    {
+     "id": "G-11",
+     "code": "G-11",
+     "title": "Richtig oder falsch?",
+     "instruction": "Odluči da li je tvrdnja tačna.",
+     "kind": "closed",
+     "items": [],
+     "type": "truefalse",
+     "xp": 1,
+     "grammarFocus": "V2 / inverzija",
+     "hint": "Obrati pažnju na početni izraz. Šta mora da stoji odmah iza njega?",
+     "hint2": "V2 pravilo: lični glagol je uvek drugi rečenični član. Ako rečenica počinje vremenom ili mestom, subjekat dolazi tek iza glagola.",
+     "explanation": "„Nach dem Abendessen” je jedan rečenični član, zato je „gehen” na drugom mestu.",
+     "prompt": "Tvrdnja: U rečenici „Nach dem Abendessen gehen wir spazieren” izraz „Nach dem Abendessen” je prvi rečenični član, a „gehen” drugi.",
+     "options": [
+      "Tačno",
+      "Netačno"
+     ],
+     "correct": [
+      0
+     ]
+    },
+    {
+     "id": "G-12",
+     "code": "G-12",
+     "title": "Ordnung in der WG",
+     "instruction": "Poređaj delove tako da dobiješ pravilnu rečenicu.",
+     "kind": "closed",
+     "items": [],
+     "type": "order",
+     "xp": 1,
+     "grammarFocus": "Trennbare Verben",
+     "hint": "Da li je glagol sa odvojivim prefiksom? Gde stoji prefiks?",
+     "hint2": "Trennbare Verben: lični deo glagola na drugom mestu, prefiks (auf, ein, an, mit…) na kraju rečenice. Uz modalni glagol infinitiv ostaje ceo na kraju.",
+     "explanation": "„Am Sonntag” na početku → „räumt” na drugom mestu, subjekat iza, „auf” na kraju.",
+     "context": "Mia sređuje kuhinju u zajedničkom stanu.",
+     "tokens": [
+      "Am Sonntag",
+      "räumt",
+      "Mia",
+      "die Küche",
+      "auf"
+     ],
+     "answer": [
+      "Am Sonntag räumt Mia die Küche auf"
+     ]
+    },
+    {
+     "id": "G-13",
+     "code": "G-13",
+     "title": "Im Kurs",
+     "instruction": "Dopuni rečenicu pravilnim oblikom glagola.",
+     "kind": "closed",
+     "items": [],
+     "type": "gaps",
+     "xp": 1,
+     "grammarFocus": "Präsens",
+     "hint": "Proveri ko je subjekat i koji nastavak mu odgovara.",
+     "hint2": "Präsens: ich -e, du -st, er/sie/es -t, wir -en, ihr -t, sie/Sie -en. Kod nekih glagola u du i er/sie/es menja se vokal (fahren → fährt, nehmen → nimmt).",
+     "explanation": "arbeiten: osnova na -t dobija -e-: ihr arbeitet.",
+     "context": "Frau Weber pita grupu.",
+     "text": "Ihr ___ heute zu zweit an dem Text.",
+     "gaps": [
+      {
+       "options": [
+        "arbeitt",
+        "arbeitet",
+        "arbeiten",
+        "arbeitest"
+       ],
+       "answer": "arbeitet"
+      }
+     ]
+    },
+    {
+     "id": "G-14",
+     "code": "G-14",
+     "title": "Ein Anruf",
+     "instruction": "Izaberi pravilno pitanje.",
+     "kind": "closed",
+     "items": [],
+     "type": "choice",
+     "xp": 1,
+     "grammarFocus": "Trennbare Verben",
+     "hint": "Da li je glagol sa odvojivim prefiksom? Gde stoji prefiks?",
+     "hint2": "Trennbare Verben: lični deo glagola na drugom mestu, prefiks (auf, ein, an, mit…) na kraju rečenice. Uz modalni glagol infinitiv ostaje ceo na kraju.",
+     "explanation": "U pitanju sa upitnom reči prefiks „an” ostaje na kraju.",
+     "context": "Lena želi da zna kada Lukas zove majku.",
+     "options": [
+      "Wann anrufst du deine Mutter?",
+      "Wann rufst du deine Mutter an?",
+      "Wann rufst an du deine Mutter?"
+     ],
+     "correct": [
+      1
+     ]
+    },
+    {
+     "id": "G-15",
+     "code": "G-15",
+     "title": "Nach dem Kurs",
+     "instruction": "Poređaj delove tako da dobiješ pravilnu rečenicu.",
+     "kind": "closed",
+     "items": [],
+     "type": "order",
+     "xp": 1,
+     "grammarFocus": "V2 / inverzija",
+     "hint": "Obrati pažnju na početni izraz. Šta mora da stoji odmah iza njega?",
+     "hint2": "V2 pravilo: lični glagol je uvek drugi rečenični član. Ako rečenica počinje vremenom ili mestom, subjekat dolazi tek iza glagola.",
+     "explanation": "Početni izraz „Nach dem Kurs” + glagol „gehen” + subjekat „wir”.",
+     "context": "Grupa ide zajedno na kafu.",
+     "tokens": [
+      "Nach dem Kurs",
+      "gehen",
+      "wir",
+      "oft",
+      "ins Café"
+     ],
+     "answer": [
+      "Nach dem Kurs gehen wir oft ins Café"
+     ]
+    },
+    {
+     "id": "G-16",
+     "code": "G-16",
+     "title": "Lukas schläft lange",
+     "instruction": "Izaberi pravilnu rečenicu.",
+     "kind": "closed",
+     "items": [],
+     "type": "choice",
+     "xp": 1,
+     "grammarFocus": "Präsens",
+     "hint": "Proveri ko je subjekat i koji nastavak mu odgovara.",
+     "hint2": "Präsens: ich -e, du -st, er/sie/es -t, wir -en, ihr -t, sie/Sie -en. Kod nekih glagola u du i er/sie/es menja se vokal (fahren → fährt, nehmen → nimmt).",
+     "explanation": "schlafen: a → ä kod er/sie/es: er schläft.",
+     "context": "Subotom Lukas ne radi.",
+     "options": [
+      "Am Samstag schlaft Lukas lange.",
+      "Am Samstag schläft Lukas lange.",
+      "Am Samstag Lukas schläft lange."
+     ],
+     "correct": [
+      1
+     ]
+    },
+    {
+     "id": "G-17",
+     "code": "G-17",
+     "title": "Kommst du mit?",
+     "instruction": "Poređaj delove tako da dobiješ pravilno pitanje.",
+     "kind": "closed",
+     "items": [],
+     "type": "order",
+     "xp": 1,
+     "grammarFocus": "Trennbare Verben",
+     "hint": "Da li je glagol sa odvojivim prefiksom? Gde stoji prefiks?",
+     "hint2": "Trennbare Verben: lični deo glagola na drugom mestu, prefiks (auf, ein, an, mit…) na kraju rečenice. Uz modalni glagol infinitiv ostaje ceo na kraju.",
+     "explanation": "Da/ne pitanje: glagol prvi, prefiks „mit” na kraju.",
+     "context": "Mia poziva Lenu u Mauerpark.",
+     "tokens": [
+      "Kommst",
+      "du",
+      "am Sonntag",
+      "in den Mauerpark",
+      "mit"
+     ],
+     "answer": [
+      "Kommst du am Sonntag in den Mauerpark mit"
+     ]
+    },
+    {
+     "id": "G-18",
+     "code": "G-18",
+     "title": "Lenas Abend",
+     "instruction": "Izaberi pravilnu rečenicu.",
+     "kind": "closed",
+     "items": [],
+     "type": "choice",
+     "xp": 1,
+     "grammarFocus": "Kombinovano",
+     "hint": "Proveri tri stvari: oblik glagola, njegovo mesto i mesto prefiksa.",
+     "hint2": "Lični glagol u pravilnom obliku na drugom mestu; ako je glagol odvojiv, prefiks na kraju; posle početnog izraza – inverzija.",
+     "explanation": "Inverzija posle „Heute Abend” i prefiks „fern” na kraju.",
+     "context": "Lena je umorna posle posla.",
+     "options": [
+      "Heute Abend sie sieht fern.",
+      "Heute Abend sieht sie fern.",
+      "Heute Abend fernsieht sie."
+     ],
+     "correct": [
+      1
+     ]
+    },
+    {
+     "id": "G-19",
+     "code": "G-19",
+     "title": "Mit Modalverb",
+     "instruction": "Izaberi pravilnu rečenicu.",
+     "kind": "closed",
+     "items": [],
+     "type": "choice",
+     "xp": 1,
+     "grammarFocus": "Trennbare Verben",
+     "hint": "Da li je glagol sa odvojivim prefiksom? Gde stoji prefiks?",
+     "hint2": "Trennbare Verben: lični deo glagola na drugom mestu, prefiks (auf, ein, an, mit…) na kraju rečenice. Uz modalni glagol infinitiv ostaje ceo na kraju.",
+     "explanation": "Uz modalni glagol „muss” infinitiv „aufstehen” ostaje ceo na kraju.",
+     "context": "Sutra Lena ima rani sastanak.",
+     "options": [
+      "Morgen muss Lena früh steht auf.",
+      "Morgen muss Lena früh aufstehen.",
+      "Morgen muss Lena aufstehen früh."
+     ],
+     "correct": [
+      1
+     ]
+    },
+    {
+     "id": "G-20",
+     "code": "G-20",
+     "title": "Wer nimmt den Bus?",
+     "instruction": "Izaberi rečenicu u kojoj su OBA glagola pravilna.",
+     "kind": "closed",
+     "items": [],
+     "type": "choice",
+     "xp": 2,
+     "grammarFocus": "Präsens",
+     "hint": "Proveri ko je subjekat i koji nastavak mu odgovara.",
+     "hint2": "Präsens: ich -e, du -st, er/sie/es -t, wir -en, ihr -t, sie/Sie -en. Kod nekih glagola u du i er/sie/es menja se vokal (fahren → fährt, nehmen → nimmt).",
+     "explanation": "nehmen → er nimmt; treffen → sie trifft (e → i kod er/sie/es).",
+     "context": "Lukas ide autobusom, Mia se nalazi sa Lenom.",
+     "options": [
+      "Lukas nehmt den Bus und Mia trefft Lena.",
+      "Lukas nimmt den Bus und Mia trifft Lena.",
+      "Lukas nimmt den Bus und Mia treffen Lena."
+     ],
+     "correct": [
+      1
+     ]
+    },
+    {
+     "id": "G-21",
+     "code": "G-21",
+     "title": "Korrigiere den Satz",
+     "instruction": "Ispravi rečenicu i napiši je pravilno.",
+     "kind": "closed",
+     "items": [],
+     "type": "text",
+     "xp": 2,
+     "grammarFocus": "V2 / inverzija",
+     "hint": "Obrati pažnju na početni izraz. Šta mora da stoji odmah iza njega?",
+     "hint2": "V2 pravilo: lični glagol je uvek drugi rečenični član. Ako rečenica počinje vremenom ili mestom, subjekat dolazi tek iza glagola.",
+     "explanation": "Posle „Heute” dolazi glagol, pa subjekat.",
+     "inputs": [
+      {
+       "prompt": "Heute Lena besucht ihre Schwester.",
+       "answers": [
+        "Heute besucht Lena ihre Schwester."
+       ]
+      }
+     ]
+    },
+    {
+     "id": "G-22",
+     "code": "G-22",
+     "title": "Satzklammer",
+     "instruction": "Ispravi rečenicu i napiši je pravilno.",
+     "kind": "closed",
+     "items": [],
+     "type": "text",
+     "xp": 2,
+     "grammarFocus": "Trennbare Verben",
+     "hint": "Da li je glagol sa odvojivim prefiksom? Gde stoji prefiks?",
+     "hint2": "Trennbare Verben: lični deo glagola na drugom mestu, prefiks (auf, ein, an, mit…) na kraju rečenice. Uz modalni glagol infinitiv ostaje ceo na kraju.",
+     "explanation": "einkaufen: „kaufe” na drugom mestu, „ein” na kraju.",
+     "inputs": [
+      {
+       "prompt": "Ich einkaufe heute im Supermarkt.",
+       "answers": [
+        "Ich kaufe heute im Supermarkt ein.",
+        "Heute kaufe ich im Supermarkt ein."
+       ]
+      }
+     ]
+    },
+    {
+     "id": "G-23",
+     "code": "G-23",
+     "title": "Die richtige Form",
+     "instruction": "Napiši pravilan oblik glagola u zagradi.",
+     "kind": "closed",
+     "items": [],
+     "type": "text",
+     "xp": 2,
+     "grammarFocus": "Präsens",
+     "hint": "Proveri ko je subjekat i koji nastavak mu odgovara.",
+     "hint2": "Präsens: ich -e, du -st, er/sie/es -t, wir -en, ihr -t, sie/Sie -en. Kod nekih glagola u du i er/sie/es menja se vokal (fahren → fährt, nehmen → nimmt).",
+     "explanation": "haben: du hast; fahren: er fährt.",
+     "inputs": [
+      {
+       "prompt": "Du ___ (haben) heute frei.",
+       "answers": [
+        "hast"
+       ]
+      },
+      {
+       "prompt": "Lukas ___ (fahren) nach Hamburg.",
+       "answers": [
+        "fährt"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "G-24",
+     "code": "G-24",
+     "title": "Zwei richtige Sätze",
+     "instruction": "Izaberi DVE pravilne rečenice.",
+     "kind": "closed",
+     "items": [],
+     "type": "multi",
+     "xp": 2,
+     "grammarFocus": "V2 / inverzija",
+     "hint": "Obrati pažnju na početni izraz. Šta mora da stoji odmah iza njega?",
+     "hint2": "V2 pravilo: lični glagol je uvek drugi rečenični član. Ako rečenica počinje vremenom ili mestom, subjekat dolazi tek iza glagola.",
+     "explanation": "U oba pravilna primera lični glagol „treffen” stoji na drugom mestu.",
+     "options": [
+      "Jeden Freitag treffen wir unsere Freunde.",
+      "Jeden Freitag wir treffen unsere Freunde.",
+      "Wir treffen unsere Freunde jeden Freitag.",
+      "Wir jeden Freitag treffen unsere Freunde."
+     ],
+     "correct": [
+      0,
+      2
+     ]
+    },
+    {
+     "id": "G-25",
+     "code": "G-25",
+     "title": "Fragen und Antworten",
+     "instruction": "Poveži pitanja sa odgovorima.",
+     "kind": "closed",
+     "items": [],
+     "type": "match",
+     "xp": 2,
+     "grammarFocus": "Trennbare Verben",
+     "hint": "Da li je glagol sa odvojivim prefiksom? Gde stoji prefiks?",
+     "hint2": "Trennbare Verben: lični deo glagola na drugom mestu, prefiks (auf, ein, an, mit…) na kraju rečenice. Uz modalni glagol infinitiv ostaje ceo na kraju.",
+     "explanation": "Svako pitanje ima odvojiv glagol; prefiks je na kraju i u pitanju.",
+     "left": [
+      "Wann stehst du am Wochenende auf?",
+      "Wann kommt der Zug in Hamburg an?",
+      "Wer räumt heute die Küche auf?",
+      "Kommst du heute Abend mit?"
+     ],
+     "right": [
+      "Mia, sie hat heute Zeit.",
+      "Erst um neun, ich schlafe gern lange.",
+      "Leider nicht, ich muss lernen.",
+      "Um 14:30 Uhr."
+     ],
+     "pairs": [
+      1,
+      3,
+      0,
+      2
+     ]
+    },
+    {
+     "id": "G-26",
+     "code": "G-26",
+     "title": "Eine Nachricht von Mia",
+     "instruction": "Dopuni poruku pravilnim oblicima glagola.",
+     "kind": "closed",
+     "items": [],
+     "type": "gaps",
+     "xp": 2,
+     "grammarFocus": "Präsens",
+     "hint": "Proveri ko je subjekat i koji nastavak mu odgovara.",
+     "hint2": "Präsens: ich -e, du -st, er/sie/es -t, wir -en, ihr -t, sie/Sie -en. Kod nekih glagola u du i er/sie/es menja se vokal (fahren → fährt, nehmen → nimmt).",
+     "explanation": "du arbeitest (osnova na -t), wir sind (sein), ihr habt (haben).",
+     "context": "Mia piše poruku Leni i Lukasu.",
+     "text": "Hallo Lena, ___ du heute lange? Wir ___ ab 17 Uhr im Café. ___ ihr Zeit?",
+     "gaps": [
+      {
+       "options": [
+        "arbeitest",
+        "arbeitst",
+        "arbeitet"
+       ],
+       "answer": "arbeitest"
+      },
+      {
+       "options": [
+        "sind",
+        "seid",
+        "ist"
+       ],
+       "answer": "sind"
+      },
+      {
+       "options": [
+        "Habt",
+        "Hat",
+        "Haben"
+       ],
+       "answer": "Habt"
+      }
+     ]
+    },
+    {
+     "id": "G-27",
+     "code": "G-27",
+     "title": "Lenas Samstag",
+     "instruction": "Dopuni tekst prefiksima.",
+     "kind": "closed",
+     "items": [],
+     "type": "gaps",
+     "xp": 2,
+     "grammarFocus": "Trennbare Verben",
+     "hint": "Da li je glagol sa odvojivim prefiksom? Gde stoji prefiks?",
+     "hint2": "Trennbare Verben: lični deo glagola na drugom mestu, prefiks (auf, ein, an, mit…) na kraju rečenice. Uz modalni glagol infinitiv ostaje ceo na kraju.",
+     "explanation": "aufstehen → auf; einkaufen → ein; anrufen → an.",
+     "context": "Lena opisuje svoju subotu.",
+     "text": "Am Samstag stehe ich spät ___. Dann kaufe ich auf dem Markt ___ und am Abend rufe ich meine Mutter ___.",
+     "gaps": [
+      {
+       "options": [
+        "auf",
+        "an",
+        "ein"
+       ],
+       "answer": "auf"
+      },
+      {
+       "options": [
+        "auf",
+        "an",
+        "ein"
+       ],
+       "answer": "ein"
+      },
+      {
+       "options": [
+        "auf",
+        "an",
+        "ein"
+       ],
+       "answer": "an"
+      }
+     ]
+    },
+    {
+     "id": "G-28",
+     "code": "G-28",
+     "title": "Alles zusammen",
+     "instruction": "Ispravi rečenicu i napiši je pravilno.",
+     "kind": "closed",
+     "items": [],
+     "type": "text",
+     "xp": 2,
+     "grammarFocus": "Kombinovano",
+     "hint": "Proveri tri stvari: oblik glagola, njegovo mesto i mesto prefiksa.",
+     "hint2": "Lični glagol u pravilnom obliku na drugom mestu; ako je glagol odvojiv, prefiks na kraju; posle početnog izraza – inverzija.",
+     "explanation": "Posle „Am Montag” glagol na drugo mesto (fängt), subjekat iza, prefiks „an” na kraj.",
+     "inputs": [
+      {
+       "prompt": "Am Montag der Kurs anfängt um 18 Uhr.",
+       "answers": [
+        "Am Montag fängt der Kurs um 18 Uhr an."
+       ]
+      }
+     ]
+    },
+    {
+     "id": "G-29",
+     "code": "G-29",
+     "title": "Ein Tag in Berlin",
+     "instruction": "Poređaj delove tako da dobiješ pravilnu rečenicu.",
+     "kind": "closed",
+     "items": [],
+     "type": "order",
+     "xp": 2,
+     "grammarFocus": "Kombinovano",
+     "hint": "Proveri tri stvari: oblik glagola, njegovo mesto i mesto prefiksa.",
+     "hint2": "Lični glagol u pravilnom obliku na drugom mestu; ako je glagol odvojiv, prefiks na kraju; posle početnog izraza – inverzija.",
+     "explanation": "Vreme na početku, „fährt” (a → ä) na drugom mestu, subjekat, prefiks „los” na kraju.",
+     "context": "Lukas kreće rano od kuće.",
+     "tokens": [
+      "Um halb acht",
+      "fährt",
+      "Lukas",
+      "mit dem Fahrrad",
+      "los"
+     ],
+     "answer": [
+      "Um halb acht fährt Lukas mit dem Fahrrad los"
+     ]
+    },
+    {
+     "id": "G-30",
+     "code": "G-30",
+     "title": "Lena erzählt",
+     "instruction": "Izaberi rečenicu bez greške.",
+     "kind": "closed",
+     "items": [],
+     "type": "choice",
+     "xp": 1,
+     "grammarFocus": "Kombinovano",
+     "hint": "Proveri tri stvari: oblik glagola, njegovo mesto i mesto prefiksa.",
+     "hint2": "Lični glagol u pravilnom obliku na drugom mestu; ako je glagol odvojiv, prefiks na kraju; posle početnog izraza – inverzija.",
+     "explanation": "Pravilno: „trifft” (e → i), inverzija posle „Heute”, prefiks „mit” na kraju.",
+     "context": "Lena priča o planu za danas.",
+     "options": [
+      "Heute trifft Lena Mia und Lukas kommt auch mit.",
+      "Heute Lena trifft Mia und Lukas mitkommt auch.",
+      "Heute trefft Lena Mia und Lukas kommt mit auch."
+     ],
+     "correct": [
+      0
+     ]
+    }
+   ]
+  },
+  "vocabulary": {
+   "areas": [
+    {
+     "key": "DR1",
+     "title": "Tagesablauf 1",
+     "sr": "Dnevna rutina 1",
+     "images": [
+      "a2v1"
+     ],
+     "words": [
+      {
+       "word": "aufwachen",
+       "translation": "probuditi se",
+       "collection": "DR1",
+       "active": true
+      },
+      {
+       "word": "aufstehen",
+       "translation": "ustati",
+       "collection": "DR1",
+       "active": true
+      },
+      {
+       "word": "sich die Zähne putzen",
+       "translation": "oprati zube",
+       "collection": "DR1",
+       "active": true
+      },
+      {
+       "word": "duschen",
+       "translation": "istuširati se",
+       "collection": "DR1",
+       "active": true
+      },
+      {
+       "word": "sich anziehen",
+       "translation": "obući se",
+       "collection": "DR1",
+       "active": true
+      },
+      {
+       "word": "frühstücken",
+       "translation": "doručkovati",
+       "collection": "DR1",
+       "active": true
+      },
+      {
+       "word": "aus dem Haus gehen",
+       "translation": "krenuti od kuće",
+       "collection": "DR1",
+       "active": true
+      },
+      {
+       "word": "den Bus nehmen",
+       "translation": "uhvatiti autobus",
+       "collection": "DR1",
+       "active": true
+      },
+      {
+       "word": "zur Arbeit kommen",
+       "translation": "stići na posao / u školu",
+       "collection": "DR1",
+       "active": true
+      },
+      {
+       "word": "mit der Arbeit anfangen",
+       "translation": "početi s poslom",
+       "collection": "DR1",
+       "active": true
+      },
+      {
+       "word": "E-Mails checken",
+       "translation": "proveravati mejlove",
+       "collection": "DR1",
+       "active": true
+      },
+      {
+       "word": "an einem Meeting teilnehmen",
+       "translation": "prisustvovati sastanku",
+       "collection": "DR1",
+       "active": true
+      },
+      {
+       "word": "Notizen machen",
+       "translation": "hvatati beleške",
+       "collection": "DR1",
+       "active": true
+      },
+      {
+       "word": "eine Pause machen",
+       "translation": "napraviti pauzu",
+       "collection": "DR1",
+       "active": true
+      },
+      {
+       "word": "Feierabend machen",
+       "translation": "završiti posao",
+       "collection": "DR1",
+       "active": true
+      }
+     ],
+     "exercises": [
+      "VO-01",
+      "VO-02",
+      "VO-05",
+      "VO-11",
+      "VO-12",
+      "VO-13"
+     ]
+    },
+    {
+     "key": "DR2",
+     "title": "Tagesablauf 2",
+     "sr": "Dnevna rutina 2",
+     "images": [
+      "a2v2"
+     ],
+     "words": [
+      {
+       "word": "Hausaufgaben machen",
+       "translation": "raditi domaći",
+       "collection": "DR2",
+       "active": true
+      },
+      {
+       "word": "sich auf eine Prüfung vorbereiten",
+       "translation": "pripremati se za ispit",
+       "collection": "DR2",
+       "active": true
+      },
+      {
+       "word": "aufräumen",
+       "translation": "pospremiti",
+       "collection": "DR2",
+       "active": true
+      },
+      {
+       "word": "Wäsche waschen",
+       "translation": "prati veš",
+       "collection": "DR2",
+       "active": true
+      },
+      {
+       "word": "abwaschen",
+       "translation": "prati sudove",
+       "collection": "DR2",
+       "active": true
+      },
+      {
+       "word": "Lebensmittel einkaufen",
+       "translation": "ići u kupovinu namirnica",
+       "collection": "DR2",
+       "active": true
+      },
+      {
+       "word": "das Bett machen",
+       "translation": "namestiti krevet",
+       "collection": "DR2",
+       "active": true
+      },
+      {
+       "word": "Abendessen kochen",
+       "translation": "spremati večeru",
+       "collection": "DR2",
+       "active": true
+      },
+      {
+       "word": "staubsaugen",
+       "translation": "usisavati pod",
+       "collection": "DR2",
+       "active": true
+      },
+      {
+       "word": "den Müll rausbringen",
+       "translation": "izneti smeće",
+       "collection": "DR2",
+       "active": true
+      },
+      {
+       "word": "trainieren",
+       "translation": "trenirati",
+       "collection": "DR2",
+       "active": true
+      },
+      {
+       "word": "spazieren gehen",
+       "translation": "otići u šetnju",
+       "collection": "DR2",
+       "active": true
+      },
+      {
+       "word": "Freunde treffen",
+       "translation": "naći se sa prijateljima",
+       "collection": "DR2",
+       "active": true
+      },
+      {
+       "word": "Zeit mit der Familie verbringen",
+       "translation": "provoditi vreme sa porodicom",
+       "collection": "DR2",
+       "active": true
+      },
+      {
+       "word": "ins Bett gehen",
+       "translation": "otići na spavanje",
+       "collection": "DR2",
+       "active": true
+      }
+     ],
+     "exercises": [
+      "VO-03",
+      "VO-04",
+      "VO-06",
+      "VO-14",
+      "VO-15",
+      "VO-19"
+     ]
+    },
+    {
+     "key": "CDL",
+     "title": "Veränderungen im Alltag",
+     "sr": "Promene u svakodnevnom životu",
+     "images": [
+      "a2v3"
+     ],
+     "words": [
+      {
+       "word": "die Routine ändern",
+       "translation": "promeniti rutinu",
+       "collection": "CDL",
+       "active": true
+      },
+      {
+       "word": "eine neue Stelle anfangen",
+       "translation": "započeti novi posao",
+       "collection": "CDL",
+       "active": true
+      },
+      {
+       "word": "in eine neue Stadt umziehen",
+       "translation": "preseliti se na novo mesto",
+       "collection": "CDL",
+       "active": true
+      },
+      {
+       "word": "eine neue Wohnung suchen",
+       "translation": "tražiti novi stan",
+       "collection": "CDL",
+       "active": true
+      },
+      {
+       "word": "sich an etwas gewöhnen",
+       "translation": "navikavati se na nešto",
+       "collection": "CDL",
+       "active": true
+      },
+      {
+       "word": "sich in der neuen Wohnung einleben",
+       "translation": "priviknuti se na novi dom",
+       "collection": "CDL",
+       "active": true
+      },
+      {
+       "word": "etwas Neues ausprobieren",
+       "translation": "probati nešto novo",
+       "collection": "CDL",
+       "active": true
+      },
+      {
+       "word": "mit einem neuen Hobby anfangen",
+       "translation": "početi da se bavite novim hobijem",
+       "collection": "CDL",
+       "active": true
+      },
+      {
+       "word": "eine neue Fähigkeit lernen",
+       "translation": "naučiti novu veštinu",
+       "collection": "CDL",
+       "active": true
+      },
+      {
+       "word": "neue Freunde finden",
+       "translation": "steći nove prijatelje",
+       "collection": "CDL",
+       "active": true
+      },
+      {
+       "word": "die Pläne ändern",
+       "translation": "promeniti planove",
+       "collection": "CDL",
+       "active": true
+      },
+      {
+       "word": "eine Entscheidung treffen",
+       "translation": "doneti odluku",
+       "collection": "CDL",
+       "active": true
+      }
+     ],
+     "exercises": [
+      "VO-07",
+      "VO-08",
+      "VO-09",
+      "VO-10",
+      "VO-16",
+      "VO-17",
+      "VO-18",
+      "VO-20"
+     ]
+    }
+   ],
+   "words": [
+    {
+     "word": "aufwachen",
+     "translation": "probuditi se",
+     "collection": "DR1",
+     "active": true
+    },
+    {
+     "word": "aufstehen",
+     "translation": "ustati",
+     "collection": "DR1",
+     "active": true
+    },
+    {
+     "word": "sich die Zähne putzen",
+     "translation": "oprati zube",
+     "collection": "DR1",
+     "active": true
+    },
+    {
+     "word": "duschen",
+     "translation": "istuširati se",
+     "collection": "DR1",
+     "active": true
+    },
+    {
+     "word": "sich anziehen",
+     "translation": "obući se",
+     "collection": "DR1",
+     "active": true
+    },
+    {
+     "word": "frühstücken",
+     "translation": "doručkovati",
+     "collection": "DR1",
+     "active": true
+    },
+    {
+     "word": "aus dem Haus gehen",
+     "translation": "krenuti od kuće",
+     "collection": "DR1",
+     "active": true
+    },
+    {
+     "word": "den Bus nehmen",
+     "translation": "uhvatiti autobus",
+     "collection": "DR1",
+     "active": true
+    },
+    {
+     "word": "zur Arbeit kommen",
+     "translation": "stići na posao / u školu",
+     "collection": "DR1",
+     "active": true
+    },
+    {
+     "word": "mit der Arbeit anfangen",
+     "translation": "početi s poslom",
+     "collection": "DR1",
+     "active": true
+    },
+    {
+     "word": "E-Mails checken",
+     "translation": "proveravati mejlove",
+     "collection": "DR1",
+     "active": true
+    },
+    {
+     "word": "an einem Meeting teilnehmen",
+     "translation": "prisustvovati sastanku",
+     "collection": "DR1",
+     "active": true
+    },
+    {
+     "word": "Notizen machen",
+     "translation": "hvatati beleške",
+     "collection": "DR1",
+     "active": true
+    },
+    {
+     "word": "eine Pause machen",
+     "translation": "napraviti pauzu",
+     "collection": "DR1",
+     "active": true
+    },
+    {
+     "word": "Feierabend machen",
+     "translation": "završiti posao",
+     "collection": "DR1",
+     "active": true
+    },
+    {
+     "word": "Hausaufgaben machen",
+     "translation": "raditi domaći",
+     "collection": "DR2",
+     "active": true
+    },
+    {
+     "word": "sich auf eine Prüfung vorbereiten",
+     "translation": "pripremati se za ispit",
+     "collection": "DR2",
+     "active": true
+    },
+    {
+     "word": "aufräumen",
+     "translation": "pospremiti",
+     "collection": "DR2",
+     "active": true
+    },
+    {
+     "word": "Wäsche waschen",
+     "translation": "prati veš",
+     "collection": "DR2",
+     "active": true
+    },
+    {
+     "word": "abwaschen",
+     "translation": "prati sudove",
+     "collection": "DR2",
+     "active": true
+    },
+    {
+     "word": "Lebensmittel einkaufen",
+     "translation": "ići u kupovinu namirnica",
+     "collection": "DR2",
+     "active": true
+    },
+    {
+     "word": "das Bett machen",
+     "translation": "namestiti krevet",
+     "collection": "DR2",
+     "active": true
+    },
+    {
+     "word": "Abendessen kochen",
+     "translation": "spremati večeru",
+     "collection": "DR2",
+     "active": true
+    },
+    {
+     "word": "staubsaugen",
+     "translation": "usisavati pod",
+     "collection": "DR2",
+     "active": true
+    },
+    {
+     "word": "den Müll rausbringen",
+     "translation": "izneti smeće",
+     "collection": "DR2",
+     "active": true
+    },
+    {
+     "word": "trainieren",
+     "translation": "trenirati",
+     "collection": "DR2",
+     "active": true
+    },
+    {
+     "word": "spazieren gehen",
+     "translation": "otići u šetnju",
+     "collection": "DR2",
+     "active": true
+    },
+    {
+     "word": "Freunde treffen",
+     "translation": "naći se sa prijateljima",
+     "collection": "DR2",
+     "active": true
+    },
+    {
+     "word": "Zeit mit der Familie verbringen",
+     "translation": "provoditi vreme sa porodicom",
+     "collection": "DR2",
+     "active": true
+    },
+    {
+     "word": "ins Bett gehen",
+     "translation": "otići na spavanje",
+     "collection": "DR2",
+     "active": true
+    },
+    {
+     "word": "die Routine ändern",
+     "translation": "promeniti rutinu",
+     "collection": "CDL",
+     "active": true
+    },
+    {
+     "word": "eine neue Stelle anfangen",
+     "translation": "započeti novi posao",
+     "collection": "CDL",
+     "active": true
+    },
+    {
+     "word": "in eine neue Stadt umziehen",
+     "translation": "preseliti se na novo mesto",
+     "collection": "CDL",
+     "active": true
+    },
+    {
+     "word": "eine neue Wohnung suchen",
+     "translation": "tražiti novi stan",
+     "collection": "CDL",
+     "active": true
+    },
+    {
+     "word": "sich an etwas gewöhnen",
+     "translation": "navikavati se na nešto",
+     "collection": "CDL",
+     "active": true
+    },
+    {
+     "word": "sich in der neuen Wohnung einleben",
+     "translation": "priviknuti se na novi dom",
+     "collection": "CDL",
+     "active": true
+    },
+    {
+     "word": "etwas Neues ausprobieren",
+     "translation": "probati nešto novo",
+     "collection": "CDL",
+     "active": true
+    },
+    {
+     "word": "mit einem neuen Hobby anfangen",
+     "translation": "početi da se bavite novim hobijem",
+     "collection": "CDL",
+     "active": true
+    },
+    {
+     "word": "eine neue Fähigkeit lernen",
+     "translation": "naučiti novu veštinu",
+     "collection": "CDL",
+     "active": true
+    },
+    {
+     "word": "neue Freunde finden",
+     "translation": "steći nove prijatelje",
+     "collection": "CDL",
+     "active": true
+    },
+    {
+     "word": "die Pläne ändern",
+     "translation": "promeniti planove",
+     "collection": "CDL",
+     "active": true
+    },
+    {
+     "word": "eine Entscheidung treffen",
+     "translation": "doneti odluku",
+     "collection": "CDL",
+     "active": true
+    }
+   ],
+   "collections": {
+    "DR1": "Tagesablauf 1",
+    "DR2": "Tagesablauf 2",
+    "CDL": "Veränderungen im Alltag"
+   },
+   "exercises": [
+    {
+     "id": "DE-A2-L01-VO-01",
+     "code": "VO-01",
+     "title": "Morgenroutine",
+     "instruction": "Napiši tačan izraz za svaku sliku.",
+     "kind": "vocabulary",
+     "image": "a2:vo01",
+     "items": [
+      {
+       "prompt": "Slika 1 (gore levo)",
+       "answers": [
+        "aufwachen",
+        "aufstehen"
+       ]
+      },
+      {
+       "prompt": "Slika 2 (gore desno)",
+       "answers": [
+        "sich die Zähne putzen",
+        "Zähne putzen"
+       ]
+      },
+      {
+       "prompt": "Slika 3 (dole levo)",
+       "answers": [
+        "frühstücken"
+       ]
+      },
+      {
+       "prompt": "Slika 4 (dole desno)",
+       "answers": [
+        "aus dem Haus gehen"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "DE-A2-L01-VO-02",
+     "code": "VO-02",
+     "title": "Bei der Arbeit",
+     "instruction": "Izaberi tačan izraz.",
+     "kind": "vocabulary",
+     "image": "a2:vo02",
+     "items": [
+      {
+       "prompt": "Ich muss um 9 Uhr ___.",
+       "options": [
+        "mit der Arbeit anfangen",
+        "ins Bett gehen",
+        "trainieren"
+       ],
+       "answers": [
+        "mit der Arbeit anfangen"
+       ]
+      },
+      {
+       "prompt": "Im Kurs müssen wir ___.",
+       "options": [
+        "Notizen machen",
+        "aufräumen",
+        "spazieren gehen"
+       ],
+       "answers": [
+        "Notizen machen"
+       ]
+      },
+      {
+       "prompt": "Nach zwei Stunden können wir ___.",
+       "options": [
+        "eine Pause machen",
+        "Wäsche waschen",
+        "das Bett machen"
+       ],
+       "answers": [
+        "eine Pause machen"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "DE-A2-L01-VO-03",
+     "code": "VO-03",
+     "title": "Hausarbeit im Alltag",
+     "instruction": "Poveži slike sa izrazima.",
+     "kind": "vocabulary",
+     "image": "a2:vo03",
+     "items": [
+      {
+       "prompt": "Slika 1 (gore levo)",
+       "options": [
+        "Wäsche waschen",
+        "abwaschen",
+        "staubsaugen",
+        "den Müll rausbringen"
+       ],
+       "answers": [
+        "Wäsche waschen"
+       ]
+      },
+      {
+       "prompt": "Slika 2 (gore desno)",
+       "options": [
+        "Wäsche waschen",
+        "abwaschen",
+        "staubsaugen",
+        "den Müll rausbringen"
+       ],
+       "answers": [
+        "abwaschen"
+       ]
+      },
+      {
+       "prompt": "Slika 3 (dole levo)",
+       "options": [
+        "Wäsche waschen",
+        "abwaschen",
+        "staubsaugen",
+        "den Müll rausbringen"
+       ],
+       "answers": [
+        "staubsaugen"
+       ]
+      },
+      {
+       "prompt": "Slika 4 (dole desno)",
+       "options": [
+        "Wäsche waschen",
+        "abwaschen",
+        "staubsaugen",
+        "den Müll rausbringen"
+       ],
+       "answers": [
+        "den Müll rausbringen"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "DE-A2-L01-VO-04",
+     "code": "VO-04",
+     "title": "Freizeit",
+     "instruction": "Dopuni rečenice izrazima iz okvira.",
+     "kind": "vocabulary",
+     "image": "a2:vo04",
+     "items": [
+      {
+       "prompt": "Nach der Arbeit gehe ich ins Fitnessstudio und ___ dort.",
+       "options": [
+        "trainieren",
+        "spazieren gehen",
+        "Freunde treffen",
+        "Zeit mit der Familie verbringen"
+       ],
+       "answers": [
+        "trainieren"
+       ]
+      },
+      {
+       "prompt": "Am Sonntag möchten wir im Tiergarten ___.",
+       "options": [
+        "trainieren",
+        "spazieren gehen",
+        "Freunde treffen",
+        "Zeit mit der Familie verbringen"
+       ],
+       "answers": [
+        "spazieren gehen"
+       ]
+      },
+      {
+       "prompt": "Am Freitag möchte ich im Café ___. Wir reden und trinken Kaffee.",
+       "options": [
+        "trainieren",
+        "spazieren gehen",
+        "Freunde treffen",
+        "Zeit mit der Familie verbringen"
+       ],
+       "answers": [
+        "Freunde treffen"
+       ]
+      },
+      {
+       "prompt": "Am Abend möchte ich zu Hause ___.",
+       "options": [
+        "trainieren",
+        "spazieren gehen",
+        "Freunde treffen",
+        "Zeit mit der Familie verbringen"
+       ],
+       "answers": [
+        "Zeit mit der Familie verbringen"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "DE-A2-L01-VO-05",
+     "code": "VO-05",
+     "title": "Der Tag in der richtigen Reihenfolge",
+     "instruction": "Poređaj aktivnosti redom kojim se dešavaju tokom dana (1–5).",
+     "kind": "vocabulary",
+     "image": "a2:vo05",
+     "items": [
+      {
+       "prompt": "aufstehen",
+       "options": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+       ],
+       "answers": [
+        "1"
+       ]
+      },
+      {
+       "prompt": "den Bus nehmen",
+       "options": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+       ],
+       "answers": [
+        "2"
+       ]
+      },
+      {
+       "prompt": "mit der Arbeit anfangen",
+       "options": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+       ],
+       "answers": [
+        "3"
+       ]
+      },
+      {
+       "prompt": "Feierabend machen",
+       "options": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+       ],
+       "answers": [
+        "4"
+       ]
+      },
+      {
+       "prompt": "ins Bett gehen",
+       "options": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+       ],
+       "answers": [
+        "5"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "DE-A2-L01-VO-06",
+     "code": "VO-06",
+     "title": "Pläne fürs Wochenende",
+     "instruction": "Izaberi najbolji izraz.",
+     "kind": "vocabulary",
+     "image": "a2:vo06",
+     "items": [
+      {
+       "prompt": "Ich brauche Milch und Obst. → Ich muss ___.",
+       "options": [
+        "Lebensmittel einkaufen",
+        "Abendessen kochen",
+        "aufräumen",
+        "das Bett machen"
+       ],
+       "answers": [
+        "Lebensmittel einkaufen"
+       ]
+      },
+      {
+       "prompt": "Die Küche ist unordentlich. → Ich muss ___.",
+       "options": [
+        "Lebensmittel einkaufen",
+        "Abendessen kochen",
+        "aufräumen",
+        "das Bett machen"
+       ],
+       "answers": [
+        "aufräumen"
+       ]
+      },
+      {
+       "prompt": "Mein Zimmer ist nicht ordentlich. → Ich muss ___.",
+       "options": [
+        "Lebensmittel einkaufen",
+        "Abendessen kochen",
+        "aufräumen",
+        "das Bett machen"
+       ],
+       "answers": [
+        "aufräumen",
+        "das Bett machen"
+       ]
+      },
+      {
+       "prompt": "Es ist Samstagmorgen. → Zuerst möchte ich im Schlafzimmer ___.",
+       "options": [
+        "Lebensmittel einkaufen",
+        "Abendessen kochen",
+        "aufräumen",
+        "das Bett machen"
+       ],
+       "answers": [
+        "das Bett machen"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "DE-A2-L01-VO-07",
+     "code": "VO-07",
+     "title": "Veränderungen im Alltag",
+     "instruction": "Poveži svaku sliku sa tačnim izrazom.",
+     "kind": "vocabulary",
+     "image": "a2:vo07",
+     "items": [
+      {
+       "prompt": "Slika 1 (gore levo)",
+       "options": [
+        "eine neue Stelle anfangen",
+        "in eine neue Stadt umziehen",
+        "eine neue Wohnung suchen",
+        "neue Freunde finden"
+       ],
+       "answers": [
+        "eine neue Stelle anfangen"
+       ]
+      },
+      {
+       "prompt": "Slika 2 (gore desno)",
+       "options": [
+        "eine neue Stelle anfangen",
+        "in eine neue Stadt umziehen",
+        "eine neue Wohnung suchen",
+        "neue Freunde finden"
+       ],
+       "answers": [
+        "in eine neue Stadt umziehen"
+       ]
+      },
+      {
+       "prompt": "Slika 3 (dole levo)",
+       "options": [
+        "eine neue Stelle anfangen",
+        "in eine neue Stadt umziehen",
+        "eine neue Wohnung suchen",
+        "neue Freunde finden"
+       ],
+       "answers": [
+        "eine neue Wohnung suchen"
+       ]
+      },
+      {
+       "prompt": "Slika 4 (dole desno)",
+       "options": [
+        "eine neue Stelle anfangen",
+        "in eine neue Stadt umziehen",
+        "eine neue Wohnung suchen",
+        "neue Freunde finden"
+       ],
+       "answers": [
+        "neue Freunde finden"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "DE-A2-L01-VO-08",
+     "code": "VO-08",
+     "title": "Ein neues Kapitel",
+     "instruction": "Dopuni tekst izrazima iz okvira.",
+     "kind": "vocabulary",
+     "image": "a2:vo08",
+     "items": [
+      {
+       "prompt": "Diesen Monat möchte ich ___.",
+       "options": [
+        "die Routine ändern",
+        "etwas Neues ausprobieren",
+        "mit einem neuen Hobby anfangen",
+        "eine neue Fähigkeit lernen"
+       ],
+       "answers": [
+        "die Routine ändern"
+       ]
+      },
+      {
+       "prompt": "Ich möchte auch ___ …",
+       "options": [
+        "die Routine ändern",
+        "etwas Neues ausprobieren",
+        "mit einem neuen Hobby anfangen",
+        "eine neue Fähigkeit lernen"
+       ],
+       "answers": [
+        "etwas Neues ausprobieren"
+       ]
+      },
+      {
+       "prompt": "… und ___.",
+       "options": [
+        "die Routine ändern",
+        "etwas Neues ausprobieren",
+        "mit einem neuen Hobby anfangen",
+        "eine neue Fähigkeit lernen"
+       ],
+       "answers": [
+        "mit einem neuen Hobby anfangen"
+       ]
+      },
+      {
+       "prompt": "Ich hoffe, ich kann bald ___.",
+       "options": [
+        "die Routine ändern",
+        "etwas Neues ausprobieren",
+        "mit einem neuen Hobby anfangen",
+        "eine neue Fähigkeit lernen"
+       ],
+       "answers": [
+        "eine neue Fähigkeit lernen"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "DE-A2-L01-VO-09",
+     "code": "VO-09",
+     "title": "Welcher Ausdruck passt?",
+     "instruction": "Izaberi najbolji izraz.",
+     "kind": "vocabulary",
+     "image": "a2:vo09",
+     "items": [
+      {
+       "prompt": "Ich weiß nicht, was ich wählen soll.",
+       "options": [
+        "eine Entscheidung treffen",
+        "sich in der neuen Wohnung einleben"
+       ],
+       "answers": [
+        "eine Entscheidung treffen"
+       ]
+      },
+      {
+       "prompt": "Ich fühle mich in meiner neuen Wohnung wohl.",
+       "options": [
+        "sich an etwas gewöhnen",
+        "sich in der neuen Wohnung einleben"
+       ],
+       "answers": [
+        "sich in der neuen Wohnung einleben"
+       ]
+      },
+      {
+       "prompt": "Wir können jetzt nicht an den See fahren.",
+       "options": [
+        "die Pläne ändern",
+        "eine neue Fähigkeit lernen"
+       ],
+       "answers": [
+        "die Pläne ändern"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "DE-A2-L01-VO-10",
+     "code": "VO-10",
+     "title": "Benutze die Wörter",
+     "instruction": "Napiši jednu rečenicu za svaki izraz.",
+     "kind": "vocabulary",
+     "image": "a2:vo10",
+     "items": [
+      {
+       "prompt": "trainieren",
+       "open": true,
+       "guide": "Napiši jednu svoju rečenicu na nemačkom u kojoj koristiš ovaj izraz."
+      },
+      {
+       "prompt": "Freunde treffen",
+       "open": true,
+       "guide": "Napiši jednu svoju rečenicu na nemačkom u kojoj koristiš ovaj izraz."
+      },
+      {
+       "prompt": "eine neue Wohnung suchen",
+       "open": true,
+       "guide": "Napiši jednu svoju rečenicu na nemačkom u kojoj koristiš ovaj izraz."
+      },
+      {
+       "prompt": "eine neue Stelle anfangen",
+       "open": true,
+       "guide": "Napiši jednu svoju rečenicu na nemačkom u kojoj koristiš ovaj izraz."
+      }
+     ]
+    },
+    {
+     "id": "DE-A2-L01-VO-11",
+     "code": "VO-11",
+     "title": "Morgen oder Abend?",
+     "instruction": "Odluči da li se aktivnost obično radi ujutru (M) ili uveče (A).",
+     "kind": "vocabulary",
+     "image": "a2:vo11",
+     "items": [
+      {
+       "prompt": "frühstücken",
+       "options": [
+        "M (Morgen)",
+        "A (Abend)"
+       ],
+       "answers": [
+        "M (Morgen)"
+       ]
+      },
+      {
+       "prompt": "ins Bett gehen",
+       "options": [
+        "M (Morgen)",
+        "A (Abend)"
+       ],
+       "answers": [
+        "A (Abend)"
+       ]
+      },
+      {
+       "prompt": "sich die Zähne putzen",
+       "options": [
+        "M (Morgen)",
+        "A (Abend)"
+       ],
+       "answers": [
+        "M (Morgen)",
+        "A (Abend)"
+       ]
+      },
+      {
+       "prompt": "aufstehen",
+       "options": [
+        "M (Morgen)",
+        "A (Abend)"
+       ],
+       "answers": [
+        "M (Morgen)"
+       ]
+      },
+      {
+       "prompt": "Feierabend machen",
+       "options": [
+        "M (Morgen)",
+        "A (Abend)"
+       ],
+       "answers": [
+        "A (Abend)"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "DE-A2-L01-VO-12",
+     "code": "VO-12",
+     "title": "Die Routine vervollständigen",
+     "instruction": "Dopuni rečenice izrazima iz okvira.",
+     "kind": "vocabulary",
+     "image": "a2:vo12",
+     "items": [
+      {
+       "prompt": "Nach dem Duschen muss man ___, bevor man rausgeht.",
+       "options": [
+        "sich anziehen",
+        "Notizen machen",
+        "frühstücken",
+        "eine Pause machen"
+       ],
+       "answers": [
+        "sich anziehen"
+       ]
+      },
+      {
+       "prompt": "Bevor ich aus dem Haus gehe, möchte ich ___, damit ich keinen Hunger habe.",
+       "options": [
+        "sich anziehen",
+        "Notizen machen",
+        "frühstücken",
+        "eine Pause machen"
+       ],
+       "answers": [
+        "frühstücken"
+       ]
+      },
+      {
+       "prompt": "In der Schule muss ich ___, damit ich mir alles merke.",
+       "options": [
+        "sich anziehen",
+        "Notizen machen",
+        "frühstücken",
+        "eine Pause machen"
+       ],
+       "answers": [
+        "Notizen machen"
+       ]
+      },
+      {
+       "prompt": "Um 10 Uhr möchten wir normalerweise ___.",
+       "options": [
+        "sich anziehen",
+        "Notizen machen",
+        "frühstücken",
+        "eine Pause machen"
+       ],
+       "answers": [
+        "eine Pause machen"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "DE-A2-L01-VO-13",
+     "code": "VO-13",
+     "title": "Schule und Arbeit",
+     "instruction": "Izaberi tačan izraz.",
+     "kind": "vocabulary",
+     "image": "a2:vo13",
+     "items": [
+      {
+       "prompt": "Im Unterricht müssen wir ___.",
+       "options": [
+        "Notizen machen",
+        "ins Bett gehen"
+       ],
+       "answers": [
+        "Notizen machen"
+       ]
+      },
+      {
+       "prompt": "Am Morgen muss ich zuerst ___.",
+       "options": [
+        "E-Mails checken",
+        "abwaschen"
+       ],
+       "answers": [
+        "E-Mails checken"
+       ]
+      },
+      {
+       "prompt": "Um 11 Uhr muss ich ___.",
+       "options": [
+        "an einem Meeting teilnehmen",
+        "staubsaugen"
+       ],
+       "answers": [
+        "an einem Meeting teilnehmen"
+       ]
+      },
+      {
+       "prompt": "Um 17 Uhr kann ich endlich ___.",
+       "options": [
+        "Feierabend machen",
+        "aufwachen"
+       ],
+       "answers": [
+        "Feierabend machen"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "DE-A2-L01-VO-14",
+     "code": "VO-14",
+     "title": "Hausarbeit",
+     "instruction": "Poveži slike sa izrazima.",
+     "kind": "vocabulary",
+     "image": "a2:vo14",
+     "items": [
+      {
+       "prompt": "Slika 1 (gore levo)",
+       "options": [
+        "Wäsche waschen",
+        "staubsaugen",
+        "das Bett machen",
+        "abwaschen"
+       ],
+       "answers": [
+        "Wäsche waschen"
+       ]
+      },
+      {
+       "prompt": "Slika 2 (gore desno)",
+       "options": [
+        "Wäsche waschen",
+        "staubsaugen",
+        "das Bett machen",
+        "abwaschen"
+       ],
+       "answers": [
+        "staubsaugen"
+       ]
+      },
+      {
+       "prompt": "Slika 3 (dole levo)",
+       "options": [
+        "Wäsche waschen",
+        "staubsaugen",
+        "das Bett machen",
+        "abwaschen"
+       ],
+       "answers": [
+        "das Bett machen"
+       ]
+      },
+      {
+       "prompt": "Slika 4 (dole desno)",
+       "options": [
+        "Wäsche waschen",
+        "staubsaugen",
+        "das Bett machen",
+        "abwaschen"
+       ],
+       "answers": [
+        "abwaschen"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "DE-A2-L01-VO-15",
+     "code": "VO-15",
+     "title": "Was musst du machen?",
+     "instruction": "Izaberi najbolji izraz.",
+     "kind": "vocabulary",
+     "image": "a2:vo15",
+     "items": [
+      {
+       "prompt": "Dein Bett ist unordentlich. → Ich muss ___.",
+       "options": [
+        "das Bett machen",
+        "abwaschen",
+        "Lebensmittel einkaufen",
+        "sich entspannen"
+       ],
+       "answers": [
+        "das Bett machen"
+       ]
+      },
+      {
+       "prompt": "In der Küche steht schmutziges Geschirr. → Ich muss ___.",
+       "options": [
+        "das Bett machen",
+        "abwaschen",
+        "Lebensmittel einkaufen",
+        "sich entspannen"
+       ],
+       "answers": [
+        "abwaschen"
+       ]
+      },
+      {
+       "prompt": "Ich brauche Milch und Brot. → Ich muss ___.",
+       "options": [
+        "das Bett machen",
+        "abwaschen",
+        "Lebensmittel einkaufen",
+        "sich entspannen"
+       ],
+       "answers": [
+        "Lebensmittel einkaufen"
+       ]
+      },
+      {
+       "prompt": "Ich bin nach der Arbeit müde. → Ich möchte ___.",
+       "options": [
+        "das Bett machen",
+        "abwaschen",
+        "Lebensmittel einkaufen",
+        "sich entspannen"
+       ],
+       "answers": [
+        "sich entspannen"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "DE-A2-L01-VO-16",
+     "code": "VO-16",
+     "title": "Große Veränderungen",
+     "instruction": "Poveži svaku sliku sa tačnim izrazom.",
+     "kind": "vocabulary",
+     "image": "a2:vo16",
+     "items": [
+      {
+       "prompt": "Slika 1 (gore levo)",
+       "options": [
+        "eine neue Stelle anfangen",
+        "in eine neue Stadt umziehen",
+        "eine neue Wohnung suchen",
+        "neue Freunde finden"
+       ],
+       "answers": [
+        "eine neue Stelle anfangen"
+       ]
+      },
+      {
+       "prompt": "Slika 2 (gore desno)",
+       "options": [
+        "eine neue Stelle anfangen",
+        "in eine neue Stadt umziehen",
+        "eine neue Wohnung suchen",
+        "neue Freunde finden"
+       ],
+       "answers": [
+        "in eine neue Stadt umziehen"
+       ]
+      },
+      {
+       "prompt": "Slika 3 (dole levo)",
+       "options": [
+        "eine neue Stelle anfangen",
+        "in eine neue Stadt umziehen",
+        "eine neue Wohnung suchen",
+        "neue Freunde finden"
+       ],
+       "answers": [
+        "eine neue Wohnung suchen"
+       ]
+      },
+      {
+       "prompt": "Slika 4 (dole desno)",
+       "options": [
+        "eine neue Stelle anfangen",
+        "in eine neue Stadt umziehen",
+        "eine neue Wohnung suchen",
+        "neue Freunde finden"
+       ],
+       "answers": [
+        "neue Freunde finden"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "DE-A2-L01-VO-17",
+     "code": "VO-17",
+     "title": "Eine neue Routine",
+     "instruction": "Dopuni tekst izrazima iz okvira.",
+     "kind": "vocabulary",
+     "image": "a2:vo17",
+     "items": [
+      {
+       "prompt": "Diesen Monat möchte Lukas ___ und Dinge zu anderen Zeiten machen.",
+       "options": [
+        "die Routine ändern",
+        "etwas Neues ausprobieren",
+        "neue Freunde finden",
+        "eine neue Fähigkeit lernen"
+       ],
+       "answers": [
+        "die Routine ändern"
+       ]
+      },
+      {
+       "prompt": "Er hat einen neuen Stundenplan und möchte auch ___, was er noch nie gemacht hat.",
+       "options": [
+        "die Routine ändern",
+        "etwas Neues ausprobieren",
+        "neue Freunde finden",
+        "eine neue Fähigkeit lernen"
+       ],
+       "answers": [
+        "etwas Neues ausprobieren"
+       ]
+      },
+      {
+       "prompt": "Er geht in einen Verein, um ___ …",
+       "options": [
+        "die Routine ändern",
+        "etwas Neues ausprobieren",
+        "neue Freunde finden",
+        "eine neue Fähigkeit lernen"
+       ],
+       "answers": [
+        "neue Freunde finden"
+       ]
+      },
+      {
+       "prompt": "… und er hofft, bald ___, zum Beispiel Gitarre spielen.",
+       "options": [
+        "die Routine ändern",
+        "etwas Neues ausprobieren",
+        "neue Freunde finden",
+        "eine neue Fähigkeit lernen"
+       ],
+       "answers": [
+        "eine neue Fähigkeit lernen"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "DE-A2-L01-VO-18",
+     "code": "VO-18",
+     "title": "Welcher Ausdruck passt?",
+     "instruction": "Izaberi najbolji izraz.",
+     "kind": "vocabulary",
+     "image": "a2:vo18",
+     "items": [
+      {
+       "prompt": "Ich lese im Internet Wohnungsanzeigen.",
+       "options": [
+        "eine neue Wohnung suchen",
+        "eine neue Stelle anfangen"
+       ],
+       "answers": [
+        "eine neue Wohnung suchen"
+       ]
+      },
+      {
+       "prompt": "Ich nehme jetzt Gitarrenunterricht.",
+       "options": [
+        "die Pläne ändern",
+        "mit einem neuen Hobby anfangen"
+       ],
+       "answers": [
+        "mit einem neuen Hobby anfangen"
+       ]
+      },
+      {
+       "prompt": "Jetzt fühle ich mich in meiner neuen Wohnung wohl.",
+       "options": [
+        "sich in der neuen Wohnung einleben",
+        "eine Entscheidung treffen"
+       ],
+       "answers": [
+        "sich in der neuen Wohnung einleben"
+       ]
+      },
+      {
+       "prompt": "Wir können nicht rausgehen, weil es regnet. Wir müssen etwas anderes machen.",
+       "options": [
+        "die Pläne ändern",
+        "neue Freunde finden"
+       ],
+       "answers": [
+        "die Pläne ändern"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "DE-A2-L01-VO-19",
+     "code": "VO-19",
+     "title": "Benutze die Ausdrücke",
+     "instruction": "Napiši jednu rečenicu za svaki izraz.",
+     "kind": "vocabulary",
+     "image": "a2:vo19",
+     "items": [
+      {
+       "prompt": "spazieren gehen",
+       "open": true,
+       "guide": "Napiši jednu svoju rečenicu na nemačkom u kojoj koristiš ovaj izraz."
+      },
+      {
+       "prompt": "sich auf eine Prüfung vorbereiten",
+       "open": true,
+       "guide": "Napiši jednu svoju rečenicu na nemačkom u kojoj koristiš ovaj izraz."
+      },
+      {
+       "prompt": "die Routine ändern",
+       "open": true,
+       "guide": "Napiši jednu svoju rečenicu na nemačkom u kojoj koristiš ovaj izraz."
+      },
+      {
+       "prompt": "eine neue Stelle anfangen",
+       "open": true,
+       "guide": "Napiši jednu svoju rečenicu na nemačkom u kojoj koristiš ovaj izraz."
+      }
+     ]
+    },
+    {
+     "id": "DE-A2-L01-VO-20",
+     "code": "VO-20",
+     "title": "Situationen im Alltag",
+     "instruction": "Napiši tačan izraz.",
+     "kind": "vocabulary",
+     "image": "a2:vo20",
+     "items": [
+      {
+       "prompt": "Du fängst in einer neuen Firma an zu arbeiten.",
+       "answers": [
+        "eine neue Stelle anfangen"
+       ]
+      },
+      {
+       "prompt": "Du suchst eine andere Wohnung.",
+       "answers": [
+        "eine neue Wohnung suchen"
+       ]
+      },
+      {
+       "prompt": "Du fühlst dich in deinem neuen Zuhause langsam wohl.",
+       "answers": [
+        "sich in der neuen Wohnung einleben",
+        "sich an etwas gewöhnen"
+       ]
+      },
+      {
+       "prompt": "Du machst Dinge jetzt zu anderen Zeiten als früher.",
+       "answers": [
+        "die Routine ändern"
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  "reading": {
+   "texts": [
+    {
+     "id": "DE-A2-L01-RD1",
+     "title": "Text 1 · Eine volle Woche",
+     "image": "a2:rd1",
+     "body": "Lena hat eine volle Woche. Sie arbeitet montags, mittwochs und freitags Teilzeit in einer Buchhandlung. Normalerweise steht sie um sieben Uhr auf, frühstückt und fährt mit der U-Bahn zur Arbeit.\n\nDienstags und donnerstags geht sie abends in den Deutschkurs, deshalb lernt sie nachmittags zu Hause. Diese Woche ist ein bisschen anders, denn sie bereitet eine Präsentation für den Kurs vor. Sie sucht auch eine neue Wohnung, also sitzt sie nach dem Abendessen oft am Laptop.\n\nAm Samstag räumt sie ihr Zimmer auf, wäscht Wäsche und trifft Mia auf einen Kaffee. Am Sonntag geht sie mit Lukas im Tiergarten spazieren und plant die neue Woche."
+    },
+    {
+     "id": "DE-A2-L01-RD2",
+     "title": "Text 2 · Eine Nachricht von Mia",
+     "image": "a2:rd2",
+     "body": "Hallo Lena!\nTut mir leid, ich kann dich am Freitagabend nicht treffen, denn ich helfe meiner Cousine beim Umzug in eine neue Wohnung. Am Samstagvormittag habe ich auch keine Zeit, weil ich mein Fahrrad in die Werkstatt bringe. Aber am Nachmittag habe ich frei. Wollen wir uns um 16 Uhr im Café am Park treffen? Wir können über deinen Deutschkurs sprechen und über deine Wohnungssuche. Lukas kommt später mit, nach seinem Fotokurs. Sag mir Bescheid, ob der Plan für dich passt!"
+    },
+    {
+     "id": "DE-A2-L01-RD3",
+     "title": "Text 3 · Ein Neuanfang in Berlin",
+     "image": "a2:rd3",
+     "body": "Als Lukas vor zwei Monaten nach Berlin gezogen ist, war alles neu und ein bisschen verwirrend. Zu Hause hat er in einer kleinen Stadt gewohnt und alle gekannt. In Berlin geht das Leben schneller, die U-Bahn ist immer voll, und die Leute haben anscheinend immer viel zu tun.\n\nAm Anfang war es für Lukas schwer, sich an seinen neuen Alltag zu gewöhnen. Er hat eine neue Stelle in einem Hotel angefangen, in verschiedenen Schichten gearbeitet und abends Deutsch gelernt. Er wollte auch neue Freunde finden, deshalb spielt er jetzt in einer Fußballgruppe, die sonntags auf dem Tempelhofer Feld spielt.\n\nNach und nach wurde alles leichter. Er hat gelernt, seine Zeit zu planen, ein schönes Café in der Nähe seiner Wohnung gefunden und fühlt sich jetzt in der Stadt wohl. Er vermisst seine Familie immer noch, aber er ist selbstbewusster und mit seinem neuen Leben zufriedener."
+    }
+   ],
+   "exercises": [
+    {
+     "id": "DE-A2-L01-R-01",
+     "code": "R-01",
+     "title": "Text 1 · Richtig oder falsch",
+     "instruction": "Wähle richtig oder falsch.",
+     "kind": "closed",
+     "items": [
+      {
+       "prompt": "Lena arbeitet jeden Tag in einer Buchhandlung.",
+       "answers": [
+        "Falsch"
+       ],
+       "options": [
+        "Richtig",
+        "Falsch"
+       ]
+      },
+      {
+       "prompt": "Sie fährt normalerweise mit der U-Bahn zur Arbeit.",
+       "answers": [
+        "Richtig"
+       ],
+       "options": [
+        "Richtig",
+        "Falsch"
+       ]
+      },
+      {
+       "prompt": "Diese Woche bereitet sie eine Präsentation vor.",
+       "answers": [
+        "Richtig"
+       ],
+       "options": [
+        "Richtig",
+        "Falsch"
+       ]
+      },
+      {
+       "prompt": "Am Samstag trifft sie Lukas auf einen Kaffee.",
+       "answers": [
+        "Falsch"
+       ],
+       "options": [
+        "Richtig",
+        "Falsch"
+       ]
+      }
+     ],
+     "textId": "DE-A2-L01-RD1"
+    },
+    {
+     "id": "DE-A2-L01-R-02",
+     "code": "R-02",
+     "title": "Text 1 · Wähle die richtige Antwort",
+     "instruction": "Wähle die richtige Antwort.",
+     "kind": "closed",
+     "items": [
+      {
+       "prompt": "Warum ist diese Woche für Lena anders?",
+       "answers": [
+        "Sie bereitet eine Präsentation für den Kurs vor."
+       ],
+       "options": [
+        "Sie bereitet eine Präsentation für den Kurs vor.",
+        "Sie fängt eine neue Stelle in der Buchhandlung an.",
+        "Sie besucht ihre Familie in einer anderen Stadt."
+       ]
+      },
+      {
+       "prompt": "Was macht Lena dienstags und donnerstags?",
+       "answers": [
+        "Sie geht abends in den Deutschkurs."
+       ],
+       "options": [
+        "Sie lernt den ganzen Abend zu Hause.",
+        "Sie geht abends in den Deutschkurs.",
+        "Sie arbeitet eine Extraschicht in der Buchhandlung."
+       ]
+      },
+      {
+       "prompt": "Was macht Lena am Sonntag?",
+       "answers": [
+        "Sie geht mit Lukas spazieren und plant die neue Woche."
+       ],
+       "options": [
+        "Sie geht mit Lukas spazieren und plant die neue Woche.",
+        "Sie räumt ihr Zimmer auf und wäscht Wäsche.",
+        "Sie trifft Mia nach dem Mittagessen auf einen Kaffee."
+       ]
+      }
+     ],
+     "textId": "DE-A2-L01-RD1"
+    },
+    {
+     "id": "DE-A2-L01-R-03",
+     "code": "R-03",
+     "title": "Text 1 · Finde die Information",
+     "instruction": "Beantworte die Fragen.",
+     "kind": "open",
+     "items": [
+      {
+       "prompt": "Wo arbeitet Lena?",
+       "open": true,
+       "guide": "Sie arbeitet Teilzeit in einer Buchhandlung."
+      },
+      {
+       "prompt": "Wen trifft sie am Samstag?",
+       "open": true,
+       "guide": "Mia."
+      },
+      {
+       "prompt": "Warum sitzt sie nach dem Abendessen am Laptop?",
+       "open": true,
+       "guide": "Weil sie eine neue Wohnung sucht."
+      }
+     ],
+     "textId": "DE-A2-L01-RD1"
+    },
+    {
+     "id": "DE-A2-L01-R-04",
+     "code": "R-04",
+     "title": "Text 2 · Wähle die richtige Antwort",
+     "instruction": "Wähle die richtige Antwort.",
+     "kind": "closed",
+     "items": [
+      {
+       "prompt": "Warum kann Mia Lena am Freitagabend nicht treffen?",
+       "answers": [
+        "Sie hilft ihrer Cousine beim Umzug."
+       ],
+       "options": [
+        "Sie hilft ihrer Cousine beim Umzug.",
+        "Sie hat einen Abendkurs.",
+        "Sie arbeitet im Café."
+       ]
+      },
+      {
+       "prompt": "Was macht Mia am Samstagvormittag?",
+       "answers": [
+        "Sie bringt ihr Fahrrad in die Werkstatt."
+       ],
+       "options": [
+        "Sie bringt ihr Fahrrad in die Werkstatt.",
+        "Sie hilft Lukas bei seinem Kurs.",
+        "Sie trifft Lena auf einen Kaffee."
+       ]
+      },
+      {
+       "prompt": "Wo wollen sie sich treffen?",
+       "answers": [
+        "Im Café am Park."
+       ],
+       "options": [
+        "Im Café am Park.",
+        "In der Buchhandlung in der Nähe von Lenas Wohnung.",
+        "In der Werkstatt."
+       ]
+      }
+     ],
+     "textId": "DE-A2-L01-RD2"
+    },
+    {
+     "id": "DE-A2-L01-R-05",
+     "code": "R-05",
+     "title": "Text 2 · Bring die Ereignisse in die richtige Reihenfolge",
+     "instruction": "Nummeriere die Ereignisse von 1 bis 4.",
+     "kind": "closed",
+     "items": [
+      {
+       "prompt": "Lukas kommt nach dem Kurs.",
+       "answers": [
+        "4"
+       ],
+       "options": [
+        "1",
+        "2",
+        "3",
+        "4"
+       ]
+      },
+      {
+       "prompt": "Mia hilft ihrer Cousine beim Umzug.",
+       "answers": [
+        "1"
+       ],
+       "options": [
+        "1",
+        "2",
+        "3",
+        "4"
+       ]
+      },
+      {
+       "prompt": "Mia bringt ihr Fahrrad in die Werkstatt.",
+       "answers": [
+        "2"
+       ],
+       "options": [
+        "1",
+        "2",
+        "3",
+        "4"
+       ]
+      },
+      {
+       "prompt": "Lena und Mia treffen sich im Café.",
+       "answers": [
+        "3"
+       ],
+       "options": [
+        "1",
+        "2",
+        "3",
+        "4"
+       ]
+      }
+     ],
+     "textId": "DE-A2-L01-RD2"
+    },
+    {
+     "id": "DE-A2-L01-R-06",
+     "code": "R-06",
+     "title": "Text 2 · Beantworte die Fragen",
+     "instruction": "Beantworte die Fragen.",
+     "kind": "open",
+     "items": [
+      {
+       "prompt": "Warum hat Mia am Freitagabend keine Zeit?",
+       "open": true,
+       "guide": "Sie hilft ihrer Cousine beim Umzug in eine neue Wohnung."
+      },
+      {
+       "prompt": "Worüber wollen Lena und Mia sprechen?",
+       "open": true,
+       "guide": "Über Lenas Deutschkurs und ihre Wohnungssuche."
+      },
+      {
+       "prompt": "Wann kommt Lukas?",
+       "open": true,
+       "guide": "Später, nach seinem Fotokurs."
+      }
+     ],
+     "textId": "DE-A2-L01-RD2"
+    },
+    {
+     "id": "DE-A2-L01-R-07",
+     "code": "R-07",
+     "title": "Text 3 · Finde die richtige Überschrift",
+     "instruction": "Schreib die richtige Überschrift (A–C) zu jedem Absatz. A) Das Leben in einer Großstadt · B) Sich an ein neues Leben gewöhnen · C) Sich wohler fühlen",
+     "kind": "closed",
+     "items": [
+      {
+       "prompt": "Absatz 1",
+       "answers": [
+        "A"
+       ],
+       "options": [
+        "A",
+        "B",
+        "C"
+       ]
+      },
+      {
+       "prompt": "Absatz 2",
+       "answers": [
+        "B"
+       ],
+       "options": [
+        "A",
+        "B",
+        "C"
+       ]
+      },
+      {
+       "prompt": "Absatz 3",
+       "answers": [
+        "C"
+       ],
+       "options": [
+        "A",
+        "B",
+        "C"
+       ]
+      }
+     ],
+     "textId": "DE-A2-L01-RD3"
+    },
+    {
+     "id": "DE-A2-L01-R-08",
+     "code": "R-08",
+     "title": "Text 3 · Wörter im Text",
+     "instruction": "Wähle die richtige Bedeutung für jedes Wort aus dem Text.",
+     "kind": "closed",
+     "items": [
+      {
+       "prompt": "verwirrend",
+       "answers": [
+        "schwer zu verstehen"
+       ],
+       "options": [
+        "sicher in sich selbst",
+        "Arbeitszeiten zu verschiedenen Zeiten",
+        "schwer zu verstehen"
+       ]
+      },
+      {
+       "prompt": "Schichten",
+       "answers": [
+        "Arbeitszeiten zu verschiedenen Zeiten"
+       ],
+       "options": [
+        "sicher in sich selbst",
+        "Arbeitszeiten zu verschiedenen Zeiten",
+        "schwer zu verstehen"
+       ]
+      },
+      {
+       "prompt": "selbstbewusst",
+       "answers": [
+        "sicher in sich selbst"
+       ],
+       "options": [
+        "sicher in sich selbst",
+        "Arbeitszeiten zu verschiedenen Zeiten",
+        "schwer zu verstehen"
+       ]
+      }
+     ],
+     "textId": "DE-A2-L01-RD3"
+    },
+    {
+     "id": "DE-A2-L01-R-09",
+     "code": "R-09",
+     "title": "Text 3 · Fakt oder Meinung?",
+     "instruction": "Schreib F für Fakt oder M für Meinung (was jemand denkt).",
+     "kind": "closed",
+     "items": [
+      {
+       "prompt": "In Berlin geht das Leben schneller.",
+       "answers": [
+        "M"
+       ],
+       "options": [
+        "F",
+        "M"
+       ]
+      },
+      {
+       "prompt": "Die Leute haben anscheinend immer viel zu tun.",
+       "answers": [
+        "M"
+       ],
+       "options": [
+        "F",
+        "M"
+       ]
+      },
+      {
+       "prompt": "Lukas spielt in einer Fußballgruppe, die sonntags spielt.",
+       "answers": [
+        "F"
+       ],
+       "options": [
+        "F",
+        "M"
+       ]
+      },
+      {
+       "prompt": "Er hat ein schönes Café in der Nähe seiner Wohnung gefunden.",
+       "answers": [
+        "F"
+       ],
+       "options": [
+        "F",
+        "M"
+       ]
+      }
+     ],
+     "textId": "DE-A2-L01-RD3"
+    },
+    {
+     "id": "DE-A2-L01-R-10",
+     "code": "R-10",
+     "title": "Text 3 · Leseverstehen",
+     "instruction": "Beantworte die Fragen.",
+     "kind": "open",
+     "items": [
+      {
+       "prompt": "Wie lange wohnt Lukas schon in Berlin?",
+       "open": true,
+       "guide": "Seit zwei Monaten."
+      },
+      {
+       "prompt": "Warum spielt er in einer Fußballgruppe?",
+       "open": true,
+       "guide": "Weil er neue Freunde finden wollte."
+      },
+      {
+       "prompt": "Was hat ihm geholfen, sich in der Stadt wohlzufühlen?",
+       "open": true,
+       "guide": "Er hat gelernt, seine Zeit zu planen, und ein schönes Café in der Nähe seiner Wohnung gefunden."
+      },
+      {
+       "prompt": "Wie geht es ihm jetzt?",
+       "open": true,
+       "guide": "Er ist selbstbewusster und zufriedener, aber er vermisst seine Familie immer noch."
+      }
+     ],
+     "textId": "DE-A2-L01-RD3"
+    }
+   ]
+  },
+  "listening": {
+   "scenes": [
+    {
+     "id": "L-01",
+     "code": "DE-A2-L01-L01",
+     "title": "L-01 · Frühe Morgen",
+     "context": "Radio-intervju",
+     "lines": [
+      {
+       "speaker": "Moderator",
+       "text": "Guten Morgen! Heute sprechen wir über Morgenroutinen. Sarah, wann stehst du normalerweise auf?"
+      },
+      {
+       "speaker": "Sarah",
+       "text": "Ich stehe um fünf Uhr auf, weil ich in einer Bäckerei arbeite. Ich frühstücke zu Hause und gehe dann zu Fuß zur Arbeit."
+      },
+      {
+       "speaker": "Moderator",
+       "text": "Stehst du gern so früh auf?"
+      },
+      {
+       "speaker": "Sarah",
+       "text": "Manchmal ist es schwer, besonders im Winter. Aber ich mache um zwei Uhr nachmittags Feierabend. Dann habe ich Zeit, Freunde zu treffen oder spazieren zu gehen."
+      },
+      {
+       "speaker": "Moderator",
+       "text": "Und was machst du heute nach der Arbeit?"
+      },
+      {
+       "speaker": "Sarah",
+       "text": "Heute treffe ich meine Schwester auf einen Kaffee."
+      }
+     ],
+     "questions": [
+      {
+       "prompt": "Was gefällt Sarah an ihren Arbeitszeiten?",
+       "options": [
+        "Sie hat am Nachmittag Zeit für Aktivitäten.",
+        "Sie kann bei der Arbeit frühstücken.",
+        "Sie kann morgens länger schlafen."
+       ],
+       "answer": "Sie hat am Nachmittag Zeit für Aktivitäten."
+      }
+     ]
+    },
+    {
+     "id": "L-02",
+     "code": "DE-A2-L01-L02",
+     "title": "L-02 · Wo ist mein Paket?",
+     "context": "Telefonski razgovor",
+     "lines": [
+      {
+       "speaker": "Kundin",
+       "text": "Guten Tag, ich rufe wegen meines Pakets an. Es kommt einfach nicht an."
+      },
+      {
+       "speaker": "Mitarbeiter",
+       "text": "Guten Tag. Können Sie mir bitte die Sendungsnummer sagen?"
+      },
+      {
+       "speaker": "Kundin",
+       "text": "Ja, die Nummer ist 4-7-2-9-1."
+      },
+      {
+       "speaker": "Mitarbeiter",
+       "text": "Danke. Das Paket ist noch im Lager in Leipzig. Es kommt morgen an, zwischen zehn und zwölf Uhr."
+      },
+      {
+       "speaker": "Kundin",
+       "text": "Morgen arbeite ich bis 13 Uhr. Kann der Fahrer es bei meiner Nachbarin abgeben?"
+      },
+      {
+       "speaker": "Mitarbeiter",
+       "text": "Ja, natürlich. Ich trage das jetzt ein."
+      }
+     ],
+     "questions": [
+      {
+       "prompt": "Wo ist das Paket jetzt?",
+       "options": [
+        "Im Lager in Leipzig.",
+        "Bei der Nachbarin.",
+        "Bei der Post in Berlin."
+       ],
+       "answer": "Im Lager in Leipzig."
+      },
+      {
+       "prompt": "Wann kommt das Paket an?",
+       "options": [
+        "Morgen zwischen zehn und zwölf Uhr.",
+        "Heute um 13 Uhr.",
+        "Übermorgen am Vormittag."
+       ],
+       "answer": "Morgen zwischen zehn und zwölf Uhr."
+      },
+      {
+       "prompt": "Was ist die Lösung?",
+       "options": [
+        "Der Fahrer gibt das Paket bei der Nachbarin ab.",
+        "Die Kundin holt das Paket im Lager ab.",
+        "Die Kundin bleibt morgen zu Hause."
+       ],
+       "answer": "Der Fahrer gibt das Paket bei der Nachbarin ab."
+      }
+     ]
+    },
+    {
+     "id": "L-03",
+     "code": "DE-A2-L01-L03",
+     "title": "L-03 · Wir teilen die Hausarbeit",
+     "context": "Razgovor cimera u WG-u",
+     "lines": [
+      {
+       "speaker": "Felix",
+       "text": "Mia, wir müssen am Wochenende die Wohnung aufräumen. Wer macht was?"
+      },
+      {
+       "speaker": "Mia",
+       "text": "Ich kann staubsaugen und die Wäsche waschen. Und du?"
+      },
+      {
+       "speaker": "Felix",
+       "text": "Ich wasche ab und bringe den Müll raus. Am Samstag kaufe ich auch Lebensmittel ein."
+      },
+      {
+       "speaker": "Mia",
+       "text": "Super. Am Samstag arbeite ich nicht, aber am Sonntag trainiere ich am Vormittag."
+      },
+      {
+       "speaker": "Felix",
+       "text": "Kein Problem. Dann kochst du am Sonntagabend?"
+      },
+      {
+       "speaker": "Mia",
+       "text": "Gern! Ich koche Spätzle."
+      },
+      {
+       "speaker": "Felix",
+       "text": "Perfekt, dann räume ich danach die Küche auf."
+      }
+     ],
+     "questions": [
+      {
+       "prompt": "Was macht Mia?",
+       "options": [
+        "Sie saugt Staub und wäscht die Wäsche.",
+        "Sie wäscht ab.",
+        "Sie bringt den Müll raus."
+       ],
+       "answer": "Sie saugt Staub und wäscht die Wäsche."
+      },
+      {
+       "prompt": "Wann kauft Felix ein?",
+       "options": [
+        "Am Samstag.",
+        "Am Sonntag.",
+        "Am Freitagabend."
+       ],
+       "answer": "Am Samstag."
+      },
+      {
+       "prompt": "Mia arbeitet am Samstag.",
+       "options": [
+        "Wahr",
+        "Falsch"
+       ],
+       "answer": "Falsch"
+      },
+      {
+       "prompt": "Mia trainiert am Sonntagvormittag.",
+       "options": [
+        "Wahr",
+        "Falsch"
+       ],
+       "answer": "Wahr"
+      },
+      {
+       "prompt": "Was kocht Mia?",
+       "options": [
+        "Spätzle.",
+        "Suppe.",
+        "Pizza."
+       ],
+       "answer": "Spätzle."
+      },
+      {
+       "prompt": "Was macht Felix nach dem Essen?",
+       "options": [
+        "Er räumt die Küche auf.",
+        "Er geht spazieren.",
+        "Er sieht fern."
+       ],
+       "answer": "Er räumt die Küche auf."
+      }
+     ]
+    },
+    {
+     "id": "L-04",
+     "code": "DE-A2-L01-L04",
+     "title": "L-04 · Der Zug hat Verspätung",
+     "context": "Obaveštenje na stanici",
+     "lines": [
+      {
+       "speaker": "Ansage",
+       "text": "Achtung am Gleis 7: Der ICE nach Hamburg, Abfahrt 14:05 Uhr, hat heute circa 20 Minuten Verspätung."
+      },
+      {
+       "speaker": "Ansage",
+       "text": "Grund dafür ist eine Reparatur an der Strecke. Der Zug fährt heute von Gleis 9 ab."
+      },
+      {
+       "speaker": "Ansage",
+       "text": "Reisende nach Hannover steigen bitte in den Regionalzug um 14:15 Uhr um. Wir bitten um Entschuldigung."
+      }
+     ],
+     "questions": [
+      {
+       "prompt": "Wie viel Verspätung hat der ICE?",
+       "options": [
+        "Circa 20 Minuten.",
+        "Circa 5 Minuten.",
+        "Eine Stunde."
+       ],
+       "answer": "Circa 20 Minuten."
+      },
+      {
+       "prompt": "Von welchem Gleis fährt der Zug heute ab?",
+       "options": [
+        "Gleis 9.",
+        "Gleis 7.",
+        "Gleis 4."
+       ],
+       "answer": "Gleis 9."
+      },
+      {
+       "prompt": "Was sollen Reisende nach Hannover tun?",
+       "options": [
+        "In den Regionalzug um 14:15 Uhr umsteigen.",
+        "Auf den nächsten ICE warten.",
+        "Mit dem Bus fahren."
+       ],
+       "answer": "In den Regionalzug um 14:15 Uhr umsteigen."
+      }
+     ]
+    },
+    {
+     "id": "L-05",
+     "code": "DE-A2-L01-L05",
+     "title": "L-05 · Einen Arzttermin vereinbaren",
+     "context": "Telefonski razgovor",
+     "lines": [
+      {
+       "speaker": "Arzthelferin",
+       "text": "Praxis Dr. Krüger, guten Morgen. Was kann ich für Sie tun?"
+      },
+      {
+       "speaker": "Patient",
+       "text": "Guten Morgen, hier ist Tobias Lang. Ich möchte gern einen Termin machen. Ich habe seit drei Tagen Halsschmerzen."
+      },
+      {
+       "speaker": "Arzthelferin",
+       "text": "Heute ist leider alles voll. Morgen um 8:30 Uhr ist noch etwas frei."
+      },
+      {
+       "speaker": "Patient",
+       "text": "Morgen früh fange ich um acht mit der Arbeit an. Geht es auch am Nachmittag?"
+      },
+      {
+       "speaker": "Arzthelferin",
+       "text": "Ja, um 16:45 Uhr. Bringen Sie bitte Ihre Versichertenkarte mit."
+      },
+      {
+       "speaker": "Patient",
+       "text": "Sehr gut, das passt. Vielen Dank!"
+      },
+      {
+       "speaker": "Arzthelferin",
+       "text": "Gern. Bis morgen, Herr Lang."
+      }
+     ],
+     "questions": [
+      {
+       "prompt": "Was ist Tobias' Problem?",
+       "options": [
+        "Er hat Halsschmerzen.",
+        "Er hat Kopfschmerzen.",
+        "Er hat Rückenschmerzen."
+       ],
+       "answer": "Er hat Halsschmerzen."
+      },
+      {
+       "prompt": "Warum passt 8:30 Uhr nicht?",
+       "options": [
+        "Er fängt um acht mit der Arbeit an.",
+        "Er schläft morgens lange.",
+        "Er bringt sein Kind in die Kita."
+       ],
+       "answer": "Er fängt um acht mit der Arbeit an."
+      },
+      {
+       "prompt": "Wann ist der Termin?",
+       "options": [
+        "Morgen um 16:45 Uhr.",
+        "Heute um 16:45 Uhr.",
+        "Morgen um 8:30 Uhr."
+       ],
+       "answer": "Morgen um 16:45 Uhr."
+      },
+      {
+       "prompt": "Was soll er mitbringen?",
+       "options": [
+        "Seine Versichertenkarte.",
+        "Seinen Pass.",
+        "Ein Rezept."
+       ],
+       "answer": "Seine Versichertenkarte."
+      }
+     ]
+    },
+    {
+     "id": "L-06",
+     "code": "DE-A2-L01-L06",
+     "title": "L-06 · Etwas Neues ausprobieren",
+     "context": "Podcast-intervju — dve rečenice su tačne",
+     "lines": [
+      {
+       "speaker": "Moderator",
+       "text": "Heute ist Jonas bei uns. Jonas, du hast vor Kurzem etwas Neues ausprobiert, oder?"
+      },
+      {
+       "speaker": "Jonas",
+       "text": "Ja! Ich jogge schon lange, aber jetzt gehe ich auch zum Klettern."
+      },
+      {
+       "speaker": "Moderator",
+       "text": "Kletterst du mit deinen alten Freunden?"
+      },
+      {
+       "speaker": "Jonas",
+       "text": "Nein, meine alten Freunde haben keine Lust. Aber in der Kletterhalle finde ich neue Freunde."
+      },
+      {
+       "speaker": "Moderator",
+       "text": "Wie oft gehst du hin?"
+      },
+      {
+       "speaker": "Jonas",
+       "text": "Zweimal pro Woche, dienstags und freitags nach der Arbeit."
+      },
+      {
+       "speaker": "Moderator",
+       "text": "Ist es schwer?"
+      },
+      {
+       "speaker": "Jonas",
+       "text": "Am Anfang war es schwer, aber jetzt gewöhne ich mich langsam daran."
+      }
+     ],
+     "questions": [
+      {
+       "prompt": "Jonas joggt regelmäßig.",
+       "options": [
+        "Wahr",
+        "Falsch"
+       ],
+       "answer": "Wahr"
+      },
+      {
+       "prompt": "Jonas klettert mit seinen alten Freunden.",
+       "options": [
+        "Wahr",
+        "Falsch"
+       ],
+       "answer": "Falsch"
+      },
+      {
+       "prompt": "Wie oft klettert Jonas?",
+       "options": [
+        "Zweimal pro Woche.",
+        "Jeden Tag.",
+        "Einmal im Monat."
+       ],
+       "answer": "Zweimal pro Woche."
+      },
+      {
+       "prompt": "Wann geht er klettern?",
+       "options": [
+        "Dienstags und freitags nach der Arbeit.",
+        "Am Wochenende vormittags.",
+        "Montags und mittwochs früh."
+       ],
+       "answer": "Dienstags und freitags nach der Arbeit."
+      },
+      {
+       "prompt": "Wie findet er das Klettern jetzt?",
+       "options": [
+        "Er gewöhnt sich langsam daran.",
+        "Es ist immer noch sehr schwer.",
+        "Er möchte aufhören."
+       ],
+       "answer": "Er gewöhnt sich langsam daran."
+      }
+     ]
+    },
+    {
+     "id": "L-07",
+     "code": "DE-A2-L01-L07",
+     "title": "L-07 · Neues aus der Stadtbibliothek",
+     "context": "Snimljena poruka",
+     "lines": [
+      {
+       "speaker": "Ansage",
+       "text": "Willkommen bei der Stadtbibliothek Pankow."
+      },
+      {
+       "speaker": "Ansage",
+       "text": "Ab nächster Woche haben wir neue Öffnungszeiten: Montag bis Freitag von 10 bis 19 Uhr, samstags von 10 bis 14 Uhr."
+      },
+      {
+       "speaker": "Ansage",
+       "text": "Sonntags ist die Bibliothek geschlossen."
+      },
+      {
+       "speaker": "Ansage",
+       "text": "Jeden Mittwoch um 18 Uhr gibt es ein kostenloses Sprachcafé für Deutschlernende."
+      },
+      {
+       "speaker": "Ansage",
+       "text": "Sie können Bücher jetzt auch online verlängern."
+      },
+      {
+       "speaker": "Ansage",
+       "text": "Wir freuen uns auf Ihren Besuch!"
+      }
+     ],
+     "questions": [
+      {
+       "prompt": "Wann ist die Bibliothek am Samstag geöffnet?",
+       "options": [
+        "Von 10 bis 14 Uhr.",
+        "Von 10 bis 19 Uhr.",
+        "Gar nicht."
+       ],
+       "answer": "Von 10 bis 14 Uhr."
+      },
+      {
+       "prompt": "Was gibt es jeden Mittwoch?",
+       "options": [
+        "Ein kostenloses Sprachcafé.",
+        "Einen Kinderfilm.",
+        "Einen Bücherflohmarkt."
+       ],
+       "answer": "Ein kostenloses Sprachcafé."
+      },
+      {
+       "prompt": "Was kann man jetzt online machen?",
+       "options": [
+        "Bücher verlängern.",
+        "Bücher kaufen.",
+        "Einen Kurs bezahlen."
+       ],
+       "answer": "Bücher verlängern."
+      }
+     ]
+    },
+    {
+     "id": "L-08",
+     "code": "DE-A2-L01-L08",
+     "title": "L-08 · Omas Geburtstag",
+     "context": "Govorna poruka",
+     "lines": [
+      {
+       "speaker": "Anna",
+       "text": "Hallo Paul, hier ist Anna. Du weißt ja, Oma hat am Samstag Geburtstag."
+      },
+      {
+       "speaker": "Anna",
+       "text": "Wir feiern bei Mama in Potsdam. Wir fangen um 15 Uhr mit Kaffee und Kuchen an."
+      },
+      {
+       "speaker": "Anna",
+       "text": "Ich backe einen Apfelkuchen. Kannst du Blumen mitbringen?"
+      },
+      {
+       "speaker": "Anna",
+       "text": "Ich fahre mit dem Regionalzug um 13:40 Uhr ab. Kommst du mit?"
+      },
+      {
+       "speaker": "Anna",
+       "text": "Ruf mich bitte heute Abend an, dann können wir alles planen."
+      },
+      {
+       "speaker": "Anna",
+       "text": "Bis dann, tschüss!"
+      }
+     ],
+     "questions": [
+      {
+       "prompt": "Wo feiern sie?",
+       "options": [
+        "Bei Mama in Potsdam.",
+        "Bei Oma in Berlin.",
+        "In einem Restaurant."
+       ],
+       "answer": "Bei Mama in Potsdam."
+      },
+      {
+       "prompt": "Wann fängt die Feier an?",
+       "options": [
+        "Um 15 Uhr.",
+        "Um 13:40 Uhr.",
+        "Am Abend."
+       ],
+       "answer": "Um 15 Uhr."
+      },
+      {
+       "prompt": "Was soll Paul mitbringen?",
+       "options": [
+        "Blumen.",
+        "Einen Kuchen.",
+        "Ein Buch."
+       ],
+       "answer": "Blumen."
+      },
+      {
+       "prompt": "Anna fährt mit dem Auto.",
+       "options": [
+        "Wahr",
+        "Falsch"
+       ],
+       "answer": "Falsch"
+      },
+      {
+       "prompt": "Was soll Paul heute Abend machen?",
+       "options": [
+        "Anna anrufen.",
+        "Einen Kuchen backen.",
+        "Oma besuchen."
+       ],
+       "answer": "Anna anrufen."
+      }
+     ]
+    },
+    {
+     "id": "L-09",
+     "code": "DE-A2-L01-L09",
+     "title": "L-09 · Mein neuer Kiez",
+     "context": "Lični govorni dnevnik",
+     "lines": [
+      {
+       "speaker": "Lena",
+       "text": "Ich wohne jetzt seit einem Monat in Prenzlauer Berg. Am Anfang war alles fremd, aber ich lebe mich langsam ein."
+      },
+      {
+       "speaker": "Lena",
+       "text": "Morgens kaufe ich beim Bäcker an der Ecke Brötchen. Die Verkäuferin kennt mich schon."
+      },
+      {
+       "speaker": "Lena",
+       "text": "Am Wochenende gibt es einen Markt auf dem Kollwitzplatz. Dort kaufe ich Obst und Gemüse ein."
+      },
+      {
+       "speaker": "Lena",
+       "text": "Nur die Abende sind manchmal ruhig. Deshalb fange ich bald mit einem Tanzkurs an."
+      }
+     ],
+     "questions": [
+      {
+       "prompt": "Wie lange wohnt Lena schon im Kiez?",
+       "options": [
+        "Seit einem Monat.",
+        "Seit einem Jahr.",
+        "Seit einer Woche."
+       ],
+       "answer": "Seit einem Monat."
+      },
+      {
+       "prompt": "Was kauft sie morgens?",
+       "options": [
+        "Brötchen.",
+        "Obst.",
+        "Eine Zeitung."
+       ],
+       "answer": "Brötchen."
+      },
+      {
+       "prompt": "Wo ist am Wochenende ein Markt?",
+       "options": [
+        "Auf dem Kollwitzplatz.",
+        "Am Alexanderplatz.",
+        "Im Tiergarten."
+       ],
+       "answer": "Auf dem Kollwitzplatz."
+      },
+      {
+       "prompt": "Lena fühlt sich am Abend manchmal allein.",
+       "options": [
+        "Wahr",
+        "Falsch"
+       ],
+       "answer": "Wahr"
+      },
+      {
+       "prompt": "Was möchte sie bald anfangen?",
+       "options": [
+        "Einen Tanzkurs.",
+        "Einen Kochkurs.",
+        "Eine neue Stelle."
+       ],
+       "answer": "Einen Tanzkurs."
+      }
+     ]
+    },
+    {
+     "id": "L-10",
+     "code": "DE-A2-L01-L10",
+     "title": "L-10 · Drei verschiedene Leben",
+     "context": "Tri kratka monologa",
+     "lines": [
+      {
+       "speaker": "Katrin",
+       "text": "Ich bin Krankenpflegerin in Köln. Ich arbeite oft nachts, deshalb schlafe ich am Vormittag. Nachmittags gehe ich mit meinem Hund spazieren."
+      },
+      {
+       "speaker": "Max",
+       "text": "Ich studiere in München. Jeden Morgen fahre ich mit dem Fahrrad zur Uni. Abends arbeite ich in einer Bar, und am Wochenende fahre ich in die Berge."
+      },
+      {
+       "speaker": "Jana",
+       "text": "Ich bin Lehrerin in Leipzig. Ich stehe um sechs Uhr auf und fange um acht mit dem Unterricht an. Am Abend korrigiere ich Hausaufgaben und sehe ein bisschen fern."
+      }
+     ],
+     "questions": [
+      {
+       "prompt": "Wer arbeitet oft nachts?",
+       "options": [
+        "Katrin.",
+        "Max.",
+        "Jana."
+       ],
+       "answer": "Katrin."
+      },
+      {
+       "prompt": "Wie fährt Max zur Uni?",
+       "options": [
+        "Mit dem Fahrrad.",
+        "Mit der U-Bahn.",
+        "Mit dem Auto."
+       ],
+       "answer": "Mit dem Fahrrad."
+      },
+      {
+       "prompt": "Was macht Max am Wochenende?",
+       "options": [
+        "Er fährt in die Berge.",
+        "Er arbeitet in der Bar.",
+        "Er lernt für die Uni."
+       ],
+       "answer": "Er fährt in die Berge."
+      },
+      {
+       "prompt": "Wann fängt Jana mit dem Unterricht an?",
+       "options": [
+        "Um acht Uhr.",
+        "Um sechs Uhr.",
+        "Um neun Uhr."
+       ],
+       "answer": "Um acht Uhr."
+      },
+      {
+       "prompt": "Wer korrigiert am Abend Hausaufgaben?",
+       "options": [
+        "Jana.",
+        "Katrin.",
+        "Max."
+       ],
+       "answer": "Jana."
+      }
+     ]
+    }
+   ]
+  },
+  "writing": {
+   "exercises": [
+    {
+     "id": "DE-A2-L01-WR-01",
+     "code": "WR-01",
+     "title": "Beschreib das Bild",
+     "image": "a2:wr01",
+     "instruction": "Sieh dir das Bild an und beschreib, was die Personen machen. (70–90 Wörter)",
+     "kind": "open",
+     "items": [
+      {
+       "prompt": "Tvoj opis slike (70–90 reči, na nemačkom)",
+       "open": true,
+       "guiding": [
+        "Wo sind die Personen?",
+        "Was macht jede Person?",
+        "Welche Dinge siehst du?",
+        "Worauf bereiten sie sich wohl vor?"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "DE-A2-L01-WR-02",
+     "code": "WR-02",
+     "title": "Mein normaler Arbeitstag",
+     "instruction": "Beschreib einen normalen Arbeitstag. Wenn du nicht arbeitest, beschreib einen normalen Tag in der Schule oder an der Uni. (70–90 Wörter)",
+     "kind": "open",
+     "items": [
+      {
+       "prompt": "Tvoj tekst (70–90 reči, na nemačkom)",
+       "open": true,
+       "guiding": [
+        "Wann stehst du normalerweise auf?",
+        "Wie machst du dich für den Tag fertig?",
+        "Was machst du bei der Arbeit oder in der Schule?",
+        "Was machst du normalerweise nach der Arbeit oder dem Unterricht?",
+        "Machst du diese Woche etwas anders?"
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  "pronunciation": {
+   "theory": [],
+   "exercises": []
+  },
+  "speaking": {
+   "tasks": [],
+   "roleswitch": []
+  },
+  "culture": {
+   "title": "",
+   "body": ""
+  },
+  "review": {
+   "quiz": []
+  }
+ }
+}

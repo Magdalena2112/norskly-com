@@ -44,6 +44,11 @@ export const LESSON_IMAGES: Record<string, LessonImages> = {
     texts: { "NO-A2-L01-T01": a2t1.url, "NO-A2-L01-T02": a2t2.url, "NO-A2-L01-T03": noT3 },
     modules: {},
   },
+  "DE-A2-L01": {
+    cover: a2t1.url,
+    texts: { "DE-A2-L01-T01": a2t1.url, "DE-A2-L01-T02": a2t2.url, "DE-A2-L01-T03": a2t3.url },
+    modules: {},
+  },
   "EN-A2-L01": {
     cover: a2t1.url,
     texts: { "EN-A2-L01-T01": a2t1.url, "EN-A2-L01-T02": a2t2.url, "EN-A2-L01-T03": a2t3.url },
