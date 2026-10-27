@@ -114,7 +114,33 @@
       "sections": [
         {
           "title": "1.1 Indirekte Fragen (W-Wort und «ob»)",
-          "explanation": "Kada pitanje uvedemo rečima Könnten Sie mir sagen…, Wissen Sie…, Ich möchte wissen…, dobijamo indirektno pitanje. Upitna reč (wo, wann, seit wann, was) ili «ob» (za da/ne) uvodi zavisnu rečenicu.\nVAŽNO: lični glagol ide na KRAJ rečenice.",
+          "explanation": "UVOD — ZAŠTO OVO POSTOJI\nKada pacijent dođe uplašen ili sa jakim bolovima, direktno pitanje poput «Wo tut es weh?» može da zvuči grubo, skoro kao ispitivanje. Zato u svakodnevnoj komunikaciji sa pacijentima i kolegama koristimo indirektna pitanja: uvodna fraza («Könnten Sie mir sagen…», «Ich möchte wissen…», «Wissen Sie…») ublažava ton, a tek onda dolazi samo pitanje.\n\nOSNOVNO PRAVILO\nIndirektno pitanje je zapravo zavisna rečenica. Uvodi je upitna reč (wo, wann, seit wann, wie, was) ili «ob» za da/ne pitanja. Najvažnije: lični (promenjeni) glagol ide NA KRAJ rečenice.\n\nPROŠIRENO PRAVILO (B1)\n1) Kod složenih vremena oba glagola idu na kraj, a lični glagol staje poslednji: «…, wann er das Medikament bekommen hat.»\n2) «ob» koristimo isključivo za pitanja na koja se odgovara sa da/ne. «wenn» znači «kada/ako» i NE koristi se za indirektna da/ne pitanja.\n3) Znak na kraju zavisi od glavne rečenice: «Ich möchte wissen, ob Sie Fieber haben.» — tačka, jer je to izjava, ne pitanje. Znak pitanja stavljamo samo ako je uvodna fraza pitanje: «Können Sie mir sagen, wo es wehtut?»\n4) Ispred zavisne rečenice uvek stoji zarez.\n\nZAMKA ZA SRPSKI MOZAK\nNa srpskom red reči u indirektnom pitanju ostaje isti: «Recite mi gde boli.» Naš mozak zato automatski napiše «…, wo tut es weh?» — a to je direktno pitanje utisnuto u rečenicu. U nemačkom glagol MORA na kraj: «…, wo es wehtut.»\n\nZAVRŠNA PROVERA\nAko posle uvodne fraze možeš da staviš tačku i rečenica i dalje ima smisla kao izjava — na dobrom si putu. Proveri: da li je glagol na kraju? Da li za da/ne pitanje stoji «ob», a ne «wenn»?",
+          "formula": {
+            "label": "Uvodna fraza + upitna reč/ob + … + GLAGOL NA KRAJU",
+            "pattern": "Könnten Sie mir sagen, + wo/wann/ob + subjekat + … + glagol",
+            "examples": [
+              "Könnten Sie mir sagen, wo es wehtut?",
+              "Ich möchte wissen, ob Sie gut geschlafen haben."
+            ]
+          },
+          "dialogue": {
+            "context": "Na prijemu: Lena prima g. Webera, koji izgleda uznemireno.",
+            "lines": [
+              [
+                "Lena",
+                "Guten Tag, Herr Weber. Könnten Sie mir sagen, seit wann Sie diese Schmerzen haben?"
+              ],
+              [
+                "G. Weber",
+                "Seit ungefähr drei Tagen, und nachts wird es schlimmer."
+              ],
+              [
+                "Lena",
+                "Verstehe. Und wissen Sie, ob Sie gegen irgendwelche Medikamente allergisch sind?"
+              ]
+            ]
+          },
+          "brainTrap": "Na srpskom kažemo «Recite mi gde boli» i red reči se ne menja. Zato naš mozak u nemačkom automatski napiše «…, wo tut es weh?». Ali čim pitanje uvučemo u uvodnu frazu, glagol postaje «ljubomoran» i traži poslednje mesto: «…, wo es wehtut.» Zamisli glagol kao voz koji u zavisnoj rečenici uvek ulazi u poslednju stanicu.",
           "table": [
             [
               "Direkt",
@@ -131,14 +157,24 @@
             [
               "Indirekt",
               "Ich möchte wissen, ob Sie gut geschlafen haben."
+            ],
+            [
+              "Direkt",
+              "Wann hat er das Medikament bekommen?"
+            ],
+            [
+              "Indirekt",
+              "Wissen Sie, wann er das Medikament bekommen hat?"
             ]
           ],
           "rules": [
-            "W-reč ili «ob» uvodi indirektno pitanje.",
-            "Lični glagol stoji na kraju.",
-            "Ispred zavisne rečenice stoji zarez."
+            "W-reč (wo, wann, seit wann, wie) ili «ob» uvodi indirektno pitanje.",
+            "Lični glagol stoji na KRAJU zavisne rečenice.",
+            "Kod složenih vremena: particip, pa lični glagol na samom kraju («…geschlafen hat»).",
+            "«ob» = da li; «wenn» = kada/ako — ne mešaj ih!",
+            "Ispred zavisne rečenice stoji zarez; znak na kraju zavisi od glavne rečenice."
           ],
-          "compare": "«ob» odgovara srpskom «da li»: «Pitam se da li ste alergični» → «Ich frage mich, ob Sie allergisch sind».",
+          "compare": "«ob» odgovara srpskom «da li»: «Pitam se da li ste alergični» → «Ich frage mich, ob Sie allergisch sind». Ali za razliku od srpskog, glagol u nemačkom menja poziciju i ide na kraj.",
           "examples": [
             [
               "Können Sie mir sagen, seit wann Sie Schmerzen haben?",
@@ -151,6 +187,10 @@
             [
               "Ich frage mich, ob er allergisch ist.",
               "Pitam se da li je alergičan."
+            ],
+            [
+              "Könnten Sie mir sagen, wie stark die Schmerzen sind?",
+              "Možete li mi reći koliko su jaki bolovi?"
             ]
           ],
           "mistakes": [
@@ -162,13 +202,55 @@
             [
               "Ich weiß nicht, wenn er Fieber hat.",
               "Ich weiß nicht, ob er Fieber hat.",
-              "Za da/ne pitanja koristi se «ob»."
+              "Za da/ne pitanja koristi se «ob», ne «wenn»."
+            ],
+            [
+              "Ich möchte wissen, ob Sie Fieber haben?",
+              "Ich möchte wissen, ob Sie Fieber haben.",
+              "Izvodna fraza je izjava — na kraju stoji tačka, ne upitnik."
             ]
-          ]
+          ],
+          "quickCheck": {
+            "question": "Kako se ljubazno pita pacijenta od kada ima bolove?",
+            "options": [
+              "Könnten Sie mir sagen, seit wann haben Sie Schmerzen?",
+              "Könnten Sie mir sagen, seit wann Sie Schmerzen haben?"
+            ],
+            "correct": 1,
+            "feedback": "Tačno! Posle «seit wann» glagol «haben» ide na kraj. Prva varijanta je direktno pitanje utisnuto u rečenicu — tipična zamka."
+          },
+          "mnemonic": "Glagol je voz: u glavnoj rečenici staje na drugu stanicu, a u zavisnoj vozi do poslednje. «Ob» je kapija za da/ne pitanja — kroz nju prolaze samo pitanja bez upitne reči.",
+          "remember": "Uvodna fraza + upitna reč/ob + … + GLAGOL NA KRAJU. Za da/ne pitanja uvek «ob»."
         },
         {
           "title": "1.2 Nebensätze mit «weil», «dass», «wenn»",
-          "explanation": "U izveštajima i razgovoru stalno objašnjavamo razloge i uslove. Posle weil, dass, wenn lični glagol ide na kraj; «nicht» stoji ispred njega.",
+          "explanation": "UVOD — ZAŠTO OVO POSTOJI\nU izveštajima, predaji smene i razgovoru sa kolegama stalno objašnjavamo razloge, navodimo tuđe reči i postavljamo uslove. Za to služe veznici weil (jer), dass (da) i wenn (kada/ako). Svaki od njih uvodi zavisnu rečenicu — a zavisna rečenica u nemačkom ima svoje strogo pravilo.\n\nOSNOVNO PRAVILO\nPosle weil, dass i wenn lični glagol ide NA KRAJ rečenice. «nicht» stoji neposredno ispred njega: «…, weil sie nicht geschlafen hat.»\n\nPROŠIRENO PRAVILO (B1)\n1) Kod složenih vremena (Perfekt, Plusquamperfekt) na kraj idu particip pa lični pomoćni glagol: «…, dass er nicht gegessen hat.»\n2) Ako zavisna rečenica stoji PRVA, glavna rečenica počinje glagolom (inverzija): «Wenn die Schmerzen stärker werden, klingeln Sie bitte.» Zavisna rečenica tada zauzima prvu poziciju, pa glagol glavne rečenice dolazi odmah posle zareza.\n3) «wenn» vs «als»: za sadašnjost, budućnost i ponavljajuće radnje u prošlosti koristimo «wenn»; «als» je samo za jednokratne događaje u prošlosti.\n4) «dass» se u govoru često izostavlja u engleskom («he said he was tired») — u nemačkom to NE sme: «Er sagt, er ist müde» je kolokvijalno, u pisanju i formalnom govoru uvek «dass» + glagol na kraju.\n\nZAMKA ZA SRPSKI MOZAK\nU srpskom red reči posle «jer/da/kada» ostaje potpuno isti: «On kaže da ne podnosi penicilin.» Zato je najčešća greška «…, dass er verträgt kein Penicillin» — doslovan prenos sa srpskog. U nemačkom veznici «šalju» glagol na kraj.\n\nZAVRŠNA PROVERA\nPročitaj rečenicu naglas i stani na veznika. Sve što dolazi posle njega pripada zavisnoj rečenici — da li je glagol na kraju? Ako je zavisna rečenica prva, da li glavna počinje glagolom?",
+          "formula": {
+            "label": "Veznik + … + GLAGOL NA KRAJU",
+            "pattern": "weil / dass / wenn + subjekat + … + (particip) + glagol",
+            "examples": [
+              "Er sagt, dass er kein Penicillin verträgt.",
+              "Sie ist müde, weil sie nicht geschlafen hat."
+            ]
+          },
+          "dialogue": {
+            "context": "Predaja smene: Lena izveštava koleginicu Moniku o stanju pacijenata.",
+            "lines": [
+              [
+                "Lena",
+                "Herr Weber bleibt noch auf Station, weil sein Blutdruck zu hoch ist."
+              ],
+              [
+                "Monika",
+                "Hat er etwas gesagt?"
+              ],
+              [
+                "Lena",
+                "Ja, er sagt, dass er die ganze Nacht nicht geschlafen hat. Wenn die Schmerzen stärker werden, soll er sofort klingeln."
+              ]
+            ]
+          },
+          "brainTrap": "Srpski «jer/da/kada» ne dira red reči, pa nam se «…weil er hat nicht gegessen» čini prirodno. Ali nemački veznici su kao magneti: čim ih staviš, povlače glagol na kraj. Trika: izgovori veznik, pa napravi kratku pauzu — mozak tada lakše «pogura» glagol do kraja.",
           "table": [
             [
               "Hauptsatz",
@@ -185,14 +267,20 @@
             [
               "Nebensatz",
               "Sie ist müde, weil sie nicht geschlafen hat."
+            ],
+            [
+              "Zavisna prva",
+              "Wenn die Schmerzen stärker werden, klingeln Sie bitte."
             ]
           ],
           "rules": [
-            "weil/dass/wenn + … + glagol na kraju.",
-            "Kod složenih vremena: …geschlafen hat.",
-            "Ako zavisna rečenica stoji prva, glavna počinje glagolom: Wenn die Schmerzen stärker werden, klingeln Sie."
+            "weil / dass / wenn + … + glagol na kraju.",
+            "«nicht» stoji neposredno ispred glagola na kraju: «…, weil sie nicht geschlafen hat.»",
+            "Kod složenih vremena: particip, pa lični glagol («…nicht gegessen hat»).",
+            "Zavisna rečenica prva → glavna počinje glagolom: «Wenn …, klingeln Sie.»",
+            "«wenn» = sadašnjost/budućnost/ponavljanje; «als» = jednokratna prošlost."
           ],
-          "compare": "U srpskom red reči ostaje isti; u nemačkom se glagol pomera na kraj.",
+          "compare": "U srpskom red reči ostaje isti posle «jer/da/kada»; u nemačkom se glagol pomera na kraj. To je jedna od najvećih razlika između dva jezika — i najčešća greška srpskih govornika.",
           "examples": [
             [
               "Rufen Sie mich, wenn die Schmerzen nicht besser werden.",
@@ -201,19 +289,74 @@
             [
               "Er bleibt noch, weil der Blutdruck hoch ist.",
               "Ostaje još jer je pritisak visok."
+            ],
+            [
+              "Ich denke, dass wir den Arzt informieren sollten.",
+              "Mislim da treba da obavestimo lekara."
+            ],
+            [
+              "Wenn Sie Fragen haben, kommen Sie einfach zu mir.",
+              "Ako imate pitanja, slobodno mi se javite."
             ]
           ],
           "mistakes": [
             [
               "…weil er hat nicht gegessen.",
               "…weil er nicht gegessen hat.",
-              "Posle «weil» glagol ide na kraj."
+              "Posle «weil» glagol ide na kraj; «nicht» ispred njega."
+            ],
+            [
+              "Wenn die Schmerzen stärker werden, Sie klingeln.",
+              "Wenn die Schmerzen stärker werden, klingeln Sie.",
+              "Kad je zavisna rečenica prva, glavna počinje glagolom."
+            ],
+            [
+              "Er sagt, dass er ist müde.",
+              "Er sagt, dass er müde ist.",
+              "Posle «dass» glagol na kraj — čak i jednostavan «ist»."
             ]
-          ]
+          ],
+          "quickCheck": {
+            "question": "Kako objašnjavaš koleginici zašto pacijent ostaje na odeljenju?",
+            "options": [
+              "Er bleibt, weil sein Blutdruck zu hoch ist.",
+              "Er bleibt, weil sein Blutdruck ist zu hoch."
+            ],
+            "correct": 0,
+            "feedback": "Tačno! «weil» šalje «ist» na kraj. Druga varijanta zadržava red reči glavne rečenice — doslovan prenos sa srpskog."
+          },
+          "mnemonic": "Veznici weil, dass, wenn su kao konduktori: u njihovom vagonu glagol uvek sedi na poslednjem sedištu. Ako vagon ide prvi, lokomotiva (glavna rečenica) mora odmah iza njega — glagolom napred.",
+          "remember": "weil / dass / wenn → glagol na kraj. Zavisna prva → glavna počinje glagolom."
         },
         {
           "title": "1.3 Höflichkeit mit Konjunktiv II (könnten, würden, sollten)",
-          "explanation": "Sa pacijentima i kolegama koristimo Konjunktiv II da zvučimo ljubazno: Könnten Sie…?, Würden Sie…?, Ich hätte gern… Za savet koristimo «sollten» (trebalo bi).",
+          "explanation": "UVOD — ZAŠTO OVO POSTOJI\nU bolnici stalno nekoga nešto molimo: pacijenta da se okrene, da duboko udahne, da sačeka. Direktni imperativ («Legen Sie sich hin!») zvuči kao naređenje i može da uvredi ili uplaši. Konjunktiv II omogućava nam da istu poruku prenesemo ljubazno i profesionalno.\n\nOSNOVNO PRAVILO\nKönnten Sie…? (Da li biste mogli…?), Würden Sie…? (Da li biste…?), Ich hätte gern… (Želeo/la bih…) — modalni glagol u Konjunktivu II stoji na drugom mestu, a glavni glagol u infinitivu ide na kraj.\n\nPROŠIRENO PRAVILO (B1)\n1) «sollten» = preporuka/savet («trebalo bi»): «Sie sollten mehr trinken.» Nije naređenje, ali je jasnije od «würden».\n2) Posle modalnog glagola NEMA «zu»: «Könnten Sie tief einatmen?» — nikad «zu einatmen».\n3) Povratni glagoli zadržavaju povratnu zamenicu: «Könnten Sie sich bitte hinlegen?» — «sich» ostaje uz subjekat.\n4) Odvojivi glagoli: infinitiv ide ceo na kraj: «Könnten Sie bitte den Ärmel hochkrempeln?»\n5) «Ich hätte gern…» i «Ich würde gern…» izražavaju ljubaznu želju — korisno kada pacijent nešto traži ili kada mi nešto predlažemo.\n\nZAMKA ZA SRPSKI MOZAK\nSrpski kondicional («Da li biste mogli da zavrnete rukav?») koristi «da» + prezent. U nemačkom nema «da» — umesto toga dolazi čist infinitiv na kraju. Druga zamka: ne dodaj «zu» posle modalnih glagola, iako bi na srpskom «da duboko udahnete» podsećalo na konstrukciju sa «zu».\n\nZAVRŠNA PROVERA\nProveri tri stvari: da li je modalni glagol u Konjunktivu II (könnten, würden, sollten — sa tačkicama!), da li je infinitiv na kraju i da li si izbacio «zu».",
+          "formula": {
+            "label": "Könnten/Würden/Sollten + subjekat + … + INFINITIV NA KRAJU",
+            "pattern": "Könnten Sie + bitte + … + infinitiv?",
+            "examples": [
+              "Könnten Sie sich bitte hinlegen?",
+              "Sie sollten mehr Wasser trinken."
+            ]
+          },
+          "dialogue": {
+            "context": "Lena priprema g. Webera za pregled.",
+            "lines": [
+              [
+                "Lena",
+                "Herr Weber, könnten Sie sich bitte hier hinlegen?"
+              ],
+              [
+                "G. Weber",
+                "Natürlich. Soll ich die Schuhe ausziehen?"
+              ],
+              [
+                "Lena",
+                "Ja, das wäre gut. Und würden Sie bitte den Ärmel hochkrempeln? Ich muss Ihren Blutdruck messen."
+              ]
+            ]
+          },
+          "brainTrap": "Na srpskom kažemo «Da li biste mogli DA ZAVRNETE rukav» — sa «da». Naš mozak zato u nemačkom traži nešto slično i doda «zu»: «Könnten Sie zu hochkrempeln?» — pogrešno! Posle könnten/würden/sollten dolazi goli infinitiv, bez «zu» i bez «dass». Zapamti: modalni glagol je šef — on ne trpi «zu» u svom timu.",
           "table": [
             [
               "Können Sie…?",
@@ -226,14 +369,20 @@
             [
               "Sie müssen…",
               "Sie sollten… (savet)"
+            ],
+            [
+              "Ich will…",
+              "Ich hätte gern… (ljubazna želja)"
             ]
           ],
           "rules": [
-            "Könnten/Würden + infinitiv na kraju: Könnten Sie sich bitte hinlegen?",
-            "Sollten = preporuka.",
+            "Könnten/Würden + infinitiv na kraju: «Könnten Sie sich bitte hinlegen?»",
+            "Posle modalnog glagola NEMA «zu».",
+            "Sollten = preporuka, ne naređenje.",
+            "Povratna zamenica ostaje: «Könnten Sie sich…?»",
             "Ich hätte gern / Ich würde gern = ljubazna želja."
           ],
-          "compare": "Kao srpski kondicional: «Da li biste mogli…?»",
+          "compare": "Kao srpski kondicional: «Da li biste mogli…?» — ali bez «da»: umesto «da udahnete» dolazi čist infinitiv «einzuatmen» na kraju rečenice.",
           "examples": [
             [
               "Könnten Sie bitte den Ärmel hochkrempeln?",
@@ -246,6 +395,10 @@
             [
               "Ich würde gern mit dem Arzt sprechen.",
               "Želeo bih da razgovaram sa lekarom."
+            ],
+            [
+              "Würden Sie bitte einmal tief einatmen?",
+              "Da li biste, molim vas, jednom duboko udahnuli?"
             ]
           ],
           "mistakes": [
@@ -253,8 +406,29 @@
               "Könnten Sie zu tief einatmen?",
               "Könnten Sie tief einatmen?",
               "Posle modalnog glagola nema «zu»."
+            ],
+            [
+              "Könnten Sie hinlegen sich?",
+              "Könnten Sie sich hinlegen?",
+              "Povratna zamenica stoji odmah posle subjekta."
+            ],
+            [
+              "Sie müssen mehr trinken. (kao savet)",
+              "Sie sollten mehr trinken.",
+              "«müssen» zvuči kao naređenje; za savet koristi «sollten»."
             ]
-          ]
+          ],
+          "quickCheck": {
+            "question": "Kako profesionalno savetuješ pacijenta da se više odmara?",
+            "options": [
+              "Sie müssen sich mehr ausruhen.",
+              "Sie sollten sich mehr ausruhen."
+            ],
+            "correct": 1,
+            "feedback": "Tačno! «sollten» je preporuka — ljubazna, ali jasna. «müssen» zvuči kao naređenje i pacijent ga može doživeti kao pritisak."
+          },
+          "mnemonic": "Könnten, würden, sollten — svi imaju tačkice (Umlaut) jer su «omekšane» verzije glagola. Tačkice = mekši ton. I zapamti: modalni glagol je šef koji ne trpi «zu» u svom timu.",
+          "remember": "Könnten/Würden/Sollten + infinitiv na kraju, bez «zu». Sollten = savet, müssen = naređenje."
         }
       ],
       "exercises": [
