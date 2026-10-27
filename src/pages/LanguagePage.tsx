@@ -305,9 +305,7 @@ export default function LanguagePage() {
       <PricingSection
         id="plans"
         onFreeSelect={() => goAuth({ plan: "trial" })}
-        onPaidSelect={() => goAuth({ plan: "subscription" })}
         onTeacherSelect={() => goAuth({ next: "/select-teacher" })}
-        paidDisabled={!lang.available}
         teacherDisabled={!lang.available}
       />
 
@@ -318,7 +316,7 @@ export default function LanguagePage() {
             Spreman/na <span className="font-script opacity-80">da</span> kreneš?
           </h2>
           <p className="text-primary-foreground/80 text-base md:text-lg mb-8 max-w-xl mx-auto">
-            Kreiraj nalog i započni svoj 7-dnevni besplatni period. Bez kartice.
+            Kreiraj nalog i uči besplatno tokom promo perioda. Bez kartice.
           </p>
           <Button
             size="lg"

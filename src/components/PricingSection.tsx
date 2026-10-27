@@ -1,49 +1,15 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Check, GraduationCap } from "lucide-react";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 
-const FREE_FEATURES = [
-  "Test nivoa",
-  "Odabrane lekcije i vežbe",
-  "Ograničen pristup alatima za učenje",
-  "Osnovni pregled napretka",
-  "Odabrani sadržaji iz Relocation Hub-a",
-];
-
-const FREE_DETAILS = [
-  "Ograničen pristup Grammar funkciji",
-  "Ograničen pristup Vocabulary funkciji",
-  "Ograničen pristup Reading funkciji",
-  "Ograničen pristup Writing funkciji",
-  "Ograničen pristup Talk funkciji",
-  "Mogućnost pregleda dostupnih profesora",
-  "Mogućnost prelaska na punu pretplatu u bilo kom trenutku",
-];
-
-const PAID_FEATURES = [
-  "Kompletan pristup svim alatima za učenje",
-  "Personalizovane vežbe i preporuke",
-  "Praćenje napretka i analiza grešaka",
-  "Kompletan pristup Relocation Hub-u",
-  "Mogućnost zakazivanja časova sa profesorima",
-];
-
-const PAID_DETAILS = [
-  "Grammar",
-  "Vocabulary",
-  "Reading",
-  "Writing",
-  "Talk",
-  "Personalizovane vežbe",
-  "Praćenje napretka",
-  "Analiza najčešćih grešaka",
-  "Preporuke za dalji rad",
-  "Kompletan pristup Relocation Hub-u",
-  "Mogućnost pronalaženja profesora i dodatnog zakazivanja časova",
+const PROMO_COURSES = [
+  "Engleski — opšti kurs A2",
+  "Norveški — opšti kurs A2",
+  "Nemački — opšti kurs A2",
+  "Norveški za zdravstvene radnike — B1",
+  "Nemački za zdravstvene radnike — B1",
 ];
 
 const TEACHER_OPTIONS = ["1 individualni čas", "Paket od 4 časa", "Paket od 8 časova"];
@@ -52,168 +18,90 @@ interface PricingSectionProps {
   id?: string;
   className?: string;
   onFreeSelect: () => void;
-  onPaidSelect: () => void;
   onTeacherSelect: () => void;
-  paidDisabled?: boolean;
   teacherDisabled?: boolean;
-}
-
-function FeatureList({ items }: { items: string[] }) {
-  return (
-    <ul className="space-y-2.5">
-      {items.map((item) => (
-        <li key={item} className="flex gap-2.5 text-sm text-foreground/85">
-          <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-          <span>{item}</span>
-        </li>
-      ))}
-    </ul>
-  );
-}
-
-function BenefitsAccordion({ value, items }: { value: string; items: string[] }) {
-  return (
-    <Accordion type="single" collapsible className="mt-5 border-t border-border">
-      <AccordionItem value={value} className="border-0">
-        <AccordionTrigger className="py-4 text-left text-sm font-semibold text-primary hover:no-underline">
-          Pogledaj sve pogodnosti
-        </AccordionTrigger>
-        <AccordionContent>
-          <FeatureList items={items} />
-        </AccordionContent>
-      </AccordionItem>
-    </Accordion>
-  );
 }
 
 export default function PricingSection({
   id = "pricing",
   className,
   onFreeSelect,
-  onPaidSelect,
   onTeacherSelect,
-  paidDisabled = false,
   teacherDisabled = false,
 }: PricingSectionProps) {
   return (
     <section id={id} className={cn("scroll-mt-16 py-14 md:scroll-mt-20 md:py-24", className)}>
       <div className="container">
-        <div className="mx-auto mb-10 max-w-2xl text-center sm:mb-12">
-          <p className="mb-3 text-[10px] font-semibold uppercase tracking-widest text-primary/70 sm:text-xs">
-            Fleksibilno učenje
-          </p>
-          <h2 className="mb-3 text-display text-[clamp(1.75rem,5vw,4rem)] text-primary sm:mb-4">
-            Izaberi način učenja koji ti <span className="font-script text-primary/70">odgovara</span>.
+        <div className="mx-auto mb-10 max-w-3xl text-center sm:mb-12">
+          <Badge variant="outline" className="mb-4 border-accent text-primary">Promo pristup</Badge>
+          <h2 className="mb-4 text-display text-3xl text-primary sm:text-5xl">
+            100% besplatno tokom testiranja
           </h2>
-          <p className="text-sm text-muted-foreground sm:text-base">
-            Počni besplatno ili otključaj kompletno Norskly iskustvo.
+          <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
+            Izaberi spreman kurs i uči svojim tempom. Bez unošenja kartice.
           </p>
         </div>
 
-        <div className="mx-auto grid max-w-5xl items-stretch gap-5 md:grid-cols-2">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.45 }}
-            className="h-full min-w-0"
-          >
-            <Card className="h-full rounded-3xl border-2 border-border bg-background shadow-card-soft">
-              <CardContent className="flex h-full flex-col p-6 sm:p-8">
-                <div className="flex flex-col md:min-h-[17.5rem]">
-                  <h3 className="font-display text-2xl font-bold text-primary sm:text-3xl">Isprobaj Norskly</h3>
-                  <div className="mt-4 flex min-h-32 items-center rounded-2xl border border-border bg-card px-4 py-5">
-                    <span className="font-display text-4xl font-black text-foreground">0 €</span>
-                  </div>
-                  <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-                    Upoznaj platformu pre nego što se pretplatiš.
-                  </p>
-                </div>
-                <div className="mt-6 flex flex-1 flex-col">
-                  <FeatureList items={FREE_FEATURES} />
-                  <BenefitsAccordion value="free-benefits" items={FREE_DETAILS} />
-                </div>
-                <Button className="mt-6 w-full rounded-full" onClick={onFreeSelect}>
-                  Počni besplatno <ArrowRight className="ml-1 h-4 w-4" />
-                </Button>
-              </CardContent>
-            </Card>
-          </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.45 }}
+          className="mx-auto grid max-w-5xl gap-8 border-y border-border py-8 md:grid-cols-2 md:gap-12 sm:py-10"
+        >
+          <div className="min-w-0">
+            <h3 className="mb-5 font-display text-2xl font-bold text-primary">Kursevi dostupni za testiranje</h3>
+            <ul className="space-y-4">
+              {PROMO_COURSES.map((course) => (
+                <li key={course} className="flex gap-3 text-sm text-foreground sm:text-base">
+                  <Check className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
+                  <span>{course}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="flex min-w-0 flex-col justify-center">
+            <h3 className="font-display text-2xl font-bold text-primary">Tvoj kurs, tvoj tempo</h3>
+            <p className="mt-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
+              Dobijaš pun pristup spremnim lekcijama i alatima svog izabranog kursa,
+              uz praćenje napretka i AI podršku u učenju.
+            </p>
+            <p className="mt-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
+              Podeli utiske u anketi i pomozi nam da kreiramo kurseve baš po tvojoj meri.
+              Ostali nivoi i kursevi su u pripremi.
+            </p>
+            <Button className="mt-6 w-full rounded-full sm:w-fit" size="lg" onClick={onFreeSelect}>
+              Započni besplatno <ArrowRight className="ml-1 h-4 w-4" />
+            </Button>
+          </div>
+        </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.45, delay: 0.07 }}
-            className="h-full min-w-0"
-          >
-            <Card className="h-full rounded-3xl border-2 border-accent bg-card shadow-accent-glow">
-              <CardContent className="flex h-full flex-col p-6 sm:p-8">
-                <div className="flex flex-col md:min-h-[17.5rem]">
-                  <h3 className="font-display text-2xl font-bold text-primary sm:text-3xl">Uči uz Norskly</h3>
-                  <div className="mt-4 grid min-h-32 grid-cols-2 gap-3">
-                    <div className="flex flex-col justify-center rounded-2xl border border-border bg-background p-3 sm:p-4">
-                      <p className="font-display text-2xl font-black text-foreground sm:text-3xl">9,90 €</p>
-                      <p className="mt-1 text-xs text-muted-foreground">mesečno</p>
-                    </div>
-                    <div className="flex flex-col justify-center rounded-2xl border border-accent/60 bg-accent/10 p-3 sm:p-4">
-                      <Badge className="mb-2 w-fit bg-accent text-accent-foreground hover:bg-accent">Najisplativije</Badge>
-                      <p className="font-display text-2xl font-black text-foreground sm:text-3xl">89 €</p>
-                      <p className="mt-1 text-xs text-muted-foreground">godišnje</p>
-                      <p className="mt-2 text-xs font-semibold text-primary">Uštedi 29,80 € godišnje</p>
-                    </div>
-                  </div>
-                  <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-                    Za korisnike koji žele kompletan pristup platformi i učenje svojim tempom.
-                  </p>
-                </div>
-                <div className="mt-6 flex flex-1 flex-col">
-                  <FeatureList items={PAID_FEATURES} />
-                  <BenefitsAccordion value="paid-benefits" items={PAID_DETAILS} />
-                  <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
-                    Časovi sa profesorom nisu uključeni u cenu pretplate i plaćaju se dodatno prema ponudi izabranog profesora.
-                  </p>
-                </div>
-                <Button className="mt-6 w-full rounded-full bg-accent text-accent-foreground hover:bg-accent/90" onClick={onPaidSelect} disabled={paidDisabled}>
-                  Započni učenje <ArrowRight className="ml-1 h-4 w-4" />
-                </Button>
-              </CardContent>
-            </Card>
-          </motion.div>
-        </div>
-
-        <div className="mx-auto mt-5 max-w-5xl sm:mt-6">
-          <div className="rounded-3xl border border-border bg-background p-6 shadow-card-soft sm:p-8">
-            <div className="grid gap-8 md:grid-cols-2 md:items-stretch md:gap-10">
-              <div className="flex flex-col justify-center md:pr-2">
-                <div className="mb-3 flex items-center gap-3">
-                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-border bg-card">
-                    <GraduationCap className="h-5 w-5 text-primary" />
-                  </span>
-                  <h3 className="font-display text-2xl font-bold text-primary sm:text-3xl">Želiš dodatnu podršku profesora?</h3>
-                </div>
-                <p className="font-medium text-foreground">Uči samostalno, a profesora uključi kada ti zatreba.</p>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                  Uz aktivnu Norskly pretplatu možeš da izabereš profesora i zakažeš individualni čas ili paket časova, u zavisnosti od njegove ponude i dostupnosti.
-                </p>
-              </div>
-              <div className="flex min-w-0 flex-col">
-                <div className="grid gap-2">
-                  {TEACHER_OPTIONS.map((option) => (
-                    <div key={option} className="flex min-h-12 w-full items-center gap-3 rounded-xl border border-border bg-card px-4 py-3 text-sm font-medium text-foreground">
-                      <Check className="h-4 w-4 shrink-0 text-primary" />
-                      <span>{option}</span>
-                    </div>
-                  ))}
-                </div>
-                <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
-                  Cena, trajanje časa i dostupni paketi zavise od izabranog profesora.
-                </p>
-                <Button variant="outline" className="mt-5 w-full rounded-full border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground" onClick={onTeacherSelect} disabled={teacherDisabled}>
-                  Pronađi profesora <ArrowRight className="ml-1 h-4 w-4" />
-                </Button>
-              </div>
+        <div className="mx-auto mt-10 grid max-w-5xl gap-8 md:grid-cols-2 md:gap-12">
+          <div className="min-w-0">
+            <div className="mb-3 flex items-start gap-3">
+              <GraduationCap className="mt-1 h-6 w-6 shrink-0 text-primary" />
+              <h3 className="font-display text-2xl font-bold text-primary">Želiš dodatnu podršku profesora?</h3>
             </div>
+            <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
+              Uči samostalno, a profesora uključi kada ti zatreba. Individualni časovi
+              nisu deo besplatnog promo pristupa i dogovaraju se i plaćaju zasebno.
+            </p>
+          </div>
+          <div className="min-w-0">
+            <ul className="space-y-3">
+              {TEACHER_OPTIONS.map((option) => (
+                <li key={option} className="flex items-center gap-3 text-sm text-foreground">
+                  <Check className="h-4 w-4 shrink-0 text-primary" />
+                  <span>{option}</span>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
+              Cena, trajanje časa i dostupni paketi zavise od izabranog profesora.
+            </p>
+            <Button variant="outline" className="mt-5 w-full rounded-full sm:w-fit" onClick={onTeacherSelect} disabled={teacherDisabled}>
+              Pronađi profesora <ArrowRight className="ml-1 h-4 w-4" />
+            </Button>
           </div>
         </div>
       </div>
