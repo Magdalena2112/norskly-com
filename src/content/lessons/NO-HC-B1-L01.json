@@ -258,176 +258,696 @@
       ],
       "exercises": [
         {
-          "id": "NO-HC-B1-L01-GR-01",
-          "code": "GR-01",
-          "title": "Indirekte spørsmål",
-          "instruction": "Izaberi tačan red reči.",
-          "kind": "closed",
-          "items": [
+          "id": "NO-HC-B1-L01-G-01",
+          "code": "G-01",
+          "title": "Pitanje tokom prijema",
+          "type": "choice",
+          "xp": 1,
+          "grammarFocus": "indirect",
+          "instruction": "Izaberi jedan odgovor koji je gramatički tačan i odgovara situaciji.",
+          "hint": "Uporedi red subjekta i ličnog glagola u indirektnom pitanju.",
+          "explanation": "Posle «når» u indirektnom pitanju stoji «du spiste», bez inverzije.",
+          "context": "Nora želi da sazna kada je Per poslednji put jeo.",
+          "options": [
+            "Kan du si når spiste du sist?",
+            "Kan du si når du spiste sist?",
+            "Kan du si når du sist spiste du?"
+          ],
+          "correct": [
+            1
+          ]
+        },
+        {
+          "id": "NO-HC-B1-L01-G-02",
+          "code": "G-02",
+          "title": "Da li ili ako?",
+          "type": "gaps",
+          "xp": 1,
+          "grammarFocus": "indirect",
+          "instruction": "Dopuni svaku prazninu odgovarajućim oblikom.",
+          "hint": "Razlikuj pitanje da/ne od uslova.",
+          "explanation": "«om» uvodi da/ne pitanje; «hvis» uvodi uslov.",
+          "text": "Nora spør ___ Per er allergisk. Hun kontakter legen ___ han får utslett.",
+          "gaps": [
             {
-              "prompt": "Kan du vise meg hvor ___?",
-              "options": [
-                "det gjør vondt",
-                "gjør det vondt",
-                "vondt det gjør"
-              ],
-              "answers": [
-                "det gjør vondt"
-              ]
-            },
-            {
-              "prompt": "Jeg lurer på ___ du har feber.",
               "options": [
                 "om",
                 "hvis",
                 "at"
               ],
-              "answers": [
-                "om"
-              ]
+              "answer": "om"
             },
             {
-              "prompt": "Vet du når ___ medisinen?",
               "options": [
-                "han fikk",
-                "fikk han",
-                "han får ikke"
-              ],
-              "answers": [
-                "han fikk"
-              ]
-            },
-            {
-              "prompt": "Kan du fortelle meg hva ___ har skjedd?",
-              "options": [
-                "som",
                 "om",
+                "hvis",
                 "at"
               ],
+              "answer": "hvis"
+            }
+          ]
+        },
+        {
+          "id": "NO-HC-B1-L01-G-03",
+          "code": "G-03",
+          "title": "Rezultat analize",
+          "type": "order",
+          "xp": 1,
+          "grammarFocus": "indirect",
+          "instruction": "Složi sve delove u jednu rečenicu. Zadrži zadati početak.",
+          "hint": "Posle upitne reči nema inverzije.",
+          "explanation": "«legen» stoji pre «får».",
+          "tokens": [
+            "Vet du",
+            "når",
+            "legen",
+            "får",
+            "prøvesvaret?"
+          ],
+          "answer": [
+            "Vet du når legen får prøvesvaret?"
+          ],
+          "context": "Početak: Vet du"
+        },
+        {
+          "id": "NO-HC-B1-L01-G-04",
+          "code": "G-04",
+          "title": "Od direktnog do indirektnog",
+          "type": "text",
+          "xp": 1,
+          "grammarFocus": "indirect",
+          "instruction": "Preoblikuj pitanje. Napiši celu rečenicu sa početkom «Kan du si om». Ne menjaj ostale reči.",
+          "hint": "Da/ne pitanje dobija «om» i red subjekat–glagol.",
+          "explanation": "«Bruker du» postaje «om du bruker».",
+          "context": "Bruker du faste medisiner?",
+          "inputs": [
+            {
+              "prompt": "Bruker du faste medisiner?",
               "answers": [
-                "som"
+                "Kan du si om du bruker faste medisiner?"
               ]
             }
           ]
         },
         {
-          "id": "NO-HC-B1-L01-GR-02",
-          "code": "GR-02",
-          "title": "Lag indirekte spørsmål",
-          "instruction": "Prepravi direktno pitanje u indirektno (počni sa «Kan du si…»).",
-          "kind": "closed",
-          "items": [
+          "id": "NO-HC-B1-L01-G-05",
+          "code": "G-05",
+          "title": "Ko je dežuran?",
+          "type": "choice",
+          "xp": 1,
+          "grammarFocus": "indirect",
+          "instruction": "Izaberi jedan odgovor koji je gramatički tačan i odgovara situaciji.",
+          "hint": "Da li upitna reč predstavlja osobu koja vrši radnju?",
+          "explanation": "Kada «hvem» predstavlja subjekat indirektnog pitanja, dodaje se «som».",
+          "context": "Anne pita Ingrid ko je večeras dežuran.",
+          "options": [
+            "Vet du hvem har vakt i kveld?",
+            "Vet du hvem som har vakt i kveld?",
+            "Vet du hvem om har vakt i kveld?"
+          ],
+          "correct": [
+            1
+          ]
+        },
+        {
+          "id": "NO-HC-B1-L01-G-06",
+          "code": "G-06",
+          "title": "Tri pitanja, tri završetka",
+          "type": "match",
+          "xp": 1,
+          "grammarFocus": "indirect",
+          "instruction": "Poveži početak sa završetkom tako da svaka rečenica bude gramatički tačna i smislena.",
+          "hint": "Razlikuj da/ne, vreme i osobu kao subjekat.",
+          "explanation": "«om» traži da/ne sadržaj, «når» vreme, a «hvem som» osobu koja vrši radnju.",
+          "left": [
+            "Nora spør om",
+            "Anne vil vite når",
+            "Per spør hvem som"
+          ],
+          "right": [
+            "legen kommer.",
+            "har kveldsvakt.",
+            "pasienten har feber."
+          ],
+          "pairs": [
+            2,
+            0,
+            1
+          ]
+        },
+        {
+          "id": "NO-HC-B1-L01-G-07",
+          "code": "G-07",
+          "title": "Predaja smene",
+          "type": "multi",
+          "xp": 1,
+          "grammarFocus": "indirect",
+          "instruction": "Izaberi sve tačne odgovore.",
+          "hint": "U oba indirektna pitanja proveri gde stoji subjekat.",
+          "explanation": "«han» stoji pre «fikk» i «har».",
+          "context": "Izaberi dve pravilno oblikovane indirektne rečenice.",
+          "options": [
+            "Anne spør når fikk han medisinen.",
+            "Anne spør når han fikk medisinen.",
+            "Anne spør om han har sovet.",
+            "Anne spør om har han sovet."
+          ],
+          "correct": [
+            1,
+            2
+          ]
+        },
+        {
+          "id": "NO-HC-B1-L01-G-08",
+          "code": "G-08",
+          "title": "Ispravi zapisano pitanje",
+          "type": "text",
+          "xp": 2,
+          "grammarFocus": "indirect",
+          "instruction": "Ispravi samo red reči. Napiši celu rečenicu, bez dodavanja ili izostavljanja reči.",
+          "hint": "Zavisna rečenica ne zadržava red direktnog pitanja.",
+          "explanation": "«hvor journalen ligger» ima red upitna reč–subjekat–glagol.",
+          "context": "Vet du hvor ligger journalen?",
+          "inputs": [
             {
-              "prompt": "Hvor lenge har du hatt vondt? → Kan du si hvor lenge ___?",
+              "prompt": "Vet du hvor ligger journalen?",
               "answers": [
-                "du har hatt vondt"
-              ]
-            },
-            {
-              "prompt": "Er du allergisk? → Kan du si om ___?",
-              "answers": [
-                "du er allergisk"
-              ]
-            },
-            {
-              "prompt": "Når spiste du sist? → Kan du si når ___ sist?",
-              "answers": [
-                "du spiste"
+                "Vet du hvor journalen ligger?"
               ]
             }
           ]
         },
         {
-          "id": "NO-HC-B1-L01-GR-03",
-          "code": "GR-03",
-          "title": "«Ikke» i leddsetninger",
-          "instruction": "Izaberi tačnu rečenicu.",
-          "kind": "closed",
-          "items": [
+          "id": "NO-HC-B1-L01-G-09",
+          "code": "G-09",
+          "title": "Negacija u indirektnom pitanju",
+          "type": "gaps",
+          "xp": 2,
+          "grammarFocus": "indirect",
+          "instruction": "Dopuni svaku prazninu odgovarajućim oblikom.",
+          "hint": "Pitanje je da/ne; «Per» je već naveden kao subjekat.",
+          "explanation": "«om Per ikke har fått medisinen» koristi negaciju pre pomoćnog glagola.",
+          "text": "Vet du ___ Per ___ har fått medisinen?",
+          "gaps": [
             {
-              "prompt": "Han sier at…",
               "options": [
-                "han ikke tåler penicillin.",
-                "han tåler ikke penicillin.",
-                "ikke han tåler penicillin."
+                "om",
+                "hvis",
+                "at"
               ],
-              "answers": [
-                "han ikke tåler penicillin."
-              ]
+              "answer": "om"
             },
             {
-              "prompt": "Ring på klokka hvis…",
               "options": [
-                "smertene ikke går over.",
-                "smertene går ikke over.",
-                "ikke smertene går over."
+                "ikke",
+                "ikke han",
+                "han ikke"
               ],
-              "answers": [
-                "smertene ikke går over."
-              ]
-            },
+              "answer": "ikke"
+            }
+          ]
+        },
+        {
+          "id": "NO-HC-B1-L01-G-10",
+          "code": "G-10",
+          "title": "Šta se desilo?",
+          "type": "text",
+          "xp": 2,
+          "grammarFocus": "indirect",
+          "instruction": "Pretvori pitanje u indirektno. Napiši celu rečenicu sa početkom «Kan du fortelle meg». Zadrži ostale reči i dodaj potrebnu vezu.",
+          "hint": "Upitna reč je subjekat; razmisli o vezi koja je prati.",
+          "explanation": "«hva som har skjedd» je pravilno indirektno pitanje o događaju.",
+          "context": "Hva har skjedd?",
+          "inputs": [
             {
-              "prompt": "Hun er sliten fordi…",
-              "options": [
-                "hun ikke har sovet.",
-                "hun har ikke sovet.",
-                "har hun ikke sovet."
-              ],
+              "prompt": "Hva har skjedd?",
               "answers": [
-                "hun ikke har sovet."
+                "Kan du fortelle meg hva som har skjedd?"
               ]
             }
           ]
         },
         {
-          "id": "NO-HC-B1-L01-GR-04",
-          "code": "GR-04",
-          "title": "Høflige former",
-          "instruction": "Izaberi najljubazniji i tačan oblik.",
-          "kind": "closed",
-          "items": [
+          "id": "NO-HC-B1-L01-G-11",
+          "code": "G-11",
+          "title": "Alergija u kartonu",
+          "type": "choice",
+          "xp": 1,
+          "grammarFocus": "subordinate",
+          "instruction": "Izaberi jedan odgovor koji je gramatički tačan i odgovara situaciji.",
+          "hint": "U zavisnoj rečenici negacija stoji ispred ličnog glagola.",
+          "explanation": "«at han ikke tåler» ima red veznik–subjekat–negacija–glagol.",
+          "context": "Nora prenosi Perovu izjavu da ne podnosi penicilin.",
+          "options": [
+            "Per sier at han tåler ikke penicillin.",
+            "Per sier at ikke han tåler penicillin.",
+            "Per sier at han ikke tåler penicillin."
+          ],
+          "correct": [
+            2
+          ]
+        },
+        {
+          "id": "NO-HC-B1-L01-G-12",
+          "code": "G-12",
+          "title": "Noć bez sna",
+          "type": "gaps",
+          "xp": 1,
+          "grammarFocus": "subordinate",
+          "instruction": "Dopuni svaku prazninu odgovarajućim oblikom.",
+          "hint": "Kod perfekta negacija dolazi pre pomoćnog glagola.",
+          "explanation": "«fordi han ikke har sovet» čuva red negacija–pomoćni glagol–particip.",
+          "text": "Per er trøtt fordi han ___ ___.",
+          "gaps": [
             {
-              "prompt": "___ du legge deg på ryggen?",
               "options": [
-                "Kunne",
-                "Må",
-                "Skal"
+                "ikke",
+                "ikke han",
+                "han ikke"
               ],
-              "answers": [
-                "Kunne"
-              ]
+              "answer": "ikke"
             },
             {
-              "prompt": "Du ___ hvile litt etter operasjonen.",
               "options": [
-                "burde",
-                "kunne",
-                "ville"
+                "har sovet",
+                "sovet har",
+                "har han sovet"
               ],
+              "answer": "har sovet"
+            }
+          ]
+        },
+        {
+          "id": "NO-HC-B1-L01-G-13",
+          "code": "G-13",
+          "title": "Zapis o anamnezi",
+          "type": "order",
+          "xp": 1,
+          "grammarFocus": "subordinate",
+          "instruction": "Složi sve delove u jednu rečenicu. Zadrži zadati početak.",
+          "hint": "«aldri» u zavisnoj rečenici stoji na mestu negacije.",
+          "explanation": "«at Per aldri har vært» ima prilog pre ličnog glagola.",
+          "tokens": [
+            "Nora vet",
+            "at",
+            "Per",
+            "aldri",
+            "har",
+            "vært innlagt før."
+          ],
+          "answer": [
+            "Nora vet at Per aldri har vært innlagt før."
+          ],
+          "context": "Početak: Nora vet"
+        },
+        {
+          "id": "NO-HC-B1-L01-G-14",
+          "code": "G-14",
+          "title": "Izjava pacijenta",
+          "type": "text",
+          "xp": 1,
+          "grammarFocus": "subordinate",
+          "instruction": "Prenesi izjavu sa početkom «Per sier at». Napiši celu rečenicu; promeni «Jeg» u «han», a ostale reči zadrži.",
+          "hint": "Negacija menja položaj kada glavna rečenica postane zavisna.",
+          "explanation": "U «at han ikke har spist» negacija prethodi «har».",
+          "context": "Jeg har ikke spist.",
+          "inputs": [
+            {
+              "prompt": "Jeg har ikke spist.",
               "answers": [
-                "burde"
+                "Per sier at han ikke har spist."
               ]
+            }
+          ]
+        },
+        {
+          "id": "NO-HC-B1-L01-G-15",
+          "code": "G-15",
+          "title": "Razlog, uslov, izjava",
+          "type": "match",
+          "xp": 1,
+          "grammarFocus": "subordinate",
+          "instruction": "Poveži početak sa završetkom tako da svaka rečenica bude gramatički tačna i smislena.",
+          "hint": "Poveži smisao početka sa pravilnim redom reči u završetku.",
+          "explanation": "«fordi» uvodi razlog, «at» prenetu izjavu, a «hvis» uslov.",
+          "left": [
+            "Per er trøtt fordi",
+            "Nora sier at",
+            "Ring på klokka hvis"
+          ],
+          "right": [
+            "legen kommer snart.",
+            "smertene ikke går over.",
+            "han ikke har sovet."
+          ],
+          "pairs": [
+            2,
+            0,
+            1
+          ]
+        },
+        {
+          "id": "NO-HC-B1-L01-G-16",
+          "code": "G-16",
+          "title": "Nikada ili ne?",
+          "type": "multi",
+          "xp": 1,
+          "grammarFocus": "subordinate",
+          "instruction": "Izaberi sve tačne odgovore.",
+          "hint": "«aldri» i «ikke» imaju isto osnovno mesto u zavisnoj rečenici.",
+          "explanation": "U obe tačne rečenice prilog stoji ispred ličnog glagola.",
+          "context": "Izaberi dve gramatički pravilne rečenice o anamnezi.",
+          "options": [
+            "Nora vet at Per har aldri vært innlagt.",
+            "Nora vet at Per aldri har vært innlagt.",
+            "Per sier at han ikke bruker faste medisiner.",
+            "Per sier at han bruker ikke faste medisiner."
+          ],
+          "correct": [
+            1,
+            2
+          ]
+        },
+        {
+          "id": "NO-HC-B1-L01-G-17",
+          "code": "G-17",
+          "title": "Uslov za poziv",
+          "type": "gaps",
+          "xp": 1,
+          "grammarFocus": "subordinate",
+          "instruction": "Dopuni svaku prazninu odgovarajućim oblikom.",
+          "hint": "Subjekat «smertene» već stoji posle veznika.",
+          "explanation": "«hvis smertene ikke går over» ima negaciju pre glagola.",
+          "text": "Ring på klokka hvis smertene ___ ___.",
+          "gaps": [
+            {
+              "options": [
+                "ikke",
+                "ikke de",
+                "de ikke"
+              ],
+              "answer": "ikke"
             },
             {
-              "prompt": "Jeg ___ gjerne snakke med legen.",
               "options": [
-                "skulle",
-                "burde",
-                "må"
+                "går over",
+                "over går",
+                "går de over"
               ],
-              "answers": [
-                "skulle"
-              ]
-            },
+              "answer": "går over"
+            }
+          ]
+        },
+        {
+          "id": "NO-HC-B1-L01-G-18",
+          "code": "G-18",
+          "title": "Ispravi predaju smene",
+          "type": "text",
+          "xp": 2,
+          "grammarFocus": "subordinate",
+          "instruction": "Ispravi samo položaj «ikke». Napiši celu rečenicu.",
+          "hint": "Proveri negaciju u zavisnoj rečenici sa pomoćnim glagolom.",
+          "explanation": "«ikke» stoji ispred «har», ne između «har» i participa.",
+          "context": "Anne sier at Per har ikke fått medisinen.",
+          "inputs": [
             {
-              "prompt": "Kunne du ___ dypt inn?",
+              "prompt": "Anne sier at Per har ikke fått medisinen.",
+              "answers": [
+                "Anne sier at Per ikke har fått medisinen."
+              ]
+            }
+          ]
+        },
+        {
+          "id": "NO-HC-B1-L01-G-19",
+          "code": "G-19",
+          "title": "Uslov na početku",
+          "type": "order",
+          "xp": 2,
+          "grammarFocus": "subordinate",
+          "instruction": "Složi sve delove u jednu rečenicu. Zadrži zadati početak.",
+          "hint": "U zavisnoj rečenici proveri negaciju; cela zavisna rečenica zauzima prvo mesto glavne.",
+          "explanation": "«ikke» prethodi «har»; posle zavisne rečenice dolazi «fortsetter Nora».",
+          "tokens": [
+            "Hvis Per",
+            "ikke",
+            "har",
+            "spørsmål,",
+            "fortsetter",
+            "Nora",
+            "samtalen."
+          ],
+          "answer": [
+            "Hvis Per ikke har spørsmål, fortsetter Nora samtalen."
+          ],
+          "context": "Početak: Hvis Per"
+        },
+        {
+          "id": "NO-HC-B1-L01-G-20",
+          "code": "G-20",
+          "title": "Dva reda reči",
+          "type": "text",
+          "xp": 2,
+          "grammarFocus": "subordinate",
+          "instruction": "Počni istu rečenicu sa celom zavisnom rečenicom «Hvis pasienten ikke forstår». Zadrži sve reči.",
+          "hint": "Posle zavisne rečenice na početku sledi lični glagol glavne rečenice.",
+          "explanation": "«Hvis pasienten ikke forstår» zauzima prvo mesto, pa sledi «forklarer Nora».",
+          "context": "Nora forklarer på nytt hvis pasienten ikke forstår.",
+          "inputs": [
+            {
+              "prompt": "Nora forklarer på nytt hvis pasienten ikke forstår.",
+              "answers": [
+                "Hvis pasienten ikke forstår, forklarer Nora på nytt."
+              ]
+            }
+          ]
+        },
+        {
+          "id": "NO-HC-B1-L01-G-21",
+          "code": "G-21",
+          "title": "Ljubazna molba",
+          "type": "choice",
+          "xp": 1,
+          "grammarFocus": "polite",
+          "instruction": "Izaberi jedan odgovor koji je gramatički tačan i odgovara situaciji.",
+          "hint": "Razlikuj mogućnost/mолbu, obavezu i preporuku.",
+          "explanation": "«Kunne du…?» je ljubazna molba; «må» pita o obavezi, a «burde» o preporuci.",
+          "context": "Nora želi da pacijent zavrne rukav radi merenja. Izaberi ljubaznu molbu, ne pitanje o obavezi.",
+          "options": [
+            "Må du brette opp ermet?",
+            "Kunne du brette opp ermet?",
+            "Burde du brette opp ermet?"
+          ],
+          "correct": [
+            1
+          ]
+        },
+        {
+          "id": "NO-HC-B1-L01-G-22",
+          "code": "G-22",
+          "title": "Bez infinitivne oznake",
+          "type": "gaps",
+          "xp": 1,
+          "grammarFocus": "polite",
+          "instruction": "Dopuni svaku prazninu odgovarajućim oblikom.",
+          "hint": "Modalni glagol traži infinitiv bez «å»; traži se mirnije disanje.",
+          "explanation": "«Kunne du puste litt roligere?» koristi goli infinitiv i komparativ.",
+          "text": "Kunne du ___ litt ___?",
+          "gaps": [
+            {
               "options": [
                 "puste",
                 "å puste",
                 "puster"
               ],
+              "answer": "puste"
+            },
+            {
+              "options": [
+                "roligere",
+                "roligst",
+                "rolige"
+              ],
+              "answer": "roligere"
+            }
+          ]
+        },
+        {
+          "id": "NO-HC-B1-L01-G-23",
+          "code": "G-23",
+          "title": "Želja pacijenta",
+          "type": "order",
+          "xp": 1,
+          "grammarFocus": "polite",
+          "instruction": "Složi sve delove u jednu rečenicu. Zadrži zadati početak.",
+          "hint": "Ljubazna želja zadržava modalni glagol na drugom mestu.",
+          "explanation": "«Jeg skulle gjerne snakke…» izražava ljubaznu želju, bez «å».",
+          "tokens": [
+            "Jeg",
+            "skulle",
+            "gjerne",
+            "snakke",
+            "med legen."
+          ],
+          "answer": [
+            "Jeg skulle gjerne snakke med legen."
+          ],
+          "context": "Početak: Jeg"
+        },
+        {
+          "id": "NO-HC-B1-L01-G-24",
+          "code": "G-24",
+          "title": "Savet ili obaveza?",
+          "type": "choice",
+          "xp": 1,
+          "grammarFocus": "polite",
+          "instruction": "Izaberi jedan odgovor koji je gramatički tačan i odgovara situaciji.",
+          "hint": "Koji modalni glagol najjasnije znači «trebalo bi»?",
+          "explanation": "«burde» prenosi preporuku; «må» obavezu, «kunne» mogućnost.",
+          "context": "Lekar je preporučio odmor. Nora prenosi preporuku, a ne obavezu niti pitanje o mogućnosti.",
+          "options": [
+            "Du må hvile litt.",
+            "Du kunne hvile litt.",
+            "Du burde hvile litt."
+          ],
+          "correct": [
+            2
+          ]
+        },
+        {
+          "id": "NO-HC-B1-L01-G-25",
+          "code": "G-25",
+          "title": "Namera govornika",
+          "type": "match",
+          "xp": 1,
+          "grammarFocus": "polite",
+          "instruction": "Poveži početak sa završetkom tako da svaka rečenica bude gramatički tačna i smislena.",
+          "hint": "Razlikuj molbu, savet i ličnu želju.",
+          "explanation": "«kunne du» = molba; «burde» = savet; «skulle gjerne» = želja.",
+          "left": [
+            "Ljubazna molba da pacijent sedne",
+            "Preporuka prema planu lekara",
+            "Ljubazna želja pacijenta"
+          ],
+          "right": [
+            "Jeg skulle gjerne snakke med legen.",
+            "Kunne du sette deg her?",
+            "Du burde hvile litt, slik legen anbefalte."
+          ],
+          "pairs": [
+            1,
+            2,
+            0
+          ]
+        },
+        {
+          "id": "NO-HC-B1-L01-G-26",
+          "code": "G-26",
+          "title": "Dve profesionalne molbe",
+          "type": "multi",
+          "xp": 1,
+          "grammarFocus": "polite",
+          "instruction": "Izaberi sve tačne odgovore.",
+          "hint": "Posle oba modalna glagola potreban je infinitiv bez «å».",
+          "explanation": "«vise» i «vente» su infinitivi; modalni glagol ne traži «å».",
+          "context": "Izaberi dve gramatički pravilne ljubazne molbe.",
+          "options": [
+            "Kunne du å vise meg hvor det gjør vondt?",
+            "Kunne du vise meg hvor det gjør vondt?",
+            "Ville du vente her et øyeblikk?",
+            "Ville du venter her et øyeblikk?"
+          ],
+          "correct": [
+            1,
+            2
+          ]
+        },
+        {
+          "id": "NO-HC-B1-L01-G-27",
+          "code": "G-27",
+          "title": "Iz naredbe u molbu",
+          "type": "text",
+          "xp": 2,
+          "grammarFocus": "polite",
+          "instruction": "Pretvori u molbu sa početkom «Kunne du». Zadrži izraz «sette deg her». Napiši celu rečenicu.",
+          "hint": "Povratna zamenica ostaje uz infinitiv.",
+          "explanation": "«sette deg» ostaje povratna konstrukcija posle modalnog glagola.",
+          "context": "Sett deg her.",
+          "inputs": [
+            {
+              "prompt": "Sett deg her.",
               "answers": [
-                "puste"
+                "Kunne du sette deg her?"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "NO-HC-B1-L01-G-28",
+          "code": "G-28",
+          "title": "Ispravi ljubazno pitanje",
+          "type": "text",
+          "xp": 2,
+          "grammarFocus": "polite",
+          "instruction": "Ukloni samo nepotrebnu reč. Napiši celu rečenicu.",
+          "hint": "Posle modalnog glagola proveri infinitivnu oznaku.",
+          "explanation": "Posle «kunne» nema «å»; «om du er» ostaje indirektno pitanje.",
+          "context": "Kunne du å fortelle meg om du er allergisk?",
+          "inputs": [
+            {
+              "prompt": "Kunne du å fortelle meg om du er allergisk?",
+              "answers": [
+                "Kunne du fortelle meg om du er allergisk?"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "NO-HC-B1-L01-G-29",
+          "code": "G-29",
+          "title": "Želja i preporuka",
+          "type": "gaps",
+          "xp": 2,
+          "grammarFocus": "polite",
+          "instruction": "Dopuni svaku prazninu odgovarajućim oblikom.",
+          "hint": "Prva replika je želja, druga izričito prenosi preporuku.",
+          "explanation": "«skulle gjerne» izražava želju, «burde» preporuku.",
+          "text": "Per: Jeg ___ gjerne snakke med legen. Nora: Du ___ hvile litt, slik legen anbefalte.",
+          "gaps": [
+            {
+              "options": [
+                "skulle",
+                "må",
+                "burde"
+              ],
+              "answer": "skulle"
+            },
+            {
+              "options": [
+                "burde",
+                "ville",
+                "må"
+              ],
+              "answer": "burde"
+            }
+          ]
+        },
+        {
+          "id": "NO-HC-B1-L01-G-30",
+          "code": "G-30",
+          "title": "Molba sa indirektnim pitanjem",
+          "type": "text",
+          "xp": 2,
+          "grammarFocus": "polite",
+          "instruction": "Napiši molbu sa početkom «Kunne du fortelle meg om». Polazno pitanje preoblikuj u zavisnu rečenicu; zadrži sve njegove reči.",
+          "hint": "Proveri infinitiv posle modalnog glagola, red subjekta i položaj negacije.",
+          "explanation": "«kunne…fortelle» je molba; «om du ikke har fått» ima subjekat i negaciju pre pomoćnog glagola.",
+          "context": "Har du ikke fått medisinen?",
+          "inputs": [
+            {
+              "prompt": "Har du ikke fått medisinen?",
+              "answers": [
+                "Kunne du fortelle meg om du ikke har fått medisinen?"
               ]
             }
           ]
