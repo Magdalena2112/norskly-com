@@ -22,7 +22,7 @@ export default function StudentLayout({ children, title }: StudentLayoutProps) {
   const { isAdmin } = useUserRole();
   const navigate = useNavigate();
   const [xp, setXp] = useState<{ total_xp: number; level: number } | null>(null);
-  const { code: langCode } = useSelectedLanguage();
+  const { code: langCode, slug: langSlug } = useSelectedLanguage();
 
   useEffect(() => {
     if (!user) return;
@@ -58,7 +58,7 @@ export default function StudentLayout({ children, title }: StudentLayoutProps) {
               )}
               {xp && (
                 <span className="hidden sm:flex text-xs bg-primary/10 text-primary px-2.5 py-1 rounded-full font-semibold items-center gap-1 border border-primary/15">
-                  <Zap className="w-3 h-3" /> {XP_TITLES[Math.min(xp.level, 10)] || `Lvl ${xp.level}`} · {xp.total_xp} XP
+                  <Zap className="w-3 h-3" /> {xpTitle(xp.level, langSlug)} · {xp.total_xp} XP
                 </span>
               )}
               <span className="hidden md:inline text-xs bg-accent/30 text-primary px-3 py-1 rounded-full font-medium border border-accent/30">
