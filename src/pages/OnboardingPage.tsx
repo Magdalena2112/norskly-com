@@ -192,19 +192,21 @@ export default function OnboardingPage() {
   const chosenLevel = courseStartLevel(explicitIntent ? params.get("level") : savedIntent?.signup_level, chosenCourse, promoAvailableLevels(langCode, chosenCourse));
   const t = COPY[langCode];
 
+  const goals = chosenCourse === "health" ? HEALTH_GOALS : GENERAL_GOALS;
   const [step, setStep] = useState(0);
-  const [form, setForm] = useState<Partial<UserProfile> & { life_context?: string }>({
+  const [form, setForm] = useState<Partial<UserProfile> & { life_context?: string; daily_minutes?: number }>({
     name: profile.name || "",
     level: chosenLevel,
-    learning_goal: t.goals[0],
-    preferred_tone: t.tones[0],
-    focus_area: t.focuses[0],
+    learning_goal: goals[0].value,
+    preferred_tone: SUPPORT_STYLES[0].value,
+    focus_area: "",
     confidence_level: profile.confidence_level || 3,
     lives_in_norway: false,
     life_context: "",
+    daily_minutes: 30,
   });
 
-  const steps = t.steps;
+  const steps = ONBOARDING_STEPS;
 
   const next = async () => {
     if (step < steps.length - 1) setStep(step + 1);
