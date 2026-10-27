@@ -20,6 +20,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import PostcardVignette from "@/components/student/PostcardVignette";
 import { LESSON_IMAGES } from "@/content/lessons/images";
 import { KeyPhrases } from "@/components/lesson/InteractiveText";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+import MyDictionaryPanel from "@/components/MyDictionaryPanel";
 import { lessonWords, phrasesInText } from "@/lib/myDictionary";
 
 const MODULE_META: Record<string, { title: string; subtitle: string; description: string; icon: typeof BookOpen; iconBg: string; vignette: any }> = {
@@ -150,7 +152,18 @@ export default function CourseLessonPage() {
     <StudentLayout>
       <NordicBackdrop />
       <div className="container max-w-4xl py-6 sm:py-8 relative z-10">
-        <BackButton />
+        <div className="flex items-center justify-between gap-2">
+          <BackButton />
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button variant="outline" size="sm" className="gap-1.5 bg-card/80"><BookOpen className="w-4 h-4" /> Moj rečnik</Button>
+            </SheetTrigger>
+            <SheetContent side="right" className="w-full sm:max-w-md overflow-y-auto">
+              <SheetHeader className="mb-4"><SheetTitle>Moj rečnik</SheetTitle></SheetHeader>
+              <MyDictionaryPanel language={lang} compact />
+            </SheetContent>
+          </Sheet>
+        </div>
         {!open && (
         <header className="mt-3 mb-6 rounded-3xl border border-border/50 bg-cream/90 backdrop-blur-md shadow-postcard overflow-hidden">
           {imgs?.cover && <img src={imgs.cover} alt={row.title_target} className="w-full aspect-[16/9] object-cover" />}

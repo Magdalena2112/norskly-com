@@ -1,5 +1,5 @@
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
-import { LayoutDashboard, User, TrendingUp, Settings, LogOut } from "lucide-react";
+import { LayoutDashboard, User, TrendingUp, Settings, LogOut, BookMarked } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -73,6 +73,14 @@ export function StudentSidebar() {
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild tooltip="Moj rečnik">
+                  <NavLink to="/recnik" className={`${linkBase} ${isActive("/recnik") ? linkActive : linkInactive}`}>
+                    <BookMarked className="w-4 h-4 shrink-0" />
+                    {!collapsed && <span>Moj rečnik</span>}
+                  </NavLink>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
