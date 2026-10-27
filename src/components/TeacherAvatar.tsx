@@ -12,7 +12,7 @@ export default function TeacherAvatar() {
       {/* Avatar — tuned to balance the text column visually */}
       <img
         src={avatarSrc}
-        alt="AI nastavnik"
+        alt="Ilustracija nastavnika"
         draggable={false}
         className="relative select-none object-contain object-bottom
                    w-[260px] sm:w-[320px] md:w-[380px] lg:w-[440px] xl:w-[480px]

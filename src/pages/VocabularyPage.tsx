@@ -72,7 +72,7 @@ async function callVocabAI(body: Record<string, unknown>) {
     body: { ...body, language: getCurrentLanguageCode(), focus_area: personalization.focus_area, life_context: personalization.life_context },
     headers: { Authorization: `Bearer ${session?.access_token}` },
   });
-  if (res.error) throw new Error(res.error.message || "AI request failed");
+  if (res.error) throw new Error(res.error.message || "Provera trenutno nije dostupna.");
   return res.data;
 }
 
@@ -506,7 +506,7 @@ function SentenceTab({ level, userId }: { level: string; userId?: string }) {
       <Card className="shadow-nordic bg-background/80 backdrop-blur-sm border-border/30">
         <CardHeader>
           <CardTitle className="text-lg">Koristi reč u rečenici</CardTitle>
-          <CardDescription>Izaberite reč i napišite rečenicu. AI će je ispraviti.</CardDescription>
+          <CardDescription>Izaberite reč i napišite rečenicu. Dobićete ispravke i objašnjenja grešaka.</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <Select value={selectedWord} onValueChange={setSelectedWord}>

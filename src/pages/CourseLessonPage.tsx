@@ -31,7 +31,7 @@ const MODULE_META: Record<string, { title: string; subtitle: string; description
   vocabulary: { title: "Vokabular", subtitle: "Vocabulary", description: "Reči lekcije po grupama, sa izgovorom i primerima.", vignette: "stamp" },
   reading: { title: "Čitanje", subtitle: "Reading", description: "Tekstovi lekcije i pitanja razumevanja.", vignette: "stamp" },
   listening: { title: "Slušanje", subtitle: "Listening", description: "Slušaj situacije bez teksta, pa proveri razumevanje.", vignette: "speech" },
-  writing: { title: "Pisanje", subtitle: "Writing", description: "Kratki zadaci pisanja sa AI povratnom informacijom.", vignette: "book" },
+  writing: { title: "Pisanje", subtitle: "Writing", description: "Kratki zadaci pisanja sa detaljnim povratnim informacijama.", vignette: "book" },
   pronunciation: { title: "Izgovor", subtitle: "Pronunciation", description: "Alfabet, glasovi i intonacija — slušaj i ponovi.", vignette: "speech" },
   speaking: { title: "Razgovor", subtitle: "Speaking", description: "Scenariji razgovora i RoleSwitch sa Sophie.", vignette: "speech" },
   culture: { title: "Kultura", subtitle: "Culture & Society", description: "Kako se ljudi upoznaju i pozdravljaju.", vignette: "cabins" },
@@ -421,7 +421,7 @@ export default function CourseLessonPage() {
           {tab === "speaking" && (
             <div className="rounded-2xl border border-border/60 bg-cream/90 p-5 shadow-card-soft space-y-3">
               <h4 className="font-display font-semibold text-primary">Razgovorne situacije lekcije</h4>
-              <p className="text-sm text-muted-foreground">AI preuzima ulogu sagovornika, započinje razgovor i vodi te kroz ciljeve lekcije. Posle toga možeš nastaviti slobodan razgovor.</p>
+              <p className="text-sm text-muted-foreground">Sagovornik u zadatoj ulozi započinje razgovor i vodi te kroz ciljeve lekcije. Posle toga možeš nastaviti slobodan razgovor.</p>
               <Button variant="hero" onClick={() => navigate(`/talk?lesson=${encodeURIComponent(content?.code || "")}`)}><MessageSquare className="w-4 h-4" /> Otvori razgovor</Button>
             </div>
           )}
