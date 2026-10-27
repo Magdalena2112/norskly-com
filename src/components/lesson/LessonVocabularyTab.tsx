@@ -1,8 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/context/AuthContext";
 import { loadLessonContent, speakLines, type Exercise } from "@/lib/courseLessons";
 import LessonExercise from "@/components/lesson/LessonExercise";
+import VocabularyPracticeExercise from "@/components/lesson/VocabularyPracticeExercise";
+import { vocabularyDedupKey, vocabularyXp, type VocabularyPracticeExercise as Practice } from "@/lib/vocabularyPractice";
+import { logActivity } from "@/lib/logActivity";
+import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Volume2, BookOpen, ArrowRight, CheckCircle2, MessageSquareQuote, PenLine, Layers, Sparkles, Loader2 } from "lucide-react";
@@ -27,7 +31,7 @@ for (const src of [wordPics, wordPicsA2, wordPicsNoA2] as Record<string, Record<
 }
 const HC_PICS: Record<string, string> = Object.fromEntries(
   Object.entries(import.meta.glob("@/assets/lessons/hc/hc-vo-*.jpg", { eager: true, import: "default" }) as Record<string, string>)
-    .map(([path, url]) => [path.split("/").pop()!.replace(".jpg", ""), url]),
+    .map(([path, url]) => [(path.split("/").pop() ?? "").replace(".jpg", ""), url]),
 );
 const picFor = (w: string, imgs: string[] = [], img?: string) => {
   if (img && HC_PICS[img]) return HC_PICS[img];
@@ -47,6 +51,8 @@ export default function LessonVocabularyTab({ lessonId, mode, onPractice, onFlas
   const [areas, setAreas] = useState<Area[]>([]);
   const [exercises, setExercises] = useState<Exercise[]>([]);
   const [done, setDone] = useState<string[]>([]);
+  const [awardedCodes, setAwardedCodes] = useState<string[]>([]);
+  const pendingAwards = useRef(new Set<string>());
   const [idx, setIdxState] = useState(sharedIdx);
   const setIdx = (i: number) => { sharedIdx = i; setIdxState(i); };
   useEffect(() => { setIdxState(sharedIdx); }, [mode]);
@@ -54,6 +60,7 @@ export default function LessonVocabularyTab({ lessonId, mode, onPractice, onFlas
 
   useEffect(() => {
     (async () => {
+      setDone([]); setAwardedCodes([]);
       const { data } = await supabase.from("course_lessons").select("*").eq("id", lessonId).maybeSingle();
       if (!data) return;
       setRow(data);
@@ -71,6 +78,12 @@ export default function LessonVocabularyTab({ lessonId, mode, onPractice, onFlas
       if (user) {
         const { data: p } = await supabase.from("course_lesson_progress").select("completed_steps").eq("user_id", user.id).eq("lesson_id", lessonId).maybeSingle();
         if (p && Array.isArray(p.completed_steps)) setDone(p.completed_steps as string[]);
+        const { data: awards } = await supabase.from("activities").select("payload").eq("user_id", user.id)
+          .eq("language", data.language).eq("type", "lesson_vocabulary_exercise").contains("payload", { lesson_id: lessonId });
+        setAwardedCodes((awards ?? []).flatMap((award) => {
+          const payload = award.payload as { code?: string } | null;
+          return typeof payload?.code === "string" ? [payload.code] : [];
+        }));
       }
     })();
   }, [lessonId, user]);
@@ -93,13 +106,41 @@ export default function LessonVocabularyTab({ lessonId, mode, onPractice, onFlas
   if (!row || !areas.length) return <p className="text-sm text-muted-foreground text-center py-8">Učitavanje reči lekcije…</p>;
   const lang = row.language || "en";
   const a = areas[Math.min(idx, areas.length - 1)];
-  const areaEx = a.exercises?.length ? exercises.filter((e) => a.exercises!.includes(e.code)) : (idx === 0 ? exercises : []);
-  const isAreaDone = (x: Area) => (x.exercises?.length ?? 0) > 0 && x.exercises!.every((c) => done.includes(c));
+  const practice = exercises.filter((e) => "type" in e && "xp" in e) as unknown as Practice[];
+  const isDone = (code: string) => practice.some((e) => e.code === code) ? awardedCodes.includes(code) : done.includes(code);
+  const areaEx = a.exercises?.length ? exercises.filter((e) => (a.exercises ?? []).includes(e.code)) : (idx === 0 ? exercises : []);
+  const isAreaDone = (x: Area) => (x.exercises?.length ?? 0) > 0 && (x.exercises ?? []).every(isDone);
+  const totalXp = practice.reduce((total, ex) => total + ex.xp, 0);
+  const gainedXp = vocabularyXp(practice, awardedCodes);
   const active = a.words.filter((w) => w.active !== false);
   const passive = a.words.filter((w) => w.active === false);
   const say = (t: string) => speakLines([{ speaker: "m", text: t.split(" / ")[0].replace("…", "") }], lang);
 
   async function markDone(code: string) {
+    const ex = practice.find((item) => item.code === code);
+    if (ex) {
+      if (!user || awardedCodes.includes(code) || pendingAwards.current.has(code)) return;
+      pendingAwards.current.add(code);
+      try {
+        const reward = await logActivity(user.id, "vocabulary", "lesson_vocabulary_exercise", ex.xp,
+          { lesson_id: row.id, code }, { dedupKey: vocabularyDedupKey(row.id, code), language: row.language });
+        if (!reward) {
+          const { data: existing } = await supabase.from("activities").select("id").eq("user_id", user.id)
+            .eq("language", row.language).eq("dedup_key", vocabularyDedupKey(row.id, code)).maybeSingle();
+          if (!existing) { toast.error("Poeni nisu sačuvani. Pokušaj ponovo."); return; }
+        }
+        setAwardedCodes((previous) => [...new Set([...previous, code])]);
+        const { data: current } = await supabase.from("course_lesson_progress").select("completed_steps")
+          .eq("user_id", user.id).eq("lesson_id", row.id).maybeSingle();
+        const next = [...new Set([...(Array.isArray(current?.completed_steps) ? current.completed_steps as string[] : done), code])];
+        const { error } = await supabase.from("course_lesson_progress").upsert({
+          user_id: user.id, lesson_id: row.id, language: row.language, completed_steps: next, status: "in_progress",
+        }, { onConflict: "user_id,lesson_id" });
+        if (error) toast.error("Poeni su sačuvani, ali napredak nije. Pokušaj ponovo.");
+        else setDone(next);
+      } finally { pendingAwards.current.delete(code); }
+      return;
+    }
     if (!user || done.includes(code)) return;
     const next = [...done, code];
     setDone(next);
@@ -205,9 +246,13 @@ export default function LessonVocabularyTab({ lessonId, mode, onPractice, onFlas
       ) : (
         <div className="space-y-4">
           <h3 className="font-display text-xl text-primary">{a.sr} — vežbe</h3>
+          {totalXp > 0 && <div className="space-y-2">
+            <p className="text-sm font-semibold text-primary" aria-live="polite">Osvojeno: {gainedXp} / {totalXp} XP</p>
+            <Progress value={gainedXp / totalXp * 100} />
+          </div>}
           <div className="flex flex-wrap gap-2">
             {areaEx.map((ex, i) => {
-              const d = done.includes(ex.code), cur = i === exIdx;
+              const d = isDone(ex.code), cur = i === exIdx;
               return (
                 <button key={ex.id} type="button" onClick={() => setExIdx(i)} aria-label={`Vežba ${i + 1}`}
                   className={`w-10 h-10 rounded-full text-sm font-semibold border-2 flex items-center justify-center transition-all ${cur ? "bg-primary text-primary-foreground border-primary scale-110 shadow-card-soft" : d ? "bg-forest/15 border-forest text-forest" : "bg-cream/90 border-border text-foreground hover:border-primary/50"}`}>
@@ -216,8 +261,9 @@ export default function LessonVocabularyTab({ lessonId, mode, onPractice, onFlas
               );
             })}
           </div>
-          {areaEx[exIdx] && (
-            <LessonExercise key={areaEx[exIdx].id} exercise={areaEx[exIdx]} language={lang} level={row.cefr_level} lessonTitle={row.title_target || row.title} done={done.includes(areaEx[exIdx].code)} onDone={markDone} />
+          {areaEx[exIdx] && (practice.some((e) => e.code === areaEx[exIdx].code) ?
+            <VocabularyPracticeExercise key={areaEx[exIdx].id} exercise={areaEx[exIdx] as unknown as Practice} pictures={HC_PICS} done={isDone(areaEx[exIdx].code)} onDone={markDone} /> :
+            <LessonExercise key={areaEx[exIdx].id} exercise={areaEx[exIdx]} language={lang} level={row.cefr_level} lessonTitle={row.title_target || row.title} done={isDone(areaEx[exIdx].code)} onDone={markDone} />
           )}
           <div className="flex justify-between gap-2">
             <Button variant="outline" size="sm" disabled={exIdx === 0} onClick={() => setExIdx(exIdx - 1)}>← Prethodna</Button>
@@ -227,7 +273,7 @@ export default function LessonVocabularyTab({ lessonId, mode, onPractice, onFlas
               <Button variant="outline" size="sm" onClick={onPractice}>Nazad na gradivo</Button>
             )}
           </div>
-          {isAreaDone(a) && <p className="text-sm rounded-xl bg-forest/10 border border-forest/30 p-3">🎉 Bravo! Završila/o si sve vežbe ove oblasti.</p>}
+          {isAreaDone(a) && <p className="text-sm rounded-xl bg-forest/10 border border-forest/30 p-3">Bravo! Završila/o si sve vežbe ove oblasti.</p>}
           <div className="rounded-2xl border border-primary/20 bg-primary/5 p-4 space-y-3">
             {!aiEx ? (
               <div className="flex flex-col sm:flex-row sm:items-center gap-3">
