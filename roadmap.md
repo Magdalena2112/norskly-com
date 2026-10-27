@@ -1,4 +1,5 @@
 # Tasks
+- [ ] Update survey course choices, multi-select modules, required question 9 and continuation/notification questions; validate submission and admin readback.
 - [x] Add approved promo banner and learner survey with dashboard/menu/completed-lesson links.
 - [x] Secure survey responses, admin statistics/filters/spreadsheet export, and single-recipient email notifications; verify submission and readback.
 - [x] Move level selection to course cards; test level validation and registration links for all languages, and verify six-step authenticated onboarding without changing an existing enrollment.
