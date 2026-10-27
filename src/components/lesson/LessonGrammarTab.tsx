@@ -25,6 +25,37 @@ function Table({ head, rows }: { head?: string[]; rows: string[][] }) {
   );
 }
 
+/** One-click micro quiz inside a theory section. */
+function QuickCheckCard({ qc }: { qc: { question: string; options: string[]; correct: number; feedback?: string } }) {
+  const [picked, setPicked] = useState<number | null>(null);
+  return (
+    <Card className="border-primary/30 bg-primary/5">
+      <CardHeader className="pb-2"><CardTitle className="text-base flex items-center gap-2"><Sparkles className="w-4 h-4 text-primary" /> Blic provera</CardTitle></CardHeader>
+      <CardContent className="space-y-2">
+        <p className="text-sm font-medium">{qc.question}</p>
+        <div className="space-y-2">
+          {qc.options.map((o, i) => {
+            const chosen = picked === i;
+            const ok = picked !== null && i === qc.correct;
+            const bad = chosen && i !== qc.correct;
+            return (
+              <button key={i} type="button" disabled={picked !== null} onClick={() => setPicked(i)}
+                className={`w-full text-left rounded-xl border px-3 py-2.5 text-sm transition-colors ${ok ? "border-forest bg-forest/10 text-forest" : bad ? "border-destructive bg-destructive/10 text-destructive" : "border-border/60 bg-background hover:border-primary/50"}`}>
+                {o}
+              </button>
+            );
+          })}
+        </div>
+        {picked !== null && (
+          <p className={`text-xs leading-relaxed ${picked === qc.correct ? "text-forest" : "text-muted-foreground"}`}>
+            {picked === qc.correct ? "✅ " : "💡 "}{qc.feedback || (picked === qc.correct ? "Tačno!" : "Nije tačno — pogledaj objašnjenje iznad.")}
+          </p>
+        )}
+      </CardContent>
+    </Card>
+  );
+}
+
 interface Topic {
   label: string;
   sectionIdx: number[];
@@ -180,6 +211,36 @@ export default function LessonGrammarTab({ lessonId, onPractice, onExplain, mode
               <CardContent><p className="text-sm leading-relaxed whitespace-pre-line">{s.explanation}</p></CardContent>
             </Card>
           )}
+          {s.dialogue && (
+            <Card className="border-primary/20">
+              <CardHeader className="pb-2"><CardTitle className="text-base flex items-center gap-2"><span>💬</span> Scena iz prakse</CardTitle></CardHeader>
+              <CardContent className="space-y-2">
+                {s.dialogue.context && <p className="text-xs text-muted-foreground italic">{s.dialogue.context}</p>}
+                <div className="space-y-2">
+                  {s.dialogue.lines.map((l: string[], i: number) => (
+                    <div key={i} className="flex items-start gap-2 p-2.5 rounded-lg bg-muted">
+                      <button type="button" onClick={() => speakLines([{ speaker: "m", text: l[1] }], lang)} className="text-primary/60 hover:text-primary mt-0.5" aria-label={`Izgovori ${l[1]}`}><Volume2 className="w-4 h-4" /></button>
+                      <p className="text-sm"><span className="font-semibold text-primary">{l[0]}:</span> {l[1]}</p>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          )}
+          {s.formula && (
+            <Card className="border-accent/40 bg-accent/5">
+              <CardHeader className="pb-2"><CardTitle className="text-base flex items-center gap-2"><span>🧩</span> {s.formula.label}</CardTitle></CardHeader>
+              <CardContent className="space-y-2">
+                <p className="text-sm font-mono font-medium rounded-lg bg-background/70 border border-accent/20 px-3 py-2">{s.formula.pattern}</p>
+                {s.formula.examples?.map((e: string) => (
+                  <div key={e} className="flex items-start gap-2">
+                    <button type="button" onClick={() => speakLines([{ speaker: "m", text: e }], lang)} className="text-primary/60 hover:text-primary mt-0.5" aria-label={`Izgovori ${e}`}><Volume2 className="w-4 h-4" /></button>
+                    <p className="text-sm">{e}</p>
+                  </div>
+                ))}
+              </CardContent>
+            </Card>
+          )}
           {s.table && (
             <Card className="border-accent/20">
               <CardHeader className="pb-2"><CardTitle className="text-base flex items-center gap-2"><span className="text-accent">📐</span> Gramatički obrazac</CardTitle></CardHeader>
@@ -190,6 +251,12 @@ export default function LessonGrammarTab({ lessonId, onPractice, onExplain, mode
             <Card>
               <CardHeader className="pb-2"><CardTitle className="text-base flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-accent" /> Pravila</CardTitle></CardHeader>
               <CardContent><ul className="space-y-2">{s.rules.map((r: string) => <li key={r} className="text-sm flex items-start gap-2"><span className="text-accent mt-0.5">•</span><span>{r}</span></li>)}</ul></CardContent>
+            </Card>
+          )}
+          {s.brainTrap && (
+            <Card className="border-amber-500/30 bg-amber-500/5">
+              <CardHeader className="pb-2"><CardTitle className="text-base flex items-center gap-2"><span>🧠</span> Zamka za naš mozak</CardTitle></CardHeader>
+              <CardContent><p className="text-sm leading-relaxed">{s.brainTrap}</p></CardContent>
             </Card>
           )}
           {s.compare && (
@@ -222,6 +289,13 @@ export default function LessonGrammarTab({ lessonId, onPractice, onExplain, mode
                   </div>
                 ))}
               </CardContent>
+            </Card>
+          )}
+          {s.quickCheck && <QuickCheckCard qc={s.quickCheck} />}
+          {s.mnemonic && (
+            <Card className="border-forest/30 bg-forest/5">
+              <CardHeader className="pb-2"><CardTitle className="text-base flex items-center gap-2"><span>🪄</span> Štos za pamćenje</CardTitle></CardHeader>
+              <CardContent><p className="text-sm leading-relaxed">{s.mnemonic}</p></CardContent>
             </Card>
           )}
           {s.remember && (
