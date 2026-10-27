@@ -8,7 +8,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { UserProfile } from "@/types/profile";
-import { ChevronRight, ChevronLeft, User, Target, MessageSquare, BookOpen, Gauge, Globe } from "lucide-react";
+import { ChevronRight, ChevronLeft, User, Target, MessageSquare, Gauge, Clock } from "lucide-react";
 import BackButton from "@/components/BackButton";
 import JourneyStepper from "@/components/onboarding/JourneyStepper";
 import { courseIntent, courseStartLevel, promoAvailableLevels } from "@/lib/courseAccess";
@@ -151,6 +151,42 @@ const COPY: Record<LangCode, Copy> = {
   },
 };
 
+const ONBOARDING_STEPS = ["Ime", "Vreme", "Cilj", "Samopouzdanje", "Stil podrške"];
+const TIME_OPTIONS = [
+  { value: 15, title: "15 min dnevno · Lagani ritam", desc: "1 modul dnevno, lekcija za ~9–10 dana, cilj 15–20 XP" },
+  { value: 30, title: "30 min dnevno · Optimalni ritam", desc: "2–3 modula dnevno, lekcija za ~4–5 dana, cilj 30–40 XP" },
+  { value: 60, title: "60+ min dnevno · Intenzivni ritam", desc: "Cela lekcija za 1–2 dana, cilj 80–100 XP" },
+];
+const GENERAL_GOALS = [
+  { value: "svakodnevni život", title: "Svakodnevni život i snalaženje", desc: "Fokus na tečnost i prirodan govorni jezik" },
+  { value: "posao i karijera", title: "Posao i karijera", desc: "Fokus na formalnost i profesionalne formulacije" },
+  { value: "ispit", title: "Polaganje ispita", desc: "Fokus na gramatičku preciznost i strukture koje se boduju" },
+];
+const HEALTH_GOALS = [
+  { value: "rad sa pacijentima", title: "Rad sa pacijentima i anamneza", desc: "Simptomi, empatija, jasna pitanja" },
+  { value: "medicinska dokumentacija", title: "Izveštaji i dokumentacija", desc: "Stručni termini i precizno pisanje" },
+  { value: "komunikacija sa kolegama", title: "Komunikacija sa lekarima i kolegama", desc: "Vizite, primopredaja smene, hitne situacije" },
+  { value: "autorizacija", title: "Priprema za autorizaciju / ispit struke", desc: "Fokus na tačnost i strukture koje se proveravaju" },
+];
+const SUPPORT_STYLES = [
+  { value: "podržavajući", title: "Podržavajući i blag", desc: "Fokus na smisao i ohrabrenje, bez zalaženja u svaku sitnicu" },
+  { value: "direktan", title: "Direktan i detaljan", desc: "Svaka greška označena, uz pravilo i ispravan primer" },
+];
+
+function ChoiceRow({ title, desc, selected, onClick }: { title: string; desc: string; selected: boolean; onClick: () => void }) {
+  return (
+    <button
+      onClick={onClick}
+      className={`w-full text-left px-4 py-3 rounded-xl border-2 transition-all duration-200 ${
+        selected ? "border-accent bg-accent/10 shadow-accent-glow" : "border-border bg-background hover:border-accent/40"
+      }`}
+    >
+      <span className={`block text-sm font-semibold ${selected ? "text-accent" : "text-foreground"}`}>{title}</span>
+      <span className="block text-xs text-muted-foreground mt-0.5">{desc}</span>
+    </button>
+  );
+}
+
 function OptionCard({
   label,
   selected,
@@ -239,7 +275,8 @@ export default function OnboardingPage() {
             learning_goal: form.learning_goal || "",
             focus_area: form.focus_area || "",
             confidence_level: form.confidence_level ?? 3,
-            preferred_tone: form.preferred_tone || "opušten",
+            preferred_tone: form.preferred_tone || SUPPORT_STYLES[0].value,
+            daily_minutes: form.daily_minutes ?? 30,
             lives_in_norway: form.lives_in_norway ?? false,
             life_context: form.life_context || null,
             subscription_type: selectedPlan,
@@ -262,15 +299,14 @@ export default function OnboardingPage() {
   };
   const prev = () => step > 0 && setStep(step - 1);
 
-  const stepIcons = [User, Target, MessageSquare, BookOpen, Gauge, Globe];
+  const stepIcons = [User, Clock, Target, Gauge, MessageSquare];
   const StepIcon = stepIcons[step];
 
   const sidebarBg = langCode === "no" ? "bg-nordic-gradient" : "bg-gradient-to-br from-primary via-fjord to-accent";
 
   const lastStepDisabled = useMemo(() => {
-    if (step !== steps.length - 1) return false;
-    return t.lifeYesNo ? false : !form.life_context;
-  }, [step, steps.length, t.lifeYesNo, form.life_context]);
+    return false;
+  }, []);
 
   return (
     <div className="min-h-screen bg-background flex">
@@ -335,11 +371,11 @@ export default function OnboardingPage() {
 
               {step === 1 && (
                 <div>
-                  <h2 className="text-2xl font-display font-bold text-foreground mb-2">{t.goalTitle}</h2>
-                  <p className="text-muted-foreground mb-6">{t.goalDesc}</p>
-                  <div className="flex flex-wrap gap-3">
-                    {t.goals.map((g) => (
-                      <OptionCard key={g} label={g} selected={form.learning_goal === g} onClick={() => setForm({ ...form, learning_goal: g })} />
+                  <h2 className="text-2xl font-display font-bold text-foreground mb-2">Koliko vremena možeš da izdvojiš za učenje?</h2>
+                  <p className="text-muted-foreground mb-6">Na osnovu ovoga predlažemo dnevni plan modula i XP cilj.</p>
+                  <div className="grid gap-3">
+                    {TIME_OPTIONS.map((o) => (
+                      <ChoiceRow key={o.value} title={o.title} desc={o.desc} selected={form.daily_minutes === o.value} onClick={() => setForm({ ...form, daily_minutes: o.value })} />
                     ))}
                   </div>
                 </div>
@@ -347,11 +383,11 @@ export default function OnboardingPage() {
 
               {step === 2 && (
                 <div>
-                  <h2 className="text-2xl font-display font-bold text-foreground mb-2">{t.toneTitle}</h2>
-                  <p className="text-muted-foreground mb-6">{t.toneDesc}</p>
-                  <div className="flex flex-wrap gap-3">
-                    {t.tones.map((tn) => (
-                      <OptionCard key={tn} label={tn} selected={form.preferred_tone === tn} onClick={() => setForm({ ...form, preferred_tone: tn })} />
+                  <h2 className="text-2xl font-display font-bold text-foreground mb-2">{t.goalTitle}</h2>
+                  <p className="text-muted-foreground mb-6">Zadaci u lekcijama su isti za sve; cilj usmerava povratne informacije AI partnera.</p>
+                  <div className="grid gap-3">
+                    {goals.map((g) => (
+                      <ChoiceRow key={g.value} title={g.title} desc={g.desc} selected={form.learning_goal === g.value} onClick={() => setForm({ ...form, learning_goal: g.value })} />
                     ))}
                   </div>
                 </div>
@@ -359,20 +395,8 @@ export default function OnboardingPage() {
 
               {step === 3 && (
                 <div>
-                  <h2 className="text-2xl font-display font-bold text-foreground mb-2">{t.focusTitle}</h2>
-                  <p className="text-muted-foreground mb-6">{t.focusDesc}</p>
-                  <div className="flex flex-wrap gap-3">
-                    {t.focuses.map((f) => (
-                      <OptionCard key={f} label={f} selected={form.focus_area === f} onClick={() => setForm({ ...form, focus_area: f })} />
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {step === 4 && (
-                <div>
                   <h2 className="text-2xl font-display font-bold text-foreground mb-2">{t.confidenceTitle}</h2>
-                  <p className="text-muted-foreground mb-6">{t.confidenceDesc}</p>
+                  <p className="text-muted-foreground mb-6">1 = nesiguran/na, 5 = vrlo siguran/na. Prema tome AI partner prilagođava tempo i složenost.</p>
                   <div className="flex gap-3">
                     {[1, 2, 3, 4, 5].map((n) => (
                       <button
@@ -391,26 +415,14 @@ export default function OnboardingPage() {
                 </div>
               )}
 
-              {step === 5 && (
+              {step === 4 && (
                 <div>
-                  <h2 className="text-2xl font-display font-bold text-foreground mb-2">{t.lifeTitle}</h2>
-                  <p className="text-muted-foreground mb-6">{t.lifeDesc}</p>
-                  <div className="flex flex-wrap gap-3">
-                    {t.lifeYesNo ? (
-                      <>
-                        <OptionCard label={t.lifeOptions[0]} selected={form.lives_in_norway === true} onClick={() => setForm({ ...form, lives_in_norway: true })} />
-                        <OptionCard label={t.lifeOptions[1]} selected={form.lives_in_norway === false} onClick={() => setForm({ ...form, lives_in_norway: false })} />
-                      </>
-                    ) : (
-                      t.lifeOptions.map((opt) => (
-                        <OptionCard
-                          key={opt}
-                          label={opt}
-                          selected={form.life_context === opt}
-                          onClick={() => setForm({ ...form, life_context: opt })}
-                        />
-                      ))
-                    )}
+                  <h2 className="text-2xl font-display font-bold text-foreground mb-2">Kakav pristup ispravkama ti odgovara?</h2>
+                  <p className="text-muted-foreground mb-6">Važi za ispravke u pisanju i povratne informacije u razgovoru.</p>
+                  <div className="grid gap-3">
+                    {SUPPORT_STYLES.map((o) => (
+                      <ChoiceRow key={o.value} title={o.title} desc={o.desc} selected={form.preferred_tone === o.value} onClick={() => setForm({ ...form, preferred_tone: o.value })} />
+                    ))}
                   </div>
                 </div>
               )}
