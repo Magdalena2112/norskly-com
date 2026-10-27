@@ -3480,21 +3480,63 @@
           "image": "hc:t3",
           "text": "Im Pflegeteam duzt man sich oft, aber Patienten und meistens auch Ärztinnen und Ärzte siezt man. Man spricht sie mit «Herr/Frau» und Nachnamen oder mit «Dr.» an.",
           "comparison": "Slično kao u Srbiji, ali se u Nemačkoj «du» bez dozvole smatra nepristojnim.",
-          "fact": "Wer zuerst das «Du» anbietet, ist meistens die ältere oder ranghöhere Person."
+          "fact": "Wer zuerst das «Du» anbietet, ist meistens die ältere oder ranghöhere Person.",
+          "keywords": [
+            {
+              "term": "siezen",
+              "meaning": "persirati"
+            },
+            {
+              "term": "duzen",
+              "meaning": "govoriti „ti“"
+            },
+            {
+              "term": "das Team",
+              "meaning": "tim"
+            }
+          ]
         },
         {
           "title": "Patientenrechte",
           "image": "hc:rd1",
           "text": "Ohne Aufklärung und Einwilligung keine Behandlung. Pflegekräfte achten darauf, dass Patienten alles verstanden haben.",
           "comparison": "U Nemačkoj se pisana saglasnost (Einwilligungserklärung) traži za mnoge zahvate.",
-          "fact": "Das Patientenrechtegesetz regelt diese Rechte seit 2013."
+          "fact": "Das Patientenrechtegesetz regelt diese Rechte seit 2013.",
+          "keywords": [
+            {
+              "term": "die Einwilligung",
+              "meaning": "pristanak"
+            },
+            {
+              "term": "die Aufklärung",
+              "meaning": "informisanje pacijenta"
+            },
+            {
+              "term": "die Patientenrechte",
+              "meaning": "prava pacijenta"
+            }
+          ]
         },
         {
           "title": "Dokumentation und Pünktlichkeit",
           "image": "hc:wr1",
           "text": "Was nicht dokumentiert ist, gilt als nicht gemacht. Übergaben beginnen pünktlich und folgen einer festen Struktur.",
           "comparison": "Dokumentacija je u Nemačkoj veoma detaljna i pravno obavezujuća.",
-          "fact": "Viele Stationen nutzen für die Übergabe das SBAR-Schema."
+          "fact": "Viele Stationen nutzen für die Übergabe das SBAR-Schema.",
+          "keywords": [
+            {
+              "term": "die Dokumentation",
+              "meaning": "dokumentacija"
+            },
+            {
+              "term": "die Pünktlichkeit",
+              "meaning": "tačnost"
+            },
+            {
+              "term": "die Übergabe",
+              "meaning": "primopredaja smene"
+            }
+          ]
         }
       ]
     },
