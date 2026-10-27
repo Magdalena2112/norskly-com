@@ -1,5 +1,6 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "jsr:@supabase/supabase-js@2";
+import { loadLearnerStyleLine } from "../_shared/learnerStyle.ts";
 import { buildPersonalizationLines, type LangCode } from "../_shared/personalization.ts";
 
 const GATEWAY_URL = "https://ai.gateway.lovable.dev/v1/chat/completions";
@@ -88,7 +89,9 @@ Deno.serve(async (req) => {
     const personalization = buildPersonalizationLines(langCode, body.focus_area, body.life_context);
     const topicTitle = body.topic?.title ? String(body.topic.title).slice(0, 200) : "";
     const topicQs = Array.isArray(body.topic?.guiding_questions) ? body.topic.guiding_questions.slice(0, 5).map((q: unknown) => String(q).slice(0, 200)).join(" | ") : "";
+    const learnerStyle = await loadLearnerStyleLine(supabase, user.id, langCode);
     const personalizationLine = [
+      learnerStyle,
       personalization.serbianLine ? `PERSONALIZACIJA: ${personalization.serbianLine}` : "",
       topicTitle ? `ZADATA TEMA: "${topicTitle}"${topicQs ? ` (pitanja vodilje: ${topicQs})` : ""}. U "overall_feedback" ukratko oceni koliko je student odgovorio na temu i pitanja vodilje.` : "",
     ].filter(Boolean).join("\n");
