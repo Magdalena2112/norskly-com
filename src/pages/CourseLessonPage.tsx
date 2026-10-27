@@ -203,6 +203,8 @@ export default function CourseLessonPage() {
           const t = content.intro[Math.min(textIdx, content.intro.length - 1)];
           const img = imgs?.texts[t.id];
           const last = textIdx >= content.intro.length - 1;
+          const keyTerms = ((t as { keyTerms?: LessonWord[] }).keyTerms) ?? [];
+          const textKnown = keyTerms.length ? [...keyTerms, ...knownWords] : knownWords;
           return (
             <section className="mb-8">
               <div className="flex items-center justify-between mb-3">
@@ -212,15 +214,15 @@ export default function CourseLessonPage() {
               <AnimatePresence mode="wait">
                 <motion.div key={t.id} initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -24 }} transition={{ duration: 0.3 }} className="space-y-3">
                   {img && t.type === "email" ? (
-                    <EmailTextCard image={img} title={t.title} scene={t.scene} lines={t.lines} language={lang} interactive={{ known: knownWords, lessonCode: content.code }} />
+                    <EmailTextCard image={img} title={t.title} scene={t.scene} lines={t.lines} language={lang} interactive={{ known: textKnown, lessonCode: content.code }} />
                   ) : (
                     <>
                       {img && <img src={img} alt={t.title} loading="lazy" className="w-full h-auto rounded-3xl border border-border/50 shadow-postcard" />}
-                      <DialoguePlayer title={t.title} scene={t.scene} lines={t.lines} language={lang} interactive={{ known: knownWords, lessonCode: content.code }} />
+                      <DialoguePlayer title={t.title} scene={t.scene} lines={t.lines} language={lang} interactive={{ known: textKnown, lessonCode: content.code }} />
                       <p className="text-[11px] text-muted-foreground">Klikni na bilo koju reč da vidiš značenje i sačuvaš je u „Moj rečnik”.</p>
                     </>
                   )}
-                  <KeyPhrases items={phrasesInText(t.lines.map((l) => l.text).join(" "), knownWords, 8, lang)} language={lang} lessonCode={content.code} />
+                  <KeyPhrases items={keyTerms.length ? keyTerms : phrasesInText(t.lines.map((l) => l.text).join(" "), knownWords, 8, lang)} language={lang} lessonCode={content.code} />
                 </motion.div>
               </AnimatePresence>
               <div className="flex items-center justify-between gap-2 mt-4">
