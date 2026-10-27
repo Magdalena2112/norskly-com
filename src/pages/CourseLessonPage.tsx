@@ -19,6 +19,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import PostcardVignette from "@/components/student/PostcardVignette";
 import { LESSON_IMAGES } from "@/content/lessons/images";
+import { KeyPhrases } from "@/components/lesson/InteractiveText";
+import { lessonWords, phrasesInText } from "@/lib/myDictionary";
 
 const MODULE_META: Record<string, { title: string; subtitle: string; description: string; icon: typeof BookOpen; iconBg: string; vignette: any }> = {
   grammar: { title: "Gramatika", subtitle: "Grammar", description: "Objašnjenja, tabele, česte greške i vežbe sa 3 pokušaja.", icon: BookOpen, iconBg: "bg-primary", vignette: "book" },
@@ -133,6 +135,7 @@ export default function CourseLessonPage() {
   const textById = (id: string) => content.intro.find((t) => t.id === id);
   const imgs = LESSON_IMAGES[row.lesson_code || content.code];
   const moduleKeys = LESSON_TABS.map((t) => t.key).filter((k) => k !== "intro" && m[k] && MODULE_META[k]);
+  const knownWords = lessonWords(m.vocabulary);
   const hasMaterial = (k: string) => !["writing", "review"].includes(k);
   const openEx: Exercise[] = open ? m[open]?.exercises || [] : [];
   const openModule = (k: string | null) => {
@@ -184,9 +187,11 @@ export default function CourseLessonPage() {
                   ) : (
                     <>
                       {img && <img src={img} alt={t.title} loading="lazy" className="w-full h-auto rounded-3xl border border-border/50 shadow-postcard" />}
-                      <DialoguePlayer title={t.title} scene={t.scene} lines={t.lines} language={lang} />
+                      <DialoguePlayer title={t.title} scene={t.scene} lines={t.lines} language={lang} interactive={{ known: knownWords, lessonCode: content.code }} />
+                      <p className="text-[11px] text-muted-foreground">Klikni na bilo koju reč da vidiš značenje i sačuvaš je u „Moj rečnik”.</p>
                     </>
                   )}
+                  <KeyPhrases items={phrasesInText(t.lines.map((l) => l.text).join(" "), knownWords)} language={lang} lessonCode={content.code} />
                 </motion.div>
               </AnimatePresence>
               <div className="flex items-center justify-between gap-2 mt-4">
