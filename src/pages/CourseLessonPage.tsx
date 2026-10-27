@@ -4,6 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/context/AuthContext";
 import { useProfile } from "@/context/ProfileContext";
 import StudentLayout from "@/components/student/StudentLayout";
+import SurveyInvitation from "@/components/survey/SurveyInvitation";
 import NordicBackdrop from "@/components/student/NordicBackdrop";
 import BackButton from "@/components/BackButton";
 import DialoguePlayer from "@/components/lesson/DialoguePlayer";
@@ -197,6 +198,7 @@ export default function CourseLessonPage() {
         )}
 
         {/* 1) Intro texts — one at a time, with illustrations */}
+        {!open && exercises.length > 0 && exercises.every(e => done.includes(e.code)) && <SurveyInvitation language={lang} completed />}
         {content.intro.length > 0 && !open && (() => {
           const t = content.intro[Math.min(textIdx, content.intro.length - 1)];
           const img = imgs?.texts[t.id];
