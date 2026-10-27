@@ -2,12 +2,14 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Play, Square, Users, User, Turtle, Eye, EyeOff } from "lucide-react";
 import { speakLines, stopSpeaking, speakerCount, type DialogueLine } from "@/lib/courseLessons";
+import InteractiveText from "@/components/lesson/InteractiveText";
+import type { LessonWord } from "@/lib/myDictionary";
 
 const COLORS = ["bg-primary/10 text-primary", "bg-fjord/15 text-fjord", "bg-sunset/15 text-sunset", "bg-forest/15 text-forest", "bg-accent/15 text-accent"];
 
 export default function DialoguePlayer({
-  title, scene, lines, language, hideTranscript = false,
-}: { title: string; scene?: string; lines: DialogueLine[]; language: string; hideTranscript?: boolean }) {
+  title, scene, lines, language, hideTranscript = false, interactive,
+}: { title: string; scene?: string; lines: DialogueLine[]; language: string; hideTranscript?: boolean; interactive?: { known: LessonWord[]; lessonCode?: string } }) {
   const [active, setActive] = useState<number | null>(null);
   const [playing, setPlaying] = useState(false);
   const [slow, setSlow] = useState(false);
@@ -57,7 +59,7 @@ export default function DialoguePlayer({
               {count > 1 && (
                 <span className={`text-[11px] font-semibold px-2 py-0.5 rounded-full h-fit whitespace-nowrap ${COLORS[[...l.speaker].reduce((a, ch) => a + ch.charCodeAt(0), 0) % COLORS.length]}`}>{l.speaker}</span>
               )}
-              <span className="text-sm text-foreground">{l.text}</span>
+              <span className="text-sm text-foreground">{interactive ? <InteractiveText text={l.text} language={language} known={interactive.known} lessonCode={interactive.lessonCode} /> : l.text}</span>
             </li>
           ))}
         </ul>

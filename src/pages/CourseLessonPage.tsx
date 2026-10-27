@@ -184,9 +184,11 @@ export default function CourseLessonPage() {
                   ) : (
                     <>
                       {img && <img src={img} alt={t.title} loading="lazy" className="w-full h-auto rounded-3xl border border-border/50 shadow-postcard" />}
-                      <DialoguePlayer title={t.title} scene={t.scene} lines={t.lines} language={lang} />
+                      <DialoguePlayer title={t.title} scene={t.scene} lines={t.lines} language={lang} interactive={{ known: knownWords, lessonCode: content.code }} />
+                      <p className="text-[11px] text-muted-foreground">Klikni na bilo koju reč da vidiš značenje i sačuvaš je u „Moj rečnik”.</p>
                     </>
                   )}
+                  <KeyPhrases items={phrasesInText(t.lines.map((l) => l.text).join(" "), knownWords)} language={lang} lessonCode={content.code} />
                 </motion.div>
               </AnimatePresence>
               <div className="flex items-center justify-between gap-2 mt-4">
