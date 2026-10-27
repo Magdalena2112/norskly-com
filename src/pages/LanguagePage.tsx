@@ -64,7 +64,8 @@ export default function LanguagePage() {
       if (langProf?.onboarding_completed) {
         navigate(`/ucenje/${lang.slug}`);
       } else {
-        navigate(`/onboarding?lang=${lang.slug}&course=${extra.course === "health" ? "health" : "general"}`);
+        const params = new URLSearchParams({ lang: lang.slug, course: extra.course === "health" ? "health" : "general", ...(extra.level ? { level: extra.level } : {}) });
+        navigate(`/onboarding?${params.toString()}`);
       }
       return;
     }
@@ -215,9 +216,9 @@ export default function LanguagePage() {
 
       <CourseTypeSection
         slug={lang.slug}
-        onSelect={(course) => {
+        onSelect={(course, level) => {
           localStorage.setItem("norskly_selected_course", course);
-          goAuth({ plan: "trial", course });
+          goAuth({ plan: "trial", mode: "signup", course, level });
         }}
       />
 

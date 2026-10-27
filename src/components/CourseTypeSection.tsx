@@ -1,7 +1,10 @@
+import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, BookOpen, HeartPulse, ClipboardCheck } from "lucide-react";
+import { CEFR_LEVELS, type CefrLevel } from "@/lib/levels";
+import { courseStartLevel } from "@/lib/courseAccess";
 
 type Course = {
   id: string;
@@ -27,7 +30,8 @@ const COURSES: Record<string, Course[]> = {
   ],
 };
 
-export default function CourseTypeSection({ slug, onSelect }: { slug: string; onSelect: (courseId: string) => void }) {
+export default function CourseTypeSection({ slug, onSelect }: { slug: string; onSelect: (courseId: string, level: CefrLevel) => void }) {
+  const [selectedLevels, setSelectedLevels] = useState<Record<string, CefrLevel>>({});
   const courses = COURSES[slug] ?? [];
   if (!courses.length) return null;
   return (
@@ -53,8 +57,21 @@ export default function CourseTypeSection({ slug, onSelect }: { slug: string; on
                 <h3 className="font-display text-xl font-bold text-primary">{c.title}</h3>
                 <p className="text-xs text-muted-foreground mt-1">{c.level}</p>
                 <p className="text-sm text-muted-foreground mt-3 flex-1">{c.description}</p>
+                {c.status === "active" && (
+                  <div className="mt-5">
+                    <p className="text-sm font-medium text-foreground mb-2">Početni nivo</p>
+                    <div className="grid grid-cols-5 gap-1.5" role="group" aria-label={`Početni nivo · ${c.title}`}>
+                      {CEFR_LEVELS.map((level) => {
+                        const available = c.id !== "health" || level === "B1";
+                        const selected = courseStartLevel(selectedLevels[c.id], c.id === "health" ? "health" : "general") === level;
+                        return <Button key={level} size="sm" variant={selected ? "default" : "outline"} className="px-0 min-w-0" aria-pressed={selected} disabled={!available} title={available ? level : `${level} · U pripremi`} onClick={() => setSelectedLevels((prev) => ({ ...prev, [c.id]: level }))}>{level}</Button>;
+                      })}
+                    </div>
+                    {c.id === "health" && <p className="text-xs text-muted-foreground mt-2 leading-relaxed">Tokom promotivnog perioda aktivan je B1. A1, A2, B2 i C1 su u pripremi.</p>}
+                  </div>
+                )}
                 {c.status === "active" ? (
-                  <Button className="mt-6 rounded-full" onClick={() => onSelect(c.id)}>
+                  <Button className="mt-6 rounded-full" onClick={() => onSelect(c.id, courseStartLevel(selectedLevels[c.id], c.id === "health" ? "health" : "general"))}>
                     Prijavi se na kurs <ArrowRight className="ml-1 h-4 w-4" />
                   </Button>
                 ) : (

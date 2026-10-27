@@ -11,6 +11,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import BackButton from "@/components/BackButton";
 import JourneyStepper from "@/components/onboarding/JourneyStepper";
+import { courseIntent, courseStartLevel } from "@/lib/courseAccess";
 
 export default function AuthPage() {
   // „Registruj se" u zaglavlju otvara odmah karticu Registracije (?mode=signup).
@@ -48,7 +49,9 @@ export default function AuthPage() {
       const { data: authData } = await supabase.auth.getUser();
       const savedIntent = authData.user?.user_metadata;
       const intendedCourse = searchParams.get("course") || (savedIntent?.signup_language === lang ? savedIntent?.signup_course : "general");
-      navigate(`/onboarding?lang=${lang}&course=${intendedCourse === "health" ? "health" : "general"}`);
+      const course = courseIntent(intendedCourse, code);
+      const level = courseStartLevel(lockedLang === lang ? searchParams.get("level") ?? (savedIntent?.signup_language === lang ? savedIntent?.signup_level : null) : savedIntent?.signup_language === lang ? savedIntent?.signup_level : null, course);
+      navigate(`/onboarding?lang=${lang}&course=${course}&level=${level}`);
       return;
     }
     navigate(`/ucenje/${lang}${plan ? `?plan=${plan}` : ""}`);
@@ -144,13 +147,15 @@ export default function AuthPage() {
 
       } else {
         const signupLang = intentLang;
+        const signupCourse = courseIntent(searchParams.get("course"), slugToCode(signupLang));
+        const signupLevel = courseStartLevel(searchParams.get("level"), signupCourse);
         localStorage.setItem("norskly_selected_language", signupLang);
         const { data, error } = await supabase.auth.signUp({
           email,
           password,
           options: {
             emailRedirectTo: window.location.origin,
-            data: { signup_language: signupLang, signup_course: searchParams.get("course") === "health" ? "health" : "general" },
+            data: { signup_language: signupLang, signup_course: signupCourse, signup_level: signupLevel },
           },
         });
         if (error) throw error;
@@ -167,7 +172,7 @@ export default function AuthPage() {
             title: "Dobrodošao 👋",
             description: "Hajde da podesimo tvoj profil za ovaj jezik.",
           });
-          navigate(`/onboarding?lang=${signupLang}&course=${searchParams.get("course") === "health" ? "health" : "general"}`);
+          navigate(`/onboarding?lang=${signupLang}&course=${signupCourse}&level=${signupLevel}`);
           return;
         }
         toast({
