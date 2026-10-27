@@ -20,6 +20,7 @@ import hcT1 from "@/assets/lessons/hc-b1-l01-t1.jpg";
 import hcT2 from "@/assets/lessons/hc-b1-l01-t2.jpg";
 import hcT3 from "@/assets/lessons/hc-b1-l01-t3.jpg";
 import noT3 from "@/assets/lessons/no-a2-l01-t3.webp";
+import deT3 from "@/assets/lessons/de-a2-l01-t3.webp";
 
 export interface LessonImages {
   cover?: string;
@@ -46,7 +47,7 @@ export const LESSON_IMAGES: Record<string, LessonImages> = {
   },
   "DE-A2-L01": {
     cover: a2t1.url,
-    texts: { "DE-A2-L01-T01": a2t1.url, "DE-A2-L01-T02": a2t2.url, "DE-A2-L01-T03": a2t3.url },
+    texts: { "DE-A2-L01-T01": a2t1.url, "DE-A2-L01-T02": a2t2.url, "DE-A2-L01-T03": deT3 },
     modules: {},
   },
   "EN-A2-L01": {

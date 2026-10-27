@@ -149,6 +149,14 @@ ITEM_IMAGES["no:rd1"] = noRd1;
 ITEM_IMAGES["no:rd3"] = noRd3;
 ITEM_IMAGES["no:vo07"] = noVo07;
 
+// DE-A2-L01: German copies of pictures that contain text.
+import deRd1 from "@/assets/lessons/de-a2-l01-rd1.webp";
+import deRd3 from "@/assets/lessons/de-a2-l01-rd3.webp";
+import deVo07 from "@/assets/lessons/de-a2-l01-vo07.webp";
+ITEM_IMAGES["de:rd1"] = deRd1;
+ITEM_IMAGES["de:rd3"] = deRd3;
+ITEM_IMAGES["de:vo07"] = deVo07;
+
 // Health-care B1 lessons (NO/DE share illustrations without text).
 import hcRd1 from "@/assets/lessons/hc-b1-l01-rd1.jpg";
 import hcWr1 from "@/assets/lessons/hc-b1-l01-wr1.jpg";

@@ -2,7 +2,7 @@ import { supabase } from "@/integrations/supabase/client";
 
 export const MY_DICTIONARY = "Moj rečnik";
 
-export interface LessonWord { word: string; translation: string }
+export interface LessonWord { word: string; translation: string; /** Extra text spans (e.g. separated German verbs) to highlight as this word. */ forms?: string[] }
 
 /** Collect every {word, translation} pair from a lesson's vocabulary module, whatever its shape. */
 export function lessonWords(vocab: unknown): LessonWord[] {
@@ -41,7 +41,7 @@ const isL = (c?: string) => !!c && /[\p{L}\p{M}'’-]/u.test(c);
 export function phraseRanges(text: string, words: LessonWord[], language?: string): { range: [number, number]; word: LessonWord }[] {
   const lower = text.toLowerCase();
   const out: { range: [number, number]; word: LessonWord }[] = [];
-  const items = words.flatMap((w) => searchForms(w.word, language).map((f) => ({ f, w }))).sort((a, b) => b.f.length - a.f.length);
+  const items = words.flatMap((w) => [...searchForms(w.word, language), ...(w.forms ?? []).map((f) => f.toLowerCase())].map((f) => ({ f, w }))).sort((a, b) => b.f.length - a.f.length);
   for (const { f, w } of items) {
     let from = 0, at: number;
     while ((at = lower.indexOf(f, from)) !== -1) {
