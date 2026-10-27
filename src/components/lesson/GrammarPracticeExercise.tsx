@@ -192,7 +192,7 @@ export default function GrammarPracticeExercise({ exercise: ex, done, onDone, im
 
       {result === "correct" && (
         <div className="rounded-xl bg-forest/10 border border-forest/30 p-3 text-sm space-y-1 animate-fade-in">
-          <p className="font-semibold text-forest flex items-center gap-1"><CheckCircle2 className="w-4 h-4" /> Tačno!{awarded ? ` +${ex.xp} XP` : ""}</p>
+          <p className="font-semibold text-forest flex items-center gap-1"><CheckCircle2 className="w-4 h-4" /> Tačno!{awarded && (!vocabulary || done) ? ` +${ex.xp} XP` : ""}</p>
           {ex.explanation && <p>{ex.explanation}</p>}
         </div>
       )}
