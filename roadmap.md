@@ -1,6 +1,6 @@
 # Tasks
-- [ ] Add approved promo banner and learner survey with dashboard/menu/completed-lesson links.
-- [ ] Secure survey responses, admin statistics/filters/spreadsheet export, and single-recipient email notifications; verify submission and readback.
+- [x] Add approved promo banner and learner survey with dashboard/menu/completed-lesson links.
+- [x] Secure survey responses, admin statistics/filters/spreadsheet export, and single-recipient email notifications; verify submission and readback.
 - [x] Move level selection to course cards; test level validation and registration links for all languages, and verify six-step authenticated onboarding without changing an existing enrollment.
 - [x] Separate general/health enrollment per language; protect content, direct links, progress and immutable enrollment; test both access rules and verify general-student access end to end.
 - [ ] Verify health-student access end to end (requires an enrolled health student; none exists yet).
