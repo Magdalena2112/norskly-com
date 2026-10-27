@@ -120,6 +120,13 @@
       "when": 1793084445646,
       "tag": "0016_fix_vocabulary_partial_dedup_index",
       "breakpoints": true
+    },
+    {
+      "idx": 17,
+      "version": "7",
+      "when": 1793103214144,
+      "tag": "0017_isolate_language_course_enrollment",
+      "breakpoints": true
     }
   ]
 }

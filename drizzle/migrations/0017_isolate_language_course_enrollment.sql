@@ -1,0 +1,12 @@
+ALTER TABLE public.language_profiles ADD COLUMN course_type text NOT NULL DEFAULT 'general' CHECK (course_type IN ('general','health'));
+CREATE OR REPLACE FUNCTION public.can_access_course(_language text, _course text) RETURNS boolean LANGUAGE sql STABLE SECURITY DEFINER SET search_path=public AS $$ SELECT auth.uid() IS NOT NULL AND (public.has_role(auth.uid(),'admin') OR public.has_role(auth.uid(),'admin_teacher') OR EXISTS(SELECT 1 FROM public.language_profiles WHERE user_id=auth.uid() AND language=_language AND course_type=_course AND onboarding_completed)); $$;
+REVOKE ALL ON FUNCTION public.can_access_course(text,text) FROM PUBLIC;
+GRANT EXECUTE ON FUNCTION public.can_access_course(text,text) TO authenticated,service_role;
+CREATE OR REPLACE FUNCTION public.lock_course_enrollment() RETURNS trigger LANGUAGE plpgsql SET search_path=public AS $$ BEGIN
+IF auth.uid() IS NOT NULL AND NOT (public.has_role(auth.uid(),'admin') OR public.has_role(auth.uid(),'admin_teacher')) AND (NEW.course_type IS DISTINCT FROM OLD.course_type OR NEW.user_id IS DISTINCT FROM OLD.user_id OR NEW.language IS DISTINCT FROM OLD.language) THEN RAISE EXCEPTION 'Upisani kurs se ne može promeniti.'; END IF;
+RETURN NEW; END $$;
+CREATE TRIGGER lock_course_enrollment BEFORE UPDATE ON public.language_profiles FOR EACH ROW EXECUTE FUNCTION public.lock_course_enrollment();
+DROP POLICY "Signed-in users read published lessons" ON public.course_lessons;
+CREATE POLICY "Read enrolled course lessons" ON public.course_lessons FOR SELECT TO authenticated USING ((is_published AND public.can_access_course(language,course)) OR public.has_role(auth.uid(),'admin') OR public.has_role(auth.uid(),'admin_teacher'));
+CREATE POLICY "Course progress access boundary" ON public.course_lesson_progress AS RESTRICTIVE FOR ALL TO authenticated USING (EXISTS(SELECT 1 FROM public.course_lessons l WHERE l.id=lesson_id AND l.language=course_lesson_progress.language AND public.can_access_course(l.language,l.course))) WITH CHECK (EXISTS(SELECT 1 FROM public.course_lessons l WHERE l.id=lesson_id AND l.language=course_lesson_progress.language AND public.can_access_course(l.language,l.course)));
+COMMENT ON COLUMN public.language_profiles.course_type IS 'Immutable student enrollment per language; privileged administration may change it.';
