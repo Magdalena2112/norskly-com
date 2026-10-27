@@ -1477,8 +1477,487 @@
       ]
     },
     "pronunciation": {
-      "theory": [],
-      "exercises": []
+      "theory": [
+        {
+          "title": "Vokallänge – dužina samoglasnika",
+          "text": "U nemačkom dužina samoglasnika menja značenje. Dug je često ispred jednog suglasnika ili uz h/ie, kratak ispred dvostrukog suglasnika. Klikni na reč da je čuješ.",
+          "pairHeads": [
+            "Dugi vokal",
+            "Kratki vokal"
+          ],
+          "pairs": [
+            {
+              "full": "Beet",
+              "fullNote": "leja",
+              "short": "Bett",
+              "shortNote": "krevet"
+            },
+            {
+              "full": "Ofen",
+              "fullNote": "peć",
+              "short": "offen",
+              "shortNote": "otvoren"
+            },
+            {
+              "full": "Miete",
+              "fullNote": "kirija",
+              "short": "Mitte",
+              "shortNote": "sredina"
+            },
+            {
+              "full": "wen",
+              "fullNote": "koga",
+              "short": "wenn",
+              "shortNote": "ako/kada"
+            },
+            {
+              "full": "Saat",
+              "fullNote": "seme",
+              "short": "satt",
+              "shortNote": "sit"
+            }
+          ]
+        },
+        {
+          "title": "Wortakzent in Fachwörtern – naglasak",
+          "text": "Nemačke složenice imaju naglasak na prvom delu, a strane reči (-ent, -ion, -ur, -ik) na kraju. Klikni na reč da je čuješ.",
+          "examples": [
+            {
+              "sentence": "Patient",
+              "display": "Pa-ti-ENT"
+            },
+            {
+              "sentence": "Medikament",
+              "display": "Me-di-ka-MENT"
+            },
+            {
+              "sentence": "Blutdruck",
+              "display": "BLUT-druck"
+            },
+            {
+              "sentence": "Temperatur",
+              "display": "Tem-pe-ra-TUR"
+            },
+            {
+              "sentence": "Schmerzmittel",
+              "display": "SCHMERZ-mit-tel"
+            },
+            {
+              "sentence": "Station",
+              "display": "Sta-TION"
+            }
+          ],
+          "note": "Pisano isticanje je samo pomagalo — merodavan je audio-model."
+        },
+        {
+          "title": "Ich-Laut, Ach-Laut i ü/ö",
+          "text": "„ch“ posle e/i/ü/ö zvuči meko (ich, Bericht), posle a/o/u tvrdo (Bauch, Nacht). Glasovi ü i ö (Übelkeit, Röntgen) izgovaraju se zaobljenim usnama.",
+          "examples": [
+            {
+              "sentence": "Ich schreibe den Bericht.",
+              "say": "ICH schreibe den BERICHT.",
+              "stressed": [
+                "Ich",
+                "Bericht"
+              ],
+              "meaning": "Meki ich-glas."
+            },
+            {
+              "sentence": "Haben Sie Schmerzen im Bauch?",
+              "say": "Haben Sie SCHMERZEN im BAUCH?",
+              "stressed": [
+                "Schmerzen",
+                "Bauch"
+              ],
+              "meaning": "Tvrdi ach-glas i važne reči."
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "code": "P-01",
+          "title": "Langer oder kurzer Vokal?",
+          "type": "choose",
+          "xp": 1,
+          "requireCorrect": true,
+          "instruction": "Poslušaj reč i odredi da li čuješ dug ili kratak samoglasnik.",
+          "okMsg": "Tačno!",
+          "wrongMsg": "Poslušaj još jednom i pokušaj ponovo.",
+          "items": [
+            {
+              "say": "Ofen",
+              "options": [
+                "Langer Vokal",
+                "Kurzer Vokal"
+              ],
+              "answer": "Langer Vokal"
+            },
+            {
+              "say": "offen",
+              "options": [
+                "Langer Vokal",
+                "Kurzer Vokal"
+              ],
+              "answer": "Kurzer Vokal"
+            },
+            {
+              "say": "Miete",
+              "options": [
+                "Langer Vokal",
+                "Kurzer Vokal"
+              ],
+              "answer": "Langer Vokal"
+            },
+            {
+              "say": "Mitte",
+              "options": [
+                "Langer Vokal",
+                "Kurzer Vokal"
+              ],
+              "answer": "Kurzer Vokal"
+            },
+            {
+              "say": "Bett",
+              "options": [
+                "Langer Vokal",
+                "Kurzer Vokal"
+              ],
+              "answer": "Kurzer Vokal"
+            }
+          ]
+        },
+        {
+          "code": "P-02",
+          "title": "Welches Wort hören Sie?",
+          "type": "choose",
+          "xp": 1,
+          "requireCorrect": true,
+          "instruction": "Poslušaj i izaberi reč koju čuješ.",
+          "okMsg": "Tačno!",
+          "wrongMsg": "Poslušaj još jednom i pokušaj ponovo.",
+          "items": [
+            {
+              "say": "offen",
+              "options": [
+                "Ofen",
+                "offen"
+              ],
+              "answer": "offen"
+            },
+            {
+              "say": "Miete",
+              "options": [
+                "Miete",
+                "Mitte"
+              ],
+              "answer": "Miete"
+            },
+            {
+              "say": "wenn",
+              "options": [
+                "wen",
+                "wenn"
+              ],
+              "answer": "wenn"
+            },
+            {
+              "say": "Beet",
+              "options": [
+                "Bett",
+                "Beet"
+              ],
+              "answer": "Beet"
+            },
+            {
+              "say": "satt",
+              "options": [
+                "Saat",
+                "satt"
+              ],
+              "answer": "satt"
+            }
+          ]
+        },
+        {
+          "code": "P-03",
+          "title": "Hören, nachsprechen, aufnehmen",
+          "type": "record",
+          "xp": 1,
+          "compareOnly": false,
+          "checklist": [
+            "Razumljivost",
+            "Dužina ciljanog vokala",
+            "Jasnoća cele rečenice"
+          ],
+          "instruction": "Poslušaj rečenicu, ponovi je i snimi. Pazi na istaknutu reč.",
+          "items": [
+            {
+              "say": "Das Fenster ist offen.",
+              "focus": "offen"
+            },
+            {
+              "say": "Bitte bleiben Sie im Bett.",
+              "focus": "Bett"
+            },
+            {
+              "say": "Wenn Sie Schmerzen haben, klingeln Sie.",
+              "focus": "Wenn"
+            }
+          ]
+        },
+        {
+          "code": "P-04",
+          "title": "Wo liegt der Akzent?",
+          "type": "choose",
+          "xp": 1,
+          "requireCorrect": true,
+          "instruction": "Poslušaj reč i izaberi naglašeni slog.",
+          "okMsg": "Tačno!",
+          "wrongMsg": "Poslušaj još jednom i pokušaj ponovo.",
+          "items": [
+            {
+              "say": "Patient",
+              "options": [
+                "PA-ti-ent",
+                "Pa-ti-ENT"
+              ],
+              "answer": "Pa-ti-ENT"
+            },
+            {
+              "say": "Blutdruck",
+              "options": [
+                "BLUT-druck",
+                "Blut-DRUCK"
+              ],
+              "answer": "BLUT-druck"
+            },
+            {
+              "say": "Medikament",
+              "options": [
+                "ME-di-ka-ment",
+                "Me-di-ka-MENT"
+              ],
+              "answer": "Me-di-ka-MENT"
+            },
+            {
+              "say": "Station",
+              "options": [
+                "STA-tion",
+                "Sta-TION"
+              ],
+              "answer": "Sta-TION"
+            },
+            {
+              "say": "Schmerzmittel",
+              "options": [
+                "SCHMERZ-mit-tel",
+                "Schmerz-MIT-tel"
+              ],
+              "answer": "SCHMERZ-mit-tel"
+            }
+          ]
+        },
+        {
+          "code": "P-05",
+          "title": "Ich-Laut oder Ach-Laut?",
+          "type": "choose",
+          "xp": 1,
+          "requireCorrect": true,
+          "instruction": "Poslušaj reč i odredi da li je „ch“ meko ili tvrdo.",
+          "okMsg": "Tačno!",
+          "wrongMsg": "Poslušaj još jednom i pokušaj ponovo.",
+          "items": [
+            {
+              "say": "Bericht",
+              "options": [
+                "Ich-Laut (meko)",
+                "Ach-Laut (tvrdo)"
+              ],
+              "answer": "Ich-Laut (meko)"
+            },
+            {
+              "say": "Bauch",
+              "options": [
+                "Ich-Laut (meko)",
+                "Ach-Laut (tvrdo)"
+              ],
+              "answer": "Ach-Laut (tvrdo)"
+            },
+            {
+              "say": "Nacht",
+              "options": [
+                "Ich-Laut (meko)",
+                "Ach-Laut (tvrdo)"
+              ],
+              "answer": "Ach-Laut (tvrdo)"
+            },
+            {
+              "say": "schlecht",
+              "options": [
+                "Ich-Laut (meko)",
+                "Ach-Laut (tvrdo)"
+              ],
+              "answer": "Ich-Laut (meko)"
+            },
+            {
+              "say": "Woche",
+              "options": [
+                "Ich-Laut (meko)",
+                "Ach-Laut (tvrdo)"
+              ],
+              "answer": "Ach-Laut (tvrdo)"
+            }
+          ]
+        },
+        {
+          "code": "P-06",
+          "title": "Was wird betont?",
+          "type": "choose",
+          "xp": 1,
+          "requireCorrect": true,
+          "instruction": "Poslušaj rečenicu i odredi koja informacija je istaknuta.",
+          "okMsg": "Tačno!",
+          "wrongMsg": "Poslušaj još jednom i pokušaj ponovo.",
+          "items": [
+            {
+              "say": "Haben Sie SCHMERZEN in der Brust?",
+              "options": [
+                "Simptom (bol)",
+                "Mesto (grudi)"
+              ],
+              "answer": "Simptom (bol)"
+            },
+            {
+              "say": "Haben Sie Schmerzen in der BRUST?",
+              "options": [
+                "Simptom (bol)",
+                "Mesto (grudi)"
+              ],
+              "answer": "Mesto (grudi)"
+            },
+            {
+              "say": "Sie bekommen das Medikament um ACHT UHR.",
+              "options": [
+                "Lek",
+                "Vreme"
+              ],
+              "answer": "Vreme"
+            },
+            {
+              "say": "Sie bekommen das MEDIKAMENT um acht Uhr.",
+              "options": [
+                "Lek",
+                "Vreme"
+              ],
+              "answer": "Lek"
+            }
+          ]
+        },
+        {
+          "code": "P-07",
+          "title": "Fragen an den Patienten",
+          "type": "record",
+          "xp": 1,
+          "compareOnly": false,
+          "checklist": [
+            "Razumljivost",
+            "Smiren tempo",
+            "Intonacija pitanja"
+          ],
+          "instruction": "Snimi pitanja kao da ih postavljaš pacijentu: smireno i jasno.",
+          "items": [
+            {
+              "say": "Wie geht es Ihnen heute?"
+            },
+            {
+              "say": "Können Sie mir zeigen, wo es wehtut?"
+            },
+            {
+              "say": "Sind Sie gegen Medikamente allergisch?"
+            },
+            {
+              "say": "Wie stark sind die Schmerzen von eins bis zehn?"
+            }
+          ]
+        },
+        {
+          "code": "P-08",
+          "title": "Übergabe",
+          "type": "record",
+          "xp": 1,
+          "compareOnly": false,
+          "checklist": [
+            "Jasnoća brojeva i vremena",
+            "Glasovi ü/ö/ch",
+            "Stručni termini"
+          ],
+          "instruction": "Snimi kratke rečenice iz predaje smene.",
+          "items": [
+            {
+              "say": "Der Patient hat Fieber und hohen Blutdruck."
+            },
+            {
+              "say": "Er hat um sechs Uhr ein Schmerzmittel bekommen."
+            },
+            {
+              "say": "Sie muss ab Mitternacht nüchtern bleiben."
+            }
+          ]
+        },
+        {
+          "code": "P-09",
+          "title": "Natürlich sprechen!",
+          "type": "record",
+          "xp": 1,
+          "compareOnly": false,
+          "checklist": [
+            "Prirodan ritam",
+            "Naglasak važnih reči",
+            "Razumljivost"
+          ],
+          "instruction": "Ponovi što prirodnije, kao u pravom razgovoru sa pacijentom.",
+          "items": [
+            {
+              "say": "Ich messe jetzt Ihren Blutdruck."
+            },
+            {
+              "say": "Sagen Sie bitte Bescheid, wenn Sie etwas brauchen."
+            },
+            {
+              "say": "Der Arzt kommt nach dem Mittagessen vorbei."
+            }
+          ]
+        },
+        {
+          "code": "P-10",
+          "title": "Aufnahmegespräch – Final Pronunciation Challenge",
+          "type": "record",
+          "xp": 1,
+          "compareOnly": false,
+          "checklist": [
+            "Stručni termini",
+            "Dužina vokala",
+            "Ich-/Ach-glas"
+          ],
+          "instruction": "Pročitaj ceo tekst naglas i snimi ga. Pazi na stručne reči, dužinu vokala i glas „ch“.",
+          "items": [
+            {
+              "say": "Guten Morgen, ich heiße Lena und bin Pflegekraft hier auf der Station. Ich möchte Ihnen ein paar Fragen stellen. Haben Sie irgendwo Schmerzen? Seit wann haben Sie die Beschwerden? Ich messe auch Ihren Blutdruck und Ihre Temperatur.",
+              "sentences": [
+                "Guten Morgen, ich heiße Lena und bin Pflegekraft hier auf der Station.",
+                "Ich möchte Ihnen ein paar Fragen stellen.",
+                "Haben Sie irgendwo Schmerzen?",
+                "Seit wann haben Sie die Beschwerden?",
+                "Ich messe auch Ihren Blutdruck und Ihre Temperatur."
+              ],
+              "showText": true
+            }
+          ],
+          "maxMs": 30000,
+          "tip": "Snimi tekst rečenicu po rečenicu uz model, pa ceo tekst bez zaustavljanja."
+        }
+      ]
     },
     "speaking": {
       "tasks": [],
