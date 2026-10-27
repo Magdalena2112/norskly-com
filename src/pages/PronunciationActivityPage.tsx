@@ -114,7 +114,9 @@ export function RecordSlot({ item, lang, level, onSuccess, compareOnly = false, 
       timerRef.current = window.setInterval(() => {
         const s = Date.now() - t0;
         setSecs(Math.floor(s / 1000));
-        if (s >= (compareOnly ? maxMs : Math.min(maxMs, 30000)) && rec.state === "recording") rec.stop();
+        // Scored recordings must stay under the server's 30 s WAV limit; stop 500 ms early so the tick latency never pushes us over.
+        const cap = compareOnly ? maxMs : Math.min(maxMs, 30000) - 500;
+        if (s >= cap && rec.state === "recording") rec.stop();
       }, 250);
     } catch {
       toast.error("Dozvoli pristup mikrofonu da bi snimio/la izgovor.");
