@@ -62,7 +62,7 @@ async function callGrammarAI(body: Record<string, unknown>) {
     },
     headers: { Authorization: `Bearer ${session?.access_token}` },
   });
-  if (res.error) throw new Error(res.error.message || "AI request failed");
+  if (res.error) throw new Error(res.error.message || "Provera trenutno nije dostupna.");
   return res.data;
 }
 
@@ -519,7 +519,7 @@ function CorrectionTab({ level, userId }: { level: string; userId?: string }) {
       <Card className="shadow-nordic bg-background/80 backdrop-blur-sm border-border/30">
         <CardHeader>
           <CardTitle className="text-lg">Korekcija teksta</CardTitle>
-          <CardDescription>{`Napišite tekst na ${langLocative()}, AI će ga ispraviti.`}</CardDescription>
+          <CardDescription>{`Napišite tekst na ${langLocative()} i dobićete ispravke i objašnjenja grešaka.`}</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <Textarea

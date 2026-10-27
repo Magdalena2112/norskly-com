@@ -75,7 +75,7 @@ export const TALK_SCENARIOS: Record<string, TalkScenario[]> = {
       id: "S-02",
       voice: "m",
       title: "Let's Share the Housework",
-      description: "Deliš stan sa AI sagovornikom i dogovarate ko će koji kućni posao raditi.",
+      description: "Deliš stan sa cimerom i dogovarate ko će koji kućni posao raditi.",
       aiRole: "Cimer/cimerka u zajedničkom stanu",
       studentRole: "Učenik dogovara raspodelu kućnih poslova",
       opening: "Hey! We have quite a lot to do this weekend. I can cook dinner, but we also need to clean the flat. What would you like to do?",

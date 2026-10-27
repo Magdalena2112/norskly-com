@@ -168,7 +168,7 @@ export default function GrammarProgressTab({ userId, lessonTopics }: { userId?: 
         <Card className="border-primary/20">
           <CardHeader className="pb-3">
             <CardTitle className="text-base flex items-center gap-2"><TrendingUp className="w-4 h-4 text-primary" /> Savladanost tema lekcije</CardTitle>
-            <CardDescription className="text-xs">Na osnovu kvizova i AI vežbi za teme ove lekcije</CardDescription>
+            <CardDescription className="text-xs">Na osnovu kvizova i dodatnih vežbi za teme ove lekcije</CardDescription>
           </CardHeader>
           <CardContent className="space-y-3">
             {mastery.map((m) => (

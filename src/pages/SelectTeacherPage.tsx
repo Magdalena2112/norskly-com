@@ -74,7 +74,7 @@ export default function SelectTeacherPage() {
       <div className="container max-w-5xl py-8 sm:py-12 space-y-8">
         <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="text-center space-y-3">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/15 border border-accent/30 text-xs font-semibold text-accent">
-            <Sparkles className="w-3.5 h-3.5" /> AI + ljudska podrška
+            <Sparkles className="w-3.5 h-3.5" /> Vođeno učenje i podrška profesora
           </div>
           <h1 className="text-3xl sm:text-4xl font-display font-bold text-primary">
             Odaberi svog nastavnika

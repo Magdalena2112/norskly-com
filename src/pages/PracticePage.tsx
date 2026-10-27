@@ -617,7 +617,7 @@ export default function PracticePage() {
       }
     } catch (e) {
       console.error("Talk error:", e);
-      toast.error("Greška pri komunikaciji sa AI-jem.");
+      toast.error("Odgovor trenutno nije dostupan. Pokušaj ponovo.");
     }
 
     // Auto-save after each exchange
@@ -867,7 +867,7 @@ export default function PracticePage() {
         <div className="container max-w-3xl py-8 space-y-4">
           <div>
             <h1 className="font-display text-2xl font-bold text-primary">Razgovor — lekcija</h1>
-            <p className="text-sm text-muted-foreground mt-1">Obavezne situacije: AI preuzima ulogu, započinje razgovor i vodi te kroz ciljeve. Svaka završena situacija donosi 10 XP.</p>
+            <p className="text-sm text-muted-foreground mt-1">Vežbaj unapred zadate situacije sa sagovornikom u odgovarajućoj ulozi. Svaka završena situacija donosi 10 XP.</p>
           </div>
           <div className="grid sm:grid-cols-2 gap-3">
             {lessonScenarios.map((s) => (
@@ -875,7 +875,7 @@ export default function PracticePage() {
                 <div className="flex justify-between text-[11px] font-mono text-primary/60"><span>{s.id}</span>{doneScenarios.includes(s.id) && <span>✓ Završeno</span>}</div>
                 <h3 className="font-display font-semibold text-primary mt-1">{s.title}</h3>
                 <p className="text-sm text-muted-foreground mt-1">{s.description}</p>
-                <p className="text-xs text-foreground/70 mt-2">AI: {s.aiRole}</p>
+                <p className="text-xs text-foreground/70 mt-2">Sagovornik: {s.aiRole}</p>
               </button>
             ))}
           </div>
@@ -927,7 +927,7 @@ export default function PracticePage() {
         <div className="border-b border-border/50 bg-secondary/40">
           <div className="container max-w-3xl py-3 flex flex-wrap items-start justify-between gap-3">
             <div className="text-sm">
-              <p className="font-semibold text-primary">{scenario.id} · {scenario.title} — AI: {scenario.aiRole}</p>
+              <p className="font-semibold text-primary">{scenario.id} · {scenario.title} — Sagovornik: {scenario.aiRole}</p>
               <ul className="mt-1 flex flex-wrap gap-x-4 gap-y-1 text-xs text-muted-foreground">
                 {scenario.goals.map((g) => <li key={g}>• {g}</li>)}
               </ul>
@@ -1078,7 +1078,7 @@ export default function PracticePage() {
                   </Select>
                 </div>
                 <div>
-                  <label className="text-xs text-muted-foreground mb-1 block">Uloga AI-ja</label>
+                  <label className="text-xs text-muted-foreground mb-1 block">Uloga sagovornika</label>
                   <Select value={role} onValueChange={setRole}>
                     <SelectTrigger className="h-9 text-sm"><SelectValue /></SelectTrigger>
                     <SelectContent>

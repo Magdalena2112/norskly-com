@@ -33,7 +33,7 @@ const TEACHER_PERKS = [
   "Profil profesora na platformi",
   "Mogućnost rada sa učenicima",
   "Organizacija časova i materijala",
-  "AI-generisane vežbe i sadržaj",
+  "Alati za pripremu dodatnih vežbi",
   "Upravljanje studentima i grupama",
   "Uvid u napredak učenika",
   "Administratorski pristup profesorskim alatima",
@@ -147,7 +147,7 @@ export default function ForTeachersPage() {
                 Postani predavač na <span className="font-script text-primary/80">Norskly</span> platformi.
               </h1>
               <p className="mt-6 text-lg md:text-xl text-foreground/70 max-w-xl mx-auto md:mx-0 leading-relaxed">
-                Pridruži se platformi koja povezuje profesore jezika sa učenicima i pruža moderne AI alate
+                Pridruži se platformi koja povezuje profesore jezika sa učenicima i pruža praktične alate
                 za organizaciju nastave, praćenje napretka i kreiranje vežbi.
               </p>
               <div className="mt-10 flex flex-wrap items-center justify-center md:justify-start gap-4">
@@ -423,7 +423,7 @@ export default function ForTeachersPage() {
             Počni da predaješ <span className="font-script text-primary/80">uz Norskly</span>.
           </h2>
           <p className="mt-5 text-lg text-foreground/70 max-w-2xl mx-auto">
-            Kombinuj svoje znanje jezika sa modernim AI alatima i organizuj nastavu na jednostavniji način.
+            Kombinuj svoje znanje jezika sa praktičnim alatima i organizuj nastavu na jednostavniji način.
           </p>
           <Button
             onClick={scrollToForm}

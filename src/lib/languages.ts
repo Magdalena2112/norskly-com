@@ -37,7 +37,7 @@ export const LANGUAGES: LanguageConfig[] = [
     code: "no",
     label: "Norveški",
     flag: "🇳🇴",
-    heroTitle: "Uči norveški uz AI i podršku profesora.",
+    heroTitle: "Uči norveški kroz vođene lekcije i podršku profesora.",
     heroSubtitle:
       "Personalizovane vežbe, praktičan razgovor i podrška profesora — sve na jednom mestu.",
     available: true,
@@ -50,7 +50,7 @@ export const LANGUAGES: LanguageConfig[] = [
       module: {
         grammar: "Norsk grammatikk",
         vocabulary: "Ord & uttrykk",
-        talk: "Snakk med AI",
+        talk: "Samtaleøvelser",
         writing: "Skriving & bildebeskrivelse",
         reading: "Lesing & forståelse",
         teacher: "Lærer-time · 90 min",
@@ -62,7 +62,7 @@ export const LANGUAGES: LanguageConfig[] = [
     code: "en",
     label: "Engleski",
     flag: "🇬🇧",
-    heroTitle: "Uči engleski uz AI i podršku profesora.",
+    heroTitle: "Uči engleski kroz vođene lekcije i podršku profesora.",
     heroSubtitle:
       "Vežbaj engleski kroz realne razgovore, pametne lekcije i podršku iskusnih profesora.",
     available: true,
@@ -75,7 +75,7 @@ export const LANGUAGES: LanguageConfig[] = [
       module: {
         grammar: "English grammar",
         vocabulary: "Words & phrases",
-        talk: "Talk with AI",
+        talk: "Conversation practice",
         writing: "Writing & picture description",
         reading: "Reading & comprehension",
         teacher: "Teacher session · 90 min",
@@ -87,9 +87,9 @@ export const LANGUAGES: LanguageConfig[] = [
     code: "de",
     label: "Nemački",
     flag: "🇩🇪",
-    heroTitle: "Uči nemački uz AI i podršku profesora.",
+    heroTitle: "Uči nemački kroz vođene lekcije i podršku profesora.",
     heroSubtitle:
-      "Otkrij strukturisan i prirodan način učenja nemačkog — uz AI i žive časove.",
+      "Otkrij strukturisan i prirodan način učenja nemačkog — kroz interaktivne vežbe i časove sa profesorima.",
     available: false,
     ui: {
       heroScript: "Willkommen zurück",
@@ -100,7 +100,7 @@ export const LANGUAGES: LanguageConfig[] = [
       module: {
         grammar: "Deutsche Grammatik",
         vocabulary: "Wörter & Ausdrücke",
-        talk: "Sprich mit der KI",
+        talk: "Gesprächsübungen",
         writing: "Schreiben & Bildbeschreibung",
         reading: "Lesen & Verständnis",
         teacher: "Lehrerstunde · 90 min",
