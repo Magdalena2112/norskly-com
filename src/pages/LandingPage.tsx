@@ -489,10 +489,6 @@ export default function LandingPage() {
           localStorage.setItem("norskly_selected_plan", "trial");
           document.getElementById("languages")?.scrollIntoView({ behavior: "smooth", block: "start" });
         }}
-        onPaidSelect={() => {
-          localStorage.setItem("norskly_selected_plan", "subscription");
-          document.getElementById("languages")?.scrollIntoView({ behavior: "smooth", block: "start" });
-        }}
         onTeacherSelect={() => document.getElementById("languages")?.scrollIntoView({ behavior: "smooth", block: "start" })}
       />
 
