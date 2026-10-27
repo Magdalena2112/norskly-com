@@ -32,6 +32,7 @@ import LandingPage from "./pages/LandingPage";
 const ForTeachersPage = lazy(() => import("./pages/ForTeachersPage"));
 const SurveyPage = lazy(() => import("./pages/SurveyPage"));
 const AdminSurveysPage = lazy(() => import("./pages/AdminSurveysPage"));
+const AdminCourseRecoveryPage = lazy(() => import("./pages/AdminCourseRecoveryPage"));
 const RelocationHubPage = lazy(() => import("./pages/RelocationHubPage"));
 const LanguagePage = lazy(() => import("./pages/LanguagePage"));
 const AuthPage = lazy(() => import("./pages/AuthPage"));
@@ -141,6 +142,7 @@ const App = () => (
                 <Route path="/admin/students/:userId" element={<ProtectedRoute><AdminRoute><AdminStudentDetailPage /></AdminRoute></ProtectedRoute>} />
                 <Route path="/admin/lessons" element={<ProtectedRoute><AdminRoute><AdminLessonsPage /></AdminRoute></ProtectedRoute>} />
                 <Route path="/admin/surveys" element={<ProtectedRoute><AdminRoute><AdminSurveysPage /></AdminRoute></ProtectedRoute>} />
+                <Route path="/admin/course-recovery" element={<ProtectedRoute><AdminRoute><AdminCourseRecoveryPage /></AdminRoute></ProtectedRoute>} />
                 <Route path="/admin/availability" element={<Navigate to="/admin/dashboard" replace />} />
                 <Route path="/admin/teacher-profile" element={<Navigate to="/admin/dashboard" replace />} />
                 <Route path="/admin/teacher-applications" element={<ProtectedRoute><AdminRoute><AdminTeacherApplicationsPage /></AdminRoute></ProtectedRoute>} />
