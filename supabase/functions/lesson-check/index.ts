@@ -1,5 +1,6 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "jsr:@supabase/supabase-js@2";
+import { loadLearnerStyleLine } from "../_shared/learnerStyle.ts";
 
 const GATEWAY_URL = "https://ai.gateway.lovable.dev/v1/responses";
 const corsHeaders = {
@@ -72,6 +73,7 @@ Deno.serve(async (req) => {
     }));
     if (!items.length) return json({ error: "Nema odgovora." }, 400);
 
+    const learnerStyle = await loadLearnerStyleLine(supabase, user.id, language);
     const instructions = `Ti si strpljiv tutor ${LANG[language] || "engleskog"} jezika na Norskly platformi. Ocenjuješ otvorene odgovore učenika nivoa ${level} u lekciji „${lessonTitle}“.
 Pravila:
 - Prihvati sve prirodne i semantički tačne varijante; ne traži jedan jedini odgovor.
@@ -96,7 +98,7 @@ Pravila:
         stream: true,
         store: false,
         reasoning: { effort: "low" },
-        instructions,
+        instructions: learnerStyle ? `${instructions}\n\n${learnerStyle}` : instructions,
         input,
         text: { format: { type: "json_schema", name: "lesson_grading", strict: true, schema } },
       }),
