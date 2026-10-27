@@ -1,0 +1,3672 @@
+{
+  "code": "DE-HC-B1-L01",
+  "intro": [
+    {
+      "id": "DE-HC-B1-L01-T01",
+      "title": "Text 1 · Mein erster Dienst in Berlin",
+      "type": "monologue",
+      "scene": "Lena, neue Pflegefachkraft, erzählt von ihrer ersten Woche im Krankenhaus.",
+      "lines": [
+        {
+          "speaker": "Lena",
+          "text": "Hallo, ich heiße Lena und arbeite seit zwei Wochen als Pflegefachkraft auf der Inneren Station eines Krankenhauses in Berlin."
+        },
+        {
+          "speaker": "Lena",
+          "text": "Die erste Woche war anstrengend, aber sehr lehrreich. Jeden Morgen beginnt der Frühdienst mit der Übergabe, bei der der Nachtdienst über die Patienten berichtet."
+        },
+        {
+          "speaker": "Lena",
+          "text": "Danach mache ich die Runde und messe Blutdruck, Puls und Temperatur. Ich frage die Patienten auch, ob sie Schmerzen haben und ob sie gut geschlafen haben."
+        },
+        {
+          "speaker": "Lena",
+          "text": "Am schwierigsten finde ich Gespräche mit Patienten, die Angst haben oder verwirrt sind. Dann spreche ich langsam, benutze einfache Wörter und nehme mir Zeit."
+        },
+        {
+          "speaker": "Lena",
+          "text": "Meine Kolleginnen sind sehr hilfsbereit. Wenn ich unsicher bin, frage ich Schwester Monika, die schon seit zwanzig Jahren auf der Station arbeitet."
+        }
+      ]
+    },
+    {
+      "id": "DE-HC-B1-L01-T02",
+      "title": "Text 2 · Das Aufnahmegespräch",
+      "type": "dialogue",
+      "scene": "Lena nimmt Herrn Schmidt (72) auf, der mit Brustschmerzen eingeliefert wurde.",
+      "lines": [
+        {
+          "speaker": "Lena",
+          "text": "Guten Tag, Herr Schmidt. Ich bin Lena, Ihre Pflegefachkraft. Könnten Sie mir erzählen, was passiert ist?"
+        },
+        {
+          "speaker": "Herr Schmidt",
+          "text": "Heute Nacht bin ich mit Schmerzen in der Brust aufgewacht, und mir war furchtbar übel."
+        },
+        {
+          "speaker": "Lena",
+          "text": "Seit wann haben Sie die Schmerzen? Und könnten Sie mir zeigen, wo es wehtut?"
+        },
+        {
+          "speaker": "Herr Schmidt",
+          "text": "Seit ungefähr vier Stunden. Hier, in der Mitte der Brust, und manchmal strahlt es in den linken Arm aus."
+        },
+        {
+          "speaker": "Lena",
+          "text": "Auf einer Skala von null bis zehn – wie stark sind die Schmerzen jetzt?"
+        },
+        {
+          "speaker": "Herr Schmidt",
+          "text": "Vielleicht sechs. In der Nacht war es schlimmer."
+        },
+        {
+          "speaker": "Lena",
+          "text": "Danke. Nehmen Sie regelmäßig Medikamente, und haben Sie Allergien?"
+        },
+        {
+          "speaker": "Herr Schmidt",
+          "text": "Ich nehme jeden Morgen eine Tablette gegen Bluthochdruck, und ich vertrage kein Penicillin."
+        },
+        {
+          "speaker": "Lena",
+          "text": "Das ist wichtig. Ich messe jetzt Ihren Blutdruck und Puls, und gleich kommt Dr. Weber zu Ihnen."
+        }
+      ]
+    },
+    {
+      "id": "DE-HC-B1-L01-T03",
+      "title": "Text 3 · Übergabe beim Schichtwechsel",
+      "type": "dialogue",
+      "scene": "Beim Schichtwechsel übergibt Lena an ihre Kollegin Anna vom Spätdienst.",
+      "lines": [
+        {
+          "speaker": "Lena",
+          "text": "Herr Schmidt in Zimmer 12 wurde heute früh mit Brustschmerzen aufgenommen. Er hat eine Penicillinallergie."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Wie geht es ihm jetzt? Hat er noch Schmerzen?"
+        },
+        {
+          "speaker": "Lena",
+          "text": "Nach dem Schmerzmittel sind die Schmerzen von sechs auf drei zurückgegangen. Der Blutdruck war etwas hoch, 160 zu 95."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Weißt du, ob der Arzt weitere Untersuchungen angeordnet hat?"
+        },
+        {
+          "speaker": "Lena",
+          "text": "Ja, Dr. Weber hat um 18 Uhr eine neue Blutabnahme angeordnet. Er überlegt auch, ob heute Abend noch ein EKG gemacht werden sollte."
+        },
+        {
+          "speaker": "Anna",
+          "text": "Alles klar. Ich behalte den Blutdruck im Auge und melde mich, wenn die Schmerzen stärker werden."
+        }
+      ]
+    }
+  ],
+  "modules": {
+    "intro": {
+      "exercises": []
+    },
+    "grammar": {
+      "sections": [
+        {
+          "title": "1.1 Indirekte Fragen (W-Wort und «ob»)",
+          "intro": "Kada pacijent dođe uplašen ili sa jakim bolovima, direktno pitanje poput «Wo tut es weh?» zvuči grubo, skoro kao ispitivanje. Zato prvo kažemo ljubaznu uvodnu frazu («Könnten Sie mir sagen…»), a tek onda samo pitanje. Ključna promena: glagol seli na kraj rečenice.",
+          "explanation": "UVOD — ZAŠTO OVO POSTOJI\nKada pacijent dođe uplašen ili sa jakim bolovima, direktno pitanje poput «Wo tut es weh?» može da zvuči grubo, skoro kao ispitivanje. Zato u svakodnevnoj komunikaciji sa pacijentima i kolegama koristimo indirektna pitanja: uvodna fraza («Könnten Sie mir sagen…», «Ich möchte wissen…», «Wissen Sie…») ublažava ton, a tek onda dolazi samo pitanje.\n\nOSNOVNO PRAVILO\nIndirektno pitanje je zapravo zavisna rečenica. Uvodi je upitna reč (wo, wann, seit wann, wie, was) ili «ob» za da/ne pitanja. Najvažnije: lični (promenjeni) glagol ide NA KRAJ rečenice.\n\nPROŠIRENO PRAVILO (B1)\n1) Kod složenih vremena oba glagola idu na kraj, a lični glagol staje poslednji: «…, wann er das Medikament bekommen hat.»\n2) «ob» koristimo isključivo za pitanja na koja se odgovara sa da/ne. «wenn» znači «kada/ako» i NE koristi se za indirektna da/ne pitanja.\n3) Znak na kraju zavisi od glavne rečenice: «Ich möchte wissen, ob Sie Fieber haben.» — tačka, jer je to izjava, ne pitanje. Znak pitanja stavljamo samo ako je uvodna fraza pitanje: «Können Sie mir sagen, wo es wehtut?»\n4) Ispred zavisne rečenice uvek stoji zarez.\n\nZAMKA ZA SRPSKI MOZAK\nNa srpskom red reči u indirektnom pitanju ostaje isti: «Recite mi gde boli.» Naš mozak zato automatski napiše «…, wo tut es weh?» — a to je direktno pitanje utisnuto u rečenicu. U nemačkom glagol MORA na kraj: «…, wo es wehtut.»\n\nZAVRŠNA PROVERA\nAko posle uvodne fraze možeš da staviš tačku i rečenica i dalje ima smisla kao izjava — na dobrom si putu. Proveri: da li je glagol na kraju? Da li za da/ne pitanje stoji «ob», a ne «wenn»?",
+          "formula": {
+            "label": "Uvodna fraza + upitna reč/ob + … + GLAGOL NA KRAJU",
+            "pattern": "Könnten Sie mir sagen, + wo/wann/ob + subjekat + … + glagol",
+            "examples": [
+              "Könnten Sie mir sagen, wo es wehtut?",
+              "Ich möchte wissen, ob Sie gut geschlafen haben."
+            ]
+          },
+          "dialogue": {
+            "context": "Na prijemu: Lena prima g. Webera, koji izgleda uznemireno.",
+            "lines": [
+              [
+                "Lena",
+                "Guten Tag, Herr Weber. Könnten Sie mir sagen, seit wann Sie diese Schmerzen haben?"
+              ],
+              [
+                "G. Weber",
+                "Seit ungefähr drei Tagen, und nachts wird es schlimmer."
+              ],
+              [
+                "Lena",
+                "Verstehe. Und wissen Sie, ob Sie gegen irgendwelche Medikamente allergisch sind?"
+              ]
+            ]
+          },
+          "brainTrap": "Na srpskom kažemo «Recite mi gde boli» i red reči se ne menja. Zato naš mozak u nemačkom automatski napiše «…, wo tut es weh?». Ali čim pitanje uvučemo u uvodnu frazu, glagol postaje «ljubomoran» i traži poslednje mesto: «…, wo es wehtut.» Zamisli glagol kao voz koji u zavisnoj rečenici uvek ulazi u poslednju stanicu.",
+          "table": [
+            [
+              "Direkt",
+              "Wo tut es weh?"
+            ],
+            [
+              "Indirekt",
+              "Könnten Sie mir zeigen, wo es wehtut?"
+            ],
+            [
+              "Direkt",
+              "Haben Sie gut geschlafen?"
+            ],
+            [
+              "Indirekt",
+              "Ich möchte wissen, ob Sie gut geschlafen haben."
+            ],
+            [
+              "Direkt",
+              "Wann hat er das Medikament bekommen?"
+            ],
+            [
+              "Indirekt",
+              "Wissen Sie, wann er das Medikament bekommen hat?"
+            ]
+          ],
+          "rules": [
+            "W-reč (wo, wann, seit wann, wie) ili «ob» uvodi indirektno pitanje.",
+            "Lični glagol stoji na KRAJU zavisne rečenice.",
+            "Kod složenih vremena: particip, pa lični glagol na samom kraju («…geschlafen hat»).",
+            "«ob» = da li; «wenn» = kada/ako — ne mešaj ih!",
+            "Ispred zavisne rečenice stoji zarez; znak na kraju zavisi od glavne rečenice."
+          ],
+          "compare": "«ob» odgovara srpskom «da li»: «Pitam se da li ste alergični» → «Ich frage mich, ob Sie allergisch sind». Ali za razliku od srpskog, glagol u nemačkom menja poziciju i ide na kraj.",
+          "examples": [
+            [
+              "Können Sie mir sagen, seit wann Sie Schmerzen haben?",
+              "Možete li mi reći od kada imate bolove?"
+            ],
+            [
+              "Wissen Sie, wann er das Medikament bekommen hat?",
+              "Znate li kada je dobio lek?"
+            ],
+            [
+              "Ich frage mich, ob er allergisch ist.",
+              "Pitam se da li je alergičan."
+            ],
+            [
+              "Könnten Sie mir sagen, wie stark die Schmerzen sind?",
+              "Možete li mi reći koliko su jaki bolovi?"
+            ]
+          ],
+          "mistakes": [
+            [
+              "Können Sie sagen, wo tut es weh?",
+              "Können Sie sagen, wo es wehtut?",
+              "Glagol ide na kraj zavisne rečenice."
+            ],
+            [
+              "Ich weiß nicht, wenn er Fieber hat.",
+              "Ich weiß nicht, ob er Fieber hat.",
+              "Za da/ne pitanja koristi se «ob», ne «wenn»."
+            ],
+            [
+              "Ich möchte wissen, ob Sie Fieber haben?",
+              "Ich möchte wissen, ob Sie Fieber haben.",
+              "Izvodna fraza je izjava — na kraju stoji tačka, ne upitnik."
+            ]
+          ],
+          "quickCheck": {
+            "question": "Kako se ljubazno pita pacijenta od kada ima bolove?",
+            "options": [
+              "Könnten Sie mir sagen, seit wann haben Sie Schmerzen?",
+              "Könnten Sie mir sagen, seit wann Sie Schmerzen haben?"
+            ],
+            "correct": 1,
+            "feedback": "Tačno! Posle «seit wann» glagol «haben» ide na kraj. Prva varijanta je direktno pitanje utisnuto u rečenicu — tipična zamka."
+          },
+          "mnemonic": "Glagol je voz: u glavnoj rečenici staje na drugu stanicu, a u zavisnoj vozi do poslednje. «Ob» je kapija za da/ne pitanja — kroz nju prolaze samo pitanja bez upitne reči.",
+          "remember": "Uvodna fraza + upitna reč/ob + … + GLAGOL NA KRAJU. Za da/ne pitanja uvek «ob»."
+        },
+        {
+          "title": "1.2 Nebensätze mit «weil», «dass», «wenn»",
+          "intro": "U izveštajima, predaji smene i razgovoru sa kolegama stalno objašnjavamo razloge, navodimo tuđe reči i postavljamo uslove. Za to služe veznici weil (jer), dass (da) i wenn (kada/ako). Svaki od njih uvodi zavisnu rečenicu — a zavisna rečenica u nemačkom ima svoje strogo pravilo reda reči.",
+          "explanation": "UVOD — ZAŠTO OVO POSTOJI\nU izveštajima, predaji smene i razgovoru sa kolegama stalno objašnjavamo razloge, navodimo tuđe reči i postavljamo uslove. Za to služe veznici weil (jer), dass (da) i wenn (kada/ako). Svaki od njih uvodi zavisnu rečenicu — a zavisna rečenica u nemačkom ima svoje strogo pravilo.\n\nOSNOVNO PRAVILO\nPosle weil, dass i wenn lični glagol ide NA KRAJ rečenice. «nicht» stoji neposredno ispred njega: «…, weil sie nicht geschlafen hat.»\n\nPROŠIRENO PRAVILO (B1)\n1) Kod složenih vremena (Perfekt, Plusquamperfekt) na kraj idu particip pa lični pomoćni glagol: «…, dass er nicht gegessen hat.»\n2) Ako zavisna rečenica stoji PRVA, glavna rečenica počinje glagolom (inverzija): «Wenn die Schmerzen stärker werden, klingeln Sie bitte.» Zavisna rečenica tada zauzima prvu poziciju, pa glagol glavne rečenice dolazi odmah posle zareza.\n3) «wenn» vs «als»: za sadašnjost, budućnost i ponavljajuće radnje u prošlosti koristimo «wenn»; «als» je samo za jednokratne događaje u prošlosti.\n4) «dass» se u govoru često izostavlja u engleskom («he said he was tired») — u nemačkom to NE sme: «Er sagt, er ist müde» je kolokvijalno, u pisanju i formalnom govoru uvek «dass» + glagol na kraju.\n\nZAMKA ZA SRPSKI MOZAK\nU srpskom red reči posle «jer/da/kada» ostaje potpuno isti: «On kaže da ne podnosi penicilin.» Zato je najčešća greška «…, dass er verträgt kein Penicillin» — doslovan prenos sa srpskog. U nemačkom veznici «šalju» glagol na kraj.\n\nZAVRŠNA PROVERA\nPročitaj rečenicu naglas i stani na veznika. Sve što dolazi posle njega pripada zavisnoj rečenici — da li je glagol na kraju? Ako je zavisna rečenica prva, da li glavna počinje glagolom?",
+          "formula": {
+            "label": "Veznik + … + GLAGOL NA KRAJU",
+            "pattern": "weil / dass / wenn + subjekat + … + (particip) + glagol",
+            "examples": [
+              "Er sagt, dass er kein Penicillin verträgt.",
+              "Sie ist müde, weil sie nicht geschlafen hat."
+            ]
+          },
+          "dialogue": {
+            "context": "Predaja smene: Lena izveštava koleginicu Moniku o stanju pacijenata.",
+            "lines": [
+              [
+                "Lena",
+                "Herr Weber bleibt noch auf Station, weil sein Blutdruck zu hoch ist."
+              ],
+              [
+                "Monika",
+                "Hat er etwas gesagt?"
+              ],
+              [
+                "Lena",
+                "Ja, er sagt, dass er die ganze Nacht nicht geschlafen hat. Wenn die Schmerzen stärker werden, soll er sofort klingeln."
+              ]
+            ]
+          },
+          "brainTrap": "Srpski «jer/da/kada» ne dira red reči, pa nam se «…weil er hat nicht gegessen» čini prirodno. Ali nemački veznici su kao magneti: čim ih staviš, povlače glagol na kraj. Trika: izgovori veznik, pa napravi kratku pauzu — mozak tada lakše «pogura» glagol do kraja.",
+          "table": [
+            [
+              "Hauptsatz",
+              "Er verträgt kein Penicillin."
+            ],
+            [
+              "Nebensatz",
+              "Er sagt, dass er kein Penicillin verträgt."
+            ],
+            [
+              "Hauptsatz",
+              "Sie hat nicht geschlafen."
+            ],
+            [
+              "Nebensatz",
+              "Sie ist müde, weil sie nicht geschlafen hat."
+            ],
+            [
+              "Zavisna prva",
+              "Wenn die Schmerzen stärker werden, klingeln Sie bitte."
+            ]
+          ],
+          "rules": [
+            "weil / dass / wenn + … + glagol na kraju.",
+            "«nicht» stoji neposredno ispred glagola na kraju: «…, weil sie nicht geschlafen hat.»",
+            "Kod složenih vremena: particip, pa lični glagol («…nicht gegessen hat»).",
+            "Zavisna rečenica prva → glavna počinje glagolom: «Wenn …, klingeln Sie.»",
+            "«wenn» = sadašnjost/budućnost/ponavljanje; «als» = jednokratna prošlost."
+          ],
+          "compare": "U srpskom red reči ostaje isti posle «jer/da/kada»; u nemačkom se glagol pomera na kraj. To je jedna od najvećih razlika između dva jezika — i najčešća greška srpskih govornika.",
+          "examples": [
+            [
+              "Rufen Sie mich, wenn die Schmerzen nicht besser werden.",
+              "Pozovite me ako bolovi ne prođu."
+            ],
+            [
+              "Er bleibt noch, weil der Blutdruck hoch ist.",
+              "Ostaje još jer je pritisak visok."
+            ],
+            [
+              "Ich denke, dass wir den Arzt informieren sollten.",
+              "Mislim da treba da obavestimo lekara."
+            ],
+            [
+              "Wenn Sie Fragen haben, kommen Sie einfach zu mir.",
+              "Ako imate pitanja, slobodno mi se javite."
+            ]
+          ],
+          "mistakes": [
+            [
+              "…weil er hat nicht gegessen.",
+              "…weil er nicht gegessen hat.",
+              "Posle «weil» glagol ide na kraj; «nicht» ispred njega."
+            ],
+            [
+              "Wenn die Schmerzen stärker werden, Sie klingeln.",
+              "Wenn die Schmerzen stärker werden, klingeln Sie.",
+              "Kad je zavisna rečenica prva, glavna počinje glagolom."
+            ],
+            [
+              "Er sagt, dass er ist müde.",
+              "Er sagt, dass er müde ist.",
+              "Posle «dass» glagol na kraj — čak i jednostavan «ist»."
+            ]
+          ],
+          "quickCheck": {
+            "question": "Kako objašnjavaš koleginici zašto pacijent ostaje na odeljenju?",
+            "options": [
+              "Er bleibt, weil sein Blutdruck zu hoch ist.",
+              "Er bleibt, weil sein Blutdruck ist zu hoch."
+            ],
+            "correct": 0,
+            "feedback": "Tačno! «weil» šalje «ist» na kraj. Druga varijanta zadržava red reči glavne rečenice — doslovan prenos sa srpskog."
+          },
+          "mnemonic": "Veznici weil, dass, wenn su kao konduktori: u njihovom vagonu glagol uvek sedi na poslednjem sedištu. Ako vagon ide prvi, lokomotiva (glavna rečenica) mora odmah iza njega — glagolom napred.",
+          "remember": "weil / dass / wenn → glagol na kraj. Zavisna prva → glavna počinje glagolom."
+        },
+        {
+          "title": "1.3 Höflichkeit mit Konjunktiv II (könnten, würden, sollten)",
+          "intro": "U bolnici stalno nekoga nešto molimo: da se okrene, da duboko udahne, da sačeka. Direktan imperativ («Legen Sie sich hin!») zvuči kao naređenje. Konjunktiv II (könnten, würden, sollten) istu poruku prenese ljubazno i profesionalno.",
+          "explanation": "UVOD — ZAŠTO OVO POSTOJI\nU bolnici stalno nekoga nešto molimo: pacijenta da se okrene, da duboko udahne, da sačeka. Direktni imperativ («Legen Sie sich hin!») zvuči kao naređenje i može da uvredi ili uplaši. Konjunktiv II omogućava nam da istu poruku prenesemo ljubazno i profesionalno.\n\nOSNOVNO PRAVILO\nKönnten Sie…? (Da li biste mogli…?), Würden Sie…? (Da li biste…?), Ich hätte gern… (Želeo/la bih…) — modalni glagol u Konjunktivu II stoji na drugom mestu, a glavni glagol u infinitivu ide na kraj.\n\nPROŠIRENO PRAVILO (B1)\n1) «sollten» = preporuka/savet («trebalo bi»): «Sie sollten mehr trinken.» Nije naređenje, ali je jasnije od «würden».\n2) Posle modalnog glagola NEMA «zu»: «Könnten Sie tief einatmen?» — nikad «zu einatmen».\n3) Povratni glagoli zadržavaju povratnu zamenicu: «Könnten Sie sich bitte hinlegen?» — «sich» ostaje uz subjekat.\n4) Odvojivi glagoli: infinitiv ide ceo na kraj: «Könnten Sie bitte den Ärmel hochkrempeln?»\n5) «Ich hätte gern…» i «Ich würde gern…» izražavaju ljubaznu želju — korisno kada pacijent nešto traži ili kada mi nešto predlažemo.\n\nZAMKA ZA SRPSKI MOZAK\nSrpski kondicional («Da li biste mogli da zavrnete rukav?») koristi «da» + prezent. U nemačkom nema «da» — umesto toga dolazi čist infinitiv na kraju. Druga zamka: ne dodaj «zu» posle modalnih glagola, iako bi na srpskom «da duboko udahnete» podsećalo na konstrukciju sa «zu».\n\nZAVRŠNA PROVERA\nProveri tri stvari: da li je modalni glagol u Konjunktivu II (könnten, würden, sollten — sa tačkicama!), da li je infinitiv na kraju i da li si izbacio «zu».",
+          "formula": {
+            "label": "Könnten/Würden/Sollten + subjekat + … + INFINITIV NA KRAJU",
+            "pattern": "Könnten Sie + bitte + … + infinitiv?",
+            "examples": [
+              "Könnten Sie sich bitte hinlegen?",
+              "Sie sollten mehr Wasser trinken."
+            ]
+          },
+          "dialogue": {
+            "context": "Lena priprema g. Webera za pregled.",
+            "lines": [
+              [
+                "Lena",
+                "Herr Weber, könnten Sie sich bitte hier hinlegen?"
+              ],
+              [
+                "G. Weber",
+                "Natürlich. Soll ich die Schuhe ausziehen?"
+              ],
+              [
+                "Lena",
+                "Ja, das wäre gut. Und würden Sie bitte den Ärmel hochkrempeln? Ich muss Ihren Blutdruck messen."
+              ]
+            ]
+          },
+          "brainTrap": "Na srpskom kažemo «Da li biste mogli DA ZAVRNETE rukav» — sa «da». Naš mozak zato u nemačkom traži nešto slično i doda «zu»: «Könnten Sie zu hochkrempeln?» — pogrešno! Posle könnten/würden/sollten dolazi goli infinitiv, bez «zu» i bez «dass». Zapamti: modalni glagol je šef — on ne trpi «zu» u svom timu.",
+          "table": [
+            [
+              "Können Sie…?",
+              "Könnten Sie…? (ljubaznije)"
+            ],
+            [
+              "Machen Sie…!",
+              "Würden Sie bitte…?"
+            ],
+            [
+              "Sie müssen…",
+              "Sie sollten… (savet)"
+            ],
+            [
+              "Ich will…",
+              "Ich hätte gern… (ljubazna želja)"
+            ]
+          ],
+          "rules": [
+            "Könnten/Würden + infinitiv na kraju: «Könnten Sie sich bitte hinlegen?»",
+            "Posle modalnog glagola NEMA «zu».",
+            "Sollten = preporuka, ne naređenje.",
+            "Povratna zamenica ostaje: «Könnten Sie sich…?»",
+            "Ich hätte gern / Ich würde gern = ljubazna želja."
+          ],
+          "compare": "Kao srpski kondicional: «Da li biste mogli…?» — ali bez «da»: umesto «da udahnete» dolazi čist infinitiv «einzuatmen» na kraju rečenice.",
+          "examples": [
+            [
+              "Könnten Sie bitte den Ärmel hochkrempeln?",
+              "Da li biste mogli da zavrnete rukav?"
+            ],
+            [
+              "Sie sollten mehr trinken.",
+              "Trebalo bi da pijete više."
+            ],
+            [
+              "Ich würde gern mit dem Arzt sprechen.",
+              "Želeo bih da razgovaram sa lekarom."
+            ],
+            [
+              "Würden Sie bitte einmal tief einatmen?",
+              "Da li biste, molim vas, jednom duboko udahnuli?"
+            ]
+          ],
+          "mistakes": [
+            [
+              "Könnten Sie zu tief einatmen?",
+              "Könnten Sie tief einatmen?",
+              "Posle modalnog glagola nema «zu»."
+            ],
+            [
+              "Könnten Sie hinlegen sich?",
+              "Könnten Sie sich hinlegen?",
+              "Povratna zamenica stoji odmah posle subjekta."
+            ],
+            [
+              "Sie müssen mehr trinken. (kao savet)",
+              "Sie sollten mehr trinken.",
+              "«müssen» zvuči kao naređenje; za savet koristi «sollten»."
+            ]
+          ],
+          "quickCheck": {
+            "question": "Kako profesionalno savetuješ pacijenta da se više odmara?",
+            "options": [
+              "Sie müssen sich mehr ausruhen.",
+              "Sie sollten sich mehr ausruhen."
+            ],
+            "correct": 1,
+            "feedback": "Tačno! «sollten» je preporuka — ljubazna, ali jasna. «müssen» zvuči kao naređenje i pacijent ga može doživeti kao pritisak."
+          },
+          "mnemonic": "Könnten, würden, sollten — svi imaju tačkice (Umlaut) jer su «omekšane» verzije glagola. Tačkice = mekši ton. I zapamti: modalni glagol je šef koji ne trpi «zu» u svom timu.",
+          "remember": "Könnten/Würden/Sollten + infinitiv na kraju, bez «zu». Sollten = savet, müssen = naređenje."
+        }
+      ],
+      "exercises": [
+        {
+          "id": "DE-HC-B1-L01-G-01",
+          "code": "G-01",
+          "title": "Pitanje tokom prijema",
+          "type": "choice",
+          "xp": 1,
+          "grammarFocus": "indirect",
+          "instruction": "Izaberi jedan odgovor koji je gramatički tačan i odgovara situaciji.",
+          "hint": "U indirektnom pitanju lični glagol menja mesto.",
+          "explanation": "U «seit wann Sie Schmerzen haben» lični glagol «haben» stoji na kraju.",
+          "context": "Lena želi da sazna od kada pacijent ima bolove.",
+          "options": [
+            "Könnten Sie mir sagen, seit wann haben Sie Schmerzen?",
+            "Könnten Sie mir sagen, seit wann Sie Schmerzen haben?",
+            "Könnten Sie mir sagen, seit wann Sie haben Schmerzen?"
+          ],
+          "correct": [
+            1
+          ],
+          "kind": "closed",
+          "items": []
+        },
+        {
+          "id": "DE-HC-B1-L01-G-02",
+          "code": "G-02",
+          "title": "Pitanje ili uslov?",
+          "type": "gaps",
+          "xp": 1,
+          "grammarFocus": "indirect",
+          "instruction": "Dopuni svaku prazninu odgovarajućim oblikom.",
+          "hint": "Razlikuj da/ne pitanje od uslova.",
+          "explanation": "«ob» = da li; «wenn» = ako/kada.",
+          "text": "Lena fragt, ___ Herr Schmidt Fieber hat. Sie informiert den Arzt, ___ die Schmerzen stärker werden.",
+          "gaps": [
+            {
+              "options": [
+                "ob",
+                "wenn",
+                "dass"
+              ],
+              "answer": "ob"
+            },
+            {
+              "options": [
+                "ob",
+                "wenn",
+                "dass"
+              ],
+              "answer": "wenn"
+            }
+          ],
+          "kind": "closed",
+          "items": []
+        },
+        {
+          "id": "DE-HC-B1-L01-G-03",
+          "code": "G-03",
+          "title": "Vreme vađenja krvi",
+          "type": "order",
+          "xp": 1,
+          "grammarFocus": "indirect",
+          "instruction": "Složi sve delove u jednu rečenicu. Zadrži zadati početak.",
+          "hint": "Odvojivi glagol u zavisnoj rečenici ostaje spojen na kraju.",
+          "explanation": "«stattfindet» se u indirektnom pitanju ne razdvaja.",
+          "tokens": [
+            "Wissen Sie,",
+            "wann",
+            "die Blutabnahme",
+            "stattfindet?"
+          ],
+          "answer": [
+            "Wissen Sie, wann die Blutabnahme stattfindet?"
+          ],
+          "context": "Početak: Wissen Sie,",
+          "kind": "closed",
+          "items": []
+        },
+        {
+          "id": "DE-HC-B1-L01-G-04",
+          "code": "G-04",
+          "title": "Od direktnog do indirektnog",
+          "type": "text",
+          "xp": 1,
+          "grammarFocus": "indirect",
+          "instruction": "Preoblikuj sa početkom «Können Sie mir sagen, ob». Napiši celu rečenicu i zadrži sve reči polaznog pitanja.",
+          "hint": "Da/ne pitanje uvodi «ob»; lični glagol ide na kraj.",
+          "explanation": "«ob Sie regelmäßig Medikamente nehmen» ima pravilan zavisni red reči.",
+          "context": "Nehmen Sie regelmäßig Medikamente?",
+          "inputs": [
+            {
+              "prompt": "Nehmen Sie regelmäßig Medikamente?",
+              "answers": [
+                "Können Sie mir sagen, ob Sie regelmäßig Medikamente nehmen?"
+              ]
+            }
+          ],
+          "kind": "closed",
+          "items": []
+        },
+        {
+          "id": "DE-HC-B1-L01-G-05",
+          "code": "G-05",
+          "title": "Dva glagola na kraju",
+          "type": "choice",
+          "xp": 1,
+          "grammarFocus": "indirect",
+          "instruction": "Izaberi jedan odgovor koji je gramatički tačan i odgovara situaciji.",
+          "hint": "U perfektu razlikuj particip od ličnog pomoćnog glagola.",
+          "explanation": "Na kraju stoje «bekommen hat»: pomoćni glagol je poslednji.",
+          "context": "Anna pita kada je pacijent dobio lek.",
+          "options": [
+            "Weißt du, wann er hat das Medikament bekommen?",
+            "Weißt du, wann er das Medikament hat bekommen?",
+            "Weißt du, wann er das Medikament bekommen hat?"
+          ],
+          "correct": [
+            2
+          ],
+          "kind": "closed",
+          "items": []
+        },
+        {
+          "id": "DE-HC-B1-L01-G-06",
+          "code": "G-06",
+          "title": "Tri pitanja, tri završetka",
+          "type": "match",
+          "xp": 1,
+          "grammarFocus": "indirect",
+          "instruction": "Poveži početak sa završetkom tako da svaka rečenica bude gramatički tačna i smislena.",
+          "hint": "Poveži da/ne, vreme i osobu kao subjekat.",
+          "explanation": "«ob» traži da/ne sadržaj, «wann» vreme, «wer» osobu.",
+          "left": [
+            "Lena fragt, ob",
+            "Anna möchte wissen, wann",
+            "Herr Schmidt fragt, wer"
+          ],
+          "right": [
+            "der Arzt kommt.",
+            "heute Dienst hat.",
+            "der Patient Allergien hat."
+          ],
+          "pairs": [
+            2,
+            0,
+            1
+          ],
+          "kind": "closed",
+          "items": [],
+          "context": "Lena proverava alergije, Anna vreme dolaska lekara, a gospodin Schmidt ko je danas dežuran."
+        },
+        {
+          "id": "DE-HC-B1-L01-G-07",
+          "code": "G-07",
+          "title": "Pitanja u predaji smene",
+          "type": "multi",
+          "xp": 1,
+          "grammarFocus": "indirect",
+          "instruction": "Izaberi sve tačne odgovore.",
+          "hint": "Oba pitanja imaju perfekt: gde stoji «hat»?",
+          "explanation": "Lični pomoćni glagol «hat» stoji na kraju oba indirektna pitanja.",
+          "context": "Izaberi dve pravilno oblikovane indirektne rečenice.",
+          "options": [
+            "Anna fragt, ob hat er gut geschlafen.",
+            "Anna fragt, ob er gut geschlafen hat.",
+            "Anna fragt, wann er die Tablette genommen hat.",
+            "Anna fragt, wann hat er die Tablette genommen."
+          ],
+          "correct": [
+            1,
+            2
+          ],
+          "kind": "closed",
+          "items": []
+        },
+        {
+          "id": "DE-HC-B1-L01-G-08",
+          "code": "G-08",
+          "title": "Ispravi red reči",
+          "type": "text",
+          "xp": 2,
+          "grammarFocus": "indirect",
+          "instruction": "Ispravi samo red reči u zavisnoj rečenici. Napiši celu rečenicu.",
+          "hint": "Odvojivi glagol «wehtun» u zavisnoj rečenici piše se zajedno.",
+          "explanation": "«wo es wehtut» je indirektno pitanje; «tut…weh» pripada direktnom pitanju.",
+          "context": "Können Sie mir sagen, wo tut es weh?",
+          "inputs": [
+            {
+              "prompt": "Können Sie mir sagen, wo tut es weh?",
+              "answers": [
+                "Können Sie mir sagen, wo es wehtut?"
+              ]
+            }
+          ],
+          "kind": "closed",
+          "items": []
+        },
+        {
+          "id": "DE-HC-B1-L01-G-09",
+          "code": "G-09",
+          "title": "Negacija i perfekt",
+          "type": "gaps",
+          "xp": 2,
+          "grammarFocus": "indirect",
+          "instruction": "Dopuni svaku prazninu odgovarajućim oblikom.",
+          "hint": "Traži se da/ne pitanje: da li pacijent nije spavao.",
+          "explanation": "«ob der Patient nicht geschlafen hat» završava participom i pomoćnim glagolom.",
+          "text": "Anna fragt, ___ der Patient ___ ___.",
+          "gaps": [
+            {
+              "options": [
+                "ob",
+                "wenn",
+                "dass"
+              ],
+              "answer": "ob"
+            },
+            {
+              "options": [
+                "nicht",
+                "kein",
+                "keine"
+              ],
+              "answer": "nicht"
+            },
+            {
+              "options": [
+                "geschlafen hat",
+                "hat geschlafen",
+                "geschlafen er hat"
+              ],
+              "answer": "geschlafen hat"
+            }
+          ],
+          "kind": "closed",
+          "items": []
+        },
+        {
+          "id": "DE-HC-B1-L01-G-10",
+          "code": "G-10",
+          "title": "Izjava nije direktno pitanje",
+          "type": "text",
+          "xp": 2,
+          "grammarFocus": "indirect",
+          "instruction": "Preoblikuj sa početkom «Ich möchte wissen, wann». Napiši celu rečenicu i zadrži sve reči polaznog pitanja.",
+          "hint": "Uvodiš izjavu o tome šta želiš da znaš, ne direktno pitanje.",
+          "explanation": "«wann der Arzt kommt» ima glagol na kraju; glavna rečenica je izjava.",
+          "context": "Wann kommt der Arzt?",
+          "inputs": [
+            {
+              "prompt": "Wann kommt der Arzt?",
+              "answers": [
+                "Ich möchte wissen, wann der Arzt kommt."
+              ]
+            }
+          ],
+          "kind": "closed",
+          "items": []
+        },
+        {
+          "id": "DE-HC-B1-L01-G-11",
+          "code": "G-11",
+          "title": "Alergija u kartonu",
+          "type": "choice",
+          "xp": 1,
+          "grammarFocus": "subordinate",
+          "instruction": "Izaberi jedan odgovor koji je gramatički tačan i odgovara situaciji.",
+          "hint": "Posle «dass» lični glagol ide na kraj.",
+          "explanation": "«kein Penicillin» ostaje objekat; «verträgt» završava zavisnu rečenicu.",
+          "context": "Lena prenosi pacijentovu izjavu da ne podnosi penicilin.",
+          "options": [
+            "Er sagt, dass er verträgt kein Penicillin.",
+            "Er sagt, dass er kein Penicillin verträgt.",
+            "Er sagt, dass verträgt er kein Penicillin."
+          ],
+          "correct": [
+            1
+          ],
+          "kind": "closed",
+          "items": []
+        },
+        {
+          "id": "DE-HC-B1-L01-G-12",
+          "code": "G-12",
+          "title": "Razlog i uslov",
+          "type": "gaps",
+          "xp": 1,
+          "grammarFocus": "subordinate",
+          "instruction": "Dopuni svaku prazninu odgovarajućim oblikom.",
+          "hint": "Prva rečenica navodi razlog, druga situaciju u kojoj traži pomoć.",
+          "explanation": "«weil» uvodi razlog, «wenn» uslov/vreme.",
+          "text": "Herr Schmidt ist müde, ___ er nicht geschlafen hat. Er klingelt, ___ er Hilfe braucht.",
+          "gaps": [
+            {
+              "options": [
+                "weil",
+                "wenn",
+                "dass"
+              ],
+              "answer": "weil"
+            },
+            {
+              "options": [
+                "weil",
+                "wenn",
+                "dass"
+              ],
+              "answer": "wenn"
+            }
+          ],
+          "kind": "closed",
+          "items": []
+        },
+        {
+          "id": "DE-HC-B1-L01-G-13",
+          "code": "G-13",
+          "title": "Umor posle noći",
+          "type": "order",
+          "xp": 1,
+          "grammarFocus": "subordinate",
+          "instruction": "Složi sve delove u jednu rečenicu. Zadrži zadati početak.",
+          "hint": "Pomoćni glagol perfekta stoji iza participa u zavisnoj rečenici.",
+          "explanation": "«weil er nicht geschlafen hat» završava sa «geschlafen hat».",
+          "tokens": [
+            "Er ist müde,",
+            "weil",
+            "er",
+            "nicht",
+            "geschlafen",
+            "hat."
+          ],
+          "answer": [
+            "Er ist müde, weil er nicht geschlafen hat."
+          ],
+          "context": "Početak: Er ist müde,",
+          "kind": "closed",
+          "items": []
+        },
+        {
+          "id": "DE-HC-B1-L01-G-14",
+          "code": "G-14",
+          "title": "Prenesi izjavu",
+          "type": "text",
+          "xp": 1,
+          "grammarFocus": "subordinate",
+          "instruction": "Prenesi sa početkom «Der Patient sagt, dass». Promeni «Ich» u «er» i prilagodi oblik glagola novom subjektu. Ostale reči zadrži i napiši celu rečenicu.",
+          "hint": "Zamenica i oblik pomoćnog glagola moraju odgovarati pacijentu.",
+          "explanation": "«ich habe» postaje «er…hat»; «hat» ide na kraj.",
+          "context": "Ich habe nicht geschlafen.",
+          "inputs": [
+            {
+              "prompt": "Ich habe nicht geschlafen.",
+              "answers": [
+                "Der Patient sagt, dass er nicht geschlafen hat."
+              ]
+            }
+          ],
+          "kind": "closed",
+          "items": []
+        },
+        {
+          "id": "DE-HC-B1-L01-G-15",
+          "code": "G-15",
+          "title": "Razlog, izjava, uslov",
+          "type": "match",
+          "xp": 1,
+          "grammarFocus": "subordinate",
+          "instruction": "Poveži početak sa završetkom tako da svaka rečenica bude gramatički tačna i smislena.",
+          "hint": "Svaki završetak ima glagol na kraju; proveri i značenje veze.",
+          "explanation": "«weil» navodi razlog, «dass» sadržaj izveštaja, «wenn» uslov.",
+          "left": [
+            "Er bleibt auf Station, weil",
+            "Lena berichtet, dass",
+            "Rufen Sie mich, wenn"
+          ],
+          "right": [
+            "der Patient kein Penicillin verträgt.",
+            "Sie Hilfe brauchen.",
+            "der Arzt ihn noch untersuchen möchte."
+          ],
+          "pairs": [
+            2,
+            0,
+            1
+          ],
+          "kind": "closed",
+          "items": [],
+          "context": "Pacijent ostaje zbog dodatnog pregleda. Lena prenosi da ne podnosi penicilin. Pacijent treba da pozove ako mu zatreba pomoć."
+        },
+        {
+          "id": "DE-HC-B1-L01-G-16",
+          "code": "G-16",
+          "title": "Zavisna rečenica na početku",
+          "type": "multi",
+          "xp": 1,
+          "grammarFocus": "subordinate",
+          "instruction": "Izaberi sve tačne odgovore.",
+          "hint": "Cela zavisna rečenica zauzima prvo mesto glavne rečenice.",
+          "explanation": "Glavna rečenica posle zareza počinje ličnim glagolom: «kommt» ili «ist».",
+          "context": "Izaberi dve gramatički pravilne rečenice.",
+          "options": [
+            "Wenn Herr Schmidt klingelt, kommt Lena ins Zimmer.",
+            "Wenn Herr Schmidt klingelt, Lena kommt ins Zimmer.",
+            "Weil er nicht geschlafen hat, ist er müde.",
+            "Weil er nicht geschlafen hat, er ist müde."
+          ],
+          "correct": [
+            0,
+            2
+          ],
+          "kind": "closed",
+          "items": []
+        },
+        {
+          "id": "DE-HC-B1-L01-G-17",
+          "code": "G-17",
+          "title": "Jednom ili svaki put?",
+          "type": "gaps",
+          "xp": 1,
+          "grammarFocus": "subordinate",
+          "instruction": "Dopuni svaku prazninu odgovarajućim oblikom.",
+          "hint": "Prva situacija se desila jednom juče; druga opisuje uobičajen uslov.",
+          "explanation": "«als» = jednokratni događaj u prošlosti; «wenn» = ponovljena ili sadašnja/buduća situacija.",
+          "text": "___ Herr Schmidt gestern aufgenommen wurde, war er nervös. ___ er Hilfe braucht, klingelt er.",
+          "gaps": [
+            {
+              "options": [
+                "Als",
+                "Wenn",
+                "Weil"
+              ],
+              "answer": "Als"
+            },
+            {
+              "options": [
+                "Als",
+                "Wenn",
+                "Dass"
+              ],
+              "answer": "Wenn"
+            }
+          ],
+          "kind": "closed",
+          "items": []
+        },
+        {
+          "id": "DE-HC-B1-L01-G-18",
+          "code": "G-18",
+          "title": "Ispravi izveštaj",
+          "type": "text",
+          "xp": 2,
+          "grammarFocus": "subordinate",
+          "instruction": "Ispravi samo red reči u zavisnoj rečenici. Napiši celu rečenicu.",
+          "hint": "U perfektu završetak zavisne rečenice čine particip i pomoćni glagol.",
+          "explanation": "«nicht gegessen hat» je pravilan završetak.",
+          "context": "Lena berichtet, dass der Patient hat nicht gegessen.",
+          "inputs": [
+            {
+              "prompt": "Lena berichtet, dass der Patient hat nicht gegessen.",
+              "answers": [
+                "Lena berichtet, dass der Patient nicht gegessen hat."
+              ]
+            }
+          ],
+          "kind": "closed",
+          "items": []
+        },
+        {
+          "id": "DE-HC-B1-L01-G-19",
+          "code": "G-19",
+          "title": "Uslov pa postupak",
+          "type": "order",
+          "xp": 2,
+          "grammarFocus": "subordinate",
+          "instruction": "Složi sve delove u jednu rečenicu. Zadrži zadati početak.",
+          "hint": "Proveri glagol na kraju zavisne rečenice i početku glavne.",
+          "explanation": "«braucht» zatvara zavisnu, «kommt» započinje glavnu rečenicu.",
+          "tokens": [
+            "Wenn",
+            "der Patient",
+            "Hilfe",
+            "braucht,",
+            "kommt",
+            "Lena",
+            "ins Zimmer."
+          ],
+          "answer": [
+            "Wenn der Patient Hilfe braucht, kommt Lena ins Zimmer."
+          ],
+          "context": "Početak: Wenn",
+          "kind": "closed",
+          "items": []
+        },
+        {
+          "id": "DE-HC-B1-L01-G-20",
+          "code": "G-20",
+          "title": "Promeni početak rečenice",
+          "type": "text",
+          "xp": 2,
+          "grammarFocus": "subordinate",
+          "instruction": "Počni istu rečenicu celom zavisnom rečenicom «Wenn Herr Schmidt klingelt». Zadrži sve reči i napiši celu rečenicu.",
+          "hint": "Posle početne zavisne rečenice glavna počinje ličnim glagolom.",
+          "explanation": "«kommt Lena» čuva glagol na drugom mestu glavne rečenice.",
+          "context": "Lena kommt ins Zimmer, wenn Herr Schmidt klingelt.",
+          "inputs": [
+            {
+              "prompt": "Lena kommt ins Zimmer, wenn Herr Schmidt klingelt.",
+              "answers": [
+                "Wenn Herr Schmidt klingelt, kommt Lena ins Zimmer."
+              ]
+            }
+          ],
+          "kind": "closed",
+          "items": []
+        },
+        {
+          "id": "DE-HC-B1-L01-G-21",
+          "code": "G-21",
+          "title": "Ljubazna molba",
+          "type": "choice",
+          "xp": 1,
+          "grammarFocus": "polite",
+          "instruction": "Izaberi jedan odgovor koji je gramatički tačan i odgovara situaciji.",
+          "hint": "Koji oblik služi ljubaznoj molbi, a ne obavezi ili savetu?",
+          "explanation": "«Könnten Sie…?» je ljubazna molba; druga dva oblika imaju druga značenja.",
+          "context": "Lena moli pacijenta da zavrne rukav, bez pitanja o obavezi ili preporuci.",
+          "options": [
+            "Müssten Sie den Ärmel hochkrempeln?",
+            "Sollten Sie den Ärmel hochkrempeln?",
+            "Könnten Sie den Ärmel hochkrempeln?"
+          ],
+          "correct": [
+            2
+          ],
+          "kind": "closed",
+          "items": []
+        },
+        {
+          "id": "DE-HC-B1-L01-G-22",
+          "code": "G-22",
+          "title": "Oblik molbe",
+          "type": "gaps",
+          "xp": 1,
+          "grammarFocus": "polite",
+          "instruction": "Dopuni svaku prazninu odgovarajućim oblikom.",
+          "hint": "«Sie» traži odgovarajući lični oblik; posle modalnog glagola nema «zu».",
+          "explanation": "«Könnten Sie…einatmen?» koristi infinitiv bez «zu» na kraju.",
+          "text": "___ Sie bitte tief ___?",
+          "gaps": [
+            {
+              "options": [
+                "Könnten",
+                "Könnte",
+                "Könntest"
+              ],
+              "answer": "Könnten"
+            },
+            {
+              "options": [
+                "einatmen",
+                "einzuatmen",
+                "atmen ein"
+              ],
+              "answer": "einatmen"
+            }
+          ],
+          "kind": "closed",
+          "items": []
+        },
+        {
+          "id": "DE-HC-B1-L01-G-23",
+          "code": "G-23",
+          "title": "Želja pacijenta",
+          "type": "order",
+          "xp": 1,
+          "grammarFocus": "polite",
+          "instruction": "Složi sve delove u jednu rečenicu. Zadrži zadati početak.",
+          "hint": "Ljubazna želja sa «würde» traži infinitiv na kraju.",
+          "explanation": "«würde» stoji na drugom mestu, «sprechen» na kraju.",
+          "tokens": [
+            "Ich",
+            "würde",
+            "gern",
+            "mit dem Arzt",
+            "sprechen."
+          ],
+          "answer": [
+            "Ich würde gern mit dem Arzt sprechen."
+          ],
+          "context": "Početak: Ich",
+          "kind": "closed",
+          "items": []
+        },
+        {
+          "id": "DE-HC-B1-L01-G-24",
+          "code": "G-24",
+          "title": "Preporuka lekara",
+          "type": "choice",
+          "xp": 1,
+          "grammarFocus": "polite",
+          "instruction": "Izaberi jedan odgovor koji je gramatički tačan i odgovara situaciji.",
+          "hint": "Izaberi modalni oblik koji jasno znači «trebalo bi».",
+          "explanation": "«sollten» prenosi preporuku; «müssten» obavezu, «würden» hipotetičku radnju.",
+          "context": "Lekar je preporučio odmor. Lena prenosi savet, a ne obavezu ili hipotetičku mogućnost.",
+          "options": [
+            "Sie müssten sich ausruhen.",
+            "Sie sollten sich ausruhen.",
+            "Sie würden sich ausruhen."
+          ],
+          "correct": [
+            1
+          ],
+          "kind": "closed",
+          "items": []
+        },
+        {
+          "id": "DE-HC-B1-L01-G-25",
+          "code": "G-25",
+          "title": "Namera govornika",
+          "type": "match",
+          "xp": 1,
+          "grammarFocus": "polite",
+          "instruction": "Poveži početak sa završetkom tako da svaka rečenica bude gramatički tačna i smislena.",
+          "hint": "Razlikuj molbu, savet i želju.",
+          "explanation": "«könnten» = molba; «sollten» = savet; «hätte gern» = želja.",
+          "left": [
+            "Ljubazna molba da pacijent sedne",
+            "Preporuka prema planu lekara",
+            "Ljubazna želja pacijenta"
+          ],
+          "right": [
+            "Ich hätte gern ein Gespräch mit dem Arzt.",
+            "Könnten Sie sich hier hinsetzen?",
+            "Sie sollten sich ausruhen, wie der Arzt empfohlen hat."
+          ],
+          "pairs": [
+            1,
+            2,
+            0
+          ],
+          "kind": "closed",
+          "items": []
+        },
+        {
+          "id": "DE-HC-B1-L01-G-26",
+          "code": "G-26",
+          "title": "Dve pravilne molbe",
+          "type": "multi",
+          "xp": 1,
+          "grammarFocus": "polite",
+          "instruction": "Izaberi sve tačne odgovore.",
+          "hint": "Infinitiv ide ceo na kraj, bez «zu».",
+          "explanation": "«einatmen» i «hochkrempeln» ostaju celi infinitivi.",
+          "context": "Izaberi dve gramatički pravilne ljubazne molbe.",
+          "options": [
+            "Könnten Sie bitte tief einzuatmen?",
+            "Könnten Sie bitte tief einatmen?",
+            "Würden Sie bitte den Ärmel hochkrempeln?",
+            "Würden Sie bitte den Ärmel krempeln hoch?"
+          ],
+          "correct": [
+            1,
+            2
+          ],
+          "kind": "closed",
+          "items": []
+        },
+        {
+          "id": "DE-HC-B1-L01-G-27",
+          "code": "G-27",
+          "title": "Iz naredbe u molbu",
+          "type": "text",
+          "xp": 2,
+          "grammarFocus": "polite",
+          "instruction": "Pretvori u molbu sa početkom «Könnten Sie». Zadrži «sich bitte hinlegen» i napiši celu rečenicu.",
+          "hint": "Povratna zamenica ostaje, a odvojivi glagol postaje ceo infinitiv.",
+          "explanation": "«sich» ostaje uz subjekat; «hinlegen» se ne razdvaja posle modalnog glagola.",
+          "context": "Legen Sie sich bitte hin.",
+          "inputs": [
+            {
+              "prompt": "Legen Sie sich bitte hin.",
+              "answers": [
+                "Könnten Sie sich bitte hinlegen?"
+              ]
+            }
+          ],
+          "kind": "closed",
+          "items": []
+        },
+        {
+          "id": "DE-HC-B1-L01-G-28",
+          "code": "G-28",
+          "title": "Ispravi infinitiv",
+          "type": "text",
+          "xp": 2,
+          "grammarFocus": "polite",
+          "instruction": "Ispravi samo oblik infinitiva. Napiši celu rečenicu.",
+          "hint": "Modalni glagol ne traži «zu» uz infinitiv.",
+          "explanation": "Posle «könnten» stoji «einatmen», ne «einzuatmen».",
+          "context": "Könnten Sie bitte einzuatmen?",
+          "inputs": [
+            {
+              "prompt": "Könnten Sie bitte einzuatmen?",
+              "answers": [
+                "Könnten Sie bitte einatmen?"
+              ]
+            }
+          ],
+          "kind": "closed",
+          "items": []
+        },
+        {
+          "id": "DE-HC-B1-L01-G-29",
+          "code": "G-29",
+          "title": "Želja i savet",
+          "type": "gaps",
+          "xp": 2,
+          "grammarFocus": "polite",
+          "instruction": "Dopuni svaku prazninu odgovarajućim oblikom.",
+          "hint": "Prva replika već ima infinitiv «sprechen»; druga prenosi izričit savet.",
+          "explanation": "«würde gern sprechen» izražava želju; «sollten sich ausruhen» preporuku.",
+          "text": "Herr Schmidt: Ich ___ gern mit dem Arzt sprechen. Lena: Sie ___ sich ausruhen, wie der Arzt empfohlen hat.",
+          "gaps": [
+            {
+              "options": [
+                "würde",
+                "hätte",
+                "wäre"
+              ],
+              "answer": "würde"
+            },
+            {
+              "options": [
+                "sollten",
+                "würden",
+                "hätten"
+              ],
+              "answer": "sollten"
+            }
+          ],
+          "kind": "closed",
+          "items": []
+        },
+        {
+          "id": "DE-HC-B1-L01-G-30",
+          "code": "G-30",
+          "title": "Molba sa indirektnim pitanjem",
+          "type": "text",
+          "xp": 2,
+          "grammarFocus": "polite",
+          "instruction": "Preoblikuj sa početkom «Könnten Sie mir sagen, ob». Napiši celu rečenicu i zadrži sve reči polaznog pitanja.",
+          "hint": "Proveri molbu, negaciju i oba glagola perfekta na kraju zavisne rečenice.",
+          "explanation": "«Könnten Sie mir sagen» je molba; «ob Sie nicht geschlafen haben» je pravilno indirektno pitanje.",
+          "context": "Haben Sie nicht geschlafen?",
+          "inputs": [
+            {
+              "prompt": "Haben Sie nicht geschlafen?",
+              "answers": [
+                "Könnten Sie mir sagen, ob Sie nicht geschlafen haben?"
+              ]
+            }
+          ],
+          "kind": "closed",
+          "items": []
+        }
+      ]
+    },
+    "vocabulary": {
+      "areas": [
+        {
+          "key": "SYM",
+          "title": "Symptome und Beschwerden",
+          "sr": "Simptomi i tegobe",
+          "images": [
+            "hcvo1"
+          ],
+          "words": [
+            {
+              "word": "Schmerzen in der Brust haben",
+              "translation": "imati bol u grudima",
+              "collection": "SYM",
+              "active": true,
+              "img": "hc-vo-1-01"
+            },
+            {
+              "word": "der Schmerz",
+              "translation": "bol",
+              "collection": "SYM",
+              "active": true,
+              "img": "hc-vo-1-02"
+            },
+            {
+              "word": "mir ist übel",
+              "translation": "mučno mi je",
+              "collection": "SYM",
+              "active": true,
+              "img": "hc-vo-1-03"
+            },
+            {
+              "word": "schwindlig",
+              "translation": "ošamućen, vrtoglav",
+              "collection": "SYM",
+              "active": true,
+              "img": "hc-vo-1-04"
+            },
+            {
+              "word": "Atemnot haben",
+              "translation": "imati otežano disanje",
+              "collection": "SYM",
+              "active": true,
+              "img": "hc-vo-1-05"
+            },
+            {
+              "word": "das Fieber",
+              "translation": "temperatura (groznica)",
+              "collection": "SYM",
+              "active": true,
+              "img": "hc-vo-1-06"
+            },
+            {
+              "word": "die Kopfschmerzen",
+              "translation": "glavobolja",
+              "collection": "SYM",
+              "active": true,
+              "img": "hc-vo-1-07"
+            },
+            {
+              "word": "der Ausschlag",
+              "translation": "osip",
+              "collection": "SYM",
+              "active": true,
+              "img": "hc-vo-1-08"
+            },
+            {
+              "word": "husten",
+              "translation": "kašljati",
+              "collection": "SYM",
+              "active": true,
+              "img": "hc-vo-1-09"
+            },
+            {
+              "word": "geschwollen",
+              "translation": "otečen",
+              "collection": "SYM",
+              "active": true,
+              "img": "hc-vo-1-10"
+            },
+            {
+              "word": "ausstrahlen",
+              "translation": "širiti se (o bolu)",
+              "collection": "SYM",
+              "active": true,
+              "img": "hc-vo-1-11"
+            },
+            {
+              "word": "bluten",
+              "translation": "krvariti",
+              "collection": "SYM",
+              "active": true,
+              "img": "hc-vo-1-12"
+            }
+          ],
+          "exercises": [
+            "VO-01",
+            "VO-02",
+            "VO-03",
+            "VO-04",
+            "VO-05",
+            "VO-06",
+            "VO-07"
+          ]
+        },
+        {
+          "key": "MES",
+          "title": "Messungen und Untersuchungen",
+          "sr": "Merenja i pregledi",
+          "images": [
+            "hcvo1"
+          ],
+          "words": [
+            {
+              "word": "den Blutdruck messen",
+              "translation": "izmeriti pritisak",
+              "collection": "MES",
+              "active": true,
+              "img": "hc-vo-2-01"
+            },
+            {
+              "word": "der Puls",
+              "translation": "puls",
+              "collection": "MES",
+              "active": true,
+              "img": "hc-vo-2-02"
+            },
+            {
+              "word": "die Temperatur",
+              "translation": "temperatura",
+              "collection": "MES",
+              "active": true,
+              "img": "hc-vo-2-03"
+            },
+            {
+              "word": "die Blutabnahme",
+              "translation": "vađenje krvi",
+              "collection": "MES",
+              "active": true,
+              "img": "hc-vo-2-04"
+            },
+            {
+              "word": "die Sauerstoffsättigung",
+              "translation": "zasićenost kiseonikom",
+              "collection": "MES",
+              "active": true,
+              "img": "hc-vo-2-05"
+            },
+            {
+              "word": "das Gewicht",
+              "translation": "težina",
+              "collection": "MES",
+              "active": true,
+              "img": "hc-vo-2-06"
+            },
+            {
+              "word": "untersuchen",
+              "translation": "pregledati",
+              "collection": "MES",
+              "active": true,
+              "img": "hc-vo-2-07"
+            },
+            {
+              "word": "ein EKG schreiben",
+              "translation": "snimiti EKG",
+              "collection": "MES",
+              "active": true,
+              "img": "hc-vo-2-08"
+            },
+            {
+              "word": "die Schmerzskala",
+              "translation": "skala bola",
+              "collection": "MES",
+              "active": true,
+              "img": "hc-vo-2-09"
+            },
+            {
+              "word": "der Befund",
+              "translation": "nalaz",
+              "collection": "MES",
+              "active": true,
+              "img": "hc-vo-2-10"
+            }
+          ],
+          "exercises": [
+            "VO-08",
+            "VO-09",
+            "VO-10",
+            "VO-11",
+            "VO-12",
+            "VO-13",
+            "VO-14"
+          ]
+        },
+        {
+          "key": "ANA",
+          "title": "Anamnese und Behandlung",
+          "sr": "Anamneza i lečenje",
+          "images": [
+            "hcvo1"
+          ],
+          "words": [
+            {
+              "word": "aufgenommen werden",
+              "translation": "biti primljen u bolnicu",
+              "collection": "ANA",
+              "active": true,
+              "img": "hc-vo-3-01"
+            },
+            {
+              "word": "das Aufnahmegespräch",
+              "translation": "prijemni razgovor",
+              "collection": "ANA",
+              "active": true,
+              "img": "hc-vo-3-02"
+            },
+            {
+              "word": "die Vorerkrankung",
+              "translation": "ranija bolest",
+              "collection": "ANA",
+              "active": true,
+              "img": "hc-vo-3-03"
+            },
+            {
+              "word": "die Dauermedikation",
+              "translation": "stalni lekovi",
+              "collection": "ANA",
+              "active": true,
+              "img": "hc-vo-3-04"
+            },
+            {
+              "word": "allergisch sein gegen",
+              "translation": "biti alergičan na",
+              "collection": "ANA",
+              "active": true,
+              "img": "hc-vo-3-05"
+            },
+            {
+              "word": "vertragen",
+              "translation": "podnositi (lek)",
+              "collection": "ANA",
+              "active": true,
+              "img": "hc-vo-3-06"
+            },
+            {
+              "word": "das Schmerzmittel",
+              "translation": "lek protiv bolova",
+              "collection": "ANA",
+              "active": true,
+              "img": "hc-vo-3-07"
+            },
+            {
+              "word": "die Nebenwirkung",
+              "translation": "neželjeno dejstvo",
+              "collection": "ANA",
+              "active": true,
+              "img": "hc-vo-3-08"
+            },
+            {
+              "word": "die Angehörigen",
+              "translation": "članovi porodice / bližnji",
+              "collection": "ANA",
+              "active": true,
+              "img": "hc-vo-3-09"
+            },
+            {
+              "word": "die Patientenakte",
+              "translation": "medicinski karton",
+              "collection": "ANA",
+              "active": true,
+              "img": "hc-vo-3-10"
+            },
+            {
+              "word": "die Übergabe",
+              "translation": "primopredaja smene",
+              "collection": "ANA",
+              "active": true,
+              "img": "hc-vo-3-11"
+            },
+            {
+              "word": "der Schichtwechsel",
+              "translation": "smena",
+              "collection": "ANA",
+              "active": true,
+              "img": "hc-vo-3-12"
+            },
+            {
+              "word": "die Schweigepflicht",
+              "translation": "obaveza čuvanja tajne",
+              "collection": "ANA",
+              "active": true,
+              "img": "hc-vo-3-13"
+            },
+            {
+              "word": "die Entlassung",
+              "translation": "otpust iz bolnice",
+              "collection": "ANA",
+              "active": true,
+              "img": "hc-vo-3-14"
+            }
+          ],
+          "exercises": [
+            "VO-15",
+            "VO-16",
+            "VO-17",
+            "VO-18",
+            "VO-19",
+            "VO-20"
+          ]
+        }
+      ],
+      "words": [
+        {
+          "word": "Schmerzen in der Brust haben",
+          "translation": "imati bol u grudima",
+          "collection": "SYM",
+          "active": true
+        },
+        {
+          "word": "der Schmerz",
+          "translation": "bol",
+          "collection": "SYM",
+          "active": true
+        },
+        {
+          "word": "mir ist übel",
+          "translation": "mučno mi je",
+          "collection": "SYM",
+          "active": true
+        },
+        {
+          "word": "schwindlig",
+          "translation": "ošamućen, vrtoglav",
+          "collection": "SYM",
+          "active": true
+        },
+        {
+          "word": "Atemnot haben",
+          "translation": "imati otežano disanje",
+          "collection": "SYM",
+          "active": true
+        },
+        {
+          "word": "das Fieber",
+          "translation": "temperatura (groznica)",
+          "collection": "SYM",
+          "active": true
+        },
+        {
+          "word": "die Kopfschmerzen",
+          "translation": "glavobolja",
+          "collection": "SYM",
+          "active": true
+        },
+        {
+          "word": "der Ausschlag",
+          "translation": "osip",
+          "collection": "SYM",
+          "active": true
+        },
+        {
+          "word": "husten",
+          "translation": "kašljati",
+          "collection": "SYM",
+          "active": true
+        },
+        {
+          "word": "geschwollen",
+          "translation": "otečen",
+          "collection": "SYM",
+          "active": true
+        },
+        {
+          "word": "ausstrahlen",
+          "translation": "širiti se (o bolu)",
+          "collection": "SYM",
+          "active": true
+        },
+        {
+          "word": "bluten",
+          "translation": "krvariti",
+          "collection": "SYM",
+          "active": true
+        },
+        {
+          "word": "den Blutdruck messen",
+          "translation": "izmeriti pritisak",
+          "collection": "MES",
+          "active": true
+        },
+        {
+          "word": "der Puls",
+          "translation": "puls",
+          "collection": "MES",
+          "active": true
+        },
+        {
+          "word": "die Temperatur",
+          "translation": "temperatura",
+          "collection": "MES",
+          "active": true
+        },
+        {
+          "word": "die Blutabnahme",
+          "translation": "vađenje krvi",
+          "collection": "MES",
+          "active": true
+        },
+        {
+          "word": "die Sauerstoffsättigung",
+          "translation": "zasićenost kiseonikom",
+          "collection": "MES",
+          "active": true
+        },
+        {
+          "word": "das Gewicht",
+          "translation": "težina",
+          "collection": "MES",
+          "active": true
+        },
+        {
+          "word": "untersuchen",
+          "translation": "pregledati",
+          "collection": "MES",
+          "active": true
+        },
+        {
+          "word": "ein EKG schreiben",
+          "translation": "snimiti EKG",
+          "collection": "MES",
+          "active": true
+        },
+        {
+          "word": "die Schmerzskala",
+          "translation": "skala bola",
+          "collection": "MES",
+          "active": true
+        },
+        {
+          "word": "der Befund",
+          "translation": "nalaz",
+          "collection": "MES",
+          "active": true
+        },
+        {
+          "word": "aufgenommen werden",
+          "translation": "biti primljen u bolnicu",
+          "collection": "ANA",
+          "active": true
+        },
+        {
+          "word": "das Aufnahmegespräch",
+          "translation": "prijemni razgovor",
+          "collection": "ANA",
+          "active": true
+        },
+        {
+          "word": "die Vorerkrankung",
+          "translation": "ranija bolest",
+          "collection": "ANA",
+          "active": true
+        },
+        {
+          "word": "die Dauermedikation",
+          "translation": "stalni lekovi",
+          "collection": "ANA",
+          "active": true
+        },
+        {
+          "word": "allergisch sein gegen",
+          "translation": "biti alergičan na",
+          "collection": "ANA",
+          "active": true
+        },
+        {
+          "word": "vertragen",
+          "translation": "podnositi (lek)",
+          "collection": "ANA",
+          "active": true
+        },
+        {
+          "word": "das Schmerzmittel",
+          "translation": "lek protiv bolova",
+          "collection": "ANA",
+          "active": true
+        },
+        {
+          "word": "die Nebenwirkung",
+          "translation": "neželjeno dejstvo",
+          "collection": "ANA",
+          "active": true
+        },
+        {
+          "word": "die Angehörigen",
+          "translation": "članovi porodice / bližnji",
+          "collection": "ANA",
+          "active": true
+        },
+        {
+          "word": "die Patientenakte",
+          "translation": "medicinski karton",
+          "collection": "ANA",
+          "active": true
+        },
+        {
+          "word": "die Übergabe",
+          "translation": "primopredaja smene",
+          "collection": "ANA",
+          "active": true
+        },
+        {
+          "word": "der Schichtwechsel",
+          "translation": "smena",
+          "collection": "ANA",
+          "active": true
+        },
+        {
+          "word": "die Schweigepflicht",
+          "translation": "obaveza čuvanja tajne",
+          "collection": "ANA",
+          "active": true
+        },
+        {
+          "word": "die Entlassung",
+          "translation": "otpust iz bolnice",
+          "collection": "ANA",
+          "active": true
+        }
+      ],
+      "collections": {
+        "SYM": "Symptome und Beschwerden",
+        "MES": "Messungen und Untersuchungen",
+        "ANA": "Anamnese und Behandlung"
+      },
+      "exercises": [
+        {
+          "id": "DE-HC-B1-L01-VO-01",
+          "code": "VO-01",
+          "title": "Tegoba na ilustraciji",
+          "instruction": "Izaberi izraz koji najpreciznije odgovara opisu.",
+          "type": "choice",
+          "xp": 1,
+          "vocabularyFocus": "SYM",
+          "kind": "vocabulary",
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "context": "Pacijent pokazuje mesto bola na grudima. Koji izraz opisuje i tegobu i njeno mesto?",
+          "options": [
+            "Schmerzen in der Brust haben",
+            "die Kopfschmerzen",
+            "Atemnot haben"
+          ],
+          "correct": [
+            0
+          ],
+          "image": "hc-vo-1-01"
+        },
+        {
+          "id": "DE-HC-B1-L01-VO-02",
+          "code": "VO-02",
+          "title": "Tri slike, tri tegobe",
+          "instruction": "Poveži svaku stavku sa odgovarajućim izrazom. Svaki izraz koristi jednom.",
+          "type": "match",
+          "xp": 1,
+          "vocabularyFocus": "SYM",
+          "kind": "vocabulary",
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "left": [
+            "Slika A",
+            "Slika B",
+            "Slika C"
+          ],
+          "right": [
+            "der Ausschlag",
+            "geschwollen",
+            "husten"
+          ],
+          "pairs": [
+            2,
+            0,
+            1
+          ],
+          "leftImages": [
+            "hc-vo-1-09",
+            "hc-vo-1-08",
+            "hc-vo-1-10"
+          ]
+        },
+        {
+          "id": "DE-HC-B1-L01-VO-03",
+          "code": "VO-03",
+          "title": "Šta pacijent opisuje?",
+          "instruction": "Izaberi izraz koji najpreciznije odgovara opisu.",
+          "type": "choice",
+          "xp": 1,
+          "vocabularyFocus": "SYM",
+          "kind": "vocabulary",
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "context": "Herr Schmidt: Wenn ich aufstehe, dreht sich alles. Mein Kopf tut nicht weh.",
+          "options": [
+            "mir ist übel",
+            "schwindlig",
+            "Atemnot haben"
+          ],
+          "correct": [
+            1
+          ]
+        },
+        {
+          "id": "DE-HC-B1-L01-VO-04",
+          "code": "VO-04",
+          "title": "Bol koji se širi",
+          "instruction": "Dopuni zapis izrazima koji odgovaraju kontekstu.",
+          "type": "gaps",
+          "xp": 1,
+          "vocabularyFocus": "SYM",
+          "kind": "vocabulary",
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "text": "Herr Schmidt hat einen ___ in der Brust. Die Schmerzen ___ in den linken Arm.",
+          "gaps": [
+            {
+              "options": [
+                "Schmerz",
+                "Ausschlag",
+                "Husten"
+              ],
+              "answer": "Schmerz"
+            },
+            {
+              "options": [
+                "strahlen aus",
+                "schwellen an",
+                "lassen nach"
+              ],
+              "answer": "strahlen aus"
+            }
+          ]
+        },
+        {
+          "id": "DE-HC-B1-L01-VO-05",
+          "code": "VO-05",
+          "title": "Od izjave do termina",
+          "instruction": "Poveži svaku stavku sa odgovarajućim izrazom. Svaki izraz koristi jednom.",
+          "type": "match",
+          "xp": 1,
+          "vocabularyFocus": "SYM",
+          "kind": "vocabulary",
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "left": [
+            "Ich habe das Gefühl, dass ich mich übergeben muss.",
+            "Ich bekomme nicht genug Luft.",
+            "Mein Kopf tut weh."
+          ],
+          "right": [
+            "die Kopfschmerzen",
+            "mir ist übel",
+            "Atemnot haben"
+          ],
+          "pairs": [
+            1,
+            2,
+            0
+          ]
+        },
+        {
+          "id": "DE-HC-B1-L01-VO-06",
+          "code": "VO-06",
+          "title": "Šta zapisati kao tegobe?",
+          "instruction": "Izaberi sve izraze koji odgovaraju opisu.",
+          "type": "multi",
+          "xp": 1,
+          "vocabularyFocus": "SYM",
+          "kind": "vocabulary",
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "context": "Pacijent kaže da mu je mučno i da je zadihan. Ne prijavljuje vrtoglavicu ni glavobolju.",
+          "options": [
+            "schwindlig",
+            "mir ist übel",
+            "die Kopfschmerzen",
+            "Atemnot haben"
+          ],
+          "correct": [
+            1,
+            3
+          ]
+        },
+        {
+          "id": "DE-HC-B1-L01-VO-07",
+          "code": "VO-07",
+          "title": "Dve kratke beleške",
+          "instruction": "Upiši traženi izraz na jeziku lekcije.",
+          "type": "text",
+          "xp": 1,
+          "vocabularyFocus": "SYM",
+          "kind": "vocabulary",
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "inputs": [
+            {
+              "prompt": "Navedi imenicu iz lekcije za povišenu telesnu temperaturu, sa članom.",
+              "answers": [
+                "das Fieber"
+              ]
+            },
+            {
+              "prompt": "Upiši infinitiv iz lekcije: iz rane izlazi krv.",
+              "answers": [
+                "bluten"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "DE-HC-B1-L01-VO-08",
+          "code": "VO-08",
+          "title": "Prepoznaj postupak",
+          "instruction": "Poveži svaku stavku sa odgovarajućim izrazom. Svaki izraz koristi jednom.",
+          "type": "match",
+          "xp": 1,
+          "vocabularyFocus": "MES",
+          "kind": "vocabulary",
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "left": [
+            "Slika A",
+            "Slika B",
+            "Slika C"
+          ],
+          "right": [
+            "ein EKG schreiben",
+            "den Blutdruck messen",
+            "die Blutabnahme"
+          ],
+          "pairs": [
+            1,
+            2,
+            0
+          ],
+          "leftImages": [
+            "hc-vo-2-01",
+            "hc-vo-2-04",
+            "hc-vo-2-08"
+          ]
+        },
+        {
+          "id": "DE-HC-B1-L01-VO-09",
+          "code": "VO-09",
+          "title": "Šta pokazuje senzor?",
+          "instruction": "Izaberi izraz koji najpreciznije odgovara opisu.",
+          "type": "choice",
+          "xp": 1,
+          "vocabularyFocus": "MES",
+          "kind": "vocabulary",
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "context": "Lena legt einen Sensor an den Finger, um zu sehen, wie gut das Blut mit Sauerstoff gesättigt ist.",
+          "options": [
+            "der Puls",
+            "der Blutdruck",
+            "die Sauerstoffsättigung",
+            "die Temperatur"
+          ],
+          "correct": [
+            2
+          ],
+          "image": "hc-vo-2-05"
+        },
+        {
+          "id": "DE-HC-B1-L01-VO-10",
+          "code": "VO-10",
+          "title": "Kontroll før legen kommer",
+          "instruction": "Dopuni zapis izrazima koji odgovaraju kontekstu.",
+          "type": "gaps",
+          "xp": 1,
+          "vocabularyFocus": "MES",
+          "kind": "vocabulary",
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "text": "Lena misst die ___, um zu sehen, ob Herr Schmidt Fieber hat. Sie zählt die Herzschläge und notiert seinen ___.",
+          "gaps": [
+            {
+              "options": [
+                "Temperatur",
+                "Sauerstoffsättigung",
+                "Atemfrequenz"
+              ],
+              "answer": "Temperatur"
+            },
+            {
+              "options": [
+                "Puls",
+                "Blutdruck",
+                "Befund"
+              ],
+              "answer": "Puls"
+            }
+          ]
+        },
+        {
+          "id": "DE-HC-B1-L01-VO-11",
+          "code": "VO-11",
+          "title": "Vrednost i odgovarajuća rubrika",
+          "instruction": "Poveži svaku stavku sa odgovarajućim izrazom. Svaki izraz koristi jednom.",
+          "type": "match",
+          "xp": 1,
+          "vocabularyFocus": "MES",
+          "kind": "vocabulary",
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "left": [
+            "72 kg",
+            "3 von 10: Wie stark sind die Schmerzen?",
+            "Das Ergebnis der Untersuchung liegt vor."
+          ],
+          "right": [
+            "der Befund",
+            "das Gewicht",
+            "die Schmerzskala"
+          ],
+          "pairs": [
+            1,
+            2,
+            0
+          ]
+        },
+        {
+          "id": "DE-HC-B1-L01-VO-12",
+          "code": "VO-12",
+          "title": "Najava pregleda",
+          "instruction": "Složi sve delove u smislenu rečenicu. Počni zadatim delom.",
+          "type": "order",
+          "xp": 1,
+          "vocabularyFocus": "MES",
+          "kind": "vocabulary",
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "context": "Početak: Der Arzt",
+          "tokens": [
+            "Der Arzt",
+            "möchte",
+            "den Patienten",
+            "untersuchen."
+          ],
+          "answer": [
+            "Der Arzt möchte den Patienten untersuchen."
+          ]
+        },
+        {
+          "id": "DE-HC-B1-L01-VO-13",
+          "code": "VO-13",
+          "title": "Postupak ili rezultat?",
+          "instruction": "Izaberi izraz koji najpreciznije odgovara opisu.",
+          "type": "choice",
+          "xp": 1,
+          "vocabularyFocus": "MES",
+          "kind": "vocabulary",
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "context": "Die Untersuchung ist beendet. Lena wartet auf das schriftliche Ergebnis, nicht auf eine weitere Blutabnahme.",
+          "options": [
+            "die Blutabnahme",
+            "der Befund",
+            "die Schmerzskala"
+          ],
+          "correct": [
+            1
+          ]
+        },
+        {
+          "id": "DE-HC-B1-L01-VO-14",
+          "code": "VO-14",
+          "title": "Dopuni dve rubrike",
+          "instruction": "Upiši traženi izraz na jeziku lekcije.",
+          "type": "text",
+          "xp": 1,
+          "vocabularyFocus": "MES",
+          "kind": "vocabulary",
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "inputs": [
+            {
+              "prompt": "Upiši jednu reč koja nedostaje: Lena möchte mit der Manschette am Arm den ___ messen.",
+              "answers": [
+                "Blutdruck"
+              ]
+            },
+            {
+              "prompt": "Upiši izraz za merenje električne aktivnosti srca, iz lekcije (infinitiv).",
+              "answers": [
+                "ein EKG schreiben"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "DE-HC-B1-L01-VO-15",
+          "code": "VO-15",
+          "title": "Postupci tokom boravka",
+          "instruction": "Poveži svaku stavku sa odgovarajućim izrazom. Svaki izraz koristi jednom.",
+          "type": "match",
+          "xp": 1,
+          "vocabularyFocus": "ANA",
+          "kind": "vocabulary",
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "left": [
+            "Der Patient kommt auf die Station und bekommt ein Bett.",
+            "Die Pflegekraft fragt nach Beschwerden, Medikamenten und früheren Krankheiten.",
+            "Der Patient darf das Krankenhaus verlassen."
+          ],
+          "right": [
+            "die Entlassung",
+            "aufgenommen werden",
+            "das Aufnahmegespräch"
+          ],
+          "pairs": [
+            1,
+            2,
+            0
+          ]
+        },
+        {
+          "id": "DE-HC-B1-L01-VO-16",
+          "code": "VO-16",
+          "title": "Redovna terapija",
+          "instruction": "Izaberi izraz koji najpreciznije odgovara opisu.",
+          "type": "choice",
+          "xp": 1,
+          "vocabularyFocus": "ANA",
+          "kind": "vocabulary",
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "context": "Herr Schmidt: Diese Tablette nehme ich jeden Morgen, auch wenn ich keine Schmerzen habe.",
+          "options": [
+            "das Schmerzmittel",
+            "die Dauermedikation",
+            "die Nebenwirkung"
+          ],
+          "correct": [
+            1
+          ],
+          "image": "hc-vo-3-04"
+        },
+        {
+          "id": "DE-HC-B1-L01-VO-17",
+          "code": "VO-17",
+          "title": "Podnošenje leka",
+          "instruction": "Dopuni zapis izrazima koji odgovaraju kontekstu.",
+          "type": "gaps",
+          "xp": 1,
+          "vocabularyFocus": "ANA",
+          "kind": "vocabulary",
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "text": "Herr Schmidt ___ kein Penicillin. Er ist allergisch ___ dieses Medikament. Nach einem anderen Medikament trat eine unerwünschte ___ auf. Lena notiert auch eine bekannte ___, die schon vor der Aufnahme bestand.",
+          "gaps": [
+            {
+              "options": [
+                "verträgt",
+                "nimmt",
+                "erhält"
+              ],
+              "answer": "verträgt"
+            },
+            {
+              "options": [
+                "gegen",
+                "mit",
+                "bei"
+              ],
+              "answer": "gegen"
+            },
+            {
+              "options": [
+                "Nebenwirkung",
+                "Vorerkrankung",
+                "Dauermedikation"
+              ],
+              "answer": "Nebenwirkung"
+            },
+            {
+              "options": [
+                "Vorerkrankung",
+                "Nebenwirkung",
+                "Entlassung"
+              ],
+              "answer": "Vorerkrankung"
+            }
+          ]
+        },
+        {
+          "id": "DE-HC-B1-L01-VO-18",
+          "code": "VO-18",
+          "title": "Ljudi i dokumentacija",
+          "instruction": "Poveži svaku stavku sa odgovarajućim izrazom. Svaki izraz koristi jednom.",
+          "type": "match",
+          "xp": 1,
+          "vocabularyFocus": "ANA",
+          "kind": "vocabulary",
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "left": [
+            "Die Tochter und die Ehefrau von Herrn Schmidt",
+            "Die Dokumentation mit Informationen über den Patienten",
+            "Medikament gegen Schmerzen nach ärztlicher Anordnung"
+          ],
+          "right": [
+            "die Patientenakte",
+            "das Schmerzmittel",
+            "die Angehörigen"
+          ],
+          "pairs": [
+            2,
+            0,
+            1
+          ],
+          "image": "hc-vo-3-09"
+        },
+        {
+          "id": "DE-HC-B1-L01-VO-19",
+          "code": "VO-19",
+          "title": "Na kraju smene",
+          "instruction": "Poveži svaku stavku sa odgovarajućim izrazom. Svaki izraz koristi jednom.",
+          "type": "match",
+          "xp": 1,
+          "vocabularyFocus": "ANA",
+          "kind": "vocabulary",
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "left": [
+            "Anna beginnt den Spätdienst, Lena beendet den Frühdienst.",
+            "Lena informiert Anna über Herrn Schmidts Zustand.",
+            "Lena gibt keine Patientendaten an unbefugte Personen weiter."
+          ],
+          "right": [
+            "die Schweigepflicht",
+            "der Schichtwechsel",
+            "die Übergabe"
+          ],
+          "pairs": [
+            1,
+            2,
+            0
+          ]
+        },
+        {
+          "id": "DE-HC-B1-L01-VO-20",
+          "code": "VO-20",
+          "title": "Završna beleška sa prijema",
+          "instruction": "Dopuni zapis izrazima koji odgovaraju kontekstu.",
+          "type": "gaps",
+          "xp": 1,
+          "vocabularyFocus": "ANA",
+          "kind": "vocabulary",
+          "items": [],
+          "hint": "Pročitaj opis ponovo i uporedi značenje srodnih izraza.",
+          "text": "Herr Schmidt wurde auf der Station ___. Lena führt das ___ mit ihm. Seine Tochter gehört zu den ___. Beim ___ informiert Lena Anna während der ___.",
+          "gaps": [
+            {
+              "options": [
+                "aufgenommen",
+                "entlassen",
+                "untersucht"
+              ],
+              "answer": "aufgenommen"
+            },
+            {
+              "options": [
+                "Aufnahmegespräch",
+                "Entlassungsgespräch",
+                "Übergabegespräch"
+              ],
+              "answer": "Aufnahmegespräch"
+            },
+            {
+              "options": [
+                "Angehörigen",
+                "Vorerkrankungen",
+                "Nebenwirkungen"
+              ],
+              "answer": "Angehörigen"
+            },
+            {
+              "options": [
+                "Schichtwechsel",
+                "Aufnahmegespräch",
+                "Arztgespräch"
+              ],
+              "answer": "Schichtwechsel"
+            },
+            {
+              "options": [
+                "Übergabe",
+                "Entlassung",
+                "Blutabnahme"
+              ],
+              "answer": "Übergabe"
+            }
+          ]
+        }
+      ]
+    },
+    "reading": {
+      "texts": [
+        {
+          "id": "DE-HC-B1-L01-RD1",
+          "title": "Text 1 · Patientenrechte in Deutschland",
+          "image": "hc:rd1",
+          "body": "In Deutschland haben Patientinnen und Patienten das Recht, verständlich über ihre Diagnose und Behandlung informiert zu werden. Ärztinnen und Ärzte müssen ihnen erklären, welche Risiken eine Behandlung hat und welche Alternativen es gibt.\n\nOhne Einwilligung des Patienten darf keine Behandlung durchgeführt werden. Deshalb ist es wichtig, dass Pflegekräfte nachfragen, ob der Patient alles verstanden hat. Wenn er schlecht Deutsch spricht, sollte ein Dolmetscher organisiert werden.\n\nAngehörige bekommen nur Auskunft, wenn der Patient einverstanden ist. Alle Mitarbeitenden im Krankenhaus unterliegen der Schweigepflicht – auch in der Pause, im Aufzug und in sozialen Medien."
+        },
+        {
+          "id": "DE-HC-B1-L01-RD2",
+          "title": "Text 2 · Pflegedokumentation",
+          "image": "hc:wr1",
+          "body": "Herr Klaus Schmidt, 72 Jahre. Aufnahme um 7:30 Uhr mit Brustschmerzen seit 3:00 Uhr. Schmerz in der Brustmitte, Ausstrahlung in den linken Arm. Schmerzskala 6/10 bei Aufnahme. Patient klagt über Übelkeit, kein Erbrechen.\n\nDauermedikation: Blutdrucksenker morgens. Allergie: Penicillin (Ausschlag).\n\nRR 160/95, Puls 92, Temp. 36,8 °C, SpO2 96 %. EKG um 7:45 Uhr. Schmerzmittel um 8:10 Uhr nach ärztlicher Anordnung. Schmerzskala 3/10 um 9:00 Uhr. Blutabnahme für 18:00 Uhr angeordnet. Tochter nach Einwilligung des Patienten informiert."
+        }
+      ],
+      "exercises": [
+        {
+          "id": "DE-HC-B1-L01-R-01",
+          "code": "R-01",
+          "title": "Text 1 · Richtig oder falsch",
+          "instruction": "Izaberi Richtig ili Falsch.",
+          "kind": "closed",
+          "items": [
+            {
+              "prompt": "Patienten müssen über Risiken informiert werden.",
+              "answers": [
+                "Richtig"
+              ],
+              "options": [
+                "Richtig",
+                "Falsch"
+              ]
+            },
+            {
+              "prompt": "Eine Behandlung ist auch ohne Einwilligung möglich.",
+              "answers": [
+                "Falsch"
+              ],
+              "options": [
+                "Richtig",
+                "Falsch"
+              ]
+            },
+            {
+              "prompt": "Angehörige bekommen immer Auskunft.",
+              "answers": [
+                "Falsch"
+              ],
+              "options": [
+                "Richtig",
+                "Falsch"
+              ]
+            },
+            {
+              "prompt": "Die Schweigepflicht gilt auch im Aufzug.",
+              "answers": [
+                "Richtig"
+              ],
+              "options": [
+                "Richtig",
+                "Falsch"
+              ]
+            }
+          ],
+          "textId": "DE-HC-B1-L01-RD1"
+        },
+        {
+          "id": "DE-HC-B1-L01-R-02",
+          "code": "R-02",
+          "title": "Text 2 · Pflegedokumentation",
+          "instruction": "Izaberi tačan odgovor.",
+          "kind": "closed",
+          "items": [
+            {
+              "prompt": "Seit wann hatte Herr Schmidt Schmerzen?",
+              "options": [
+                "Seit 3:00 Uhr",
+                "Seit gestern",
+                "Seit 7:30 Uhr"
+              ],
+              "answers": [
+                "Seit 3:00 Uhr"
+              ]
+            },
+            {
+              "prompt": "Was passiert, wenn er Penicillin bekommt?",
+              "options": [
+                "Er bekommt einen Ausschlag",
+                "Ihm wird schwindlig",
+                "Er bekommt Fieber"
+              ],
+              "answers": [
+                "Er bekommt einen Ausschlag"
+              ]
+            },
+            {
+              "prompt": "Wie stark waren die Schmerzen um 9:00 Uhr?",
+              "options": [
+                "3 von 10",
+                "6 von 10",
+                "Keine Schmerzen"
+              ],
+              "answers": [
+                "3 von 10"
+              ]
+            },
+            {
+              "prompt": "Warum wurde die Tochter informiert?",
+              "options": [
+                "Der Patient war einverstanden",
+                "Sie ist Ärztin",
+                "Sie hat angerufen"
+              ],
+              "answers": [
+                "Der Patient war einverstanden"
+              ]
+            }
+          ],
+          "textId": "DE-HC-B1-L01-RD2"
+        }
+      ]
+    },
+    "listening": {
+      "scenes": [
+        {
+          "id": "L-01",
+          "code": "DE-HC-B1-L01-L01",
+          "title": "L-01 · Neuaufnahme auf Station",
+          "context": "Pflegekraft berichtet (Monolog)",
+          "xp": 1,
+          "lines": [
+            {
+              "speaker": "Lena",
+              "text": "Guten Morgen. Ich bin Lena, Pflegefachkraft auf der Inneren Station der Charité. Heute um sieben Uhr ist ein neuer Patient gekommen. Er heißt Klaus Schmidt und ist siebzig Jahre alt. Seit gestern Abend hat er Brustschmerzen und ist etwas kurzatmig. Zuerst habe ich Blutdruck und Puls gemessen. Der Blutdruck war erhöht, der Puls war normal. Danach wurde Blut abgenommen, und der Arzt untersucht ihn noch vor dem Mittagessen."
+            }
+          ],
+          "questions": [
+            {
+              "prompt": "Warum wurde Herr Schmidt aufgenommen?",
+              "options": [
+                "Er hat Brustschmerzen und ist kurzatmig.",
+                "Er hat sich den Arm gebrochen.",
+                "Er hat Fieber und Husten."
+              ],
+              "answer": "Er hat Brustschmerzen und ist kurzatmig."
+            },
+            {
+              "prompt": "Welcher Wert war auffällig?",
+              "options": [
+                "Der Blutdruck war erhöht.",
+                "Der Puls war sehr schnell.",
+                "Die Temperatur war hoch."
+              ],
+              "answer": "Der Blutdruck war erhöht."
+            },
+            {
+              "prompt": "Was passiert vor dem Mittagessen?",
+              "options": [
+                "Der Arzt untersucht den Patienten.",
+                "Der Patient wird entlassen.",
+                "Der Patient wird operiert."
+              ],
+              "answer": "Der Arzt untersucht den Patienten."
+            }
+          ]
+        },
+        {
+          "id": "L-02",
+          "code": "DE-HC-B1-L01-L02",
+          "title": "L-02 · Blutdruckmessung",
+          "context": "Pflegekraft und nervöser Patient",
+          "xp": 1,
+          "lines": [
+            {
+              "speaker": "Lena",
+              "text": "Herr Schmidt, ich möchte jetzt Ihren Blutdruck messen. Könnten Sie bitte den Ärmel hochkrempeln?"
+            },
+            {
+              "speaker": "Herr Schmidt",
+              "text": "Ja, gern. Aber ich bin ein bisschen nervös. Stimmt etwas nicht mit meinem Herzen?"
+            },
+            {
+              "speaker": "Lena",
+              "text": "Das wissen wir noch nicht. Die Messung dauert nur eine Minute. Bitte sitzen Sie ruhig und sprechen Sie nicht, während die Manschette aufgepumpt wird."
+            },
+            {
+              "speaker": "Herr Schmidt",
+              "text": "In Ordnung. Es drückt ein bisschen am Arm."
+            },
+            {
+              "speaker": "Lena",
+              "text": "Das ist ganz normal. So, fertig. Hundertfünfzig zu neunzig. Das ist etwas hoch, deshalb messe ich in einer Stunde noch einmal."
+            }
+          ],
+          "questions": [
+            {
+              "prompt": "Was soll der Patient während der Messung tun?",
+              "options": [
+                "Ruhig sitzen und nicht sprechen.",
+                "Tief atmen und aufstehen.",
+                "Den Arm über den Kopf halten."
+              ],
+              "answer": "Ruhig sitzen und nicht sprechen."
+            },
+            {
+              "prompt": "Was macht Lena, weil der Wert hoch ist?",
+              "options": [
+                "Sie misst in einer Stunde noch einmal.",
+                "Sie ruft sofort den Notarzt.",
+                "Sie gibt ihm ein Medikament."
+              ],
+              "answer": "Sie misst in einer Stunde noch einmal."
+            }
+          ]
+        },
+        {
+          "id": "L-03",
+          "code": "DE-HC-B1-L01-L03",
+          "title": "L-03 · Allergien und Dauermedikation",
+          "context": "Anamnesegespräch",
+          "xp": 1,
+          "lines": [
+            {
+              "speaker": "Lena",
+              "text": "Ich muss Ihnen ein paar Fragen stellen. Können Sie mir sagen, ob Sie gegen etwas allergisch sind?"
+            },
+            {
+              "speaker": "Herr Schmidt",
+              "text": "Ja, ich vertrage kein Penicillin. Vor ein paar Jahren hatte ich davon einen Ausschlag am ganzen Körper."
+            },
+            {
+              "speaker": "Lena",
+              "text": "Danke, das trage ich in die Akte ein. Nehmen Sie regelmäßig Medikamente?"
+            },
+            {
+              "speaker": "Herr Schmidt",
+              "text": "Jeden Morgen eine Blutdrucktablette, und manchmal eine Schlaftablette."
+            },
+            {
+              "speaker": "Lena",
+              "text": "Wissen Sie, wie die Tabletten heißen? Sonst könnte ich Ihren Hausarzt anrufen."
+            }
+          ],
+          "questions": [
+            {
+              "prompt": "Wogegen ist der Patient allergisch?",
+              "options": [
+                "Penicillin",
+                "Paracetamol",
+                "Nüsse"
+              ],
+              "answer": "Penicillin"
+            },
+            {
+              "prompt": "Welches Medikament nimmt er täglich?",
+              "options": [
+                "Eine Blutdrucktablette",
+                "Eine Schlaftablette",
+                "Ein Schmerzmittel"
+              ],
+              "answer": "Eine Blutdrucktablette"
+            },
+            {
+              "prompt": "Welche Frage ist eine indirekte Frage?",
+              "options": [
+                "Können Sie mir sagen, ob Sie gegen etwas allergisch sind?",
+                "Sind Sie gegen etwas allergisch?",
+                "Allergisch gegen etwas Sie sind?"
+              ],
+              "answer": "Können Sie mir sagen, ob Sie gegen etwas allergisch sind?"
+            }
+          ]
+        },
+        {
+          "id": "L-04",
+          "code": "DE-HC-B1-L01-L04",
+          "title": "L-04 · Die Tochter ruft an",
+          "context": "Telefongespräch",
+          "xp": 1,
+          "lines": [
+            {
+              "speaker": "Lena",
+              "text": "Innere Station, Lena am Apparat."
+            },
+            {
+              "speaker": "Anna",
+              "text": "Guten Tag, hier ist Anna Schmidt. Mein Vater wurde heute Nacht aufgenommen. Könnten Sie mir sagen, wie es ihm geht?"
+            },
+            {
+              "speaker": "Lena",
+              "text": "Ich verstehe, dass Sie sich Sorgen machen. Wegen der Schweigepflicht darf ich am Telefon aber erst Auskunft geben, wenn ich weiß, wer Sie sind."
+            },
+            {
+              "speaker": "Anna",
+              "text": "Natürlich. Ich bin als nächste Angehörige eingetragen."
+            },
+            {
+              "speaker": "Lena",
+              "text": "Dann schaue ich nach. Ihr Vater ist stabil und ruht sich aus. Besuchszeit ist von sechzehn bis neunzehn Uhr."
+            }
+          ],
+          "questions": [
+            {
+              "prompt": "Warum ist Lena am Anfang vorsichtig?",
+              "options": [
+                "Sie hat Schweigepflicht.",
+                "Sie hat keine Zeit.",
+                "Sie kennt den Patienten nicht."
+              ],
+              "answer": "Sie hat Schweigepflicht."
+            },
+            {
+              "prompt": "Wann darf Anna ihren Vater besuchen?",
+              "options": [
+                "Von sechzehn bis neunzehn Uhr",
+                "Von zehn bis zwölf Uhr",
+                "Rund um die Uhr"
+              ],
+              "answer": "Von sechzehn bis neunzehn Uhr"
+            }
+          ]
+        },
+        {
+          "id": "L-05",
+          "code": "DE-HC-B1-L01-L05",
+          "title": "L-05 · Die Visite",
+          "context": "Arzt und Patient",
+          "xp": 1,
+          "lines": [
+            {
+              "speaker": "Dr. Weber",
+              "text": "Guten Tag, Herr Schmidt. Ich bin Dr. Weber. Die Blutergebnisse sind da."
+            },
+            {
+              "speaker": "Herr Schmidt",
+              "text": "Ist es etwas Ernstes?"
+            },
+            {
+              "speaker": "Dr. Weber",
+              "text": "Es gibt keine Hinweise auf einen Herzinfarkt. Trotzdem sollten wir ein EKG und einen Herzultraschall machen, um sicher zu sein."
+            },
+            {
+              "speaker": "Herr Schmidt",
+              "text": "Muss ich lange bleiben?"
+            },
+            {
+              "speaker": "Dr. Weber",
+              "text": "Wahrscheinlich zwei Tage. Sie sollten sich nicht anstrengen, und wenn die Schmerzen wiederkommen, klingeln Sie bitte sofort."
+            }
+          ],
+          "questions": [
+            {
+              "prompt": "Was zeigen die Blutergebnisse?",
+              "options": [
+                "Keine Hinweise auf einen Herzinfarkt.",
+                "Eine Infektion.",
+                "Diabetes."
+              ],
+              "answer": "Keine Hinweise auf einen Herzinfarkt."
+            },
+            {
+              "prompt": "Was soll der Patient bei neuen Schmerzen tun?",
+              "options": [
+                "Sofort klingeln.",
+                "Eine zusätzliche Tablette nehmen.",
+                "Auf dem Flur spazieren gehen."
+              ],
+              "answer": "Sofort klingeln."
+            }
+          ]
+        },
+        {
+          "id": "L-06",
+          "code": "DE-HC-B1-L01-L06",
+          "title": "L-06 · Übergabe beim Schichtwechsel",
+          "context": "Zwei Pflegekräfte",
+          "xp": 1,
+          "lines": [
+            {
+              "speaker": "Monika",
+              "text": "Hallo Lena. Kannst du mir noch die Übergabe für Zimmer vier machen?"
+            },
+            {
+              "speaker": "Lena",
+              "text": "Klar. Herr Schmidt wurde heute Morgen mit Brustschmerzen aufgenommen. Er ist allergisch gegen Penicillin."
+            },
+            {
+              "speaker": "Monika",
+              "text": "Wie geht es ihm jetzt?"
+            },
+            {
+              "speaker": "Lena",
+              "text": "Seit zehn Uhr hat er keine Schmerzen mehr. Der Blutdruck ist gesunken, muss aber alle vier Stunden gemessen werden."
+            },
+            {
+              "speaker": "Monika",
+              "text": "Muss ich sonst noch an etwas denken?"
+            },
+            {
+              "speaker": "Lena",
+              "text": "Ab Mitternacht muss er nüchtern bleiben, weil morgen früh ein Ultraschall gemacht wird."
+            }
+          ],
+          "questions": [
+            {
+              "prompt": "Wie oft wird der Blutdruck gemessen?",
+              "options": [
+                "Alle vier Stunden",
+                "Jede Stunde",
+                "Einmal am Tag"
+              ],
+              "answer": "Alle vier Stunden"
+            },
+            {
+              "prompt": "Warum muss er ab Mitternacht nüchtern bleiben?",
+              "options": [
+                "Morgen früh wird ein Ultraschall gemacht.",
+                "Er wird heute Nacht operiert.",
+                "Er hat Bauchschmerzen."
+              ],
+              "answer": "Morgen früh wird ein Ultraschall gemacht."
+            }
+          ]
+        },
+        {
+          "id": "L-07",
+          "code": "DE-HC-B1-L01-L07",
+          "title": "L-07 · Übergabe vom Rettungsdienst",
+          "context": "Sanitäter und Pflegekraft",
+          "xp": 1,
+          "lines": [
+            {
+              "speaker": "Markus",
+              "text": "Hallo, wir bringen eine zweiundachtzigjährige Frau. Sie ist heute Abend zu Hause im Bad gestürzt."
+            },
+            {
+              "speaker": "Lena",
+              "text": "War sie bewusstlos?"
+            },
+            {
+              "speaker": "Markus",
+              "text": "Nein, sie war die ganze Zeit wach, klagt aber über Schmerzen in der rechten Hüfte. Wir haben ihr ein Schmerzmittel gegeben."
+            },
+            {
+              "speaker": "Lena",
+              "text": "Haben Sie die Sauerstoffsättigung gemessen?"
+            },
+            {
+              "speaker": "Markus",
+              "text": "Ja, siebenundneunzig Prozent. Ihre Tochter kommt in einer halben Stunde mit dem Medikamentenplan."
+            }
+          ],
+          "questions": [
+            {
+              "prompt": "Was ist mit der Frau passiert?",
+              "options": [
+                "Sie ist im Bad gestürzt.",
+                "Ihr wurde im Bus schlecht.",
+                "Sie hatte einen Unfall bei der Arbeit."
+              ],
+              "answer": "Sie ist im Bad gestürzt."
+            },
+            {
+              "prompt": "Wo hat sie Schmerzen?",
+              "options": [
+                "In der rechten Hüfte",
+                "In der linken Schulter",
+                "Im Kopf"
+              ],
+              "answer": "In der rechten Hüfte"
+            },
+            {
+              "prompt": "Wer bringt den Medikamentenplan?",
+              "options": [
+                "Die Tochter",
+                "Der Hausarzt",
+                "Der Sanitäter"
+              ],
+              "answer": "Die Tochter"
+            }
+          ]
+        },
+        {
+          "id": "L-08",
+          "code": "DE-HC-B1-L01-L08",
+          "title": "L-08 · Die Schmerzskala",
+          "context": "Pflegekraft und Patient",
+          "xp": 1,
+          "lines": [
+            {
+              "speaker": "Lena",
+              "text": "Wie geht es Ihnen jetzt? Haben Sie noch Schmerzen?"
+            },
+            {
+              "speaker": "Herr Schmidt",
+              "text": "Ja, es tut ein bisschen in der Brust weh."
+            },
+            {
+              "speaker": "Lena",
+              "text": "Könnten Sie mir sagen, wie stark die Schmerzen auf einer Skala von null bis zehn sind?"
+            },
+            {
+              "speaker": "Herr Schmidt",
+              "text": "Vielleicht vier. Heute Nacht war es acht."
+            },
+            {
+              "speaker": "Lena",
+              "text": "Ist der Schmerz eher stechend oder drückend?"
+            },
+            {
+              "speaker": "Herr Schmidt",
+              "text": "Eher drückend. Er kommt, wenn ich Treppen steige."
+            }
+          ],
+          "questions": [
+            {
+              "prompt": "Wie stark sind die Schmerzen jetzt?",
+              "options": [
+                "Vier von zehn",
+                "Acht von zehn",
+                "Null von zehn"
+              ],
+              "answer": "Vier von zehn"
+            },
+            {
+              "prompt": "Wann kommt der Schmerz?",
+              "options": [
+                "Wenn er Treppen steigt.",
+                "Wenn er im Bett liegt.",
+                "Wenn er isst."
+              ],
+              "answer": "Wenn er Treppen steigt."
+            }
+          ]
+        },
+        {
+          "id": "L-09",
+          "code": "DE-HC-B1-L01-L09",
+          "title": "L-09 · Vorbereitung auf die Untersuchung",
+          "context": "Pflegekraft informiert",
+          "xp": 1,
+          "lines": [
+            {
+              "speaker": "Lena",
+              "text": "Morgen um acht Uhr wird Ihnen Blut abgenommen, und danach wird ein Ultraschall vom Bauch gemacht. Ab Mitternacht dürfen Sie nichts essen und nichts trinken. Ihre Medikamente können Sie mit einem Schluck Wasser nehmen. Ein Mitarbeiter vom Patiententransport holt Sie im Zimmer ab, Sie müssen also nicht selbst gehen. Nach der Untersuchung bekommen Sie Frühstück."
+            }
+          ],
+          "questions": [
+            {
+              "prompt": "Was ist ab Mitternacht nicht erlaubt?",
+              "options": [
+                "Essen und trinken",
+                "Medikamente mit Wasser nehmen",
+                "Schlafen"
+              ],
+              "answer": "Essen und trinken"
+            },
+            {
+              "prompt": "Wie kommt der Patient zur Untersuchung?",
+              "options": [
+                "Der Patiententransport holt ihn ab.",
+                "Er geht allein.",
+                "Seine Tochter fährt ihn."
+              ],
+              "answer": "Der Patiententransport holt ihn ab."
+            }
+          ]
+        },
+        {
+          "id": "L-10",
+          "code": "DE-HC-B1-L01-L10",
+          "title": "L-10 · Planung der Entlassung",
+          "context": "Arzt, Pflegekraft und Patient",
+          "xp": 1,
+          "lines": [
+            {
+              "speaker": "Dr. Weber",
+              "text": "Herr Schmidt, die Untersuchungen waren unauffällig. Sie können morgen nach Hause."
+            },
+            {
+              "speaker": "Herr Schmidt",
+              "text": "Wunderbar! Muss ich neue Medikamente nehmen?"
+            },
+            {
+              "speaker": "Dr. Weber",
+              "text": "Ja, zusätzlich eine neue Blutdrucktablette. Ihr Hausarzt sollte den Blutdruck in zwei Wochen kontrollieren."
+            },
+            {
+              "speaker": "Lena",
+              "text": "Ich schreibe Ihnen alle Medikamente auf, und der ambulante Pflegedienst kommt in den ersten Tagen vorbei."
+            },
+            {
+              "speaker": "Herr Schmidt",
+              "text": "Danke. Kann meine Tochter mich abholen?"
+            },
+            {
+              "speaker": "Lena",
+              "text": "Ja, sie kann ab elf Uhr kommen."
+            }
+          ],
+          "questions": [
+            {
+              "prompt": "Wann wird der Blutdruck kontrolliert?",
+              "options": [
+                "In zwei Wochen beim Hausarzt",
+                "Morgen im Krankenhaus",
+                "In einem halben Jahr"
+              ],
+              "answer": "In zwei Wochen beim Hausarzt"
+            },
+            {
+              "prompt": "Wer hilft dem Patienten zu Hause?",
+              "options": [
+                "Der ambulante Pflegedienst",
+                "Dr. Weber",
+                "Niemand"
+              ],
+              "answer": "Der ambulante Pflegedienst"
+            },
+            {
+              "prompt": "Wer holt den Patienten ab?",
+              "options": [
+                "Seine Tochter",
+                "Ein Krankenwagen",
+                "Ein Taxi vom Krankenhaus"
+              ],
+              "answer": "Seine Tochter"
+            }
+          ]
+        }
+      ]
+    },
+    "writing": {
+      "exercises": [
+        {
+          "id": "DE-HC-B1-L01-WR-01",
+          "code": "WR-01",
+          "title": "Pflegedokumentation schreiben",
+          "instruction": "Pogledaj sliku i napiši kratak zapis u dokumentaciju za novog pacijenta (80–100 reči).",
+          "kind": "open",
+          "items": [
+            {
+              "prompt": "Tvoj zapis (80–100 reči, na nemačkom)",
+              "open": true,
+              "guiding": [
+                "Wer ist der Patient, wann wurde er aufgenommen?",
+                "Welche Beschwerden hat er?",
+                "Welche Werte hast du gemessen?",
+                "Allergien und Dauermedikation?",
+                "Wie geht es weiter?"
+              ]
+            }
+          ],
+          "image": "hc:wr1"
+        },
+        {
+          "id": "DE-HC-B1-L01-WR-02",
+          "code": "WR-02",
+          "title": "Nachricht an Angehörige",
+          "instruction": "Napiši ljubaznu poruku ćerki pacijenta (pacijent se saglasio) o tome kako se otac oseća (70–90 reči).",
+          "kind": "open",
+          "items": [
+            {
+              "prompt": "Tvoja poruka (70–90 reči, na nemačkom)",
+              "open": true,
+              "guiding": [
+                "Begrüße höflich und stell dich vor.",
+                "Beschreibe, wie es dem Patienten geht.",
+                "Erkläre, wie es weitergeht.",
+                "Benutze mindestens eine indirekte Frage und einen Nebensatz mit «weil» oder «wenn»."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "pronunciation": {
+      "theory": [
+        {
+          "title": "Vokallänge – dužina samoglasnika",
+          "text": "U nemačkom dužina samoglasnika menja značenje. Dug je često ispred jednog suglasnika ili uz h/ie, kratak ispred dvostrukog suglasnika. Klikni na reč da je čuješ.",
+          "pairHeads": [
+            "Dugi vokal",
+            "Kratki vokal"
+          ],
+          "pairs": [
+            {
+              "full": "Beet",
+              "fullNote": "leja",
+              "short": "Bett",
+              "shortNote": "krevet"
+            },
+            {
+              "full": "Ofen",
+              "fullNote": "peć",
+              "short": "offen",
+              "shortNote": "otvoren"
+            },
+            {
+              "full": "Miete",
+              "fullNote": "kirija",
+              "short": "Mitte",
+              "shortNote": "sredina"
+            },
+            {
+              "full": "wen",
+              "fullNote": "koga",
+              "short": "wenn",
+              "shortNote": "ako/kada"
+            },
+            {
+              "full": "Saat",
+              "fullNote": "seme",
+              "short": "satt",
+              "shortNote": "sit"
+            }
+          ]
+        },
+        {
+          "title": "Wortakzent in Fachwörtern – naglasak",
+          "text": "Nemačke složenice imaju naglasak na prvom delu, a strane reči (-ent, -ion, -ur, -ik) na kraju. Klikni na reč da je čuješ.",
+          "examples": [
+            {
+              "sentence": "Patient",
+              "display": "Pa-ti-ENT"
+            },
+            {
+              "sentence": "Medikament",
+              "display": "Me-di-ka-MENT"
+            },
+            {
+              "sentence": "Blutdruck",
+              "display": "BLUT-druck"
+            },
+            {
+              "sentence": "Temperatur",
+              "display": "Tem-pe-ra-TUR"
+            },
+            {
+              "sentence": "Schmerzmittel",
+              "display": "SCHMERZ-mit-tel"
+            },
+            {
+              "sentence": "Station",
+              "display": "Sta-TION"
+            }
+          ],
+          "note": "Pisano isticanje je samo pomagalo — merodavan je audio-model."
+        },
+        {
+          "title": "Ich-Laut, Ach-Laut i ü/ö",
+          "text": "„ch“ posle e/i/ü/ö zvuči meko (ich, Bericht), posle a/o/u tvrdo (Bauch, Nacht). Glasovi ü i ö (Übelkeit, Röntgen) izgovaraju se zaobljenim usnama.",
+          "examples": [
+            {
+              "sentence": "Ich schreibe den Bericht.",
+              "say": "ICH schreibe den BERICHT.",
+              "stressed": [
+                "Ich",
+                "Bericht"
+              ],
+              "meaning": "Meki ich-glas."
+            },
+            {
+              "sentence": "Haben Sie Schmerzen im Bauch?",
+              "say": "Haben Sie SCHMERZEN im BAUCH?",
+              "stressed": [
+                "Schmerzen",
+                "Bauch"
+              ],
+              "meaning": "Tvrdi ach-glas i važne reči."
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "code": "P-01",
+          "title": "Langer oder kurzer Vokal?",
+          "type": "choose",
+          "xp": 1,
+          "requireCorrect": true,
+          "instruction": "Poslušaj reč i odredi da li čuješ dug ili kratak samoglasnik.",
+          "okMsg": "Tačno!",
+          "wrongMsg": "Poslušaj još jednom i pokušaj ponovo.",
+          "items": [
+            {
+              "say": "Ofen",
+              "options": [
+                "Langer Vokal",
+                "Kurzer Vokal"
+              ],
+              "answer": "Langer Vokal"
+            },
+            {
+              "say": "offen",
+              "options": [
+                "Langer Vokal",
+                "Kurzer Vokal"
+              ],
+              "answer": "Kurzer Vokal"
+            },
+            {
+              "say": "Miete",
+              "options": [
+                "Langer Vokal",
+                "Kurzer Vokal"
+              ],
+              "answer": "Langer Vokal"
+            },
+            {
+              "say": "Mitte",
+              "options": [
+                "Langer Vokal",
+                "Kurzer Vokal"
+              ],
+              "answer": "Kurzer Vokal"
+            },
+            {
+              "say": "Bett",
+              "options": [
+                "Langer Vokal",
+                "Kurzer Vokal"
+              ],
+              "answer": "Kurzer Vokal"
+            }
+          ]
+        },
+        {
+          "code": "P-02",
+          "title": "Welches Wort hören Sie?",
+          "type": "choose",
+          "xp": 1,
+          "requireCorrect": true,
+          "instruction": "Poslušaj i izaberi reč koju čuješ.",
+          "okMsg": "Tačno!",
+          "wrongMsg": "Poslušaj još jednom i pokušaj ponovo.",
+          "items": [
+            {
+              "say": "offen",
+              "options": [
+                "Ofen",
+                "offen"
+              ],
+              "answer": "offen"
+            },
+            {
+              "say": "Miete",
+              "options": [
+                "Miete",
+                "Mitte"
+              ],
+              "answer": "Miete"
+            },
+            {
+              "say": "wenn",
+              "options": [
+                "wen",
+                "wenn"
+              ],
+              "answer": "wenn"
+            },
+            {
+              "say": "Beet",
+              "options": [
+                "Bett",
+                "Beet"
+              ],
+              "answer": "Beet"
+            },
+            {
+              "say": "satt",
+              "options": [
+                "Saat",
+                "satt"
+              ],
+              "answer": "satt"
+            }
+          ]
+        },
+        {
+          "code": "P-03",
+          "title": "Hören, nachsprechen, aufnehmen",
+          "type": "record",
+          "xp": 1,
+          "compareOnly": false,
+          "checklist": [
+            "Razumljivost",
+            "Dužina ciljanog vokala",
+            "Jasnoća cele rečenice"
+          ],
+          "instruction": "Poslušaj rečenicu, ponovi je i snimi. Pazi na istaknutu reč.",
+          "items": [
+            {
+              "say": "Das Fenster ist offen.",
+              "focus": "offen"
+            },
+            {
+              "say": "Bitte bleiben Sie im Bett.",
+              "focus": "Bett"
+            },
+            {
+              "say": "Wenn Sie Schmerzen haben, klingeln Sie.",
+              "focus": "Wenn"
+            }
+          ]
+        },
+        {
+          "code": "P-04",
+          "title": "Wo liegt der Akzent?",
+          "type": "choose",
+          "xp": 1,
+          "requireCorrect": true,
+          "instruction": "Poslušaj reč i izaberi naglašeni slog.",
+          "okMsg": "Tačno!",
+          "wrongMsg": "Poslušaj još jednom i pokušaj ponovo.",
+          "items": [
+            {
+              "say": "Patient",
+              "options": [
+                "PA-ti-ent",
+                "Pa-ti-ENT"
+              ],
+              "answer": "Pa-ti-ENT"
+            },
+            {
+              "say": "Blutdruck",
+              "options": [
+                "BLUT-druck",
+                "Blut-DRUCK"
+              ],
+              "answer": "BLUT-druck"
+            },
+            {
+              "say": "Medikament",
+              "options": [
+                "ME-di-ka-ment",
+                "Me-di-ka-MENT"
+              ],
+              "answer": "Me-di-ka-MENT"
+            },
+            {
+              "say": "Station",
+              "options": [
+                "STA-tion",
+                "Sta-TION"
+              ],
+              "answer": "Sta-TION"
+            },
+            {
+              "say": "Schmerzmittel",
+              "options": [
+                "SCHMERZ-mit-tel",
+                "Schmerz-MIT-tel"
+              ],
+              "answer": "SCHMERZ-mit-tel"
+            }
+          ]
+        },
+        {
+          "code": "P-05",
+          "title": "Ich-Laut oder Ach-Laut?",
+          "type": "choose",
+          "xp": 1,
+          "requireCorrect": true,
+          "instruction": "Poslušaj reč i odredi da li je „ch“ meko ili tvrdo.",
+          "okMsg": "Tačno!",
+          "wrongMsg": "Poslušaj još jednom i pokušaj ponovo.",
+          "items": [
+            {
+              "say": "Bericht",
+              "options": [
+                "Ich-Laut (meko)",
+                "Ach-Laut (tvrdo)"
+              ],
+              "answer": "Ich-Laut (meko)"
+            },
+            {
+              "say": "Bauch",
+              "options": [
+                "Ich-Laut (meko)",
+                "Ach-Laut (tvrdo)"
+              ],
+              "answer": "Ach-Laut (tvrdo)"
+            },
+            {
+              "say": "Nacht",
+              "options": [
+                "Ich-Laut (meko)",
+                "Ach-Laut (tvrdo)"
+              ],
+              "answer": "Ach-Laut (tvrdo)"
+            },
+            {
+              "say": "schlecht",
+              "options": [
+                "Ich-Laut (meko)",
+                "Ach-Laut (tvrdo)"
+              ],
+              "answer": "Ich-Laut (meko)"
+            },
+            {
+              "say": "Woche",
+              "options": [
+                "Ich-Laut (meko)",
+                "Ach-Laut (tvrdo)"
+              ],
+              "answer": "Ach-Laut (tvrdo)"
+            }
+          ]
+        },
+        {
+          "code": "P-06",
+          "title": "Was wird betont?",
+          "type": "choose",
+          "xp": 1,
+          "requireCorrect": true,
+          "instruction": "Poslušaj rečenicu i odredi koja informacija je istaknuta.",
+          "okMsg": "Tačno!",
+          "wrongMsg": "Poslušaj još jednom i pokušaj ponovo.",
+          "items": [
+            {
+              "say": "Haben Sie SCHMERZEN in der Brust?",
+              "options": [
+                "Simptom (bol)",
+                "Mesto (grudi)"
+              ],
+              "answer": "Simptom (bol)"
+            },
+            {
+              "say": "Haben Sie Schmerzen in der BRUST?",
+              "options": [
+                "Simptom (bol)",
+                "Mesto (grudi)"
+              ],
+              "answer": "Mesto (grudi)"
+            },
+            {
+              "say": "Sie bekommen das Medikament um ACHT UHR.",
+              "options": [
+                "Lek",
+                "Vreme"
+              ],
+              "answer": "Vreme"
+            },
+            {
+              "say": "Sie bekommen das MEDIKAMENT um acht Uhr.",
+              "options": [
+                "Lek",
+                "Vreme"
+              ],
+              "answer": "Lek"
+            }
+          ]
+        },
+        {
+          "code": "P-07",
+          "title": "Fragen an den Patienten",
+          "type": "record",
+          "xp": 1,
+          "compareOnly": false,
+          "checklist": [
+            "Razumljivost",
+            "Smiren tempo",
+            "Intonacija pitanja"
+          ],
+          "instruction": "Snimi pitanja kao da ih postavljaš pacijentu: smireno i jasno.",
+          "items": [
+            {
+              "say": "Wie geht es Ihnen heute?"
+            },
+            {
+              "say": "Können Sie mir zeigen, wo es wehtut?"
+            },
+            {
+              "say": "Sind Sie gegen Medikamente allergisch?"
+            },
+            {
+              "say": "Wie stark sind die Schmerzen von eins bis zehn?"
+            }
+          ]
+        },
+        {
+          "code": "P-08",
+          "title": "Übergabe",
+          "type": "record",
+          "xp": 1,
+          "compareOnly": false,
+          "checklist": [
+            "Jasnoća brojeva i vremena",
+            "Glasovi ü/ö/ch",
+            "Stručni termini"
+          ],
+          "instruction": "Snimi kratke rečenice iz predaje smene.",
+          "items": [
+            {
+              "say": "Der Patient hat Fieber und hohen Blutdruck."
+            },
+            {
+              "say": "Er hat um sechs Uhr ein Schmerzmittel bekommen."
+            },
+            {
+              "say": "Sie muss ab Mitternacht nüchtern bleiben."
+            }
+          ]
+        },
+        {
+          "code": "P-09",
+          "title": "Natürlich sprechen!",
+          "type": "record",
+          "xp": 1,
+          "compareOnly": false,
+          "checklist": [
+            "Prirodan ritam",
+            "Naglasak važnih reči",
+            "Razumljivost"
+          ],
+          "instruction": "Ponovi što prirodnije, kao u pravom razgovoru sa pacijentom.",
+          "items": [
+            {
+              "say": "Ich messe jetzt Ihren Blutdruck."
+            },
+            {
+              "say": "Sagen Sie bitte Bescheid, wenn Sie etwas brauchen."
+            },
+            {
+              "say": "Der Arzt kommt nach dem Mittagessen vorbei."
+            }
+          ]
+        },
+        {
+          "code": "P-10",
+          "title": "Aufnahmegespräch – Final Pronunciation Challenge",
+          "type": "record",
+          "xp": 1,
+          "compareOnly": false,
+          "checklist": [
+            "Stručni termini",
+            "Dužina vokala",
+            "Ich-/Ach-glas"
+          ],
+          "instruction": "Pročitaj ceo tekst naglas i snimi ga. Pazi na stručne reči, dužinu vokala i glas „ch“.",
+          "items": [
+            {
+              "say": "Guten Morgen, ich heiße Lena und bin Pflegekraft hier auf der Station. Ich möchte Ihnen ein paar Fragen stellen. Haben Sie irgendwo Schmerzen? Seit wann haben Sie die Beschwerden? Ich messe auch Ihren Blutdruck und Ihre Temperatur.",
+              "sentences": [
+                "Guten Morgen, ich heiße Lena und bin Pflegekraft hier auf der Station.",
+                "Ich möchte Ihnen ein paar Fragen stellen.",
+                "Haben Sie irgendwo Schmerzen?",
+                "Seit wann haben Sie die Beschwerden?",
+                "Ich messe auch Ihren Blutdruck und Ihre Temperatur."
+              ],
+              "showText": true
+            }
+          ],
+          "maxMs": 30000,
+          "tip": "Snimi tekst rečenicu po rečenicu uz model, pa ceo tekst bez zaustavljanja."
+        }
+      ]
+    },
+    "speaking": {
+      "tasks": [],
+      "roleswitch": []
+    },
+    "culture": {
+      "title": "Arbeitskultur im deutschen Krankenhaus",
+      "body": "Kako izgleda saradnja u nemačkoj bolnici i šta se očekuje od zdravstvenog radnika.",
+      "topics": [
+        {
+          "title": "«Sie» und «du» im Team",
+          "image": "hc:t3",
+          "text": "Im Pflegeteam duzt man sich oft, aber Patienten und meistens auch Ärztinnen und Ärzte siezt man. Man spricht sie mit «Herr/Frau» und Nachnamen oder mit «Dr.» an.",
+          "comparison": "Slično kao u Srbiji, ali se u Nemačkoj «du» bez dozvole smatra nepristojnim.",
+          "fact": "Wer zuerst das «Du» anbietet, ist meistens die ältere oder ranghöhere Person.",
+          "keywords": [
+            {
+              "term": "siezen",
+              "meaning": "persirati"
+            },
+            {
+              "term": "duzen",
+              "meaning": "govoriti „ti“"
+            },
+            {
+              "term": "das Team",
+              "meaning": "tim"
+            }
+          ]
+        },
+        {
+          "title": "Patientenrechte",
+          "image": "hc:rd1",
+          "text": "Ohne Aufklärung und Einwilligung keine Behandlung. Pflegekräfte achten darauf, dass Patienten alles verstanden haben.",
+          "comparison": "U Nemačkoj se pisana saglasnost (Einwilligungserklärung) traži za mnoge zahvate.",
+          "fact": "Das Patientenrechtegesetz regelt diese Rechte seit 2013.",
+          "keywords": [
+            {
+              "term": "die Einwilligung",
+              "meaning": "pristanak"
+            },
+            {
+              "term": "die Aufklärung",
+              "meaning": "informisanje pacijenta"
+            },
+            {
+              "term": "die Patientenrechte",
+              "meaning": "prava pacijenta"
+            }
+          ]
+        },
+        {
+          "title": "Dokumentation und Pünktlichkeit",
+          "image": "hc:wr1",
+          "text": "Was nicht dokumentiert ist, gilt als nicht gemacht. Übergaben beginnen pünktlich und folgen einer festen Struktur.",
+          "comparison": "Dokumentacija je u Nemačkoj veoma detaljna i pravno obavezujuća.",
+          "fact": "Viele Stationen nutzen für die Übergabe das SBAR-Schema.",
+          "keywords": [
+            {
+              "term": "die Dokumentation",
+              "meaning": "dokumentacija"
+            },
+            {
+              "term": "die Pünktlichkeit",
+              "meaning": "tačnost"
+            },
+            {
+              "term": "die Übergabe",
+              "meaning": "primopredaja smene"
+            }
+          ]
+        }
+      ]
+    },
+    "review": {
+      "quiz": {
+        "passScore": 8,
+        "bonusXp": 50,
+        "questions": [
+          {
+            "area": "grammar",
+            "prompt": "Könnten Sie mir zeigen, wo ___?",
+            "options": [
+              "es wehtut",
+              "tut es weh",
+              "wehtut es",
+              "es tut weh"
+            ],
+            "answer": "es wehtut",
+            "explain": "U indirektnom pitanju glagol ide na kraj."
+          },
+          {
+            "area": "grammar",
+            "prompt": "Ich möchte wissen, ___ Sie gut geschlafen haben.",
+            "options": [
+              "ob",
+              "wenn",
+              "dass",
+              "weil"
+            ],
+            "answer": "ob",
+            "explain": "Za da/ne pitanja koristi se «ob»."
+          },
+          {
+            "area": "grammar",
+            "prompt": "Er sagt, dass er kein Penicillin ___.",
+            "options": [
+              "verträgt",
+              "vertragt",
+              "verträgt er",
+              "vertragen"
+            ],
+            "answer": "verträgt",
+            "explain": "Posle «dass» glagol na kraju."
+          },
+          {
+            "area": "grammar",
+            "prompt": "___ Sie bitte den Ärmel hochkrempeln?",
+            "options": [
+              "Könnten",
+              "Sollten",
+              "Müssen",
+              "Hätten"
+            ],
+            "answer": "Könnten",
+            "explain": "Könnten Sie…? je ljubazna molba."
+          },
+          {
+            "area": "vocabulary",
+            "prompt": "«Mučno mi je» =",
+            "options": [
+              "Mir ist übel",
+              "Mir ist schwindlig",
+              "Ich bin geschwollen",
+              "Ich habe Atemnot"
+            ],
+            "answer": "Mir ist übel",
+            "explain": "übel = mučnina."
+          },
+          {
+            "area": "vocabulary",
+            "prompt": "«stalni lekovi» =",
+            "options": [
+              "die Dauermedikation",
+              "das Schmerzmittel",
+              "die Nebenwirkung",
+              "der Befund"
+            ],
+            "answer": "die Dauermedikation",
+            "explain": "Dauer = stalno."
+          },
+          {
+            "area": "vocabulary",
+            "prompt": "Familie des Patienten =",
+            "options": [
+              "die Angehörigen",
+              "die Kollegen",
+              "das Personal",
+              "die Dolmetscher"
+            ],
+            "answer": "die Angehörigen",
+            "explain": "Angehörige = bližnji."
+          },
+          {
+            "area": "vocabulary",
+            "prompt": "Was bedeutet «die Schweigepflicht»?",
+            "options": [
+              "obaveza čuvanja tajne",
+              "smena",
+              "otpust",
+              "pregled"
+            ],
+            "answer": "obaveza čuvanja tajne",
+            "explain": "Ne smeš deliti podatke o pacijentu."
+          },
+          {
+            "area": "reading",
+            "prompt": "Wann bekommen Angehörige Auskunft?",
+            "options": [
+              "Wenn der Patient einverstanden ist",
+              "Immer",
+              "Nie",
+              "Nur nachts"
+            ],
+            "answer": "Wenn der Patient einverstanden ist",
+            "explain": "Potrebna je saglasnost pacijenta."
+          },
+          {
+            "area": "culture",
+            "prompt": "Wie spricht man Patienten normalerweise an?",
+            "options": [
+              "Mit «Sie» und Nachnamen",
+              "Mit «du» und Vornamen",
+              "Nur mit Vornamen",
+              "Mit Zimmernummer"
+            ],
+            "answer": "Mit «Sie» und Nachnamen",
+            "explain": "Pacijentima se obraća sa «Sie»."
+          }
+        ]
+      }
+    }
+  }
+}

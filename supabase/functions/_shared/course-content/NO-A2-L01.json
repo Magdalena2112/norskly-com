@@ -1,0 +1,4546 @@
+{
+  "code": "NO-A2-L01",
+  "intro": [
+    {
+      "id": "NO-A2-L01-T01",
+      "title": "Tekst 1 · En ny rutine",
+      "type": "monologue",
+      "scene": "Nora forteller om det nye livet sitt i Oslo.",
+      "lines": [
+        {
+          "speaker": "Nora",
+          "text": "Hei! Jeg heter Nora. Jeg har bodd i Oslo i tre måneder nå, og livet mitt er ganske annerledes."
+        },
+        {
+          "speaker": "Nora",
+          "text": "Vanligvis står jeg opp klokka sju og spiser frokost før jeg drar hjemmefra. Tre dager i uka tar jeg bussen til jobb. De andre dagene studerer jeg og jobber med egne prosjekter."
+        },
+        {
+          "speaker": "Nora",
+          "text": "Akkurat nå forbereder jeg meg til et nytt norskkurs. Jeg leter også etter en ny leilighet fordi rommet mitt nå er ganske lite."
+        },
+        {
+          "speaker": "Nora",
+          "text": "Vennene mine Jonas og Ingrid hjelper meg mye. Jonas kjenner Oslo veldig godt, og Ingrid finner alltid hyggelige steder vi kan besøke."
+        }
+      ]
+    },
+    {
+      "id": "NO-A2-L01-T02",
+      "title": "Tekst 2 · En kaffepause sammen",
+      "type": "dialogue",
+      "scene": "Nora, Jonas og Ingrid møtes på en kafé.",
+      "lines": [
+        {
+          "speaker": "Jonas",
+          "text": "Nora! Så hyggelig å se deg igjen. Hvordan går det med alt?"
+        },
+        {
+          "speaker": "Nora",
+          "text": "Ganske bra, takk! Jeg har det travelt for tiden."
+        },
+        {
+          "speaker": "Ingrid",
+          "text": "Virkelig? Hva driver du med nå om dagen?"
+        },
+        {
+          "speaker": "Nora",
+          "text": "Jeg jobber deltid og lærer norsk. I dag jobber jeg ikke, så nå leter jeg etter en større leilighet."
+        },
+        {
+          "speaker": "Jonas",
+          "text": "Leter du i sentrum, eller vil du bo litt utenfor byen?"
+        },
+        {
+          "speaker": "Nora",
+          "text": "Jeg vil gjerne bo i nærheten av T-banen. Da er det mye lettere å reise til jobb."
+        },
+        {
+          "speaker": "Ingrid",
+          "text": "Det forstår jeg godt. Anne og jeg kjenner noen som leier ut et rom fra neste måned!"
+        }
+      ]
+    },
+    {
+      "id": "NO-A2-L01-T03",
+      "title": "Tekst 3 · Velkommen til kurset",
+      "type": "email",
+      "scene": "Emne: Velkommen til norskkurset A2 · Fra: Anne · Til: A2-gruppen",
+      "lines": [
+        {
+          "speaker": "Anne",
+          "text": "Hei alle sammen! Håper dere har det bra."
+        },
+        {
+          "speaker": "Anne",
+          "text": "Vårt nye norskkurs begynner på mandag klokka 18.00. Vi møtes hver mandag og onsdag i klasserom 4."
+        },
+        {
+          "speaker": "Anne",
+          "text": "Denne måneden fokuserer vi på dagliglivet, personlige erfaringer og hvordan vi snakker sammen i hverdagen."
+        },
+        {
+          "speaker": "Anne",
+          "text": "I morgen sender jeg dere oversikten over tekstene. Vi gleder oss til å se dere!"
+        }
+      ]
+    }
+  ],
+  "modules": {
+    "intro": {
+      "exercises": []
+    },
+    "grammar": {
+      "sections": [
+        {
+          "title": "1.1 V2 pravilo u glavnoj rečenici",
+          "explanation": "U norveškom glavna rečenica poštuje V2 pravilo: lični glagol stoji na drugom mestu u rečenici. „Drugo mesto” znači drugi rečenični član, a ne nužno drugu reč. Zato duži izrazi kao „Tre dager i uka” ili „I kveld etter jobb” i dalje zauzimaju samo prvo mesto.\nObrazac: PRVI ČLAN + LIČNI GLAGOL + ostatak.",
+          "table": [
+            [
+              "Nora",
+              "tar",
+              "bussen til jobb."
+            ],
+            [
+              "Vanligvis",
+              "tar",
+              "Nora bussen til jobb."
+            ],
+            [
+              "Tre dager i uka",
+              "tar",
+              "Nora bussen til jobb."
+            ],
+            [
+              "I kveld etter jobb",
+              "skal",
+              "vi møte Anne."
+            ]
+          ],
+          "rules": [
+            "Lični glagol je uvek drugi rečenični član.",
+            "Prvi član može biti subjekat, vreme, mesto ili prilog.",
+            "Duži izraz (Tre dager i uka) računa se kao jedan član."
+          ],
+          "compare": "U srpskom red reči je slobodniji, a u norveškom glagol ne sme da se pomeri sa drugog mesta.",
+          "examples": [
+            [
+              "Nora tar bussen til jobb.",
+              "Nora ide autobusom na posao."
+            ],
+            [
+              "Vanligvis tar Nora bussen til jobb.",
+              "Nora obično ide autobusom na posao."
+            ],
+            [
+              "I kveld etter jobb skal vi møte Anne.",
+              "Večeras posle posla vidimo se sa Anne."
+            ]
+          ],
+          "mistakes": [
+            [
+              "Tre dager i uka Nora tar bussen.",
+              "Tre dager i uka tar Nora bussen.",
+              "Glagol mora biti na drugom mestu."
+            ]
+          ],
+          "remember": "Prvo pronađi prvi rečenični član, pa odmah stavi lični glagol."
+        },
+        {
+          "title": "1.2 Inverzija",
+          "explanation": "Kada rečenica ne počinje subjektom, već na primer vremenskim izrazom ili mestom, subjekat ide iza ličnog glagola. To zovemo inverzija.\nObrazac: VREME/MESTO + GLAGOL + SUBJEKAT + ostatak.",
+          "table": [
+            [
+              "Nora jobber hjemme i dag.",
+              "→",
+              "I dag jobber Nora hjemme."
+            ],
+            [
+              "Jonas trener på tirsdager.",
+              "→",
+              "På tirsdager trener Jonas."
+            ],
+            [
+              "Vi møtes ved stasjonen etter jobb.",
+              "→",
+              "Etter jobb møtes vi ved stasjonen."
+            ]
+          ],
+          "rules": [
+            "Početni izraz vremena ili mesta pomera subjekat iza glagola.",
+            "Glagol ostaje na drugom mestu."
+          ],
+          "compare": "Na srpskom kažemo „Danas Nora radi od kuće”, ali na norveškom ne može „I dag Nora jobber”.",
+          "examples": [
+            [
+              "I dag jobber Nora hjemme.",
+              "Danas Nora radi od kuće."
+            ],
+            [
+              "På tirsdager trener Jonas.",
+              "Utorkom Jonas trenira."
+            ],
+            [
+              "Etter jobb møtes vi ved stasjonen.",
+              "Posle posla nalazimo se kod stanice."
+            ]
+          ],
+          "mistakes": [
+            [
+              "I dag Nora jobber hjemme.",
+              "I dag jobber Nora hjemme.",
+              "Posle početnog izraza dolazi glagol, pa subjekat."
+            ]
+          ],
+          "remember": "Ne počinješ subjektom? Onda: glagol, pa subjekat."
+        },
+        {
+          "title": "2. Negacija ikke",
+          "explanation": "U neutralnoj glavnoj rečenici ikke obično stoji posle ličnog glagola. Kada rečenica počinje vremenskim izrazom, red reči glasi: početni izraz + glagol + subjekat + ikke + ostatak.",
+          "table": [
+            [
+              "Nora jobber ikke på søndager.",
+              "Nora ne radi nedeljom.",
+              ""
+            ],
+            [
+              "I dag jobber hun ikke hjemme.",
+              "Danas ne radi od kuće.",
+              ""
+            ],
+            [
+              "På mandager drikker Markus ikke kaffe.",
+              "Ponedeljkom Markus ne pije kafu.",
+              ""
+            ]
+          ],
+          "rules": [
+            "Neutralno: subjekat + glagol + ikke.",
+            "Sa inverzijom: početni izraz + glagol + subjekat + ikke."
+          ],
+          "compare": "U srpskom „ne” stoji ispred glagola, a u norveškom ikke dolazi posle glagola.",
+          "examples": [
+            [
+              "Nora jobber ikke på søndager.",
+              "Nora ne radi nedeljom."
+            ],
+            [
+              "I dag jobber hun ikke hjemme.",
+              "Danas ne radi od kuće."
+            ]
+          ],
+          "mistakes": [
+            [
+              "Nora ikke jobber på søndager.",
+              "Nora jobber ikke på søndager.",
+              "Ikke dolazi posle ličnog glagola."
+            ],
+            [
+              "I dag jobber ikke hun hjemme.",
+              "I dag jobber hun ikke hjemme.",
+              "Kod inverzije ikke dolazi posle subjekta (zamenice)."
+            ]
+          ],
+          "remember": "Glagol pa ikke; kod inverzije: glagol, subjekat, ikke."
+        },
+        {
+          "title": "3. Pitanja",
+          "explanation": "U da/ne pitanjima lični glagol dolazi prvi: „Bor du i Oslo?” / „Tar dere bussen?” U pitanjima sa upitnom reči, upitna reč je prva, a lični glagol drugi: „Hvor bor du?” / „Når begynner kurset?”",
+          "table": [
+            [
+              "Da/ne",
+              "Glagol + subjekat + … ?",
+              "Kommer du tidlig i dag?"
+            ],
+            [
+              "Sa upitnom reči",
+              "Upitna reč + glagol + subjekat + … ?",
+              "Hvor jobber Ingrid?"
+            ],
+            [
+              "Sa negacijom",
+              "Upitna reč + glagol + subjekat + ikke + … ?",
+              "Hvorfor sykler du ikke i dag?"
+            ]
+          ],
+          "rules": [
+            "Da/ne pitanje počinje glagolom.",
+            "Upitna reč je prva, glagol drugi.",
+            "Ikke dolazi posle subjekta u pitanju."
+          ],
+          "compare": "Na srpskom često dodajemo „da li”, a na norveškom pitanje gradimo samo redom reči.",
+          "examples": [
+            [
+              "Bor du i Oslo?",
+              "Da li živiš u Oslu?"
+            ],
+            [
+              "Når begynner kurset?",
+              "Kada počinje kurs?"
+            ],
+            [
+              "Hvorfor sykler du ikke i dag?",
+              "Zašto danas ne voziš bicikl?"
+            ]
+          ],
+          "mistakes": [
+            [
+              "Hvor Ingrid jobber?",
+              "Hvor jobber Ingrid?",
+              "Posle upitne reči dolazi glagol."
+            ],
+            [
+              "Du bor i Oslo?",
+              "Bor du i Oslo?",
+              "Da/ne pitanje počinje glagolom."
+            ]
+          ],
+          "remember": "Pitanje = glagol prvi ili upitna reč + glagol."
+        },
+        {
+          "title": "4. Prilozi učestalosti",
+          "explanation": "Prilozi učestalosti govore koliko često nešto radimo. U neutralnom redu reči najčešće dolaze posle ličnog glagola: „Jeg jobber ofte hjemme.” Mogu stajati i na početku uz V2: „Ofte jobber jeg hjemme.”",
+          "table": [
+            [
+              "alltid",
+              "uvek",
+              "Jeg spiser alltid frokost."
+            ],
+            [
+              "vanligvis",
+              "obično",
+              "Vanligvis tar jeg bussen."
+            ],
+            [
+              "ofte",
+              "često",
+              "Ahmed trener ofte etter jobb."
+            ],
+            [
+              "noen ganger / av og til",
+              "ponekad",
+              "Vi går av og til på kafé etter timen."
+            ],
+            [
+              "sjelden",
+              "retko",
+              "Sara kommer sjelden for sent."
+            ],
+            [
+              "aldri",
+              "nikada",
+              "Jeg glemmer aldri nøklene mine."
+            ]
+          ],
+          "rules": [
+            "Neutralno: subjekat + glagol + prilog.",
+            "Na početku: prilog + glagol + subjekat (V2)."
+          ],
+          "compare": "U srpskom je red reči fleksibilniji i kontekst nosi značenje; u norveškom je raspored u glavnoj rečenici stroži. Prepoznaj prvi član i odmah stavi glagol na drugo mesto.",
+          "examples": [
+            [
+              "Jeg jobber ofte hjemme.",
+              "Često radim od kuće."
+            ],
+            [
+              "Ofte jobber jeg hjemme.",
+              "Često radim od kuće."
+            ],
+            [
+              "Jeg glemmer aldri nøklene mine.",
+              "Nikad ne zaboravljam ključeve."
+            ]
+          ],
+          "mistakes": [
+            [
+              "Jeg alltid spiser frokost.",
+              "Jeg spiser alltid frokost.",
+              "Prilog dolazi posle ličnog glagola."
+            ],
+            [
+              "Vanligvis jeg tar bussen.",
+              "Vanligvis tar jeg bussen.",
+              "Na početku rečenice važi V2."
+            ]
+          ],
+          "remember": "alltid – vanligvis – ofte – av og til – sjelden – aldri: posle glagola, ili na početku uz inverziju."
+        }
+      ],
+      "exercises": [
+        {
+          "id": "G-01",
+          "code": "G-01",
+          "title": "En vanlig arbeidsdag",
+          "instruction": "Izaberi rečenicu koja pravilno opisuje šta se dešava posle ručka.",
+          "kind": "closed",
+          "items": [],
+          "type": "choice",
+          "xp": 1,
+          "grammarFocus": "V2 / inverzija",
+          "hint": "Obrati pažnju na početni izraz. Koji rečenični član treba da stoji odmah iza njega?",
+          "hint2": "V2 pravilo: lični glagol je uvek drugi rečenični član. Ako rečenica počinje vremenskim izrazom ili mestom, subjekat dolazi tek iza glagola.",
+          "explanation": "Vremenski izraz „Etter lunsj“ zauzima prvo mesto. Lični glagol „har“ dolazi na drugo mesto, zatim subjekat „Erik“ i prilog „vanligvis“.",
+          "context": "Erik jobber på et kontor. Etter lunsj har han vanligvis et møte.",
+          "options": [
+            "Etter lunsj Erik har vanligvis et møte.",
+            "Etter lunsj har Erik vanligvis et møte.",
+            "Etter lunsj har vanligvis Erik et møte."
+          ],
+          "correct": [
+            1
+          ]
+        },
+        {
+          "id": "G-02",
+          "code": "G-02",
+          "title": "På vei til universitetet",
+          "instruction": "Poređaj sve delove tako da dobiješ pravilnu rečenicu.",
+          "kind": "closed",
+          "items": [],
+          "type": "order",
+          "xp": 1,
+          "grammarFocus": "V2 / inverzija",
+          "hint": "Obrati pažnju na početni izraz. Koji rečenični član treba da stoji odmah iza njega?",
+          "hint2": "V2 pravilo: lični glagol je uvek drugi rečenični član. Ako rečenica počinje vremenskim izrazom ili mestom, subjekat dolazi tek iza glagola.",
+          "explanation": "Kada vremenski izraz stoji na početku, glagol dolazi ispred subjekta.",
+          "context": "Studentkinja svakog jutra putuje tramvajem na fakultet.",
+          "tokens": [
+            "Hver morgen",
+            "tar",
+            "studenten",
+            "trikken",
+            "til universitetet"
+          ],
+          "answer": [
+            "Hver morgen tar studenten trikken til universitetet"
+          ]
+        },
+        {
+          "id": "G-03",
+          "code": "G-03",
+          "title": "Hjemmekontor",
+          "instruction": "Izaberi gramatički pravilno pitanje na osnovu datog odgovora.",
+          "kind": "closed",
+          "items": [],
+          "type": "choice",
+          "xp": 1,
+          "grammarFocus": "Pitanja",
+          "hint": "Šta dolazi odmah posle upitne reči?",
+          "hint2": "U pitanju: upitna reč + lični glagol + subjekat. Da/ne pitanje počinje samim glagolom.",
+          "explanation": "U direktnom pitanju redosled je upitni izraz + lični glagol + subjekat.",
+          "prompt": "Svar: Jeg jobber hjemme to dager i uka.",
+          "options": [
+            "Hvor ofte du jobber hjemme?",
+            "Hvor ofte jobber du hjemme?",
+            "Hvor ofte jobber hjemme du?"
+          ],
+          "correct": [
+            1
+          ]
+        },
+        {
+          "id": "G-04",
+          "code": "G-04",
+          "title": "På søndager",
+          "instruction": "Poređaj reči tako da dobiješ odričnu rečenicu.",
+          "kind": "closed",
+          "items": [],
+          "type": "order",
+          "xp": 1,
+          "grammarFocus": "Negacija ikke",
+          "hint": "Gde stoji „ikke“ u odnosu na lični glagol i subjekat?",
+          "hint2": "U glavnoj rečenici „ikke“ dolazi iza ličnog glagola. Kada postoji inverzija, redosled je: glagol + subjekat + ikke.",
+          "explanation": "Početni vremenski izraz zahteva inverziju, dok „ikke“ stoji iza ličnog glagola i subjekta.",
+          "tokens": [
+            "På søndager",
+            "jobber",
+            "vi",
+            "ikke"
+          ],
+          "answer": [
+            "På søndager jobber vi ikke"
+          ]
+        },
+        {
+          "id": "G-05",
+          "code": "G-05",
+          "title": "Hos legen",
+          "instruction": "Izaberi pitanje koje odgovara datom odgovoru.",
+          "kind": "closed",
+          "items": [],
+          "type": "choice",
+          "xp": 1,
+          "grammarFocus": "Pitanja",
+          "hint": "Proveri značenje: koja reč odgovara informaciji koju traži odgovor (vreme, mesto, razlog, učestalost)?",
+          "hint2": "Når = kada, Hvor = gde, Hvorfor = zašto, Hvor ofte = koliko često, Hvem = ko.",
+          "explanation": "Odgovor označava vreme zakazanog pregleda, pa koristimo „når“.",
+          "prompt": "Svar: Jeg har time hos legen klokka halv elleve.",
+          "options": [
+            "Når har du time hos legen?",
+            "Hvor har du time hos legen?",
+            "Hvor ofte har du time hos legen?",
+            "Hvorfor har du time hos legen?"
+          ],
+          "correct": [
+            0
+          ]
+        },
+        {
+          "id": "G-06",
+          "code": "G-06",
+          "title": "En travel uke",
+          "instruction": "Izaberi prilog koji odgovara opisanom kontekstu.",
+          "kind": "closed",
+          "items": [],
+          "type": "gaps",
+          "xp": 1,
+          "grammarFocus": "Prilozi učestalosti",
+          "hint": "Razmisli koliko često se radnja dešava i gde stoji prilog u odnosu na glagol.",
+          "hint2": "Prilozi učestalosti (alltid, vanligvis, ofte, av og til, sjelden, aldri) u neutralnoj rečenici stoje iza ličnog glagola, a kod inverzije iza glagola i subjekta.",
+          "explanation": "„Vanligvis“ označava uobičajeni obrazac ponašanja.",
+          "context": "Emma trener hver mandag, onsdag og fredag.",
+          "text": "Emma trener ___ tre ganger i uka.",
+          "gaps": [
+            {
+              "options": [
+                "vanligvis",
+                "aldri",
+                "sjelden",
+                "nesten aldri"
+              ],
+              "answer": "vanligvis"
+            }
+          ]
+        },
+        {
+          "id": "G-07",
+          "code": "G-07",
+          "title": "Etter skolen",
+          "instruction": "Pronađi rečenicu sa pogrešnim redom reči.",
+          "kind": "closed",
+          "items": [],
+          "type": "choice",
+          "xp": 1,
+          "grammarFocus": "V2 / inverzija",
+          "hint": "Obrati pažnju na početni izraz. Koji rečenični član treba da stoji odmah iza njega?",
+          "hint2": "V2 pravilo: lični glagol je uvek drugi rečenični član. Ako rečenica počinje vremenskim izrazom ili mestom, subjekat dolazi tek iza glagola.",
+          "explanation": "Ispravno je: „Etter skolen besøker barna bestemor.“ Posle početnog vremenskog izraza dolazi lični glagol, a zatim subjekat.",
+          "options": [
+            "Etter skolen gjør barna lekser.",
+            "Etter skolen spiller barna fotball.",
+            "Etter skolen barna besøker bestemor.",
+            "Etter skolen leser barna bøker."
+          ],
+          "correct": [
+            2
+          ]
+        },
+        {
+          "id": "G-08",
+          "code": "G-08",
+          "title": "En ny leilighet",
+          "instruction": "Sastavi pravilno da/ne pitanje.",
+          "kind": "closed",
+          "items": [],
+          "type": "order",
+          "xp": 1,
+          "grammarFocus": "Pitanja",
+          "hint": "Šta dolazi odmah posle upitne reči?",
+          "hint2": "U pitanju: upitna reč + lični glagol + subjekat. Da/ne pitanje počinje samim glagolom.",
+          "explanation": "Da/ne pitanje počinje ličnim glagolom „leter“.",
+          "tokens": [
+            "Leter",
+            "du",
+            "etter",
+            "en ny leilighet",
+            "?"
+          ],
+          "answer": [
+            "Leter du etter en ny leilighet ?"
+          ]
+        },
+        {
+          "id": "G-09",
+          "code": "G-09",
+          "title": "Kaffe eller te?",
+          "instruction": "Pročitaj kontekst i izaberi jedinu rečenicu koja ga pravilno prenosi.",
+          "kind": "closed",
+          "items": [],
+          "type": "choice",
+          "xp": 1,
+          "grammarFocus": "Prilozi učestalosti",
+          "hint": "Razmisli koliko često se radnja dešava i gde stoji prilog u odnosu na glagol.",
+          "hint2": "Prilozi učestalosti (alltid, vanligvis, ofte, av og til, sjelden, aldri) u neutralnoj rečenici stoje iza ličnog glagola, a kod inverzije iza glagola i subjekta.",
+          "explanation": "„Aldri“ označava da se radnja nikada ne događa. U neutralnoj izjavnoj rečenici dolazi iza ličnog glagola.",
+          "context": "Laila drikker te hver morgen. Hun drikker ikke kaffe.",
+          "options": [
+            "Laila drikker alltid kaffe om morgenen.",
+            "Laila drikker aldri kaffe om morgenen.",
+            "Laila aldri drikker kaffe om morgenen.",
+            "Laila drikker sjelden te om morgenen."
+          ],
+          "correct": [
+            1
+          ]
+        },
+        {
+          "id": "G-10",
+          "code": "G-10",
+          "title": "En melding fra kollegaen",
+          "instruction": "Izaberi odgovarajuću upitnu reč.",
+          "kind": "closed",
+          "items": [],
+          "type": "gaps",
+          "xp": 1,
+          "grammarFocus": "Pitanja",
+          "hint": "Proveri značenje: koja reč odgovara informaciji koju traži odgovor (vreme, mesto, razlog, učestalost)?",
+          "hint2": "Når = kada, Hvor = gde, Hvorfor = zašto, Hvor ofte = koliko često, Hvem = ko.",
+          "explanation": "„Når“ se koristi za pitanje o vremenu.",
+          "prompt": "Svar: Klokka ni.",
+          "text": "___ begynner møtet?",
+          "gaps": [
+            {
+              "options": [
+                "Når",
+                "Hvor",
+                "Hvorfor",
+                "Hvem"
+              ],
+              "answer": "Når"
+            }
+          ]
+        },
+        {
+          "id": "G-11",
+          "code": "G-11",
+          "title": "På biblioteket",
+          "instruction": "Poređaj reči da dobiješ pravilnu rečenicu.",
+          "kind": "closed",
+          "items": [],
+          "type": "order",
+          "xp": 1,
+          "grammarFocus": "V2 / inverzija",
+          "hint": "Obrati pažnju na početni izraz. Koji rečenični član treba da stoji odmah iza njega?",
+          "hint2": "V2 pravilo: lični glagol je uvek drugi rečenični član. Ako rečenica počinje vremenskim izrazom ili mestom, subjekat dolazi tek iza glagola.",
+          "explanation": "Rečenica počinje izrazom za mesto, pa sledi lični glagol i zatim subjekat. Prilog „ofte“ nalazi se iza glagola i subjekta.",
+          "tokens": [
+            "På biblioteket",
+            "leser",
+            "studentene",
+            "ofte",
+            "sammen"
+          ],
+          "answer": [
+            "På biblioteket leser studentene ofte sammen"
+          ]
+        },
+        {
+          "id": "G-12",
+          "code": "G-12",
+          "title": "Hvorfor er du sen?",
+          "instruction": "Izaberi pravilno formirano pitanje.",
+          "kind": "closed",
+          "items": [],
+          "type": "choice",
+          "xp": 1,
+          "grammarFocus": "Pitanja",
+          "hint": "Šta dolazi odmah posle upitne reči?",
+          "hint2": "U pitanju: upitna reč + lični glagol + subjekat. Da/ne pitanje počinje samim glagolom.",
+          "explanation": "Posle „hvorfor“ dolazi lični glagol, zatim subjekat i prilog učestalosti.",
+          "options": [
+            "Hvorfor kommer du alltid for sent?",
+            "Hvorfor du kommer alltid for sent?",
+            "Hvorfor alltid du kommer for sent?",
+            "Hvorfor kommer alltid du for sent?"
+          ],
+          "correct": [
+            0
+          ]
+        },
+        {
+          "id": "G-13",
+          "code": "G-13",
+          "title": "Familiebesøk",
+          "instruction": "Izaberi rečenicu koja pravilno izražava da porodica ne posećuje baku subotom.",
+          "kind": "closed",
+          "items": [],
+          "type": "choice",
+          "xp": 1,
+          "grammarFocus": "Negacija ikke",
+          "hint": "Gde stoji „ikke“ u odnosu na lični glagol i subjekat?",
+          "hint2": "U glavnoj rečenici „ikke“ dolazi iza ličnog glagola. Kada postoji inverzija, redosled je: glagol + subjekat + ikke.",
+          "explanation": "U ciljnom neutralnom obrascu redosled je vremenski izraz + glagol + subjekat + negacija.",
+          "options": [
+            "På lørdager familien besøker ikke bestemor.",
+            "På lørdager besøker familien ikke bestemor.",
+            "På lørdager besøker ikke familien bestemor."
+          ],
+          "correct": [
+            1
+          ]
+        },
+        {
+          "id": "G-14",
+          "code": "G-14",
+          "title": "Kveldsvaner",
+          "instruction": "Izaberi prilog koji odgovara značenju.",
+          "kind": "closed",
+          "items": [],
+          "type": "gaps",
+          "xp": 1,
+          "grammarFocus": "Prilozi učestalosti",
+          "hint": "Razmisli koliko često se radnja dešava i gde stoji prilog u odnosu na glagol.",
+          "hint2": "Prilozi učestalosti (alltid, vanligvis, ofte, av og til, sjelden, aldri) u neutralnoj rečenici stoje iza ličnog glagola, a kod inverzije iza glagola i subjekta.",
+          "explanation": "„Sjelden“ označava malu učestalost.",
+          "context": "Thomas ser på TV omtrent én gang i måneden.",
+          "text": "Thomas ser ___ på TV.",
+          "gaps": [
+            {
+              "options": [
+                "alltid",
+                "vanligvis",
+                "sjelden",
+                "hver kveld"
+              ],
+              "answer": "sjelden"
+            }
+          ]
+        },
+        {
+          "id": "G-15",
+          "code": "G-15",
+          "title": "På treningssenteret",
+          "instruction": "Sastavi rečenicu o redovnoj aktivnosti.",
+          "kind": "closed",
+          "items": [],
+          "type": "order",
+          "xp": 1,
+          "grammarFocus": "V2 / inverzija",
+          "hint": "Obrati pažnju na početni izraz. Koji rečenični član treba da stoji odmah iza njega?",
+          "hint2": "V2 pravilo: lični glagol je uvek drugi rečenični član. Ako rečenica počinje vremenskim izrazom ili mestom, subjekat dolazi tek iza glagola.",
+          "explanation": "Vremenski izraz može sadržati više reči, ali se računa kao jedan rečenični član.",
+          "tokens": [
+            "To ganger i uka",
+            "trener",
+            "Ahmed",
+            "på treningssenteret"
+          ],
+          "answer": [
+            "To ganger i uka trener Ahmed på treningssenteret"
+          ]
+        },
+        {
+          "id": "G-16",
+          "code": "G-16",
+          "title": "På restauranten",
+          "instruction": "Konobar želi da sazna šta gosti obično piju. Koje pitanje je odgovarajuće?",
+          "kind": "closed",
+          "items": [],
+          "type": "choice",
+          "xp": 1,
+          "grammarFocus": "Pitanja",
+          "hint": "Šta dolazi odmah posle upitne reči?",
+          "hint2": "U pitanju: upitna reč + lični glagol + subjekat. Da/ne pitanje počinje samim glagolom.",
+          "explanation": "Pitanje počinje sa „hva“, zatim sledi glagol, subjekat i prilog učestalosti.",
+          "options": [
+            "Hva drikker dere vanligvis?",
+            "Hva dere drikker vanligvis?",
+            "Hva drikker vanligvis dere?",
+            "Hva vanligvis drikker dere?"
+          ],
+          "correct": [
+            0
+          ]
+        },
+        {
+          "id": "G-17",
+          "code": "G-17",
+          "title": "Rett eller galt?",
+          "instruction": "Proceni da li je gramatičko objašnjenje tačno.",
+          "kind": "closed",
+          "items": [],
+          "type": "truefalse",
+          "xp": 1,
+          "grammarFocus": "V2 / inverzija",
+          "hint": "Razmisli: da li se V2 broji po rečima ili po rečeničnim članovima?",
+          "hint2": "V2 pravilo: lični glagol je uvek drugi rečenični član. Ako rečenica počinje vremenskim izrazom ili mestom, subjekat dolazi tek iza glagola.",
+          "explanation": "V2 pravilo odnosi se na rečenične članove, a ne na pojedinačne reči.",
+          "prompt": "Tvrdnja: U rečenici „Etter middag går vi en tur“ izraz „Etter middag“ predstavlja prvi rečenični član, a „går“ drugi.",
+          "options": [
+            "Tačno",
+            "Netačno"
+          ],
+          "correct": [
+            0
+          ]
+        },
+        {
+          "id": "G-18",
+          "code": "G-18",
+          "title": "I helgen",
+          "instruction": "Izaberi rečenicu koja odgovara kontekstu i poštuje V2 pravilo.",
+          "kind": "closed",
+          "items": [],
+          "type": "choice",
+          "xp": 1,
+          "grammarFocus": "V2 / inverzija",
+          "hint": "Proveri obe rečenice posebno: šta dolazi posle „På lørdag“, a šta posle „på søndag“?",
+          "hint2": "V2 pravilo: lični glagol je uvek drugi rečenični član. Ako rečenica počinje vremenskim izrazom ili mestom, subjekat dolazi tek iza glagola.",
+          "explanation": "Obe glavne rečenice poštuju V2 pravilo, čak i kada počinju vremenskim izrazom.",
+          "context": "Porodica u subotu planira izlet, ali u nedelju ostaje kod kuće.",
+          "options": [
+            "På lørdag drar familien på tur, men på søndag blir de hjemme.",
+            "På lørdag familien drar på tur, men på søndag blir de hjemme.",
+            "På lørdag drar familien på tur, men på søndag de blir hjemme.",
+            "På lørdag drar familien på tur, men på søndag hjemme de blir."
+          ],
+          "correct": [
+            0
+          ]
+        },
+        {
+          "id": "G-19",
+          "code": "G-19",
+          "title": "En vanlig morgen",
+          "instruction": "Poređaj delove u pravilnu izjavnu rečenicu.",
+          "kind": "closed",
+          "items": [],
+          "type": "order",
+          "xp": 1,
+          "grammarFocus": "Prilozi učestalosti",
+          "hint": "Razmisli koliko često se radnja dešava i gde stoji prilog u odnosu na glagol.",
+          "hint2": "Prilozi učestalosti (alltid, vanligvis, ofte, av og til, sjelden, aldri) u neutralnoj rečenici stoje iza ličnog glagola, a kod inverzije iza glagola i subjekta.",
+          "explanation": "U neutralnoj rečenici sa subjektom na početku prilog „vanligvis“ obično dolazi iza ličnog glagola.",
+          "tokens": [
+            "Jeg",
+            "spiser",
+            "vanligvis",
+            "frokost",
+            "klokka åtte"
+          ],
+          "answer": [
+            "Jeg spiser vanligvis frokost klokka åtte"
+          ]
+        },
+        {
+          "id": "G-20",
+          "code": "G-20",
+          "title": "På kontoret",
+          "instruction": "Koja rečenica je gramatički pravilna i odgovara opisanom kontekstu?",
+          "kind": "closed",
+          "items": [],
+          "type": "choice",
+          "xp": 1,
+          "grammarFocus": "Negacija ikke",
+          "hint": "Gde stoji „ikke“ u odnosu na lični glagol i subjekat?",
+          "hint2": "U glavnoj rečenici „ikke“ dolazi iza ličnog glagola. Kada postoji inverzija, redosled je: glagol + subjekat + ikke.",
+          "explanation": "Posle vremenskog izraza dolazi glagol, zatim subjekat i „ikke“.",
+          "context": "Peter radi u kancelariji svakog dana osim petkom.",
+          "options": [
+            "På fredager Peter jobber ikke på kontoret.",
+            "På fredager jobber Peter ikke på kontoret.",
+            "På fredager ikke jobber Peter på kontoret.",
+            "På fredager jobber ikke Peter på kontoret."
+          ],
+          "correct": [
+            1
+          ]
+        },
+        {
+          "id": "G-21",
+          "code": "G-21",
+          "title": "Rett setningen",
+          "instruction": "Ispravi grešku u redu reči. Napiši kompletnu rečenicu.",
+          "kind": "closed",
+          "items": [],
+          "type": "text",
+          "xp": 2,
+          "grammarFocus": "V2 / inverzija",
+          "hint": "Obrati pažnju na početni izraz. Koji rečenični član treba da stoji odmah iza njega?",
+          "hint2": "V2 pravilo: lični glagol je uvek drugi rečenični član. Ako rečenica počinje vremenskim izrazom ili mestom, subjekat dolazi tek iza glagola.",
+          "explanation": "Posle „I dag“ dolazi glagol „besøker“, a zatim subjekat.",
+          "inputs": [
+            {
+              "prompt": "I dag Maria besøker søsteren sin.",
+              "answers": [
+                "I dag besøker Maria søsteren sin."
+              ]
+            }
+          ]
+        },
+        {
+          "id": "G-22",
+          "code": "G-22",
+          "title": "To riktige setninger",
+          "instruction": "Izaberi tačno dve gramatički pravilne rečenice.",
+          "kind": "closed",
+          "items": [],
+          "type": "multi",
+          "xp": 2,
+          "grammarFocus": "V2 / inverzija",
+          "hint": "Označi tačno dve rečenice. Proveri gde stoji glagol „møter“ u svakoj.",
+          "hint2": "V2 pravilo: lični glagol je uvek drugi rečenični član. Ako rečenica počinje vremenskim izrazom ili mestom, subjekat dolazi tek iza glagola.",
+          "explanation": "Vremenski izraz može stajati na početku uz inverziju ili na kraju rečenice uz neutralni red reči.",
+          "options": [
+            "Hver fredag møter vi vennene våre.",
+            "Hver fredag vi møter vennene våre.",
+            "Vi møter vennene våre hver fredag.",
+            "Vi hver fredag møter vennene våre."
+          ],
+          "correct": [
+            0,
+            2
+          ]
+        },
+        {
+          "id": "G-23",
+          "code": "G-23",
+          "title": "En dag uten bil",
+          "instruction": "Dopuni rečenicu tako da bude gramatički pravilna.",
+          "kind": "closed",
+          "items": [],
+          "type": "gaps",
+          "xp": 2,
+          "grammarFocus": "Negacija ikke",
+          "hint": "Gde stoji „ikke“ u odnosu na lični glagol i subjekat?",
+          "hint2": "U glavnoj rečenici „ikke“ dolazi iza ličnog glagola. Kada postoji inverzija, redosled je: glagol + subjekat + ikke.",
+          "explanation": "U rečenici sa vremenskim izrazom na početku redosled je lični glagol + subjekat + negacija.",
+          "text": "I dag ___ Markus ___ bilen til jobb. Han tar toget i stedet.",
+          "gaps": [
+            {
+              "options": [
+                "bruker",
+                "ikke",
+                "Markus bruker"
+              ],
+              "answer": "bruker"
+            },
+            {
+              "options": [
+                "ikke",
+                "bruker",
+                "aldri bruker"
+              ],
+              "answer": "ikke"
+            }
+          ]
+        },
+        {
+          "id": "G-24",
+          "code": "G-24",
+          "title": "En kort melding",
+          "instruction": "U drugoj rečenici postoji gramatička greška. Ispravi je, ali zadrži isto značenje.",
+          "kind": "closed",
+          "items": [],
+          "type": "text",
+          "xp": 2,
+          "grammarFocus": "V2 / inverzija",
+          "hint": "Obrati pažnju na početni izraz. Koji rečenični član treba da stoji odmah iza njega?",
+          "hint2": "I modalni glagol (kan, vil, må, skal) je lični glagol i mora stajati na drugom mestu.",
+          "explanation": "„Kan“ je lični modalni glagol i zauzima drugo mesto posle „I morgen“.",
+          "context": "Hei, Maria! Jeg er opptatt i dag. I morgen jeg kan møte deg etter jobb.",
+          "inputs": [
+            {
+              "prompt": "I morgen jeg kan møte deg etter jobb.",
+              "answers": [
+                "I morgen kan jeg møte deg etter jobb."
+              ]
+            }
+          ]
+        },
+        {
+          "id": "G-25",
+          "code": "G-25",
+          "title": "Spørsmål og svar",
+          "instruction": "Poveži svako pitanje sa odgovarajućim odgovorom.",
+          "kind": "closed",
+          "items": [],
+          "type": "match",
+          "xp": 2,
+          "grammarFocus": "Pitanja",
+          "hint": "Proveri značenje: koja reč odgovara informaciji koju traži odgovor (vreme, mesto, razlog, učestalost)?",
+          "hint2": "Når = kada, Hvor = gde, Hvorfor = zašto, Hvor ofte = koliko često, Hvem = ko.",
+          "explanation": "Učenik mora da prepozna da li pitanje traži učestalost, razlog, vreme ili mesto.",
+          "left": [
+            "Hvor ofte besøker du foreldrene dine?",
+            "Hvorfor tar du taxi i dag?",
+            "Når stenger butikken?",
+            "Hvor jobber broren din?"
+          ],
+          "right": [
+            "Fordi jeg har dårlig tid.",
+            "På et sykehus i Tromsø.",
+            "To ganger i måneden.",
+            "Klokka åtte."
+          ],
+          "pairs": [
+            2,
+            0,
+            3,
+            1
+          ]
+        },
+        {
+          "id": "G-26",
+          "code": "G-26",
+          "title": "På reise",
+          "instruction": "Dopuni obe praznine tako da pitanja i odgovori budu gramatički pravilni.",
+          "kind": "closed",
+          "items": [],
+          "type": "gaps",
+          "xp": 2,
+          "grammarFocus": "Pitanja",
+          "hint": "Šta dolazi odmah posle upitne reči?",
+          "hint2": "U pitanju: upitna reč + lični glagol + subjekat. Da/ne pitanje počinje samim glagolom.",
+          "explanation": "Posle „Hvor ofte“ sledi glagol i subjekat. U odgovoru „jeg“ je već subjekat, pa sledi lični glagol.",
+          "text": "A: Hvor ofte ___ du til Bergen?\nB: Jeg ___ dit omtrent én gang i måneden.",
+          "gaps": [
+            {
+              "options": [
+                "reiser",
+                "du reiser",
+                "reiser ofte"
+              ],
+              "answer": "reiser"
+            },
+            {
+              "options": [
+                "reiser",
+                "jeg reiser",
+                "aldri reiser"
+              ],
+              "answer": "reiser"
+            }
+          ]
+        },
+        {
+          "id": "G-27",
+          "code": "G-27",
+          "title": "Bytt plass",
+          "instruction": "Preoblikuj rečenicu tako da počinje izrazom „Etter middag“. Zadrži isto značenje.",
+          "kind": "closed",
+          "items": [],
+          "type": "text",
+          "xp": 2,
+          "grammarFocus": "V2 / inverzija",
+          "hint": "Obrati pažnju na početni izraz. Koji rečenični član treba da stoji odmah iza njega?",
+          "hint2": "V2 pravilo: lični glagol je uvek drugi rečenični član. Ako rečenica počinje vremenskim izrazom ili mestom, subjekat dolazi tek iza glagola.",
+          "explanation": "Kada vremenski izraz postane prvi rečenični član, lični glagol dolazi ispred subjekta.",
+          "inputs": [
+            {
+              "prompt": "Familien går en tur etter middag.",
+              "answers": [
+                "Etter middag går familien en tur."
+              ]
+            }
+          ]
+        },
+        {
+          "id": "G-28",
+          "code": "G-28",
+          "title": "Nye arbeidsvaner",
+          "instruction": "Pažljivo pročitaj situaciju i izaberi rečenicu koja je i gramatički i značenjski tačna.",
+          "kind": "closed",
+          "items": [],
+          "type": "choice",
+          "xp": 2,
+          "grammarFocus": "Kombinovano",
+          "hint": "Proveri i značenje (obično / ove nedelje) i red reči posle početnih izraza.",
+          "hint2": "V2 pravilo: lični glagol je uvek drugi rečenični član. Ako rečenica počinje vremenskim izrazom ili mestom, subjekat dolazi tek iza glagola.",
+          "explanation": "Rečenica pravilno koristi V2 i vremenske izraze i odgovara kontekstu.",
+          "context": "Sofie obično radi u kancelariji, ali ove nedelje radi od kuće zbog renoviranja poslovnog prostora.",
+          "options": [
+            "Sofie jobber aldri på kontoret, men denne uka jobber hun hjemme.",
+            "Vanligvis jobber Sofie på kontoret, men denne uka jobber hun hjemme.",
+            "Vanligvis Sofie jobber på kontoret, men denne uka hun jobber hjemme.",
+            "Sofie jobber alltid hjemme, men denne uka jobber hun på kontoret."
+          ],
+          "correct": [
+            1
+          ]
+        },
+        {
+          "id": "G-29",
+          "code": "G-29",
+          "title": "To feil i teksten",
+          "instruction": "U tekstu se nalaze dve greške u redu reči. Ispravi obe rečenice bez promene značenja.",
+          "kind": "closed",
+          "items": [],
+          "type": "text",
+          "xp": 2,
+          "grammarFocus": "Kombinovano",
+          "hint": "Obrati pažnju na početni izraz. Koji rečenični član treba da stoji odmah iza njega?",
+          "hint2": "Posle početnog izraza ide lični glagol, pa subjekat. Kod „legge seg“ povratna zamenica „seg“ ide iza subjekta, a „ikke“ iza nje.",
+          "explanation": "„Vanligvis“ i „På lørdager“ zauzimaju prvo mesto, pa iza njih mora doći lični glagol.",
+          "context": "Vanligvis vi spiser middag klokka seks. På lørdager barna legger seg ikke tidlig.",
+          "inputs": [
+            {
+              "prompt": "Vanligvis vi spiser middag klokka seks.",
+              "answers": [
+                "Vanligvis spiser vi middag klokka seks."
+              ]
+            },
+            {
+              "prompt": "På lørdager barna legger seg ikke tidlig.",
+              "answers": [
+                "På lørdager legger barna seg ikke tidlig."
+              ]
+            }
+          ]
+        },
+        {
+          "id": "G-30",
+          "code": "G-30",
+          "title": "Grammar in Context – En travel uke",
+          "instruction": "Pročitaj kratak tekst i dopuni sve četiri praznine. Obrati pažnju na V2, inverziju, položaj negacije i pitanja.",
+          "kind": "closed",
+          "items": [],
+          "type": "gaps",
+          "xp": 2,
+          "grammarFocus": "Kombinovano",
+          "hint": "Svaka rečenica posle prve počinje izrazom ili upitnom reči. Šta mora doći odmah iza?",
+          "hint2": "V2 pravilo: lični glagol je uvek drugi rečenični član. Ako rečenica počinje vremenskim izrazom ili mestom, subjekat dolazi tek iza glagola.",
+          "explanation": "Ovaj zadatak proverava više gramatičkih pravila u okviru jednog povezanog teksta.",
+          "text": "Martin jobber som sykepleier i Trondheim.\nVanligvis ___ han på jobb klokka sju.\nEtter jobb ___ han ofte en tur med hunden sin.\nPå søndager ___ han ikke på sykehuset.\nHvor ofte ___ han foreldrene sine?",
+          "gaps": [
+            {
+              "options": [
+                "begynner",
+                "han begynner",
+                "begynner ikke"
+              ],
+              "answer": "begynner"
+            },
+            {
+              "options": [
+                "går",
+                "han går",
+                "ikke går"
+              ],
+              "answer": "går"
+            },
+            {
+              "options": [
+                "jobber",
+                "han jobber",
+                "ikke jobber"
+              ],
+              "answer": "jobber"
+            },
+            {
+              "options": [
+                "besøker",
+                "han besøker",
+                "besøker ofte"
+              ],
+              "answer": "besøker"
+            }
+          ]
+        }
+      ]
+    },
+    "vocabulary": {
+      "areas": [
+        {
+          "key": "DR1",
+          "title": "Daglig rutine 1",
+          "sr": "Dnevna rutina 1",
+          "images": [
+            "a2v1"
+          ],
+          "words": [
+            {
+              "word": "våkne",
+              "translation": "probuditi se",
+              "collection": "DR1",
+              "active": true
+            },
+            {
+              "word": "stå opp",
+              "translation": "ustati",
+              "collection": "DR1",
+              "active": true
+            },
+            {
+              "word": "pusse tennene",
+              "translation": "oprati zube",
+              "collection": "DR1",
+              "active": true
+            },
+            {
+              "word": "ta en dusj",
+              "translation": "istuširati se",
+              "collection": "DR1",
+              "active": true
+            },
+            {
+              "word": "kle på seg",
+              "translation": "obući se",
+              "collection": "DR1",
+              "active": true
+            },
+            {
+              "word": "spise frokost",
+              "translation": "doručkovati",
+              "collection": "DR1",
+              "active": true
+            },
+            {
+              "word": "dra hjemmefra",
+              "translation": "krenuti od kuće",
+              "collection": "DR1",
+              "active": true
+            },
+            {
+              "word": "ta bussen",
+              "translation": "uhvatiti autobus",
+              "collection": "DR1",
+              "active": true
+            },
+            {
+              "word": "komme på jobb",
+              "translation": "stići na posao / u školu",
+              "collection": "DR1",
+              "active": true
+            },
+            {
+              "word": "begynne på jobb",
+              "translation": "početi s poslom",
+              "collection": "DR1",
+              "active": true
+            },
+            {
+              "word": "sjekke e-post",
+              "translation": "proveravati mejlove",
+              "collection": "DR1",
+              "active": true
+            },
+            {
+              "word": "delta på et møte",
+              "translation": "prisustvovati sastanku",
+              "collection": "DR1",
+              "active": true
+            },
+            {
+              "word": "ta notater",
+              "translation": "hvatati beleške",
+              "collection": "DR1",
+              "active": true
+            },
+            {
+              "word": "ta en pause",
+              "translation": "napraviti pauzu",
+              "collection": "DR1",
+              "active": true
+            },
+            {
+              "word": "slutte på jobb",
+              "translation": "završiti posao",
+              "collection": "DR1",
+              "active": true
+            }
+          ],
+          "exercises": [
+            "VO-01",
+            "VO-02",
+            "VO-05",
+            "VO-11",
+            "VO-12",
+            "VO-13"
+          ]
+        },
+        {
+          "key": "DR2",
+          "title": "Daglig rutine 2",
+          "sr": "Dnevna rutina 2",
+          "images": [
+            "a2v2"
+          ],
+          "words": [
+            {
+              "word": "gjøre lekser",
+              "translation": "raditi domaći",
+              "collection": "DR2",
+              "active": true
+            },
+            {
+              "word": "forberede seg til en prøve",
+              "translation": "pripremati se za ispit",
+              "collection": "DR2",
+              "active": true
+            },
+            {
+              "word": "rydde",
+              "translation": "pospremiti",
+              "collection": "DR2",
+              "active": true
+            },
+            {
+              "word": "vaske klær",
+              "translation": "prati veš",
+              "collection": "DR2",
+              "active": true
+            },
+            {
+              "word": "ta oppvasken",
+              "translation": "prati sudove",
+              "collection": "DR2",
+              "active": true
+            },
+            {
+              "word": "handle matvarer",
+              "translation": "ići u kupovinu namirnica",
+              "collection": "DR2",
+              "active": true
+            },
+            {
+              "word": "re opp sengen",
+              "translation": "namestiti krevet",
+              "collection": "DR2",
+              "active": true
+            },
+            {
+              "word": "lage middag",
+              "translation": "spremati večeru",
+              "collection": "DR2",
+              "active": true
+            },
+            {
+              "word": "støvsuge gulvet",
+              "translation": "usisavati pod",
+              "collection": "DR2",
+              "active": true
+            },
+            {
+              "word": "gå ut med søpla",
+              "translation": "izneti smeće",
+              "collection": "DR2",
+              "active": true
+            },
+            {
+              "word": "trene",
+              "translation": "trenirati",
+              "collection": "DR2",
+              "active": true
+            },
+            {
+              "word": "gå en tur",
+              "translation": "otići u šetnju",
+              "collection": "DR2",
+              "active": true
+            },
+            {
+              "word": "treffe venner",
+              "translation": "naći se sa prijateljima",
+              "collection": "DR2",
+              "active": true
+            },
+            {
+              "word": "tilbringe tid med familien",
+              "translation": "provoditi vreme sa porodicom",
+              "collection": "DR2",
+              "active": true
+            },
+            {
+              "word": "legge seg",
+              "translation": "otići na spavanje",
+              "collection": "DR2",
+              "active": true
+            }
+          ],
+          "exercises": [
+            "VO-03",
+            "VO-04",
+            "VO-06",
+            "VO-14",
+            "VO-15",
+            "VO-19"
+          ]
+        },
+        {
+          "key": "CDL",
+          "title": "Endringer i hverdagen",
+          "sr": "Promene u svakodnevnom životu",
+          "images": [
+            "a2v3"
+          ],
+          "words": [
+            {
+              "word": "endre rutinen",
+              "translation": "promeniti rutinu",
+              "collection": "CDL",
+              "active": true
+            },
+            {
+              "word": "begynne i ny jobb",
+              "translation": "započeti novi posao",
+              "collection": "CDL",
+              "active": true
+            },
+            {
+              "word": "flytte til et nytt sted",
+              "translation": "preseliti se na novo mesto",
+              "collection": "CDL",
+              "active": true
+            },
+            {
+              "word": "lete etter en ny leilighet",
+              "translation": "tražiti novi stan",
+              "collection": "CDL",
+              "active": true
+            },
+            {
+              "word": "venne seg til noe",
+              "translation": "navikavati se na nešto",
+              "collection": "CDL",
+              "active": true
+            },
+            {
+              "word": "finne seg til rette i et nytt hjem",
+              "translation": "priviknuti se na novi dom",
+              "collection": "CDL",
+              "active": true
+            },
+            {
+              "word": "prøve noe nytt",
+              "translation": "probati nešto novo",
+              "collection": "CDL",
+              "active": true
+            },
+            {
+              "word": "begynne med en ny hobby",
+              "translation": "početi da se bavite novim hobijem",
+              "collection": "CDL",
+              "active": true
+            },
+            {
+              "word": "lære en ny ferdighet",
+              "translation": "naučiti novu veštinu",
+              "collection": "CDL",
+              "active": true
+            },
+            {
+              "word": "få nye venner",
+              "translation": "steći nove prijatelje",
+              "collection": "CDL",
+              "active": true
+            },
+            {
+              "word": "endre planene",
+              "translation": "promeniti planove",
+              "collection": "CDL",
+              "active": true
+            },
+            {
+              "word": "ta en beslutning",
+              "translation": "doneti odluku",
+              "collection": "CDL",
+              "active": true
+            }
+          ],
+          "exercises": [
+            "VO-07",
+            "VO-08",
+            "VO-09",
+            "VO-10",
+            "VO-16",
+            "VO-17",
+            "VO-18",
+            "VO-20"
+          ]
+        }
+      ],
+      "words": [
+        {
+          "word": "våkne",
+          "translation": "probuditi se",
+          "collection": "DR1",
+          "active": true
+        },
+        {
+          "word": "stå opp",
+          "translation": "ustati",
+          "collection": "DR1",
+          "active": true
+        },
+        {
+          "word": "pusse tennene",
+          "translation": "oprati zube",
+          "collection": "DR1",
+          "active": true
+        },
+        {
+          "word": "ta en dusj",
+          "translation": "istuširati se",
+          "collection": "DR1",
+          "active": true
+        },
+        {
+          "word": "kle på seg",
+          "translation": "obući se",
+          "collection": "DR1",
+          "active": true
+        },
+        {
+          "word": "spise frokost",
+          "translation": "doručkovati",
+          "collection": "DR1",
+          "active": true
+        },
+        {
+          "word": "dra hjemmefra",
+          "translation": "krenuti od kuće",
+          "collection": "DR1",
+          "active": true
+        },
+        {
+          "word": "ta bussen",
+          "translation": "uhvatiti autobus",
+          "collection": "DR1",
+          "active": true
+        },
+        {
+          "word": "komme på jobb",
+          "translation": "stići na posao / u školu",
+          "collection": "DR1",
+          "active": true
+        },
+        {
+          "word": "begynne på jobb",
+          "translation": "početi s poslom",
+          "collection": "DR1",
+          "active": true
+        },
+        {
+          "word": "sjekke e-post",
+          "translation": "proveravati mejlove",
+          "collection": "DR1",
+          "active": true
+        },
+        {
+          "word": "delta på et møte",
+          "translation": "prisustvovati sastanku",
+          "collection": "DR1",
+          "active": true
+        },
+        {
+          "word": "ta notater",
+          "translation": "hvatati beleške",
+          "collection": "DR1",
+          "active": true
+        },
+        {
+          "word": "ta en pause",
+          "translation": "napraviti pauzu",
+          "collection": "DR1",
+          "active": true
+        },
+        {
+          "word": "slutte på jobb",
+          "translation": "završiti posao",
+          "collection": "DR1",
+          "active": true
+        },
+        {
+          "word": "gjøre lekser",
+          "translation": "raditi domaći",
+          "collection": "DR2",
+          "active": true
+        },
+        {
+          "word": "forberede seg til en prøve",
+          "translation": "pripremati se za ispit",
+          "collection": "DR2",
+          "active": true
+        },
+        {
+          "word": "rydde",
+          "translation": "pospremiti",
+          "collection": "DR2",
+          "active": true
+        },
+        {
+          "word": "vaske klær",
+          "translation": "prati veš",
+          "collection": "DR2",
+          "active": true
+        },
+        {
+          "word": "ta oppvasken",
+          "translation": "prati sudove",
+          "collection": "DR2",
+          "active": true
+        },
+        {
+          "word": "handle matvarer",
+          "translation": "ići u kupovinu namirnica",
+          "collection": "DR2",
+          "active": true
+        },
+        {
+          "word": "re opp sengen",
+          "translation": "namestiti krevet",
+          "collection": "DR2",
+          "active": true
+        },
+        {
+          "word": "lage middag",
+          "translation": "spremati večeru",
+          "collection": "DR2",
+          "active": true
+        },
+        {
+          "word": "støvsuge gulvet",
+          "translation": "usisavati pod",
+          "collection": "DR2",
+          "active": true
+        },
+        {
+          "word": "gå ut med søpla",
+          "translation": "izneti smeće",
+          "collection": "DR2",
+          "active": true
+        },
+        {
+          "word": "trene",
+          "translation": "trenirati",
+          "collection": "DR2",
+          "active": true
+        },
+        {
+          "word": "gå en tur",
+          "translation": "otići u šetnju",
+          "collection": "DR2",
+          "active": true
+        },
+        {
+          "word": "treffe venner",
+          "translation": "naći se sa prijateljima",
+          "collection": "DR2",
+          "active": true
+        },
+        {
+          "word": "tilbringe tid med familien",
+          "translation": "provoditi vreme sa porodicom",
+          "collection": "DR2",
+          "active": true
+        },
+        {
+          "word": "legge seg",
+          "translation": "otići na spavanje",
+          "collection": "DR2",
+          "active": true
+        },
+        {
+          "word": "endre rutinen",
+          "translation": "promeniti rutinu",
+          "collection": "CDL",
+          "active": true
+        },
+        {
+          "word": "begynne i ny jobb",
+          "translation": "započeti novi posao",
+          "collection": "CDL",
+          "active": true
+        },
+        {
+          "word": "flytte til et nytt sted",
+          "translation": "preseliti se na novo mesto",
+          "collection": "CDL",
+          "active": true
+        },
+        {
+          "word": "lete etter en ny leilighet",
+          "translation": "tražiti novi stan",
+          "collection": "CDL",
+          "active": true
+        },
+        {
+          "word": "venne seg til noe",
+          "translation": "navikavati se na nešto",
+          "collection": "CDL",
+          "active": true
+        },
+        {
+          "word": "finne seg til rette i et nytt hjem",
+          "translation": "priviknuti se na novi dom",
+          "collection": "CDL",
+          "active": true
+        },
+        {
+          "word": "prøve noe nytt",
+          "translation": "probati nešto novo",
+          "collection": "CDL",
+          "active": true
+        },
+        {
+          "word": "begynne med en ny hobby",
+          "translation": "početi da se bavite novim hobijem",
+          "collection": "CDL",
+          "active": true
+        },
+        {
+          "word": "lære en ny ferdighet",
+          "translation": "naučiti novu veštinu",
+          "collection": "CDL",
+          "active": true
+        },
+        {
+          "word": "få nye venner",
+          "translation": "steći nove prijatelje",
+          "collection": "CDL",
+          "active": true
+        },
+        {
+          "word": "endre planene",
+          "translation": "promeniti planove",
+          "collection": "CDL",
+          "active": true
+        },
+        {
+          "word": "ta en beslutning",
+          "translation": "doneti odluku",
+          "collection": "CDL",
+          "active": true
+        }
+      ],
+      "collections": {
+        "DR1": "Daglig rutine 1",
+        "DR2": "Daglig rutine 2",
+        "CDL": "Endringer i hverdagen"
+      },
+      "exercises": [
+        {
+          "id": "NO-A2-L01-VO-01",
+          "code": "VO-01",
+          "title": "Morgenrutine",
+          "instruction": "Napiši tačan izraz za svaku sliku.",
+          "kind": "vocabulary",
+          "image": "a2:vo01",
+          "items": [
+            {
+              "prompt": "Slika 1 (gore levo)",
+              "answers": [
+                "våkne",
+                "stå opp"
+              ]
+            },
+            {
+              "prompt": "Slika 2 (gore desno)",
+              "answers": [
+                "pusse tennene"
+              ]
+            },
+            {
+              "prompt": "Slika 3 (dole levo)",
+              "answers": [
+                "spise frokost"
+              ]
+            },
+            {
+              "prompt": "Slika 4 (dole desno)",
+              "answers": [
+                "dra hjemmefra"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "NO-A2-L01-VO-02",
+          "code": "VO-02",
+          "title": "På jobb",
+          "instruction": "Izaberi tačan izraz.",
+          "kind": "vocabulary",
+          "image": "a2:vo02",
+          "items": [
+            {
+              "prompt": "Jeg skal ___ klokka 9.",
+              "options": [
+                "begynne på jobb",
+                "legge seg",
+                "trene"
+              ],
+              "answers": [
+                "begynne på jobb"
+              ]
+            },
+            {
+              "prompt": "I timen må vi ___.",
+              "options": [
+                "ta notater",
+                "rydde",
+                "gå en tur"
+              ],
+              "answers": [
+                "ta notater"
+              ]
+            },
+            {
+              "prompt": "Etter to timer kan vi ___.",
+              "options": [
+                "ta en pause",
+                "vaske klær",
+                "re opp sengen"
+              ],
+              "answers": [
+                "ta en pause"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "NO-A2-L01-VO-03",
+          "code": "VO-03",
+          "title": "Daglige husarbeid",
+          "instruction": "Poveži slike sa izrazima.",
+          "kind": "vocabulary",
+          "image": "a2:vo03",
+          "items": [
+            {
+              "prompt": "Slika 1 (gore levo)",
+              "options": [
+                "vaske klær",
+                "ta oppvasken",
+                "støvsuge gulvet",
+                "gå ut med søpla"
+              ],
+              "answers": [
+                "vaske klær"
+              ]
+            },
+            {
+              "prompt": "Slika 2 (gore desno)",
+              "options": [
+                "vaske klær",
+                "ta oppvasken",
+                "støvsuge gulvet",
+                "gå ut med søpla"
+              ],
+              "answers": [
+                "ta oppvasken"
+              ]
+            },
+            {
+              "prompt": "Slika 3 (dole levo)",
+              "options": [
+                "vaske klær",
+                "ta oppvasken",
+                "støvsuge gulvet",
+                "gå ut med søpla"
+              ],
+              "answers": [
+                "støvsuge gulvet"
+              ]
+            },
+            {
+              "prompt": "Slika 4 (dole desno)",
+              "options": [
+                "vaske klær",
+                "ta oppvasken",
+                "støvsuge gulvet",
+                "gå ut med søpla"
+              ],
+              "answers": [
+                "gå ut med søpla"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "NO-A2-L01-VO-04",
+          "code": "VO-04",
+          "title": "Fritid",
+          "instruction": "Dopuni rečenice izrazima iz okvira.",
+          "kind": "vocabulary",
+          "image": "a2:vo04",
+          "items": [
+            {
+              "prompt": "Etter jobb pleier jeg å ___ på treningssenteret.",
+              "options": [
+                "trene",
+                "gå en tur",
+                "treffe venner",
+                "tilbringe tid med familien"
+              ],
+              "answers": [
+                "trene"
+              ]
+            },
+            {
+              "prompt": "På søndager liker vi å ___ langs stiene i parken.",
+              "options": [
+                "trene",
+                "gå en tur",
+                "treffe venner",
+                "tilbringe tid med familien"
+              ],
+              "answers": [
+                "gå en tur"
+              ]
+            },
+            {
+              "prompt": "På fredager pleier jeg å ___ på en kafé. Vi snakker og drikker kaffe sammen.",
+              "options": [
+                "trene",
+                "gå en tur",
+                "treffe venner",
+                "tilbringe tid med familien"
+              ],
+              "answers": [
+                "treffe venner"
+              ]
+            },
+            {
+              "prompt": "Om kvelden liker jeg å ___ hjemme med barna mine.",
+              "options": [
+                "trene",
+                "gå en tur",
+                "treffe venner",
+                "tilbringe tid med familien"
+              ],
+              "answers": [
+                "tilbringe tid med familien"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "NO-A2-L01-VO-05",
+          "code": "VO-05",
+          "title": "Sett dagens aktiviteter i riktig rekkefølge",
+          "instruction": "Poređaj aktivnosti redom kojim se dešavaju tokom dana (1–5).",
+          "kind": "vocabulary",
+          "image": "a2:vo05",
+          "items": [
+            {
+              "prompt": "stå opp",
+              "options": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5"
+              ],
+              "answers": [
+                "1"
+              ]
+            },
+            {
+              "prompt": "ta bussen",
+              "options": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5"
+              ],
+              "answers": [
+                "2"
+              ]
+            },
+            {
+              "prompt": "begynne på jobb",
+              "options": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5"
+              ],
+              "answers": [
+                "3"
+              ]
+            },
+            {
+              "prompt": "slutte på jobb",
+              "options": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5"
+              ],
+              "answers": [
+                "4"
+              ]
+            },
+            {
+              "prompt": "legge seg",
+              "options": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5"
+              ],
+              "answers": [
+                "5"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "NO-A2-L01-VO-06",
+          "code": "VO-06",
+          "title": "Planer for helgen",
+          "instruction": "Izaberi najbolji izraz.",
+          "kind": "vocabulary",
+          "image": "a2:vo06",
+          "items": [
+            {
+              "prompt": "Jeg trenger melk og frukt. → Jeg må ___.",
+              "options": [
+                "handle matvarer",
+                "lage middag",
+                "rydde",
+                "re opp sengen"
+              ],
+              "answers": [
+                "handle matvarer"
+              ]
+            },
+            {
+              "prompt": "Kjøkkenet er rotete. → Jeg må ___.",
+              "options": [
+                "handle matvarer",
+                "lage middag",
+                "rydde",
+                "re opp sengen"
+              ],
+              "answers": [
+                "rydde"
+              ]
+            },
+            {
+              "prompt": "Rommet mitt er ikke ryddig. → Jeg må ___.",
+              "options": [
+                "handle matvarer",
+                "lage middag",
+                "rydde",
+                "re opp sengen"
+              ],
+              "answers": [
+                "rydde",
+                "re opp sengen"
+              ]
+            },
+            {
+              "prompt": "Det er lørdag morgen. → Først skal jeg ___ på soverommet.",
+              "options": [
+                "handle matvarer",
+                "lage middag",
+                "rydde",
+                "re opp sengen"
+              ],
+              "answers": [
+                "re opp sengen"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "NO-A2-L01-VO-07",
+          "code": "VO-07",
+          "title": "Endringer i hverdagen",
+          "instruction": "Poveži svaku sliku sa tačnim izrazom.",
+          "kind": "vocabulary",
+          "image": "no:vo07",
+          "items": [
+            {
+              "prompt": "Slika 1 (gore levo)",
+              "options": [
+                "begynne i ny jobb",
+                "flytte til et nytt sted",
+                "lete etter en ny leilighet",
+                "få nye venner"
+              ],
+              "answers": [
+                "begynne i ny jobb"
+              ]
+            },
+            {
+              "prompt": "Slika 2 (gore desno)",
+              "options": [
+                "begynne i ny jobb",
+                "flytte til et nytt sted",
+                "lete etter en ny leilighet",
+                "få nye venner"
+              ],
+              "answers": [
+                "flytte til et nytt sted"
+              ]
+            },
+            {
+              "prompt": "Slika 3 (dole levo)",
+              "options": [
+                "begynne i ny jobb",
+                "flytte til et nytt sted",
+                "lete etter en ny leilighet",
+                "få nye venner"
+              ],
+              "answers": [
+                "lete etter en ny leilighet"
+              ]
+            },
+            {
+              "prompt": "Slika 4 (dole desno)",
+              "options": [
+                "begynne i ny jobb",
+                "flytte til et nytt sted",
+                "lete etter en ny leilighet",
+                "få nye venner"
+              ],
+              "answers": [
+                "få nye venner"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "NO-A2-L01-VO-08",
+          "code": "VO-08",
+          "title": "Et nytt kapittel",
+          "instruction": "Dopuni tekst izrazima iz okvira.",
+          "kind": "vocabulary",
+          "image": "a2:vo08",
+          "items": [
+            {
+              "prompt": "Denne måneden vil jeg ___.",
+              "options": [
+                "endre rutinen",
+                "prøve noe nytt",
+                "begynne med en ny hobby",
+                "lære en ny ferdighet"
+              ],
+              "answers": [
+                "endre rutinen"
+              ]
+            },
+            {
+              "prompt": "Jeg vil også ___ …",
+              "options": [
+                "endre rutinen",
+                "prøve noe nytt",
+                "begynne med en ny hobby",
+                "lære en ny ferdighet"
+              ],
+              "answers": [
+                "prøve noe nytt"
+              ]
+            },
+            {
+              "prompt": "… og ___.",
+              "options": [
+                "endre rutinen",
+                "prøve noe nytt",
+                "begynne med en ny hobby",
+                "lære en ny ferdighet"
+              ],
+              "answers": [
+                "begynne med en ny hobby"
+              ]
+            },
+            {
+              "prompt": "Jeg håper å ___ snart.",
+              "options": [
+                "endre rutinen",
+                "prøve noe nytt",
+                "begynne med en ny hobby",
+                "lære en ny ferdighet"
+              ],
+              "answers": [
+                "lære en ny ferdighet"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "NO-A2-L01-VO-09",
+          "code": "VO-09",
+          "title": "Hvilket uttrykk passer?",
+          "instruction": "Izaberi najbolji izraz.",
+          "kind": "vocabulary",
+          "image": "a2:vo09",
+          "items": [
+            {
+              "prompt": "Jeg vet ikke hva jeg skal velge.",
+              "options": [
+                "ta en beslutning",
+                "finne seg til rette i et nytt hjem"
+              ],
+              "answers": [
+                "ta en beslutning"
+              ]
+            },
+            {
+              "prompt": "Jeg trives i den nye leiligheten min.",
+              "options": [
+                "venne seg til noe",
+                "finne seg til rette i et nytt hjem"
+              ],
+              "answers": [
+                "finne seg til rette i et nytt hjem"
+              ]
+            },
+            {
+              "prompt": "Vi kan ikke dra til stranden nå.",
+              "options": [
+                "endre planene",
+                "lære en ny ferdighet"
+              ],
+              "answers": [
+                "endre planene"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "NO-A2-L01-VO-10",
+          "code": "VO-10",
+          "title": "Bruk ordene",
+          "instruction": "Napiši jednu rečenicu za svaki izraz.",
+          "kind": "vocabulary",
+          "image": "a2:vo10",
+          "items": [
+            {
+              "prompt": "trene",
+              "open": true,
+              "guide": "Napiši jednu svoju rečenicu na norveškom u kojoj koristiš ovaj izraz."
+            },
+            {
+              "prompt": "treffe venner",
+              "open": true,
+              "guide": "Napiši jednu svoju rečenicu na norveškom u kojoj koristiš ovaj izraz."
+            },
+            {
+              "prompt": "lete etter en ny leilighet",
+              "open": true,
+              "guide": "Napiši jednu svoju rečenicu na norveškom u kojoj koristiš ovaj izraz."
+            },
+            {
+              "prompt": "begynne i ny jobb",
+              "open": true,
+              "guide": "Napiši jednu svoju rečenicu na norveškom u kojoj koristiš ovaj izraz."
+            }
+          ]
+        },
+        {
+          "id": "NO-A2-L01-VO-11",
+          "code": "VO-11",
+          "title": "Morgen eller kveld?",
+          "instruction": "Odluči da li se aktivnost obično radi ujutru (M) ili uveče (E).",
+          "kind": "vocabulary",
+          "image": "a2:vo11",
+          "items": [
+            {
+              "prompt": "spise frokost",
+              "options": [
+                "M (morgen)",
+                "E (kveld)"
+              ],
+              "answers": [
+                "M (morgen)"
+              ]
+            },
+            {
+              "prompt": "legge seg",
+              "options": [
+                "M (morgen)",
+                "E (kveld)"
+              ],
+              "answers": [
+                "E (kveld)"
+              ]
+            },
+            {
+              "prompt": "pusse tennene",
+              "options": [
+                "M (morgen)",
+                "E (kveld)"
+              ],
+              "answers": [
+                "M (morgen)",
+                "E (kveld)"
+              ]
+            },
+            {
+              "prompt": "stå opp",
+              "options": [
+                "M (morgen)",
+                "E (kveld)"
+              ],
+              "answers": [
+                "M (morgen)"
+              ]
+            },
+            {
+              "prompt": "slutte på jobb",
+              "options": [
+                "M (morgen)",
+                "E (kveld)"
+              ],
+              "answers": [
+                "E (kveld)"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "NO-A2-L01-VO-12",
+          "code": "VO-12",
+          "title": "Fullfør rutinen",
+          "instruction": "Dopuni rečenice izrazima iz okvira.",
+          "kind": "vocabulary",
+          "image": "a2:vo12",
+          "items": [
+            {
+              "prompt": "Når man har våknet og vasket ansiktet, må man ___ før man går ut.",
+              "options": [
+                "kle på seg",
+                "ta notater",
+                "spise frokost",
+                "ta en pause"
+              ],
+              "answers": [
+                "kle på seg"
+              ]
+            },
+            {
+              "prompt": "Før jeg drar hjemmefra, vil jeg ___ så jeg ikke blir sulten.",
+              "options": [
+                "kle på seg",
+                "ta notater",
+                "spise frokost",
+                "ta en pause"
+              ],
+              "answers": [
+                "spise frokost"
+              ]
+            },
+            {
+              "prompt": "På skolen må jeg ___ i timen for å huske det læreren sier.",
+              "options": [
+                "kle på seg",
+                "ta notater",
+                "spise frokost",
+                "ta en pause"
+              ],
+              "answers": [
+                "ta notater"
+              ]
+            },
+            {
+              "prompt": "Klokka 10 pleier vi å ___ fra arbeidet.",
+              "options": [
+                "kle på seg",
+                "ta notater",
+                "spise frokost",
+                "ta en pause"
+              ],
+              "answers": [
+                "ta en pause"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "NO-A2-L01-VO-13",
+          "code": "VO-13",
+          "title": "Skole og jobb",
+          "instruction": "Izaberi tačan izraz.",
+          "kind": "vocabulary",
+          "image": "a2:vo13",
+          "items": [
+            {
+              "prompt": "I timen må vi ___.",
+              "options": [
+                "ta notater",
+                "legge seg"
+              ],
+              "answers": [
+                "ta notater"
+              ]
+            },
+            {
+              "prompt": "Klokka 9 må jeg ___ på kontoret.",
+              "options": [
+                "begynne på jobb",
+                "vaske klær"
+              ],
+              "answers": [
+                "begynne på jobb"
+              ]
+            },
+            {
+              "prompt": "Når timene er ferdige, skal jeg ___ hjem.",
+              "options": [
+                "slutte på jobb",
+                "ta bussen"
+              ],
+              "answers": [
+                "ta bussen"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "NO-A2-L01-VO-14",
+          "code": "VO-14",
+          "title": "Husarbeid",
+          "instruction": "Poveži slike sa izrazima.",
+          "kind": "vocabulary",
+          "image": "a2:vo14",
+          "items": [
+            {
+              "prompt": "Slika 1 (gore levo)",
+              "options": [
+                "vaske klær",
+                "støvsuge gulvet",
+                "re opp sengen",
+                "ta oppvasken"
+              ],
+              "answers": [
+                "vaske klær"
+              ]
+            },
+            {
+              "prompt": "Slika 2 (gore desno)",
+              "options": [
+                "vaske klær",
+                "støvsuge gulvet",
+                "re opp sengen",
+                "ta oppvasken"
+              ],
+              "answers": [
+                "støvsuge gulvet"
+              ]
+            },
+            {
+              "prompt": "Slika 3 (dole levo)",
+              "options": [
+                "vaske klær",
+                "støvsuge gulvet",
+                "re opp sengen",
+                "ta oppvasken"
+              ],
+              "answers": [
+                "re opp sengen"
+              ]
+            },
+            {
+              "prompt": "Slika 4 (dole desno)",
+              "options": [
+                "vaske klær",
+                "støvsuge gulvet",
+                "re opp sengen",
+                "ta oppvasken"
+              ],
+              "answers": [
+                "ta oppvasken"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "NO-A2-L01-VO-15",
+          "code": "VO-15",
+          "title": "Hva må du gjøre?",
+          "instruction": "Izaberi najbolji izraz.",
+          "kind": "vocabulary",
+          "image": "a2:vo15",
+          "items": [
+            {
+              "prompt": "Sengen din er rotete. → Jeg må ___.",
+              "options": [
+                "re opp sengen",
+                "ta oppvasken",
+                "handle matvarer",
+                "slappe av"
+              ],
+              "answers": [
+                "re opp sengen"
+              ]
+            },
+            {
+              "prompt": "Det er skitne tallerkener på kjøkkenet. → Jeg må ___.",
+              "options": [
+                "re opp sengen",
+                "ta oppvasken",
+                "handle matvarer",
+                "slappe av"
+              ],
+              "answers": [
+                "ta oppvasken"
+              ]
+            },
+            {
+              "prompt": "Jeg trenger melk og brød. → Jeg må ___.",
+              "options": [
+                "re opp sengen",
+                "ta oppvasken",
+                "handle matvarer",
+                "slappe av"
+              ],
+              "answers": [
+                "handle matvarer"
+              ]
+            },
+            {
+              "prompt": "Jeg er trøtt etter jobb. → Jeg vil ___.",
+              "options": [
+                "re opp sengen",
+                "ta oppvasken",
+                "handle matvarer",
+                "slappe av"
+              ],
+              "answers": [
+                "slappe av"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "NO-A2-L01-VO-16",
+          "code": "VO-16",
+          "title": "Store endringer",
+          "instruction": "Poveži svaku sliku sa tačnim izrazom.",
+          "kind": "vocabulary",
+          "image": "a2:vo16",
+          "items": [
+            {
+              "prompt": "Slika 1 (gore levo)",
+              "options": [
+                "begynne i ny jobb",
+                "flytte til et nytt sted",
+                "lete etter en ny leilighet",
+                "få nye venner"
+              ],
+              "answers": [
+                "begynne i ny jobb"
+              ]
+            },
+            {
+              "prompt": "Slika 2 (gore desno)",
+              "options": [
+                "begynne i ny jobb",
+                "flytte til et nytt sted",
+                "lete etter en ny leilighet",
+                "få nye venner"
+              ],
+              "answers": [
+                "flytte til et nytt sted"
+              ]
+            },
+            {
+              "prompt": "Slika 3 (dole levo)",
+              "options": [
+                "begynne i ny jobb",
+                "flytte til et nytt sted",
+                "lete etter en ny leilighet",
+                "få nye venner"
+              ],
+              "answers": [
+                "lete etter en ny leilighet"
+              ]
+            },
+            {
+              "prompt": "Slika 4 (dole desno)",
+              "options": [
+                "begynne i ny jobb",
+                "flytte til et nytt sted",
+                "lete etter en ny leilighet",
+                "få nye venner"
+              ],
+              "answers": [
+                "få nye venner"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "NO-A2-L01-VO-17",
+          "code": "VO-17",
+          "title": "En ny rutine",
+          "instruction": "Dopuni tekst izrazima iz okvira.",
+          "kind": "vocabulary",
+          "image": "a2:vo17",
+          "items": [
+            {
+              "prompt": "Denne måneden vil Henrik ___ og gjøre ting til andre tider enn før.",
+              "options": [
+                "endre rutinen",
+                "prøve noe nytt",
+                "få nye venner",
+                "lære en ny ferdighet"
+              ],
+              "answers": [
+                "endre rutinen"
+              ]
+            },
+            {
+              "prompt": "Han har en ny timeplan, og han vil også ___ som han aldri har gjort før.",
+              "options": [
+                "endre rutinen",
+                "prøve noe nytt",
+                "få nye venner",
+                "lære en ny ferdighet"
+              ],
+              "answers": [
+                "prøve noe nytt"
+              ]
+            },
+            {
+              "prompt": "Han har blitt med i en klubb for å ___ og ha noen å være sammen med …",
+              "options": [
+                "endre rutinen",
+                "prøve noe nytt",
+                "få nye venner",
+                "lære en ny ferdighet"
+              ],
+              "answers": [
+                "få nye venner"
+              ]
+            },
+            {
+              "prompt": "… og han håper å ___ snart, for eksempel å spille gitar.",
+              "options": [
+                "endre rutinen",
+                "prøve noe nytt",
+                "få nye venner",
+                "lære en ny ferdighet"
+              ],
+              "answers": [
+                "lære en ny ferdighet"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "NO-A2-L01-VO-18",
+          "code": "VO-18",
+          "title": "Hvilket uttrykk passer?",
+          "instruction": "Izaberi najbolji izraz.",
+          "kind": "vocabulary",
+          "image": "a2:vo18",
+          "items": [
+            {
+              "prompt": "Jeg leser annonser for leiligheter på nettet.",
+              "options": [
+                "lete etter en ny leilighet",
+                "begynne i ny jobb"
+              ],
+              "answers": [
+                "lete etter en ny leilighet"
+              ]
+            },
+            {
+              "prompt": "Jeg har begynt å ta gitartimer.",
+              "options": [
+                "endre planene",
+                "begynne med en ny hobby"
+              ],
+              "answers": [
+                "begynne med en ny hobby"
+              ]
+            },
+            {
+              "prompt": "Nå trives jeg i den nye leiligheten min.",
+              "options": [
+                "finne seg til rette i et nytt hjem",
+                "ta en beslutning"
+              ],
+              "answers": [
+                "finne seg til rette i et nytt hjem"
+              ]
+            },
+            {
+              "prompt": "Vi kan ikke gå ut fordi det regner. Vi må gjøre noe annet.",
+              "options": [
+                "endre planene",
+                "få nye venner"
+              ],
+              "answers": [
+                "endre planene"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "NO-A2-L01-VO-19",
+          "code": "VO-19",
+          "title": "Bruk uttrykkene",
+          "instruction": "Napiši jednu rečenicu za svaki izraz.",
+          "kind": "vocabulary",
+          "image": "a2:vo19",
+          "items": [
+            {
+              "prompt": "gå en tur",
+              "open": true,
+              "guide": "Napiši jednu svoju rečenicu na norveškom u kojoj koristiš ovaj izraz."
+            },
+            {
+              "prompt": "forberede seg til en prøve",
+              "open": true,
+              "guide": "Napiši jednu svoju rečenicu na norveškom u kojoj koristiš ovaj izraz."
+            },
+            {
+              "prompt": "endre rutinen",
+              "open": true,
+              "guide": "Napiši jednu svoju rečenicu na norveškom u kojoj koristiš ovaj izraz."
+            },
+            {
+              "prompt": "begynne i ny jobb",
+              "open": true,
+              "guide": "Napiši jednu svoju rečenicu na norveškom u kojoj koristiš ovaj izraz."
+            }
+          ]
+        },
+        {
+          "id": "NO-A2-L01-VO-20",
+          "code": "VO-20",
+          "title": "Situasjoner i hverdagen",
+          "instruction": "Napiši tačan izraz.",
+          "kind": "vocabulary",
+          "image": "a2:vo20",
+          "items": [
+            {
+              "prompt": "Du begynner å jobbe i et nytt firma.",
+              "answers": [
+                "begynne i ny jobb",
+                "begynne i en ny jobb"
+              ]
+            },
+            {
+              "prompt": "Du leter etter en annen leilighet.",
+              "answers": [
+                "lete etter en ny leilighet",
+                "lete etter en annen leilighet"
+              ]
+            },
+            {
+              "prompt": "Du begynner å trives i det nye hjemmet ditt.",
+              "answers": [
+                "finne seg til rette i et nytt hjem",
+                "venne seg til noe",
+                "venne seg til et nytt hjem"
+              ]
+            },
+            {
+              "prompt": "Du gjør ikke lenger det du vanligvis gjør. Nå gjør du noe annet.",
+              "answers": [
+                "endre rutinen",
+                "prøve noe nytt"
+              ]
+            },
+            {
+              "prompt": "Du begynner med en ny aktivitet, som yoga eller maling.",
+              "answers": [
+                "begynne med en ny hobby"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "reading": {
+      "texts": [
+        {
+          "id": "NO-A2-L01-RD1",
+          "title": "Tekst 1 · En travel uke",
+          "image": "no:rd1",
+          "body": "Nora har en travel uke. Hun jobber deltid i en bokhandel på mandager, onsdager og fredager. Vanligvis står hun opp klokka sju, spiser frokost og tar bussen til jobb.\n\nPå tirsdager og torsdager går hun på norskkurs om kvelden, så hun studerer hjemme om ettermiddagen. Denne uka er litt annerledes fordi hun forbereder en presentasjon til kurset. Hun leter også etter en ny leilighet, så etter middag bruker hun tid på nettet.\n\nPå lørdag rydder hun rommet sitt, vasker klær og treffer Ingrid for å ta en kaffe. På søndag går hun en tur med Jonas og planlegger den nye uka."
+        },
+        {
+          "id": "NO-A2-L01-RD2",
+          "title": "Tekst 2 · En melding fra Ingrid",
+          "image": "a2:rd2",
+          "body": "Hei Nora!\nBeklager, jeg kan ikke møte deg på fredag kveld fordi jeg hjelper kusinen min med å flytte til en ny leilighet. Jeg er opptatt på lørdag formiddag også, fordi jeg skal levere sykkelen min på verkstedet. Men om ettermiddagen har jeg fri. Vil du møtes på kafeen ved parken klokka 16? Vi kan snakke om norskkurset ditt og hvordan det går med å lete etter en ny leilighet. Jonas vil komme senere, etter fotokurset sitt. Si fra om planen passer for deg!"
+        },
+        {
+          "id": "NO-A2-L01-RD3",
+          "title": "Tekst 3 · En ny start i Oslo",
+          "image": "no:rd3",
+          "body": "Da Lukas flyttet til Oslo for to måneder siden, var alt nytt og litt forvirrende. Hjemme bodde han i en liten by og kjente alle. I Oslo går livet fortere, bussene er alltid fulle, og det virker som folk har det travelt.\n\nI starten syntes Lukas det var vanskelig å venne seg til den nye rutinen sin. Han begynte i ny jobb på et hotell, jobbet ulike vakter og studerte norsk om kvelden. Han ville også få nye venner, så han ble med i en lokal fotballgruppe som spiller på søndager.\n\nLitt etter litt ble ting lettere. Han lærte å planlegge tiden sin, fant en hyggelig kafé i nærheten av leiligheten sin og begynte å trives i byen. Nå savner han fortsatt familien sin, men han er mer selvsikker og trives bedre med det nye livet sitt."
+        }
+      ],
+      "exercises": [
+        {
+          "id": "NO-A2-L01-R-01",
+          "code": "R-01",
+          "title": "Tekst 1 · Riktig eller galt",
+          "instruction": "Velg riktig eller galt.",
+          "kind": "closed",
+          "items": [
+            {
+              "prompt": "Nora jobber i en bokhandel hver dag.",
+              "answers": [
+                "Galt"
+              ],
+              "options": [
+                "Riktig",
+                "Galt"
+              ]
+            },
+            {
+              "prompt": "Hun tar vanligvis bussen til jobb.",
+              "answers": [
+                "Riktig"
+              ],
+              "options": [
+                "Riktig",
+                "Galt"
+              ]
+            },
+            {
+              "prompt": "Denne uka forbereder hun en presentasjon.",
+              "answers": [
+                "Riktig"
+              ],
+              "options": [
+                "Riktig",
+                "Galt"
+              ]
+            },
+            {
+              "prompt": "På lørdag treffer hun Jonas for å ta en kaffe.",
+              "answers": [
+                "Galt"
+              ],
+              "options": [
+                "Riktig",
+                "Galt"
+              ]
+            }
+          ],
+          "textId": "NO-A2-L01-RD1"
+        },
+        {
+          "id": "NO-A2-L01-R-02",
+          "code": "R-02",
+          "title": "Tekst 1 · Velg riktig svar",
+          "instruction": "Velg riktig svar.",
+          "kind": "closed",
+          "items": [
+            {
+              "prompt": "Hvorfor er denne uka annerledes for Nora?",
+              "answers": [
+                "Hun forbereder en presentasjon til kurset."
+              ],
+              "options": [
+                "Hun forbereder en presentasjon til kurset.",
+                "Hun begynner i ny jobb i bokhandelen.",
+                "Hun besøker familien sin i en annen by."
+              ]
+            },
+            {
+              "prompt": "Hva gjør Nora på tirsdager og torsdager?",
+              "answers": [
+                "Hun går på norskkurs om kvelden."
+              ],
+              "options": [
+                "Hun studerer hjemme hele kvelden.",
+                "Hun går på norskkurs om kvelden.",
+                "Hun jobber en ekstra vakt i bokhandelen."
+              ]
+            },
+            {
+              "prompt": "Hva gjør Nora på søndag?",
+              "answers": [
+                "Hun går en tur med Jonas og planlegger den nye uka."
+              ],
+              "options": [
+                "Hun går en tur med Jonas og planlegger den nye uka.",
+                "Hun rydder rommet sitt og vasker klær.",
+                "Hun treffer Ingrid for å ta en kaffe etter lunsj."
+              ]
+            }
+          ],
+          "textId": "NO-A2-L01-RD1"
+        },
+        {
+          "id": "NO-A2-L01-R-03",
+          "code": "R-03",
+          "title": "Tekst 1 · Finn informasjonen",
+          "instruction": "Svar på spørsmålene.",
+          "kind": "open",
+          "items": [
+            {
+              "prompt": "Hvor jobber Nora?",
+              "open": true,
+              "guide": "Hun jobber deltid i en bokhandel."
+            },
+            {
+              "prompt": "Hvem treffer hun på lørdag?",
+              "open": true,
+              "guide": "Ingrid."
+            },
+            {
+              "prompt": "Hvorfor bruker hun tid på nettet etter middag?",
+              "open": true,
+              "guide": "Fordi hun leter etter en ny leilighet."
+            }
+          ],
+          "textId": "NO-A2-L01-RD1"
+        },
+        {
+          "id": "NO-A2-L01-R-04",
+          "code": "R-04",
+          "title": "Tekst 2 · Velg riktig svar",
+          "instruction": "Velg riktig svar.",
+          "kind": "closed",
+          "items": [
+            {
+              "prompt": "Hvorfor kan ikke Ingrid møte Nora på fredag kveld?",
+              "answers": [
+                "Hun hjelper kusinen sin med å flytte."
+              ],
+              "options": [
+                "Hun hjelper kusinen sin med å flytte.",
+                "Hun går på et kveldskurs.",
+                "Hun jobber på kafeen."
+              ]
+            },
+            {
+              "prompt": "Hva skal Ingrid gjøre på lørdag formiddag?",
+              "answers": [
+                "Hun skal levere sykkelen sin på verkstedet."
+              ],
+              "options": [
+                "Hun skal levere sykkelen sin på verkstedet.",
+                "Hun skal hjelpe Jonas med kurset hans.",
+                "Hun skal treffe Nora for å ta en kaffe."
+              ]
+            },
+            {
+              "prompt": "Hvor vil de møtes?",
+              "answers": [
+                "På kafeen ved parken."
+              ],
+              "options": [
+                "På kafeen ved parken.",
+                "I bokhandelen i nærheten av leiligheten til Nora.",
+                "På verkstedet."
+              ]
+            }
+          ],
+          "textId": "NO-A2-L01-RD2"
+        },
+        {
+          "id": "NO-A2-L01-R-05",
+          "code": "R-05",
+          "title": "Tekst 2 · Sett hendelsene i riktig rekkefølge",
+          "instruction": "Nummerer hendelsene fra 1 til 4.",
+          "kind": "closed",
+          "items": [
+            {
+              "prompt": "Jonas kommer etter kurset.",
+              "answers": [
+                "4"
+              ],
+              "options": [
+                "1",
+                "2",
+                "3",
+                "4"
+              ]
+            },
+            {
+              "prompt": "Ingrid hjelper kusinen sin med å flytte.",
+              "answers": [
+                "1"
+              ],
+              "options": [
+                "1",
+                "2",
+                "3",
+                "4"
+              ]
+            },
+            {
+              "prompt": "Ingrid leverer sykkelen sin på verkstedet.",
+              "answers": [
+                "2"
+              ],
+              "options": [
+                "1",
+                "2",
+                "3",
+                "4"
+              ]
+            },
+            {
+              "prompt": "Nora og Ingrid møtes på kafeen.",
+              "answers": [
+                "3"
+              ],
+              "options": [
+                "1",
+                "2",
+                "3",
+                "4"
+              ]
+            }
+          ],
+          "textId": "NO-A2-L01-RD2"
+        },
+        {
+          "id": "NO-A2-L01-R-06",
+          "code": "R-06",
+          "title": "Tekst 2 · Svar på spørsmålene",
+          "instruction": "Svar på spørsmålene.",
+          "kind": "open",
+          "items": [
+            {
+              "prompt": "Hvorfor er Ingrid opptatt på fredag kveld?",
+              "open": true,
+              "guide": "Hun hjelper kusinen sin med å flytte til en ny leilighet."
+            },
+            {
+              "prompt": "Hva planlegger Nora og Ingrid å snakke om?",
+              "open": true,
+              "guide": "Norskkurset til Nora og hvordan det går med å lete etter en ny leilighet."
+            },
+            {
+              "prompt": "Når har Jonas fri?",
+              "open": true,
+              "guide": "Senere, etter fotokurset sitt."
+            }
+          ],
+          "textId": "NO-A2-L01-RD2"
+        },
+        {
+          "id": "NO-A2-L01-R-07",
+          "code": "R-07",
+          "title": "Tekst 3 · Finn riktig overskrift",
+          "instruction": "Skriv riktig overskrift (A–C) ved hvert avsnitt. A) Livet i en storby · B) Å venne seg til et nytt liv · C) Å trives bedre",
+          "kind": "closed",
+          "items": [
+            {
+              "prompt": "Avsnitt 1",
+              "answers": [
+                "A"
+              ],
+              "options": [
+                "A",
+                "B",
+                "C"
+              ]
+            },
+            {
+              "prompt": "Avsnitt 2",
+              "answers": [
+                "B"
+              ],
+              "options": [
+                "A",
+                "B",
+                "C"
+              ]
+            },
+            {
+              "prompt": "Avsnitt 3",
+              "answers": [
+                "C"
+              ],
+              "options": [
+                "A",
+                "B",
+                "C"
+              ]
+            }
+          ],
+          "textId": "NO-A2-L01-RD3"
+        },
+        {
+          "id": "NO-A2-L01-R-08",
+          "code": "R-08",
+          "title": "Tekst 3 · Ord i teksten",
+          "instruction": "Velg riktig betydning til hvert ord fra teksten.",
+          "kind": "closed",
+          "items": [
+            {
+              "prompt": "forvirrende",
+              "answers": [
+                "vanskelig å forstå"
+              ],
+              "options": [
+                "sikker på seg selv",
+                "arbeidsperioder på ulike tider",
+                "vanskelig å forstå"
+              ]
+            },
+            {
+              "prompt": "vakter",
+              "answers": [
+                "arbeidsperioder på ulike tider"
+              ],
+              "options": [
+                "sikker på seg selv",
+                "arbeidsperioder på ulike tider",
+                "vanskelig å forstå"
+              ]
+            },
+            {
+              "prompt": "selvsikker",
+              "answers": [
+                "sikker på seg selv"
+              ],
+              "options": [
+                "sikker på seg selv",
+                "arbeidsperioder på ulike tider",
+                "vanskelig å forstå"
+              ]
+            }
+          ],
+          "textId": "NO-A2-L01-RD3"
+        },
+        {
+          "id": "NO-A2-L01-R-09",
+          "code": "R-09",
+          "title": "Tekst 3 · Fakta eller oppfatning?",
+          "instruction": "Skriv F for fakta eller O for oppfatning (det noen mener).",
+          "kind": "closed",
+          "items": [
+            {
+              "prompt": "Livet i Oslo går fortere.",
+              "answers": [
+                "O"
+              ],
+              "options": [
+                "F",
+                "O"
+              ]
+            },
+            {
+              "prompt": "Det virker som folk har det travelt.",
+              "answers": [
+                "O"
+              ],
+              "options": [
+                "F",
+                "O"
+              ]
+            },
+            {
+              "prompt": "Lukas ble med i en fotballgruppe som spiller på søndager.",
+              "answers": [
+                "F"
+              ],
+              "options": [
+                "F",
+                "O"
+              ]
+            },
+            {
+              "prompt": "Han fant en hyggelig kafé i nærheten av leiligheten sin.",
+              "answers": [
+                "F"
+              ],
+              "options": [
+                "F",
+                "O"
+              ]
+            }
+          ],
+          "textId": "NO-A2-L01-RD3"
+        },
+        {
+          "id": "NO-A2-L01-R-10",
+          "code": "R-10",
+          "title": "Tekst 3 · Leseforståelse",
+          "instruction": "Svar på spørsmålene.",
+          "kind": "open",
+          "items": [
+            {
+              "prompt": "Hvor lenge har Lukas bodd i Oslo?",
+              "open": true,
+              "guide": "I to måneder."
+            },
+            {
+              "prompt": "Hvorfor ble han med i en lokal fotballgruppe?",
+              "open": true,
+              "guide": "Fordi han ville få nye venner."
+            },
+            {
+              "prompt": "Hva hjalp ham med å trives bedre i byen?",
+              "open": true,
+              "guide": "Han lærte å planlegge tiden sin, fant en hyggelig kafé i nærheten av leiligheten sin og begynte å trives i byen."
+            },
+            {
+              "prompt": "Hvordan har han det nå?",
+              "open": true,
+              "guide": "Han er mer selvsikker og trives bedre, men han savner fortsatt familien sin."
+            }
+          ],
+          "textId": "NO-A2-L01-RD3"
+        }
+      ]
+    },
+    "listening": {
+      "scenes": [
+        {
+          "id": "L-01",
+          "code": "NO-A2-L01-L01",
+          "title": "L-01 · Tidlige morgener",
+          "context": "Radio-intervju",
+          "lines": [
+            {
+              "speaker": "Programleder",
+              "text": "God morgen! I dag snakker vi om morgenrutiner. Sara, når står du vanligvis opp?"
+            },
+            {
+              "speaker": "Sara",
+              "text": "Jeg står opp klokka fem fordi jeg jobber på et bakeri. Jeg spiser frokost hjemme og går til jobb."
+            },
+            {
+              "speaker": "Programleder",
+              "text": "Liker du å stå opp så tidlig?"
+            },
+            {
+              "speaker": "Sara",
+              "text": "Av og til er det vanskelig, særlig om vinteren. Men jeg slutter på jobb klokka to på ettermiddagen. Da har jeg tid til å treffe venner eller gå en tur."
+            },
+            {
+              "speaker": "Programleder",
+              "text": "Og hva skal du gjøre etter jobb i dag?"
+            },
+            {
+              "speaker": "Sara",
+              "text": "I dag skal jeg møte søsteren min og ta en kaffe."
+            }
+          ],
+          "questions": [
+            {
+              "prompt": "Hva liker Sara med arbeidstiden sin?",
+              "options": [
+                "Hun har tid til aktiviteter på ettermiddagen.",
+                "Hun kan spise frokost på jobb.",
+                "Hun kan sove lenger om morgenen."
+              ],
+              "answer": "Hun har tid til aktiviteter på ettermiddagen."
+            }
+          ]
+        },
+        {
+          "id": "L-02",
+          "code": "NO-A2-L01-L02",
+          "title": "L-02 · Hvor er pakken min?",
+          "context": "Telefonski razgovor",
+          "lines": [
+            {
+              "speaker": "Kunde",
+              "text": "Hei. Jeg ringer om en pakke. Den skal komme i dag, men jeg vet ikke når."
+            },
+            {
+              "speaker": "Kundebehandler",
+              "text": "Jeg skal sjekke. Kan jeg få bestillingsnummeret ditt?"
+            },
+            {
+              "speaker": "Kunde",
+              "text": "Ja, det er 4821."
+            },
+            {
+              "speaker": "Kundebehandler",
+              "text": "Takk. Sjåføren er forsinket fordi det er mye trafikk. Pakken din kommer mellom klokka to og tre i ettermiddag."
+            },
+            {
+              "speaker": "Kunde",
+              "text": "Det går fint. I dag jobber jeg hjemme, så jeg er her."
+            },
+            {
+              "speaker": "Kundebehandler",
+              "text": "Flott. Sjåføren ringer deg før pakken kommer."
+            }
+          ],
+          "questions": [
+            {
+              "prompt": "Hva er bestillingsnummeret?",
+              "options": [
+                "4821",
+                "4281",
+                "4812"
+              ],
+              "answer": "4821"
+            },
+            {
+              "prompt": "Hvorfor er pakken forsinket?",
+              "options": [
+                "Det er mye trafikk.",
+                "Sjåføren er syk.",
+                "Adressen er feil."
+              ],
+              "answer": "Det er mye trafikk."
+            },
+            {
+              "prompt": "Når kommer pakken nå?",
+              "options": [
+                "Mellom klokka 2 og 3 på ettermiddagen.",
+                "Mellom klokka 12 og 2 på ettermiddagen.",
+                "Mellom klokka 3 og 4 på ettermiddagen."
+              ],
+              "answer": "Mellom klokka 2 og 3 på ettermiddagen."
+            }
+          ]
+        },
+        {
+          "id": "L-03",
+          "code": "NO-A2-L01-L03",
+          "title": "L-03 · Vi deler på husarbeidet",
+          "context": "Razgovor cimera",
+          "lines": [
+            {
+              "speaker": "Erik",
+              "text": "Maja, kan vi snakke om husarbeidet? Denne uka har vi begge mye å gjøre."
+            },
+            {
+              "speaker": "Maja",
+              "text": "Ja, klart. I kveld skal jeg vaske klær. Kan du støvsuge gulvet i stua?"
+            },
+            {
+              "speaker": "Erik",
+              "text": "Ikke noe problem. Jeg skal også handle matvarer etter jobb."
+            },
+            {
+              "speaker": "Maja",
+              "text": "Flott. Hva med middagen?"
+            },
+            {
+              "speaker": "Erik",
+              "text": "I kveld skal jeg lage middag, men kan du ta oppvasken etterpå?"
+            },
+            {
+              "speaker": "Maja",
+              "text": "Ja, det går fint. Og ikke glem å gå ut med søpla!"
+            },
+            {
+              "speaker": "Erik",
+              "text": "Det gjør jeg før jeg drar hjemmefra i morgen tidlig."
+            }
+          ],
+          "questions": [
+            {
+              "prompt": "Hvem skal vaske klær?",
+              "options": [
+                "Erik",
+                "Maja"
+              ],
+              "answer": "Maja"
+            },
+            {
+              "prompt": "Hvem skal støvsuge gulvet i stua?",
+              "options": [
+                "Erik",
+                "Maja"
+              ],
+              "answer": "Erik"
+            },
+            {
+              "prompt": "Hvem skal handle matvarer?",
+              "options": [
+                "Erik",
+                "Maja"
+              ],
+              "answer": "Erik"
+            },
+            {
+              "prompt": "Hvem skal lage middag?",
+              "options": [
+                "Erik",
+                "Maja"
+              ],
+              "answer": "Erik"
+            },
+            {
+              "prompt": "Hvem skal ta oppvasken?",
+              "options": [
+                "Erik",
+                "Maja"
+              ],
+              "answer": "Maja"
+            },
+            {
+              "prompt": "Hvem skal gå ut med søpla?",
+              "options": [
+                "Erik",
+                "Maja"
+              ],
+              "answer": "Erik"
+            }
+          ]
+        },
+        {
+          "id": "L-04",
+          "code": "NO-A2-L01-L04",
+          "title": "L-04 · Toget er forsinket",
+          "context": "Obaveštenje na stanici",
+          "lines": [
+            {
+              "speaker": "Høyttalerstemme",
+              "text": "God morgen, alle reisende. Toget til Bergen går vanligvis klokka ti førtifem. I dag er det omtrent tjue minutter forsinket. Det går nå klokka elleve null fem fra spor 3."
+            },
+            {
+              "speaker": "Høyttalerstemme",
+              "text": "Toget til Trondheim går fra spor 5 om fem minutter. Reisende til Trondheim må gå til spor 5 nå."
+            },
+            {
+              "speaker": "Høyttalerstemme",
+              "text": "Følg med på nye beskjeder. Takk."
+            }
+          ],
+          "questions": [
+            {
+              "prompt": "Når går toget til Bergen?",
+              "options": [
+                "10:45",
+                "11:05",
+                "11:15"
+              ],
+              "answer": "11:05"
+            },
+            {
+              "prompt": "Hvilket spor går toget til Bergen fra?",
+              "options": [
+                "Spor 2",
+                "Spor 3",
+                "Spor 5"
+              ],
+              "answer": "Spor 3"
+            },
+            {
+              "prompt": "Hvilket tog går om fem minutter?",
+              "options": [
+                "Toget til Bergen",
+                "Toget til Trondheim",
+                "Begge togene"
+              ],
+              "answer": "Toget til Trondheim"
+            }
+          ]
+        },
+        {
+          "id": "L-05",
+          "code": "NO-A2-L01-L05",
+          "title": "L-05 · Bestille en legetime",
+          "context": "Telefonski razgovor",
+          "lines": [
+            {
+              "speaker": "Resepsjonist",
+              "text": "God morgen. Du har kommet til Grønnegata legesenter."
+            },
+            {
+              "speaker": "Pasient",
+              "text": "Hei. Jeg vil gjerne ha en legetime i morgen. Har dere noen ledige timer?"
+            },
+            {
+              "speaker": "Resepsjonist",
+              "text": "Vi har en ledig time klokka halv ti om morgenen."
+            },
+            {
+              "speaker": "Pasient",
+              "text": "Jeg begynner vanligvis på jobb klokka ni, så det passer ikke så godt."
+            },
+            {
+              "speaker": "Resepsjonist",
+              "text": "Hva med kvart over fire på ettermiddagen?"
+            },
+            {
+              "speaker": "Pasient",
+              "text": "Det passer bedre. Jeg slutter på jobb klokka halv fire."
+            },
+            {
+              "speaker": "Resepsjonist",
+              "text": "Da har du time i morgen klokka kvart over fire. Kom ti minutter før timen."
+            }
+          ],
+          "questions": [
+            {
+              "prompt": "Pasienten vil ha en legetime i dag.",
+              "options": [
+                "Sant",
+                "Usant"
+              ],
+              "answer": "Usant"
+            },
+            {
+              "prompt": "Den første timen passer ikke så godt fordi pasienten er på jobb.",
+              "options": [
+                "Sant",
+                "Usant"
+              ],
+              "answer": "Sant"
+            },
+            {
+              "prompt": "Pasienten slutter på jobb før klokka fire.",
+              "options": [
+                "Sant",
+                "Usant"
+              ],
+              "answer": "Sant"
+            },
+            {
+              "prompt": "Pasienten skal komme til legesenteret klokka 4:15 på ettermiddagen.",
+              "options": [
+                "Sant",
+                "Usant"
+              ],
+              "answer": "Usant",
+              "explanation": "Treba doći deset minuta ranije, u 4:05."
+            }
+          ]
+        },
+        {
+          "id": "L-06",
+          "code": "NO-A2-L01-L06",
+          "title": "L-06 · Prøve noe nytt",
+          "context": "Podcast-intervju — dve rečenice su tačne",
+          "lines": [
+            {
+              "speaker": "Programleder",
+              "text": "I dag snakker vi med Henrik om den nye hobbyen hans. Henrik, hva driver du med for tiden?"
+            },
+            {
+              "speaker": "Henrik",
+              "text": "Jeg tar klatretimer på et idrettssenter."
+            },
+            {
+              "speaker": "Programleder",
+              "text": "Er dette første gang du prøver å klatre?"
+            },
+            {
+              "speaker": "Henrik",
+              "text": "Ja! Vanligvis jogger jeg, men jeg ville prøve noe nytt. Klatring er vanskeligere enn jeg trodde."
+            },
+            {
+              "speaker": "Programleder",
+              "text": "Hva liker du med det?"
+            },
+            {
+              "speaker": "Henrik",
+              "text": "Jeg liker å lære nye ting og få nye venner. Alle er veldig hyggelige."
+            },
+            {
+              "speaker": "Programleder",
+              "text": "Skal du tilbake neste uke?"
+            },
+            {
+              "speaker": "Henrik",
+              "text": "Ja, jeg har allerede bestilt en ny time på lørdag."
+            }
+          ],
+          "questions": [
+            {
+              "prompt": "Henrik pleier å jogge.",
+              "options": [
+                "Sant",
+                "Usant"
+              ],
+              "answer": "Sant"
+            },
+            {
+              "prompt": "Henrik tar klatretimer sammen med de gamle vennene sine.",
+              "options": [
+                "Sant",
+                "Usant"
+              ],
+              "answer": "Usant"
+            },
+            {
+              "prompt": "Henrik synes klatring er lettere enn han trodde.",
+              "options": [
+                "Sant",
+                "Usant"
+              ],
+              "answer": "Usant"
+            },
+            {
+              "prompt": "Henrik liker å møte folk på idrettssenteret.",
+              "options": [
+                "Sant",
+                "Usant"
+              ],
+              "answer": "Sant"
+            },
+            {
+              "prompt": "Henrik planlegger å slutte med klatring.",
+              "options": [
+                "Sant",
+                "Usant"
+              ],
+              "answer": "Usant"
+            }
+          ]
+        },
+        {
+          "id": "L-07",
+          "code": "NO-A2-L01-L07",
+          "title": "L-07 · Nyheter fra biblioteket",
+          "context": "Snimljeno obaveštenje",
+          "lines": [
+            {
+              "speaker": "Oppleser",
+              "text": "Hei, og velkommen til Majorstuen bibliotek."
+            },
+            {
+              "speaker": "Oppleser",
+              "text": "Vanligvis har vi åpent fra klokka ni om morgenen til klokka seks om kvelden, mandag til fredag."
+            },
+            {
+              "speaker": "Oppleser",
+              "text": "Denne torsdagen stenger biblioteket klokka fire fordi vi har et personalmøte."
+            },
+            {
+              "speaker": "Oppleser",
+              "text": "På lørdag arrangerer vi et gratis bokbytte. Det begynner klokka ti og slutter klokka ett."
+            },
+            {
+              "speaker": "Oppleser",
+              "text": "Du kan ta med bøker du ikke leser lenger, og velge noen andre bøker å ta med hjem."
+            },
+            {
+              "speaker": "Oppleser",
+              "text": "Vi håper å se deg der!"
+            }
+          ],
+          "questions": [
+            {
+              "prompt": "Når stenger biblioteket vanligvis?",
+              "options": [
+                "Klokka 18",
+                "Klokka 16",
+                "Klokka 17"
+              ],
+              "answer": "Klokka 18"
+            },
+            {
+              "prompt": "Når stenger biblioteket denne torsdagen?",
+              "options": [
+                "Klokka 16",
+                "Klokka 18",
+                "Klokka 13"
+              ],
+              "answer": "Klokka 16"
+            },
+            {
+              "prompt": "Når er bokbyttet på lørdag?",
+              "options": [
+                "10:00–13:00",
+                "09:00–13:00",
+                "10:00–16:00"
+              ],
+              "answer": "10:00–13:00"
+            }
+          ]
+        },
+        {
+          "id": "L-08",
+          "code": "NO-A2-L01-L08",
+          "title": "L-08 · Bestemors bursdag",
+          "context": "Govorna poruka",
+          "lines": [
+            {
+              "speaker": "Taleren",
+              "text": "Hei, tante Kari! Jeg ringer om bestemors bursdag på søndag."
+            },
+            {
+              "speaker": "Taleren",
+              "text": "Vi skal spise lunsj hjemme hos foreldrene mine klokka ett. Pappa lager maten, og jeg lager en sjokoladekake."
+            },
+            {
+              "speaker": "Taleren",
+              "text": "Broren min pynter stua med ballonger. Mamma dekker bordet."
+            },
+            {
+              "speaker": "Taleren",
+              "text": "Kan du ta med noe å drikke, er du snill? Vi har allerede alt det andre."
+            },
+            {
+              "speaker": "Taleren",
+              "text": "Og ikke fortell bestemor om kaken. Det er en overraskelse!"
+            },
+            {
+              "speaker": "Taleren",
+              "text": "Vi ses på søndag!"
+            }
+          ],
+          "questions": [
+            {
+              "prompt": "Hvem lager lunsj?",
+              "options": [
+                "Pappa",
+                "Den som snakker",
+                "Broren",
+                "Mamma",
+                "Tante Kari"
+              ],
+              "answer": "Pappa"
+            },
+            {
+              "prompt": "Hvem lager en kake?",
+              "options": [
+                "Pappa",
+                "Den som snakker",
+                "Broren",
+                "Mamma",
+                "Tante Kari"
+              ],
+              "answer": "Den som snakker"
+            },
+            {
+              "prompt": "Hvem pynter stua?",
+              "options": [
+                "Pappa",
+                "Den som snakker",
+                "Broren",
+                "Mamma",
+                "Tante Kari"
+              ],
+              "answer": "Broren"
+            },
+            {
+              "prompt": "Hvem dekker bordet?",
+              "options": [
+                "Pappa",
+                "Den som snakker",
+                "Broren",
+                "Mamma",
+                "Tante Kari"
+              ],
+              "answer": "Mamma"
+            },
+            {
+              "prompt": "Hvem skal ta med noe å drikke?",
+              "options": [
+                "Pappa",
+                "Den som snakker",
+                "Broren",
+                "Mamma",
+                "Tante Kari"
+              ],
+              "answer": "Tante Kari"
+            }
+          ]
+        },
+        {
+          "id": "L-09",
+          "code": "NO-A2-L01-L09",
+          "title": "L-09 · Mitt nye nabolag",
+          "context": "Lični govorni dnevnik",
+          "lines": [
+            {
+              "speaker": "Taleren",
+              "text": "Nå har jeg bodd i dette nabolaget i tre uker. I begynnelsen var alt nytt, og jeg visste ikke hvor butikkene var."
+            },
+            {
+              "speaker": "Taleren",
+              "text": "Nå begynner jeg å bli vant til området. Det er en liten matbutikk i nærheten av leiligheten min og en fin park på den andre siden av veien."
+            },
+            {
+              "speaker": "Taleren",
+              "text": "Etter middag pleier jeg å gå en tur. Jeg prøver også å få nye venner, så denne måneden begynner jeg på et yogakurs."
+            },
+            {
+              "speaker": "Taleren",
+              "text": "Trafikken bråker fortsatt ganske mye, men jeg liker å bo her."
+            }
+          ],
+          "questions": [
+            {
+              "prompt": "Når visste den som snakker, ikke hvor butikkene var?",
+              "options": [
+                "I begynnelsen",
+                "Nå / vanligvis",
+                "Denne måneden"
+              ],
+              "answer": "I begynnelsen"
+            },
+            {
+              "prompt": "Når går den som snakker, en tur etter middag?",
+              "options": [
+                "I begynnelsen",
+                "Nå / vanligvis",
+                "Denne måneden"
+              ],
+              "answer": "Nå / vanligvis"
+            },
+            {
+              "prompt": "Når begynner den som snakker, på et yogakurs?",
+              "options": [
+                "I begynnelsen",
+                "Nå / vanligvis",
+                "Denne måneden"
+              ],
+              "answer": "Denne måneden"
+            },
+            {
+              "prompt": "Når føler den som snakker, seg mer hjemme i området?",
+              "options": [
+                "I begynnelsen",
+                "Nå / vanligvis",
+                "Denne måneden"
+              ],
+              "answer": "Nå / vanligvis"
+            },
+            {
+              "prompt": "Når syntes den som snakker, at alt i nabolaget var nytt?",
+              "options": [
+                "I begynnelsen",
+                "Nå / vanligvis",
+                "Denne måneden"
+              ],
+              "answer": "I begynnelsen"
+            }
+          ]
+        },
+        {
+          "id": "L-10",
+          "code": "NO-A2-L01-L10",
+          "title": "L-10 · Tre forskjellige liv",
+          "context": "Tri kratka monologa",
+          "lines": [
+            {
+              "speaker": "Ragnhild",
+              "text": "Vanligvis ser jeg på TV etter middag, men for tiden går jeg på matlagingskurs to kvelder i uka. Jeg lærer å lage forskjellige retter, og jeg liker det veldig godt."
+            },
+            {
+              "speaker": "Jakob",
+              "text": "Jeg pleier å ta bussen til jobb, men nå sykler jeg oftere. Det tar omtrent tjuefem minutter, nesten like lang tid som med bussen. Jeg føler meg mye bedre når jeg kommer på jobb."
+            },
+            {
+              "speaker": "Oda",
+              "text": "Nå bor familien min i et mindre hus utenfor byen. Her er det roligere, og vi har en fin hage som jeg liker godt. Det eneste problemet er at skoleveien min er lengre enn før."
+            }
+          ],
+          "questions": [
+            {
+              "prompt": "Hvem lærer å lage nye retter?",
+              "options": [
+                "Ragnhild",
+                "Jakob",
+                "Oda"
+              ],
+              "answer": "Ragnhild"
+            },
+            {
+              "prompt": "Hvem har endret måten de reiser til jobb på?",
+              "options": [
+                "Ragnhild",
+                "Jakob",
+                "Oda"
+              ],
+              "answer": "Jakob"
+            },
+            {
+              "prompt": "Hvem bor lenger unna skolen nå?",
+              "options": [
+                "Ragnhild",
+                "Jakob",
+                "Oda"
+              ],
+              "answer": "Oda"
+            },
+            {
+              "prompt": "Hvem driver med en ny aktivitet om kvelden?",
+              "options": [
+                "Ragnhild",
+                "Jakob",
+                "Oda"
+              ],
+              "answer": "Ragnhild"
+            },
+            {
+              "prompt": "Hvem liker å ha en hage?",
+              "options": [
+                "Ragnhild",
+                "Jakob",
+                "Oda"
+              ],
+              "answer": "Oda"
+            }
+          ]
+        }
+      ]
+    },
+    "writing": {
+      "exercises": [
+        {
+          "id": "NO-A2-L01-WR-01",
+          "code": "WR-01",
+          "title": "Beskriv bildet",
+          "image": "a2:wr01",
+          "instruction": "Se på bildet og beskriv hva personene gjør. (70–90 ord)",
+          "kind": "open",
+          "items": [
+            {
+              "prompt": "Tvoj opis slike (70–90 reči, na norveškom)",
+              "open": true,
+              "guiding": [
+                "Hvor er personene?",
+                "Hva gjør hver person?",
+                "Hvilke ting kan du se?",
+                "Hva tror du de forbereder seg til?"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "NO-A2-L01-WR-02",
+          "code": "WR-02",
+          "title": "Min vanlige arbeidsdag",
+          "instruction": "Beskriv en vanlig arbeidsdag. Hvis du ikke jobber, kan du beskrive en vanlig dag på skolen eller med studier. (70–90 ord)",
+          "kind": "open",
+          "items": [
+            {
+              "prompt": "Tvoj tekst (70–90 reči, na norveškom)",
+              "open": true,
+              "guiding": [
+                "Når står du vanligvis opp?",
+                "Hvordan gjør du deg klar for dagen?",
+                "Hva gjør du på jobb eller på skolen?",
+                "Hva gjør du vanligvis etter jobb eller undervisning?",
+                "Gjør du noe annerledes denne uka?"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "pronunciation": {
+      "theory": [
+        {
+          "title": "Vokallengde – dužina samoglasnika",
+          "text": "U norveškom jeziku dužina samoglasnika može promeniti značenje reči. U naglašenim slogovima kratki vokali se često nalaze ispred dva ista suglasnička slova, a dugi ispred jednog. To je korisna pravopisno-fonetska smernica, ne univerzalno pravilo. Klikni na reč da je čuješ.",
+          "pairHeads": [
+            "Dugi vokal",
+            "Kratki vokal"
+          ],
+          "pairs": [
+            {
+              "full": "tak",
+              "fullNote": "krov",
+              "short": "takk",
+              "shortNote": "hvala"
+            },
+            {
+              "full": "hat",
+              "fullNote": "mržnja",
+              "short": "hatt",
+              "shortNote": "šešir"
+            },
+            {
+              "full": "fin",
+              "fullNote": "lep",
+              "short": "finn",
+              "shortNote": "pronađi (imperativ)"
+            },
+            {
+              "full": "mat",
+              "fullNote": "hrana",
+              "short": "matt",
+              "shortNote": "matiran / bez sjaja"
+            },
+            {
+              "full": "pen",
+              "fullNote": "lep, uredan",
+              "short": "penn",
+              "shortNote": "olovka"
+            }
+          ]
+        },
+        {
+          "title": "Ordtrykk – naglasak reči",
+          "text": "U norveškim rečima jedan slog je obično naglašeniji od ostalih. Klikni na reč da je čuješ.",
+          "examples": [
+            {
+              "sentence": "morgen",
+              "display": "MOR-gen"
+            },
+            {
+              "sentence": "arbeid",
+              "display": "AR-beid"
+            },
+            {
+              "sentence": "leilighet",
+              "display": "LEI-lig-het"
+            },
+            {
+              "sentence": "begynne",
+              "display": "be-GYN-ne"
+            },
+            {
+              "sentence": "studere",
+              "display": "stu-DE-re"
+            }
+          ],
+          "note": "Pisano isticanje je samo nastavno pomagalo — merodavan je izgovor u audio-modelu."
+        },
+        {
+          "title": "Setningsrytme – ritam rečenice",
+          "text": "Određene reči ili delovi rečenice mogu biti istaknutiji, u zavisnosti od informacije koju govornik želi da naglasi.",
+          "examples": [
+            {
+              "sentence": "Jeg tar bussen til jobb.",
+              "say": "Jeg tar BUSSEN til jobb.",
+              "stressed": [
+                "bussen"
+              ],
+              "meaning": "Naglašava se prevozno sredstvo."
+            },
+            {
+              "sentence": "Jeg tar bussen til jobb.",
+              "say": "Jeg tar bussen til JOBB.",
+              "stressed": [
+                "jobb"
+              ],
+              "meaning": "Naglašava se odredište."
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "code": "P-01",
+          "title": "Lang eller kort vokal?",
+          "type": "choose",
+          "xp": 1,
+          "requireCorrect": true,
+          "instruction": "Poslušaj reč i odredi da li čuješ dug ili kratak samoglasnik.",
+          "okMsg": "Tačno! Prepoznao/la si dužinu samoglasnika.",
+          "wrongMsg": "Obrati pažnju na trajanje naglašenog samoglasnika. Poslušaj još jednom.",
+          "items": [
+            {
+              "say": "tak",
+              "options": [
+                "Lang vokal",
+                "Kort vokal"
+              ],
+              "answer": "Lang vokal",
+              "reveal": "tak"
+            },
+            {
+              "say": "takk",
+              "options": [
+                "Lang vokal",
+                "Kort vokal"
+              ],
+              "answer": "Kort vokal",
+              "reveal": "takk"
+            },
+            {
+              "say": "fin",
+              "options": [
+                "Lang vokal",
+                "Kort vokal"
+              ],
+              "answer": "Lang vokal",
+              "reveal": "fin"
+            },
+            {
+              "say": "finn",
+              "options": [
+                "Lang vokal",
+                "Kort vokal"
+              ],
+              "answer": "Kort vokal",
+              "reveal": "finn"
+            },
+            {
+              "say": "pen",
+              "options": [
+                "Lang vokal",
+                "Kort vokal"
+              ],
+              "answer": "Lang vokal",
+              "reveal": "pen"
+            }
+          ],
+          "compareOnly": true
+        },
+        {
+          "code": "P-02",
+          "title": "Hvilket ord hører du?",
+          "type": "choose",
+          "xp": 1,
+          "requireCorrect": true,
+          "shuffle": true,
+          "optionAudio": "after",
+          "instruction": "Poslušaj audio-snimak i izaberi reč koju čuješ. Posle odgovora možeš da poslušaš obe reči iz para.",
+          "items": [
+            {
+              "say": "takk",
+              "options": [
+                {
+                  "label": "tak",
+                  "say": "tak"
+                },
+                {
+                  "label": "takk",
+                  "say": "takk"
+                }
+              ],
+              "answer": "takk"
+            },
+            {
+              "say": "hatt",
+              "options": [
+                {
+                  "label": "hat",
+                  "say": "hat"
+                },
+                {
+                  "label": "hatt",
+                  "say": "hatt"
+                }
+              ],
+              "answer": "hatt"
+            },
+            {
+              "say": "fin",
+              "options": [
+                {
+                  "label": "fin",
+                  "say": "fin"
+                },
+                {
+                  "label": "finn",
+                  "say": "finn"
+                }
+              ],
+              "answer": "fin"
+            },
+            {
+              "say": "matt",
+              "options": [
+                {
+                  "label": "mat",
+                  "say": "mat"
+                },
+                {
+                  "label": "matt",
+                  "say": "matt"
+                }
+              ],
+              "answer": "matt"
+            },
+            {
+              "say": "penn",
+              "options": [
+                {
+                  "label": "pen",
+                  "say": "pen"
+                },
+                {
+                  "label": "penn",
+                  "say": "penn"
+                }
+              ],
+              "answer": "penn"
+            }
+          ],
+          "compareOnly": true
+        },
+        {
+          "code": "P-03",
+          "title": "Lytt, gjenta og ta opp",
+          "type": "record",
+          "xp": 1,
+          "compareOnly": true,
+          "checklist": [
+            "Razumljivost",
+            "Dužina ciljanog vokala",
+            "Jasnoća izgovora cele rečenice"
+          ],
+          "instruction": "Poslušaj rečenicu, ponovi je naglas i snimi svoj izgovor. Obrati posebnu pažnju na istaknutu reč.",
+          "items": [
+            {
+              "say": "Takk for hjelpen!",
+              "focus": "Takk"
+            },
+            {
+              "say": "Hun har en fin leilighet.",
+              "focus": "fin"
+            },
+            {
+              "say": "Kan du finne en penn?",
+              "focus": "penn"
+            },
+            {
+              "say": "Vi lager mat hjemme.",
+              "focus": "mat"
+            },
+            {
+              "say": "Han har en svart hatt.",
+              "focus": "hatt"
+            }
+          ]
+        },
+        {
+          "code": "P-04",
+          "title": "Samme eller forskjellig?",
+          "type": "choose",
+          "xp": 1,
+          "requireCorrect": true,
+          "instruction": "Poslušaj dve reči i odredi da li zvuče isto ili različito.",
+          "items": [
+            {
+              "say": "tak",
+              "sayB": "takk",
+              "options": [
+                "Samme",
+                "Forskjellig"
+              ],
+              "answer": "Forskjellig",
+              "reveal": "tak – takk"
+            },
+            {
+              "say": "fin",
+              "sayB": "fin",
+              "options": [
+                "Samme",
+                "Forskjellig"
+              ],
+              "answer": "Samme",
+              "reveal": "fin – fin"
+            },
+            {
+              "say": "mat",
+              "sayB": "matt",
+              "options": [
+                "Samme",
+                "Forskjellig"
+              ],
+              "answer": "Forskjellig",
+              "reveal": "mat – matt"
+            },
+            {
+              "say": "penn",
+              "sayB": "penn",
+              "options": [
+                "Samme",
+                "Forskjellig"
+              ],
+              "answer": "Samme",
+              "reveal": "penn – penn"
+            },
+            {
+              "say": "hat",
+              "sayB": "hatt",
+              "options": [
+                "Samme",
+                "Forskjellig"
+              ],
+              "answer": "Forskjellig",
+              "reveal": "hat – hatt"
+            }
+          ],
+          "compareOnly": true
+        },
+        {
+          "code": "P-05",
+          "title": "Hvor ligger trykket?",
+          "type": "choose",
+          "xp": 1,
+          "requireCorrect": true,
+          "instruction": "Poslušaj reč i izaberi slog koji nosi glavni naglasak.",
+          "items": [
+            {
+              "say": "morgen",
+              "options": [
+                "mor",
+                "gen"
+              ],
+              "answer": "mor",
+              "reveal": "MOR-gen"
+            },
+            {
+              "say": "arbeid",
+              "options": [
+                "ar",
+                "beid"
+              ],
+              "answer": "ar",
+              "reveal": "AR-beid"
+            },
+            {
+              "say": "leilighet",
+              "options": [
+                "lei",
+                "lig",
+                "het"
+              ],
+              "answer": "lei",
+              "reveal": "LEI-lig-het"
+            },
+            {
+              "say": "begynne",
+              "options": [
+                "be",
+                "gyn",
+                "ne"
+              ],
+              "answer": "gyn",
+              "reveal": "be-GYN-ne"
+            },
+            {
+              "say": "studere",
+              "options": [
+                "stu",
+                "de",
+                "re"
+              ],
+              "answer": "de",
+              "reveal": "stu-DE-re"
+            }
+          ],
+          "compareOnly": true
+        },
+        {
+          "code": "P-06",
+          "title": "Hva legger personen vekt på?",
+          "type": "choose",
+          "xp": 1,
+          "requireCorrect": true,
+          "instruction": "Poslušaj rečenicu i odredi koju informaciju govornik posebno naglašava.",
+          "items": [
+            {
+              "prompt": "Šta govornik naglašava?",
+              "say": "Jeg tar BUSSEN til jobb.",
+              "options": [
+                "Prevozno sredstvo",
+                "Odredište",
+                "Ko ide na posao"
+              ],
+              "answer": "Prevozno sredstvo",
+              "reveal": "Jeg tar BUSSEN til jobb.",
+              "explain": "Naglašena reč „bussen“ stavlja fokus na prevozno sredstvo — autobus, a ne nešto drugo."
+            },
+            {
+              "prompt": "Šta govornik naglašava?",
+              "say": "Jeg tar bussen til JOBB.",
+              "options": [
+                "Kada putuje",
+                "Kuda putuje",
+                "Kojim prevozom putuje"
+              ],
+              "answer": "Kuda putuje",
+              "reveal": "Jeg tar bussen til JOBB.",
+              "explain": "Naglašena reč „jobb“ stavlja fokus na odredište — na posao, a ne negde drugde."
+            },
+            {
+              "prompt": "Šta govornik naglašava?",
+              "say": "MARIA lager middag i dag.",
+              "options": [
+                "Ko sprema večeru",
+                "Šta sprema",
+                "Kada sprema večeru"
+              ],
+              "answer": "Ko sprema večeru",
+              "reveal": "MARIA lager middag i dag.",
+              "explain": "Naglašeno ime „Maria“ ističe ko sprema večeru."
+            },
+            {
+              "prompt": "Šta govornik naglašava?",
+              "say": "Maria lager MIDDAG i dag.",
+              "options": [
+                "Ko sprema hranu",
+                "Šta sprema",
+                "Gde sprema hranu"
+              ],
+              "answer": "Šta sprema",
+              "reveal": "Maria lager MIDDAG i dag.",
+              "explain": "Naglašena reč „middag“ ističe šta Maria sprema."
+            },
+            {
+              "prompt": "Šta govornik naglašava?",
+              "say": "Vi møtes på FREDAG.",
+              "options": [
+                "Ko se sastaje",
+                "Gde se sastaju",
+                "Kada se sastaju"
+              ],
+              "answer": "Kada se sastaju",
+              "reveal": "Vi møtes på FREDAG.",
+              "explain": "Naglašena reč „fredag“ ističe kada je sastanak."
+            }
+          ],
+          "compareOnly": true
+        },
+        {
+          "code": "P-07",
+          "title": "Følg rytmen",
+          "type": "record",
+          "xp": 1,
+          "compareOnly": true,
+          "checklist": [
+            "Tečnost",
+            "Pauze",
+            "Ritam",
+            "Razumljivost"
+          ],
+          "instruction": "Poslušaj rečenicu i odmah je ponovi, pokušavajući da pratiš tempo i ritam govornika.",
+          "items": [
+            {
+              "say": "Jeg står vanligvis opp klokka sju.",
+              "stressNote": "STÅR · OPP · SJU"
+            },
+            {
+              "say": "Etter jobb går vi en tur.",
+              "stressNote": "JOBB · TUR"
+            },
+            {
+              "say": "På mandager tar jeg bussen.",
+              "stressNote": "MANDAGER · BUSSEN"
+            },
+            {
+              "say": "I dag jobber søsteren min hjemme.",
+              "stressNote": "DAG · SØSTEREN · HJEMME"
+            },
+            {
+              "say": "Om kvelden leser jeg ofte en bok.",
+              "stressNote": "KVELDEN · LESER · BOK"
+            }
+          ]
+        },
+        {
+          "code": "P-08",
+          "title": "Ordtrykk i hverdagen",
+          "type": "choose",
+          "xp": 1,
+          "requireCorrect": true,
+          "compareOnly": true,
+          "instruction": "Poslušaj reč, označi naglašeni slog i ponovi je naglas.",
+          "items": [
+            {
+              "say": "frokost",
+              "options": [
+                "fro",
+                "kost"
+              ],
+              "answer": "fro",
+              "reveal": "FRO-kost",
+              "repeat": "frokost",
+              "explain": "Naglasak je na slogu „fro“: FRO-kost."
+            },
+            {
+              "say": "middag",
+              "options": [
+                "mid",
+                "dag"
+              ],
+              "answer": "mid",
+              "reveal": "MID-dag",
+              "repeat": "middag",
+              "explain": "Naglasak je na slogu „mid“: MID-dag."
+            },
+            {
+              "say": "leilighet",
+              "options": [
+                "lei",
+                "lig",
+                "het"
+              ],
+              "answer": "lei",
+              "reveal": "LEI-lig-het",
+              "repeat": "leilighet",
+              "explain": "Naglasak je na slogu „lei“: LEI-lig-het."
+            },
+            {
+              "say": "arbeid",
+              "options": [
+                "ar",
+                "beid"
+              ],
+              "answer": "ar",
+              "reveal": "AR-beid",
+              "repeat": "arbeid",
+              "explain": "Naglasak je na slogu „ar“: AR-beid."
+            },
+            {
+              "say": "universitet",
+              "options": [
+                "u",
+                "ni",
+                "ver",
+                "si",
+                "tet"
+              ],
+              "answer": "tet",
+              "reveal": "u-ni-ver-si-TET",
+              "repeat": "universitet",
+              "explain": "Naglasak je na slogu „tet“: u-ni-ver-si-TET."
+            }
+          ]
+        },
+        {
+          "code": "P-09",
+          "title": "Snakk naturlig!",
+          "type": "record",
+          "xp": 1,
+          "compareOnly": true,
+          "checklist": [
+            "Da li je iskaz razumljiv?",
+            "Da li je naglašavanje prirodno?",
+            "Da li je ritam približan modelu?",
+            "Da li su ciljani vokali dovoljno jasno izgovoreni?"
+          ],
+          "instruction": "Poslušaj rečenice i ponovi ih što prirodnije. Obrati pažnju na izgovor važnih reči, ali nemoj izgovarati svaku reč podjednako naglašeno.",
+          "items": [
+            {
+              "say": "Takk, vi ses i morgen!"
+            },
+            {
+              "say": "Kan du finne en penn til meg?"
+            },
+            {
+              "say": "Etter middag går vi en tur."
+            },
+            {
+              "say": "På tirsdager trener jeg på treningssenteret."
+            },
+            {
+              "say": "I helgen skal vi besøke familien."
+            }
+          ]
+        },
+        {
+          "code": "P-10",
+          "title": "Min hverdag – Final Pronunciation Challenge",
+          "type": "record",
+          "xp": 1,
+          "compareOnly": true,
+          "maxMs": 60000,
+          "checklist": [
+            "Vokallengde: da li se čuje razlika između dugih i kratkih samoglasnika (npr. „tar“, „middag“)?",
+            "Ordtrykk: da li je naglasak na pravom slogu (FRO-kost, MID-dag)?",
+            "Setningsrytme: da li važne reči nose naglasak, a ostale teku brže i slabije?"
+          ],
+          "tip": "Savet za sledeći pokušaj: snimi tekst rečenicu po rečenicu uz model, pa ceo tekst još jednom bez zaustavljanja.",
+          "instruction": "Poslušaj kratak tekst. Zatim ga pročitaj naglas i snimi ceo iskaz. Obrati pažnju na dužinu samoglasnika, naglasak reči i prirodan ritam.",
+          "items": [
+            {
+              "say": "Jeg står vanligvis opp klokka sju. Etter frokost tar jeg bussen til jobb. I lunsjpausen møter jeg ofte kollegene mine. Etter jobb lager jeg middag hjemme. Om kvelden leser jeg en bok eller går en tur.",
+              "sentences": [
+                "Jeg står vanligvis opp klokka sju.",
+                "Etter frokost tar jeg bussen til jobb.",
+                "I lunsjpausen møter jeg ofte kollegene mine.",
+                "Etter jobb lager jeg middag hjemme.",
+                "Om kvelden leser jeg en bok eller går en tur."
+              ],
+              "showText": true
+            }
+          ]
+        }
+      ]
+    },
+    "speaking": {
+      "tasks": [],
+      "roleswitch": []
+    },
+    "culture": {
+      "title": "",
+      "body": ""
+    },
+    "review": {
+      "quiz": []
+    }
+  }
+}
