@@ -48,3 +48,21 @@ export async function saveToMyDictionary(userId: string, language: string, entry
     if (error) throw error;
   }
 }
+
+export interface DictEntry { linkId: string; wordId: string; word: string; translation: string; example: string | null; pos: string | null; topic: string; created_at: string }
+
+export async function listMyDictionary(userId: string, language: string): Promise<DictEntry[]> {
+  const { data: col } = await supabase.from("word_collections").select("id").eq("user_id", userId).eq("language", language).eq("name", MY_DICTIONARY).maybeSingle();
+  if (!col) return [];
+  const { data } = await supabase.from("collection_words").select("id, vocabulary_words(id, word, translation, example_sentence, word_type, topic, created_at)").eq("collection_id", col.id);
+  return ((data || []) as any[]).filter((r) => r.vocabulary_words).map((r) => ({
+    linkId: r.id, wordId: r.vocabulary_words.id, word: r.vocabulary_words.word, translation: r.vocabulary_words.translation,
+    example: r.vocabulary_words.example_sentence, pos: r.vocabulary_words.word_type, topic: r.vocabulary_words.topic, created_at: r.vocabulary_words.created_at,
+  })).sort((a, b) => b.created_at.localeCompare(a.created_at));
+}
+
+/** Removes the word from "Moj rečnik" only; the word itself stays in the learner's vocabulary. */
+export async function removeFromMyDictionary(linkId: string) {
+  const { error } = await supabase.from("collection_words").delete().eq("id", linkId);
+  if (error) throw error;
+}
