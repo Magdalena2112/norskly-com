@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, BookOpen, HeartPulse, ClipboardCheck } from "lucide-react";
 import { CEFR_LEVELS, type CefrLevel } from "@/lib/levels";
-import { courseStartLevel } from "@/lib/courseAccess";
+import { courseStartLevel, promoAvailableLevels } from "@/lib/courseAccess";
 
 type Course = {
   id: string;
@@ -30,6 +30,8 @@ const COURSES: Record<string, Course[]> = {
   ],
 };
 
+const SLUG_TO_CODE: Record<string, string> = { norveski: "no", engleski: "en", nemacki: "de" };
+
 export default function CourseTypeSection({ slug, onSelect }: { slug: string; onSelect: (courseId: string, level: CefrLevel) => void }) {
   const [selectedLevels, setSelectedLevels] = useState<Record<string, CefrLevel>>({});
   const courses = COURSES[slug] ?? [];
@@ -43,7 +45,9 @@ export default function CourseTypeSection({ slug, onSelect }: { slug: string; on
           <p className="text-muted-foreground mt-3">Svaki kurs ima zaseban pristup i napredak.</p>
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {courses.map((c) => (
+          {courses.map((c) => {
+            const courseType = c.id === "health" ? "health" : "general";
+            const promo = promoAvailableLevels(SLUG_TO_CODE[slug] ?? "", courseType);
             <Card key={c.id} className={`rounded-3xl h-full ${c.status === "soon" ? "border-dashed bg-background/50" : "hover:shadow-soft"}`}>
               <CardContent className="p-6 flex flex-col h-full">
                 <div className="flex items-center justify-between mb-4">
@@ -62,16 +66,17 @@ export default function CourseTypeSection({ slug, onSelect }: { slug: string; on
                     <p className="text-sm font-medium text-foreground mb-2">Početni nivo</p>
                     <div className="grid grid-cols-5 gap-1.5" role="group" aria-label={`Početni nivo · ${c.title}`}>
                       {CEFR_LEVELS.map((level) => {
-                        const available = c.id !== "health" || level === "B1";
-                        const selected = courseStartLevel(selectedLevels[c.id], c.id === "health" ? "health" : "general") === level;
+                        const available = promo ? promo.includes(level) : courseType === "general";
+                        const selected = courseStartLevel(selectedLevels[c.id], courseType, promo) === level;
                         return <Button key={level} size="sm" variant={selected ? "default" : "outline"} className="px-0 min-w-0" aria-pressed={selected} disabled={!available} title={available ? level : `${level} · U pripremi`} onClick={() => setSelectedLevels((prev) => ({ ...prev, [c.id]: level }))}>{level}</Button>;
                       })}
                     </div>
                     {c.id === "health" && <p className="text-xs text-muted-foreground mt-2 leading-relaxed">Tokom promotivnog perioda aktivan je B1. A1, A2, B2 i C1 su u pripremi.</p>}
+                    {promo && <p className="text-xs text-muted-foreground mt-2 leading-relaxed">Tokom promotivnog perioda aktivan je {promo[0]}. {CEFR_LEVELS.filter((l) => !promo.includes(l)).join(", ")} su u pripremi.</p>}
                   </div>
                 )}
                 {c.status === "active" ? (
-                  <Button className="mt-6 rounded-full" onClick={() => onSelect(c.id, courseStartLevel(selectedLevels[c.id], c.id === "health" ? "health" : "general"))}>
+                  <Button className="mt-6 rounded-full" onClick={() => onSelect(c.id, courseStartLevel(selectedLevels[c.id], courseType, promo))}>
                     Prijavi se na kurs <ArrowRight className="ml-1 h-4 w-4" />
                   </Button>
                 ) : (
@@ -79,7 +84,7 @@ export default function CourseTypeSection({ slug, onSelect }: { slug: string; on
                 )}
               </CardContent>
             </Card>
-          ))}
+          );})}
         </div>
       </div>
     </section>
