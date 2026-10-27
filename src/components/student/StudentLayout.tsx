@@ -9,12 +9,7 @@ import { useAuth } from "@/context/AuthContext";
 import { useProfile } from "@/context/ProfileContext";
 import { supabase } from "@/integrations/supabase/client";
 import { useSelectedLanguage } from "@/hooks/useSelectedLanguage";
-
-
-const XP_TITLES: Record<number, string> = {
-  1: "Utforsker", 2: "Lærling", 3: "Kommunikatør", 4: "Taler", 5: "Trygg taler",
-  6: "Avansert kommunikatør", 7: "Flytende", 8: "Dyktig", 9: "Ekspert", 10: "Norskly-mester",
-};
+import { xpTitle } from "@/lib/xpTitles";
 
 interface StudentLayoutProps {
   children: ReactNode;
