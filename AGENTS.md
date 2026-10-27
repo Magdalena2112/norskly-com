@@ -17,3 +17,4 @@
 - Gateway calls use the server-only SDK with generated contracts under the functions shared directory, so Deno deployments and the frontend type augmentation share the same model definitions.
 - Student course enrollment is immutable per language in `language_profiles.course_type`; RLS and shared route checks enforce it, while the dashboard lists only that course, so local selections cannot grant access.
 - Protected structured lessons and talk scenarios are served by authenticated `course-content` from `_shared/course-content`; browser lesson JSON remains authoring/test source only and must never be bundled, so students cannot download another course's content.
+- Keep server lesson JSON and talk-scenario authoring mirrors synchronized when content changes; signup metadata is enrollment intent only, never authorization, because enrollment checks belong to database policies.
