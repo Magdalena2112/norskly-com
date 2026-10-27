@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { courseIntent, courseMatches, courseStartLevel } from "./courseAccess";
+import { courseIntent, courseMatches, courseStartLevel, promoAvailableLevels } from "./courseAccess";
 describe("isolated course access", () => {
   it("health enrollment cannot open general lessons", () => { expect(courseMatches("health", "general")).toBe(false); });
   it("general enrollment cannot open health lessons", () => { expect(courseMatches("general", "health")).toBe(false); });
@@ -15,5 +15,14 @@ describe("isolated course access", () => {
   it("direct general registration without a valid level defaults to A1", () => {
     expect(courseStartLevel(null, "general")).toBe("A1");
     expect(courseStartLevel("invalid", "general")).toBe("A1");
+  });
+  it("English general course is limited to A2 in the promo period", () => {
+    expect(promoAvailableLevels("en", "general")).toEqual(["A2"]);
+    expect(promoAvailableLevels("no", "general")).toBeNull();
+    expect(promoAvailableLevels("de", "general")).toBeNull();
+    expect(promoAvailableLevels("en", "health")).toBeNull();
+  });
+  it("promo levels clamp any incoming start level to the allowed one", () => {
+    for (const level of ["A1", "A2", "B1", "B2", "C1", null, "invalid"]) expect(courseStartLevel(level, "general", ["A2"])).toBe("A2");
   });
 });
