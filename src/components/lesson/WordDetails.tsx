@@ -1,11 +1,30 @@
 import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { ChevronDown, Loader2 } from "lucide-react";
+import { ChevronRight, Loader2, Volume2, BookText, Shuffle, MessageSquareQuote, Lightbulb, Layers } from "lucide-react";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from "@/components/ui/sheet";
+import { speakLines } from "@/lib/courseLessons";
 
 interface Details { pos: string; forms: string[]; synonyms: string[]; antonyms: string[]; examples: { text: string; sr: string }[]; other_meanings: string[]; note: string }
 
 const mem = new Map<string, Details>();
 const keyOf = (l: string, w: string) => `wd:${l}:${w.toLowerCase()}`;
+
+function Section({ icon: Icon, title, children }: { icon: typeof BookText; title: string; children: React.ReactNode }) {
+  return (
+    <section className="rounded-xl border border-border/60 bg-card/60 p-4">
+      <h4 className="flex items-center gap-2 text-sm font-semibold text-foreground mb-2.5">
+        <Icon className="w-4 h-4 text-accent" /> {title}
+      </h4>
+      {children}
+    </section>
+  );
+}
+
+const Chips = ({ items }: { items: string[] }) => (
+  <div className="flex flex-wrap gap-1.5">
+    {items.map((x) => <span key={x} className="rounded-full bg-primary/10 text-primary px-2.5 py-1 text-xs">{x}</span>)}
+  </div>
+);
 
 export default function WordDetails({ word, translation, language }: { word: string; translation: string; language: string }) {
   const [open, setOpen] = useState(false);
@@ -13,9 +32,9 @@ export default function WordDetails({ word, translation, language }: { word: str
   const [err, setErr] = useState("");
   const [loading, setLoading] = useState(false);
 
-  async function toggle() {
-    const next = !open; setOpen(next);
-    if (!next || data || loading) return;
+  async function openSheet() {
+    setOpen(true);
+    if (data || loading) return;
     const k = keyOf(language, word);
     const cached = mem.get(k) ?? (() => { try { const s = localStorage.getItem(k); return s ? JSON.parse(s) as Details : null; } catch { return null; } })();
     if (cached) { setData(cached); return; }
@@ -27,31 +46,61 @@ export default function WordDetails({ word, translation, language }: { word: str
     setData(d);
   }
 
-  const List = ({ label, items }: { label: string; items: string[] }) => items.length ? (
-    <div><p className="font-medium text-primary">{label}</p><ul className="list-disc pl-4 text-muted-foreground">{items.map((x) => <li key={x}>{x}</li>)}</ul></div>
-  ) : null;
-
   return (
-    <div className="mt-1.5">
-      <button type="button" onClick={toggle} aria-expanded={open}
-        className="inline-flex items-center gap-1 text-xs text-primary/70 hover:text-primary">
-        <ChevronDown className={`w-3.5 h-3.5 transition-transform ${open ? "rotate-180" : ""}`} /> Više detalja
+    <>
+      <button type="button" onClick={openSheet}
+        className="mt-1.5 inline-flex items-center gap-0.5 text-xs text-primary/70 hover:text-primary">
+        Više detalja <ChevronRight className="w-3.5 h-3.5" />
       </button>
-      {open && (
-        <div className="mt-2 space-y-2 text-xs rounded-lg bg-muted/40 p-2.5">
-          {loading && <p className="flex items-center gap-1.5 text-muted-foreground"><Loader2 className="w-3.5 h-3.5 animate-spin" /> Učitavam…</p>}
-          {err && <p className="text-destructive">{err}</p>}
-          {data && <>
-            {data.pos && <p><span className="font-medium text-primary">Vrsta reči:</span> <span className="text-muted-foreground">{data.pos}</span></p>}
-            <List label="Gramatički oblici" items={data.forms} />
-            <List label="Sinonimi" items={data.synonyms} />
-            <List label="Antonimi" items={data.antonyms} />
-            {data.examples.length > 0 && <div><p className="font-medium text-primary">Primeri</p><ul className="space-y-1">{data.examples.map((e) => <li key={e.text}><span className="italic text-primary/80">{e.text}</span><br /><span className="text-muted-foreground">{e.sr}</span></li>)}</ul></div>}
-            <List label="Druga značenja" items={data.other_meanings} />
-            {data.note && <p className="text-muted-foreground"><span className="font-medium text-primary">Savet:</span> {data.note}</p>}
-          </>}
-        </div>
-      )}
-    </div>
+      <Sheet open={open} onOpenChange={setOpen}>
+        <SheetContent side="right" className="w-full sm:max-w-md overflow-y-auto">
+          <SheetHeader className="text-left pb-4 border-b border-border/60">
+            <div className="flex items-center gap-2">
+              <SheetTitle className="font-display text-2xl text-primary break-words">{word}</SheetTitle>
+              <button onClick={() => speakLines([{ speaker: "f", text: word }], language)} aria-label={`Izgovori ${word}`}
+                className="text-primary/60 hover:text-primary"><Volume2 className="w-5 h-5" /></button>
+            </div>
+            <SheetDescription className="text-base">{translation}</SheetDescription>
+            {data?.pos && <span className="self-start rounded-full bg-accent/15 text-accent-foreground px-2.5 py-0.5 text-xs">{data.pos}</span>}
+          </SheetHeader>
+
+          <div className="space-y-3 pt-4 text-sm">
+            {loading && <p className="flex items-center gap-2 text-muted-foreground"><Loader2 className="w-4 h-4 animate-spin" /> Učitavam detalje…</p>}
+            {err && <p className="text-destructive">{err}</p>}
+            {data && <>
+              {data.forms.length > 0 && <Section icon={BookText} title="Gramatički oblici"><Chips items={data.forms} /></Section>}
+              {data.examples.length > 0 && (
+                <Section icon={MessageSquareQuote} title="Primeri u rečenicama">
+                  <ul className="space-y-2.5">
+                    {data.examples.map((e) => (
+                      <li key={e.text} className="flex gap-2">
+                        <button onClick={() => speakLines([{ speaker: "f", text: e.text }], language)} aria-label="Poslušaj" className="text-primary/60 hover:text-primary shrink-0 mt-0.5"><Volume2 className="w-4 h-4" /></button>
+                        <div><p className="italic text-foreground">{e.text}</p><p className="text-muted-foreground text-xs mt-0.5">{e.sr}</p></div>
+                      </li>
+                    ))}
+                  </ul>
+                </Section>
+              )}
+              {(data.synonyms.length > 0 || data.antonyms.length > 0) && (
+                <Section icon={Shuffle} title="Sinonimi i antonimi">
+                  <div className="space-y-2.5">
+                    {data.synonyms.length > 0 && <div><p className="text-xs text-muted-foreground mb-1">Sinonimi</p><Chips items={data.synonyms} /></div>}
+                    {data.antonyms.length > 0 && <div><p className="text-xs text-muted-foreground mb-1">Antonimi</p><Chips items={data.antonyms} /></div>}
+                  </div>
+                </Section>
+              )}
+              {data.other_meanings.length > 0 && (
+                <Section icon={Layers} title="Druga značenja">
+                  <ul className="list-disc pl-5 space-y-1 text-muted-foreground">{data.other_meanings.map((x) => <li key={x}>{x}</li>)}</ul>
+                </Section>
+              )}
+              {data.note && (
+                <Section icon={Lightbulb} title="Savet za upotrebu"><p className="text-muted-foreground">{data.note}</p></Section>
+              )}
+            </>}
+          </div>
+        </SheetContent>
+      </Sheet>
+    </>
   );
 }
