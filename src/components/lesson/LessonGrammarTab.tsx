@@ -13,6 +13,7 @@ import { earnedXp, type PracticeExercise } from "@/lib/grammarPractice";
 import { logActivity } from "@/lib/logActivity";
 
 const gc = (...n: number[]) => n.map((x) => `G-${String(x).padStart(2, "0")}`);
+const practiceRange = (start: number) => gc(...Array.from({ length: 10 }, (_, i) => start + i));
 
 function Table({ head, rows }: { head?: string[]; rows: string[][] }) {
   return (
@@ -92,14 +93,14 @@ export const LESSON_GRAMMAR_TOPICS: Record<string, Topic[]> = {
     { label: "Kombinovano", sectionIdx: [0, 1, 2, 3, 4], exercises: gc(28, 29, 30), aiTopic: "Norwegian V2, inversion, ikke and questions combined", related: [] },
   ],
   "NO-HC-B1-L01": [
-    { label: "Indirekte spørsmål", sectionIdx: [0], exercises: ["GR-01", "GR-02"], aiTopic: "Norwegian indirect questions with question words and om (no inversion)", related: [] },
-    { label: "Ikke i leddsetninger", sectionIdx: [1], exercises: ["GR-03"], aiTopic: "Position of ikke and adverbs in Norwegian subordinate clauses", related: [] },
-    { label: "Høflige former", sectionIdx: [2], exercises: ["GR-04"], aiTopic: "Polite requests and advice with kunne, ville, skulle, burde in healthcare", related: [] },
+    { label: "Indirekte spørsmål", sectionIdx: [0], exercises: practiceRange(1), aiTopic: "Norwegian indirect questions with question words and om (no inversion)", related: [] },
+    { label: "Ikke i leddsetninger", sectionIdx: [1], exercises: practiceRange(11), aiTopic: "Position of ikke and adverbs in Norwegian subordinate clauses", related: [] },
+    { label: "Høflige former", sectionIdx: [2], exercises: practiceRange(21), aiTopic: "Polite requests and advice with kunne, ville, skulle, burde in healthcare", related: [] },
   ],
   "DE-HC-B1-L01": [
-    { label: "Indirekte Fragen", sectionIdx: [0], exercises: ["GR-01", "GR-02"], aiTopic: "German indirect questions with W-words and ob (verb at the end)", related: [] },
-    { label: "Nebensätze", sectionIdx: [1], exercises: ["GR-03"], aiTopic: "German subordinate clauses with weil, dass, wenn (verb final, nicht position)", related: [] },
-    { label: "Höflichkeit", sectionIdx: [2], exercises: ["GR-04"], aiTopic: "German Konjunktiv II politeness: könnten, würden, sollten in healthcare", related: [] },
+    { label: "Indirekte Fragen", sectionIdx: [0], exercises: practiceRange(1), aiTopic: "German indirect questions with W-words and ob (verb at the end)", related: [] },
+    { label: "Nebensätze", sectionIdx: [1], exercises: practiceRange(11), aiTopic: "German subordinate clauses with weil, dass, wenn (verb final, nicht position)", related: [] },
+    { label: "Höflichkeit", sectionIdx: [2], exercises: practiceRange(21), aiTopic: "German Konjunktiv II politeness: könnten, würden, sollten in healthcare", related: [] },
   ],
 };
 
