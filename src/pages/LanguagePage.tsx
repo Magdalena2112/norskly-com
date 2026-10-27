@@ -64,7 +64,7 @@ export default function LanguagePage() {
       if (langProf?.onboarding_completed) {
         navigate(`/ucenje/${lang.slug}`);
       } else {
-        navigate("/onboarding");
+        navigate(`/onboarding?lang=${lang.slug}&course=${extra.course === "health" ? "health" : "general"}`);
       }
       return;
     }

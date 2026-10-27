@@ -45,7 +45,7 @@ export default function AuthPage() {
       .eq("language", code)
       .maybeSingle();
     if (!langProf?.onboarding_completed) {
-      navigate(`/onboarding?lang=${lang}`);
+      navigate(`/onboarding?lang=${lang}&course=${searchParams.get("course") === "health" ? "health" : "general"}`);
       return;
     }
     navigate(`/ucenje/${lang}${plan ? `?plan=${plan}` : ""}`);
@@ -161,7 +161,7 @@ export default function AuthPage() {
             title: "Dobrodošao 👋",
             description: "Hajde da podesimo tvoj profil za ovaj jezik.",
           });
-          navigate("/onboarding");
+          navigate(`/onboarding?lang=${signupLang}&course=${searchParams.get("course") === "health" ? "health" : "general"}`);
           return;
         }
         toast({

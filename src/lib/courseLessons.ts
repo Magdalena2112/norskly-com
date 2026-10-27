@@ -13,13 +13,12 @@ export interface LessonContent {
   modules: Record<string, any>;
 }
 
-const files = import.meta.glob("../content/lessons/*.json");
-
 export async function loadLessonContent(row: { lesson_code: string | null; intro_texts?: any; modules?: any; text_segments?: any; text_title?: string }): Promise<LessonContent> {
-  const key = row.lesson_code ? `../content/lessons/${row.lesson_code}.json` : "";
-  if (key && files[key]) {
-    const mod: any = await files[key]();
-    return (mod.default || mod) as LessonContent;
+  if (row.lesson_code) {
+    const { supabase } = await import("@/integrations/supabase/client");
+    const { data, error } = await supabase.functions.invoke("course-content", { body: { lesson_code: row.lesson_code } });
+    if (error || !data?.content) throw new Error("Ova lekcija nije deo tvog kursa.");
+    return data.content as LessonContent;
   }
   // Fallback for lessons stored only in the database.
   const intro: IntroText[] = Array.isArray(row.intro_texts) && row.intro_texts.length
