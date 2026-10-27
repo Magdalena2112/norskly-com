@@ -48,6 +48,7 @@ export default function CourseTypeSection({ slug, onSelect }: { slug: string; on
           {courses.map((c) => {
             const courseType = c.id === "health" ? "health" : "general";
             const promo = promoAvailableLevels(SLUG_TO_CODE[slug] ?? "", courseType);
+            return (
             <Card key={c.id} className={`rounded-3xl h-full ${c.status === "soon" ? "border-dashed bg-background/50" : "hover:shadow-soft"}`}>
               <CardContent className="p-6 flex flex-col h-full">
                 <div className="flex items-center justify-between mb-4">
