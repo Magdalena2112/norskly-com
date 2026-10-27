@@ -14,7 +14,7 @@ import LessonReviewQuiz from "@/components/lesson/LessonReviewQuiz";
 import LessonExercise from "@/components/lesson/LessonExercise";
 import { ITEM_IMAGES } from "@/content/lessons/itemImages";
 import { Button } from "@/components/ui/button";
-import { Volume2, Mic, MessageSquare, CheckCircle2, ChevronLeft, ChevronRight, BookOpen, Languages, BookOpenText, Headphones, PenLine, Globe2, Trophy, Play, Square, Eye, EyeOff, Turtle } from "lucide-react";
+import { Volume2, Mic, MessageSquare, CheckCircle2, ChevronLeft, ChevronRight, BookOpen, Play, Square, Eye, EyeOff, Turtle } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import PostcardVignette from "@/components/student/PostcardVignette";
@@ -25,16 +25,16 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/co
 import MyDictionaryPanel from "@/components/MyDictionaryPanel";
 import { lessonWords, phrasesInText, type LessonWord } from "@/lib/myDictionary";
 
-const MODULE_META: Record<string, { title: string; subtitle: string; description: string; icon: typeof BookOpen; iconBg: string; vignette: any }> = {
-  grammar: { title: "Gramatika", subtitle: "Grammar", description: "Objašnjenja, tabele, česte greške i vežbe sa 3 pokušaja.", icon: BookOpen, iconBg: "bg-primary", vignette: "book" },
-  vocabulary: { title: "Vokabular", subtitle: "Vocabulary", description: "Reči lekcije po grupama, sa izgovorom i primerima.", icon: Languages, iconBg: "bg-sunset", vignette: "stamp" },
-  reading: { title: "Čitanje", subtitle: "Reading", description: "Tekstovi lekcije i pitanja razumevanja.", icon: BookOpenText, iconBg: "bg-fjord", vignette: "stamp" },
-  listening: { title: "Slušanje", subtitle: "Listening", description: "Slušaj situacije bez teksta, pa proveri razumevanje.", icon: Headphones, iconBg: "bg-sunset", vignette: "speech" },
-  writing: { title: "Pisanje", subtitle: "Writing", description: "Kratki zadaci pisanja sa AI povratnom informacijom.", icon: PenLine, iconBg: "bg-accent", vignette: "book" },
-  pronunciation: { title: "Izgovor", subtitle: "Pronunciation", description: "Alfabet, glasovi i intonacija — slušaj i ponovi.", icon: Mic, iconBg: "bg-primary", vignette: "speech" },
-  speaking: { title: "Razgovor", subtitle: "Speaking", description: "Scenariji razgovora i RoleSwitch sa Sophie.", icon: MessageSquare, iconBg: "bg-fjord", vignette: "speech" },
-  culture: { title: "Kultura", subtitle: "Culture & Society", description: "Kako se ljudi upoznaju i pozdravljaju.", icon: Globe2, iconBg: "bg-forest", vignette: "cabins" },
-  review: { title: "Ponavljanje", subtitle: "Review", description: "Završna provera cele lekcije.", icon: Trophy, iconBg: "bg-sunset", vignette: "cabins" },
+const MODULE_META: Record<string, { title: string; subtitle: string; description: string; vignette: any }> = {
+  grammar: { title: "Gramatika", subtitle: "Grammar", description: "Objašnjenja, tabele, česte greške i vežbe sa 3 pokušaja.", vignette: "book" },
+  vocabulary: { title: "Vokabular", subtitle: "Vocabulary", description: "Reči lekcije po grupama, sa izgovorom i primerima.", vignette: "stamp" },
+  reading: { title: "Čitanje", subtitle: "Reading", description: "Tekstovi lekcije i pitanja razumevanja.", vignette: "stamp" },
+  listening: { title: "Slušanje", subtitle: "Listening", description: "Slušaj situacije bez teksta, pa proveri razumevanje.", vignette: "speech" },
+  writing: { title: "Pisanje", subtitle: "Writing", description: "Kratki zadaci pisanja sa AI povratnom informacijom.", vignette: "book" },
+  pronunciation: { title: "Izgovor", subtitle: "Pronunciation", description: "Alfabet, glasovi i intonacija — slušaj i ponovi.", vignette: "speech" },
+  speaking: { title: "Razgovor", subtitle: "Speaking", description: "Scenariji razgovora i RoleSwitch sa Sophie.", vignette: "speech" },
+  culture: { title: "Kultura", subtitle: "Culture & Society", description: "Kako se ljudi upoznaju i pozdravljaju.", vignette: "cabins" },
+  review: { title: "Ponavljanje", subtitle: "Review", description: "Završna provera cele lekcije.", vignette: "cabins" },
 };
 import { LESSON_TABS, allExercises, loadLessonContent, speakLines, stopSpeaking, type DialogueLine, type Exercise, type LessonContent } from "@/lib/courseLessons";
 
@@ -238,12 +238,9 @@ export default function CourseLessonPage() {
                     <Card className="cursor-pointer group h-full bg-cream border border-border/60 shadow-postcard overflow-hidden relative transition-all duration-500 hover:-translate-y-1.5" onClick={() => openModule(key)}>
                       <div className="relative w-full h-36 overflow-hidden border-b border-border/40">
                         {cover ? <img src={cover} alt="" loading="lazy" className="absolute inset-0 w-full h-full object-contain bg-cream transition-transform duration-700 group-hover:scale-105" /> : <PostcardVignette variant={meta.vignette} className="absolute inset-0 w-full h-full" />}
-                        <div className={`absolute -bottom-5 left-5 w-12 h-12 rounded-2xl ${meta.iconBg} flex items-center justify-center shadow-card-soft ring-2 ring-cream`}>
-                          <meta.icon className="w-5 h-5 text-cream" />
-                        </div>
                         {modDone(key) && <span className="absolute top-2 right-2 bg-forest text-cream text-[11px] px-2 py-0.5 rounded-full flex items-center gap-1"><CheckCircle2 className="w-3 h-3" /> Završeno</span>}
                       </div>
-                      <CardContent className="pt-8 pb-5 px-5">
+                      <CardContent className="pt-5 pb-5 px-5">
                         <p className="font-script italic text-xs text-primary/55 mb-0.5">{meta.subtitle}</p>
                         <h3 className="font-display font-semibold text-lg text-primary leading-tight">{meta.title}</h3>
                         <p className="text-sm text-muted-foreground mt-1.5 leading-relaxed">{meta.description}</p>
