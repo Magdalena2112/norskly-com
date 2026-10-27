@@ -1,0 +1,1 @@
+ALTER TABLE public.language_profiles ADD COLUMN IF NOT EXISTS daily_minutes integer CHECK (daily_minutes IN (15,30,60));

@@ -127,6 +127,13 @@
       "when": 1793103214144,
       "tag": "0017_isolate_language_course_enrollment",
       "breakpoints": true
+    },
+    {
+      "idx": 18,
+      "version": "7",
+      "when": 1793107401917,
+      "tag": "0018_onboarding_daily_time",
+      "breakpoints": true
     }
   ]
 }

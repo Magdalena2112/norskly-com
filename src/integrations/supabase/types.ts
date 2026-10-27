@@ -452,6 +452,7 @@ export type Database = {
           confidence_level: number | null
           course_type: string
           created_at: string
+          daily_minutes: number | null
           focus_area: string | null
           id: string
           language: string
@@ -469,6 +470,7 @@ export type Database = {
           confidence_level?: number | null
           course_type?: string
           created_at?: string
+          daily_minutes?: number | null
           focus_area?: string | null
           id?: string
           language?: string
@@ -486,6 +488,7 @@ export type Database = {
           confidence_level?: number | null
           course_type?: string
           created_at?: string
+          daily_minutes?: number | null
           focus_area?: string | null
           id?: string
           language?: string
