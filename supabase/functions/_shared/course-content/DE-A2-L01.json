@@ -23,6 +23,64 @@
      "speaker": "Lena",
      "text": "Meine Freunde Lukas und Mia helfen mir sehr. Lukas kennt Berlin sehr gut, und Mia findet immer schöne Orte für uns."
     }
+   ],
+   "keyTerms": [
+    {
+     "word": "aufstehen",
+     "translation": "ustati",
+     "forms": [
+      "stehe ich um sieben uhr auf"
+     ]
+    },
+    {
+     "word": "frühstücken",
+     "translation": "doručkovati",
+     "forms": [
+      "frühstücke"
+     ]
+    },
+    {
+     "word": "aus dem Haus gehen",
+     "translation": "krenuti od kuće",
+     "forms": [
+      "aus dem haus gehe"
+     ]
+    },
+    {
+     "word": "mit der U-Bahn fahren",
+     "translation": "ići metroom",
+     "forms": [
+      "fahre ich mit der u-bahn"
+     ]
+    },
+    {
+     "word": "an eigenen Projekten arbeiten",
+     "translation": "raditi na sopstvenim projektima",
+     "forms": [
+      "arbeite an eigenen projekten"
+     ]
+    },
+    {
+     "word": "sich auf etwas vorbereiten",
+     "translation": "pripremati se za nešto",
+     "forms": [
+      "bereite ich mich auf einen neuen deutschkurs vor"
+     ]
+    },
+    {
+     "word": "eine neue Wohnung suchen",
+     "translation": "tražiti novi stan",
+     "forms": [
+      "suche auch eine neue wohnung"
+     ]
+    },
+    {
+     "word": "jemandem helfen",
+     "translation": "pomagati nekome",
+     "forms": [
+      "helfen mir"
+     ]
+    }
    ]
   },
   {
@@ -59,6 +117,64 @@
      "speaker": "Mia",
      "text": "Das verstehe ich gut. Frau Weber und ich kennen jemanden, der ab nächstem Monat ein Zimmer vermietet!"
     }
+   ],
+   "keyTerms": [
+    {
+     "word": "Schön, dich wiederzusehen!",
+     "translation": "Drago mi je što te ponovo vidim!",
+     "forms": [
+      "schön, dich wiederzusehen"
+     ]
+    },
+    {
+     "word": "viel zu tun haben",
+     "translation": "imati mnogo posla",
+     "forms": [
+      "habe im moment viel zu tun"
+     ]
+    },
+    {
+     "word": "Teilzeit arbeiten",
+     "translation": "raditi pola radnog vremena",
+     "forms": [
+      "arbeite teilzeit"
+     ]
+    },
+    {
+     "word": "eine größere Wohnung suchen",
+     "translation": "tražiti veći stan",
+     "forms": [
+      "suche ich jetzt eine größere wohnung"
+     ]
+    },
+    {
+     "word": "außerhalb wohnen",
+     "translation": "živeti van grada",
+     "forms": [
+      "außerhalb wohnen"
+     ]
+    },
+    {
+     "word": "in der Nähe der U-Bahn",
+     "translation": "blizu metroa",
+     "forms": [
+      "in der nähe der u-bahn"
+     ]
+    },
+    {
+     "word": "zur Arbeit kommen",
+     "translation": "stići na posao",
+     "forms": [
+      "komme ich viel leichter zur arbeit"
+     ]
+    },
+    {
+     "word": "ein Zimmer vermieten",
+     "translation": "izdavati sobu",
+     "forms": [
+      "ein zimmer vermietet"
+     ]
+    }
    ]
   },
   {
@@ -82,6 +198,64 @@
     {
      "speaker": "Frau Weber",
      "text": "Morgen schicke ich Ihnen die Übersicht über die Texte. Ich freue mich auf Sie!"
+    }
+   ],
+   "keyTerms": [
+    {
+     "word": "die Kursteilnehmer",
+     "translation": "polaznici kursa",
+     "forms": [
+      "kursteilnehmerinnen und kursteilnehmer"
+     ]
+    },
+    {
+     "word": "anfangen",
+     "translation": "počinjati",
+     "forms": [
+      "fängt am montag um 18 uhr an"
+     ]
+    },
+    {
+     "word": "sich treffen",
+     "translation": "sastajati se",
+     "forms": [
+      "treffen uns"
+     ]
+    },
+    {
+     "word": "die Volkshochschule",
+     "translation": "narodni univerzitet (škola za odrasle)",
+     "forms": [
+      "volkshochschule"
+     ]
+    },
+    {
+     "word": "über den Alltag sprechen",
+     "translation": "pričati o svakodnevici",
+     "forms": [
+      "sprechen wir über den alltag"
+     ]
+    },
+    {
+     "word": "persönliche Erfahrungen",
+     "translation": "lična iskustva",
+     "forms": [
+      "persönliche erfahrungen"
+     ]
+    },
+    {
+     "word": "jemandem etwas schicken",
+     "translation": "poslati nekome nešto",
+     "forms": [
+      "schicke ich ihnen"
+     ]
+    },
+    {
+     "word": "sich freuen auf",
+     "translation": "radovati se nečemu",
+     "forms": [
+      "freue mich auf sie"
+     ]
     }
    ]
   }
@@ -2105,7 +2279,7 @@
      "title": "Veränderungen im Alltag",
      "instruction": "Poveži svaku sliku sa tačnim izrazom.",
      "kind": "vocabulary",
-     "image": "a2:vo07",
+     "image": "de:vo07",
      "items": [
       {
        "prompt": "Slika 1 (gore levo)",
@@ -2808,7 +2982,7 @@
     {
      "id": "DE-A2-L01-RD1",
      "title": "Text 1 · Eine volle Woche",
-     "image": "a2:rd1",
+     "image": "de:rd1",
      "body": "Lena hat eine volle Woche. Sie arbeitet montags, mittwochs und freitags Teilzeit in einer Buchhandlung. Normalerweise steht sie um sieben Uhr auf, frühstückt und fährt mit der U-Bahn zur Arbeit.\n\nDienstags und donnerstags geht sie abends in den Deutschkurs, deshalb lernt sie nachmittags zu Hause. Diese Woche ist ein bisschen anders, denn sie bereitet eine Präsentation für den Kurs vor. Sie sucht auch eine neue Wohnung, also sitzt sie nach dem Abendessen oft am Laptop.\n\nAm Samstag räumt sie ihr Zimmer auf, wäscht Wäsche und trifft Mia auf einen Kaffee. Am Sonntag geht sie mit Lukas im Tiergarten spazieren und plant die neue Woche."
     },
     {
@@ -2820,7 +2994,7 @@
     {
      "id": "DE-A2-L01-RD3",
      "title": "Text 3 · Ein Neuanfang in Berlin",
-     "image": "a2:rd3",
+     "image": "de:rd3",
      "body": "Als Lukas vor zwei Monaten nach Berlin gezogen ist, war alles neu und ein bisschen verwirrend. Zu Hause hat er in einer kleinen Stadt gewohnt und alle gekannt. In Berlin geht das Leben schneller, die U-Bahn ist immer voll, und die Leute haben anscheinend immer viel zu tun.\n\nAm Anfang war es für Lukas schwer, sich an seinen neuen Alltag zu gewöhnen. Er hat eine neue Stelle in einem Hotel angefangen, in verschiedenen Schichten gearbeitet und abends Deutsch gelernt. Er wollte auch neue Freunde finden, deshalb spielt er jetzt in einer Fußballgruppe, die sonntags auf dem Tempelhofer Feld spielt.\n\nNach und nach wurde alles leichter. Er hat gelernt, seine Zeit zu planen, ein schönes Café in der Nähe seiner Wohnung gefunden und fühlt sich jetzt in der Stadt wohl. Er vermisst seine Familie immer noch, aber er ist selbstbewusster und mit seinem neuen Leben zufriedener."
     }
    ],
