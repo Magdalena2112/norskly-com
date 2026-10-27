@@ -571,6 +571,13 @@ export default function LandingPage() {
             <Link to="/za-profesore" className="hover:text-primary transition-colors">Postani profesor</Link>
             <Link to="/profesori/prijava" className="hover:text-primary transition-colors">Profesorski portal</Link>
           </div>
+          <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-5">
+            <a href="https://instagram.com/norskly" target="_blank" rel="noopener noreferrer" aria-label="Norskly na Instagramu" className="inline-flex items-center gap-1.5 hover:text-primary transition-colors">
+              <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r="0.8" fill="currentColor" /></svg>
+              @norskly
+            </a>
+            <a href="mailto:norskly.admin@gmail.com" className="hover:text-primary transition-colors">norskly.admin@gmail.com</a>
+          </div>
           <p>© 2026 Norskly. Sva prava zadržana.</p>
         </div>
       </footer>
