@@ -19,6 +19,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import PostcardVignette from "@/components/student/PostcardVignette";
 import { LESSON_IMAGES } from "@/content/lessons/images";
+import { KeyPhrases } from "@/components/lesson/InteractiveText";
+import { lessonWords, phrasesInText } from "@/lib/myDictionary";
 
 const MODULE_META: Record<string, { title: string; subtitle: string; description: string; icon: typeof BookOpen; iconBg: string; vignette: any }> = {
   grammar: { title: "Gramatika", subtitle: "Grammar", description: "Objašnjenja, tabele, česte greške i vežbe sa 3 pokušaja.", icon: BookOpen, iconBg: "bg-primary", vignette: "book" },
@@ -133,6 +135,7 @@ export default function CourseLessonPage() {
   const textById = (id: string) => content.intro.find((t) => t.id === id);
   const imgs = LESSON_IMAGES[row.lesson_code || content.code];
   const moduleKeys = LESSON_TABS.map((t) => t.key).filter((k) => k !== "intro" && m[k] && MODULE_META[k]);
+  const knownWords = lessonWords(m.vocabulary);
   const hasMaterial = (k: string) => !["writing", "review"].includes(k);
   const openEx: Exercise[] = open ? m[open]?.exercises || [] : [];
   const openModule = (k: string | null) => {
