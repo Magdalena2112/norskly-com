@@ -1095,6 +1095,36 @@ export type Database = {
         }
         Relationships: []
       }
+      survey_responses: {
+        Row: {
+          answers: Json
+          course: string
+          created_at: string
+          id: string
+          language: string
+          level: string
+          user_id: string
+        }
+        Insert: {
+          answers: Json
+          course: string
+          created_at?: string
+          id?: string
+          language: string
+          level: string
+          user_id: string
+        }
+        Update: {
+          answers?: Json
+          course?: string
+          created_at?: string
+          id?: string
+          language?: string
+          level?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       talk_sessions: {
         Row: {
           created_at: string
@@ -1823,6 +1853,10 @@ export type Database = {
       reject_teacher_application: {
         Args: { _application_id: string; _notes?: string }
         Returns: undefined
+      }
+      submit_survey: {
+        Args: { p_answers: Json; p_language: string }
+        Returns: Json
       }
       teacher_has_student: {
         Args: { _student_id: string; _teacher_id: string }

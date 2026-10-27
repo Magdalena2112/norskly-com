@@ -1,5 +1,5 @@
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
-import { LayoutDashboard, User, TrendingUp, Settings, LogOut, BookMarked } from "lucide-react";
+import { LayoutDashboard, User, TrendingUp, Settings, LogOut, BookMarked, MessageSquareHeart } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -21,6 +21,7 @@ const mainItems = [
 ];
 
 const accountItems = [
+  { title: "Podeli utiske", url: "/anketa", icon: MessageSquareHeart },
   { title: "Profil", url: "/profile", icon: User },
   { title: "Napredak", url: "/progress", icon: TrendingUp },
   { title: "Podešavanja", url: "/settings", icon: Settings },

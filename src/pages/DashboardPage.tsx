@@ -12,6 +12,7 @@ import { supabase } from "@/integrations/supabase/client";
 import WeeklyDigest from "@/components/WeeklyDigest";
 import TeacherWorkWidget from "@/components/student/TeacherWorkWidget";
 import DailyPlanCard from "@/components/student/DailyPlanCard";
+import SurveyInvitation from "@/components/survey/SurveyInvitation";
 import { format } from "date-fns";
 import StudentLayout from "@/components/student/StudentLayout";
 import NordicBackdrop from "@/components/student/NordicBackdrop";
@@ -194,6 +195,7 @@ export default function DashboardPage() {
         {location.state?.courseDenied && <p role="alert" className="my-4 text-sm text-destructive">Ova lekcija nije deo kursa na koji si upisan/a.</p>}
 
         <TeacherWorkWidget language={code} />
+        <SurveyInvitation language={code} />
 
         <div className="mt-10 mb-5 flex items-center gap-3">
           <span className="h-px flex-1 bg-border" />

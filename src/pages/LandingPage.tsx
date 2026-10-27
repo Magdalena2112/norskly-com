@@ -117,7 +117,7 @@ export default function LandingPage() {
         <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
       </Helmet>
       {/* ============== NAV ============== */}
-      <nav className="fixed top-0 inset-x-0 z-50 backdrop-blur-md bg-background/80 border-b border-border/60">
+      <nav className="sticky top-0 inset-x-0 z-50 backdrop-blur-md bg-background/80 border-b border-border/60">
         <div className="container flex items-center justify-between h-14 sm:h-16">
           <img src={norsklyLogo.url} alt="Norskly" width={370} height={144} fetchPriority="high" decoding="async" className="h-10 sm:h-12 w-auto select-none" draggable={false} />
           <div className="hidden md:flex md:min-w-0 md:overflow-x-auto items-center gap-4 whitespace-nowrap text-xs font-medium text-foreground/80 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:overflow-x-visible lg:gap-8 lg:text-sm">

@@ -1,6 +1,7 @@
 import * as React from 'npm:react@18.3.1'
 import { renderAsync } from 'npm:@react-email/components@0.0.22'
 import { createClient } from 'npm:@supabase/supabase-js@2'
+import { corsHeaders } from 'npm:@supabase/supabase-js@2/cors'
 import { TEMPLATES } from '../_shared/transactional-email-templates/registry.ts'
 
 // Configuration baked in at scaffold time — do NOT change these manually.
@@ -15,11 +16,6 @@ const SENDER_DOMAIN = "notify.norskly.com"
 // even though actual sending uses the subdomain above.
 const FROM_DOMAIN = "norskly.com"
 
-const corsHeaders = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Headers':
-    'authorization, x-client-info, apikey, content-type',
-}
 
 // Generate a cryptographically random 32-byte hex token
 function generateToken(): string {
@@ -132,6 +128,23 @@ Deno.serve(async (req) => {
   // The caller-supplied recipientEmail is IGNORED; we resolve it server-side.
   let enforcedRecipient: string | null = null
   switch (templateName) {
+    case 'survey-submitted': {
+      const responseId = templateData?.responseId;
+      if (typeof responseId !== 'string' || !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(responseId)) {
+        return new Response(JSON.stringify({ error: 'Invalid response ID' }), { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
+      }
+      const { data: response, error } = await supabase.from('survey_responses').select('user_id,language,course,level,answers').eq('id', responseId).maybeSingle();
+      if (error || !response || response.user_id !== authUser.id) {
+        return new Response(JSON.stringify({ error: 'Not authorized' }), { status: 403, headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
+      }
+      const languages: Record<string,string> = { no: 'Norveški', en: 'Engleski', de: 'Nemački' };
+      const labels: Record<string,string> = { phone:'Mobilni telefon',computer:'Računar / Laptop',tablet:'Tablet',smooth:'Brzo i pregledno',minor:'Sitni zastoji ili nejasnoće',problems:'Tehnički problemi' };
+      const answers = response.answers as Record<string,unknown>;
+      templateData = { courseLabel: `${languages[response.language]} · ${response.course === 'health' ? 'Za zdravstvene radnike' : 'Opšti kurs'} · ${response.level}`, engagement:answers.engagement,pace:answers.pace,ai:answers.ai,recommend:answers.recommend,device:labels[String(answers.device)],accessibility:labels[String(answers.accessibility)],frustration:answers.frustration,suggestion:answers.suggestion };
+      enforcedRecipient = 'norskly.admin@gmail.com';
+      idempotencyKey = `survey-submitted-${responseId}`;
+      break;
+    }
     case 'lesson-booked-student': {
       // Student confirmation must go to the caller's own email only.
       enforcedRecipient = authUser.email ?? null

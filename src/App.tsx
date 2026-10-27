@@ -25,10 +25,13 @@ import { ProtectedRoute } from "@/components/ProtectedRoute";
 import { AdminRoute } from "@/components/AdminRoute";
 import { TeacherRoute } from "@/components/TeacherRoute";
 import LanguageSync from "@/components/LanguageSync";
+import PromoBanner from "@/components/survey/PromoBanner";
 // Public homepage stays eager so first paint / LCP is unaffected.
 import LandingPage from "./pages/LandingPage";
 
 const ForTeachersPage = lazy(() => import("./pages/ForTeachersPage"));
+const SurveyPage = lazy(() => import("./pages/SurveyPage"));
+const AdminSurveysPage = lazy(() => import("./pages/AdminSurveysPage"));
 const RelocationHubPage = lazy(() => import("./pages/RelocationHubPage"));
 const LanguagePage = lazy(() => import("./pages/LanguagePage"));
 const AuthPage = lazy(() => import("./pages/AuthPage"));
@@ -90,6 +93,7 @@ const App = () => (
           <Sonner />
           <BrowserRouter>
             <LanguageSync />
+            <PromoBanner />
             <Suspense fallback={<RouteFallback />}>
               <Routes>
                 <Route path="/" element={<LandingPage />} />
@@ -101,6 +105,7 @@ const App = () => (
                 <Route path="/relocation-hub/:countryId" element={<RelocationHubPage />} />
                 <Route path="/jezici/:slug" element={<LanguagePage />} />
                 <Route path="/auth" element={<AuthPage />} />
+                <Route path="/anketa" element={<SurveyPage />} />
                 <Route path="/onboarding" element={<ProtectedRoute><OnboardingPage /></ProtectedRoute>} />
                 <Route path="/practice" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />
                 <Route path="/ucenje/:slug" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />
@@ -135,6 +140,7 @@ const App = () => (
                 <Route path="/admin/teachers" element={<ProtectedRoute><AdminRoute><AdminTeachersPage /></AdminRoute></ProtectedRoute>} />
                 <Route path="/admin/students/:userId" element={<ProtectedRoute><AdminRoute><AdminStudentDetailPage /></AdminRoute></ProtectedRoute>} />
                 <Route path="/admin/lessons" element={<ProtectedRoute><AdminRoute><AdminLessonsPage /></AdminRoute></ProtectedRoute>} />
+                <Route path="/admin/surveys" element={<ProtectedRoute><AdminRoute><AdminSurveysPage /></AdminRoute></ProtectedRoute>} />
                 <Route path="/admin/availability" element={<Navigate to="/admin/dashboard" replace />} />
                 <Route path="/admin/teacher-profile" element={<Navigate to="/admin/dashboard" replace />} />
                 <Route path="/admin/teacher-applications" element={<ProtectedRoute><AdminRoute><AdminTeacherApplicationsPage /></AdminRoute></ProtectedRoute>} />
