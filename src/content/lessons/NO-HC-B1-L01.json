@@ -271,11 +271,13 @@
           "options": [
             "Kan du si når spiste du sist?",
             "Kan du si når du spiste sist?",
-            "Kan du si når du sist spiste du?"
+            "Kan du si når du spiste du sist?"
           ],
           "correct": [
             1
-          ]
+          ],
+          "kind": "closed",
+          "items": []
         },
         {
           "id": "NO-HC-B1-L01-G-02",
@@ -305,7 +307,9 @@
               ],
               "answer": "hvis"
             }
-          ]
+          ],
+          "kind": "closed",
+          "items": []
         },
         {
           "id": "NO-HC-B1-L01-G-03",
@@ -327,7 +331,9 @@
           "answer": [
             "Vet du når legen får prøvesvaret?"
           ],
-          "context": "Početak: Vet du"
+          "context": "Početak: Vet du",
+          "kind": "closed",
+          "items": []
         },
         {
           "id": "NO-HC-B1-L01-G-04",
@@ -347,7 +353,9 @@
                 "Kan du si om du bruker faste medisiner?"
               ]
             }
-          ]
+          ],
+          "kind": "closed",
+          "items": []
         },
         {
           "id": "NO-HC-B1-L01-G-05",
@@ -367,7 +375,9 @@
           ],
           "correct": [
             1
-          ]
+          ],
+          "kind": "closed",
+          "items": []
         },
         {
           "id": "NO-HC-B1-L01-G-06",
@@ -393,7 +403,9 @@
             2,
             0,
             1
-          ]
+          ],
+          "kind": "closed",
+          "items": []
         },
         {
           "id": "NO-HC-B1-L01-G-07",
@@ -415,7 +427,9 @@
           "correct": [
             1,
             2
-          ]
+          ],
+          "kind": "closed",
+          "items": []
         },
         {
           "id": "NO-HC-B1-L01-G-08",
@@ -435,7 +449,9 @@
                 "Vet du hvor journalen ligger?"
               ]
             }
-          ]
+          ],
+          "kind": "closed",
+          "items": []
         },
         {
           "id": "NO-HC-B1-L01-G-09",
@@ -465,7 +481,9 @@
               ],
               "answer": "ikke"
             }
-          ]
+          ],
+          "kind": "closed",
+          "items": []
         },
         {
           "id": "NO-HC-B1-L01-G-10",
@@ -485,7 +503,9 @@
                 "Kan du fortelle meg hva som har skjedd?"
               ]
             }
-          ]
+          ],
+          "kind": "closed",
+          "items": []
         },
         {
           "id": "NO-HC-B1-L01-G-11",
@@ -505,7 +525,9 @@
           ],
           "correct": [
             2
-          ]
+          ],
+          "kind": "closed",
+          "items": []
         },
         {
           "id": "NO-HC-B1-L01-G-12",
@@ -535,7 +557,9 @@
               ],
               "answer": "har sovet"
             }
-          ]
+          ],
+          "kind": "closed",
+          "items": []
         },
         {
           "id": "NO-HC-B1-L01-G-13",
@@ -558,7 +582,9 @@
           "answer": [
             "Nora vet at Per aldri har vært innlagt før."
           ],
-          "context": "Početak: Nora vet"
+          "context": "Početak: Nora vet",
+          "kind": "closed",
+          "items": []
         },
         {
           "id": "NO-HC-B1-L01-G-14",
@@ -578,7 +604,9 @@
                 "Per sier at han ikke har spist."
               ]
             }
-          ]
+          ],
+          "kind": "closed",
+          "items": []
         },
         {
           "id": "NO-HC-B1-L01-G-15",
@@ -604,7 +632,9 @@
             2,
             0,
             1
-          ]
+          ],
+          "kind": "closed",
+          "items": []
         },
         {
           "id": "NO-HC-B1-L01-G-16",
@@ -626,7 +656,9 @@
           "correct": [
             1,
             2
-          ]
+          ],
+          "kind": "closed",
+          "items": []
         },
         {
           "id": "NO-HC-B1-L01-G-17",
@@ -656,7 +688,9 @@
               ],
               "answer": "går over"
             }
-          ]
+          ],
+          "kind": "closed",
+          "items": []
         },
         {
           "id": "NO-HC-B1-L01-G-18",
@@ -676,7 +710,9 @@
                 "Anne sier at Per ikke har fått medisinen."
               ]
             }
-          ]
+          ],
+          "kind": "closed",
+          "items": []
         },
         {
           "id": "NO-HC-B1-L01-G-19",
@@ -700,7 +736,9 @@
           "answer": [
             "Hvis Per ikke har spørsmål, fortsetter Nora samtalen."
           ],
-          "context": "Početak: Hvis Per"
+          "context": "Početak: Hvis Per",
+          "kind": "closed",
+          "items": []
         },
         {
           "id": "NO-HC-B1-L01-G-20",
@@ -720,7 +758,9 @@
                 "Hvis pasienten ikke forstår, forklarer Nora på nytt."
               ]
             }
-          ]
+          ],
+          "kind": "closed",
+          "items": []
         },
         {
           "id": "NO-HC-B1-L01-G-21",
@@ -730,7 +770,7 @@
           "xp": 1,
           "grammarFocus": "polite",
           "instruction": "Izaberi jedan odgovor koji je gramatički tačan i odgovara situaciji.",
-          "hint": "Razlikuj mogućnost/mолbu, obavezu i preporuku.",
+          "hint": "Razlikuj mogućnost i molbu, obavezu i preporuku.",
           "explanation": "«Kunne du…?» je ljubazna molba; «må» pita o obavezi, a «burde» o preporuci.",
           "context": "Nora želi da pacijent zavrne rukav radi merenja. Izaberi ljubaznu molbu, ne pitanje o obavezi.",
           "options": [
@@ -740,7 +780,9 @@
           ],
           "correct": [
             1
-          ]
+          ],
+          "kind": "closed",
+          "items": []
         },
         {
           "id": "NO-HC-B1-L01-G-22",
@@ -750,27 +792,29 @@
           "xp": 1,
           "grammarFocus": "polite",
           "instruction": "Dopuni svaku prazninu odgovarajućim oblikom.",
-          "hint": "Modalni glagol traži infinitiv bez «å»; traži se mirnije disanje.",
-          "explanation": "«Kunne du puste litt roligere?» koristi goli infinitiv i komparativ.",
-          "text": "Kunne du ___ litt ___?",
+          "hint": "Razlikuj infinitiv posle modalnog glagola od ličnog glagola u indirektnom pitanju.",
+          "explanation": "Posle «kunne» stoji infinitiv «vise»; u indirektnom pitanju «det gjør vondt» subjekat stoji pre ličnog glagola.",
+          "text": "Kunne du ___ meg hvor det ___ vondt?",
           "gaps": [
             {
               "options": [
-                "puste",
-                "å puste",
-                "puster"
+                "vise",
+                "å vise",
+                "viser"
               ],
-              "answer": "puste"
+              "answer": "vise"
             },
             {
               "options": [
-                "roligere",
-                "roligst",
-                "rolige"
+                "gjør",
+                "gjøre",
+                "å gjøre"
               ],
-              "answer": "roligere"
+              "answer": "gjør"
             }
-          ]
+          ],
+          "kind": "closed",
+          "items": []
         },
         {
           "id": "NO-HC-B1-L01-G-23",
@@ -792,7 +836,9 @@
           "answer": [
             "Jeg skulle gjerne snakke med legen."
           ],
-          "context": "Početak: Jeg"
+          "context": "Početak: Jeg",
+          "kind": "closed",
+          "items": []
         },
         {
           "id": "NO-HC-B1-L01-G-24",
@@ -812,7 +858,9 @@
           ],
           "correct": [
             2
-          ]
+          ],
+          "kind": "closed",
+          "items": []
         },
         {
           "id": "NO-HC-B1-L01-G-25",
@@ -838,7 +886,9 @@
             1,
             2,
             0
-          ]
+          ],
+          "kind": "closed",
+          "items": []
         },
         {
           "id": "NO-HC-B1-L01-G-26",
@@ -860,7 +910,9 @@
           "correct": [
             1,
             2
-          ]
+          ],
+          "kind": "closed",
+          "items": []
         },
         {
           "id": "NO-HC-B1-L01-G-27",
@@ -880,7 +932,9 @@
                 "Kunne du sette deg her?"
               ]
             }
-          ]
+          ],
+          "kind": "closed",
+          "items": []
         },
         {
           "id": "NO-HC-B1-L01-G-28",
@@ -900,7 +954,9 @@
                 "Kunne du fortelle meg om du er allergisk?"
               ]
             }
-          ]
+          ],
+          "kind": "closed",
+          "items": []
         },
         {
           "id": "NO-HC-B1-L01-G-29",
@@ -930,7 +986,9 @@
               ],
               "answer": "burde"
             }
-          ]
+          ],
+          "kind": "closed",
+          "items": []
         },
         {
           "id": "NO-HC-B1-L01-G-30",
@@ -950,7 +1008,9 @@
                 "Kunne du fortelle meg om du ikke har fått medisinen?"
               ]
             }
-          ]
+          ],
+          "kind": "closed",
+          "items": []
         }
       ]
     },

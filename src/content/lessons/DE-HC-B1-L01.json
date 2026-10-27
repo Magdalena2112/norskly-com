@@ -453,7 +453,9 @@
           ],
           "correct": [
             1
-          ]
+          ],
+          "kind": "closed",
+          "items": []
         },
         {
           "id": "DE-HC-B1-L01-G-02",
@@ -483,7 +485,9 @@
               ],
               "answer": "wenn"
             }
-          ]
+          ],
+          "kind": "closed",
+          "items": []
         },
         {
           "id": "DE-HC-B1-L01-G-03",
@@ -504,7 +508,9 @@
           "answer": [
             "Wissen Sie, wann die Blutabnahme stattfindet?"
           ],
-          "context": "Početak: Wissen Sie,"
+          "context": "Početak: Wissen Sie,",
+          "kind": "closed",
+          "items": []
         },
         {
           "id": "DE-HC-B1-L01-G-04",
@@ -524,7 +530,9 @@
                 "Können Sie mir sagen, ob Sie regelmäßig Medikamente nehmen?"
               ]
             }
-          ]
+          ],
+          "kind": "closed",
+          "items": []
         },
         {
           "id": "DE-HC-B1-L01-G-05",
@@ -544,7 +552,9 @@
           ],
           "correct": [
             2
-          ]
+          ],
+          "kind": "closed",
+          "items": []
         },
         {
           "id": "DE-HC-B1-L01-G-06",
@@ -570,7 +580,9 @@
             2,
             0,
             1
-          ]
+          ],
+          "kind": "closed",
+          "items": []
         },
         {
           "id": "DE-HC-B1-L01-G-07",
@@ -592,7 +604,9 @@
           "correct": [
             1,
             2
-          ]
+          ],
+          "kind": "closed",
+          "items": []
         },
         {
           "id": "DE-HC-B1-L01-G-08",
@@ -612,7 +626,9 @@
                 "Können Sie mir sagen, wo es wehtut?"
               ]
             }
-          ]
+          ],
+          "kind": "closed",
+          "items": []
         },
         {
           "id": "DE-HC-B1-L01-G-09",
@@ -650,7 +666,9 @@
               ],
               "answer": "geschlafen hat"
             }
-          ]
+          ],
+          "kind": "closed",
+          "items": []
         },
         {
           "id": "DE-HC-B1-L01-G-10",
@@ -670,7 +688,9 @@
                 "Ich möchte wissen, wann der Arzt kommt."
               ]
             }
-          ]
+          ],
+          "kind": "closed",
+          "items": []
         },
         {
           "id": "DE-HC-B1-L01-G-11",
@@ -690,7 +710,9 @@
           ],
           "correct": [
             1
-          ]
+          ],
+          "kind": "closed",
+          "items": []
         },
         {
           "id": "DE-HC-B1-L01-G-12",
@@ -720,7 +742,9 @@
               ],
               "answer": "wenn"
             }
-          ]
+          ],
+          "kind": "closed",
+          "items": []
         },
         {
           "id": "DE-HC-B1-L01-G-13",
@@ -743,7 +767,9 @@
           "answer": [
             "Er ist müde, weil er nicht geschlafen hat."
           ],
-          "context": "Početak: Er ist müde,"
+          "context": "Početak: Er ist müde,",
+          "kind": "closed",
+          "items": []
         },
         {
           "id": "DE-HC-B1-L01-G-14",
@@ -763,7 +789,9 @@
                 "Der Patient sagt, dass er nicht geschlafen hat."
               ]
             }
-          ]
+          ],
+          "kind": "closed",
+          "items": []
         },
         {
           "id": "DE-HC-B1-L01-G-15",
@@ -789,7 +817,9 @@
             2,
             0,
             1
-          ]
+          ],
+          "kind": "closed",
+          "items": []
         },
         {
           "id": "DE-HC-B1-L01-G-16",
@@ -811,7 +841,9 @@
           "correct": [
             0,
             2
-          ]
+          ],
+          "kind": "closed",
+          "items": []
         },
         {
           "id": "DE-HC-B1-L01-G-17",
@@ -841,7 +873,9 @@
               ],
               "answer": "Wenn"
             }
-          ]
+          ],
+          "kind": "closed",
+          "items": []
         },
         {
           "id": "DE-HC-B1-L01-G-18",
@@ -861,7 +895,9 @@
                 "Lena berichtet, dass der Patient nicht gegessen hat."
               ]
             }
-          ]
+          ],
+          "kind": "closed",
+          "items": []
         },
         {
           "id": "DE-HC-B1-L01-G-19",
@@ -885,7 +921,9 @@
           "answer": [
             "Wenn der Patient Hilfe braucht, kommt Lena ins Zimmer."
           ],
-          "context": "Početak: Wenn"
+          "context": "Početak: Wenn",
+          "kind": "closed",
+          "items": []
         },
         {
           "id": "DE-HC-B1-L01-G-20",
@@ -905,7 +943,9 @@
                 "Wenn Herr Schmidt klingelt, kommt Lena ins Zimmer."
               ]
             }
-          ]
+          ],
+          "kind": "closed",
+          "items": []
         },
         {
           "id": "DE-HC-B1-L01-G-21",
@@ -925,7 +965,9 @@
           ],
           "correct": [
             2
-          ]
+          ],
+          "kind": "closed",
+          "items": []
         },
         {
           "id": "DE-HC-B1-L01-G-22",
@@ -955,7 +997,9 @@
               ],
               "answer": "einatmen"
             }
-          ]
+          ],
+          "kind": "closed",
+          "items": []
         },
         {
           "id": "DE-HC-B1-L01-G-23",
@@ -977,7 +1021,9 @@
           "answer": [
             "Ich würde gern mit dem Arzt sprechen."
           ],
-          "context": "Početak: Ich"
+          "context": "Početak: Ich",
+          "kind": "closed",
+          "items": []
         },
         {
           "id": "DE-HC-B1-L01-G-24",
@@ -997,7 +1043,9 @@
           ],
           "correct": [
             1
-          ]
+          ],
+          "kind": "closed",
+          "items": []
         },
         {
           "id": "DE-HC-B1-L01-G-25",
@@ -1023,7 +1071,9 @@
             1,
             2,
             0
-          ]
+          ],
+          "kind": "closed",
+          "items": []
         },
         {
           "id": "DE-HC-B1-L01-G-26",
@@ -1045,7 +1095,9 @@
           "correct": [
             1,
             2
-          ]
+          ],
+          "kind": "closed",
+          "items": []
         },
         {
           "id": "DE-HC-B1-L01-G-27",
@@ -1065,7 +1117,9 @@
                 "Könnten Sie sich bitte hinlegen?"
               ]
             }
-          ]
+          ],
+          "kind": "closed",
+          "items": []
         },
         {
           "id": "DE-HC-B1-L01-G-28",
@@ -1085,7 +1139,9 @@
                 "Könnten Sie bitte einatmen?"
               ]
             }
-          ]
+          ],
+          "kind": "closed",
+          "items": []
         },
         {
           "id": "DE-HC-B1-L01-G-29",
@@ -1115,7 +1171,9 @@
               ],
               "answer": "sollten"
             }
-          ]
+          ],
+          "kind": "closed",
+          "items": []
         },
         {
           "id": "DE-HC-B1-L01-G-30",
@@ -1135,7 +1193,9 @@
                 "Könnten Sie mir sagen, ob Sie nicht geschlafen haben?"
               ]
             }
-          ]
+          ],
+          "kind": "closed",
+          "items": []
         }
       ]
     },
