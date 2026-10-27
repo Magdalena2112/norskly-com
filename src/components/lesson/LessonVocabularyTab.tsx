@@ -3,6 +3,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/context/AuthContext";
 import { loadLessonContent, speakLines, type Exercise } from "@/lib/courseLessons";
 import LessonExercise from "@/components/lesson/LessonExercise";
+import WordDetails from "@/components/lesson/WordDetails";
 import VocabularyPracticeExercise from "@/components/lesson/VocabularyPracticeExercise";
 import { vocabularyXp, type VocabularyPracticeExercise as Practice } from "@/lib/vocabularyPractice";
 import { Progress } from "@/components/ui/progress";
@@ -153,17 +154,19 @@ export default function LessonVocabularyTab({ lessonId, mode, onPractice, onFlas
           <p className="font-semibold text-primary leading-snug break-words hyphens-auto">{w.word}</p>
           <p className="text-xs text-muted-foreground">{w.translation}</p>
           {w.example && <p className="text-xs italic text-primary/70 mt-0.5">„{w.example}“</p>}
+          <WordDetails word={w.word} translation={w.translation} language={row.language} />
         </div>
       </li>
     );
     return (
-      <li className="flex items-center gap-3 rounded-xl border border-border/50 bg-background/80 px-3 py-2.5 col-span-2 sm:col-span-1">
-        <button onClick={() => say(w.word)} className="text-primary/60 hover:text-primary shrink-0" aria-label={`Izgovori ${w.word}`}>
+      <li className="flex items-start gap-3 rounded-xl border border-border/50 bg-background/80 px-3 py-2.5 col-span-2 sm:col-span-1">
+        <button onClick={() => say(w.word)} className="text-primary/60 hover:text-primary shrink-0 mt-0.5" aria-label={`Izgovori ${w.word}`}>
           <Volume2 className="w-4 h-4" />
         </button>
         <div className="min-w-0 flex-1">
           <p className="font-semibold text-primary">{w.word}</p>
           <p className="text-sm text-muted-foreground">{w.translation}</p>
+          <WordDetails word={w.word} translation={w.translation} language={row.language} />
         </div>
       </li>
     );
