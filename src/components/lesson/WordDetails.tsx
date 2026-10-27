@@ -68,7 +68,24 @@ export default function WordDetails({ word, translation, language }: { word: str
             {loading && <p className="flex items-center gap-2 text-muted-foreground"><Loader2 className="w-4 h-4 animate-spin" /> Učitavam detalje…</p>}
             {err && <p className="text-destructive">{err}</p>}
             {data && <>
-              {data.forms.length > 0 && <Section icon={BookText} title="Gramatički oblici"><Chips items={data.forms} /></Section>}
+              {data.forms.length > 0 && (
+                <Section icon={BookText} title="Gramatički oblici">
+                  <div className="divide-y divide-border/50 rounded-lg border border-border/50 overflow-hidden">
+                    {data.forms.map((f) => {
+                      const m = f.match(/^\s*([^:–—=]+?)\s*[:–—=]\s*(.+)$/) ?? f.match(/^\s*(.+?)\s*\(([^)]+)\)\s*$/);
+                      const [form, label] = !m ? [f, ""] : f.includes("(") && !/[:–—=]/.test(f) ? [m[1], m[2]] : [m[2], m[1]];
+                      return (
+                        <div key={f} className="flex items-center gap-3 px-3 py-2 bg-background/40">
+                          {label && <span className="w-28 shrink-0 text-xs text-muted-foreground leading-tight">{label}</span>}
+                          <span className="flex-1 font-medium text-foreground break-words">{form}</span>
+                          <button onClick={() => speakLines([{ speaker: "f", text: form }], language)} aria-label={`Izgovori ${form}`}
+                            className="text-primary/60 hover:text-primary shrink-0"><Volume2 className="w-4 h-4" /></button>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </Section>
+              )}
               {data.examples.length > 0 && (
                 <Section icon={MessageSquareQuote} title="Primeri u rečenicama">
                   <ul className="space-y-2.5">
