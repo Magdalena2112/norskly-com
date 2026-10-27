@@ -203,7 +203,7 @@ export default function CourseLessonPage() {
           const t = content.intro[Math.min(textIdx, content.intro.length - 1)];
           const img = imgs?.texts[t.id];
           const last = textIdx >= content.intro.length - 1;
-          const keyTerms = ((t as { keyTerms?: LessonWord[] }).keyTerms) ?? [];
+          const keyTerms = ((t as unknown as { keyTerms?: LessonWord[] }).keyTerms) ?? [];
           const textKnown = keyTerms.length ? [...keyTerms, ...knownWords] : knownWords;
           return (
             <section className="mb-8">
