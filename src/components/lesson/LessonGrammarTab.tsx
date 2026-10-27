@@ -25,6 +25,37 @@ function Table({ head, rows }: { head?: string[]; rows: string[][] }) {
   );
 }
 
+/** One-click micro quiz inside a theory section. */
+function QuickCheckCard({ qc }: { qc: { question: string; options: string[]; correct: number; feedback?: string } }) {
+  const [picked, setPicked] = useState<number | null>(null);
+  return (
+    <Card className="border-primary/30 bg-primary/5">
+      <CardHeader className="pb-2"><CardTitle className="text-base flex items-center gap-2"><Sparkles className="w-4 h-4 text-primary" /> Blic provera</CardTitle></CardHeader>
+      <CardContent className="space-y-2">
+        <p className="text-sm font-medium">{qc.question}</p>
+        <div className="space-y-2">
+          {qc.options.map((o, i) => {
+            const chosen = picked === i;
+            const ok = picked !== null && i === qc.correct;
+            const bad = chosen && i !== qc.correct;
+            return (
+              <button key={i} type="button" disabled={picked !== null} onClick={() => setPicked(i)}
+                className={`w-full text-left rounded-xl border px-3 py-2.5 text-sm transition-colors ${ok ? "border-forest bg-forest/10 text-forest" : bad ? "border-destructive bg-destructive/10 text-destructive" : "border-border/60 bg-background hover:border-primary/50"}`}>
+                {o}
+              </button>
+            );
+          })}
+        </div>
+        {picked !== null && (
+          <p className={`text-xs leading-relaxed ${picked === qc.correct ? "text-forest" : "text-muted-foreground"}`}>
+            {picked === qc.correct ? "✅ " : "💡 "}{qc.feedback || (picked === qc.correct ? "Tačno!" : "Nije tačno — pogledaj objašnjenje iznad.")}
+          </p>
+        )}
+      </CardContent>
+    </Card>
+  );
+}
+
 interface Topic {
   label: string;
   sectionIdx: number[];
