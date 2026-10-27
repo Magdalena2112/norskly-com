@@ -67,7 +67,7 @@ export default function CourseTypeSection({ slug, onSelect }: { slug: string; on
                     <p className="text-sm font-medium text-foreground mb-2">Početni nivo</p>
                     <div className="grid grid-cols-5 gap-1.5" role="group" aria-label={`Početni nivo · ${c.title}`}>
                       {CEFR_LEVELS.map((level) => {
-                        const available = promo ? promo.includes(level) : courseType === "general";
+                        const available = promo ? promo.includes(level) : courseType === "general" || level === "B1";
                         const selected = courseStartLevel(selectedLevels[c.id], courseType, promo) === level;
                         return <Button key={level} size="sm" variant={selected ? "default" : "outline"} className="px-0 min-w-0" aria-pressed={selected} disabled={!available} title={available ? level : `${level} · U pripremi`} onClick={() => setSelectedLevels((prev) => ({ ...prev, [c.id]: level }))}>{level}</Button>;
                       })}
