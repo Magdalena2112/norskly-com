@@ -19,10 +19,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import PostcardVignette from "@/components/student/PostcardVignette";
 import { LESSON_IMAGES } from "@/content/lessons/images";
-import { KeyPhrases } from "@/components/lesson/InteractiveText";
+import InteractiveText, { KeyPhrases } from "@/components/lesson/InteractiveText";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import MyDictionaryPanel from "@/components/MyDictionaryPanel";
-import { lessonWords, phrasesInText } from "@/lib/myDictionary";
+import { lessonWords, phrasesInText, type LessonWord } from "@/lib/myDictionary";
 
 const MODULE_META: Record<string, { title: string; subtitle: string; description: string; icon: typeof BookOpen; iconBg: string; vignette: any }> = {
   grammar: { title: "Gramatika", subtitle: "Grammar", description: "Objašnjenja, tabele, česte greške i vežbe sa 3 pokušaja.", icon: BookOpen, iconBg: "bg-primary", vignette: "book" },
@@ -196,7 +196,7 @@ export default function CourseLessonPage() {
               <AnimatePresence mode="wait">
                 <motion.div key={t.id} initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -24 }} transition={{ duration: 0.3 }} className="space-y-3">
                   {img && t.type === "email" ? (
-                    <EmailTextCard image={img} title={t.title} scene={t.scene} lines={t.lines} language={lang} />
+                    <EmailTextCard image={img} title={t.title} scene={t.scene} lines={t.lines} language={lang} interactive={{ known: knownWords, lessonCode: content.code }} />
                   ) : (
                     <>
                       {img && <img src={img} alt={t.title} loading="lazy" className="w-full h-auto rounded-3xl border border-border/50 shadow-postcard" />}
@@ -427,7 +427,7 @@ export default function CourseLessonPage() {
 
 // Email-type intro text: the illustration already contains the full text, so the
 // image stands alone with a floating play button; the transcript stays hidden by default.
-function EmailTextCard({ image, title, scene, lines, language }: { image: string; title: string; scene?: string; lines: DialogueLine[]; language: string }) {
+function EmailTextCard({ image, title, scene, lines, language, interactive }: { image: string; title: string; scene?: string; lines: DialogueLine[]; language: string; interactive?: { known: LessonWord[]; lessonCode?: string } }) {
   const [playing, setPlaying] = useState(false);
   const [slow, setSlow] = useState(false);
   const [showText, setShowText] = useState(false);
@@ -475,7 +475,7 @@ function EmailTextCard({ image, title, scene, lines, language }: { image: string
       </div>
       {showText && (
         <ul className="space-y-1.5 rounded-2xl border border-border/60 bg-cream/90 p-4 shadow-card-soft">
-          {lines.map((l, i) => <li key={i} className="text-sm text-foreground">{l.text}</li>)}
+          {lines.map((l, i) => <li key={i} className="text-sm text-foreground">{interactive ? <InteractiveText text={l.text} language={language} known={interactive.known} lessonCode={interactive.lessonCode} /> : l.text}</li>)}
         </ul>
       )}
     </div>
