@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 import { toast } from "sonner";
 
 type Q = { prompt: string; options: string[]; answer: string; explanation?: string };
-export type ListeningScene = { id: string; code?: string; title: string; context?: string; lines: DialogueLine[]; questions: Q[] };
+export type ListeningScene = { id: string; code?: string; xp?: number; title: string; context?: string; lines: DialogueLine[]; questions: Q[] };
 type Answers = Record<string, Record<number, string>>;
 
 export default function LessonListeningTab({ scenes, lang, lessonCode, completed = [], onDone, onFinish }: {
@@ -59,7 +59,7 @@ export default function LessonListeningTab({ scenes, lang, lessonCode, completed
       if (user && !completed.includes(code) && !awarded.current.has(code)) {
         awarded.current.add(code);
         const score = scene.questions.filter((question, i) => next[i] === question.answer).length;
-        void logActivity(user.id, "listening", "lesson_scene", 5 + score * 3,
+        void logActivity(user.id, "listening", "lesson_scene", scene.xp ?? 5 + score * 3,
           { lesson: lessonCode, scene: scene.id, score, total: scene.questions.length },
           { dedupKey: `lesson_listen_${lessonCode}_${scene.id}_${lang}`, language: lang });
       }
