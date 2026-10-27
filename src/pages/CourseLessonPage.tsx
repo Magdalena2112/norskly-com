@@ -19,6 +19,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import PostcardVignette from "@/components/student/PostcardVignette";
 import { LESSON_IMAGES } from "@/content/lessons/images";
+import { MODULE_COVERS } from "@/content/lessons/moduleCovers";
 import InteractiveText, { KeyPhrases } from "@/components/lesson/InteractiveText";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import MyDictionaryPanel from "@/components/MyDictionaryPanel";
@@ -229,7 +230,7 @@ export default function CourseLessonPage() {
             <div className="grid gap-6 sm:grid-cols-2">
               {moduleKeys.map((key, i) => {
                 const meta = MODULE_META[key];
-                const cover = imgs?.modules[key]?.[0];
+                const cover = MODULE_COVERS[key];
                 const ex = moduleExercises(key);
                 const n = ex.filter((e) => done.includes(e.code)).length;
                 return (
