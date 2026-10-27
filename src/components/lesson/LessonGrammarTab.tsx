@@ -253,6 +253,12 @@ export default function LessonGrammarTab({ lessonId, onPractice, onExplain, mode
               <CardContent><ul className="space-y-2">{s.rules.map((r: string) => <li key={r} className="text-sm flex items-start gap-2"><span className="text-accent mt-0.5">•</span><span>{r}</span></li>)}</ul></CardContent>
             </Card>
           )}
+          {s.brainTrap && (
+            <Card className="border-amber-500/30 bg-amber-500/5">
+              <CardHeader className="pb-2"><CardTitle className="text-base flex items-center gap-2"><span>🧠</span> Zamka za naš mozak</CardTitle></CardHeader>
+              <CardContent><p className="text-sm leading-relaxed">{s.brainTrap}</p></CardContent>
+            </Card>
+          )}
           {s.compare && (
             <Card className="bg-primary/5 border-primary/20">
               <CardHeader className="pb-2"><CardTitle className="text-base flex items-center gap-2"><span>⚖️</span> Poređenje sa srpskim</CardTitle></CardHeader>
