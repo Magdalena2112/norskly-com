@@ -11,7 +11,7 @@ import { UserProfile } from "@/types/profile";
 import { ChevronRight, ChevronLeft, User, Target, MessageSquare, BookOpen, Gauge, Globe } from "lucide-react";
 import BackButton from "@/components/BackButton";
 import JourneyStepper from "@/components/onboarding/JourneyStepper";
-import { courseIntent, courseStartLevel } from "@/lib/courseAccess";
+import { courseIntent, courseStartLevel, promoAvailableLevels } from "@/lib/courseAccess";
 import { useToast } from "@/hooks/use-toast";
 
 type LangCode = "no" | "en" | "de";
@@ -189,7 +189,7 @@ export default function OnboardingPage() {
   const savedIntent = user?.user_metadata?.signup_language === selectedLang ? user.user_metadata : null;
   const explicitIntent = params.has("course") || params.has("level");
   const chosenCourse = courseIntent(explicitIntent ? params.get("course") : savedIntent?.signup_course, langCode);
-  const chosenLevel = courseStartLevel(explicitIntent ? params.get("level") : savedIntent?.signup_level, chosenCourse);
+  const chosenLevel = courseStartLevel(explicitIntent ? params.get("level") : savedIntent?.signup_level, chosenCourse, promoAvailableLevels(langCode, chosenCourse));
   const t = COPY[langCode];
 
   const [step, setStep] = useState(0);
@@ -226,7 +226,7 @@ export default function OnboardingPage() {
         const { data: existing, error: enrollmentError } = await supabase.from("language_profiles").select("course_type, level, onboarding_completed").eq("user_id", user.id).eq("language", langCode).maybeSingle();
         if (enrollmentError) throw enrollmentError;
         const enrolledCourse = courseIntent(existing?.course_type ?? chosenCourse, langCode);
-        const enrolledLevel = existing?.onboarding_completed || (existing && enrolledCourse !== chosenCourse) ? courseStartLevel(existing.level, enrolledCourse) : courseStartLevel(chosenLevel, enrolledCourse);
+        const enrolledLevel = existing?.onboarding_completed || (existing && enrolledCourse !== chosenCourse) ? courseStartLevel(existing.level, enrolledCourse, promoAvailableLevels(langCode, enrolledCourse)) : courseStartLevel(chosenLevel, enrolledCourse, promoAvailableLevels(langCode, enrolledCourse));
         const { error: languageError } = await supabase
           .from("language_profiles")
           .upsert({

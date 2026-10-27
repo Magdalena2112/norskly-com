@@ -11,7 +11,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import BackButton from "@/components/BackButton";
 import JourneyStepper from "@/components/onboarding/JourneyStepper";
-import { courseIntent, courseStartLevel } from "@/lib/courseAccess";
+import { courseIntent, courseStartLevel, promoAvailableLevels } from "@/lib/courseAccess";
 
 export default function AuthPage() {
   // „Registruj se" u zaglavlju otvara odmah karticu Registracije (?mode=signup).
@@ -52,7 +52,7 @@ export default function AuthPage() {
       const matchingIntent = savedIntent?.signup_language === lang ? savedIntent : null;
       const intendedCourse = explicitIntent ? searchParams.get("course") : matchingIntent?.signup_course;
       const course = courseIntent(intendedCourse, code);
-      const level = courseStartLevel(explicitIntent ? searchParams.get("level") : matchingIntent?.signup_level, course);
+      const level = courseStartLevel(explicitIntent ? searchParams.get("level") : matchingIntent?.signup_level, course, promoAvailableLevels(code, course));
       navigate(`/onboarding?lang=${lang}&course=${course}&level=${level}`);
       return;
     }
@@ -149,8 +149,9 @@ export default function AuthPage() {
 
       } else {
         const signupLang = intentLang;
-        const signupCourse = courseIntent(searchParams.get("course"), slugToCode(signupLang));
-        const signupLevel = courseStartLevel(searchParams.get("level"), signupCourse);
+        const signupCode = slugToCode(signupLang);
+        const signupCourse = courseIntent(searchParams.get("course"), signupCode);
+        const signupLevel = courseStartLevel(searchParams.get("level"), signupCourse, promoAvailableLevels(signupCode, signupCourse));
         localStorage.setItem("norskly_selected_language", signupLang);
         const { data, error } = await supabase.auth.signUp({
           email,
