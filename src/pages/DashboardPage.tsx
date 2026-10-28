@@ -293,7 +293,8 @@ export default function DashboardPage() {
                   <PostcardVignette variant={mod.vignette} className="absolute inset-0 w-full h-full" />
                 </div>
 
-                <CardContent className="pt-8 pb-5 px-5">
+                <CardContent className="pt-5 pb-5 px-5">
+
                   <p className="font-script italic text-xs text-primary/55 mb-0.5">{mod.subtitle}</p>
                   <h3 className="font-display font-semibold text-lg text-primary leading-tight">{mod.title}</h3>
                   <p className="text-sm text-muted-foreground mt-1.5 leading-relaxed">{mod.description}</p>
