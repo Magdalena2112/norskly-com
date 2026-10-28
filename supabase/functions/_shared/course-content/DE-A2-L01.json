@@ -4138,8 +4138,672 @@
       ]
     },
     "pronunciation": {
-      "theory": [],
-      "exercises": []
+      "theory": [
+        {
+          "title": "Wortakzent – naglasak reči",
+          "text": "U nemačkom jeziku jedan slog u reči obično nosi glavni naglasak. Taj slog se izgovara istaknutije od ostalih. Pravilan naglasak je važan jer utiče na prirodnost i razumljivost govora. Klikni na reč da je čuješ.",
+          "examples": [
+            {
+              "sentence": "arbeiten",
+              "display": "AR-bei-ten",
+              "meaning": "raditi"
+            },
+            {
+              "sentence": "Morgen",
+              "display": "MOR-gen",
+              "meaning": "jutro"
+            },
+            {
+              "sentence": "besuchen",
+              "display": "be-SU-chen",
+              "meaning": "posetiti"
+            },
+            {
+              "sentence": "bezahlen",
+              "display": "be-ZAH-len",
+              "meaning": "platiti"
+            },
+            {
+              "sentence": "Telefon",
+              "display": "Te-le-FON",
+              "meaning": "telefon"
+            }
+          ],
+          "compare": "I srpski koristi naglasak reči, ali se njegovo mesto i izgovorna realizacija razlikuju od nemačkog. Zato nemačku reč usvajaj zajedno sa njenim naglaskom, a ne samo sa značenjem.",
+          "note": "Naglašeni slog je prikazan velikim slovima samo radi objašnjenja."
+        },
+        {
+          "title": "Trennbare Präfixe – naglasak odvojivih prefiksa",
+          "text": "Neki nemački glagoli imaju odvojivi prefiks. Kod ovih glagola glavni naglasak najčešće pada na prefiks. U glavnim rečenicama u prezentu prefiks se odvaja i stoji na kraju rečenice. Kod neodvojivih prefiksa kao što su be- i ver- naglasak obično ne pada na prefiks: ANrufen – beSUchen.",
+          "examples": [
+            {
+              "sentence": "aufstehen",
+              "display": "AUF-stehen",
+              "meaning": "ustati"
+            },
+            {
+              "sentence": "anrufen",
+              "display": "AN-rufen",
+              "meaning": "pozvati telefonom"
+            },
+            {
+              "sentence": "einkaufen",
+              "display": "EIN-kaufen",
+              "meaning": "kupovati"
+            },
+            {
+              "sentence": "aussteigen",
+              "display": "AUS-steigen",
+              "meaning": "izaći iz prevoznog sredstva"
+            },
+            {
+              "sentence": "mitkommen",
+              "display": "MIT-kommen",
+              "meaning": "poći zajedno"
+            },
+            {
+              "sentence": "Ich stehe um sieben Uhr auf.",
+              "stressed": [
+                "auf"
+              ]
+            },
+            {
+              "sentence": "Sie ruft ihre Mutter an.",
+              "stressed": [
+                "an"
+              ]
+            },
+            {
+              "sentence": "Wir kaufen am Samstag ein.",
+              "stressed": [
+                "ein"
+              ]
+            }
+          ],
+          "compare": "U srpskom ne postoji potpuno isti sistem odvojivih glagolskih prefiksa. Izgovor prefiksa zato usvajaj zajedno sa značenjem glagola."
+        },
+        {
+          "title": "Lange und kurze Vokale – dugi i kratki samoglasnici",
+          "text": "U nemačkom jeziku samoglasnici mogu biti dugi ili kratki, a razlika često menja značenje reči. U mnogim parovima menja se i kvalitet samoglasnika, ne samo trajanje. Česte smernice (ne pravila bez izuzetaka): ie često označava dugo /iː/ (Miete, bieten); dva ista suglasnika često ukazuju na kratak prethodni vokal (Mitte, bitten, Bett); h iza samoglasnika često ukazuje na dužinu (wohnen, fahren); dva ista samoglasnika mogu označavati dug vokal (Staat, See). Klikni na reč da je čuješ.",
+          "pairHeads": [
+            "Dugi vokal",
+            "Kratki vokal"
+          ],
+          "pairs": [
+            {
+              "full": "Miete",
+              "fullNote": "kirija",
+              "short": "Mitte",
+              "shortNote": "sredina"
+            },
+            {
+              "full": "bieten",
+              "fullNote": "ponuditi",
+              "short": "bitten",
+              "shortNote": "zamoliti"
+            },
+            {
+              "full": "Ofen",
+              "fullNote": "peć",
+              "short": "offen",
+              "shortNote": "otvoren"
+            },
+            {
+              "full": "Beet",
+              "fullNote": "cvetna leja",
+              "short": "Bett",
+              "shortNote": "krevet"
+            },
+            {
+              "full": "Staat",
+              "fullNote": "država",
+              "short": "Stadt",
+              "shortNote": "grad"
+            }
+          ],
+          "compare": "U oba jezika postoji trajanje samoglasnika, ali je u nemačkom posebno važno razlikovati dužinu i kvalitet vokala u rečima kao što su Miete i Mitte."
+        }
+      ],
+      "exercises": [
+        {
+          "code": "P-01",
+          "title": "Lang oder kurz?",
+          "type": "choose",
+          "xp": 1,
+          "requireCorrect": true,
+          "compareOnly": true,
+          "instruction": "Poslušaj reč i odredi da li je naglašeni samoglasnik dug ili kratak. Reč će biti prikazana tek nakon što odgovoriš.",
+          "items": [
+            {
+              "say": "Miete",
+              "options": [
+                "Langer Vokal",
+                "Kurzer Vokal"
+              ],
+              "answer": "Langer Vokal",
+              "reveal": "Miete",
+              "explain": "Tačno! U reči Miete čuje se dugo /iː/."
+            },
+            {
+              "say": "bitten",
+              "options": [
+                "Langer Vokal",
+                "Kurzer Vokal"
+              ],
+              "answer": "Kurzer Vokal",
+              "reveal": "bitten",
+              "explain": "Tačno! U reči bitten čuje se kratko /ɪ/ – dva t ukazuju na kratak vokal."
+            },
+            {
+              "say": "Ofen",
+              "options": [
+                "Langer Vokal",
+                "Kurzer Vokal"
+              ],
+              "answer": "Langer Vokal",
+              "reveal": "Ofen",
+              "explain": "Tačno! U reči Ofen čuje se dugo /oː/."
+            },
+            {
+              "say": "Bett",
+              "options": [
+                "Langer Vokal",
+                "Kurzer Vokal"
+              ],
+              "answer": "Kurzer Vokal",
+              "reveal": "Bett",
+              "explain": "Tačno! U reči Bett čuje se kratko /ɛ/ – dva t ukazuju na kratak vokal."
+            },
+            {
+              "say": "Staat",
+              "options": [
+                "Langer Vokal",
+                "Kurzer Vokal"
+              ],
+              "answer": "Langer Vokal",
+              "reveal": "Staat",
+              "explain": "Tačno! U reči Staat čuje se dugo /aː/ – dva a označavaju dužinu."
+            }
+          ],
+          "wrongMsg": "Obrati pažnju na dužinu i kvalitet naglašenog samoglasnika. Poslušaj još jednom."
+        },
+        {
+          "code": "P-02",
+          "title": "Welches Wort hörst du?",
+          "type": "choose",
+          "xp": 1,
+          "requireCorrect": true,
+          "compareOnly": true,
+          "instruction": "Poslušaj audio i izaberi reč koju čuješ. Obrati pažnju na izgovor samoglasnika. Posle odgovora možeš da poslušaš obe reči iz para.",
+          "items": [
+            {
+              "say": "Miete",
+              "options": [
+                {
+                  "label": "Miete",
+                  "say": "Miete"
+                },
+                {
+                  "label": "Mitte",
+                  "say": "Mitte"
+                }
+              ],
+              "answer": "Miete"
+            },
+            {
+              "say": "bitten",
+              "options": [
+                {
+                  "label": "bieten",
+                  "say": "bieten"
+                },
+                {
+                  "label": "bitten",
+                  "say": "bitten"
+                }
+              ],
+              "answer": "bitten"
+            },
+            {
+              "say": "offen",
+              "options": [
+                {
+                  "label": "Ofen",
+                  "say": "Ofen"
+                },
+                {
+                  "label": "offen",
+                  "say": "offen"
+                }
+              ],
+              "answer": "offen"
+            },
+            {
+              "say": "Beet",
+              "options": [
+                {
+                  "label": "Beet",
+                  "say": "Beet"
+                },
+                {
+                  "label": "Bett",
+                  "say": "Bett"
+                }
+              ],
+              "answer": "Beet"
+            },
+            {
+              "say": "Stadt",
+              "options": [
+                {
+                  "label": "Staat",
+                  "say": "Staat"
+                },
+                {
+                  "label": "Stadt",
+                  "say": "Stadt"
+                }
+              ],
+              "answer": "Stadt"
+            }
+          ],
+          "shuffle": true,
+          "optionAudio": "after",
+          "wrongMsg": "Obrati pažnju na dužinu i kvalitet samoglasnika. U nemačkom mala razlika u izgovoru može promeniti značenje reči."
+        },
+        {
+          "code": "P-03",
+          "title": "Hör zu, sprich nach und nimm auf!",
+          "type": "record",
+          "xp": 1,
+          "compareOnly": true,
+          "checklist": [
+            "Dužina i kvalitet ciljanog samoglasnika",
+            "Razumljivost cele rečenice",
+            "Prirodan tempo"
+          ],
+          "instruction": "Poslušaj rečenicu, ponovi je naglas i snimi svoj izgovor. Obrati pažnju na reč koja sadrži ciljani samoglasnik.",
+          "items": [
+            {
+              "say": "Die Miete ist sehr hoch.",
+              "focus": "Miete"
+            },
+            {
+              "say": "Wir bitten um Hilfe.",
+              "focus": "bitten"
+            },
+            {
+              "say": "Der Ofen ist noch warm.",
+              "focus": "Ofen"
+            },
+            {
+              "say": "Das Bett steht am Fenster.",
+              "focus": "Bett"
+            },
+            {
+              "say": "Berlin ist eine große Stadt.",
+              "focus": "Stadt"
+            }
+          ]
+        },
+        {
+          "code": "P-04",
+          "title": "Wo liegt die Betonung?",
+          "type": "choose",
+          "xp": 1,
+          "requireCorrect": true,
+          "compareOnly": true,
+          "instruction": "Poslušaj reč i izaberi slog koji nosi glavni naglasak.",
+          "items": [
+            {
+              "say": "arbeiten",
+              "options": [
+                "ar",
+                "bei",
+                "ten"
+              ],
+              "answer": "ar",
+              "reveal": "AR-bei-ten",
+              "explain": "Naglašeni slog se izgovara istaknutije. Poslušaj reč još jednom i ponovi je."
+            },
+            {
+              "say": "besuchen",
+              "options": [
+                "be",
+                "su",
+                "chen"
+              ],
+              "answer": "su",
+              "reveal": "be-SU-chen",
+              "explain": "Naglašeni slog se izgovara istaknutije. Poslušaj reč još jednom i ponovi je."
+            },
+            {
+              "say": "bezahlen",
+              "options": [
+                "be",
+                "zah",
+                "len"
+              ],
+              "answer": "zah",
+              "reveal": "be-ZAH-len",
+              "explain": "Naglašeni slog se izgovara istaknutije. Poslušaj reč još jednom i ponovi je."
+            },
+            {
+              "say": "Telefon",
+              "options": [
+                "te",
+                "le",
+                "fon"
+              ],
+              "answer": "fon",
+              "reveal": "Te-le-FON",
+              "explain": "Naglašeni slog se izgovara istaknutije. Poslušaj reč još jednom i ponovi je."
+            },
+            {
+              "say": "Morgen",
+              "options": [
+                "mor",
+                "gen"
+              ],
+              "answer": "mor",
+              "reveal": "MOR-gen",
+              "explain": "Naglašeni slog se izgovara istaknutije. Poslušaj reč još jednom i ponovi je."
+            }
+          ]
+        },
+        {
+          "code": "P-05",
+          "title": "Betonung bei trennbaren Verben",
+          "type": "choose",
+          "xp": 1,
+          "requireCorrect": true,
+          "compareOnly": true,
+          "instruction": "Poslušaj glagol i izaberi deo na koji pada glavni naglasak. Posle tačnog odgovora poslušaj i ponovi ceo glagol.",
+          "items": [
+            {
+              "say": "aufstehen",
+              "options": [
+                "auf",
+                "stehen"
+              ],
+              "answer": "auf",
+              "reveal": "AUFstehen",
+              "repeat": "aufstehen",
+              "explain": "Kod ovih odvojivih glagola glavni naglasak pada na prefiks."
+            },
+            {
+              "say": "anrufen",
+              "options": [
+                "an",
+                "rufen"
+              ],
+              "answer": "an",
+              "reveal": "ANrufen",
+              "repeat": "anrufen",
+              "explain": "Kod ovih odvojivih glagola glavni naglasak pada na prefiks."
+            },
+            {
+              "say": "einkaufen",
+              "options": [
+                "ein",
+                "kaufen"
+              ],
+              "answer": "ein",
+              "reveal": "EINkaufen",
+              "repeat": "einkaufen",
+              "explain": "Kod ovih odvojivih glagola glavni naglasak pada na prefiks."
+            },
+            {
+              "say": "aussteigen",
+              "options": [
+                "aus",
+                "steigen"
+              ],
+              "answer": "aus",
+              "reveal": "AUSsteigen",
+              "repeat": "aussteigen",
+              "explain": "Kod ovih odvojivih glagola glavni naglasak pada na prefiks."
+            },
+            {
+              "say": "mitkommen",
+              "options": [
+                "mit",
+                "kommen"
+              ],
+              "answer": "mit",
+              "reveal": "MITkommen",
+              "repeat": "mitkommen",
+              "explain": "Kod ovih odvojivih glagola glavni naglasak pada na prefiks."
+            }
+          ]
+        },
+        {
+          "code": "P-06",
+          "title": "Trennbar oder untrennbar?",
+          "type": "choose",
+          "xp": 1,
+          "requireCorrect": true,
+          "compareOnly": true,
+          "instruction": "Poslušaj glagol i svrstaj ga prema mestu glavnog naglaska.",
+          "items": [
+            {
+              "say": "anrufen",
+              "options": [
+                "Betonung auf dem Präfix",
+                "Betonung auf dem Verbstamm"
+              ],
+              "answer": "Betonung auf dem Präfix",
+              "reveal": "ANrufen",
+              "explain": "an- je odvojivi prefiks i nosi naglasak."
+            },
+            {
+              "say": "besuchen",
+              "options": [
+                "Betonung auf dem Präfix",
+                "Betonung auf dem Verbstamm"
+              ],
+              "answer": "Betonung auf dem Verbstamm",
+              "reveal": "beSUchen",
+              "explain": "be- je neodvojivi prefiks – naglasak pada na osnovu glagola."
+            },
+            {
+              "say": "aufstehen",
+              "options": [
+                "Betonung auf dem Präfix",
+                "Betonung auf dem Verbstamm"
+              ],
+              "answer": "Betonung auf dem Präfix",
+              "reveal": "AUFstehen",
+              "explain": "auf- je odvojivi prefiks i nosi naglasak."
+            },
+            {
+              "say": "verkaufen",
+              "options": [
+                "Betonung auf dem Präfix",
+                "Betonung auf dem Verbstamm"
+              ],
+              "answer": "Betonung auf dem Verbstamm",
+              "reveal": "verKAUfen",
+              "explain": "ver- je neodvojivi prefiks – naglasak pada na osnovu glagola."
+            },
+            {
+              "say": "einkaufen",
+              "options": [
+                "Betonung auf dem Präfix",
+                "Betonung auf dem Verbstamm"
+              ],
+              "answer": "Betonung auf dem Präfix",
+              "reveal": "EINkaufen",
+              "explain": "ein- je odvojivi prefiks i nosi naglasak."
+            }
+          ]
+        },
+        {
+          "code": "P-07",
+          "title": "Hör genau hin!",
+          "type": "choose",
+          "xp": 1,
+          "requireCorrect": true,
+          "compareOnly": true,
+          "instruction": "Poslušaj dva audio-snimka. Odredi da li je izgovorena ista reč ili dve različite reči.",
+          "items": [
+            {
+              "say": "Miete",
+              "sayB": "Mitte",
+              "options": [
+                "Gleich",
+                "Unterschiedlich"
+              ],
+              "answer": "Unterschiedlich",
+              "reveal": "Miete – Mitte",
+              "explain": "Miete ima dugo /iː/, a Mitte kratko /ɪ/."
+            },
+            {
+              "say": "arbeiten",
+              "sayB": "arbeiten",
+              "options": [
+                "Gleich",
+                "Unterschiedlich"
+              ],
+              "answer": "Gleich",
+              "reveal": "arbeiten – arbeiten",
+              "explain": "Obe reči su iste: AR-bei-ten."
+            },
+            {
+              "say": "bitten",
+              "sayB": "bieten",
+              "options": [
+                "Gleich",
+                "Unterschiedlich"
+              ],
+              "answer": "Unterschiedlich",
+              "reveal": "bitten – bieten",
+              "explain": "bitten ima kratko /ɪ/, a bieten dugo /iː/."
+            },
+            {
+              "say": "anrufen",
+              "sayB": "anrufen",
+              "options": [
+                "Gleich",
+                "Unterschiedlich"
+              ],
+              "answer": "Gleich",
+              "reveal": "anrufen – anrufen",
+              "explain": "Obe reči su iste: ANrufen."
+            },
+            {
+              "say": "Staat",
+              "sayB": "Stadt",
+              "options": [
+                "Gleich",
+                "Unterschiedlich"
+              ],
+              "answer": "Unterschiedlich",
+              "reveal": "Staat – Stadt",
+              "explain": "Staat ima dugo /aː/, a Stadt kratko /a/."
+            }
+          ]
+        },
+        {
+          "code": "P-08",
+          "title": "Trennbare Verben im Satz",
+          "type": "record",
+          "xp": 1,
+          "compareOnly": true,
+          "checklist": [
+            "Jasnoća izgovora prefiksa",
+            "Razumljivost",
+            "Prirodan rečenični ritam"
+          ],
+          "instruction": "Poslušaj rečenicu, ponovi je i snimi svoj izgovor. Obrati pažnju na odvojivi prefiks na kraju rečenice. Možeš da poslušaš i sporiju verziju.",
+          "items": [
+            {
+              "say": "Ich stehe jeden Morgen um sieben Uhr auf.",
+              "focus": "auf"
+            },
+            {
+              "say": "Am Abend rufe ich meine Schwester an.",
+              "focus": "an"
+            },
+            {
+              "say": "Wir kaufen am Samstag ein.",
+              "focus": "ein"
+            },
+            {
+              "say": "Die Fahrgäste steigen an der nächsten Haltestelle aus.",
+              "focus": "aus"
+            },
+            {
+              "say": "Kommst du heute Abend mit?",
+              "focus": "mit"
+            }
+          ]
+        },
+        {
+          "code": "P-09",
+          "title": "Sprich natürlich!",
+          "type": "record",
+          "xp": 1,
+          "compareOnly": true,
+          "checklist": [
+            "Naglasak reči",
+            "Dužina samoglasnika",
+            "Naglasak odvojivih prefiksa",
+            "Ritam i razumljivost"
+          ],
+          "instruction": "Poslušaj rečenicu i odmah je ponovi. Pokušaj da pratiš ritam i naglasak govornika.",
+          "items": [
+            {
+              "say": "Die Miete ist teuer, aber die Wohnung ist schön.",
+              "stressNote": "MIEte · TEUer · WOHnung"
+            },
+            {
+              "say": "Morgen stehe ich früher auf.",
+              "stressNote": "MORgen · FRÜher · AUF"
+            },
+            {
+              "say": "Nach der Arbeit kaufe ich im Supermarkt ein.",
+              "stressNote": "ARbeit · SUpermarkt · EIN"
+            },
+            {
+              "say": "Meine Freundin ruft mich heute Abend an.",
+              "stressNote": "FREUNdin · Abend · AN"
+            },
+            {
+              "say": "Wir bitten den Lehrer um Hilfe.",
+              "stressNote": "BITten · LEHrer · HILfe"
+            }
+          ]
+        },
+        {
+          "code": "P-10",
+          "title": "Mein neuer Alltag – Final Pronunciation Challenge",
+          "type": "record",
+          "xp": 1,
+          "compareOnly": true,
+          "checklist": [
+            "Wortakzent: MOnaten, MORgen, FRÜHstück, ARbeit, MITtagspause",
+            "Trennbare Präfixe: stehe … AUF, rufe … AN, kaufe … EIN",
+            "Lange und kurze Vokale: wohne, fahre (dugo) – Mittagspause, treffe (kratko)"
+          ],
+          "instruction": "Poslušaj tekst, zatim ga pročitaj naglas i snimi. Obrati pažnju na duge i kratke samoglasnike, naglasak reči i odvojive prefikse.",
+          "items": [
+            {
+              "say": "Ich wohne seit zwei Monaten in Berlin. Jeden Morgen stehe ich um sieben Uhr auf. Nach dem Frühstück fahre ich mit der U-Bahn zur Arbeit. In der Mittagspause rufe ich manchmal meine Freundin an. Am Wochenende kaufe ich ein oder treffe meine Freunde.",
+              "sentences": [
+                "Ich wohne seit zwei Monaten in Berlin.",
+                "Jeden Morgen stehe ich um sieben Uhr auf.",
+                "Nach dem Frühstück fahre ich mit der U-Bahn zur Arbeit.",
+                "In der Mittagspause rufe ich manchmal meine Freundin an.",
+                "Am Wochenende kaufe ich ein oder treffe meine Freunde."
+              ],
+              "showText": true
+            }
+          ],
+          "maxMs": 60000,
+          "tip": "Savet za sledeći pokušaj: snimi tekst rečenicu po rečenicu uz model, pa ceo tekst još jednom bez zaustavljanja."
+        }
+      ]
     },
     "speaking": {
       "tasks": [],
