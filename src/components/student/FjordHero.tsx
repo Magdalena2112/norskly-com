@@ -2,7 +2,101 @@
  * Pure SVG Lofoten-inspired hero illustration.
  * Sunset sky → slate mountains → rorbuer cabins → mirror water.
  */
-export default function FjordHero({ className = "" }: { className?: string }) {
+const SKY = (
+  <linearGradient id="citySky" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stopColor="hsl(18 75% 84%)" />
+    <stop offset="40%" stopColor="hsl(340 55% 85%)" />
+    <stop offset="75%" stopColor="hsl(280 35% 82%)" />
+    <stop offset="100%" stopColor="hsl(220 30% 78%)" />
+  </linearGradient>
+);
+
+function LondonHero({ className }: { className: string }) {
+  const ink = "hsl(220 25% 26%)";
+  return (
+    <svg viewBox="0 0 600 360" preserveAspectRatio="xMidYMid slice" className={className} aria-hidden="true">
+      <defs>{SKY}</defs>
+      <rect width="600" height="360" fill="url(#citySky)" />
+      <circle cx="110" cy="120" r="46" fill="hsl(45 95% 88% / 0.7)" />
+      {/* London Eye */}
+      <g stroke="hsl(220 20% 45%)" strokeWidth="1.5" fill="none">
+        <circle cx="140" cy="200" r="62" />
+        {[0, 30, 60, 90, 120, 150].map((a) => (
+          <line key={a} x1={140 - 62 * Math.cos((a * Math.PI) / 180)} y1={200 - 62 * Math.sin((a * Math.PI) / 180)} x2={140 + 62 * Math.cos((a * Math.PI) / 180)} y2={200 + 62 * Math.sin((a * Math.PI) / 180)} />
+        ))}
+        <line x1="140" y1="200" x2="115" y2="270" /><line x1="140" y1="200" x2="165" y2="270" />
+      </g>
+      {/* Skyline */}
+      <path fill="hsl(220 18% 55%)" opacity="0.8" d="M0,270 L0,230 L40,230 L40,215 L70,215 L70,240 L230,240 L230,220 L260,220 L260,245 L600,245 L600,270 Z" />
+      {/* Parliament + Big Ben */}
+      <g fill={ink}>
+        <rect x="300" y="215" width="200" height="55" />
+        {[310, 340, 370, 400, 430, 460, 485].map((x) => <rect key={x} x={x} y="205" width="6" height="12" />)}
+        <rect x="470" y="110" width="26" height="160" />
+        <polygon points="470,110 483,78 496,110" />
+        <line x1="483" y1="78" x2="483" y2="64" stroke={ink} strokeWidth="2" />
+      </g>
+      <circle cx="483" cy="128" r="8" fill="hsl(42 75% 70%)" />
+      {/* Thames */}
+      <rect y="270" width="600" height="90" fill="hsl(220 30% 62%)" />
+      <g className="animate-water">
+        <rect y="282" width="600" height="2" fill="hsl(45 80% 90% / 0.6)" />
+        <rect y="305" width="600" height="1.5" fill="hsl(340 60% 88% / 0.5)" />
+      </g>
+      {/* Red bus on bridge */}
+      <rect x="0" y="262" width="600" height="6" fill="hsl(220 25% 35%)" />
+      <g transform="translate(330 244)">
+        <rect width="44" height="20" rx="3" fill="hsl(4 70% 48%)" />
+        <rect x="4" y="3" width="36" height="5" fill="hsl(36 45% 92%)" />
+        <rect x="4" y="11" width="36" height="4" fill="hsl(36 45% 92%)" />
+      </g>
+    </svg>
+  );
+}
+
+function BerlinHero({ className }: { className: string }) {
+  const ink = "hsl(220 25% 26%)";
+  return (
+    <svg viewBox="0 0 600 360" preserveAspectRatio="xMidYMid slice" className={className} aria-hidden="true">
+      <defs>{SKY}</defs>
+      <rect width="600" height="360" fill="url(#citySky)" />
+      <circle cx="480" cy="110" r="44" fill="hsl(45 95% 88% / 0.7)" />
+      {/* Fernsehturm */}
+      <g fill="hsl(220 20% 45%)">
+        <rect x="105" y="90" width="8" height="190" />
+        <circle cx="109" cy="120" r="16" />
+        <rect x="108" y="40" width="2" height="62" />
+      </g>
+      {/* Skyline */}
+      <path fill="hsl(220 18% 58%)" opacity="0.8" d="M0,280 L0,235 L60,235 L60,220 L90,220 L90,245 L150,245 L150,225 L200,225 L200,250 L420,250 L420,228 L470,228 L470,240 L600,240 L600,280 Z" />
+      {/* Brandenburger Tor */}
+      <g fill={ink}>
+        <rect x="250" y="190" width="160" height="14" />
+        <rect x="262" y="180" width="136" height="10" />
+        {[256, 284, 312, 340, 368, 396].map((x) => <rect key={x} x={x} y="204" width="8" height="66" />)}
+        <rect x="244" y="268" width="172" height="6" />
+        {/* Quadriga */}
+        <rect x="318" y="166" width="24" height="12" />
+        <rect x="328" y="154" width="3" height="14" />
+      </g>
+      {/* Street */}
+      <rect y="274" width="600" height="86" fill="hsl(220 22% 70%)" />
+      <g className="animate-water">
+        <rect y="290" width="600" height="1.5" fill="hsl(45 80% 92% / 0.6)" />
+      </g>
+      {/* Yellow tram */}
+      <g transform="translate(440 250)">
+        <rect width="90" height="24" rx="4" fill="hsl(45 85% 58%)" />
+        {[6, 26, 46, 66].map((x) => <rect key={x} x={x} y="5" width="16" height="9" fill="hsl(36 45% 92%)" />)}
+        <circle cx="18" cy="26" r="3" fill={ink} /><circle cx="72" cy="26" r="3" fill={ink} />
+      </g>
+    </svg>
+  );
+}
+
+export default function FjordHero({ className = "", language = "no" }: { className?: string; language?: string }) {
+  if (language === "en") return <LondonHero className={className} />;
+  if (language === "de") return <BerlinHero className={className} />;
   return (
     <svg
       viewBox="0 0 600 360"
