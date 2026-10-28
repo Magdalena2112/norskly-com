@@ -2148,6 +2148,19 @@
           "image": "a2:vo05",
           "items": [
             {
+              "prompt": "den Bus nehmen",
+              "options": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5"
+              ],
+              "answers": [
+                "2"
+              ]
+            },
+            {
               "prompt": "aufstehen",
               "options": [
                 "1",
@@ -2161,7 +2174,7 @@
               ]
             },
             {
-              "prompt": "den Bus nehmen",
+              "prompt": "ins Bett gehen",
               "options": [
                 "1",
                 "2",
@@ -2170,7 +2183,7 @@
                 "5"
               ],
               "answers": [
-                "2"
+                "5"
               ]
             },
             {
@@ -2197,19 +2210,6 @@
               ],
               "answers": [
                 "4"
-              ]
-            },
-            {
-              "prompt": "ins Bett gehen",
-              "options": [
-                "1",
-                "2",
-                "3",
-                "4",
-                "5"
-              ],
-              "answers": [
-                "5"
               ]
             }
           ]

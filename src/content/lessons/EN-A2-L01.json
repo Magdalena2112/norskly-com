@@ -2873,6 +2873,19 @@
           "image": "a2:vo05",
           "items": [
             {
+              "prompt": "catch the bus",
+              "options": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5"
+              ],
+              "answers": [
+                "2"
+              ]
+            },
+            {
               "prompt": "get up",
               "options": [
                 "1",
@@ -2886,7 +2899,7 @@
               ]
             },
             {
-              "prompt": "catch the bus",
+              "prompt": "go to bed",
               "options": [
                 "1",
                 "2",
@@ -2895,7 +2908,7 @@
                 "5"
               ],
               "answers": [
-                "2"
+                "5"
               ]
             },
             {
@@ -2922,19 +2935,6 @@
               ],
               "answers": [
                 "4"
-              ]
-            },
-            {
-              "prompt": "go to bed",
-              "options": [
-                "1",
-                "2",
-                "3",
-                "4",
-                "5"
-              ],
-              "answers": [
-                "5"
               ]
             }
           ]
