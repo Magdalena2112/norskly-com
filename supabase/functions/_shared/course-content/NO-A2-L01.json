@@ -4536,8 +4536,147 @@
       "roleswitch": []
     },
     "culture": {
-      "title": "",
-      "body": ""
+      "title": "Kultur: Hverdagsrytme og arbeidstid",
+      "body": "Hvordan ser en vanlig hverdag ut i Norge? Og hva er likt eller forskjellig sammenlignet med Serbia?",
+      "topics": [
+        {
+          "title": "Arbeidsdagen i Norge",
+          "image": "no:cu1",
+          "text": "Mange i Norge jobber fra omtrent klokka åtte til halv fire. En arbeidsuke på 37,5 timer er vanlig på mange arbeidsplasser. Arbeidstiden kan likevel være forskjellig. På sykehus og i butikker jobber mange også om kvelden eller i helgene. Det er vanlig å komme presis til møter.",
+          "fact": "Vanlig arbeidstid: ca. 08:00–15:30 · 37,5 timer per uke · presis til møter.",
+          "keywords": [
+            {
+              "term": "arbeidstid",
+              "meaning": "radno vreme"
+            },
+            {
+              "term": "en arbeidsuke",
+              "meaning": "radna nedelja"
+            },
+            {
+              "term": "en arbeidsplass",
+              "meaning": "radno mesto"
+            },
+            {
+              "term": "å jobbe om kvelden",
+              "meaning": "raditi uveče"
+            },
+            {
+              "term": "i helgene",
+              "meaning": "vikendom"
+            },
+            {
+              "term": "å komme presis",
+              "meaning": "doći tačno na vreme"
+            },
+            {
+              "term": "et møte",
+              "meaning": "sastanak"
+            }
+          ]
+        },
+        {
+          "title": "Matpakke og pauser",
+          "image": "no:cu2",
+          "text": "På mange arbeidsplasser tar folk med matpakke hjemmefra. Ofte spiser de brødskiver til lunsj. Kollegene tar en pause og snakker sammen. Noen spiser i kantina. Etter jobb har mange tid til familie, venner eller en tur ute.",
+          "fact": "Matpakke hjemmefra · pause med kolleger · tid til familie, venner og fritid.",
+          "keywords": [
+            {
+              "term": "en matpakke",
+              "meaning": "užina spakovana od kuće"
+            },
+            {
+              "term": "hjemmefra",
+              "meaning": "od kuće"
+            },
+            {
+              "term": "en brødskive",
+              "meaning": "kriška hleba (sendvič)"
+            },
+            {
+              "term": "å ta en pause",
+              "meaning": "napraviti pauzu"
+            },
+            {
+              "term": "kantina",
+              "meaning": "menza, kantina"
+            },
+            {
+              "term": "en kollega",
+              "meaning": "kolega"
+            },
+            {
+              "term": "å gå en tur",
+              "meaning": "prošetati, ići u šetnju"
+            }
+          ]
+        },
+        {
+          "title": "Norge og Serbia – sammenlign",
+          "image": "no:cu3",
+          "text": "I Serbia og Norge går folk på jobb, tar pauser og møter venner. Men arbeidstid, lunsjvaner og transport kan være ulike. I Norge tar mange med matpakke. I Serbia kjøper noen lunsj på et bakeri eller spiser et varmt måltid. Vanene varierer fra person til person.",
+          "keywords": [
+            {
+              "term": "å sammenligne",
+              "meaning": "uporediti"
+            },
+            {
+              "term": "likt",
+              "meaning": "isto, slično"
+            },
+            {
+              "term": "forskjellig / ulik",
+              "meaning": "različit"
+            },
+            {
+              "term": "lunsjvaner",
+              "meaning": "navike za ručak"
+            },
+            {
+              "term": "kollektivtransport",
+              "meaning": "javni prevoz"
+            },
+            {
+              "term": "et varmt måltid",
+              "meaning": "topao obrok"
+            },
+            {
+              "term": "å variere",
+              "meaning": "varirati, razlikovati se"
+            }
+          ],
+          "compareTable": {
+            "left": "Oslo, Norge",
+            "right": "Beograd, Serbia",
+            "rows": [
+              {
+                "label": "Lunsj",
+                "left": "Mange tar med matpakke",
+                "right": "Mange kjøper lunsj på bakeri eller spiser varm mat"
+              },
+              {
+                "label": "Transport",
+                "left": "Bruker ofte kollektivtransport",
+                "right": "Flere bruker bil eller buss"
+              },
+              {
+                "label": "Arbeidstid",
+                "left": "Vanlig: ca. 08–15.30",
+                "right": "Arbeidstid kan variere mer"
+              },
+              {
+                "label": "Etter jobb",
+                "left": "Ofte tid til tur og fritid",
+                "right": "Et aktivt kafeliv er vanlig"
+              }
+            ]
+          },
+          "questions": [
+            "Når begynner arbeidsdagen din?",
+            "Hva spiser du vanligvis til lunsj?"
+          ]
+        }
+      ]
     },
     "review": {
       "quiz": []
