@@ -2871,9 +2871,9 @@
             {
               "prompt": "Hvem hjelper pasienten hjemme de første dagene?",
               "options": [
-                "Hjemmesykepleien",
-                "Doktor Lund",
-                "Ingen"
+                "Fastlegen hans",
+                "Datteren hans",
+                "Hjemmesykepleien"
               ],
               "answer": "Hjemmesykepleien"
             },
@@ -3558,24 +3558,24 @@
           },
           {
             "area": "vocabulary",
-            "prompt": "Hva betyr «taushetsplikt»?",
+            "prompt": "«obaveza čuvanja tajne» =",
             "options": [
-              "obaveza čuvanja tajne",
-              "smena",
-              "otpust",
-              "pregled"
+              "taushetsplikt",
+              "opplysningsplikt",
+              "vaktskifte",
+              "utskrivning"
             ],
-            "answer": "obaveza čuvanja tajne",
+            "answer": "taushetsplikt",
             "explain": "Ne smeš deliti podatke o pacijentu."
           },
           {
             "area": "reading",
             "prompt": "Når får pårørende informasjon?",
             "options": [
-              "Når pasienten sier ja",
-              "Alltid",
-              "Aldri",
-              "Bare om natta"
+              "Når legen har tid",
+              "Når de ringer avdelingen",
+              "Når pasienten blir utskrevet",
+              "Når pasienten sier ja"
             ],
             "answer": "Når pasienten sier ja",
             "explain": "Potrebna je saglasnost pacijenta."

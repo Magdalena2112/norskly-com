@@ -3065,9 +3065,9 @@
             {
               "prompt": "Wer hilft dem Patienten zu Hause?",
               "options": [
-                "Der ambulante Pflegedienst",
-                "Dr. Weber",
-                "Niemand"
+                "Der Hausarzt von Herrn Schmidt",
+                "Die Tochter von Herrn Schmidt",
+                "Der ambulante Pflegedienst"
               ],
               "answer": "Der ambulante Pflegedienst"
             },
@@ -3775,24 +3775,24 @@
           },
           {
             "area": "vocabulary",
-            "prompt": "Was bedeutet «die Schweigepflicht»?",
+            "prompt": "«obaveza čuvanja tajne» =",
             "options": [
-              "obaveza čuvanja tajne",
-              "smena",
-              "otpust",
-              "pregled"
+              "die Schweigepflicht",
+              "die Aufklärungspflicht",
+              "der Schichtwechsel",
+              "die Entlassung"
             ],
-            "answer": "obaveza čuvanja tajne",
+            "answer": "die Schweigepflicht",
             "explain": "Ne smeš deliti podatke o pacijentu."
           },
           {
             "area": "reading",
             "prompt": "Wann bekommen Angehörige Auskunft?",
             "options": [
-              "Wenn der Patient einverstanden ist",
-              "Immer",
-              "Nie",
-              "Nur nachts"
+              "Wenn der Arzt Zeit hat",
+              "Wenn sie auf der Station anrufen",
+              "Wenn der Patient entlassen wird",
+              "Wenn der Patient einverstanden ist"
             ],
             "answer": "Wenn der Patient einverstanden ist",
             "explain": "Potrebna je saglasnost pacijenta."
