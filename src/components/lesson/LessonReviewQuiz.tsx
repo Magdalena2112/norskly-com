@@ -16,7 +16,6 @@ export default function LessonReviewQuiz({ quiz, lang, lessonCode, passed, onPas
 }) {
   const { user } = useAuth();
   const pass = quiz.passScore ?? 8;
-  const bonus = quiz.bonusXp ?? 50;
   const bestKey = `review_best_${lang}_${lessonCode}`;
   const [round, setRound] = useState(0);
   const [i, setI] = useState(0);
@@ -33,9 +32,9 @@ export default function LessonReviewQuiz({ quiz, lang, lessonCode, passed, onPas
     if (next.length < total) { setTimeout(() => setI(i + 1), 250); return; }
     const s = next.filter((a, k) => a === quiz.questions[k].answer).length;
     if (s > best) { setBest(s); localStorage.setItem(bestKey, String(s)); }
+    // Review awards a trophy only (0 XP) so each lesson stays at exactly 100 XP.
     if (s >= pass && !passed && user) {
-      const r = await logActivity(user.id, "quiz", "lesson_review_pass", bonus, { lessonCode, score: s, total }, { dedupKey: `review_${lessonCode}_${lang}`, language: lang });
-      if (r) toast.success(`Trofej osvojen! +${bonus} XP`);
+      toast.success("Trofej osvojen! Pogledaj svoju policu sa trofejima.");
       onPass();
     }
   }
@@ -50,7 +49,7 @@ export default function LessonReviewQuiz({ quiz, lang, lessonCode, passed, onPas
           <Trophy className={`w-12 h-12 mx-auto ${ok ? "text-sunset" : "text-muted-foreground/50"}`} />
           <p className="font-display text-3xl font-bold text-primary">{score}/{total}</p>
           <p className="text-sm text-muted-foreground">
-            {ok ? (passed ? "Bravo! Trofej za ovu lekciju je tvoj." : `Bravo! Osvojila si trofej i +${bonus} XP.`) : `Za trofej ti treba bar ${pass}/${total}. Pogledaj greške i pokušaj ponovo.`}
+            {ok ? "Bravo! Trofej za ovu lekciju je na tvojoj polici." : `Za trofej ti treba bar ${pass}/${total}. Pogledaj greške i pokušaj ponovo.`}
           </p>
         </div>
         <ul className="space-y-2">
