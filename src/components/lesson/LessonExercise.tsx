@@ -168,7 +168,7 @@ export default function LessonExercise({
                     <Volume2 className="w-4 h-4 mr-1" /> Poslušaj
                   </Button>
                 </div>
-              ) : (
+              ) : quad ? null : (
                 <p className="text-sm font-medium text-foreground">{i + 1}. {item.prompt}</p>
               )}
               {item.options ? (
