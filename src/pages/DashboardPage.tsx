@@ -20,6 +20,8 @@ import StudentLayout from "@/components/student/StudentLayout";
 import NordicBackdrop from "@/components/student/NordicBackdrop";
 import FjordHero from "@/components/student/FjordHero";
 import PostcardVignette from "@/components/student/PostcardVignette";
+import TrophyShelf from "@/components/student/TrophyShelf";
+import { Trophy } from "lucide-react";
 import { useSelectedLanguage } from "@/hooks/useSelectedLanguage";
 import { getLanguageBySlug, getLanguageByCode, type LanguageSlug } from "@/lib/languages";
 import { useCourseEnrollment } from "@/hooks/useCourseEnrollment";
@@ -85,6 +87,7 @@ export default function DashboardPage() {
   const [courseLessons, setCourseLessons] = useState<{ id: string; sort_order: number; cefr_level: string; title_target: string; summary: string; course: string }[]>([]);
   const { data: course, isLoading: enrollmentLoading } = useCourseEnrollment(code);
   const [lessonProgress, setLessonProgress] = useState<Record<string, string>>({});
+  const [trophies, setTrophies] = useState<Set<string>>(new Set());
   const [lessonsLoaded, setLessonsLoaded] = useState(false);
 
   const startLevel = normalizeLevel(profile.level);
@@ -99,11 +102,12 @@ export default function DashboardPage() {
     (async () => {
       const [{ data: ls }, { data: pr }] = await Promise.all([
         supabase.from("course_lessons").select("id, sort_order, cefr_level, title_target, summary, course").eq("language", code).eq("course", course).eq("is_published", true).order("sort_order"),
-        supabase.from("course_lesson_progress").select("lesson_id, status").eq("user_id", user.id).eq("language", code),
+        supabase.from("course_lesson_progress").select("lesson_id, status, completed_steps").eq("user_id", user.id).eq("language", code),
       ]);
       if (!alive) return;
       setCourseLessons(ls || []);
       setLessonProgress(Object.fromEntries((pr || []).map((p) => [p.lesson_id, p.status])));
+      setTrophies(new Set((pr || []).filter((p) => Array.isArray(p.completed_steps) && (p.completed_steps as unknown[]).includes("REVIEW-PASS")).map((p) => p.lesson_id)));
       setLessonsLoaded(true);
     })();
     return () => { alive = false; };
@@ -190,6 +194,9 @@ export default function DashboardPage() {
             <XpProgressCard level={xpData.level} totalXp={xpData.total_xp} />
           </motion.div>
         )}
+        {lessonsLoaded && (
+          <TrophyShelf level={activeCourse === "health" ? "B1" : selectedLevel} lessons={visibleLessons} won={trophies} />
+        )}
 
         {user && <DailyPlanCard userId={user.id} language={code} nextLesson={visibleLessons.find((l) => lessonProgress[l.id] !== "completed") ?? null} />}
         <WeeklyDigest />
@@ -267,6 +274,9 @@ export default function DashboardPage() {
                     <span className="absolute top-3 right-3 w-6 h-6 rounded-full bg-forest text-cream flex items-center justify-center z-10">
                       <CheckCircle2 className="w-4 h-4" />
                     </span>
+                  )}
+                  {trophies.has(l.id) && (
+                    <span className="absolute top-3 left-3 z-10" title="Trofej osvojen"><Trophy className="w-5 h-5 text-sunset" /></span>
                   )}
                   {p === "in_progress" && (
                     <span className="absolute top-3 right-3 w-2.5 h-2.5 rounded-full bg-sunset z-10" />
