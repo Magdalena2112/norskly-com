@@ -389,7 +389,7 @@ export default function CourseLessonPage() {
             ) : open === "listening" && m.listening?.scenes ? (
               <LessonListeningTab key={`${row.id}_${lang}`} scenes={m.listening.scenes} lang={lang} lessonCode={content?.code || "lesson"} completed={done} onDone={markDone} onFinish={() => openModule(null)} />
             ) : open === "pronunciation" && m.pronunciation?.exercises ? (
-              <LessonPronunciationTab key={`${row.id}_${lang}`} data={m.pronunciation} lang={lang} level={level} lessonCode={content?.code || "lesson"} />
+              <LessonPronunciationTab key={`${row.id}_${lang}`} data={m.pronunciation} lang={lang} level={level} lessonCode={content?.code || "lesson"} lessonId={row.id} completed={done} onDone={markDone} />
             ) : view === "practice" || !hasMaterial(open) ? (
               <ExerciseStepper list={openEx} done={done} render={(ex) => renderExercises([ex])} onFinish={() => openModule(null)} />
             ) : (
@@ -465,7 +465,7 @@ export default function CourseLessonPage() {
 
           {tab === "pronunciation" && m.pronunciation && (
             m.pronunciation.exercises
-              ? <LessonPronunciationTab key={`${row.id}_${lang}`} data={m.pronunciation} lang={lang} level={level} lessonCode={content?.code || "lesson"} />
+              ? <LessonPronunciationTab key={`${row.id}_${lang}`} data={m.pronunciation} lang={lang} level={level} lessonCode={content?.code || "lesson"} lessonId={row.id} completed={done} onDone={markDone} />
               : <Button variant="hero" onClick={() => navigate("/pronunciation")}><Mic className="w-4 h-4" /> Snimi se i dobij ocenu izgovora</Button>
           )}
 
