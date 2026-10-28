@@ -194,14 +194,19 @@ function CabinsVignette({ className }: { className?: string }) {
 
 /**
  * Wide, language-neutral scene for the teacher-lesson card.
- * Minimal line drawing in the shared card palette: mentor and student
- * facing each other across a small table, with a shared open book and
- * word-free speech bubbles, so it works for every language.
+ * Two cute kittens — a mentor and a student — face each other across a
+ * small table with a shared open book, with word-free speech bubbles,
+ * so it works for every language. Drawn in the shared card palette.
  */
 function TeacherVignette({ className }: { className?: string }) {
   const ink = "hsl(350 50% 22%)";
   const paper = "hsl(36 50% 97%)";
-  const skin = "hsl(30 55% 84%)";
+  const fur = "hsl(30 45% 86%)";
+  const pink = "hsl(340 60% 78%)";
+  const blush = "hsl(340 60% 82%)";
+  const sage = "hsl(145 25% 48%)";
+  const blue = "hsl(215 28% 55%)";
+
   return (
     <svg viewBox="0 0 880 146" preserveAspectRatio="xMidYMid slice" className={className} aria-hidden="true">
       <defs>
@@ -224,17 +229,63 @@ function TeacherVignette({ className }: { className?: string }) {
         <path d="M-26,102 Q-13,96 0,100 Q13,96 26,102 L26,104 L-26,104 Z" fill={paper} strokeWidth="1.1" />
         <line x1="0" y1="99" x2="0" y2="104" strokeWidth="0.9" />
 
-        {/* Mentor (left) */}
-        <path d="M-118,104 Q-118,74 -96,72 Q-74,74 -74,104 Z" fill="hsl(145 22% 42%)" />
-        <circle cx="-96" cy="56" r="13" fill={skin} />
-        <path d="M-109,54 Q-108,40 -96,41 Q-83,40 -83,52 Q-92,46 -109,54 Z" fill="hsl(350 45% 26%)" />
-        <path d="M-80,86 Q-60,84 -34,98" fill="none" strokeWidth="1.6" />
+        {/* Mentor kitten (left) — round glasses, sage scarf */}
+        <path d="M-118,104 C-118,82 -110,72 -96,72 C-82,72 -74,82 -74,104 Z" fill={fur} />
+        <path d="M-74,98 Q-58,100 -60,88 Q-61,79 -51,82" fill="none" strokeWidth="1.3" />
+        <path d="M-108,49 L-105,33 L-95,45 Z" fill={fur} strokeWidth="1.2" />
+        <path d="M-84,49 L-87,33 L-97,45 Z" fill={fur} strokeWidth="1.2" />
+        <path d="M-106,46 L-104,36 L-98,43 Z" fill={pink} stroke="none" />
+        <path d="M-86,46 L-88,36 L-94,43 Z" fill={pink} stroke="none" />
+        <circle cx="-96" cy="57" r="14" fill={fur} />
+        <circle cx="-101" cy="54" r="4.2" fill="none" strokeWidth="1" />
+        <circle cx="-91" cy="54" r="4.2" fill="none" strokeWidth="1" />
+        <line x1="-97" y1="54" x2="-95" y2="54" strokeWidth="1" />
+        <path d="M-104,54 Q-102,51.5 -100,54" fill="none" strokeWidth="0.9" />
+        <path d="M-92,54 Q-90,51.5 -88,54" fill="none" strokeWidth="0.9" />
+        <path d="M-98,59 L-94,59 L-96,61.5 Z" fill={pink} stroke="none" />
+        <path d="M-96,61.5 Q-97.5,64 -99.5,63 M-96,61.5 Q-94.5,64 -92.5,63" fill="none" strokeWidth="0.8" />
+        <g strokeWidth="0.7" opacity="0.65">
+          <line x1="-110" y1="57" x2="-104" y2="58" />
+          <line x1="-110" y1="60" x2="-104" y2="60" />
+          <line x1="-88" y1="58" x2="-82" y2="57" />
+          <line x1="-88" y1="60" x2="-82" y2="60" />
+        </g>
+        <circle cx="-104" cy="61" r="2" fill={blush} stroke="none" opacity="0.7" />
+        <circle cx="-88" cy="61" r="2" fill={blush} stroke="none" opacity="0.7" />
+        {/* Scarf */}
+        <path d="M-109,70 Q-96,76 -83,70 L-83,74 Q-96,80 -109,74 Z" fill={sage} strokeWidth="1.1" />
+        <path d="M-90,74 Q-88,81 -90,85 L-84,85 Q-82,79 -84,74 Z" fill={sage} strokeWidth="1.1" />
+        {/* Paw resting on the table */}
+        <ellipse cx="-58" cy="102" rx="5" ry="2.4" fill={fur} strokeWidth="1" />
 
-        {/* Student (right) */}
-        <path d="M74,104 Q74,76 96,74 Q118,76 118,104 Z" fill="hsl(215 28% 55%)" />
-        <circle cx="96" cy="58" r="12" fill={skin} />
-        <path d="M84,56 Q85,44 96,44 Q108,44 108,56 Q100,50 84,56 Z" fill="hsl(25 40% 35%)" />
-        <path d="M80,88 Q62,90 40,99" fill="none" strokeWidth="1.6" />
+        {/* Student kitten (right) — blue scarf, one paw raised */}
+        <path d="M74,104 C74,82 82,72 96,72 C110,72 118,82 118,104 Z" fill={fur} />
+        <path d="M74,98 Q58,100 60,88 Q61,79 51,82" fill="none" strokeWidth="1.3" />
+        <path d="M86,49 L89,33 L99,45 Z" fill={fur} strokeWidth="1.2" />
+        <path d="M106,49 L103,33 L93,45 Z" fill={fur} strokeWidth="1.2" />
+        <path d="M88,46 L90,36 L96,43 Z" fill={pink} stroke="none" />
+        <path d="M104,46 L102,36 L96,43 Z" fill={pink} stroke="none" />
+        <circle cx="96" cy="57" r="14" fill={fur} />
+        <circle cx="91" cy="55" r="1.7" fill={ink} stroke="none" />
+        <circle cx="101" cy="55" r="1.7" fill={ink} stroke="none" />
+        <path d="M94,59 L98,59 L96,61.5 Z" fill={pink} stroke="none" />
+        <path d="M96,61.5 Q94.5,64 92.5,63 M96,61.5 Q97.5,64 99.5,63" fill="none" strokeWidth="0.8" />
+        <g strokeWidth="0.7" opacity="0.65">
+          <line x1="82" y1="58" x2="76" y2="57" />
+          <line x1="82" y1="60" x2="76" y2="60" />
+          <line x1="110" y1="57" x2="116" y2="58" />
+          <line x1="110" y1="60" x2="116" y2="60" />
+        </g>
+        <circle cx="88" cy="61" r="2" fill={blush} stroke="none" opacity="0.7" />
+        <circle cx="104" cy="61" r="2" fill={blush} stroke="none" opacity="0.7" />
+        {/* Scarf */}
+        <path d="M83,70 Q96,76 109,70 L109,74 Q96,80 83,74 Z" fill={blue} strokeWidth="1.1" />
+        <path d="M102,74 Q104,81 102,85 L108,85 Q110,79 108,74 Z" fill={blue} strokeWidth="1.1" />
+        {/* Raised paw waving toward the speech bubble */}
+        <path d="M80,82 Q68,74 62,66" fill="none" strokeWidth="1.3" />
+        <ellipse cx="60" cy="64" rx="4" ry="4.4" fill={fur} strokeWidth="1.1" />
+        {/* Paw resting on the table */}
+        <ellipse cx="58" cy="102" rx="5" ry="2.4" fill={fur} strokeWidth="1" />
       </g>
 
       {/* Word-free speech bubbles */}
@@ -244,9 +295,9 @@ function TeacherVignette({ className }: { className?: string }) {
         <g fill={ink} stroke="none">
           <circle cx="306" cy="37" r="2.4" /><circle cx="318" cy="37" r="2.4" /><circle cx="330" cy="37" r="2.4" />
         </g>
-        <rect x="534" y="26" width="48" height="28" rx="14" fill={paper} />
-        <path d="M550,54 L548,64 L560,54" fill={paper} />
-        <path d="M548,40 L555,46 L568,34" fill="none" stroke="hsl(145 30% 38%)" strokeWidth="2" strokeLinecap="round" />
+        <rect x="528" y="30" width="48" height="28" rx="14" fill={paper} />
+        <path d="M544,58 L540,68 L552,58" fill={paper} />
+        <path d="M542,44 L549,50 L562,38" fill="none" stroke="hsl(145 30% 38%)" strokeWidth="2" strokeLinecap="round" />
       </g>
 
       {/* Balancing ink swirls */}
