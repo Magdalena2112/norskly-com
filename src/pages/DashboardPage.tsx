@@ -275,6 +275,9 @@ export default function DashboardPage() {
                       <CheckCircle2 className="w-4 h-4" />
                     </span>
                   )}
+                  {trophies.has(l.id) && (
+                    <span className="absolute top-3 left-3 z-10" title="Trofej osvojen"><Trophy className="w-5 h-5 text-sunset" /></span>
+                  )}
                   {p === "in_progress" && (
                     <span className="absolute top-3 right-3 w-2.5 h-2.5 rounded-full bg-sunset z-10" />
                   )}
