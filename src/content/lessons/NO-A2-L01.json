@@ -524,7 +524,7 @@
           "hint": "Obrati pažnju na početni izraz. Koji rečenični član treba da stoji odmah iza njega?",
           "hint2": "V2 pravilo: lični glagol je uvek drugi rečenični član. Ako rečenica počinje vremenskim izrazom ili mestom, subjekat dolazi tek iza glagola.",
           "explanation": "Vremenski izraz „Etter lunsj“ zauzima prvo mesto. Lični glagol „har“ dolazi na drugo mesto, zatim subjekat „Erik“ i prilog „vanligvis“.",
-          "context": "Erik jobber på et kontor. Etter lunsj har han vanligvis et møte.",
+          "context": "Erik jobber på et kontor. Han spiser lunsj klokka tolv. Så har han vanligvis et møte.",
           "options": [
             "Etter lunsj Erik har vanligvis et møte.",
             "Etter lunsj har Erik vanligvis et møte.",
@@ -3135,9 +3135,9 @@
           "kind": "open",
           "items": [
             {
-              "prompt": "Hvorfor er Ingrid opptatt på fredag kveld?",
+              "prompt": "Når vil de møtes på lørdag?",
               "open": true,
-              "guide": "Hun hjelper kusinen sin med å flytte til en ny leilighet."
+              "guide": "Klokka 16, på kafeen ved parken."
             },
             {
               "prompt": "Hva planlegger Nora og Ingrid å snakke om?",
@@ -4855,10 +4855,10 @@
             "area": "grammar",
             "prompt": "Izaberi tačnu odričnu rečenicu:",
             "options": [
+              "Jeg drikker kaffe ikke.",
               "Jeg drikker ikke kaffe.",
               "Jeg ikke drikker kaffe.",
-              "Ikke jeg drikker kaffe.",
-              "Jeg drikker kaffe ikke ikke."
+              "Ikke jeg drikker kaffe."
             ],
             "answer": "Jeg drikker ikke kaffe.",
             "explain": "U glavnoj rečenici ikke stoji posle ličnog glagola."
@@ -4889,12 +4889,12 @@
           },
           {
             "area": "grammar",
-            "prompt": "Izaberi tačan red: Jeg ___ trener om kvelden.",
+            "prompt": "Izaberi tačan red: Jeg ___ om kvelden.",
             "options": [
+              "trene alltid",
+              "har alltid trener",
               "trener alltid",
-              "alltid trener",
-              "trener aldri ikke",
-              "alltid"
+              "alltid trener"
             ],
             "answer": "trener alltid",
             "explain": "Prilog učestalosti stoji posle ličnog glagola."
@@ -4925,15 +4925,15 @@
           },
           {
             "area": "communication",
-            "prompt": "„Gleder du deg til helgen?” znači:",
+            "prompt": "Prijatelj pita: „Gleder du deg til helgen?” Prirodan odgovor:",
             "options": [
-              "Raduješ li se vikendu?",
-              "Da li radiš vikendom?",
-              "Gde si za vikend?",
-              "Da li si umoran?"
+              "Ja, jeg glemmer helgen.",
+              "Nei, jeg er glad i helgen.",
+              "Ja, takk for maten.",
+              "Ja, jeg gleder meg veldig!"
             ],
-            "answer": "Raduješ li se vikendu?",
-            "explain": "glede seg til = radovati se."
+            "answer": "Ja, jeg gleder meg veldig!",
+            "explain": "glede seg til = radovati se nečemu."
           },
           {
             "area": "communication",

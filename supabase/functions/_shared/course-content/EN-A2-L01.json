@@ -3950,9 +3950,9 @@
           "kind": "open",
           "items": [
             {
-              "prompt": "Why is Sophie busy on Friday evening?",
+              "prompt": "What time do they want to meet on Saturday?",
               "open": true,
-              "guide": "She is helping her cousin move to a new flat."
+              "guide": "At 4 p.m., at the café near the park."
             },
             {
               "prompt": "What do Emma and Sophie plan to talk about?",
@@ -5588,13 +5588,13 @@
             "area": "vocabulary",
             "prompt": "Kako kažeš „ustati”?",
             "options": [
+              "go up",
               "get up",
-              "wake down",
-              "stand on",
-              "go up"
+              "wake up",
+              "get on"
             ],
             "answer": "get up",
-            "explain": "get up = ustati iz kreveta."
+            "explain": "get up = ustati iz kreveta; wake up = probuditi se."
           },
           {
             "area": "vocabulary",

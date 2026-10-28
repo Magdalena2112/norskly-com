@@ -6111,10 +6111,10 @@
             "area": "communication",
             "prompt": "„How are you?” — najprirodniji kratak odgovor:",
             "options": [
-              "I'm fine, thanks. And you?",
-              "I am Emma.",
-              "I'm from Serbia.",
-              "Yes, I am."
+              "Nice to meet you, too.",
+              "You're welcome.",
+              "Fine, and you are?",
+              "I'm fine, thanks. And you?"
             ],
             "answer": "I'm fine, thanks. And you?",
             "explain": "Kratko odgovaramo i vraćamo pitanje."

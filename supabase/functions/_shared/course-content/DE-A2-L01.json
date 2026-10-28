@@ -607,7 +607,7 @@
           "hint": "Obrati pažnju na početni izraz. Šta mora da stoji odmah iza njega?",
           "hint2": "V2 pravilo: lični glagol je uvek drugi rečenični član. Ako rečenica počinje vremenom ili mestom, subjekat dolazi tek iza glagola.",
           "explanation": "„Nach dem Mittagessen” zauzima prvo mesto, „hat” drugo, zatim subjekat „Jonas”.",
-          "context": "Jonas arbeitet in einem Büro. Nach dem Mittagessen hat er normalerweise ein Meeting.",
+          "context": "Jonas arbeitet in einem Büro. Er isst um zwölf Uhr zu Mittag. Danach hat er normalerweise ein Meeting.",
           "options": [
             "Nach dem Mittagessen Jonas hat normalerweise ein Meeting.",
             "Nach dem Mittagessen hat Jonas normalerweise ein Meeting.",
@@ -3226,9 +3226,9 @@
           "kind": "open",
           "items": [
             {
-              "prompt": "Warum hat Mia am Freitagabend keine Zeit?",
+              "prompt": "Um wie viel Uhr wollen sie sich am Samstag treffen?",
               "open": true,
-              "guide": "Sie hilft ihrer Cousine beim Umzug in eine neue Wohnung."
+              "guide": "Um 16 Uhr im Café am Park."
             },
             {
               "prompt": "Worüber wollen Lena und Mia sprechen?",
@@ -5072,9 +5072,9 @@
             "area": "grammar",
             "prompt": "Ich trinke ___ Kaffee am Abend.",
             "options": [
+              "nichts",
+              "niemand",
               "nie",
-              "nicht nie",
-              "kein nie",
               "nein"
             ],
             "answer": "nie",
@@ -5108,10 +5108,10 @@
             "area": "communication",
             "prompt": "Kolega pita: „Wie geht's?” Prirodan odgovor:",
             "options": [
-              "Gut, danke. Und dir?",
-              "Ich heiße Marko.",
-              "Ja, bitte.",
-              "Aus Serbien."
+              "Freut mich auch.",
+              "Gleichfalls, danke.",
+              "Bitte schön.",
+              "Gut, danke. Und dir?"
             ],
             "answer": "Gut, danke. Und dir?",
             "explain": "Kratko odgovaramo i vraćamo pitanje."
