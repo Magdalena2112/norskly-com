@@ -1120,7 +1120,7 @@ export default function PracticePage() {
                 <Sparkles className="w-8 h-8 text-accent" />
               </div>
               <h2 className="text-2xl font-display font-bold text-foreground mb-2">
-                Hei, {profile.name || "korisniče"}! 👋
+                {langCode === "en" ? "Hi" : langCode === "de" ? "Hallo" : "Hei"}, {profile.name || "korisniče"}! 👋
               </h2>
               <p className="text-muted-foreground mb-8 max-w-md mx-auto">
                 Izaberi situaciju gore i započni razgovor na {langLocative()}. Ja ću ti odgovarati i pomagati.
