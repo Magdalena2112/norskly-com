@@ -252,32 +252,32 @@ export default function DashboardPage() {
           </Card>
         )}
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
           {visibleLessons.map((l, i) => {
             const p = lessonProgress[l.id];
             return (
               <motion.div key={l.id} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.08 + 0.15 }}>
                 <Card
-                  className={`cursor-pointer group h-full bg-cream border border-border/60 shadow-postcard overflow-hidden relative ${["rotate-card-1", "rotate-card-2", "rotate-card-3", "rotate-card-4"][i % 4]} transition-all duration-500 ease-out hover:rotate-0 hover:-translate-y-1.5`}
+                  className={`cursor-pointer group h-full bg-cream border border-border/60 shadow-postcard overflow-hidden relative aspect-square flex flex-col transition-all duration-500 ease-out hover:-translate-y-1.5 hover:shadow-card-soft ${
+                    p === "completed" ? "ring-1 ring-forest/40" : p === "in_progress" ? "ring-1 ring-sunset/50" : ""
+                  }`}
                   onClick={() => navigate(`/lekcija/${l.id}`)}
                 >
-                  <div className="relative w-full h-28 overflow-hidden border-b border-border/40">
-                    <PostcardVignette variant={(["book", "stamp", "speech", "cabins"] as const)[i % 4]} className="absolute inset-0 w-full h-full" />
-                    {p === "completed" && (
-                      <span className="absolute top-2 right-2 bg-forest text-cream text-[11px] px-2 py-0.5 rounded-full">✓ Završeno</span>
-                    )}
-                    {p === "in_progress" && (
-                      <span className="absolute top-2 right-2 bg-sunset text-cream text-[11px] px-2 py-0.5 rounded-full">U toku</span>
-                    )}
-                  </div>
-                  <div className="absolute top-24 left-5 w-12 h-12 rounded-2xl bg-primary flex items-center justify-center shadow-card-soft ring-2 ring-cream font-display font-bold text-cream z-10">
-                    {String(l.sort_order).padStart(2, "0")}
-                  </div>
+                  {p === "completed" && (
+                    <span className="absolute top-3 right-3 w-6 h-6 rounded-full bg-forest text-cream flex items-center justify-center z-10">
+                      <CheckCircle2 className="w-4 h-4" />
+                    </span>
+                  )}
+                  {p === "in_progress" && (
+                    <span className="absolute top-3 right-3 w-2.5 h-2.5 rounded-full bg-sunset z-10" />
+                  )}
 
-                  <CardContent className="pt-8 pb-5 px-5">
-                    <p className="font-script italic text-xs text-primary/55 mb-0.5">Lekcija {l.sort_order} · {l.cefr_level}</p>
-                    <h3 className="font-display font-semibold text-lg text-primary leading-tight">{l.title_target}</h3>
-                    <p className="text-sm text-muted-foreground mt-1.5 leading-relaxed line-clamp-3">{l.summary}</p>
+                  <CardContent className="flex-1 flex flex-col items-center justify-center text-center p-4 sm:p-5">
+                    <span className="font-display font-bold text-3xl sm:text-4xl text-primary/25 group-hover:text-primary/40 transition-colors">
+                      {String(l.sort_order).padStart(2, "0")}
+                    </span>
+                    <p className="font-script italic text-[11px] text-primary/55 mt-2">Lekcija {l.sort_order}</p>
+                    <h3 className="font-display font-semibold text-sm sm:text-base text-primary leading-snug mt-1 line-clamp-2">{l.title_target}</h3>
                   </CardContent>
                 </Card>
               </motion.div>
