@@ -36,9 +36,9 @@ type ModuleDef = {
   rotation: string;
   buttonLabel?: string;
   fullWidth?: boolean;
-  image?: { src: string; alt: string };
   stamp?: boolean;
 };
+
 
 
 export default function DashboardPage() {
