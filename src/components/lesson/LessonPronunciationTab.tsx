@@ -342,7 +342,7 @@ export default function LessonPronunciationTab({ data, lang, level, lessonCode }
                   )}
                   {(ex.type === "record" || (ex.type === "choose" && p !== undefined && (!ex.requireCorrect || p === it.answer) && repeatText) || (ex.type === "stress" && stressOk === true)) && (
                     <div className="rounded-2xl border border-border/60 bg-background/60 p-3">
-                      <RecordSlot item={{ text: ex.type === "record" ? (it.say || it.hint || "") : repeatText }} lang={lang} level={level} compareOnly={lang === "no" ? false : ex.compareOnly} maxMs={Math.min(ex.maxMs ?? 15000, 30000)} checklist={ex.checklist} onSuccess={() => setOk((o) => ({ ...o, [k]: true }))} />
+                      <RecordSlot item={{ text: ex.type === "record" ? (it.say || it.hint || "") : repeatText }} lang={lang} level={level} compareOnly={false} maxMs={Math.min(ex.maxMs ?? 15000, 30000)} checklist={ex.checklist} onSuccess={() => setOk((o) => ({ ...o, [k]: true }))} />
                       {ex.tip && ok[k] && <p className="text-sm text-primary/80 mt-2">{ex.tip}</p>}
                     </div>
                   )}
