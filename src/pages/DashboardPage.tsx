@@ -1,5 +1,5 @@
 import { getCurrentLanguageCode } from "@/lib/currentLanguage";
-import teacherCallBanner from "@/assets/teacher-call-banner.png.asset.json";
+
 import { useState, useEffect, useMemo } from "react";
 import { motion } from "framer-motion";
 import { useProfile } from "@/context/ProfileContext";
@@ -30,14 +30,15 @@ type ModuleDef = {
   description: string;
   icon: typeof BookOpen;
   route: string;
-  vignette: "book" | "stamp" | "speech" | "cabins";
+  vignette: "book" | "stamp" | "speech" | "cabins" | "teacher";
+
   iconBg: string;
   rotation: string;
   buttonLabel?: string;
   fullWidth?: boolean;
-  image?: { src: string; alt: string };
   stamp?: boolean;
 };
+
 
 
 export default function DashboardPage() {
@@ -72,7 +73,8 @@ export default function DashboardPage() {
       { title: "Čitanje", subtitle: ui.module.reading, description: "Čitaj tekstove prilagođene tvom nivou i reši vežbe razumevanja.", icon: BookOpenText, route: "/reading", vignette: "stamp", iconBg: "bg-fjord", rotation: "rotate-card-2" },
       { title: "Slušanje", subtitle: ({ no: "Lytting", de: "Hören", en: "Listening" } as Record<string, string>)[activeLang.code] || "Listening", description: "Slušaj snimke i dijaloge i proveri razumevanje kroz vežbe.", icon: Headphones, route: "/listening", vignette: "speech", iconBg: "bg-sunset", rotation: "rotate-card-3" },
       { title: "Izgovor", subtitle: ({ no: "Uttale", de: "Aussprache", en: "Pronunciation" } as Record<string, string>)[activeLang.code] || "Pronunciation", description: "Slušaj, ponovi i uvežbaj glasove, reči, naglasak i intonaciju.", icon: Mic, route: "/pronunciation", vignette: "speech", iconBg: "bg-primary", rotation: "rotate-card-4" },
-      { title: "Razgovor sa profesorom", subtitle: ui.module.teacher, description: `Rezerviši 90-minutni čas sa profesorom ${activeLang.label.toLowerCase()}.`, icon: GraduationCap, route: "/book-lesson", vignette: "cabins", iconBg: "bg-forest", rotation: "rotate-card-1", buttonLabel: "Rezerviši čas", fullWidth: true, image: { src: teacherCallBanner.url, alt: `Razgovor sa profesorom ${activeLang.label.toLowerCase()}` } },
+      { title: "Razgovor sa profesorom", subtitle: ui.module.teacher, description: `Rezerviši 90-minutni čas sa profesorom ${activeLang.label.toLowerCase()}.`, icon: GraduationCap, route: "/book-lesson", vignette: "teacher", iconBg: "bg-forest", rotation: "rotate-card-1", buttonLabel: "Rezerviši čas", fullWidth: true },
+
     ],
     [ui, activeLang.label],
   );
@@ -265,9 +267,6 @@ export default function DashboardPage() {
                 >
                   <div className="relative w-full h-28 overflow-hidden border-b border-border/40">
                     <PostcardVignette variant={(["book", "stamp", "speech", "cabins"] as const)[i % 4]} className="absolute inset-0 w-full h-full" />
-                    <div className="absolute -bottom-5 left-5 w-12 h-12 rounded-2xl bg-primary flex items-center justify-center shadow-card-soft ring-2 ring-cream font-display font-bold text-cream">
-                      {String(l.sort_order).padStart(2, "0")}
-                    </div>
                     {p === "completed" && (
                       <span className="absolute top-2 right-2 bg-forest text-cream text-[11px] px-2 py-0.5 rounded-full">✓ Završeno</span>
                     )}
@@ -275,6 +274,10 @@ export default function DashboardPage() {
                       <span className="absolute top-2 right-2 bg-sunset text-cream text-[11px] px-2 py-0.5 rounded-full">U toku</span>
                     )}
                   </div>
+                  <div className="absolute top-24 left-5 w-12 h-12 rounded-2xl bg-primary flex items-center justify-center shadow-card-soft ring-2 ring-cream font-display font-bold text-cream z-10">
+                    {String(l.sort_order).padStart(2, "0")}
+                  </div>
+
                   <CardContent className="pt-8 pb-5 px-5">
                     <p className="font-script italic text-xs text-primary/55 mb-0.5">Lekcija {l.sort_order} · {l.cefr_level}</p>
                     <h3 className="font-display font-semibold text-lg text-primary leading-tight">{l.title_target}</h3>
@@ -288,16 +291,11 @@ export default function DashboardPage() {
             <motion.div key={mod.route} className="sm:col-span-2" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}>
               <Card className="cursor-pointer group h-full bg-cream border border-border/60 shadow-postcard overflow-hidden relative transition-all duration-500 hover:-translate-y-1.5" onClick={() => navigate(mod.route)}>
                 <div className="relative w-full h-32 sm:h-36 overflow-hidden border-b border-border/40">
-                  {mod.image ? (
-                    <img src={mod.image.src} alt={mod.image.alt} className="absolute inset-0 w-full h-full object-cover" />
-                  ) : (
-                    <PostcardVignette variant={mod.vignette} className="absolute inset-0 w-full h-full" />
-                  )}
-                  <div className={`absolute -bottom-5 left-5 w-12 h-12 rounded-2xl ${mod.iconBg} flex items-center justify-center shadow-card-soft ring-2 ring-cream`}>
-                    <mod.icon className="w-5 h-5 text-cream" />
-                  </div>
+                  <PostcardVignette variant={mod.vignette} className="absolute inset-0 w-full h-full" />
                 </div>
-                <CardContent className="pt-8 pb-5 px-5">
+
+                <CardContent className="pt-5 pb-5 px-5">
+
                   <p className="font-script italic text-xs text-primary/55 mb-0.5">{mod.subtitle}</p>
                   <h3 className="font-display font-semibold text-lg text-primary leading-tight">{mod.title}</h3>
                   <p className="text-sm text-muted-foreground mt-1.5 leading-relaxed">{mod.description}</p>
