@@ -174,3 +174,10 @@ ITEM_IMAGES["de:cu1"] = deCu1.url;
 ITEM_IMAGES["de:cu2"] = deCu2.url;
 ITEM_IMAGES["de:cu3"] = deCu3.url;
 ITEM_IMAGES["de:cu4"] = deCu4.url;
+
+import noCu1 from "@/assets/lessons/no-a2-l01-cu1.webp.asset.json";
+import noCu2 from "@/assets/lessons/no-a2-l01-cu2.webp.asset.json";
+import noCu3 from "@/assets/lessons/no-a2-l01-cu3.webp.asset.json";
+ITEM_IMAGES["no:cu1"] = noCu1.url;
+ITEM_IMAGES["no:cu2"] = noCu2.url;
+ITEM_IMAGES["no:cu3"] = noCu3.url;
