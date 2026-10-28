@@ -193,95 +193,67 @@ function CabinsVignette({ className }: { className?: string }) {
 }
 
 /**
- * Wide full-width scene for the "Razgovor sa profesorom" card.
- * Fjord backdrop with a warm video-call frame at the centre: a friendly
- * mentor waving on screen, flanked by chat bubbles — all inside the safe band.
+ * Wide, language-neutral scene for the teacher-lesson card.
+ * Minimal line drawing in the shared card palette: mentor and student
+ * facing each other across a small table, with a shared open book and
+ * word-free speech bubbles, so it works for every language.
  */
 function TeacherVignette({ className }: { className?: string }) {
+  const ink = "hsl(350 50% 22%)";
+  const paper = "hsl(36 50% 97%)";
+  const skin = "hsl(30 55% 84%)";
   return (
     <svg viewBox="0 0 880 146" preserveAspectRatio="xMidYMid slice" className={className} aria-hidden="true">
       <defs>
-        <linearGradient id="teacherSky" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="hsl(18 75% 88%)" />
-          <stop offset="40%" stopColor="hsl(340 55% 90%)" />
-          <stop offset="100%" stopColor="hsl(280 30% 88%)" />
-        </linearGradient>
-        <linearGradient id="teacherMt" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="hsl(215 25% 42%)" />
-          <stop offset="100%" stopColor="hsl(145 22% 30%)" />
-        </linearGradient>
-        <linearGradient id="teacherWater" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="hsl(340 35% 74%)" />
-          <stop offset="100%" stopColor="hsl(220 30% 58%)" />
+        <CardSky id="teacherSky" />
+        <linearGradient id="teacherMist" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="hsl(350 40% 88%)" />
+          <stop offset="100%" stopColor="hsl(36 45% 95%)" />
         </linearGradient>
       </defs>
       <rect width="880" height="146" fill="url(#teacherSky)" />
-      {/* Distant range across the whole card */}
-      <path d="M0,104 L70,84 L140,94 L220,70 L300,92 L380,72 L440,84 L520,66 L600,90 L680,74 L760,94 L830,82 L880,92 L880,112 L0,112 Z" fill="hsl(220 18% 55% / 0.65)" />
-      {/* Water */}
-      <rect y="112" width="880" height="34" fill="url(#teacherWater)" />
-      <rect y="116" width="880" height="1.5" fill="hsl(45 80% 90% / 0.5)" />
-      {/* Video-call frame, centred */}
-      <g transform="translate(340 22)">
-        {/* Screen */}
-        <rect x="0" y="0" width="200" height="86" rx="10" fill="hsl(36 45% 96%)" stroke="hsl(350 50% 22%)" strokeWidth="1.6" />
-        <rect x="6" y="6" width="188" height="74" rx="7" fill="hsl(340 55% 90%)" />
-        {/* Mentor on screen */}
-        <g>
-          {/* Shoulders */}
-          <path d="M66,80 Q100,56 134,80 L134,80 L66,80 Z" fill="hsl(350 50% 24%)" />
-          <circle cx="100" cy="44" r="18" fill="hsl(30 55% 82%)" stroke="hsl(350 50% 22%)" strokeWidth="1.2" />
-          {/* Hair bun */}
-          <circle cx="116" cy="30" r="7" fill="hsl(350 45% 26%)" />
-          <path d="M82,42 Q80,22 100,24 Q120,22 118,42" fill="hsl(350 45% 26%)" />
-          {/* Smile + eyes */}
-          <circle cx="94" cy="42" r="1.6" fill="hsl(350 50% 22%)" />
-          <circle cx="106" cy="42" r="1.6" fill="hsl(350 50% 22%)" />
-          <path d="M94,50 Q100,54 106,50" fill="none" stroke="hsl(350 50% 22%)" strokeWidth="1.4" strokeLinecap="round" />
-          {/* Waving hand */}
-          <path d="M126,64 Q136,54 134,44" fill="none" stroke="hsl(350 50% 22%)" strokeWidth="2" strokeLinecap="round" />
-          <circle cx="134" cy="41" r="4" fill="hsl(30 55% 82%)" stroke="hsl(350 50% 22%)" strokeWidth="1" />
+      <path d="M0,112 Q220,100 440,112 T880,108 L880,146 L0,146 Z" fill="url(#teacherMist)" opacity="0.85" />
+      <path d="M0,122 C160,110 280,130 440,122 C600,114 720,132 880,120" fill="none" stroke="hsl(350 45% 40% / 0.3)" strokeWidth="1.2" strokeDasharray="1 6" strokeLinecap="round" />
+
+      <g transform="translate(440 0)" stroke={ink} strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+        {/* Table */}
+        <line x1="-90" y1="104" x2="90" y2="104" strokeWidth="1.8" />
+        <line x1="-70" y1="104" x2="-70" y2="122" />
+        <line x1="70" y1="104" x2="70" y2="122" />
+        {/* Shared open book */}
+        <path d="M-26,102 Q-13,96 0,100 Q13,96 26,102 L26,104 L-26,104 Z" fill={paper} strokeWidth="1.1" />
+        <line x1="0" y1="99" x2="0" y2="104" strokeWidth="0.9" />
+
+        {/* Mentor (left) */}
+        <path d="M-118,104 Q-118,74 -96,72 Q-74,74 -74,104 Z" fill="hsl(145 22% 42%)" />
+        <circle cx="-96" cy="56" r="13" fill={skin} />
+        <path d="M-109,54 Q-108,40 -96,41 Q-83,40 -83,52 Q-92,46 -109,54 Z" fill="hsl(350 45% 26%)" />
+        <path d="M-80,86 Q-60,84 -34,98" fill="none" strokeWidth="1.6" />
+
+        {/* Student (right) */}
+        <path d="M74,104 Q74,76 96,74 Q118,76 118,104 Z" fill="hsl(215 28% 55%)" />
+        <circle cx="96" cy="58" r="12" fill={skin} />
+        <path d="M84,56 Q85,44 96,44 Q108,44 108,56 Q100,50 84,56 Z" fill="hsl(25 40% 35%)" />
+        <path d="M80,88 Q62,90 40,99" fill="none" strokeWidth="1.6" />
+      </g>
+
+      {/* Word-free speech bubbles */}
+      <g stroke={ink} strokeWidth="1.1" strokeLinejoin="round">
+        <rect x="290" y="22" width="56" height="30" rx="15" fill={paper} />
+        <path d="M318,52 L322,62 L328,52" fill={paper} />
+        <g fill={ink} stroke="none">
+          <circle cx="306" cy="37" r="2.4" /><circle cx="318" cy="37" r="2.4" /><circle cx="330" cy="37" r="2.4" />
         </g>
-        {/* Status bar dots */}
-        <circle cx="178" cy="14" r="3" fill="hsl(145 30% 55%)" />
-        <rect x="14" y="14" width="30" height="8" rx="4" fill="hsl(350 50% 30% / 0.15)" />
-        {/* Desk stand */}
-        <rect x="92" y="86" width="16" height="8" fill="hsl(350 50% 30%)" />
-        <rect x="72" y="94" width="56" height="5" rx="2.5" fill="hsl(350 50% 24%)" />
+        <rect x="534" y="26" width="48" height="28" rx="14" fill={paper} />
+        <path d="M550,54 L548,64 L560,54" fill={paper} />
+        <path d="M548,40 L555,46 L568,34" fill="none" stroke="hsl(145 30% 38%)" strokeWidth="2" strokeLinecap="round" />
       </g>
-      {/* Chat bubbles flanking the screen */}
-      <g>
-        <ellipse cx="286" cy="52" rx="30" ry="18" fill="hsl(36 50% 97%)" stroke="hsl(350 50% 22%)" strokeWidth="1.1" />
-        <polygon points="298,68 294,78 282,68" fill="hsl(36 50% 97%)" stroke="hsl(350 50% 22%)" strokeWidth="1.1" />
-        <text x="286" y="57" textAnchor="middle" fill="hsl(350 50% 22%)" fontSize="11" fontFamily="Instrument Serif, serif" fontStyle="italic">Hei!</text>
-      </g>
-      <g>
-        <ellipse cx="594" cy="46" rx="30" ry="18" fill="hsl(36 50% 97%)" stroke="hsl(350 50% 22%)" strokeWidth="1.1" />
-        <polygon points="582,62 578,72 566,62" fill="hsl(36 50% 97%)" stroke="hsl(350 50% 22%)" strokeWidth="1.1" />
-        <text x="594" y="51" textAnchor="middle" fill="hsl(350 50% 22%)" fontSize="10" fontFamily="Instrument Serif, serif" fontStyle="italic">Ja!</text>
-      </g>
-      {/* Rorbuer accents on the near shore */}
-      <g>
-        <rect x="80" y="100" width="18" height="12" fill="hsl(8 65% 45%)" />
-        <polygon points="80,100 89,93 98,100" fill="hsl(220 25% 22%)" />
-        <rect x="104" y="102" width="16" height="10" fill="hsl(42 75% 60%)" />
-        <polygon points="104,102 112,96 120,102" fill="hsl(220 25% 22%)" />
-        <rect x="760" y="100" width="18" height="12" fill="hsl(8 65% 45%)" />
-        <polygon points="760,100 769,93 778,100" fill="hsl(220 25% 22%)" />
-        <rect x="784" y="102" width="16" height="10" fill="hsl(42 75% 60%)" />
-        <polygon points="784,102 792,96 800,102" fill="hsl(220 25% 22%)" />
-      </g>
-      {/* Pier reflections */}
-      <g stroke="hsl(220 25% 22% / 0.5)" strokeWidth="1">
-        <line x1="92" y1="114" x2="92" y2="122" />
-        <line x1="112" y1="114" x2="112" y2="122" />
-        <line x1="772" y1="114" x2="772" y2="122" />
-      </g>
-      {/* Tiny sailboat */}
-      <g transform="translate(690 118)">
-        <polygon points="0,0 8,-14 8,0" fill="hsl(36 45% 92%)" stroke="hsl(350 50% 22%)" strokeWidth="0.6" />
-        <line x1="-4" y1="0" x2="10" y2="0" stroke="hsl(220 25% 22%)" strokeWidth="1.2" />
-      </g>
+
+      {/* Balancing ink swirls */}
+      <path d="M150,64 Q166,72 158,86 Q150,98 168,100" fill="none" stroke="hsl(350 55% 40%)" strokeWidth="1.5" strokeLinecap="round" />
+      <circle cx="172" cy="102" r="2" fill="hsl(350 55% 40%)" />
+      <path d="M730,64 Q714,72 722,86 Q730,98 712,100" fill="none" stroke="hsl(350 55% 40%)" strokeWidth="1.5" strokeLinecap="round" />
+      <circle cx="708" cy="102" r="2" fill="hsl(350 55% 40%)" />
     </svg>
   );
 }
