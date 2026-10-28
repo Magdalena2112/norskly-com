@@ -1,3 +1,4 @@
+import { getCurrentLanguageCode } from "@/lib/languages";
 import { useState, useEffect, useMemo } from "react";
 import { motion } from "framer-motion";
 import { useProfile } from "@/context/ProfileContext";
@@ -160,7 +161,7 @@ export default function DashboardPage() {
             <div className="md:col-span-3 p-6 sm:p-8 flex flex-col justify-center">
               <p className="font-script italic text-primary/60 text-sm mb-1">{ui.heroScript}</p>
               <h1 className="text-display text-3xl sm:text-4xl text-primary mb-3 leading-[0.95]">
-                Hei, {profile.name || "korisniče"}.
+                {({ en: "Hi", de: "Hallo" } as Record<string, string>)[getCurrentLanguageCode()] ?? "Hei"}, {profile.name || "korisniče"}.
               </h1>
               <p className="text-muted-foreground text-sm sm:text-base max-w-md leading-relaxed">
                 {ui.heroBody}

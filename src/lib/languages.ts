@@ -94,7 +94,7 @@ export const LANGUAGES: LanguageConfig[] = [
     ui: {
       heroScript: "Willkommen zurück",
       heroBody:
-        "Ein ruhiger Moment für Deutsch. Smesti se i izaberi modul — korak po korak.",
+        "Ein ruhiger Moment für Deutsch. Wähle ein Modul — Schritt für Schritt.",
       stampCity: "BERLIN",
       modulesDivider: "Lernmodule",
       module: {

@@ -40,13 +40,15 @@ interface CollectionWord extends VocabWord {
 
 // ─── TTS helper ───
 function speakNorwegian(text: string) {
+  const code = getCurrentLanguageCode();
+  const locale = code === "en" ? "en-GB" : code === "de" ? "de-DE" : "nb-NO";
   if (!window.speechSynthesis) return;
   window.speechSynthesis.cancel();
   const utter = new SpeechSynthesisUtterance(text);
-  utter.lang = "nb-NO";
+  utter.lang = locale;
   utter.rate = 0.9;
   const voices = window.speechSynthesis.getVoices();
-  const nbVoice = voices.find((v) => v.lang.startsWith("nb") || v.lang.startsWith("no"));
+  const nbVoice = voices.find((v) => (code === "no" ? v.lang.startsWith("nb") || v.lang.startsWith("no") : v.lang.startsWith(code)));
   if (nbVoice) utter.voice = nbVoice;
   window.speechSynthesis.speak(utter);
 }
@@ -193,7 +195,7 @@ export default function VocabCollections({ userId }: { userId?: string }) {
       <div className="space-y-4">
         <Card className="shadow-nordic bg-background/80 backdrop-blur-sm border-border/30">
           <CardHeader>
-            <CardTitle className="text-lg">Mine ordsamlinger</CardTitle>
+            <CardTitle className="text-lg">Moje kolekcije</CardTitle>
             <CardDescription>Organizuj reči u kolekcije za kartice i kvizove.</CardDescription>
           </CardHeader>
           <CardContent className="space-y-3">

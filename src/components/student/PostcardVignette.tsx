@@ -64,7 +64,7 @@ function StampVignette({ className }: { className?: string }) {
           <path d="M0,18 Q6,16 8,22" stroke="hsl(145 30% 38%)" strokeWidth="1" fill="none" />
         </g>
         <text x="30" y="68" textAnchor="middle" fill="hsl(350 50% 22%)" fontSize="6" fontFamily="Fraunces, serif" fontWeight="700" letterSpacing="1">
-          45 KR · NORGE
+          NORSKLY
         </text>
       </g>
     </svg>
@@ -87,12 +87,12 @@ function SpeechVignette({ className }: { className?: string }) {
       <g>
         <ellipse cx="60" cy="40" rx="32" ry="20" fill="hsl(36 50% 97%)" stroke="hsl(350 50% 22%)" strokeWidth="1" />
         <polygon points="48,58 52,68 62,58" fill="hsl(36 50% 97%)" stroke="hsl(350 50% 22%)" strokeWidth="1" />
-        <text x="60" y="44" textAnchor="middle" fill="hsl(350 50% 22%)" fontSize="14" fontFamily="Instrument Serif, serif" fontStyle="italic">Hei!</text>
+        <text x="60" y="44" textAnchor="middle" fill="hsl(350 50% 22%)" fontSize="14" fontFamily="Instrument Serif, serif" fontStyle="italic">…</text>
       </g>
       <g>
         <ellipse cx="145" cy="32" rx="28" ry="16" fill="hsl(36 50% 97%)" stroke="hsl(350 50% 22%)" strokeWidth="1" />
         <polygon points="155,46 152,54 142,46" fill="hsl(36 50% 97%)" stroke="hsl(350 50% 22%)" strokeWidth="1" />
-        <text x="145" y="36" textAnchor="middle" fill="hsl(350 50% 22%)" fontSize="9" fontFamily="Instrument Serif, serif" fontStyle="italic">Hvordan?</text>
+        <text x="145" y="36" textAnchor="middle" fill="hsl(350 50% 22%)" fontSize="9" fontFamily="Instrument Serif, serif" fontStyle="italic">?</text>
       </g>
     </svg>
   );
