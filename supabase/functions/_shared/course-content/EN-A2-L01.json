@@ -5508,7 +5508,132 @@
       ]
     },
     "review": {
-      "quiz": []
+      "quiz": {
+        "passScore": 8,
+        "bonusXp": 50,
+        "questions": [
+          {
+            "area": "grammar",
+            "prompt": "She ___ to work by bus.",
+            "options": [
+              "goes",
+              "go",
+              "going",
+              "is go"
+            ],
+            "answer": "goes",
+            "explain": "Uz he/she/it go dobija -es."
+          },
+          {
+            "area": "grammar",
+            "prompt": "My brother ___ (study) every evening.",
+            "options": [
+              "studies",
+              "studys",
+              "study",
+              "studyes"
+            ],
+            "answer": "studies",
+            "explain": "Suglasnik + y → -ies."
+          },
+          {
+            "area": "grammar",
+            "prompt": "___ you usually get up early?",
+            "options": [
+              "Do",
+              "Does",
+              "Are",
+              "Is"
+            ],
+            "answer": "Do",
+            "explain": "Uz you pitanje počinje sa Do."
+          },
+          {
+            "area": "grammar",
+            "prompt": "He ___ like coffee.",
+            "options": [
+              "doesn't",
+              "don't",
+              "isn't",
+              "not"
+            ],
+            "answer": "doesn't",
+            "explain": "Uz he/she/it odrični oblik je doesn't + glagol."
+          },
+          {
+            "area": "grammar",
+            "prompt": "Izaberi tačan red reči:",
+            "options": [
+              "I always have breakfast at 7.",
+              "I have always breakfast at 7.",
+              "Always I have breakfast at 7.",
+              "I have breakfast always at 7."
+            ],
+            "answer": "I always have breakfast at 7.",
+            "explain": "Prilog učestalosti stoji ispred glavnog glagola."
+          },
+          {
+            "area": "grammar",
+            "prompt": "She is ___ late for class.",
+            "options": [
+              "never",
+              "nevers",
+              "not never",
+              "no"
+            ],
+            "answer": "never",
+            "explain": "Uz be prilog učestalosti stoji posle glagola."
+          },
+          {
+            "area": "vocabulary",
+            "prompt": "Kako kažeš „ustati”?",
+            "options": [
+              "get up",
+              "wake down",
+              "stand on",
+              "go up"
+            ],
+            "answer": "get up",
+            "explain": "get up = ustati iz kreveta."
+          },
+          {
+            "area": "vocabulary",
+            "prompt": "„Radujem se vikendu.”",
+            "options": [
+              "I'm looking forward to the weekend.",
+              "I look after the weekend.",
+              "I'm looking for the weekend.",
+              "I wait the weekend."
+            ],
+            "answer": "I'm looking forward to the weekend.",
+            "explain": "look forward to = radovati se nečemu."
+          },
+          {
+            "area": "communication",
+            "prompt": "Prijatelj kaže: „Long time no see!” Prirodan odgovor:",
+            "options": [
+              "I know! How have you been?",
+              "Yes, I see.",
+              "No, thank you.",
+              "See you later."
+            ],
+            "answer": "I know! How have you been?",
+            "explain": "Pozdrav posle dužeg vremena i pitanje kako je bio."
+          },
+          {
+            "area": "communication",
+            "prompt": "Kako pitaš koliko često neko vežba?",
+            "options": [
+              "How often do you exercise?",
+              "How many you exercise?",
+              "When often do you exercise?",
+              "How much exercise you?"
+            ],
+            "answer": "How often do you exercise?",
+            "explain": "How often = koliko često."
+          }
+        ]
+      }
     }
   }
 }

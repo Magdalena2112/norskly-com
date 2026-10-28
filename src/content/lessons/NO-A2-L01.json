@@ -4823,7 +4823,132 @@
       ]
     },
     "review": {
-      "quiz": []
+      "quiz": {
+        "passScore": 8,
+        "bonusXp": 50,
+        "questions": [
+          {
+            "area": "grammar",
+            "prompt": "Izaberi rečenicu sa tačnim V2 redom:",
+            "options": [
+              "Om morgenen drikker jeg kaffe.",
+              "Om morgenen jeg drikker kaffe.",
+              "Jeg om morgenen drikker kaffe.",
+              "Drikker om morgenen jeg kaffe."
+            ],
+            "answer": "Om morgenen drikker jeg kaffe.",
+            "explain": "Lični glagol je uvek na drugom mestu."
+          },
+          {
+            "area": "grammar",
+            "prompt": "Tre dager i uka ___ Nora bussen.",
+            "options": [
+              "tar",
+              "Nora tar",
+              "å ta",
+              "tatt"
+            ],
+            "answer": "tar",
+            "explain": "Ceo izraz vremena je prvi član, glagol je drugi."
+          },
+          {
+            "area": "grammar",
+            "prompt": "Izaberi tačnu odričnu rečenicu:",
+            "options": [
+              "Jeg drikker ikke kaffe.",
+              "Jeg ikke drikker kaffe.",
+              "Ikke jeg drikker kaffe.",
+              "Jeg drikker kaffe ikke ikke."
+            ],
+            "answer": "Jeg drikker ikke kaffe.",
+            "explain": "U glavnoj rečenici ikke stoji posle ličnog glagola."
+          },
+          {
+            "area": "grammar",
+            "prompt": "Pretvori u pitanje: Du jobber i dag.",
+            "options": [
+              "Jobber du i dag?",
+              "Du jobber i dag?",
+              "Jobber i dag du?",
+              "Gjør du jobber i dag?"
+            ],
+            "answer": "Jobber du i dag?",
+            "explain": "Da/ne pitanje počinje glagolom."
+          },
+          {
+            "area": "grammar",
+            "prompt": "___ står du opp? – Klokka seks.",
+            "options": [
+              "Når",
+              "Hvor",
+              "Hva",
+              "Hvem"
+            ],
+            "answer": "Når",
+            "explain": "Når = kada."
+          },
+          {
+            "area": "grammar",
+            "prompt": "Izaberi tačan red: Jeg ___ trener om kvelden.",
+            "options": [
+              "trener alltid",
+              "alltid trener",
+              "trener aldri ikke",
+              "alltid"
+            ],
+            "answer": "trener alltid",
+            "explain": "Prilog učestalosti stoji posle ličnog glagola."
+          },
+          {
+            "area": "vocabulary",
+            "prompt": "Kako kažeš „ustati”?",
+            "options": [
+              "stå opp",
+              "stå på",
+              "gå opp",
+              "legge seg"
+            ],
+            "answer": "stå opp",
+            "explain": "legge seg = leći."
+          },
+          {
+            "area": "vocabulary",
+            "prompt": "„Imam mnogo posla / žurim.”",
+            "options": [
+              "Jeg har det travelt.",
+              "Jeg har det bra.",
+              "Jeg er travel.",
+              "Jeg har tid."
+            ],
+            "answer": "Jeg har det travelt.",
+            "explain": "ha det travelt = biti zauzet, žuriti."
+          },
+          {
+            "area": "communication",
+            "prompt": "„Gleder du deg til helgen?” znači:",
+            "options": [
+              "Raduješ li se vikendu?",
+              "Da li radiš vikendom?",
+              "Gde si za vikend?",
+              "Da li si umoran?"
+            ],
+            "answer": "Raduješ li se vikendu?",
+            "explain": "glede seg til = radovati se."
+          },
+          {
+            "area": "communication",
+            "prompt": "Novi ste na kursu. Kako se prirodno predstavljaš?",
+            "options": [
+              "Hei, jeg heter Ana og kommer fra Serbia.",
+              "Hei, jeg Ana fra Serbia.",
+              "Hei, heter jeg Ana fra Serbia er.",
+              "Ana jeg heter."
+            ],
+            "answer": "Hei, jeg heter Ana og kommer fra Serbia.",
+            "explain": "Subjekat + glagol, pa još jedna rečenica posle og."
+          }
+        ]
+      }
     }
   }
 }
