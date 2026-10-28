@@ -39,6 +39,43 @@
           "speaker": "Emma",
           "text": "Thank you!"
         }
+      ],
+      "keyTerms": [
+        {
+          "word": "What's your name?",
+          "translation": "Kako se zoveš?"
+        },
+        {
+          "word": "Nice to meet you",
+          "translation": "Drago mi je"
+        },
+        {
+          "word": "Nice to meet you too",
+          "translation": "I meni je drago"
+        },
+        {
+          "word": "Are you a student?",
+          "translation": "Da li si student?",
+          "forms": [
+            "are you a student"
+          ]
+        },
+        {
+          "word": "Yes, I am",
+          "translation": "Da, jesam"
+        },
+        {
+          "word": "too",
+          "translation": "takođe"
+        },
+        {
+          "word": "Welcome to the class",
+          "translation": "Dobro došli na čas"
+        },
+        {
+          "word": "Thank you",
+          "translation": "Hvala"
+        }
       ]
     },
     {
@@ -91,6 +128,43 @@
           "speaker": "Ms Taylor",
           "text": "Wonderful. We are ready!"
         }
+      ],
+      "keyTerms": [
+        {
+          "word": "Good morning",
+          "translation": "Dobro jutro"
+        },
+        {
+          "word": "everyone",
+          "translation": "svi"
+        },
+        {
+          "word": "teacher",
+          "translation": "nastavnik"
+        },
+        {
+          "word": "This is …",
+          "translation": "Ovo je …",
+          "forms": [
+            "this is"
+          ]
+        },
+        {
+          "word": "new student",
+          "translation": "novi učenik"
+        },
+        {
+          "word": "she is",
+          "translation": "ona je"
+        },
+        {
+          "word": "he is",
+          "translation": "on je"
+        },
+        {
+          "word": "We are ready",
+          "translation": "Spremni smo"
+        }
       ]
     },
     {
@@ -130,6 +204,49 @@
         {
           "speaker": "Emma and Sophie",
           "text": "See you!"
+        }
+      ],
+      "keyTerms": [
+        {
+          "word": "How are you?",
+          "translation": "Kako si?"
+        },
+        {
+          "word": "I'm good, thanks",
+          "translation": "Dobro sam, hvala"
+        },
+        {
+          "word": "I'm fine",
+          "translation": "Dobro sam"
+        },
+        {
+          "word": "How do you spell your name?",
+          "translation": "Kako se piše tvoje ime?",
+          "forms": [
+            "how do you spell your name"
+          ]
+        },
+        {
+          "word": "spell",
+          "translation": "sricati, napisati slovo po slovo"
+        },
+        {
+          "word": "My name is …",
+          "translation": "Moje ime je …",
+          "forms": [
+            "my name is"
+          ]
+        },
+        {
+          "word": "See you in class",
+          "translation": "Vidimo se na času"
+        },
+        {
+          "word": "See you!",
+          "translation": "Vidimo se!",
+          "forms": [
+            "see you"
+          ]
         }
       ]
     }

@@ -27,6 +27,49 @@
           "speaker": "Emma",
           "text": "Life in a big city isn't always easy, but I'm learning something new every day. I'm excited about this new chapter!"
         }
+      ],
+      "keyTerms": [
+        {
+          "word": "get up",
+          "translation": "ustati"
+        },
+        {
+          "word": "have breakfast",
+          "translation": "doručkovati"
+        },
+        {
+          "word": "leave home",
+          "translation": "izaći iz kuće"
+        },
+        {
+          "word": "take the bus",
+          "translation": "ići autobusom"
+        },
+        {
+          "word": "at the moment",
+          "translation": "trenutno"
+        },
+        {
+          "word": "look for",
+          "translation": "tražiti",
+          "forms": [
+            "looking for"
+          ]
+        },
+        {
+          "word": "prepare for",
+          "translation": "pripremati se za",
+          "forms": [
+            "preparing for"
+          ]
+        },
+        {
+          "word": "be excited about",
+          "translation": "radovati se, biti uzbuđen zbog",
+          "forms": [
+            "excited about"
+          ]
+        }
       ]
     },
     {
@@ -83,6 +126,43 @@
           "speaker": "Emma",
           "text": "Exactly! And our English course starts again soon."
         }
+      ],
+      "keyTerms": [
+        {
+          "word": "How's everything going?",
+          "translation": "Kako sve ide?"
+        },
+        {
+          "word": "Pretty well",
+          "translation": "Prilično dobro"
+        },
+        {
+          "word": "busy",
+          "translation": "zauzet"
+        },
+        {
+          "word": "these days",
+          "translation": "ovih dana"
+        },
+        {
+          "word": "work part-time",
+          "translation": "raditi skraćeno",
+          "forms": [
+            "working part-time"
+          ]
+        },
+        {
+          "word": "move closer to work",
+          "translation": "preseliti se bliže poslu"
+        },
+        {
+          "word": "cycle to work",
+          "translation": "ići biciklom na posao"
+        },
+        {
+          "word": "That sounds interesting",
+          "translation": "To zvuči zanimljivo"
+        }
       ]
     },
     {
@@ -130,6 +210,49 @@
         {
           "speaker": "Ms Taylor",
           "text": "Best wishes, Ms Taylor"
+        }
+      ],
+      "keyTerms": [
+        {
+          "word": "I hope you're all doing well",
+          "translation": "Nadam se da ste svi dobro"
+        },
+        {
+          "word": "start on Monday",
+          "translation": "počinje u ponedeljak",
+          "forms": [
+            "starts on monday"
+          ]
+        },
+        {
+          "word": "every Monday and Wednesday",
+          "translation": "svakog ponedeljka i srede"
+        },
+        {
+          "word": "focus on",
+          "translation": "fokusirati se na",
+          "forms": [
+            "focusing on"
+          ]
+        },
+        {
+          "word": "everyday life",
+          "translation": "svakodnevni život"
+        },
+        {
+          "word": "personal experiences",
+          "translation": "lična iskustva"
+        },
+        {
+          "word": "look forward to",
+          "translation": "radovati se",
+          "forms": [
+            "looking forward to"
+          ]
+        },
+        {
+          "word": "Best wishes",
+          "translation": "Srdačan pozdrav"
         }
       ]
     }

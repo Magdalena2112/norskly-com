@@ -27,6 +27,49 @@
           "speaker": "Lena",
           "text": "Meine Kolleginnen sind sehr hilfsbereit. Wenn ich unsicher bin, frage ich Schwester Monika, die schon seit zwanzig Jahren auf der Station arbeitet."
         }
+      ],
+      "keyTerms": [
+        {
+          "word": "die Pflegefachkraft",
+          "translation": "medicinska sestra / tehničar"
+        },
+        {
+          "word": "die Innere Station",
+          "translation": "interno odeljenje",
+          "forms": [
+            "inneren station"
+          ]
+        },
+        {
+          "word": "der Frühdienst",
+          "translation": "jutarnja smena"
+        },
+        {
+          "word": "die Übergabe",
+          "translation": "primopredaja"
+        },
+        {
+          "word": "der Nachtdienst",
+          "translation": "noćna smena"
+        },
+        {
+          "word": "den Blutdruck messen",
+          "translation": "meriti pritisak",
+          "forms": [
+            "messe blutdruck"
+          ]
+        },
+        {
+          "word": "Schmerzen haben",
+          "translation": "imati bolove",
+          "forms": [
+            "schmerzen haben"
+          ]
+        },
+        {
+          "word": "verwirrt",
+          "translation": "zbunjen, dezorijentisan"
+        }
       ]
     },
     {
@@ -71,6 +114,61 @@
           "speaker": "Lena",
           "text": "Das ist wichtig. Ich messe jetzt Ihren Blutdruck und Puls, und gleich kommt Dr. Weber zu Ihnen."
         }
+      ],
+      "keyTerms": [
+        {
+          "word": "Schmerzen in der Brust",
+          "translation": "bol u grudima"
+        },
+        {
+          "word": "übel",
+          "translation": "mučno",
+          "forms": [
+            "war furchtbar übel"
+          ]
+        },
+        {
+          "word": "wehtun",
+          "translation": "boleti",
+          "forms": [
+            "wehtut"
+          ]
+        },
+        {
+          "word": "ausstrahlen",
+          "translation": "širiti se (bol)",
+          "forms": [
+            "strahlt es in den linken arm aus"
+          ]
+        },
+        {
+          "word": "die Skala",
+          "translation": "skala",
+          "forms": [
+            "skala"
+          ]
+        },
+        {
+          "word": "regelmäßig Medikamente nehmen",
+          "translation": "redovno uzimati lekove",
+          "forms": [
+            "nehmen sie regelmäßig medikamente"
+          ]
+        },
+        {
+          "word": "die Allergie",
+          "translation": "alergija",
+          "forms": [
+            "allergien"
+          ]
+        },
+        {
+          "word": "vertragen",
+          "translation": "podnositi",
+          "forms": [
+            "vertrage"
+          ]
+        }
       ]
     },
     {
@@ -102,6 +200,52 @@
         {
           "speaker": "Anna",
           "text": "Alles klar. Ich behalte den Blutdruck im Auge und melde mich, wenn die Schmerzen stärker werden."
+        }
+      ],
+      "keyTerms": [
+        {
+          "word": "aufgenommen werden",
+          "translation": "biti primljen u bolnicu",
+          "forms": [
+            "wurde heute früh mit brustschmerzen aufgenommen"
+          ]
+        },
+        {
+          "word": "die Brustschmerzen",
+          "translation": "bolovi u grudima"
+        },
+        {
+          "word": "die Penicillinallergie",
+          "translation": "alergija na penicilin"
+        },
+        {
+          "word": "das Schmerzmittel",
+          "translation": "lek protiv bolova"
+        },
+        {
+          "word": "zurückgehen",
+          "translation": "smanjiti se",
+          "forms": [
+            "zurückgegangen"
+          ]
+        },
+        {
+          "word": "die Untersuchung anordnen",
+          "translation": "naložiti pregled",
+          "forms": [
+            "untersuchungen angeordnet"
+          ]
+        },
+        {
+          "word": "die Blutabnahme",
+          "translation": "vađenje krvi"
+        },
+        {
+          "word": "im Auge behalten",
+          "translation": "pratiti, držati na oku",
+          "forms": [
+            "behalte den blutdruck im auge"
+          ]
         }
       ]
     }
