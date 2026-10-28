@@ -6,7 +6,7 @@ import { useProfile } from "@/context/ProfileContext";
 import { useAuth } from "@/context/AuthContext";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { BookOpen, Languages, MessageSquare, GraduationCap, CalendarCheck, PenLine, BookOpenText, Headphones, Mic, Lock } from "lucide-react";
+import { BookOpen, Languages, MessageSquare, GraduationCap, CalendarCheck, PenLine, BookOpenText, Headphones, Mic, Lock, CheckCircle2 } from "lucide-react";
 import { computeLevelStates, normalizeLevel, LEVEL_UNLOCK_THRESHOLD, type CefrLevel, type LevelState } from "@/lib/levels";
 import XpProgressCard from "@/components/XpProgressCard";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
@@ -284,7 +284,7 @@ export default function DashboardPage() {
             );
           })}
           {modules.filter((m) => m.fullWidth).map((mod) => (
-            <motion.div key={mod.route} className="sm:col-span-2" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}>
+            <motion.div key={mod.route} className="col-span-full" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}>
               <Card className="cursor-pointer group h-full bg-cream border border-border/60 shadow-postcard overflow-hidden relative transition-all duration-500 hover:-translate-y-1.5" onClick={() => navigate(mod.route)}>
                 <div className="relative w-full h-32 sm:h-36 overflow-hidden border-b border-border/40">
                   <PostcardVignette variant={mod.vignette} className="absolute inset-0 w-full h-full" />
