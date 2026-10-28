@@ -192,18 +192,29 @@ export default function CourseLessonPage() {
         </div>
         {!open && (
         <header className="mt-3 mb-6 rounded-3xl border border-border/50 bg-cream/90 backdrop-blur-md shadow-postcard overflow-hidden">
-          {imgs?.cover && <img src={imgs.cover} alt={row.title_target} className="w-full aspect-[16/9] object-cover" />}
           <div className="p-5 sm:p-7">
-          <p className="font-script italic text-primary/60 text-sm">Lekcija {row.sort_order} · {row.cefr_level}</p>
-          <h1 className="text-display text-2xl sm:text-3xl text-primary leading-tight">{row.title_target}</h1>
-          <p className="text-sm text-muted-foreground mt-1">{row.title} — {row.summary}</p>
+          <div className="flex flex-wrap items-center gap-2">
+            <p className="font-script italic text-primary/60 text-sm">Lekcija {String(row.sort_order).padStart(2, "0")} · {row.cefr_level}</p>
+            <span className="text-[11px] bg-secondary/60 text-primary px-2 py-0.5 rounded-full">~{Math.max(30, Math.round(exercises.length * 1.5 / 5) * 5)} min</span>
+            <span className="text-[11px] bg-secondary/60 text-primary px-2 py-0.5 rounded-full">100 XP</span>
+          </div>
+          <h1 className="text-display text-2xl sm:text-3xl text-primary leading-tight mt-1">{row.title_target}</h1>
+          <p className="text-sm text-muted-foreground mt-1">{row.title}{row.summary ? ` — ${row.summary}` : ""}</p>
           {Array.isArray(row.goals) && row.goals.length > 0 && (
-            <ul className="mt-3 flex flex-wrap gap-1.5">{row.goals.map((g: string) => <li key={g} className="text-xs bg-secondary/60 text-primary px-2.5 py-1 rounded-full">{g}</li>)}</ul>
+            <div className="mt-4">
+              <p className="text-xs font-medium text-primary mb-1.5">Na kraju lekcije moći ćeš da:</p>
+              <ul className="space-y-1">{row.goals.slice(0, 4).map((g: string) => <li key={g} className="text-sm text-foreground/80 flex gap-2"><CheckCircle2 className="w-4 h-4 text-forest shrink-0 mt-0.5" />{g}</li>)}</ul>
+            </div>
           )}
           <div className="mt-4 h-1.5 rounded-full bg-secondary overflow-hidden">
             <div className="h-full bg-forest transition-all" style={{ width: `${exercises.length ? (done.filter((d) => exercises.some((e) => e.code === d)).length / exercises.length) * 100 : 0}%` }} />
           </div>
-          <p className="text-[11px] text-muted-foreground mt-1">Urađeno {done.length} / {exercises.length} vežbi</p>
+          <div className="flex items-center justify-between gap-2 mt-2">
+            <p className="text-[11px] text-muted-foreground">Urađeno {done.length} / {exercises.length} vežbi</p>
+            {(() => { const next = moduleKeys.find((k) => moduleExercises(k).length > 0 && !modDone(k)); return next ? (
+              <Button variant="hero" size="sm" onClick={() => openModule(next)}>{done.length ? "Nastavi lekciju" : "Započni lekciju"}</Button>
+            ) : null; })()}
+          </div>
           </div>
         </header>
         )}
