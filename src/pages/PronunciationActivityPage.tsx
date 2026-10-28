@@ -82,17 +82,36 @@ export function RecordSlot({ item, lang, level, onSuccess, compareOnly = false, 
   const [state, setState] = useState<"idle" | "rec" | "busy">("idle");
   const [secs, setSecs] = useState(0);
   const [result, setResult] = useState<CheckResult | null>(null);
+  const [error, setError] = useState<string | null>(null);
   const [myUrl, setMyUrl] = useState<string | null>(null);
+  const lastBlobRef = useRef<Blob | null>(null);
+  const activeRef = useRef(false);
   const recRef = useRef<MediaRecorder | null>(null);
   const timerRef = useRef<number | null>(null);
 
   useEffect(() => {
+    activeRef.current = true;
     setResult(null);
+    setError(null);
     setMyUrl(null);
-    return () => { recRef.current?.state === "recording" && recRef.current.stop(); };
+    lastBlobRef.current = null;
+    return () => {
+      activeRef.current = false;
+      if (timerRef.current) window.clearInterval(timerRef.current);
+      if (recRef.current?.state === "recording") recRef.current.stop();
+    };
   }, [item.text]);
 
+  useEffect(() => () => { if (myUrl) URL.revokeObjectURL(myUrl); }, [myUrl]);
+
+  const stop = () => {
+    if (recRef.current?.state !== "recording") return;
+    setState("busy");
+    recRef.current.stop();
+  };
+
   const start = async () => {
+    setError(null);
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
       const type = ["audio/webm", "audio/mp4", "audio/ogg"].find((t) => MediaRecorder.isTypeSupported?.(t)) || "";
@@ -102,8 +121,9 @@ export function RecordSlot({ item, lang, level, onSuccess, compareOnly = false, 
       rec.onstop = () => {
         stream.getTracks().forEach((t) => t.stop());
         if (timerRef.current) window.clearInterval(timerRef.current);
+        if (!activeRef.current) return;
         const blob = new Blob(chunks, { type: rec.mimeType || "audio/webm" });
-        send(blob);
+        void send(blob);
       };
       recRef.current = rec;
       rec.start();
@@ -116,15 +136,19 @@ export function RecordSlot({ item, lang, level, onSuccess, compareOnly = false, 
         setSecs(Math.floor(s / 1000));
         // Scored recordings must stay under the server's 30 s WAV limit; stop 500 ms early so the tick latency never pushes us over.
         const cap = compareOnly ? maxMs : Math.min(maxMs, 30000) - 500;
-        if (s >= cap && rec.state === "recording") rec.stop();
+        if (s >= cap && rec.state === "recording") stop();
       }, 250);
     } catch {
+      setError("Dozvoli pristup mikrofonu da bi snimio/la izgovor.");
+      setState("idle");
       toast.error("Dozvoli pristup mikrofonu da bi snimio/la izgovor.");
     }
   };
 
   const send = async (blob: Blob) => {
-    if (blob.size < 1000) { setState("idle"); toast.error("Snimak je prekratak."); return; }
+    setError(null);
+    if (blob.size < 1000) { setState("idle"); setError("Snimak je prekratak. Snimi izgovor ponovo."); return; }
+    lastBlobRef.current = blob;
     setState("busy");
     setMyUrl(URL.createObjectURL(blob));
     if (compareOnly) { setState("idle"); onSuccess(); return; }
@@ -140,12 +164,16 @@ export function RecordSlot({ item, lang, level, onSuccess, compareOnly = false, 
       const r = await fetch(CHECK_URL, { method: "POST", headers: { Authorization: `Bearer ${session?.access_token}` }, body: fd });
       const data = await r.json();
       if (!r.ok) throw new Error(data.error || "Greška");
+      if (!activeRef.current) return;
       setResult(data);
       if (data.verdict !== "retry") onSuccess();
     } catch (e) {
-      toast.error(e instanceof Error ? e.message : "Procena nije uspela.");
+      if (!activeRef.current) return;
+      const message = e instanceof Error ? e.message : "Procena nije uspela.";
+      setError(message);
+      toast.error(message);
     } finally {
-      setState("idle");
+      if (activeRef.current) setState("idle");
     }
   };
 
@@ -157,7 +185,7 @@ export function RecordSlot({ item, lang, level, onSuccess, compareOnly = false, 
   return (
     <div className="mt-6 flex flex-col items-center gap-3">
       {state === "rec" ? (
-        <Button variant="destructive" className="rounded-full" onClick={() => recRef.current?.stop()}>
+        <Button variant="destructive" className="rounded-full" onClick={stop}>
           <Square className="w-4 h-4 mr-1" /> Završi snimanje · {secs}s
         </Button>
       ) : (
@@ -167,6 +195,17 @@ export function RecordSlot({ item, lang, level, onSuccess, compareOnly = false, 
         </Button>
       )}
       {state === "rec" && <span className="text-xs text-destructive animate-pulse">● Snimanje… izgovori naglas</span>}
+      {error && (
+        <div role="alert" className="w-full max-w-md rounded-lg border border-destructive/40 bg-destructive/10 p-4 space-y-3">
+          <p className="font-semibold text-destructive">Ocena nije dostupna</p>
+          <p className="text-sm text-foreground">{error}</p>
+          {lastBlobRef.current && !compareOnly && <Button variant="outline" disabled={state === "busy"} onClick={() => {
+            const blob = lastBlobRef.current;
+            if (blob) void send(blob);
+          }}>Ponovi procenu</Button>}
+          {myUrl && <audio controls src={myUrl} className="w-full h-9" aria-label="Tvoj snimak" />}
+        </div>
+      )}
 
       {compareOnly && myUrl && state === "idle" && (
         <div className="w-full max-w-md rounded-2xl border border-border/60 bg-background/80 p-4 text-left space-y-2">
