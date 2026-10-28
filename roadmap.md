@@ -1,5 +1,5 @@
 # Tasks
-- [ ] Unify six available lessons to 100 XP with atomic, deduplicated rewards and trophy-only review; run allocation tests and signed-in completion/readback checks.
+- [x] Unify six available lessons to 100 XP with atomic, deduplicated rewards and trophy-only review; allocation tests passed, signed-in Norwegian completion awarded 2 XP once and persisted on reopening; historical XP not recalculated.
 - [x] Verify German lesson recording assessment, persistent errors and retry without rerecording; six tests passed and authenticated microphone recording returned a real score after retry (physical iPad not tested).
 - [x] Show four German A2 speaking topics with localized tasks, criteria and direct launch; verified synchronized protected scenarios, 14 tests, signed-in German lesson launch and mobile layout.
 - [x] Replace user-facing AI branding with guided learning, practice and feedback wording; verified five public pages and six signed-in learning views, with 16 existing tests passing and no runtime errors.
