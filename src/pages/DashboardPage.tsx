@@ -288,7 +288,11 @@ export default function DashboardPage() {
             <motion.div key={mod.route} className="sm:col-span-2" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}>
               <Card className="cursor-pointer group h-full bg-cream border border-border/60 shadow-postcard overflow-hidden relative transition-all duration-500 hover:-translate-y-1.5" onClick={() => navigate(mod.route)}>
                 <div className="relative w-full h-32 sm:h-36 overflow-hidden border-b border-border/40">
-                  <PostcardVignette variant={mod.vignette} className="absolute inset-0 w-full h-full" />
+                  {mod.image ? (
+                    <img src={mod.image.src} alt={mod.image.alt} className="absolute inset-0 w-full h-full object-cover" />
+                  ) : (
+                    <PostcardVignette variant={mod.vignette} className="absolute inset-0 w-full h-full" />
+                  )}
                   <div className={`absolute -bottom-5 left-5 w-12 h-12 rounded-2xl ${mod.iconBg} flex items-center justify-center shadow-card-soft ring-2 ring-cream`}>
                     <mod.icon className="w-5 h-5 text-cream" />
                   </div>
