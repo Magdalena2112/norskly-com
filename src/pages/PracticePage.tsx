@@ -40,6 +40,7 @@ import {
 } from "lucide-react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import type { TalkScenario } from "@/content/lessons/talkScenarios";
+import { selectedLessonScenario } from "@/lib/lessonSpeaking";
 import BackButton from "@/components/BackButton";
 import ReactMarkdown from "react-markdown";
 import { logActivity } from "@/lib/logActivity";
@@ -270,18 +271,21 @@ export default function PracticePage() {
   const [role, setRole] = useState("sagovornik");
   const [searchParams] = useSearchParams();
   const lessonCode = searchParams.get("lesson");
+  const scenarioId = searchParams.get("scenario");
   const [lessonScenarios, setLessonScenarios] = useState<TalkScenario[]>([]);
   const [lessonMaterial, setLessonMaterial] = useState<string | undefined>();
   useEffect(() => {
     let alive = true;
-    setLessonScenarios([]); setLessonMaterial(undefined); setScenario(null);
+    setLessonScenarios([]); setLessonMaterial(undefined); setScenario(null); setScenarioPicked(false);
     if (lessonCode) void supabase.functions.invoke("course-content", { body: { lesson_code: lessonCode } }).then(({ data, error }) => {
       if (!alive) return;
       if (error) { navigate("/practice", { replace: true }); return; }
       setLessonScenarios(data?.scenarios || []); setLessonMaterial(data?.material);
+      const requested = selectedLessonScenario(data?.scenarios || [], scenarioId);
+      if (requested) startScenario(requested);
     });
     return () => { alive = false; };
-  }, [lessonCode, user?.id, navigate]);
+  }, [lessonCode, scenarioId, user?.id, navigate]);
   const [scenario, setScenario] = useState<TalkScenario | null>(null);
   const [scenarioPicked, setScenarioPicked] = useState(false);
   const doneKey = `talk_lesson_done_${langCode}_${lessonCode}`;

@@ -2,6 +2,8 @@
 // is stored per lesson code under src/content/lessons/<CODE>.json and falls
 // back to the row's `modules`/`intro_texts` columns when no file exists.
 
+import type { TalkScenario } from "@/content/lessons/talkScenarios";
+
 export interface DialogueLine { speaker: string; text: string }
 export interface IntroText { id: string; title: string; type: "dialogue" | "narrative" | "monologue" | "email"; scene?: string; lines: DialogueLine[] }
 export interface ExerciseItem { prompt: string; answers?: string[]; options?: string[]; open?: boolean; guide?: string; guiding?: string[]; image?: string; audio?: string }
@@ -11,6 +13,7 @@ export interface LessonContent {
   code: string;
   intro: IntroText[];
   modules: Record<string, any>;
+  scenarios?: TalkScenario[];
 }
 
 export async function loadLessonContent(row: { lesson_code: string | null; intro_texts?: any; modules?: any; text_segments?: any; text_title?: string }): Promise<LessonContent> {
@@ -18,7 +21,7 @@ export async function loadLessonContent(row: { lesson_code: string | null; intro
     const { supabase } = await import("@/integrations/supabase/client");
     const { data, error } = await supabase.functions.invoke("course-content", { body: { lesson_code: row.lesson_code } });
     if (error || !data?.content) throw new Error("Ova lekcija nije deo tvog kursa.");
-    return data.content as LessonContent;
+    return { ...data.content, scenarios: data.scenarios || [] } as LessonContent;
   }
   // Fallback for lessons stored only in the database.
   const intro: IntroText[] = Array.isArray(row.intro_texts) && row.intro_texts.length
