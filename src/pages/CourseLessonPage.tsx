@@ -11,6 +11,7 @@ import DialoguePlayer from "@/components/lesson/DialoguePlayer";
 import LessonListeningTab from "@/components/lesson/LessonListeningTab";
 import LessonPronunciationTab from "@/components/lesson/LessonPronunciationTab";
 import LessonCultureTab from "@/components/lesson/LessonCultureTab";
+import LessonSpeakingTab from "@/components/lesson/LessonSpeakingTab";
 import LessonReviewQuiz from "@/components/lesson/LessonReviewQuiz";
 import LessonExercise from "@/components/lesson/LessonExercise";
 import { ITEM_IMAGES } from "@/content/lessons/itemImages";
@@ -421,11 +422,7 @@ export default function CourseLessonPage() {
           )}
 
           {tab === "speaking" && (
-            <div className="rounded-2xl border border-border/60 bg-cream/90 p-5 shadow-card-soft space-y-3">
-              <h4 className="font-display font-semibold text-primary">Razgovorne situacije lekcije</h4>
-              <p className="text-sm text-muted-foreground">Sagovornik u zadatoj ulozi započinje razgovor i vodi te kroz ciljeve lekcije. Posle toga možeš nastaviti slobodan razgovor.</p>
-              <Button variant="hero" onClick={() => navigate(`/talk?lesson=${encodeURIComponent(content?.code || "")}`)}><MessageSquare className="w-4 h-4" /> Otvori razgovor</Button>
-            </div>
+            <LessonSpeakingTab scenarios={content?.scenarios || []} lessonCode={content?.code || ""} />
           )}
 
           {tab === "culture" && m.culture && (
