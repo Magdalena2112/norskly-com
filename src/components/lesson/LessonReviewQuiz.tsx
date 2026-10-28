@@ -2,7 +2,6 @@ import { useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Trophy, CheckCircle2, XCircle, RotateCcw, ChevronRight } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
-import { logActivity } from "@/lib/logActivity";
 import { toast } from "sonner";
 
 export interface ReviewQuestion { area: string; prompt: string; options: string[]; answer: string; explain?: string }
