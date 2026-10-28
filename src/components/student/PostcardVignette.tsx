@@ -194,117 +194,109 @@ function CabinsVignette({ className }: { className?: string }) {
 
 /**
  * Wide, language-neutral scene for the teacher-lesson card.
- * Two cute kittens — a mentor and a student — face each other across a
- * small table with a shared open book, with word-free speech bubbles,
- * so it works for every language. Drawn in the shared card palette.
+ * Flat pastel style: a mentor and a student sit faceless at a table with
+ * a laptop, word-free speech bubbles above them, mauve mountains and a
+ * sunlit window behind — universal for every language, in the platform palette.
  */
 function TeacherVignette({ className }: { className?: string }) {
-  const ink = "hsl(350 50% 22%)";
   const paper = "hsl(36 50% 97%)";
-  const fur = "hsl(30 45% 86%)";
-  const pink = "hsl(340 60% 78%)";
-  const blush = "hsl(340 60% 82%)";
-  const sage = "hsl(145 25% 48%)";
-  const blue = "hsl(215 28% 55%)";
+  const skin = "hsl(28 55% 82%)";
+  const hair = "hsl(350 30% 26%)";
+  const sage = "hsl(145 25% 50%)";
+  const blue = "hsl(215 30% 62%)";
+  const chairPink = "hsl(340 50% 80%)";
 
   return (
     <svg viewBox="0 0 880 146" preserveAspectRatio="xMidYMid slice" className={className} aria-hidden="true">
       <defs>
         <CardSky id="teacherSky" />
-        <linearGradient id="teacherMist" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="hsl(350 40% 88%)" />
-          <stop offset="100%" stopColor="hsl(36 45% 95%)" />
-        </linearGradient>
       </defs>
       <rect width="880" height="146" fill="url(#teacherSky)" />
-      <path d="M0,112 Q220,100 440,112 T880,108 L880,146 L0,146 Z" fill="url(#teacherMist)" opacity="0.85" />
-      <path d="M0,122 C160,110 280,130 440,122 C600,114 720,132 880,120" fill="none" stroke="hsl(350 45% 40% / 0.3)" strokeWidth="1.2" strokeDasharray="1 6" strokeLinecap="round" />
 
-      <g transform="translate(440 0)" stroke={ink} strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
-        {/* Table */}
-        <line x1="-90" y1="104" x2="90" y2="104" strokeWidth="1.8" />
-        <line x1="-70" y1="104" x2="-70" y2="122" />
-        <line x1="70" y1="104" x2="70" y2="122" />
-        {/* Shared open book */}
-        <path d="M-26,102 Q-13,96 0,100 Q13,96 26,102 L26,104 L-26,104 Z" fill={paper} strokeWidth="1.1" />
-        <line x1="0" y1="99" x2="0" y2="104" strokeWidth="0.9" />
+      {/* Soft sun */}
+      <circle cx="640" cy="30" r="17" fill="hsl(45 80% 92%)" opacity="0.9" />
 
-        {/* Mentor kitten (left) — round glasses, sage scarf */}
-        <path d="M-118,104 C-118,82 -110,72 -96,72 C-82,72 -74,82 -74,104 Z" fill={fur} />
-        <path d="M-74,98 Q-58,100 -60,88 Q-61,79 -51,82" fill="none" strokeWidth="1.3" />
-        <path d="M-108,49 L-105,33 L-95,45 Z" fill={fur} strokeWidth="1.2" />
-        <path d="M-84,49 L-87,33 L-97,45 Z" fill={fur} strokeWidth="1.2" />
-        <path d="M-106,46 L-104,36 L-98,43 Z" fill={pink} stroke="none" />
-        <path d="M-86,46 L-88,36 L-94,43 Z" fill={pink} stroke="none" />
-        <circle cx="-96" cy="57" r="14" fill={fur} />
-        <circle cx="-101" cy="54" r="4.2" fill="none" strokeWidth="1" />
-        <circle cx="-91" cy="54" r="4.2" fill="none" strokeWidth="1" />
-        <line x1="-97" y1="54" x2="-95" y2="54" strokeWidth="1" />
-        <path d="M-104,54 Q-102,51.5 -100,54" fill="none" strokeWidth="0.9" />
-        <path d="M-92,54 Q-90,51.5 -88,54" fill="none" strokeWidth="0.9" />
-        <path d="M-98,59 L-94,59 L-96,61.5 Z" fill={pink} stroke="none" />
-        <path d="M-96,61.5 Q-97.5,64 -99.5,63 M-96,61.5 Q-94.5,64 -92.5,63" fill="none" strokeWidth="0.8" />
-        <g strokeWidth="0.7" opacity="0.65">
-          <line x1="-110" y1="57" x2="-104" y2="58" />
-          <line x1="-110" y1="60" x2="-104" y2="60" />
-          <line x1="-88" y1="58" x2="-82" y2="57" />
-          <line x1="-88" y1="60" x2="-82" y2="60" />
-        </g>
-        <circle cx="-104" cy="61" r="2" fill={blush} stroke="none" opacity="0.7" />
-        <circle cx="-88" cy="61" r="2" fill={blush} stroke="none" opacity="0.7" />
-        {/* Scarf */}
-        <path d="M-109,70 Q-96,76 -83,70 L-83,74 Q-96,80 -109,74 Z" fill={sage} strokeWidth="1.1" />
-        <path d="M-90,74 Q-88,81 -90,85 L-84,85 Q-82,79 -84,74 Z" fill={sage} strokeWidth="1.1" />
-        {/* Paw resting on the table */}
-        <ellipse cx="-58" cy="102" rx="5" ry="2.4" fill={fur} strokeWidth="1" />
+      {/* Mauve mountain ranges */}
+      <path d="M0,96 L80,74 L160,88 L260,66 L360,86 L460,70 L560,88 L660,72 L760,90 L880,78 L880,146 L0,146 Z" fill="hsl(280 22% 76%)" opacity="0.8" />
+      <path d="M0,112 L120,94 L240,108 L380,92 L520,110 L680,96 L880,114 L880,146 L0,146 Z" fill="hsl(270 20% 68%)" opacity="0.85" />
 
-        {/* Student kitten (right) — blue scarf, one paw raised */}
-        <path d="M74,104 C74,82 82,72 96,72 C110,72 118,82 118,104 Z" fill={fur} />
-        <path d="M74,98 Q58,100 60,88 Q61,79 51,82" fill="none" strokeWidth="1.3" />
-        <path d="M86,49 L89,33 L99,45 Z" fill={fur} strokeWidth="1.2" />
-        <path d="M106,49 L103,33 L93,45 Z" fill={fur} strokeWidth="1.2" />
-        <path d="M88,46 L90,36 L96,43 Z" fill={pink} stroke="none" />
-        <path d="M104,46 L102,36 L96,43 Z" fill={pink} stroke="none" />
-        <circle cx="96" cy="57" r="14" fill={fur} />
-        <circle cx="91" cy="55" r="1.7" fill={ink} stroke="none" />
-        <circle cx="101" cy="55" r="1.7" fill={ink} stroke="none" />
-        <path d="M94,59 L98,59 L96,61.5 Z" fill={pink} stroke="none" />
-        <path d="M96,61.5 Q94.5,64 92.5,63 M96,61.5 Q97.5,64 99.5,63" fill="none" strokeWidth="0.8" />
-        <g strokeWidth="0.7" opacity="0.65">
-          <line x1="82" y1="58" x2="76" y2="57" />
-          <line x1="82" y1="60" x2="76" y2="60" />
-          <line x1="110" y1="57" x2="116" y2="58" />
-          <line x1="110" y1="60" x2="116" y2="60" />
-        </g>
-        <circle cx="88" cy="61" r="2" fill={blush} stroke="none" opacity="0.7" />
-        <circle cx="104" cy="61" r="2" fill={blush} stroke="none" opacity="0.7" />
-        {/* Scarf */}
-        <path d="M83,70 Q96,76 109,70 L109,74 Q96,80 83,74 Z" fill={blue} strokeWidth="1.1" />
-        <path d="M102,74 Q104,81 102,85 L108,85 Q110,79 108,74 Z" fill={blue} strokeWidth="1.1" />
-        {/* Raised paw waving toward the speech bubble */}
-        <path d="M80,82 Q68,74 62,66" fill="none" strokeWidth="1.3" />
-        <ellipse cx="60" cy="64" rx="4" ry="4.4" fill={fur} strokeWidth="1.1" />
-        {/* Paw resting on the table */}
-        <ellipse cx="58" cy="102" rx="5" ry="2.4" fill={fur} strokeWidth="1" />
+      {/* Floor band */}
+      <rect y="120" width="880" height="26" fill="hsl(340 45% 91%)" />
+
+      {/* Sunlit window on the right */}
+      <g>
+        <rect x="706" y="6" width="132" height="112" rx="10" fill="hsl(350 45% 94%)" />
+        <circle cx="772" cy="38" r="15" fill="hsl(45 80% 90%)" />
+        <path d="M706,84 L750,62 L790,80 L838,58 L838,118 L706,118 Z" fill="hsl(280 22% 78%)" opacity="0.7" />
+        <line x1="772" y1="6" x2="772" y2="118" stroke="hsl(350 30% 82%)" strokeWidth="2.5" />
+        <line x1="706" y1="62" x2="838" y2="62" stroke="hsl(350 30% 82%)" strokeWidth="2.5" />
       </g>
+
+      {/* Small potted plant on the left */}
+      <g>
+        <rect x="86" y="106" width="18" height="13" rx="2.5" fill="hsl(8 55% 55%)" />
+        <ellipse cx="95" cy="98" rx="4" ry="9" fill="hsl(145 25% 48%)" />
+        <ellipse cx="88" cy="101" rx="3.4" ry="7" fill="hsl(145 25% 42%)" transform="rotate(-18 88 101)" />
+        <ellipse cx="102" cy="101" rx="3.4" ry="7" fill="hsl(145 25% 42%)" transform="rotate(18 102 101)" />
+      </g>
+      {/* Tiny sparkle dots on the left */}
+      <g fill="hsl(350 40% 60% / 0.5)">
+        <circle cx="150" cy="58" r="1.4" /><circle cx="172" cy="76" r="1.2" /><circle cx="128" cy="88" r="1.2" />
+      </g>
+
+      {/* Grounding shadows */}
+      <ellipse cx="316" cy="126" rx="36" ry="3.5" fill="hsl(350 40% 40% / 0.08)" />
+      <ellipse cx="564" cy="126" rx="36" ry="3.5" fill="hsl(350 40% 40% / 0.08)" />
+      <ellipse cx="440" cy="126" rx="72" ry="3" fill="hsl(350 40% 40% / 0.08)" />
+
+      {/* Chairs */}
+      <rect x="294" y="78" width="42" height="46" rx="9" fill={chairPink} />
+      <rect x="544" y="78" width="42" height="46" rx="9" fill={chairPink} />
+
+      {/* Mentor (left, sage sweater, gesturing) */}
+      <g>
+        <path d="M300,124 C300,94 308,78 322,76 C336,78 344,94 344,124 Z" fill={sage} />
+        <path d="M338,86 Q356,82 364,72" fill="none" stroke={sage} strokeWidth="7" strokeLinecap="round" />
+        <circle cx="367" cy="69" r="4.2" fill={skin} />
+        <circle cx="324" cy="60" r="13" fill={skin} />
+        <path d="M311,60 Q311,45 324,45 Q337,45 337,58 Q330,51 324,51 Q316,51 311,60 Z" fill={hair} />
+      </g>
+
+      {/* Student (right, blue sweater, hair bun) */}
+      <g>
+        <path d="M536,124 C536,94 544,78 558,76 C572,78 580,94 580,124 Z" fill={blue} />
+        <path d="M542,88 Q530,94 524,99" fill="none" stroke={blue} strokeWidth="7" strokeLinecap="round" />
+        <circle cx="521" cy="100" r="4.2" fill={skin} />
+        <circle cx="556" cy="60" r="13" fill={skin} />
+        <path d="M543,58 Q543,45 556,45 Q569,45 569,58 Q562,51 556,51 Q549,51 543,58 Z" fill={hair} />
+        <circle cx="556" cy="43" r="5.5" fill={hair} />
+      </g>
+
+      {/* Table */}
+      <rect x="352" y="100" width="176" height="5" rx="2.5" fill={paper} />
+      <rect x="370" y="105" width="4" height="19" rx="2" fill="hsl(350 25% 62%)" />
+      <rect x="506" y="105" width="4" height="19" rx="2" fill="hsl(350 25% 62%)" />
+
+      {/* Book stack */}
+      <rect x="382" y="94.5" width="24" height="3" rx="1.5" fill="hsl(8 60% 55%)" />
+      <rect x="385" y="91" width="18" height="3" rx="1.5" fill="hsl(42 70% 60%)" />
+
+      {/* Laptop with a soft pink screen */}
+      <rect x="424" y="76" width="34" height="24" rx="2.5" fill="hsl(220 15% 72%)" />
+      <rect x="427" y="79" width="28" height="18" rx="1.5" fill="hsl(340 55% 84%)" />
+      <rect x="418" y="100" width="46" height="3.5" rx="1.75" fill="hsl(220 15% 68%)" />
 
       {/* Word-free speech bubbles */}
-      <g stroke={ink} strokeWidth="1.1" strokeLinejoin="round">
-        <rect x="290" y="22" width="56" height="30" rx="15" fill={paper} />
-        <path d="M318,52 L322,62 L328,52" fill={paper} />
-        <g fill={ink} stroke="none">
-          <circle cx="306" cy="37" r="2.4" /><circle cx="318" cy="37" r="2.4" /><circle cx="330" cy="37" r="2.4" />
+      <g>
+        <rect x="336" y="12" width="54" height="27" rx="13.5" fill={paper} />
+        <path d="M354,39 L358,49 L366,39 Z" fill={paper} />
+        <g fill="hsl(350 45% 38%)">
+          <circle cx="351" cy="25.5" r="2.6" /><circle cx="363" cy="25.5" r="2.6" /><circle cx="375" cy="25.5" r="2.6" />
         </g>
-        <rect x="528" y="30" width="48" height="28" rx="14" fill={paper} />
-        <path d="M544,58 L540,68 L552,58" fill={paper} />
-        <path d="M542,44 L549,50 L562,38" fill="none" stroke="hsl(145 30% 38%)" strokeWidth="2" strokeLinecap="round" />
+        <rect x="488" y="16" width="50" height="27" rx="13.5" fill={paper} />
+        <path d="M504,43 L500,53 L512,43 Z" fill={paper} />
+        <path d="M500,29.5 L506,35.5 L518,23.5" fill="none" stroke="hsl(145 30% 40%)" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" />
       </g>
-
-      {/* Balancing ink swirls */}
-      <path d="M150,64 Q166,72 158,86 Q150,98 168,100" fill="none" stroke="hsl(350 55% 40%)" strokeWidth="1.5" strokeLinecap="round" />
-      <circle cx="172" cy="102" r="2" fill="hsl(350 55% 40%)" />
-      <path d="M730,64 Q714,72 722,86 Q730,98 712,100" fill="none" stroke="hsl(350 55% 40%)" strokeWidth="1.5" strokeLinecap="round" />
-      <circle cx="708" cy="102" r="2" fill="hsl(350 55% 40%)" />
     </svg>
   );
 }
