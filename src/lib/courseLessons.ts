@@ -34,12 +34,12 @@ export async function loadLessonContent(row: { lesson_code: string | null; intro
 
 export const LESSON_TABS: { key: string; label: string }[] = [
   { key: "intro", label: "Uvod" },
-  { key: "grammar", label: "Gramatika" },
   { key: "vocabulary", label: "Vokabular" },
-  { key: "reading", label: "Čitanje" },
-  { key: "listening", label: "Slušanje" },
-  { key: "writing", label: "Pisanje" },
   { key: "pronunciation", label: "Izgovor" },
+  { key: "grammar", label: "Gramatika" },
+  { key: "listening", label: "Slušanje" },
+  { key: "reading", label: "Čitanje" },
+  { key: "writing", label: "Pisanje" },
   { key: "speaking", label: "Govor" },
   { key: "culture", label: "Kultura" },
   { key: "review", label: "Ponavljanje" },
