@@ -6,6 +6,7 @@ import de2 from "../_shared/course-content/DE-A2-L01.json" with { type: "json" }
 import noHealth from "../_shared/course-content/NO-HC-B1-L01.json" with { type: "json" };
 import deHealth from "../_shared/course-content/DE-HC-B1-L01.json" with { type: "json" };
 import { getTalkScenarios, getLessonMaterial } from "../_shared/course-content/talkScenarios.ts";
+import { withLessonXp } from "../_shared/lessonXp.ts";
 
 const lessons: Record<string, unknown> = { "EN-A1-L01": en1, "EN-A2-L01": en2, "NO-A2-L01": no2, "DE-A2-L01": de2, "NO-HC-B1-L01": noHealth, "DE-HC-B1-L01": deHealth };
 const headers = { "Access-Control-Allow-Origin": "*", "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type", "Content-Type": "application/json", "Cache-Control": "no-store" };
@@ -34,6 +35,6 @@ Deno.serve(async (req) => {
         if (enrolled !== data.cefr_level) return reply({ error: "Ova lekcija nije deo nivoa na koji si upisan/a." }, 403);
       }
     }
-    return reply({ content: lessons[lesson_code], scenarios: getTalkScenarios(lesson_code), material: getLessonMaterial(lesson_code) });
+    return reply({ content: withLessonXp(lessons[lesson_code]), scenarios: getTalkScenarios(lesson_code), material: getLessonMaterial(lesson_code) });
   } catch { return reply({ error: "Sadržaj nije dostupan." }, 400); }
 });
