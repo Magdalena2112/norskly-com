@@ -221,6 +221,7 @@ export default function RelocationHubPage() {
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
+        <link rel="canonical" href={`https://norskly.com/relocation-hub${country ? `/${country.id}` : ""}`} />
         <title>{country ? `Preseljenje u ${country.name === "Nemačka" ? "Nemačku" : "Norvešku"} | Relocation Hub | Norskly` : "Relocation Hub - Norveška ili Nemačka | Norskly"}</title>
         <meta name="description" content={country ? `Vodič za državljane Srbije: preseljenje u ${country.name === "Nemačka" ? "Nemačku" : "Norvešku"}, korak po korak. Posao, dokumenta, dozvola i život.` : "Izaberi Norvešku ili Nemačku i pronađi praktične smernice za preseljenje, korak po korak."} />
       </Helmet>

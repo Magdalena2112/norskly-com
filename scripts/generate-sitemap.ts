@@ -15,6 +15,9 @@ const entries: SitemapEntry[] = [
   { path: "/jezici/engleski", changefreq: "weekly", priority: "0.8" },
   { path: "/jezici/nemacki", changefreq: "weekly", priority: "0.8" },
   { path: "/za-profesore", changefreq: "monthly", priority: "0.7" },
+  { path: "/relocation-hub", changefreq: "monthly", priority: "0.7" },
+  { path: "/relocation-hub/norveska", changefreq: "monthly", priority: "0.7" },
+  { path: "/relocation-hub/nemacka", changefreq: "monthly", priority: "0.7" },
 ];
 
 function generateSitemap(entries: SitemapEntry[]) {

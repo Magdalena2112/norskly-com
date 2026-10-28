@@ -74,6 +74,11 @@ export const SEO_ROUTES: RouteSeo[] = [
     ogDescription:
       "Prijavi se na Norskly ili napravi nalog i nastavi učenje svojim tempom.",
   },
+  ...[
+    { path: "/relocation-hub", title: "Relocation Hub - Norveška ili Nemačka | Norskly", description: "Izaberi Norvešku ili Nemačku i pronađi praktične smernice za preseljenje, korak po korak." },
+    { path: "/relocation-hub/norveska", title: "Preseljenje u Norvešku | Relocation Hub | Norskly", description: "Vodič za državljane Srbije: preseljenje u Norvešku, korak po korak. Posao, dokumenta, dozvola i život." },
+    { path: "/relocation-hub/nemacka", title: "Preseljenje u Nemačku | Relocation Hub | Norskly", description: "Vodič za državljane Srbije: preseljenje u Nemačku, korak po korak. Posao, dokumenta, dozvola i život." },
+  ].map((route) => ({ ...route, ogTitle: route.title, ogDescription: route.description })),
   {
     path: "/unsubscribe",
     title: "Odjava od obaveštenja | Norskly",
