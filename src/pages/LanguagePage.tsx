@@ -57,11 +57,15 @@ export default function LanguagePage() {
       }
       const { data: langProf } = await supabase
         .from("language_profiles")
-        .select("onboarding_completed")
+        .select("id, onboarding_completed, course_type, level")
         .eq("user_id", user.id)
         .eq("language", lang.code)
         .maybeSingle();
       if (langProf?.onboarding_completed) {
+        const wantedCourse = extra.course === "health" ? "health" : "general";
+        if (extra.level && langProf.course_type === wantedCourse && langProf.level !== extra.level) {
+          await supabase.from("language_profiles").update({ level: extra.level }).eq("id", langProf.id);
+        }
         navigate(`/ucenje/${lang.slug}`);
       } else {
         const params = new URLSearchParams({ lang: lang.slug, course: extra.course === "health" ? "health" : "general", ...(extra.level ? { level: extra.level } : {}) });
