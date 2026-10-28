@@ -4271,7 +4271,7 @@
           "type": "choose",
           "xp": 1,
           "requireCorrect": true,
-          "compareOnly": true,
+          "compareOnly": false,
           "instruction": "Poslušaj reč i odredi da li je naglašeni samoglasnik dug ili kratak. Reč će biti prikazana tek nakon što odgovoriš.",
           "items": [
             {
@@ -4333,7 +4333,7 @@
           "type": "choose",
           "xp": 1,
           "requireCorrect": true,
-          "compareOnly": true,
+          "compareOnly": false,
           "instruction": "Poslušaj audio i izaberi reč koju čuješ. Obrati pažnju na izgovor samoglasnika. Posle odgovora možeš da poslušaš obe reči iz para.",
           "items": [
             {
@@ -4416,7 +4416,7 @@
           "title": "Hör zu, sprich nach und nimm auf!",
           "type": "record",
           "xp": 1,
-          "compareOnly": true,
+          "compareOnly": false,
           "checklist": [
             "Dužina i kvalitet ciljanog samoglasnika",
             "Razumljivost cele rečenice",
@@ -4452,7 +4452,7 @@
           "type": "choose",
           "xp": 1,
           "requireCorrect": true,
-          "compareOnly": true,
+          "compareOnly": false,
           "instruction": "Poslušaj reč i izaberi slog koji nosi glavni naglasak.",
           "items": [
             {
@@ -4517,7 +4517,7 @@
           "type": "choose",
           "xp": 1,
           "requireCorrect": true,
-          "compareOnly": true,
+          "compareOnly": false,
           "instruction": "Poslušaj glagol i izaberi deo na koji pada glavni naglasak. Posle tačnog odgovora poslušaj i ponovi ceo glagol.",
           "items": [
             {
@@ -4583,7 +4583,7 @@
           "type": "choose",
           "xp": 1,
           "requireCorrect": true,
-          "compareOnly": true,
+          "compareOnly": false,
           "instruction": "Poslušaj glagol i svrstaj ga prema mestu glavnog naglaska.",
           "items": [
             {
@@ -4644,7 +4644,7 @@
           "type": "choose",
           "xp": 1,
           "requireCorrect": true,
-          "compareOnly": true,
+          "compareOnly": false,
           "instruction": "Poslušaj dva audio-snimka. Odredi da li je izgovorena ista reč ili dve različite reči.",
           "items": [
             {
@@ -4709,7 +4709,7 @@
           "title": "Trennbare Verben im Satz",
           "type": "record",
           "xp": 1,
-          "compareOnly": true,
+          "compareOnly": false,
           "checklist": [
             "Jasnoća izgovora prefiksa",
             "Razumljivost",
@@ -4744,7 +4744,7 @@
           "title": "Sprich natürlich!",
           "type": "record",
           "xp": 1,
-          "compareOnly": true,
+          "compareOnly": false,
           "checklist": [
             "Naglasak reči",
             "Dužina samoglasnika",
@@ -4780,7 +4780,7 @@
           "title": "Mein neuer Alltag – Final Pronunciation Challenge",
           "type": "record",
           "xp": 1,
-          "compareOnly": true,
+          "compareOnly": false,
           "checklist": [
             "Wortakzent: MOnaten, MORgen, FRÜHstück, ARbeit, MITtagspause",
             "Trennbare Präfixe: stehe … AUF, rufe … AN, kaufe … EIN",
