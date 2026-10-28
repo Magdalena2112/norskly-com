@@ -1,4 +1,5 @@
 import { getCurrentLanguageCode } from "@/lib/currentLanguage";
+import teacherCallBanner from "@/assets/teacher-call-banner.png.asset.json";
 import { useState, useEffect, useMemo } from "react";
 import { motion } from "framer-motion";
 import { useProfile } from "@/context/ProfileContext";
