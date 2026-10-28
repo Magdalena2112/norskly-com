@@ -175,7 +175,7 @@ export default function DashboardPage() {
               </div>
             </div>
             <div className="md:col-span-2 relative min-h-[160px] md:min-h-[240px] border-t md:border-t-0 md:border-l border-border/40">
-              <FjordHero className="absolute inset-0 w-full h-full" />
+              <FjordHero className="absolute inset-0 w-full h-full" language={getCurrentLanguageCode()} />
               {/* Tiny stamp on hero */}
               <div className="absolute top-3 right-3 bg-cream/90 backdrop-blur rounded-sm border-2 border-dashed border-primary/40 px-1.5 py-1 rotate-[6deg] shadow-card-soft">
                 <div className="font-display text-[8px] font-bold text-primary leading-none">{ui.stampCity}</div>
