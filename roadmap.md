@@ -1,5 +1,5 @@
 # Tasks
-- [ ] Verify German lesson recording assessment, persistent errors and retry without rerecording.
+- [x] Verify German lesson recording assessment, persistent errors and retry without rerecording; six tests passed and authenticated microphone recording returned a real score after retry (physical iPad not tested).
 - [x] Show four German A2 speaking topics with localized tasks, criteria and direct launch; verified synchronized protected scenarios, 14 tests, signed-in German lesson launch and mobile layout.
 - [x] Replace user-facing AI branding with guided learning, practice and feedback wording; verified five public pages and six signed-in learning views, with 16 existing tests passing and no runtime errors.
 - [x] Replace proposed subscription prices with free promo access on homepage and language pages; retain separate teacher lessons and verify buttons/layout.
