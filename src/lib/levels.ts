@@ -11,7 +11,7 @@ export function normalizeLevel(raw?: string | null): CefrLevel {
 
 export type LevelState = { level: CefrLevel; total: number; done: number; ratio: number; unlocked: boolean };
 
-/** Levels up to the onboarding start level are open; each next level opens at the threshold of the previous one. */
+/** Only the enrolled level is open. LEVEL_UNLOCK_THRESHOLD is kept for display/future progression. */
 export function computeLevelStates(
   startLevel: CefrLevel,
   lessons: { id: string; cefr_level: string }[],
@@ -24,7 +24,8 @@ export function computeLevelStates(
     const done = inLevel.filter((l) => progress[l.id] === "completed").length;
     const ratio = inLevel.length ? done / inLevel.length : 0;
     const prev = out[i - 1];
-    const unlocked = i <= startIdx || (!!prev && prev.unlocked && prev.total > 0 && prev.ratio >= LEVEL_UNLOCK_THRESHOLD);
+    void prev;
+    const unlocked = i === startIdx;
     out.push({ level, total: inLevel.length, done, ratio, unlocked });
   });
   return out;

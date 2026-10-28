@@ -1,3 +1,4 @@
+import { normalizeLevel } from "@/lib/levels";
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
@@ -96,6 +97,15 @@ export default function CourseLessonPage() {
       const { data } = await supabase.from("course_lessons").select("*").eq("id", lessonId).maybeSingle();
       if (!alive) return;
       if (!data) { navigate("/practice", { replace: true, state: { courseDenied: true } }); return; }
+      if (user && data.course === "general") {
+        const [{ data: roles }, { data: prof }] = await Promise.all([
+          supabase.from("user_roles").select("role").eq("user_id", user.id),
+          supabase.from("language_profiles").select("level").eq("user_id", user.id).eq("language", data.language).maybeSingle(),
+        ]);
+        const staff = (roles || []).some((r) => ["admin", "admin_teacher", "teacher"].includes(r.role));
+        if (!alive) return;
+        if (!staff && normalizeLevel(prof?.level) !== data.cefr_level) { navigate("/practice", { replace: true, state: { courseDenied: true } }); return; }
+      }
       const loaded = await loadLessonContent(data as any);
       if (!alive) return;
       setRow(data);

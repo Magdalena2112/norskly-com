@@ -22,8 +22,18 @@ Deno.serve(async (req) => {
     const { lesson_code } = await req.json();
     if (typeof lesson_code !== "string" || lesson_code.length > 80) return reply({ error: "Neispravna lekcija." }, 400);
     // User-scoped RLS checks publication and immutable language/course enrollment.
-    const { data, error } = await client.from("course_lessons").select("id").eq("lesson_code", lesson_code).maybeSingle();
+    const { data, error } = await client.from("course_lessons").select("id, language, course, cefr_level").eq("lesson_code", lesson_code).maybeSingle();
     if (error || !data || !lessons[lesson_code]) return reply({ error: "Ova lekcija nije deo tvog kursa." }, 403);
+    // Students may open only the CEFR level they enrolled in; staff see all levels.
+    if (data.course === "general") {
+      const { data: roles } = await client.from("user_roles").select("role").eq("user_id", user.id);
+      const staff = (roles || []).some((r: { role: string }) => ["admin", "admin_teacher", "teacher"].includes(r.role));
+      if (!staff) {
+        const { data: prof } = await client.from("language_profiles").select("level").eq("user_id", user.id).eq("language", data.language).maybeSingle();
+        const enrolled = String(prof?.level || "").match(/[ABC][12]/)?.[0];
+        if (enrolled !== data.cefr_level) return reply({ error: "Ova lekcija nije deo nivoa na koji si upisan/a." }, 403);
+      }
+    }
     return reply({ content: lessons[lesson_code], scenarios: getTalkScenarios(lesson_code), material: getLessonMaterial(lesson_code) });
   } catch { return reply({ error: "Sadržaj nije dostupan." }, 400); }
 });
