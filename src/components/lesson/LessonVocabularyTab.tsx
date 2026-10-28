@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Volume2, BookOpen, ArrowRight, CheckCircle2, MessageSquareQuote, PenLine, Layers, Sparkles, Loader2 } from "lucide-react";
 import { toast } from "sonner";
+import { completeLessonExercise } from "@/lib/lessonRewards";
 import v1 from "@/assets/lessons/en-a1-l01-vocab-1.webp.asset.json";
 import v2 from "@/assets/lessons/en-a1-l01-vocab-2.webp.asset.json";
 import v3 from "@/assets/lessons/en-a1-l01-vocab-3.webp.asset.json";
@@ -108,28 +109,29 @@ export default function LessonVocabularyTab({ lessonId, mode, onPractice, onFlas
   const lang = row.language || "en";
   const a = areas[Math.min(idx, areas.length - 1)];
   const practice = exercises.filter((e) => "type" in e && "xp" in e) as unknown as Practice[];
-  const isDone = (code: string) => practice.some((e) => e.code === code) ? awardedCodes.includes(code) : done.includes(code);
+  const rewarded = exercises.filter((e) => (e.xp ?? 0) > 0);
+  const isDone = (code: string) => rewarded.some((e) => e.code === code) ? awardedCodes.includes(code) : done.includes(code);
   const areaEx = a.exercises?.length ? exercises.filter((e) => (a.exercises ?? []).includes(e.code)) : (idx === 0 ? exercises : []);
   const isAreaDone = (x: Area) => (x.exercises?.length ?? 0) > 0 && (x.exercises ?? []).every(isDone);
-  const totalXp = practice.reduce((total, ex) => total + ex.xp, 0);
-  const gainedXp = vocabularyXp(practice, awardedCodes);
+  const totalXp = rewarded.reduce((total, ex) => total + (ex.xp ?? 0), 0);
+  const gainedXp = rewarded.reduce((total, ex) => total + (awardedCodes.includes(ex.code) ? ex.xp ?? 0 : 0), 0);
   const active = a.words.filter((w) => w.active !== false);
   const passive = a.words.filter((w) => w.active === false);
   const say = (t: string) => speakLines([{ speaker: "m", text: t.split(" / ")[0].replace("…", "") }], lang);
 
   async function markDone(code: string) {
-    const ex = practice.find((item) => item.code === code);
+    const ex = rewarded.find((item) => item.code === code);
     if (ex) {
       if (!user || awardedCodes.includes(code) || pendingAwards.current.has(code)) return;
       pendingAwards.current.add(code);
       try {
-        const { error: rewardError } = await supabase.rpc("complete_medical_vocabulary", { _lesson_id: row.id, _code: code });
-        if (rewardError) { toast.error("Poeni nisu sačuvani. Pokušaj ponovo."); return; }
+        await completeLessonExercise(row.id, code);
         setAwardedCodes((previous) => [...new Set([...previous, code])]);
         const { data: current } = await supabase.from("course_lesson_progress").select("completed_steps")
           .eq("user_id", user.id).eq("lesson_id", row.id).maybeSingle();
         setDone(Array.isArray(current?.completed_steps) ? current.completed_steps as string[] : [...new Set([...done, code])]);
-      } finally { pendingAwards.current.delete(code); }
+      } catch { toast.error("Poeni nisu sačuvani. Pokušaj ponovo."); }
+      finally { pendingAwards.current.delete(code); }
       return;
     }
     if (!user || done.includes(code)) return;

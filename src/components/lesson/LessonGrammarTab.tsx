@@ -11,6 +11,8 @@ import { loadLessonContent, speakLines, type Exercise, type LessonContent } from
 import { LESSON_IMAGES } from "@/content/lessons/images";
 import { earnedXp, type PracticeExercise } from "@/lib/grammarPractice";
 import { logActivity } from "@/lib/logActivity";
+import { completeLessonExercise } from "@/lib/lessonRewards";
+import { toast } from "sonner";
 
 const gc = (...n: number[]) => n.map((x) => `G-${String(x).padStart(2, "0")}`);
 const practiceRange = (start: number) => gc(...Array.from({ length: 10 }, (_, i) => start + i));
@@ -68,6 +70,7 @@ interface Topic {
 /** Topic grouping per lesson; sections without config become one topic each. */
 export const LESSON_GRAMMAR_TOPICS: Record<string, Topic[]> = {
   "EN-A1-L01": [
+    { label: "Kombinovano", sectionIdx: [0, 1, 2], exercises: Array.from({ length: 10 }, (_, i) => `GR-${String(i + 1).padStart(2, "0")}`), aiTopic: "Personal pronouns, to be and articles", related: [] },
     { label: "Lične zamenice", sectionIdx: [0], exercises: ["PR-01","PR-02","PR-03","PR-04","PR-05","PR-06","PR-07","PR-08","PR-09","PR-10"], aiTopic: "Personal pronouns (I, you, he, she, it, we, they)",
       related: [{ title: "Prisvojni pridevi (my, your, his…)", query: "Possessive adjectives my, your, his, her" }, { title: "Objektne zamenice (me, him, her…)", query: "Object pronouns me, him, her, us, them" }] },
     { label: "Glagol to be", sectionIdx: [1], exercises: ["TB-01","TB-02","TB-03","TB-04","TB-05","TB-06","TB-07","TB-08","TB-09","TB-10"], aiTopic: "Verb to be – affirmative (am, is, are) and contractions",
@@ -165,16 +168,11 @@ export default function LessonGrammarTab({ lessonId, onPractice, onExplain, mode
 
   async function markDone(code: string) {
     if (!user || done.includes(code)) return;
-    const next = [...done, code];
-    setDone(next);
-    await supabase.from("course_lesson_progress").upsert({
-      user_id: user.id, lesson_id: row.id, language: row.language, completed_steps: next, status: "in_progress",
-    }, { onConflict: "user_id,lesson_id" });
-    const ex = exercises.find((e) => e.code === code) as any;
-    if (ex?.xp) {
-      await logActivity(user.id, "grammar", "lesson_grammar_exercise", ex.xp, { lesson_id: row.id, code },
-        { dedupKey: `lesson:${row.id}:${code}`, language: row.language });
-    }
+    try {
+      await completeLessonExercise(row.id, code);
+      const { data } = await supabase.from("course_lesson_progress").select("completed_steps").eq("user_id", user.id).eq("lesson_id", row.id).maybeSingle();
+      if (Array.isArray(data?.completed_steps)) setDone(data.completed_steps as string[]);
+    } catch { toast.error("Poeni nisu sačuvani. Pokušaj ponovo."); }
   }
 
   if (!topics.length) return <p className="text-sm text-muted-foreground">Gramatički sadržaj ove lekcije je u pripremi.</p>;

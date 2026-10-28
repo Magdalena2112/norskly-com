@@ -6,6 +6,8 @@ import { useAuth } from "@/context/AuthContext";
 import { loadLessonContent, type Exercise } from "@/lib/courseLessons";
 import { logActivity } from "@/lib/logActivity";
 import LessonExercise from "./LessonExercise";
+import { completeLessonExercise } from "@/lib/lessonRewards";
+import { toast } from "sonner";
 
 // Prepared writing tasks of one lesson, shown one at a time (1..N stepper).
 export default function LessonWritingTab({ lessonId, language, level, onOpenFree }: {
@@ -16,10 +18,7 @@ export default function LessonWritingTab({ lessonId, language, level, onOpenFree
   const [title, setTitle] = useState("");
   const [code, setCode] = useState("");
   const [idx, setIdx] = useState(0);
-  const storeKey = `lesson_writing_done_${lessonId}_${language}`;
-  const [done, setDone] = useState<string[]>(() => {
-    try { return JSON.parse(localStorage.getItem(storeKey) || "[]"); } catch { return []; }
-  });
+  const [done, setDone] = useState<string[]>([]);
 
   useEffect(() => {
     supabase.from("course_lessons").select("*").eq("id", lessonId).maybeSingle().then(async ({ data }) => {
@@ -41,18 +40,12 @@ export default function LessonWritingTab({ lessonId, language, level, onOpenFree
   }, [user, lessonId]);
 
   const markDone = async (exCode: string) => {
-    if (done.includes(exCode)) return;
-    const next = [...done, exCode];
-    setDone(next);
-    localStorage.setItem(storeKey, JSON.stringify(next));
     if (!user) return;
-    void logActivity(user.id, "grammar", "lesson_writing", 10, { lesson: code, exercise: exCode },
-      { dedupKey: `lesson_write_${code}_${exCode}_${language}`, language });
-    const { data: p } = await supabase.from("course_lesson_progress").select("completed_steps").eq("user_id", user.id).eq("lesson_id", lessonId).maybeSingle();
-    const steps = Array.from(new Set([...((p?.completed_steps as string[]) || []), exCode]));
-    await supabase.from("course_lesson_progress").upsert({
-      user_id: user.id, lesson_id: lessonId, language, completed_steps: steps, status: "in_progress",
-    }, { onConflict: "user_id,lesson_id" });
+    try {
+      await completeLessonExercise(lessonId, exCode);
+      const { data: p } = await supabase.from("course_lesson_progress").select("completed_steps").eq("user_id", user.id).eq("lesson_id", lessonId).maybeSingle();
+      if (Array.isArray(p?.completed_steps)) setDone(p.completed_steps as string[]);
+    } catch { toast.error("Poeni nisu sačuvani. Pokušaj ponovo."); }
   };
 
   if (!exercises) return <div className="py-10 flex justify-center"><Loader2 className="w-5 h-5 animate-spin text-primary" /></div>;

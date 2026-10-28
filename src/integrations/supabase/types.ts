@@ -1782,6 +1782,10 @@ export type Database = {
         Returns: boolean
       }
       claim_teacher_account: { Args: never; Returns: boolean }
+      complete_lesson_exercise: {
+        Args: { _code: string; _lesson_id: string }
+        Returns: Json
+      }
       complete_medical_vocabulary: {
         Args: { _code: string; _lesson_id: string }
         Returns: Json

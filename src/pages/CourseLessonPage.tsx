@@ -27,6 +27,8 @@ import InteractiveText, { KeyPhrases } from "@/components/lesson/InteractiveText
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import MyDictionaryPanel from "@/components/MyDictionaryPanel";
 import { lessonWords, phrasesInText, type LessonWord } from "@/lib/myDictionary";
+import { completeLessonExercise } from "@/lib/lessonRewards";
+import { toast } from "sonner";
 
 const MODULE_META: Record<string, { title: string; subtitle: string; description: string; vignette: any }> = {
   grammar: { title: "Gramatika", subtitle: "Grammar", description: "Objašnjenja, tabele, česte greške i vežbe sa 3 pokušaja.", vignette: "book" },
@@ -128,6 +130,15 @@ export default function CourseLessonPage() {
 
   async function markDone(code: string) {
     if (!user || !row || done.includes(code)) return;
+    const rewarded = exercises.find((e) => e.code === code) as Exercise | undefined;
+    if ((rewarded?.xp ?? 0) > 0 || (content?.modules.listening?.scenes || []).some((s: { code?: string; id: string }) => (s.code || s.id) === code)) {
+      try {
+        await completeLessonExercise(row.id, code);
+        const { data } = await supabase.from("course_lesson_progress").select("completed_steps").eq("user_id", user.id).eq("lesson_id", row.id).maybeSingle();
+        if (Array.isArray(data?.completed_steps)) setDone(data.completed_steps as string[]);
+      } catch { toast.error("Napredak nije sačuvan. Pokušaj ponovo."); }
+      return;
+    }
     const next = [...done, code];
     setDone(next);
     const complete = exercises.every((e) => next.includes(e.code));
@@ -378,7 +389,7 @@ export default function CourseLessonPage() {
             ) : open === "listening" && m.listening?.scenes ? (
               <LessonListeningTab key={`${row.id}_${lang}`} scenes={m.listening.scenes} lang={lang} lessonCode={content?.code || "lesson"} completed={done} onDone={markDone} onFinish={() => openModule(null)} />
             ) : open === "pronunciation" && m.pronunciation?.exercises ? (
-              <LessonPronunciationTab key={`${row.id}_${lang}`} data={m.pronunciation} lang={lang} level={level} lessonCode={content?.code || "lesson"} />
+              <LessonPronunciationTab key={`${row.id}_${lang}`} data={m.pronunciation} lang={lang} level={level} lessonCode={content?.code || "lesson"} lessonId={row.id} completed={done} onDone={markDone} />
             ) : view === "practice" || !hasMaterial(open) ? (
               <ExerciseStepper list={openEx} done={done} render={(ex) => renderExercises([ex])} onFinish={() => openModule(null)} />
             ) : (
@@ -454,7 +465,7 @@ export default function CourseLessonPage() {
 
           {tab === "pronunciation" && m.pronunciation && (
             m.pronunciation.exercises
-              ? <LessonPronunciationTab key={`${row.id}_${lang}`} data={m.pronunciation} lang={lang} level={level} lessonCode={content?.code || "lesson"} />
+              ? <LessonPronunciationTab key={`${row.id}_${lang}`} data={m.pronunciation} lang={lang} level={level} lessonCode={content?.code || "lesson"} lessonId={row.id} completed={done} onDone={markDone} />
               : <Button variant="hero" onClick={() => navigate("/pronunciation")}><Mic className="w-4 h-4" /> Snimi se i dobij ocenu izgovora</Button>
           )}
 

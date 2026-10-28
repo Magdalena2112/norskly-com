@@ -1,5 +1,6 @@
 import { supabase } from "@/integrations/supabase/client";
 import { getCurrentLanguageCode } from "@/lib/currentLanguage";
+import { completeLessonExercise } from "@/lib/lessonRewards";
 
 type ActivityModule = "grammar" | "vocabulary" | "talk" | "quiz" | "listening" | "pronunciation";
 
@@ -26,6 +27,17 @@ export async function logActivity(
 ): Promise<{ total_xp: number; level: number; daily_bonus: number; points_awarded: number } | null> {
   const { dedupKey, checkDailyBonus = false, language } = options;
   const langCode = language || getCurrentLanguageCode();
+
+  if (["lesson_grammar_exercise", "lesson_pronunciation", "lesson_scene", "lesson_writing"].includes(type)) {
+    const code = String(payload.code || payload.exercise || payload.scene || "");
+    let lessonId = payload.lesson_id as string | undefined;
+    if (!lessonId) {
+      const { data } = await supabase.from("course_lessons").select("id").eq("lesson_code", String(payload.lesson || "")).maybeSingle();
+      lessonId = data?.id;
+    }
+    if (!lessonId) throw new Error("Lekcija nije dostupna.");
+    return await completeLessonExercise(lessonId, code) as any;
+  }
 
   const insertData = {
     user_id: userId,

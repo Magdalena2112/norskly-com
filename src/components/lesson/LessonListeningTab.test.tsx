@@ -7,7 +7,7 @@ vi.mock("@/context/AuthContext", () => ({ useAuth: () => ({ user: { id: "test-us
 vi.mock("@/lib/logActivity", () => ({ logActivity: log }));
 vi.mock("@/lib/courseLessons", () => ({ speakLines: speak, stopSpeaking: stop }));
 const scenes = lesson.modules.listening.scenes;
-beforeEach(() => { vi.clearAllMocks(); Object.defineProperty(window, "speechSynthesis", { configurable: true, value: {} }); });
+beforeEach(() => { vi.clearAllMocks(); log.mockResolvedValue({ points_awarded: 1 }); Object.defineProperty(window, "speechSynthesis", { configurable: true, value: {} }); });
 afterEach(cleanup);
 describe("Unified lesson listening", () => {
   it("contains ten unique audio-first variations with valid answers", () => {
@@ -40,7 +40,7 @@ describe("Unified lesson listening", () => {
     }
     expect(log).toHaveBeenCalledTimes(10);
     expect(onDone.mock.calls.map(c => c[0])).toEqual(scenes.map(s => s.code));
-    expect(log).toHaveBeenCalledWith("test-user", "listening", "lesson_scene", expect.any(Number), expect.any(Object), expect.objectContaining({ language: "en" }));
+    expect(log).toHaveBeenCalledWith("test-user", "listening", "lesson_scene", 1, expect.any(Object), expect.objectContaining({ language: "en" }));
     fireEvent.click(screen.getByRole("button", { name: "Aktivnost 1, završena" }));
     expect(screen.getByRole("button", { name: scenes[0].questions[4].answer })).toBeDisabled();
     expect(log).toHaveBeenCalledTimes(10);
