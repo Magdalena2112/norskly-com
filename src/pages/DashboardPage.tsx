@@ -267,11 +267,6 @@ export default function DashboardPage() {
                 >
                   <div className="relative w-full h-28 overflow-hidden border-b border-border/40">
                     <PostcardVignette variant={(["book", "stamp", "speech", "cabins"] as const)[i % 4]} className="absolute inset-0 w-full h-full" />
-                  </div>
-                  <div className="absolute top-24 left-5 w-12 h-12 rounded-2xl bg-primary flex items-center justify-center shadow-card-soft ring-2 ring-cream font-display font-bold text-cream z-10">
-                    {String(l.sort_order).padStart(2, "0")}
-                  </div>
-
                     {p === "completed" && (
                       <span className="absolute top-2 right-2 bg-forest text-cream text-[11px] px-2 py-0.5 rounded-full">✓ Završeno</span>
                     )}
@@ -279,6 +274,10 @@ export default function DashboardPage() {
                       <span className="absolute top-2 right-2 bg-sunset text-cream text-[11px] px-2 py-0.5 rounded-full">U toku</span>
                     )}
                   </div>
+                  <div className="absolute top-24 left-5 w-12 h-12 rounded-2xl bg-primary flex items-center justify-center shadow-card-soft ring-2 ring-cream font-display font-bold text-cream z-10">
+                    {String(l.sort_order).padStart(2, "0")}
+                  </div>
+
                   <CardContent className="pt-8 pb-5 px-5">
                     <p className="font-script italic text-xs text-primary/55 mb-0.5">Lekcija {l.sort_order} · {l.cefr_level}</p>
                     <h3 className="font-display font-semibold text-lg text-primary leading-tight">{l.title_target}</h3>
