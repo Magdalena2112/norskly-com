@@ -197,3 +197,11 @@ ITEM_IMAGES["a2:vo14"] = hqVo14;
 ITEM_IMAGES["a2:vo16"] = hqVo16;
 ITEM_IMAGES["no:vo07"] = hqNoVo07;
 ITEM_IMAGES["de:vo07"] = hqDeVo07;
+
+// Sharpened versions of all remaining A2 exercise illustrations (src/assets/lessons/hq).
+const HQ = import.meta.glob("@/assets/lessons/hq/*.webp", { eager: true, import: "default" }) as Record<string, string>;
+for (const [path, url] of Object.entries(HQ)) {
+  const name = path.split("/").pop()!.replace(/\.webp$/, "");
+  const m = name.match(/^(no|de)-(.+)$/);
+  ITEM_IMAGES[m ? `${m[1]}:${m[2]}` : `a2:${name}`] = url;
+}
