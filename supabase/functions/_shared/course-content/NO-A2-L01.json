@@ -23,6 +23,55 @@
           "speaker": "Nora",
           "text": "Vennene mine Jonas og Ingrid hjelper meg mye. Jonas kjenner Oslo veldig godt, og Ingrid finner alltid hyggelige steder vi kan besøke."
         }
+      ],
+      "keyTerms": [
+        {
+          "word": "bo",
+          "translation": "živeti, stanovati",
+          "forms": [
+            "bodd"
+          ]
+        },
+        {
+          "word": "annerledes",
+          "translation": "drugačije"
+        },
+        {
+          "word": "vanligvis",
+          "translation": "obično"
+        },
+        {
+          "word": "stå opp",
+          "translation": "ustati",
+          "forms": [
+            "står jeg opp"
+          ]
+        },
+        {
+          "word": "spise frokost",
+          "translation": "doručkovati",
+          "forms": [
+            "spiser frokost"
+          ]
+        },
+        {
+          "word": "dra hjemmefra",
+          "translation": "izaći iz kuće",
+          "forms": [
+            "drar hjemmefra"
+          ]
+        },
+        {
+          "word": "akkurat nå",
+          "translation": "upravo sada"
+        },
+        {
+          "word": "lete etter",
+          "translation": "tražiti",
+          "forms": [
+            "leter også etter"
+          ]
+        }
       ]
     },
     {
@@ -59,6 +108,55 @@
           "speaker": "Ingrid",
           "text": "Det forstår jeg godt. Anne og jeg kjenner noen som leier ut et rom fra neste måned!"
         }
+      ],
+      "keyTerms": [
+        {
+          "word": "Så hyggelig å se deg igjen",
+          "translation": "Baš lepo što te ponovo vidim"
+        },
+        {
+          "word": "Hvordan går det med alt?",
+          "translation": "Kako sve ide?",
+          "forms": [
+            "hvordan går det med alt"
+          ]
+        },
+        {
+          "word": "ha det travelt",
+          "translation": "biti zauzet",
+          "forms": [
+            "har det travelt"
+          ]
+        },
+        {
+          "word": "for tiden",
+          "translation": "trenutno, ovih dana"
+        },
+        {
+          "word": "jobbe deltid",
+          "translation": "raditi skraćeno",
+          "forms": [
+            "jobber deltid"
+          ]
+        },
+        {
+          "word": "lete etter",
+          "translation": "tražiti",
+          "forms": [
+            "leter jeg etter"
+          ]
+        },
+        {
+          "word": "i nærheten av",
+          "translation": "u blizini"
+        },
+        {
+          "word": "leie ut",
+          "translation": "izdavati",
+          "forms": [
+            "leier ut"
+          ]
+        }
       ]
     },
     {
@@ -82,6 +180,52 @@
         {
           "speaker": "Anne",
           "text": "I morgen sender jeg dere oversikten over tekstene. Vi gleder oss til å se dere!"
+        }
+      ],
+      "keyTerms": [
+        {
+          "word": "Hei alle sammen",
+          "translation": "Zdravo svima"
+        },
+        {
+          "word": "ha det bra",
+          "translation": "biti dobro",
+          "forms": [
+            "har det bra"
+          ]
+        },
+        {
+          "word": "begynne",
+          "translation": "početi",
+          "forms": [
+            "begynner"
+          ]
+        },
+        {
+          "word": "møtes",
+          "translation": "sastajati se"
+        },
+        {
+          "word": "fokusere på",
+          "translation": "fokusirati se na",
+          "forms": [
+            "fokuserer vi på"
+          ]
+        },
+        {
+          "word": "dagliglivet",
+          "translation": "svakodnevni život"
+        },
+        {
+          "word": "personlige erfaringer",
+          "translation": "lična iskustva"
+        },
+        {
+          "word": "glede seg til",
+          "translation": "radovati se",
+          "forms": [
+            "gleder oss til"
+          ]
         }
       ]
     }

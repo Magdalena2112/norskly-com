@@ -27,6 +27,49 @@
           "speaker": "Nora",
           "text": "Kollegaene mine er hjelpsomme. Hvis jeg er usikker, spør jeg Ingrid, som har jobbet på avdelingen i mange år. Hun sier alltid at det er bedre å spørre én gang for mye enn én gang for lite."
         }
+      ],
+      "keyTerms": [
+        {
+          "word": "sykepleier",
+          "translation": "medicinska sestra / tehničar"
+        },
+        {
+          "word": "medisinsk avdeling",
+          "translation": "interno odeljenje"
+        },
+        {
+          "word": "rapport",
+          "translation": "primopredaja (izveštaj smene)"
+        },
+        {
+          "word": "nattevakt",
+          "translation": "noćna smena",
+          "forms": [
+            "nattevakten"
+          ]
+        },
+        {
+          "word": "måle blodtrykk",
+          "translation": "meriti pritisak",
+          "forms": [
+            "måler blodtrykk"
+          ]
+        },
+        {
+          "word": "puls",
+          "translation": "puls"
+        },
+        {
+          "word": "ha vondt",
+          "translation": "imati bolove",
+          "forms": [
+            "har vondt"
+          ]
+        },
+        {
+          "word": "forvirret",
+          "translation": "zbunjen, dezorijentisan"
+        }
       ]
     },
     {
@@ -71,6 +114,52 @@
           "speaker": "Nora",
           "text": "Det er viktig å vite. Nå skal jeg måle blodtrykket og pulsen din, og så kommer legen, Jonas, om noen minutter."
         }
+      ],
+      "keyTerms": [
+        {
+          "word": "vondt i brystet",
+          "translation": "bol u grudima"
+        },
+        {
+          "word": "kvalm",
+          "translation": "mučno (osećati mučninu)"
+        },
+        {
+          "word": "Hvor gjør det vondt?",
+          "translation": "Gde vas boli?",
+          "forms": [
+            "hvor det gjør vondt"
+          ]
+        },
+        {
+          "word": "stråle ut",
+          "translation": "širiti se (bol)",
+          "forms": [
+            "stråler det ut"
+          ]
+        },
+        {
+          "word": "en skala fra null til ti",
+          "translation": "skala od nula do deset",
+          "forms": [
+            "skala fra null til ti"
+          ]
+        },
+        {
+          "word": "faste medisiner",
+          "translation": "redovni lekovi"
+        },
+        {
+          "word": "allergisk mot",
+          "translation": "alergičan na"
+        },
+        {
+          "word": "tåle",
+          "translation": "podnositi",
+          "forms": [
+            "tåler ikke"
+          ]
+        }
       ]
     },
     {
@@ -102,6 +191,52 @@
         {
           "speaker": "Anne",
           "text": "Greit. Jeg følger med på blodtrykket og sier fra hvis han får mer vondt."
+        }
+      ],
+      "keyTerms": [
+        {
+          "word": "bli innlagt",
+          "translation": "biti primljen u bolnicu",
+          "forms": [
+            "ble innlagt"
+          ]
+        },
+        {
+          "word": "brystsmerter",
+          "translation": "bolovi u grudima"
+        },
+        {
+          "word": "smertestillende",
+          "translation": "lek protiv bolova"
+        },
+        {
+          "word": "blodtrykket",
+          "translation": "krvni pritisak"
+        },
+        {
+          "word": "bestille prøver",
+          "translation": "naručiti analize",
+          "forms": [
+            "bestilt flere prøver"
+          ]
+        },
+        {
+          "word": "blodprøve",
+          "translation": "analiza krvi",
+          "forms": [
+            "blodprøver"
+          ]
+        },
+        {
+          "word": "EKG",
+          "translation": "EKG"
+        },
+        {
+          "word": "følge med på",
+          "translation": "pratiti",
+          "forms": [
+            "følger med på"
+          ]
         }
       ]
     }
