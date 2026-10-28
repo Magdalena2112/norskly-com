@@ -2057,6 +2057,19 @@
           "image": "a2:vo05",
           "items": [
             {
+              "prompt": "ta bussen",
+              "options": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5"
+              ],
+              "answers": [
+                "2"
+              ]
+            },
+            {
               "prompt": "stå opp",
               "options": [
                 "1",
@@ -2070,7 +2083,7 @@
               ]
             },
             {
-              "prompt": "ta bussen",
+              "prompt": "legge seg",
               "options": [
                 "1",
                 "2",
@@ -2079,7 +2092,7 @@
                 "5"
               ],
               "answers": [
-                "2"
+                "5"
               ]
             },
             {
@@ -2106,19 +2119,6 @@
               ],
               "answers": [
                 "4"
-              ]
-            },
-            {
-              "prompt": "legge seg",
-              "options": [
-                "1",
-                "2",
-                "3",
-                "4",
-                "5"
-              ],
-              "answers": [
-                "5"
               ]
             }
           ]
