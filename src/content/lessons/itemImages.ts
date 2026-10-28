@@ -181,3 +181,16 @@ import noCu3 from "@/assets/lessons/no-a2-l01-cu3.webp.asset.json";
 ITEM_IMAGES["no:cu1"] = noCu1.url;
 ITEM_IMAGES["no:cu2"] = noCu2.url;
 ITEM_IMAGES["no:cu3"] = noCu3.url;
+
+// Upgraded 2x2 composite illustrations (shared across EN/NO/DE A2).
+import v2vo01 from "@/assets/lessons/a2-vo01-v2.jpg";
+import v2vo03 from "@/assets/lessons/a2-vo03-v2.jpg";
+import v2vo07 from "@/assets/lessons/a2-vo07-v2.jpg";
+import v2vo14 from "@/assets/lessons/a2-vo14-v2.jpg";
+ITEM_IMAGES["a2:vo01"] = v2vo01;
+ITEM_IMAGES["a2:vo03"] = v2vo03;
+ITEM_IMAGES["a2:vo07"] = v2vo07;
+ITEM_IMAGES["no:vo07"] = v2vo07;
+ITEM_IMAGES["de:vo07"] = v2vo07;
+ITEM_IMAGES["a2:vo14"] = v2vo14;
+ITEM_IMAGES["a2:vo16"] = v2vo07;
