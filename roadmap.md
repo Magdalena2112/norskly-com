@@ -1,4 +1,5 @@
 # Tasks
+- [ ] Show four German A2 speaking topics with localized tasks, criteria and direct launch; synchronize protected content and verify the lesson-to-conversation flow.
 - [x] Replace user-facing AI branding with guided learning, practice and feedback wording; verified five public pages and six signed-in learning views, with 16 existing tests passing and no runtime errors.
 - [x] Replace proposed subscription prices with free promo access on homepage and language pages; retain separate teacher lessons and verify buttons/layout.
 - [x] Add strict-admin legacy enrollment review and audited recovery; verify candidates, confirmation, student denial and server invariants without reopening switching.
