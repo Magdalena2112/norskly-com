@@ -164,3 +164,13 @@ import hcT3 from "@/assets/lessons/hc-b1-l01-t3.jpg";
 ITEM_IMAGES["hc:rd1"] = hcRd1;
 ITEM_IMAGES["hc:wr1"] = hcWr1;
 ITEM_IMAGES["hc:t3"] = hcT3;
+
+// DE-A2-L01 culture topic illustrations (from the German culture poster).
+import deCu1 from "@/assets/lessons/de-a2-l01-cu1.webp.asset.json";
+import deCu2 from "@/assets/lessons/de-a2-l01-cu2.webp.asset.json";
+import deCu3 from "@/assets/lessons/de-a2-l01-cu3.webp.asset.json";
+import deCu4 from "@/assets/lessons/de-a2-l01-cu4.webp.asset.json";
+ITEM_IMAGES["de:cu1"] = deCu1.url;
+ITEM_IMAGES["de:cu2"] = deCu2.url;
+ITEM_IMAGES["de:cu3"] = deCu3.url;
+ITEM_IMAGES["de:cu4"] = deCu4.url;
