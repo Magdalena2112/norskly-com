@@ -59,9 +59,13 @@ export default function LessonListeningTab({ scenes, lang, lessonCode, completed
       if (user && !completed.includes(code) && !awarded.current.has(code)) {
         awarded.current.add(code);
         const score = scene.questions.filter((question, i) => next[i] === question.answer).length;
-        void logActivity(user.id, "listening", "lesson_scene", scene.xp ?? 5 + score * 3,
+        void logActivity(user.id, "listening", "lesson_scene", scene.xp ?? 1,
           { lesson: lessonCode, scene: scene.id, score, total: scene.questions.length },
-          { dedupKey: `lesson_listen_${lessonCode}_${scene.id}_${lang}`, language: lang });
+          { dedupKey: `lesson_listen_${lessonCode}_${scene.id}_${lang}`, language: lang }).catch(() => {
+            awarded.current.delete(code);
+            setAnswers(previous => ({ ...previous, [scene.id]: picked }));
+            toast.error("Poeni nisu sačuvani. Pokušaj ponovo.");
+          });
       }
       onDone?.(code);
     }

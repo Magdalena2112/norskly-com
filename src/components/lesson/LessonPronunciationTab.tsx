@@ -1,10 +1,13 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { CheckCircle2, ChevronLeft, ChevronRight, Mic, RotateCcw, Volume2, XCircle } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import { speakLines } from "@/lib/courseLessons";
 import { logActivity } from "@/lib/logActivity";
 import { RecordSlot } from "@/pages/PronunciationActivityPage";
+import { supabase } from "@/integrations/supabase/client";
+import { completeLessonExercise } from "@/lib/lessonRewards";
+import { toast } from "sonner";
 
 type Letter = { letter: string; ipa: string; word: string; meaning: string };
 type Opt = string | { label: string; say?: string };
@@ -51,16 +54,18 @@ function Stressed({ text, stressed }: { text: string; stressed?: string[] }) {
   );
 }
 
-export default function LessonPronunciationTab({ data, lang, level, lessonCode }: {
-  data: any; lang: "no" | "en" | "de"; level: string; lessonCode: string;
+export default function LessonPronunciationTab({ data, lang, level, lessonCode, lessonId, completed = [], onDone }: {
+  data: any; lang: "no" | "en" | "de"; level: string; lessonCode: string; lessonId?: string; completed?: string[]; onDone?: (code: string) => void;
 }) {
   const { user } = useAuth();
   const [view, setView] = useState<"material" | "practice">("material");
   const letters: Letter[] = data.letters || [];
   const theory: Theory[] = data.theory || [];
   const exercises: PEx[] = data.exercises || [];
-  const storeKey = `lesson_pron_done_${lessonCode}_${lang}`;
-  const [done, setDone] = useState<string[]>(() => { try { return JSON.parse(localStorage.getItem(storeKey) || "[]"); } catch { return []; } });
+  const [done, setDone] = useState<string[]>(completed);
+  const pending = useRef(new Set<string>());
+  const [rewardFailed, setRewardFailed] = useState(false);
+  useEffect(() => { setDone(completed); }, [completed]);
   const [idx, setIdx] = useState(0);
   const [item, setItem] = useState(0);
   const [picked, setPicked] = useState<Record<string, string>>({});
@@ -68,13 +73,17 @@ export default function LessonPronunciationTab({ data, lang, level, lessonCode }
   const [ok, setOk] = useState<Record<string, boolean>>({});
 
   const ex = exercises[idx];
-  const finishEx = (code: string) => {
-    if (done.includes(code)) return;
-    const next = [...done, code];
-    setDone(next);
-    localStorage.setItem(storeKey, JSON.stringify(next));
-    if (user) void logActivity(user.id, "pronunciation", "lesson_pronunciation", exercises.find((e) => e.code === code)?.xp ?? 10, { lesson: lessonCode, exercise: code },
-      { dedupKey: `lesson_pron_${lessonCode}_${code}_${lang}`, language: lang });
+  const finishEx = async (code: string) => {
+    if (!user || done.includes(code) || pending.current.has(code)) return;
+    pending.current.add(code);
+    try {
+      if (lessonId) await completeLessonExercise(lessonId, code);
+      else await logActivity(user.id, "pronunciation", "lesson_pronunciation", 1, { lesson: lessonCode, exercise: code }, { language: lang });
+      setDone(previous => [...new Set([...previous, code])]);
+      onDone?.(code);
+      setRewardFailed(false);
+    } catch { setRewardFailed(true); toast.error("Poeni nisu sačuvani. Pokušaj ponovo."); }
+    finally { pending.current.delete(code); }
   };
   const key = (i: number) => `${ex?.code}_${i}`;
   const itemDone = (i: number) => ex.type === "choose"
@@ -88,12 +97,15 @@ export default function LessonPronunciationTab({ data, lang, level, lessonCode }
     }));
     return m;
   }, [exercises]);
-  if (ex && exComplete && !done.includes(ex.code)) setTimeout(() => finishEx(ex.code), 0);
+  useEffect(() => {
+    if (ex && exComplete && !done.includes(ex.code) && !rewardFailed) void finishEx(ex.code);
+  }, [ex?.code, exComplete, done, rewardFailed]);
 
   const card = "rounded-3xl border border-border/50 bg-cream/90 shadow-postcard p-5";
 
   return (
     <div className="space-y-5">
+      {rewardFailed && ex && <Button variant="outline" onClick={() => { setRewardFailed(false); void finishEx(ex.code); }}>Sačuvaj poene ponovo</Button>}
       <div className="flex gap-2">
         {(["material", "practice"] as const).map((v) => (
           <Button key={v} size="sm" variant={view === v ? "default" : "outline"} onClick={() => setView(v)}>
