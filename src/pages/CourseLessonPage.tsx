@@ -164,6 +164,7 @@ export default function CourseLessonPage() {
   const imgs = LESSON_IMAGES[row.lesson_code || content.code];
   const moduleKeys = LESSON_TABS.map((t) => t.key).filter((k) => k !== "intro" && m[k] && MODULE_META[k]);
   const knownWords = lessonWords(m.vocabulary);
+  const nextKey = moduleKeys.find((k) => moduleExercises(k).length > 0 && !modDone(k)) ?? null;
   const hasMaterial = (k: string) => !["writing", "review"].includes(k);
   const openEx: Exercise[] = open ? m[open]?.exercises || [] : [];
   const openModule = (k: string | null) => {
@@ -211,9 +212,19 @@ export default function CourseLessonPage() {
           </div>
           <div className="flex items-center justify-between gap-2 mt-2">
             <p className="text-[11px] text-muted-foreground">Urađeno {done.length} / {exercises.length} vežbi</p>
-            {(() => { const next = moduleKeys.find((k) => moduleExercises(k).length > 0 && !modDone(k)); return next ? (
-              <Button variant="hero" size="sm" onClick={() => openModule(next)}>{done.length ? "Nastavi lekciju" : "Započni lekciju"}</Button>
-            ) : null; })()}
+            {nextKey && <Button variant="hero" size="sm" onClick={() => openModule(nextKey)}>{done.length ? "Nastavi lekciju" : "Započni lekciju"}</Button>}
+          </div>
+          <div className="mt-4 flex gap-2 overflow-x-auto pb-1 -mx-1 px-1">
+            {moduleKeys.map((k) => {
+              const ex = moduleExercises(k); const n = ex.filter((e) => done.includes(e.code)).length;
+              const st = ex.length && modDone(k) ? "done" : n > 0 ? "progress" : "todo";
+              return (
+                <button key={k} onClick={() => openModule(k)} className={`shrink-0 flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-full border transition-colors ${st === "done" ? "bg-forest text-cream border-forest" : st === "progress" ? "bg-accent/20 text-primary border-accent" : "bg-card/70 text-muted-foreground border-border hover:text-primary"}`}>
+                  {st === "done" ? <CheckCircle2 className="w-3.5 h-3.5" /> : <span className={`w-2 h-2 rounded-full ${st === "progress" ? "bg-accent" : "bg-border"}`} />}
+                  {MODULE_META[k].title}{st === "progress" && ex.length ? ` ${n}/${ex.length}` : ""}
+                </button>
+              );
+            })}
           </div>
           </div>
         </header>
@@ -277,12 +288,17 @@ export default function CourseLessonPage() {
                     <Card className="cursor-pointer group h-full bg-cream border border-border/60 shadow-postcard overflow-hidden relative transition-all duration-500 hover:-translate-y-1.5" onClick={() => openModule(key)}>
                       <div className="relative w-full h-36 overflow-hidden border-b border-border/40">
                         {cover ? <img src={cover} alt="" loading="lazy" className="absolute inset-0 w-full h-full object-contain bg-cream transition-transform duration-700 group-hover:scale-105" /> : <PostcardVignette variant={meta.vignette} className="absolute inset-0 w-full h-full" />}
-                        {modDone(key) && <span className="absolute top-2 right-2 bg-forest text-cream text-[11px] px-2 py-0.5 rounded-full flex items-center gap-1"><CheckCircle2 className="w-3 h-3" /> Završeno</span>}
+                        {modDone(key) ? <span className="absolute top-2 right-2 bg-forest text-cream text-[11px] px-2 py-0.5 rounded-full flex items-center gap-1"><CheckCircle2 className="w-3 h-3" /> Završeno</span>
+                          : n > 0 ? <span className="absolute top-2 right-2 bg-accent text-accent-foreground text-[11px] px-2 py-0.5 rounded-full">U toku</span> : null}
+                        {key === nextKey && <span className="absolute top-2 left-2 bg-primary text-primary-foreground text-[11px] px-2 py-0.5 rounded-full">Nastavi ovde</span>}
                       </div>
                       <CardContent className="pt-5 pb-5 px-5">
                         <p className="font-script italic text-xs text-primary/55 mb-0.5">{MODULE_SUBTITLES[lang][key] ?? meta.subtitle}</p>
                         <h3 className="font-display font-semibold text-lg text-primary leading-tight">{meta.title}</h3>
-                        {ex.length > 0 && <p className="text-xs text-primary/70 mt-2">Vežbe: {n} / {ex.length}</p>}
+                        {ex.length > 0 && <>
+                          <p className="text-xs text-primary/70 mt-2">Urađeno {n} od {ex.length} vežbi</p>
+                          <div className="mt-1.5 h-1 rounded-full bg-secondary overflow-hidden"><div className={`h-full ${modDone(key) ? "bg-forest" : "bg-accent"}`} style={{ width: `${(n / ex.length) * 100}%` }} /></div>
+                        </>}
                       </CardContent>
                     </Card>
                   </motion.div>
