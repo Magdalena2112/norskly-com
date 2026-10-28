@@ -3,7 +3,7 @@ export const LOCALES = { no: "nb-NO", en: "en-GB", de: "de-DE" } as const;
 /** Minimum word/overall accuracy to pass; below this the learner retries. */
 export const PASS_THRESHOLD = 80;
 /** Any single sound below this marks the whole word as an error. */
-export const PHONEME_MIN = 60;
+export const PHONEME_MIN = 70;
 type Phoneme = { Phoneme?: string; AccuracyScore?: number; PronunciationAssessment?: { AccuracyScore?: number } };
 type WordMetrics = { AccuracyScore?: number; ErrorType?: string };
 type Metrics = { PronScore?: number; AccuracyScore?: number; FluencyScore?: number; CompletenessScore?: number };
