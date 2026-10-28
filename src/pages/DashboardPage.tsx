@@ -1,4 +1,4 @@
-import { getCurrentLanguageCode } from "@/lib/languages";
+import { getCurrentLanguageCode } from "@/lib/currentLanguage";
 import { useState, useEffect, useMemo } from "react";
 import { motion } from "framer-motion";
 import { useProfile } from "@/context/ProfileContext";

@@ -1,3 +1,4 @@
+import { getCurrentLanguageCode } from "@/lib/currentLanguage";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
