@@ -4853,14 +4853,14 @@
           },
           {
             "area": "grammar",
-            "prompt": "Gde ide „ikke”? Jeg ___ kaffe ___.",
+            "prompt": "Izaberi tačnu odričnu rečenicu:",
             "options": [
-              "drikker ikke · –",
-              "ikke drikker · –",
-              "drikker · ikke",
-              "– · ikke drikker"
+              "Jeg drikker ikke kaffe.",
+              "Jeg ikke drikker kaffe.",
+              "Ikke jeg drikker kaffe.",
+              "Jeg drikker kaffe ikke ikke."
             ],
-            "answer": "drikker ikke · –",
+            "answer": "Jeg drikker ikke kaffe.",
             "explain": "U glavnoj rečenici ikke stoji posle ličnog glagola."
           },
           {
