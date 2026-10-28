@@ -5004,7 +5004,132 @@
       ]
     },
     "review": {
-      "quiz": []
+      "quiz": {
+        "passScore": 8,
+        "bonusXp": 50,
+        "questions": [
+          {
+            "area": "grammar",
+            "prompt": "Du ___ (arbeiten) heute lange.",
+            "options": [
+              "arbeitest",
+              "arbeitst",
+              "arbeiten",
+              "arbeite"
+            ],
+            "answer": "arbeitest",
+            "explain": "Osnova na -t dobija -e-: du arbeitest."
+          },
+          {
+            "area": "grammar",
+            "prompt": "Wir ___ (lernen) Deutsch.",
+            "options": [
+              "lernen",
+              "lernt",
+              "lernst",
+              "lerne"
+            ],
+            "answer": "lernen",
+            "explain": "Uz wir nastavak je -en."
+          },
+          {
+            "area": "grammar",
+            "prompt": "Izaberi rečenicu sa glagolom na drugom mestu:",
+            "options": [
+              "Am Morgen trinke ich Kaffee.",
+              "Am Morgen ich trinke Kaffee.",
+              "Ich am Morgen trinke Kaffee.",
+              "Trinke am Morgen ich Kaffee."
+            ],
+            "answer": "Am Morgen trinke ich Kaffee.",
+            "explain": "U izjavnoj rečenici lični glagol je drugi."
+          },
+          {
+            "area": "grammar",
+            "prompt": "Ich stehe um sechs Uhr ___.",
+            "options": [
+              "auf",
+              "an",
+              "ab",
+              "aus"
+            ],
+            "answer": "auf",
+            "explain": "aufstehen je razdvojivi glagol – auf ide na kraj."
+          },
+          {
+            "area": "grammar",
+            "prompt": "Pretvori u pitanje: Sie kommen aus Serbien.",
+            "options": [
+              "Kommen Sie aus Serbien?",
+              "Sie kommen aus Serbien?",
+              "Kommen aus Serbien Sie?",
+              "Tun Sie kommen aus Serbien?"
+            ],
+            "answer": "Kommen Sie aus Serbien?",
+            "explain": "Da/ne pitanje počinje glagolom."
+          },
+          {
+            "area": "grammar",
+            "prompt": "Ich trinke ___ Kaffee am Abend.",
+            "options": [
+              "nie",
+              "nicht nie",
+              "kein nie",
+              "nein"
+            ],
+            "answer": "nie",
+            "explain": "nie = nikad."
+          },
+          {
+            "area": "vocabulary",
+            "prompt": "Kako kažeš „ustati”?",
+            "options": [
+              "aufstehen",
+              "aufmachen",
+              "anstehen",
+              "ins Bett gehen"
+            ],
+            "answer": "aufstehen",
+            "explain": "ins Bett gehen = ići u krevet."
+          },
+          {
+            "area": "vocabulary",
+            "prompt": "„Radujem se vikendu.”",
+            "options": [
+              "Ich freue mich auf das Wochenende.",
+              "Ich freue mich über das Wochenende morgen.",
+              "Ich warte das Wochenende.",
+              "Ich mag Wochenende auf."
+            ],
+            "answer": "Ich freue mich auf das Wochenende.",
+            "explain": "sich freuen auf = radovati se nečemu što dolazi."
+          },
+          {
+            "area": "communication",
+            "prompt": "Kolega pita: „Wie geht's?” Prirodan odgovor:",
+            "options": [
+              "Gut, danke. Und dir?",
+              "Ich heiße Marko.",
+              "Ja, bitte.",
+              "Aus Serbien."
+            ],
+            "answer": "Gut, danke. Und dir?",
+            "explain": "Kratko odgovaramo i vraćamo pitanje."
+          },
+          {
+            "area": "communication",
+            "prompt": "Kako pitaš kada neko počinje sa radom?",
+            "options": [
+              "Wann fängst du mit der Arbeit an?",
+              "Wo fängst du an?",
+              "Was arbeitest du an?",
+              "Wann du fängst an?"
+            ],
+            "answer": "Wann fängst du mit der Arbeit an?",
+            "explain": "Wann = kada; anfangen je razdvojiv."
+          }
+        ]
+      }
     }
   }
 }
