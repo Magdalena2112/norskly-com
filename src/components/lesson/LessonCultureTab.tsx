@@ -76,7 +76,7 @@ function CultureTopics({ data, lang, onFinish }: { data: CultureData; lang: stri
       )}
       {!!t.questions?.length && (
         <div className="rounded-2xl border border-accent/40 bg-accent/10 p-4">
-          <p className="font-semibold text-primary mb-2">Denk nach und sprich</p>
+          <p className="font-semibold text-primary mb-2">{lang === "de" ? "Denk nach und sprich" : lang === "en" ? "Think and talk" : "Tenk og snakk"}</p>
           <ol className="list-decimal pl-5 space-y-1 text-sm">{t.questions.map((q) => <li key={q}>{q}</li>)}</ol>
         </div>
       )}
