@@ -134,6 +134,12 @@ export default function LessonExercise({
 
   // Shape alone is not enough: short comprehension questions can also have one open item.
   const isWriting = exercise.kind === "open" && exercise.items.length === 1 && !!exercise.items[0].open;
+  // Composite 2x2 image + items labelled "Slika N (gore levo…)": show each quadrant above its own answers.
+  const QUAD_POS: Record<string, string> = { "gore levo": "0% 0%", "gore desno": "100% 0%", "dole levo": "0% 100%", "dole desno": "100% 100%" };
+  const quadList = exercise.image && ITEM_IMAGES[exercise.image]
+    ? exercise.items.map((it) => QUAD_POS[(it.prompt || "").match(/\(([^)]+)\)/)?.[1]?.trim() ?? ""])
+    : [];
+  const quadrants = quadList.length > 0 && quadList.every(Boolean) ? quadList : undefined;
   if (!isWriting) return (
     <div className="rounded-2xl border border-border/60 bg-cream/90 p-4 sm:p-5 shadow-card-soft">
       <div className="flex items-start justify-between gap-2 mb-1">
@@ -143,16 +149,18 @@ export default function LessonExercise({
         </div>
         {(done || finished) && <CheckCircle2 className="w-5 h-5 text-forest shrink-0" />}
       </div>
-      {exercise.image && ITEM_IMAGES[exercise.image] && <img src={ITEM_IMAGES[exercise.image]} alt={exercise.title} loading="lazy" className="w-full max-w-sm h-auto rounded-xl border border-border/60 mb-3" />}
+      {exercise.image && ITEM_IMAGES[exercise.image] && !quadrants && <img src={ITEM_IMAGES[exercise.image]} alt={exercise.title} loading="lazy" className="w-full max-w-sm h-auto rounded-xl border border-border/60 mb-3" />}
       <p className="text-sm text-muted-foreground mb-4">{exercise.instruction}</p>
-      <ol className={exercise.items.some((x) => x.image) ? "grid sm:grid-cols-2 gap-4" : "space-y-3"}>
+      <ol className={exercise.items.some((x) => x.image) || quadrants ? "grid sm:grid-cols-2 gap-4" : "space-y-3"}>
         {exercise.items.map((item, i) => {
           const s = state[i];
           const locked = s.status === "correct" || s.status === "failed";
           const img = item.image ? ITEM_IMAGES[item.image] : undefined;
+          const quad = quadrants?.[i];
           return (
-            <li key={i} className={img ? "rounded-2xl border border-border/60 bg-background/70 p-3 space-y-2" : "space-y-1.5"}>
+            <li key={i} className={img || quad ? "rounded-2xl border border-border/60 bg-background/70 p-3 space-y-2" : "space-y-1.5"}>
               {img && <img src={img} alt={`Slika ${i + 1}`} loading="lazy" className="w-full h-auto aspect-square object-contain rounded-xl bg-cream" />}
+              {quad && <div role="img" aria-label={`Slika ${i + 1}`} className="w-full aspect-square rounded-xl bg-cream bg-no-repeat" style={{ backgroundImage: `url(${ITEM_IMAGES[exercise.image!]})`, backgroundSize: "200% 200%", backgroundPosition: quad }} />}
               {item.audio ? (
                 <div className="flex items-center gap-2">
                   <span className="text-sm font-medium text-foreground">{i + 1}.</span>
