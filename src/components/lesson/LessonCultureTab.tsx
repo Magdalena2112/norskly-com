@@ -55,17 +55,18 @@ function CultureTopics({ data, lang, onFinish }: { data: CultureData; lang: stri
             <h4 className="font-display font-semibold text-lg text-primary">{t.title}</h4>
             <Button size="sm" variant="outline" onClick={() => speakLines([{ speaker: "n", text: t.text }], lang)}><Volume2 className="w-4 h-4" /> Slušaj</Button>
           </div>
-          <p className="leading-relaxed">{t.text}</p>
+          <p className="leading-relaxed whitespace-pre-line">{t.text}</p>
         </div>
       </section>
       {!!t.keywords?.length && (
         <div className="rounded-2xl border border-border/60 bg-background/70 p-4">
-          <p className="font-semibold text-primary mb-2">Ključne reči i izrazi</p>
-          <div className="flex flex-wrap gap-2">
+          <p className="font-semibold text-primary mb-3">Korisne reči i izrazi</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
             {t.keywords.map((k) => (
               <button key={k.term} onClick={() => speakLines([{ speaker: "n", text: k.term }], lang)}
-                className="rounded-full border border-primary/30 bg-primary/5 px-3 py-1 text-sm text-left">
-                <span className="font-medium text-primary">{k.term}</span> <span className="text-muted-foreground">– {k.meaning}</span>
+                className="flex items-center gap-2 rounded-xl border border-primary/20 bg-primary/5 px-3 py-2 text-sm text-left hover:bg-primary/10 transition">
+                <Volume2 className="w-3.5 h-3.5 shrink-0 text-primary/70" />
+                <span className="min-w-0"><span className="font-medium text-primary">{k.term}</span> <span className="text-muted-foreground">– {k.meaning}</span></span>
               </button>
             ))}
           </div>
