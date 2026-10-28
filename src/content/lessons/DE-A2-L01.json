@@ -4262,9 +4262,7 @@
         },
         {
           "title": "Deutschland und dein Land – ein Vergleich",
-          "image": "de:cu4",
-          "text": "In Deutschland arbeiten viele oft 35 bis 40 Stunden pro Woche, und der Arbeitsbeginn ist meist zwischen 8 und 9 Uhr. Pausen sind wichtig und werden oft wirklich eingehalten. Viele nehmen eine Brotdose mit. Pünktlichkeit ist im Alltag und im Beruf sehr wichtig. Am Wochenende gibt es Zeit für Familie, Hobbys und Erholung.\n\nDenk nach und sprich: Wann beginnt dein Arbeitstag oder dein Schultag? Was isst du normalerweise zu Mittag? Nimmst du etwas von zu Hause mit? Was machst du nach der Arbeit oder am Wochenende? Was findest du an der deutschen Alltagskultur interessant oder vielleicht ungewohnt?",
-          "comparison": "In Serbien kann die Arbeitszeit je nach Beruf unterschiedlich sein, Pausen werden oft flexibler genutzt, viele kaufen das Mittagessen oder kochen zu Hause, und Freunde und Familie spielen eine wichtige Rolle im Alltag.",
+          "text": "In Deutschland und in Serbien sieht der Alltag oft ähnlich aus – aber es gibt auch Unterschiede. Vergleich die Punkte in der Tabelle.",
           "fact": "Viele Deutsche planen ihre Woche mit einem Kalender – auch Treffen mit Freunden werden oft im Voraus vereinbart.",
           "keywords": [
             {
@@ -4295,6 +4293,48 @@
               "term": "im Voraus",
               "meaning": "unapred"
             }
+          ],
+          "compareTable": {
+            "left": "Deutschland",
+            "right": "Serbien",
+            "rows": [
+              {
+                "label": "Arbeitsbeginn",
+                "left": "meist 8–9 Uhr",
+                "right": "oft 7–8 Uhr, je nach Beruf"
+              },
+              {
+                "label": "Arbeitszeit",
+                "left": "oft 35–40 Stunden pro Woche",
+                "right": "meist 40 Stunden pro Woche"
+              },
+              {
+                "label": "Pausen",
+                "left": "fest geplant, 30–60 Minuten",
+                "right": "oft flexibler"
+              },
+              {
+                "label": "Mittagessen",
+                "left": "Brotdose, Kantine oder Café",
+                "right": "kaufen oder zu Hause kochen"
+              },
+              {
+                "label": "Pünktlichkeit",
+                "left": "sehr wichtig",
+                "right": "wichtig, oft etwas lockerer"
+              },
+              {
+                "label": "Wochenende",
+                "left": "Familie, Hobbys, Ausflüge",
+                "right": "Familie und Freunde"
+              }
+            ]
+          },
+          "questions": [
+            "Wann beginnt dein Arbeitstag oder dein Schultag?",
+            "Was isst du normalerweise zu Mittag? Nimmst du etwas von zu Hause mit?",
+            "Was machst du nach der Arbeit oder am Wochenende?",
+            "Was findest du an der deutschen Alltagskultur interessant oder vielleicht ungewohnt?"
           ]
         }
       ]

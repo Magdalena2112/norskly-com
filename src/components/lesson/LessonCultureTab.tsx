@@ -7,7 +7,7 @@ import LessonExercise from "./LessonExercise";
 
 // Universal culture tab: all content comes from the lesson's `modules.culture` data.
 interface CultureCard { title: string; text: string; example?: string }
-interface CultureTopic { title: string; image?: string; text: string; comparison?: string; fact?: string; keywords?: { term: string; meaning: string }[] }
+interface CultureTopic { title: string; image?: string; text: string; comparison?: string; fact?: string; keywords?: { term: string; meaning: string }[]; compareTable?: { left: string; right: string; rows: { label: string; left: string; right: string }[] }; questions?: string[] }
 const COMPARE_LABEL: Record<string, string> = {
   en: "🇬🇧 Velika Britanija vs. Srbija 🇷🇸",
   no: "🇳🇴 Norveška vs. Srbija 🇷🇸",
@@ -46,7 +46,7 @@ function CultureTopics({ data, lang, onFinish }: { data: CultureData; lang: stri
           </button>
         ))}
       </div>
-      <section className="rounded-2xl border border-border/60 bg-cream/90 p-5 shadow-card-soft grid md:grid-cols-2 gap-5 items-start">
+      <section className={`rounded-2xl border border-border/60 bg-cream/90 p-5 shadow-card-soft grid ${t.image && ITEM_IMAGES[t.image] ? "md:grid-cols-2" : ""} gap-5 items-start`}>
         {t.image && ITEM_IMAGES[t.image] && (
           <img src={ITEM_IMAGES[t.image]} alt={t.title} className="w-full rounded-xl object-cover" loading="lazy" />
         )}
@@ -58,6 +58,28 @@ function CultureTopics({ data, lang, onFinish }: { data: CultureData; lang: stri
           <p className="leading-relaxed whitespace-pre-line">{t.text}</p>
         </div>
       </section>
+      {t.compareTable && (
+        <div className="rounded-2xl border border-border/60 bg-background/70 overflow-hidden">
+          <div className="grid grid-cols-[1fr_1.3fr_1.3fr] text-sm">
+            <div className="bg-primary text-primary-foreground px-3 py-2 font-semibold" />
+            <div className="bg-primary text-primary-foreground px-3 py-2 font-semibold">{t.compareTable.left}</div>
+            <div className="bg-primary text-primary-foreground px-3 py-2 font-semibold">{t.compareTable.right}</div>
+            {t.compareTable.rows.map((r, n) => (
+              <div key={r.label} className={`contents ${n % 2 ? "" : "[&>div]:bg-primary/5"}`}>
+                <div className="px-3 py-2 font-medium text-primary">{r.label}</div>
+                <div className="px-3 py-2">{r.left}</div>
+                <div className="px-3 py-2">{r.right}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+      {!!t.questions?.length && (
+        <div className="rounded-2xl border border-accent/40 bg-accent/10 p-4">
+          <p className="font-semibold text-primary mb-2">Denk nach und sprich</p>
+          <ol className="list-decimal pl-5 space-y-1 text-sm">{t.questions.map((q) => <li key={q}>{q}</li>)}</ol>
+        </div>
+      )}
       {!!t.keywords?.length && (
         <div className="rounded-2xl border border-border/60 bg-background/70 p-4">
           <p className="font-semibold text-primary mb-3">Korisne reči i izrazi</p>
