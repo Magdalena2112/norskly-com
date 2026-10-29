@@ -70,6 +70,7 @@ export function useSavedState<T>(name: string, initial: T | (() => T)): [T, (v: 
   const uid = user?.id;
   const key = `${scope}:${name}`;
   const init = useRef(initial);
+  init.current = initial;
   const [value, setValue] = useState<T>(() => {
     const saved = uid ? readLocal(uid, key) : undefined;
     if (saved !== undefined) return saved as T;
@@ -83,7 +84,9 @@ export function useSavedState<T>(name: string, initial: T | (() => T)): [T, (v: 
     if (!uid) return;
     const k = lsKey(uid, key);
     const sync = () => { if (mem.has(k)) setValue(mem.get(k) as T); };
-    sync();
+    const local = readLocal(uid, key);
+    if (local !== undefined) setValue(local as T);
+    else { const i = init.current; setValue(typeof i === "function" ? (i as () => T)() : i); }
     if (!listeners.has(k)) listeners.set(k, new Set());
     listeners.get(k)!.add(sync);
     loadScope(uid, scope);
