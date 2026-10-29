@@ -1,4 +1,5 @@
-import norsklyLogo from "@/assets/norskly-logo-new.webp.asset.json";
+import norsklyLogoSrc from "@/assets/norskly-logo-local.webp";
+const norsklyLogo = { url: norsklyLogoSrc };
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { LayoutDashboard, User, TrendingUp, Settings, LogOut, BookMarked, MessageSquareHeart } from "lucide-react";
 import {
