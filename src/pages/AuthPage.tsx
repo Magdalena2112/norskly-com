@@ -346,6 +346,7 @@ export default function AuthPage() {
                 {loading ? "Učitavanje..." : isLogin ? "Prijavi se" : "Registruj se"}
               </Button>
             </form>
+            </>
             )}
 
             <div className="mt-6 text-center text-sm text-muted-foreground">
