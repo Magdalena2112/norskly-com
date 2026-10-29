@@ -1422,6 +1422,38 @@ export type Database = {
           },
         ]
       }
+      teacher_course_approvals: {
+        Row: {
+          approved_at: string
+          approved_by: string
+          course_type: string
+          language: string
+          teacher_id: string
+        }
+        Insert: {
+          approved_at?: string
+          approved_by?: string
+          course_type?: string
+          language: string
+          teacher_id: string
+        }
+        Update: {
+          approved_at?: string
+          approved_by?: string
+          course_type?: string
+          language?: string
+          teacher_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "teacher_course_approvals_teacher_id_fkey"
+            columns: ["teacher_id"]
+            isOneToOne: false
+            referencedRelation: "teachers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       teacher_lesson_notes: {
         Row: {
           covered: string
@@ -1911,6 +1943,21 @@ export type Database = {
         Returns: {
           bio: string
           focus: string[]
+          id: string
+          is_verified: boolean
+          name: string
+          photo_url: string
+          rating: number
+          spoken_languages: string[]
+          students_count: number
+        }[]
+      }
+      get_course_teachers: {
+        Args: { p_course?: string; p_language: string }
+        Returns: {
+          bio: string
+          focus: string[]
+          healthcare_approved: boolean
           id: string
           is_verified: boolean
           name: string

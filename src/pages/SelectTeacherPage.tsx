@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
 import { langGenitive } from "@/lib/currentLanguage";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
@@ -12,6 +13,8 @@ import BackButton from "@/components/BackButton";
 import { Star, Languages, GraduationCap, Sparkles } from "lucide-react";
 import { useSelectedLanguage } from "@/hooks/useSelectedLanguage";
 import teacherPhotoFallback from "@/assets/teacher-photo.jpg";
+import { useSelectedCourse } from "@/hooks/useSelectedCourse";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 type Teacher = {
   id: string;
@@ -23,6 +26,7 @@ type Teacher = {
   rating: number;
   students_count: number;
   is_verified: boolean;
+  healthcare_approved: boolean;
 };
 
 type PriceInfo = { min: number; currency: string } | null;
@@ -30,12 +34,15 @@ type PriceInfo = { min: number; currency: string } | null;
 export default function SelectTeacherPage() {
   const navigate = useNavigate();
   const { code, labelSr } = useSelectedLanguage();
+  const course = useSelectedCourse(code);
+  const [filter, setFilter] = useState("all");
 
   const { data: teachers = [], isLoading } = useQuery({
-    queryKey: ["teachers-list", code],
+    queryKey: ["teachers-list", code, course],
     queryFn: async () => {
-      const { data, error } = await (supabase.rpc as any)("get_active_teachers_by_language", {
+      const { data, error } = await supabase.rpc("get_course_teachers", {
         p_language: code,
+        p_course: course,
       });
       if (error) throw error;
       return (data || []) as Teacher[];
@@ -62,6 +69,8 @@ export default function SelectTeacherPage() {
     },
   });
 
+  const visibleTeachers = teachers.filter(t => filter !== "health" || t.healthcare_approved);
+
   return (
     <div className="min-h-screen bg-fjord-soft">
       <header className="border-b border-border/50 bg-cream/80 backdrop-blur-md sticky top-0 z-50">
@@ -84,21 +93,28 @@ export default function SelectTeacherPage() {
           </p>
         </motion.div>
 
+        <Tabs value={course === "health" ? "health" : filter} onValueChange={setFilter}>
+          <TabsList className="h-auto flex flex-wrap">
+            {course !== "health" && <TabsTrigger value="all">Svi profesori</TabsTrigger>}
+            <TabsTrigger value="health">Specijalisti za zdravstveni jezik</TabsTrigger>
+          </TabsList>
+        </Tabs>
+
         {isLoading ? (
           <div className="grid sm:grid-cols-2 gap-5">
             {[1, 2].map((i) => (
               <Skeleton key={i} className="h-72 rounded-3xl" />
             ))}
           </div>
-        ) : teachers.length === 0 ? (
+        ) : visibleTeachers.length === 0 ? (
           <Card className="bg-background/80 backdrop-blur-sm border-border/30">
             <CardContent className="py-12 text-center text-muted-foreground">
-              Trenutno nema dostupnih nastavnika za jezik: <strong>{labelSr}</strong>.
+              Trenutno nema dostupnih nastavnika za ovaj izbor: <strong>{labelSr}</strong>.
             </CardContent>
           </Card>
         ) : (
           <div className="grid sm:grid-cols-2 gap-5">
-            {teachers.map((t, i) => {
+            {visibleTeachers.map((t, i) => {
               const initials = t.name.split(" ").map((n) => n[0]).join("").slice(0, 2);
               const price = prices[t.id];
               return (
@@ -137,6 +153,7 @@ export default function SelectTeacherPage() {
                       </div>
 
                       <p className="mt-4 text-sm text-muted-foreground line-clamp-3">{t.bio || `Iskusan nastavnik ${langGenitive()} jezika.`}</p>
+                      {t.healthcare_approved && <Badge variant="outline" className="mt-3 self-start">Medicinski {labelSr.toLowerCase()}</Badge>}
 
                       {t.spoken_languages?.length > 0 && (
                         <div className="mt-3 flex items-center gap-1.5 text-xs text-muted-foreground">
@@ -164,7 +181,7 @@ export default function SelectTeacherPage() {
                           </span>
                         )}
                         <Button
-                          onClick={() => navigate(`/book-lesson/${t.id}`)}
+                          onClick={() => navigate(`/book-lesson/${t.id}?course=${course}`)}
                           className="ml-auto"
                         >
                           Pogledaj profil
