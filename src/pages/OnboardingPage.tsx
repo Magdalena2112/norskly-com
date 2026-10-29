@@ -182,8 +182,8 @@ function ChoiceRow({ title, desc, selected, onClick }: { title: string; desc: st
         selected ? "border-accent bg-accent/10 shadow-accent-glow" : "border-border bg-background hover:border-accent/40"
       }`}
     >
-      <span className={`block text-sm font-semibold ${selected ? "text-accent" : "text-foreground"}`}>{title}</span>
-      <span className="block text-xs text-muted-foreground mt-0.5">{desc}</span>
+      <span className={`block text-sm font-semibold break-words ${selected ? "text-accent" : "text-foreground"}`}>{title}</span>
+      <span className="block text-xs text-muted-foreground mt-0.5 break-words">{desc}</span>
     </button>
   );
 }
@@ -399,12 +399,12 @@ export default function OnboardingPage() {
                 <div>
                   <h2 className="text-xl sm:text-2xl font-display font-bold text-foreground mb-2 break-words">{t.confidenceTitle}</h2>
                   <p className="text-muted-foreground mb-6">1 = nesiguran/na, 5 = vrlo siguran/na. Na osnovu toga prilagođavamo stil podrške i detaljnost objašnjenja.</p>
-                  <div className="flex gap-3">
+                  <div className="flex gap-2 sm:gap-3">
                     {[1, 2, 3, 4, 5].map((n) => (
                       <button
                         key={n}
                         onClick={() => setForm({ ...form, confidence_level: n })}
-                        className={`w-14 h-14 rounded-xl text-lg font-bold transition-all ${
+                        className={`w-11 h-11 sm:w-14 sm:h-14 rounded-xl text-base sm:text-lg font-bold transition-all ${
                           form.confidence_level === n
                             ? "bg-accent text-accent-foreground shadow-accent-glow scale-110"
                             : "bg-secondary text-secondary-foreground hover:bg-accent/20"
