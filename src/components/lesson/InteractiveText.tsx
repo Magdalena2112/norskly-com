@@ -22,10 +22,15 @@ function WordPop({ word, sentence, language, known, lessonCode }: { word: string
   const load = async () => {
     if (info) return;
     if (cache.has(key)) return setInfo(cache.get(key)!);
+    const lsKey = `wl:${key}`;
+    try { const s = localStorage.getItem(lsKey); if (s) { const v = JSON.parse(s) as Info; cache.set(key, v); return setInfo(v); } } catch { /* ignore */ }
+    // Lesson words are shown instantly; richer details load quietly in the background.
+    if (known) setInfo({ lemma: known.word, translation: known.translation });
     setErr("");
     const { data, error } = await supabase.functions.invoke("word-lookup", { body: { word, sentence, language } });
-    if (error || data?.error) { if (known) setInfo({ lemma: known.word, translation: known.translation }); else setErr(data?.error || "Prevod trenutno nije dostupan."); return; }
+    if (error || data?.error) { if (!known) setErr(data?.error || "Prevod trenutno nije dostupan."); return; }
     cache.set(key, data); setInfo(data);
+    try { localStorage.setItem(lsKey, JSON.stringify(data)); } catch { /* quota */ }
   };
 
   const save = async () => {
