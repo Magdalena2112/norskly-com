@@ -162,6 +162,13 @@
       "when": 1793224448796,
       "tag": "0022_atomic_lesson_rewards",
       "breakpoints": true
+    },
+    {
+      "idx": 23,
+      "version": "7",
+      "when": 1793274247233,
+      "tag": "0023_independent_course_enrollments",
+      "breakpoints": true
     }
   ]
 }
