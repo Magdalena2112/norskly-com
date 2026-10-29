@@ -16,9 +16,10 @@ function shuffle<T>(arr: T[]) {
   return a;
 }
 
-export default function GrammarPracticeExercise({ exercise: ex, done, onDone, images, vocabulary = false }: {
+export default function GrammarPracticeExercise({ exercise: ex, done, onDone, images, vocabulary = false, language }: {
   exercise: PracticeExercise; done: boolean; onDone: (code: string) => void;
   images?: { prompt?: string; left?: (string | undefined)[] }; vocabulary?: boolean;
+  language?: "no" | "en" | "de";
 }) {
   const { user } = useAuth();
   const scope = useAnswerScope();
@@ -75,7 +76,7 @@ export default function GrammarPracticeExercise({ exercise: ex, done, onDone, im
       if (user) void logErrors(user.id, vocabulary ? "vocabulary" : "grammar", "lesson_practice", [{
         category: vocabulary ? "vocabulary" : "grammar", topic: `${ex.code} · ${ex.title}`,
         severity: 2, example_wrong: describe(true), example_correct: describe(false),
-      }], questionText, attempt + 1, getCurrentLanguageCode(), /^[0-9a-f-]{36}$/i.test(scope) ? scope : undefined);
+      }], questionText, attempt + 1, language || getCurrentLanguageCode(), /^[0-9a-f-]{36}$/i.test(scope) ? scope : undefined);
       const n = attempt + 1;
       if (n >= limit) { setResult("failed"); return; }
       setResult("wrong");

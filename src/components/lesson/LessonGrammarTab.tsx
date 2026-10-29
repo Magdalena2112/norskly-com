@@ -370,7 +370,7 @@ export default function LessonGrammarTab({ lessonId, onPractice, onExplain, mode
           </div>
           {topicEx[exIdx] && (
             (topicEx[exIdx] as any).type
-              ? <GrammarPracticeExercise key={topicEx[exIdx].id} exercise={topicEx[exIdx] as unknown as PracticeExercise} done={done.includes(topicEx[exIdx].code)} onDone={markDone} />
+              ? <GrammarPracticeExercise key={topicEx[exIdx].id} exercise={topicEx[exIdx] as unknown as PracticeExercise} language={lang} done={done.includes(topicEx[exIdx].code)} onDone={markDone} />
               : <LessonExercise key={topicEx[exIdx].id} exercise={topicEx[exIdx]} language={lang} level={row.cefr_level} lessonTitle={row.title_target || row.title} lessonCode={row.lesson_code} done={done.includes(topicEx[exIdx].code)} onDone={markDone} />
           )}
           <div className="flex justify-between gap-2">
