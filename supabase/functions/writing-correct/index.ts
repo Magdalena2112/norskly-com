@@ -89,7 +89,7 @@ Deno.serve(async (req) => {
     const personalization = buildPersonalizationLines(langCode, body.focus_area, body.life_context);
     const topicTitle = body.topic?.title ? String(body.topic.title).slice(0, 200) : "";
     const topicQs = Array.isArray(body.topic?.guiding_questions) ? body.topic.guiding_questions.slice(0, 5).map((q: unknown) => String(q).slice(0, 200)).join(" | ") : "";
-    const learnerStyle = await loadLearnerStyleLine(supabase, user.id, langCode);
+    const learnerStyle = await loadLearnerStyleLine(supabase, user.id, langCode, body.course);
     const personalizationLine = [
       learnerStyle,
       personalization.serbianLine ? `PERSONALIZACIJA: ${personalization.serbianLine}` : "",

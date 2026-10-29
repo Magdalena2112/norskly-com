@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect, useCallback } from "react";
+import { getSelectedCourse } from "@/lib/courseSelection";
 import { langLocative, speakInCurrentLanguage } from "@/lib/currentLanguage";
 import { Mic, Square as StopIcon, Loader2 as Spinner } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -490,6 +491,7 @@ export default function PracticePage() {
           title,
           points: 0,
           language: langCode,
+          course: getSelectedCourse(langCode),
         } as any)
         .select("id")
         .single();
@@ -548,6 +550,7 @@ export default function PracticePage() {
         body: JSON.stringify({
           action: "chat",
           language: langCode,
+          course: getSelectedCourse(langCode),
           messages: updatedMessages,
           profile: {
             name: profile.name,
@@ -659,6 +662,7 @@ export default function PracticePage() {
         body: JSON.stringify({
           action: "recap",
           language: langCode,
+          course: getSelectedCourse(langCode),
           messages,
           profile: {
             name: profile.name,

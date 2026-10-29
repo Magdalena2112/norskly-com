@@ -51,12 +51,13 @@ export default function TeacherStudentDetailPage() {
   const activeLang = lang || langs[0] || "no";
   const hasConsent = !!student?.consent_granted;
 
-  const { data: langProfile } = useQuery({
+  const { data: langProfiles = [] } = useQuery({
     queryKey: ["t-student-lp", studentId, activeLang],
-    queryFn: async () => (await supabase.from("language_profiles").select("*").eq("user_id", studentId!).eq("language", activeLang).maybeSingle()).data,
+    queryFn: async () => (await supabase.from("course_enrollments").select("*").eq("user_id", studentId ?? "").eq("language", activeLang)).data ?? [],
     enabled: hasConsent,
   });
 
+  const langProfile = langProfiles[0];
   const since30 = useMemo(() => new Date(Date.now() - 30 * 864e5).toISOString(), []);
   const since7 = useMemo(() => new Date(Date.now() - 7 * 864e5).toISOString(), []);
 
@@ -166,7 +167,7 @@ export default function TeacherStudentDetailPage() {
               <>
                 <Section icon={Target} title="Profil učenja">
                   <div className="grid grid-cols-2 gap-2 text-sm">
-                    <Info label="Nivo" value={langProfile?.level} />
+                    <Info label="Kursevi i nivoi" value={langProfiles.map(p => `${p.course_type === "health" ? "Zdravstveni" : "Opšti"} ${p.level}`).join(" · ")} />
                     <Info label="Cilj" value={langProfile?.learning_goal} />
                     <Info label="Fokus" value={langProfile?.focus_area} />
                     <Info label="Kontekst" value={langProfile?.life_context} />

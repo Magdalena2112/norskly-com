@@ -7,6 +7,7 @@ import { isCorrect, speakLines, type Exercise } from "@/lib/courseLessons";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/context/AuthContext";
 import { logErrors } from "@/lib/logErrors";
+import { getSelectedCourse } from "@/lib/courseSelection";
 import { toast } from "sonner";
 import { ITEM_IMAGES } from "@/content/lessons/itemImages";
 import CorrectionResultView, { type CorrectionResult } from "@/components/writing/CorrectionResultView";
@@ -76,6 +77,7 @@ export default function LessonExercise({
           text: s.value.trim(),
           level,
           language,
+          course: getSelectedCourse(language),
           has_image: !!exercise.image,
           topic: { title: exercise.title, guiding_questions: exercise.items[0].guiding || [] },
         },
@@ -105,7 +107,7 @@ export default function LessonExercise({
       setState([...next]);
       const { data, error } = await supabase.functions.invoke("lesson-check", {
         body: {
-          language, level, lessonTitle,
+          language, level, lessonTitle, course: getSelectedCourse(language),
           exercise: { code: exercise.code, title: exercise.title, instruction: exercise.instruction },
           items: openIdx.map((i) => ({ prompt: exercise.items[i].prompt, answer: next[i].value, guide: exercise.items[i].guide })),
         },
