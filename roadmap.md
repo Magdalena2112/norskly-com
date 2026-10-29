@@ -1,4 +1,5 @@
 # Tasks
+- [ ] Optimize homepage font loading and relocation illustration without visual redesign; verify mobile rendering and network delivery.
 - [x] Unify six available lessons to 100 XP with atomic, deduplicated rewards and trophy-only review; allocation tests passed, signed-in Norwegian completion awarded 2 XP once and persisted on reopening; historical XP not recalculated.
 - [x] Verify German lesson recording assessment, persistent errors and retry without rerecording; six tests passed and authenticated microphone recording returned a real score after retry (physical iPad not tested).
 - [x] Show four German A2 speaking topics with localized tasks, criteria and direct launch; verified synchronized protected scenarios, 14 tests, signed-in German lesson launch and mobile layout.
