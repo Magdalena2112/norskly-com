@@ -36,6 +36,7 @@ const AdminCourseRecoveryPage = lazy(() => import("./pages/AdminCourseRecoveryPa
 const RelocationHubPage = lazy(() => import("./pages/RelocationHubPage"));
 const LanguagePage = lazy(() => import("./pages/LanguagePage"));
 const AuthPage = lazy(() => import("./pages/AuthPage"));
+const ResetPasswordPage = lazy(() => import("./pages/ResetPasswordPage"));
 const OnboardingPage = lazy(() => import("./pages/OnboardingPage"));
 const DashboardPage = lazy(() => import("./pages/DashboardPage"));
 const GrammarPage = lazy(() => import("./pages/GrammarPage"));
@@ -106,6 +107,7 @@ const App = () => (
                 <Route path="/relocation-hub/:countryId" element={<RelocationHubPage />} />
                 <Route path="/jezici/:slug" element={<LanguagePage />} />
                 <Route path="/auth" element={<AuthPage />} />
+                <Route path="/reset-password" element={<ResetPasswordPage />} />
                 <Route path="/anketa" element={<SurveyPage />} />
                 <Route path="/onboarding" element={<ProtectedRoute><OnboardingPage /></ProtectedRoute>} />
                 <Route path="/practice" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />

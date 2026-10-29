@@ -74,6 +74,23 @@ export default function AuthPage() {
     if (plan) localStorage.setItem("norskly_selected_plan", plan);
   }, [searchParams]);
 
+  const handleForgot = async () => {
+    if (!email.trim()) {
+      toast({ title: "Unesi email", description: "Upiši email adresu pa ponovo klikni „Zaboravljena lozinka?”." });
+      return;
+    }
+    setLoading(true);
+    const { error } = await supabase.auth.resetPasswordForEmail(email.trim(), {
+      redirectTo: `${window.location.origin}/reset-password`,
+    });
+    setLoading(false);
+    toast(
+      error
+        ? { title: "Greška", description: error.message, variant: "destructive" }
+        : { title: "Proveri email", description: "Poslali smo ti link za postavljanje nove lozinke." },
+    );
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!pickedLang && !isLogin) {
@@ -142,6 +159,15 @@ export default function AuthPage() {
           },
         });
         if (error) throw error;
+        // Postojeći email: sistem vraća korisnika bez identiteta i ne šalje novi mejl.
+        if (data.user && (data.user.identities?.length ?? 0) === 0) {
+          setIsLogin(true);
+          toast({
+            title: "Nalog već postoji",
+            description: "Nalog sa ovim emailom već postoji. Prijavi se ili iskoristi „Zaboravljena lozinka?”.",
+          });
+          return;
+        }
         // Sačuvaj izabrani jezik na profil novog korisnika
         if (data.user) {
           await supabase
@@ -164,9 +190,14 @@ export default function AuthPage() {
         });
       }
     } catch (err: any) {
+      const msg = String(err?.message || "");
       toast({
         title: "Greška",
-        description: err.message,
+        description: /invalid login credentials/i.test(msg)
+          ? "Pogrešan email ili lozinka. Ako si zaboravila lozinku, klikni „Zaboravljena lozinka?”."
+          : /email not confirmed/i.test(msg)
+          ? "Email još nije potvrđen. Proveri inbox i spam folder."
+          : msg,
         variant: "destructive",
       });
     } finally {
@@ -273,6 +304,17 @@ export default function AuthPage() {
                   required
                   minLength={6}
                 />
+                {isLogin && (
+                  <div className="text-right">
+                    <button
+                      type="button"
+                      onClick={handleForgot}
+                      className="text-xs text-accent font-medium hover:underline"
+                    >
+                      Zaboravljena lozinka?
+                    </button>
+                  </div>
+                )}
               </div>
               <Button variant="hero" className="w-full" disabled={loading}>
                 {loading ? "Učitavanje..." : isLogin ? "Prijavi se" : "Registruj se"}
