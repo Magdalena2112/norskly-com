@@ -1,4 +1,7 @@
-import { useSavedState } from "@/lib/savedAnswers";
+import { useSavedState, useAnswerScope } from "@/lib/savedAnswers";
+import { useAuth } from "@/context/AuthContext";
+import { logErrors } from "@/lib/logErrors";
+import { getCurrentLanguageCode } from "@/lib/currentLanguage";
 import { useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -17,6 +20,8 @@ export default function GrammarPracticeExercise({ exercise: ex, done, onDone, im
   exercise: PracticeExercise; done: boolean; onDone: (code: string) => void;
   images?: { prompt?: string; left?: (string | undefined)[] }; vocabulary?: boolean;
 }) {
+  const { user } = useAuth();
+  const scope = useAnswerScope();
   const [attempt, setAttempt] = useSavedState(`gp:${ex.code}:attempt`, 0);
   const [result, setResult] = useSavedState<"idle" | "correct" | "wrong" | "failed">(`gp:${ex.code}:result`, "idle");
   const [seed, setSeed] = useState(0);
@@ -67,6 +72,10 @@ export default function GrammarPracticeExercise({ exercise: ex, done, onDone, im
       if (!done) setAwarded(true);
       onDone(ex.code);
     } else {
+      if (user) void logErrors(user.id, vocabulary ? "vocabulary" : "grammar", "lesson_practice", [{
+        category: vocabulary ? "vocabulary" : "grammar", topic: `${ex.code} · ${ex.title}`,
+        severity: 2, example_wrong: describe(true), example_correct: describe(false),
+      }], questionText, attempt + 1, getCurrentLanguageCode(), /^[0-9a-f-]{36}$/i.test(scope) ? scope : undefined);
       const n = attempt + 1;
       if (n >= limit) { setResult("failed"); return; }
       setResult("wrong");

@@ -17,6 +17,7 @@ export async function logErrors(
   context?: string,
   attemptNo?: number,
   language?: "no" | "en" | "de",
+  lessonId?: string,
 ) {
   if (!errors || errors.length === 0) return;
   const langCode = language || getCurrentLanguageCode();
@@ -33,6 +34,7 @@ export async function logErrors(
     context: context || null,
     attempt_no: attemptNo || null,
     language: langCode,
+    lesson_id: lessonId || null,
   }));
 
   const { error } = await supabase.from("error_events").insert(rows);
