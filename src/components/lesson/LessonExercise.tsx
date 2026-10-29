@@ -198,7 +198,7 @@ export default function LessonExercise({
               )}
               {s.status === "correct" && <p className="text-xs text-forest flex items-center gap-1"><CheckCircle2 className="w-3.5 h-3.5" /> Tačno!{s.feedback ? ` ${s.feedback}` : ""}</p>}
               {s.status === "wrong" && !item.open && <p className="text-xs text-destructive flex items-center gap-1"><XCircle className="w-3.5 h-3.5" /> Nije tačno. Pokušaj ponovo (preostalo: {limitFor(item) - s.attempts}).</p>}
-              {s.status === "failed" && <><p className="text-xs text-destructive flex items-center gap-1"><XCircle className="w-3.5 h-3.5" /> Netačno — iskorišćeni su svi pokušaji.</p><MistakeExplanation question={[exercise.instruction, item.q].filter(Boolean).join("\n")} yourAnswer={s.value} correct={item.answers?.[0]} explanation={item.guide} /></>}
+              {s.status === "failed" && <><p className="text-xs text-destructive flex items-center gap-1"><XCircle className="w-3.5 h-3.5" /> Netačno — iskorišćeni su svi pokušaji.</p><MistakeExplanation question={[exercise.instruction, item.prompt].filter(Boolean).join("\n")} yourAnswer={s.value} correct={item.answers?.[0]} explanation={item.guide} /></>}
               {item.open && (s.status === "partial" || s.status === "wrong") && (
                 <div className="text-xs rounded-lg bg-secondary/50 p-2 space-y-1">
                   <p className="flex items-start gap-1"><AlertCircle className="w-3.5 h-3.5 mt-0.5 text-sunset shrink-0" /> {s.feedback}</p>
