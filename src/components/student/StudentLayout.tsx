@@ -1,4 +1,5 @@
-import norsklyLogo from "@/assets/norskly-logo-new.webp.asset.json";
+import norsklyLogoSrc from "@/assets/norskly-logo-local.webp";
+const norsklyLogo = { url: norsklyLogoSrc };
 import { ReactNode, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
