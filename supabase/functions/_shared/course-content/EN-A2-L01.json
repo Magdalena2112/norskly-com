@@ -2681,25 +2681,32 @@
               "prompt": "Slika 1 (gore levo)",
               "answers": [
                 "wake up",
-                "get up"
+                "get up",
+                "wake"
               ]
             },
             {
               "prompt": "Slika 2 (gore desno)",
               "answers": [
-                "brush your teeth"
+                "brush your teeth",
+                "brush teeth",
+                "clean your teeth"
               ]
             },
             {
               "prompt": "Slika 3 (dole levo)",
               "answers": [
-                "have breakfast"
+                "have breakfast",
+                "eat breakfast"
               ]
             },
             {
               "prompt": "Slika 4 (dole desno)",
               "answers": [
-                "leave home"
+                "leave home",
+                "leave the house",
+                "leave for work",
+                "go to work"
               ]
             }
           ]
@@ -3664,33 +3671,47 @@
             {
               "prompt": "You put your dirty clothes in the washing machine.",
               "answers": [
-                "do the laundry"
+                "do the laundry",
+                "wash clothes",
+                "wash the clothes",
+                "do laundry"
               ]
             },
             {
               "prompt": "You leave your town and go to live in another city.",
               "answers": [
                 "move to a new place",
-                "move to a new city"
+                "move to a new city",
+                "move",
+                "move house",
+                "move to another city"
               ]
             },
             {
               "prompt": "You finally choose one of two options.",
               "answers": [
-                "make a decision"
+                "make a decision",
+                "decide",
+                "make a choice",
+                "choose"
               ]
             },
             {
               "prompt": "You play games and have dinner with your parents and children.",
               "answers": [
                 "spend time with family",
-                "spend time with your family"
+                "spend time with your family",
+                "be with family",
+                "spend time with my family"
               ]
             },
             {
               "prompt": "You join a club and meet new people there.",
               "answers": [
-                "make new friends"
+                "make new friends",
+                "meet new friends",
+                "find new friends",
+                "meet new people"
               ]
             }
           ]
