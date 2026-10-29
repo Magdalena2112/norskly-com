@@ -1562,6 +1562,7 @@ export type Database = {
       teachers: {
         Row: {
           bio: string
+          course_types: string[]
           created_at: string
           email: string | null
           focus: string[]
@@ -1576,11 +1577,13 @@ export type Database = {
           spoken_languages: string[]
           students_count: number
           teaching_languages: string[]
+          teaching_levels: string[]
           updated_at: string
           user_id: string | null
         }
         Insert: {
           bio?: string
+          course_types?: string[]
           created_at?: string
           email?: string | null
           focus?: string[]
@@ -1595,11 +1598,13 @@ export type Database = {
           spoken_languages?: string[]
           students_count?: number
           teaching_languages?: string[]
+          teaching_levels?: string[]
           updated_at?: string
           user_id?: string | null
         }
         Update: {
           bio?: string
+          course_types?: string[]
           created_at?: string
           email?: string | null
           focus?: string[]
@@ -1614,6 +1619,7 @@ export type Database = {
           spoken_languages?: string[]
           students_count?: number
           teaching_languages?: string[]
+          teaching_levels?: string[]
           updated_at?: string
           user_id?: string | null
         }
@@ -1956,6 +1962,7 @@ export type Database = {
         Args: { p_course?: string; p_language: string }
         Returns: {
           bio: string
+          course_types: string[]
           focus: string[]
           healthcare_approved: boolean
           id: string
@@ -1965,6 +1972,7 @@ export type Database = {
           rating: number
           spoken_languages: string[]
           students_count: number
+          teaching_levels: string[]
         }[]
       }
       get_lesson_teacher_email: {
