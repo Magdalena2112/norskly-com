@@ -317,6 +317,7 @@ ${sc.lesson_material ? `- LESSON MATERIAL (the learner has just studied this —
       const systemPrompt = `Ti si nastavnik ${recapLangLabel} jezika. Analiziraj sledeći razgovor i napravi rezime sesije.
 Korisnik se zove ${profile?.name || "korisnik"}, nivo je ${userLevel}. ${cefrFocus}
 ${focusArea ? `Fokusna oblast korisnika: ${focusArea}. Istakni napredak i preporuke u toj oblasti.` : ""}
+Razgovor je možda transkript govora: NIKADA ne navodi interpunkciju (zareze, tačke, upitnike) ni velika/mala slova kao grešku; navodi samo stvarne govorne greške (red reči, glagolski oblici, predlozi, izbor reči).
 ${lifeContext ? `Stvarni kontekst korisnika: ${lifeContext}. Vezuj korisne fraze i sledeće korake za ovaj kontekst.` : ""}
 
 
