@@ -1,3 +1,4 @@
+import norsklyLogo from "@/assets/norskly-logo-new.webp.asset.json";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { LayoutDashboard, User, TrendingUp, Settings, LogOut, BookMarked, MessageSquareHeart } from "lucide-react";
 import {
@@ -44,16 +45,9 @@ export function StudentSidebar() {
   return (
     <Sidebar collapsible="icon" className="border-r-0">
       <SidebarHeader className="p-4">
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-xl bg-accent flex items-center justify-center font-display font-bold text-accent-foreground shrink-0">
-            N
-          </div>
-          {!collapsed && (
-            <span className="font-display font-bold text-lg text-primary-foreground">
-              Norskly
-            </span>
-          )}
-        </div>
+        <Link to={`/ucenje/${getCurrentLanguageSlug(pathname)}`} className="flex items-center gap-2" aria-label="Norskly početna">
+          <img src={norsklyLogo.url} alt="Norskly" width={collapsed ? 32 : 56} height={collapsed ? 32 : 56} className={collapsed ? "w-8 h-8 object-contain shrink-0" : "w-14 h-14 object-contain shrink-0"} />
+        </Link>
       </SidebarHeader>
 
       <SidebarContent className="px-2">
