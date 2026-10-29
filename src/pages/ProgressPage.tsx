@@ -106,7 +106,7 @@ export default function ProgressPage() {
       // 1. Grammar accuracy (30%) – based on error rate in grammar module
       const grammarActivities = activities.filter((a) => a.module === "grammar");
       const grammarErrors = errors.filter((e) => e.module === "grammar");
-      let grammarScore = 50; // baseline
+      let grammarScore = 0;
       if (grammarActivities.length > 0) {
         const errorRate = grammarErrors.length / Math.max(grammarActivities.length, 1);
         grammarScore = Math.max(0, Math.min(100, 100 - errorRate * 40));
@@ -117,11 +117,11 @@ export default function ProgressPage() {
           grammarScore = Math.min(100, (grammarScore + avgPct) / 2);
         }
       } else {
-        grammarScore = 20; // no data penalty
+        grammarScore = 0;
       }
 
       // 2. Vocabulary mastery (25%) – based on known vs total vocab
-      let vocabScore = 20;
+      let vocabScore = 0;
       if (vocabItems.length > 0) {
         const known = vocabItems.filter((v) => v.status === "known" || v.status === "practiced").length;
         vocabScore = Math.min(100, (known / vocabItems.length) * 100);
@@ -136,7 +136,7 @@ export default function ProgressPage() {
       // 3. Communication clarity (25%) – based on talk sessions and error severity
       const talkActivities = activities.filter((a) => a.module === "talk");
       const talkErrors = errors.filter((e) => e.module === "talk");
-      let commScore = 20;
+      let commScore = 0;
       if (talkActivities.length > 0) {
         const avgSev = talkErrors.length > 0
           ? talkErrors.reduce((s, e) => s + e.severity, 0) / talkErrors.length
