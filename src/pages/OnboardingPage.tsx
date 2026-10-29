@@ -182,8 +182,8 @@ function ChoiceRow({ title, desc, selected, onClick }: { title: string; desc: st
         selected ? "border-accent bg-accent/10 shadow-accent-glow" : "border-border bg-background hover:border-accent/40"
       }`}
     >
-      <span className={`block text-sm font-semibold ${selected ? "text-accent" : "text-foreground"}`}>{title}</span>
-      <span className="block text-xs text-muted-foreground mt-0.5">{desc}</span>
+      <span className={`block text-sm font-semibold break-words ${selected ? "text-accent" : "text-foreground"}`}>{title}</span>
+      <span className="block text-xs text-muted-foreground mt-0.5 break-words">{desc}</span>
     </button>
   );
 }
@@ -331,8 +331,8 @@ export default function OnboardingPage() {
         <p className="text-sm opacity-60">{t.stepCounter(step + 1, steps.length)}</p>
       </div>
 
-      <div className="flex-1 flex items-center justify-center p-6">
-        <div className="w-full max-w-lg">
+      <div className="flex-1 min-w-0 w-full flex items-center justify-center p-4 sm:p-6">
+        <div className="w-full min-w-0 max-w-lg">
           <div className="md:hidden flex items-center justify-between mb-8">
             <div className="flex items-center gap-2">
               <BackButton />
@@ -348,6 +348,7 @@ export default function OnboardingPage() {
           <AnimatePresence mode="wait">
             <motion.div
               key={step}
+              className="min-w-0"
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
@@ -359,7 +360,7 @@ export default function OnboardingPage() {
 
               {step === 0 && (
                 <div>
-                  <h2 className="text-2xl font-display font-bold text-foreground mb-2">{t.nameTitle}</h2>
+                  <h2 className="text-xl sm:text-2xl font-display font-bold text-foreground mb-2 break-words">{t.nameTitle}</h2>
                   <p className="text-muted-foreground mb-6">{t.nameDesc}</p>
                   <Input
                     placeholder={t.namePlaceholder}
@@ -372,7 +373,7 @@ export default function OnboardingPage() {
 
               {step === 1 && (
                 <div>
-                  <h2 className="text-2xl font-display font-bold text-foreground mb-2">Koliko vremena možeš da izdvojiš za učenje?</h2>
+                  <h2 className="text-xl sm:text-2xl font-display font-bold text-foreground mb-2 break-words">Koliko vremena možeš da izdvojiš za učenje?</h2>
                   <p className="text-muted-foreground mb-6">Na osnovu ovoga predlažemo dnevni plan modula i XP cilj.</p>
                   <div className="grid gap-3">
                     {TIME_OPTIONS.map((o) => (
@@ -384,7 +385,7 @@ export default function OnboardingPage() {
 
               {step === 2 && (
                 <div>
-                  <h2 className="text-2xl font-display font-bold text-foreground mb-2">{t.goalTitle}</h2>
+                  <h2 className="text-xl sm:text-2xl font-display font-bold text-foreground mb-2 break-words">{t.goalTitle}</h2>
                   <p className="text-muted-foreground mb-6">Zadaci u lekcijama su isti za sve; cilj usmerava povratne informacije i savete tokom učenja.</p>
                   <div className="grid gap-3">
                     {goals.map((g) => (
@@ -396,14 +397,14 @@ export default function OnboardingPage() {
 
               {step === 3 && (
                 <div>
-                  <h2 className="text-2xl font-display font-bold text-foreground mb-2">{t.confidenceTitle}</h2>
+                  <h2 className="text-xl sm:text-2xl font-display font-bold text-foreground mb-2 break-words">{t.confidenceTitle}</h2>
                   <p className="text-muted-foreground mb-6">1 = nesiguran/na, 5 = vrlo siguran/na. Na osnovu toga prilagođavamo stil podrške i detaljnost objašnjenja.</p>
-                  <div className="flex gap-3">
+                  <div className="flex gap-2 sm:gap-3">
                     {[1, 2, 3, 4, 5].map((n) => (
                       <button
                         key={n}
                         onClick={() => setForm({ ...form, confidence_level: n })}
-                        className={`w-14 h-14 rounded-xl text-lg font-bold transition-all ${
+                        className={`w-11 h-11 sm:w-14 sm:h-14 rounded-xl text-base sm:text-lg font-bold transition-all ${
                           form.confidence_level === n
                             ? "bg-accent text-accent-foreground shadow-accent-glow scale-110"
                             : "bg-secondary text-secondary-foreground hover:bg-accent/20"
@@ -418,7 +419,7 @@ export default function OnboardingPage() {
 
               {step === 4 && (
                 <div>
-                  <h2 className="text-2xl font-display font-bold text-foreground mb-2">Kakav pristup ispravkama ti odgovara?</h2>
+                  <h2 className="text-xl sm:text-2xl font-display font-bold text-foreground mb-2 break-words">Kakav pristup ispravkama ti odgovara?</h2>
                   <p className="text-muted-foreground mb-6">Važi za ispravke u pisanju i povratne informacije u razgovoru.</p>
                   <div className="grid gap-3">
                     {SUPPORT_STYLES.map((o) => (
