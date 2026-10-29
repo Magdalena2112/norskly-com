@@ -1,3 +1,4 @@
+import { useSavedState } from "@/lib/savedAnswers";
 import { useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Trophy, CheckCircle2, XCircle, RotateCcw, ChevronRight } from "lucide-react";
@@ -17,8 +18,8 @@ export default function LessonReviewQuiz({ quiz, lang, lessonCode, passed, onPas
   const pass = quiz.passScore ?? 8;
   const bestKey = `review_best_${lang}_${lessonCode}`;
   const [round, setRound] = useState(0);
-  const [i, setI] = useState(0);
-  const [answers, setAnswers] = useState<string[]>([]);
+  const [i, setI] = useSavedState(`rq:${lessonCode}:i`, 0);
+  const [answers, setAnswers] = useSavedState<string[]>(`rq:${lessonCode}:answers`, []);
   const [best, setBest] = useState(() => Number(localStorage.getItem(bestKey) || 0));
   const opts = useMemo(() => quiz.questions.map((q) => [...q.options].sort(() => Math.random() - 0.5)), [quiz, round]);
   const total = quiz.questions.length;

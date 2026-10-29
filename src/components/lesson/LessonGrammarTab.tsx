@@ -1,3 +1,4 @@
+import { useSavedState } from "@/lib/savedAnswers";
 import React, { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/context/AuthContext";
@@ -30,7 +31,7 @@ function Table({ head, rows }: { head?: string[]; rows: string[][] }) {
 
 /** One-click micro quiz inside a theory section. */
 function QuickCheckCard({ qc }: { qc: { question: string; options: string[]; correct: number; feedback?: string } }) {
-  const [picked, setPicked] = useState<number | null>(null);
+  const [picked, setPicked] = useSavedState<number | null>(`qc:${qc.question.slice(0, 80)}`, null);
   return (
     <Card className="border-primary/30 bg-primary/5">
       <CardHeader className="pb-2"><CardTitle className="text-base flex items-center gap-2"><Sparkles className="w-4 h-4 text-primary" /> Blic provera</CardTitle></CardHeader>

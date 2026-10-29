@@ -1,3 +1,4 @@
+import { useSavedState } from "@/lib/savedAnswers";
 import { useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -23,9 +24,10 @@ export default function LessonExercise({
   exercise: Exercise; language: "no" | "en" | "de"; level: string; lessonTitle: string; lessonCode?: string; done: boolean; onDone: (code: string) => void;
 }) {
   const { user } = useAuth();
-  const [state, setState] = useState<ItemState[]>(() => exercise.items.map(() => ({ value: "", attempts: 0, status: "idle" })));
+  const [rawState, setState] = useSavedState<ItemState[]>(`le:${exercise.code}:state`, () => exercise.items.map(() => ({ value: "", attempts: 0, status: "idle" as Status })));
+  const state = rawState.map((x) => (x.status === "pending" ? { ...x, status: "idle" as Status } : x));
   const [checking, setChecking] = useState(false);
-  const [analysis, setAnalysis] = useState<CorrectionResult | null>(null);
+  const [analysis, setAnalysis] = useSavedState<CorrectionResult | null>(`le:${exercise.code}:analysis`, null);
   // Shuffle options once per exercise so the correct answer's position doesn't give it away.
   const shuffledOptions = useMemo(
     () => exercise.items.map((it) => (it.options ? [...it.options].sort(() => Math.random() - 0.5) : undefined)),

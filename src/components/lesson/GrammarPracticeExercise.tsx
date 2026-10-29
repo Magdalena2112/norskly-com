@@ -1,3 +1,4 @@
+import { useSavedState } from "@/lib/savedAnswers";
 import { useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -14,8 +15,8 @@ export default function GrammarPracticeExercise({ exercise: ex, done, onDone, im
   exercise: PracticeExercise; done: boolean; onDone: (code: string) => void;
   images?: { prompt?: string; left?: (string | undefined)[] }; vocabulary?: boolean;
 }) {
-  const [attempt, setAttempt] = useState(0);
-  const [result, setResult] = useState<"idle" | "correct" | "wrong">("idle");
+  const [attempt, setAttempt] = useSavedState(`gp:${ex.code}:attempt`, 0);
+  const [result, setResult] = useSavedState<"idle" | "correct" | "wrong">(`gp:${ex.code}:result`, "idle");
   const [seed, setSeed] = useState(0);
   const [awarded, setAwarded] = useState(false);
   const optOrder = useMemo(() => shuffle((ex.options || []).map((_, i) => i)), [ex, seed]);
@@ -23,12 +24,12 @@ export default function GrammarPracticeExercise({ exercise: ex, done, onDone, im
   const tokenOrder = useMemo(() => shuffle((ex.tokens || []).map((_, i) => i)), [ex]);
   const gapOpts = useMemo(() => (ex.gaps || []).map((g) => shuffle(g.options)), [ex]);
 
-  const [picked, setPicked] = useState<number[]>([]);
-  const [placed, setPlaced] = useState<number[]>([]); // token indices in answer order
+  const [picked, setPicked] = useSavedState<number[]>(`gp:${ex.code}:picked`, []);
+  const [placed, setPlaced] = useSavedState<number[]>(`gp:${ex.code}:placed`, []); // token indices in answer order
   const [dragFrom, setDragFrom] = useState<number | null>(null);
-  const [gapVals, setGapVals] = useState<string[]>(() => (ex.gaps || []).map(() => ""));
-  const [texts, setTexts] = useState<string[]>(() => (ex.inputs || []).map(() => ""));
-  const [matches, setMatches] = useState<number[]>(() => (ex.left || []).map(() => -1));
+  const [gapVals, setGapVals] = useSavedState<string[]>(`gp:${ex.code}:gaps`, () => (ex.gaps || []).map(() => ""));
+  const [texts, setTexts] = useSavedState<string[]>(`gp:${ex.code}:texts`, () => (ex.inputs || []).map(() => ""));
+  const [matches, setMatches] = useSavedState<number[]>(`gp:${ex.code}:matches`, () => (ex.left || []).map(() => -1));
   const [activeLeft, setActiveLeft] = useState<number | null>(null);
 
   const locked = result === "correct";

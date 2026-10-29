@@ -1,3 +1,4 @@
+import { useSavedState } from "@/lib/savedAnswers";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Play, Square, Eye, EyeOff, Volume2, CheckCircle2, XCircle, ChevronLeft, ChevronRight } from "lucide-react";
@@ -17,8 +18,8 @@ export default function LessonListeningTab({ scenes, lang, lessonCode, completed
 }) {
   const { user } = useAuth();
   const [index, setIndex] = useState(0);
-  const [questionSteps, setQuestionSteps] = useState<Record<string, number>>({});
-  const [answers, setAnswers] = useState<Answers>({});
+  const [questionSteps, setQuestionSteps] = useSavedState<Record<string, number>>(`li:${lessonCode}:steps`, {});
+  const [answers, setAnswers] = useSavedState<Answers>(`li:${lessonCode}:answers`, {});
   const [transcripts, setTranscripts] = useState<Record<string, boolean>>({});
   const [rate, setRate] = useState(1);
   const [playing, setPlaying] = useState(false);

@@ -1,3 +1,4 @@
+import { useSavedState } from "@/lib/savedAnswers";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { CheckCircle2, ChevronLeft, ChevronRight, Mic, RotateCcw, Volume2, XCircle } from "lucide-react";
@@ -68,9 +69,9 @@ export default function LessonPronunciationTab({ data, lang, level, lessonCode, 
   useEffect(() => { setDone(completed); }, [completed]);
   const [idx, setIdx] = useState(0);
   const [item, setItem] = useState(0);
-  const [picked, setPicked] = useState<Record<string, string>>({});
-  const [multi, setMulti] = useState<Record<string, string[]>>({});
-  const [ok, setOk] = useState<Record<string, boolean>>({});
+  const [picked, setPicked] = useSavedState<Record<string, string>>("pr:picked", {});
+  const [multi, setMulti] = useSavedState<Record<string, string[]>>("pr:multi", {});
+  const [ok, setOk] = useSavedState<Record<string, boolean>>("pr:ok", {});
 
   const ex = exercises[idx];
   const finishEx = async (code: string) => {
