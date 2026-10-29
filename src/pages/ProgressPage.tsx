@@ -273,29 +273,29 @@ export default function ProgressPage() {
                           : "Nastavi sa radom na svim oblastima."}
                       </p>
                       <p className="text-xs text-muted-foreground mt-0.5">
-                        Potrebno: 75/100 za prelazak na {nextLevel || "—"}
+                        Potrebno: 75/100 i {LEVEL_UP_LESSON_PCT}% lekcija nivoa za prelazak na {nextLevel || "—"} · završeno lekcija: {readinessScore.lessonPct}%
                       </p>
                     </div>
                   </div>
 
                   {/* Component bars */}
                   {[
-                    { label: "Gramatička tačnost", value: readinessScore.grammar, weight: "30%" },
-                    { label: "Vokabular", value: readinessScore.vocabulary, weight: "25%" },
-                    { label: "Komunikacija", value: readinessScore.communication, weight: "25%" },
-                    { label: "Konzistentnost", value: readinessScore.consistency, weight: "20%" },
+                    { label: "Razumevanje (slušanje i čitanje)", value: readinessScore.comprehension, weight: "25%" },
+                    { label: "Produkcija i govor", value: readinessScore.production, weight: "25%" },
+                    { label: "Jezički sistem (gramatika i vokabular)", value: readinessScore.system, weight: "30%" },
+                    { label: "Pokrivenost nivoa i kontinuitet", value: readinessScore.coverage, weight: "20%" },
                   ].map((comp) => (
                     <div key={comp.label} className="space-y-1">
-                      <div className="flex justify-between text-xs">
+                      <div className="flex justify-between gap-2 text-xs">
                         <span className="text-muted-foreground">{comp.label} <span className="opacity-60">({comp.weight})</span></span>
-                        <span className="font-medium text-foreground">{comp.value}/100</span>
+                        <span className="font-medium text-foreground shrink-0">{comp.value}/100</span>
                       </div>
                       <Progress value={comp.value} className="h-2" />
                     </div>
                   ))}
 
                   {/* Level up button */}
-                  {readinessScore.total >= 75 && nextLevel && (
+                  {readinessScore.canLevelUp && nextLevel && (
                     <motion.div
                       initial={{ opacity: 0, scale: 0.95 }}
                       animate={{ opacity: 1, scale: 1 }}
