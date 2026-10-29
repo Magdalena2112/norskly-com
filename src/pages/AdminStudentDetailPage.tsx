@@ -113,9 +113,24 @@ export default function AdminStudentDetailPage() {
       return data;
     },
   });
-  const enrollment = enrollments.find(e => e.id === selection) || enrollments[0];
+  const { data: legacyProfiles = [] } = useQuery({
+    queryKey: ["admin-legacy-profiles", userId], enabled: !!userId,
+    queryFn: async () => {
+      const { data } = await supabase.from("language_profiles").select("*").eq("user_id", userId || "");
+      return data || [];
+    },
+  });
+  const knownLanguages = new Set([...legacyProfiles.map(p => p.language), ...activities.map(a => a.language), ...errors.map(e => e.language)]);
+  const legacyEnrollments = [...knownLanguages].filter(l => l && !enrollments.some(e => e.language === l)).map(l => {
+    const lp = legacyProfiles.find(p => p.language === l);
+    return { id: `legacy-${l}`, user_id: userId || "", language: l, course_type: "legacy", level: lp?.level ?? null,
+      onboarding_completed: lp?.onboarding_completed ?? false, learning_goal: lp?.learning_goal ?? null, focus_area: lp?.focus_area ?? null } as (typeof enrollments)[number];
+  });
+  const allEnrollments = [...enrollments, ...legacyEnrollments];
+  const enrollment = allEnrollments.find(e => e.id === selection) || allEnrollments[0];
+  const isLegacy = enrollment?.course_type === "legacy";
   const unassigned = selection === "unassigned";
-  const matches = (record: Parameters<typeof belongsToEnrollment>[0]) => enrollment && belongsToEnrollment(record, enrollment, courseLessons);
+  const matches = (record: Parameters<typeof belongsToEnrollment>[0]) => !!enrollment && (isLegacy ? record.language === enrollment.language : belongsToEnrollment(record, enrollment, courseLessons));
   const scopedActivities = unassigned ? activities.filter(a => a.language === enrollment?.language && !enrollments.some(e => belongsToEnrollment(a, e, courseLessons))) : activities.filter(matches);
   const scopedErrors = unassigned ? errors.filter(e => e.language === enrollment?.language && !enrollments.some(n => belongsToEnrollment(e, n, courseLessons))) : errors.filter(matches);
   const scopedProgress = unassigned ? [] : progress.filter(matches);
@@ -136,11 +151,11 @@ export default function AdminStudentDetailPage() {
 
         {enrollmentError && <p className="text-destructive">Upisi nisu učitani. Osveži stranicu.</p>}
         <h2 className="text-lg font-semibold">Upisani kursevi</h2>
-        <div className="flex flex-wrap gap-2">{enrollments.map(e => <Button key={e.id} variant={!unassigned && enrollment?.id === e.id ? "secondary" : "outline"} className="h-auto whitespace-normal text-left" onClick={() => setSelection(e.id)}>{enrollmentName(e)}{!e.onboarding_completed && " · Upis nije završen"}</Button>)}</div>
-        {!enrollments.length && <p className="text-muted-foreground">Korisnik još nema upisan kurs.</p>}
+        <div className="flex flex-wrap gap-2">{allEnrollments.map(e => <Button key={e.id} variant={!unassigned && enrollment?.id === e.id ? "secondary" : "outline"} className="h-auto whitespace-normal text-left" onClick={() => setSelection(e.id)}>{enrollmentName(e)}{!e.onboarding_completed && " · Upis nije završen"}</Button>)}</div>
+        {!allEnrollments.length && <p className="text-muted-foreground">Korisnik još nema upisan kurs.</p>}
         {enrollment && <Select value={unassigned ? "unassigned" : enrollment.id} onValueChange={setSelection}>
           <SelectTrigger className="w-full"><SelectValue /></SelectTrigger>
-          <SelectContent>{enrollments.map(e => <SelectItem key={e.id} value={e.id}>{enrollmentName(e)}</SelectItem>)}<SelectItem value="unassigned">Ostale aktivnosti i ranije greške · {enrollment.language.toUpperCase()}</SelectItem></SelectContent>
+          <SelectContent>{allEnrollments.map(e => <SelectItem key={e.id} value={e.id}>{enrollmentName(e)}</SelectItem>)}{!isLegacy && <SelectItem value="unassigned">Ostale aktivnosti i ranije greške · {enrollment.language.toUpperCase()}</SelectItem>}</SelectContent>
         </Select>}
         {/* Overview card */}
         <Card>

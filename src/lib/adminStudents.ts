@@ -3,7 +3,7 @@ export interface Enrollment {
   level: string | null; onboarding_completed: boolean;
 }
 export const languageName = (code: string) => ({ no: "Norveški", en: "Engleski", de: "Nemački" }[code] || code);
-export const courseName = (course: string) => course === "general" ? "Opšti kurs" : course === "health" ? "Zdravstveni kurs" : course;
+export const courseName = (course: string) => course === "general" ? "Opšti kurs" : course === "health" ? "Zdravstveni kurs" : course === "legacy" ? "Raniji profil (sve aktivnosti)" : course;
 export const enrollmentName = (e: Enrollment) => `${languageName(e.language)} · ${courseName(e.course_type)} · ${e.level || "Nivo nije izabran"}`;
 
 export function matchesEnrollment(enrollments: Enrollment[], language: string, course: string, level: string) {
