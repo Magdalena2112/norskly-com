@@ -106,3 +106,6 @@ export function useSavedState<T>(name: string, initial: T | (() => T)): [T, (v: 
 
   return [value, set];
 }
+
+/** Test helper: forget all cached answers. */
+export function resetSavedAnswersCache() { mem.clear(); loaded.clear(); timers.forEach(clearTimeout); timers.clear(); }
