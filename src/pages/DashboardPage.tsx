@@ -269,13 +269,13 @@ export default function DashboardPage() {
           </Card>
         )}
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div className={`grid ${visibleLessons.length === 1 ? "grid-cols-1" : "grid-cols-2"} sm:grid-cols-3 lg:grid-cols-4 gap-4`}>
           {visibleLessons.map((l, i) => {
             const p = lessonProgress[l.id];
             return (
               <motion.div key={l.id} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.08 + 0.15 }}>
                 <Card
-                  className={`cursor-pointer group h-full bg-cream border border-border/60 shadow-postcard overflow-hidden relative aspect-square flex flex-col transition-all duration-500 ease-out hover:-translate-y-1.5 hover:shadow-card-soft ${
+                  className={`cursor-pointer group h-full bg-cream border border-border/60 shadow-postcard overflow-hidden relative aspect-[2/1] sm:aspect-square flex flex-col transition-all duration-500 ease-out hover:-translate-y-1.5 hover:shadow-card-soft ${
                     p === "completed" ? "ring-1 ring-forest/40" : p === "in_progress" ? "ring-1 ring-sunset/50" : ""
                   }`}
                   onClick={() => navigate(`/lekcija/${l.id}?course=${course}`)}
