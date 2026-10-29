@@ -13,6 +13,7 @@ interface ErrorEvent {
   created_at: string;
   context?: string | null;
   attempt_no?: number | null;
+  courseLabel?: string;
 }
 
 export function StudentErrorAnalysis({ errors, loading }: { errors: ErrorEvent[]; loading: boolean }) {
@@ -63,13 +64,13 @@ export function StudentErrorAnalysis({ errors, loading }: { errors: ErrorEvent[]
             </TableRow>
           </TableHeader>
           <TableBody>
-            {errors.slice(0, 20).map((e) => (
+            {errors.map((e) => (
               <TableRow key={e.id}>
                 <TableCell>
                   <Badge variant="outline">{e.module}</Badge>
                 </TableCell>
                 <TableCell className="text-sm">{e.category}</TableCell>
-                <TableCell className="text-sm text-muted-foreground">{e.topic}</TableCell>
+                <TableCell className="text-sm text-muted-foreground">{e.topic}<p className="text-xs">{e.courseLabel}</p></TableCell>
                 <TableCell className="text-xs text-muted-foreground">{e.attempt_no || "—"} · {new Date(e.created_at).toLocaleDateString("sr-Latn")}<p className="max-w-xs whitespace-normal">{e.context}</p></TableCell>
                 <TableCell className="text-sm text-destructive">{e.example_wrong}</TableCell>
                 <TableCell className="text-sm text-accent">{e.example_correct}</TableCell>

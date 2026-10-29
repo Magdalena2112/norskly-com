@@ -21,3 +21,26 @@ export function belongsToEnrollment(
   return record.language === enrollment.language && lessons.some(l => l.id === id && l.language === enrollment.language &&
     l.course === enrollment.course_type && (l.course !== "general" || l.cefr_level === enrollment.level));
 }
+
+export type StudentRecord = { language: string; lesson_id?: string | null; payload?: unknown };
+type LessonMetadata = { id: string; language: string; course: string; cefr_level: string };
+
+export function filterStudentRecords<T extends StudentRecord>(
+  records: T[], language: string, scope: "all" | "unassigned" | "course",
+  enrollment: Enrollment | undefined, lessons: LessonMetadata[],
+) {
+  return records.filter(record => {
+    if (record.language !== language) return false;
+    if (scope === "all") return true;
+    if (scope === "course") return !!enrollment && belongsToEnrollment(record, enrollment, lessons);
+    const payload = record.payload as { lesson_id?: string } | null;
+    const id = record.lesson_id || payload?.lesson_id;
+    return !lessons.some(lesson => lesson.id === id && lesson.language === language);
+  });
+}
+
+export function studentRecordLabel(record: StudentRecord, lessons: (LessonMetadata & { title: string })[]) {
+  const payload = record.payload as { lesson_id?: string } | null;
+  const lesson = lessons.find(l => l.id === (record.lesson_id || payload?.lesson_id) && l.language === record.language);
+  return lesson ? `${courseName(lesson.course)} · ${lesson.cefr_level} · ${lesson.title}` : "Bez dodeljenog kursa · ranije ili samostalno vežbanje";
+}
