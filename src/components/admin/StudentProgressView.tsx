@@ -26,6 +26,7 @@ export function StudentProgressView({ activities, loading }: { activities: Activ
     }));
   }, [activities]);
 
+  if (loading) return <p className="text-muted-foreground">Učitavanje...</p>;
   if (activities.length === 0) {
     return (
       <div className="text-center py-12">
@@ -49,7 +50,7 @@ export function StudentProgressView({ activities, loading }: { activities: Activ
                 <XAxis dataKey="module" fontSize={12} />
                 <YAxis fontSize={12} />
                 <Tooltip />
-                <Bar dataKey="aktivnosti" fill="hsl(168, 45%, 42%)" radius={[4, 4, 0, 0]} />
+                <Bar dataKey="aktivnosti" fill="hsl(var(--primary))" radius={[4, 4, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>

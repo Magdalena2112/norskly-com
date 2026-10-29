@@ -1,4 +1,4 @@
-import { useSavedState } from "@/lib/savedAnswers";
+import { useSavedState, useAnswerScope } from "@/lib/savedAnswers";
 import { useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -18,7 +18,6 @@ interface ItemState { value: string; attempts: number; status: Status; feedback?
 
 import { maxAttempts } from "@/lib/attemptPolicy";
 import MistakeExplanation from "./MistakeExplanation";
-const MAX_ATTEMPTS = 3;
 const limitFor = (it: { options?: string[] }) => maxAttempts({ optionCount: it.options?.length });
 
 export default function LessonExercise({
@@ -27,6 +26,8 @@ export default function LessonExercise({
   exercise: Exercise; language: "no" | "en" | "de"; level: string; lessonTitle: string; lessonCode?: string; done: boolean; onDone: (code: string) => void;
 }) {
   const { user } = useAuth();
+  const scope = useAnswerScope();
+  const lessonId = /^[0-9a-f-]{36}$/i.test(scope) ? scope : undefined;
   const [rawState, setState] = useSavedState<ItemState[]>(`le:${exercise.code}:state`, () => exercise.items.map(() => ({ value: "", attempts: 0, status: "idle" as Status })));
   const state = rawState.map((x) => (x.status === "pending" ? { ...x, status: "idle" as Status } : x));
   const [checking, setChecking] = useState(false);
@@ -44,7 +45,7 @@ export default function LessonExercise({
 
   async function check() {
     const next = [...state];
-    const wrongs: { wrong: string; correct: string; prompt: string }[] = [];
+    const wrongs: { wrong: string; correct: string; prompt: string; attempt: number }[] = [];
     exercise.items.forEach((item, i) => {
       if (item.open) return;
       const s = next[i];
@@ -55,19 +56,19 @@ export default function LessonExercise({
         const attempts = s.attempts + 1;
         const failed = attempts >= limitFor(item);
         next[i] = { ...s, attempts, status: failed ? "failed" : "wrong" };
-        if (failed) wrongs.push({ wrong: s.value, correct: item.answers?.[0] || "", prompt: item.prompt });
+        wrongs.push({ wrong: s.value, correct: item.answers?.[0] || "", prompt: item.prompt, attempt: attempts });
       }
     });
     setState(next);
 
     if (user && wrongs.length) {
-      logErrors(user.id, "grammar", "lesson", wrongs.slice(0, 5).map((w) => ({
+      wrongs.forEach(w => void logErrors(user.id, exercise.kind === "vocabulary" ? "vocabulary" : "grammar", "lesson", [{
         category: /^(VO|GI|PCF|CO|NUM)-/.test(exercise.code) ? "vocabulary" : "grammar",
         topic: `${exercise.code} · ${exercise.title}`,
         severity: 2,
         example_wrong: `${w.prompt} → ${w.wrong}`,
         example_correct: w.correct,
-      })), lessonTitle, MAX_ATTEMPTS, language);
+      }], lessonTitle, w.attempt, language, lessonId));
     }
 
     // Explicitly open writing tasks get the full analysis, same as free writing.
@@ -101,7 +102,7 @@ export default function LessonExercise({
       const mistakeCount = (data.mistakes || []).length;
       next[0] = { ...next[0], status: mistakeCount === 0 ? "correct" : "partial", feedback: data.overall_feedback, improved: data.corrected_text, attempts: next[0].attempts + 1 };
       setState([...next]);
-      if (user && data._errors?.length) logErrors(user.id, "writing", "lesson", data._errors.slice(0, 5), lessonTitle, undefined, language);
+      if (user && data._errors?.length) logErrors(user.id, "writing", "lesson", data._errors.slice(0, 5), lessonTitle, undefined, language, lessonId);
       onDone(exercise.code);
       return;
     }
@@ -133,7 +134,7 @@ export default function LessonExercise({
         next[i] = { ...next[i], status: r.verdict === "correct" ? "correct" : r.verdict === "partial" ? "partial" : "wrong", feedback: r.feedback, improved: r.improved, attempts: next[i].attempts + 1 };
       });
       setState([...next]);
-      if (user && data.errors?.length) logErrors(user.id, "writing", "lesson", data.errors, lessonTitle, undefined, language);
+      if (user && data.errors?.length) logErrors(user.id, "writing", "lesson", data.errors, lessonTitle, undefined, language, lessonId);
     }
 
     const allDone = next.every((s, i) => exercise.items[i].open ? ["correct", "partial", "wrong"].includes(s.status) : ["correct", "failed"].includes(s.status));
