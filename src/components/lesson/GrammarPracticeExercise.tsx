@@ -3,6 +3,8 @@ import { useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { CheckCircle2, AlertCircle, RotateCcw, Lightbulb } from "lucide-react";
+import { maxAttempts } from "@/lib/attemptPolicy";
+import MistakeExplanation from "./MistakeExplanation";
 import { gradePractice, type PracticeExercise } from "@/lib/grammarPractice";
 
 function shuffle<T>(arr: T[]) {
@@ -16,7 +18,7 @@ export default function GrammarPracticeExercise({ exercise: ex, done, onDone, im
   images?: { prompt?: string; left?: (string | undefined)[] }; vocabulary?: boolean;
 }) {
   const [attempt, setAttempt] = useSavedState(`gp:${ex.code}:attempt`, 0);
-  const [result, setResult] = useSavedState<"idle" | "correct" | "wrong">(`gp:${ex.code}:result`, "idle");
+  const [result, setResult] = useSavedState<"idle" | "correct" | "wrong" | "failed">(`gp:${ex.code}:result`, "idle");
   const [seed, setSeed] = useState(0);
   const [awarded, setAwarded] = useState(false);
   const optOrder = useMemo(() => shuffle((ex.options || []).map((_, i) => i)), [ex, seed]);
@@ -32,7 +34,8 @@ export default function GrammarPracticeExercise({ exercise: ex, done, onDone, im
   const [matches, setMatches] = useSavedState<number[]>(`gp:${ex.code}:matches`, () => (ex.left || []).map(() => -1));
   const [activeLeft, setActiveLeft] = useState<number | null>(null);
 
-  const locked = result === "correct";
+  const limit = maxAttempts({ type: ex.type, optionCount: ex.type === "choice" || ex.type === "truefalse" ? ex.options?.length : undefined });
+  const locked = result === "correct" || result === "failed";
   const touch = () => result === "wrong" && setResult("idle");
 
   const value = (): number[] | string[] => {
@@ -64,6 +67,8 @@ export default function GrammarPracticeExercise({ exercise: ex, done, onDone, im
       if (!done) setAwarded(true);
       onDone(ex.code);
     } else {
+      const n = attempt + 1;
+      if (n >= limit) { setResult("failed"); return; }
       setResult("wrong");
       setSeed((s) => s + 1); // reshuffle options between attempts
     }
@@ -199,8 +204,15 @@ export default function GrammarPracticeExercise({ exercise: ex, done, onDone, im
       )}
       {result === "wrong" && (
         <div className="rounded-xl bg-secondary/60 border border-border p-3 text-sm space-y-1">
-          <p className="font-semibold text-destructive flex items-center gap-1"><AlertCircle className="w-4 h-4" /> Pokušaj ponovo.</p>
+          <p className="font-semibold text-destructive flex items-center gap-1"><AlertCircle className="w-4 h-4" /> Pokušaj ponovo (preostalo: {limit - attempt}).</p>
           <p className="flex gap-1"><Lightbulb className="w-4 h-4 text-sunset shrink-0 mt-0.5" /> {attempt >= 2 && ex.hint2 ? ex.hint2 : ex.hint}</p>
+        </div>
+      )}
+
+      {result === "failed" && (
+        <div className="space-y-2">
+          <p className="text-sm font-semibold text-destructive flex items-center gap-1"><AlertCircle className="w-4 h-4" /> Netačno — iskorišćeni su svi pokušaji.</p>
+          <MistakeExplanation explanation={[ex.explanation, ex.grammarFocus && `Pravilo: ${ex.grammarFocus}`].filter(Boolean).join(" ") || ex.hint2 || ex.hint} />
         </div>
       )}
 
