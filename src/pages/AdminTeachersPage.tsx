@@ -34,7 +34,7 @@ export default function AdminTeachersPage() {
     queryKey: ["admin-teachers-overview"],
     queryFn: async () => {
       const [teachers, types, lessons, approvals] = await Promise.all([
-        supabase.from("teachers").select("id, name, email, photo_url, is_active, teaching_languages, language, rating, focus").order("name"),
+        supabase.from("teachers").select("id, name, email, photo_url, is_active, teaching_languages, language, rating, focus, teaching_levels, course_types").order("name"),
         supabase.from("lesson_types").select("id, teacher_id, title, duration_minutes, price_cents, currency, is_active, language"),
         supabase.from("lessons").select("teacher_id, user_id, status, start_time"),
         supabase.from("teacher_course_approvals").select("teacher_id, language"),
@@ -100,6 +100,9 @@ export default function AdminTeachersPage() {
                       )}
                       <div className="flex flex-wrap gap-1 mt-2">
                         {langs.map((l) => <Badge key={l} variant="outline" className="text-xs">{LANG[l] ?? l}</Badge>)}
+                        {(t.teaching_levels ?? []).map((l: string) => <Badge key={l} variant="secondary" className="text-xs">{l}</Badge>)}
+                        {(t.course_types ?? []).includes("health") && <Badge variant="secondary" className="text-xs">Želi zdravstveni</Badge>}
+                        {!(t.teaching_levels ?? []).length && <Badge variant="destructive" className="text-xs">Nivoi nisu uneti</Badge>}
                         {Number(t.rating) > 0 && (
                           <Badge variant="outline" className="text-xs"><Star className="h-3 w-3 mr-1" />{Number(t.rating).toFixed(1)}</Badge>
                         )}
