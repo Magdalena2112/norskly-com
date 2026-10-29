@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { useAuth } from "@/context/AuthContext";
 import { useProfile } from "@/context/ProfileContext";
 import { supabase } from "@/integrations/supabase/client";
+import { useSelectedCourse } from "@/hooks/useSelectedCourse";
 import { useSelectedLanguage } from "@/hooks/useSelectedLanguage";
 import { format } from "date-fns";
 import { Mail, Calendar, Languages, CreditCard, Target, GraduationCap, Zap, Camera, Loader2 } from "lucide-react";
@@ -31,6 +32,7 @@ export default function ProfilePage() {
   const [uploading, setUploading] = useState(false);
   const fileRef = useRef<HTMLInputElement>(null);
   const { code: langCode } = useSelectedLanguage();
+  const course = useSelectedCourse(langCode);
 
   useEffect(() => {
     if (!user) return;
@@ -42,10 +44,11 @@ export default function ProfilePage() {
           .eq("user_id", user.id)
           .maybeSingle(),
         supabase
-          .from("language_profiles")
+          .from("course_enrollments")
           .select("subscription_type")
           .eq("user_id", user.id)
           .eq("language", langCode)
+          .eq("course_type", course)
           .maybeSingle(),
         supabase.from("user_xp").select("total_xp, level").eq("user_id", user.id).eq("language", langCode).maybeSingle(),
       ]);
@@ -55,7 +58,7 @@ export default function ProfilePage() {
       setAvatarUrl((p as any)?.avatar_url || null);
       setXp(x || { total_xp: 0, level: 1 });
     })();
-  }, [user, langCode]);
+  }, [user, langCode, course]);
 
 
 

@@ -12,6 +12,7 @@ import { ChevronRight, ChevronLeft, User, Target, MessageSquare, Gauge, Clock } 
 import BackButton from "@/components/BackButton";
 import JourneyStepper from "@/components/onboarding/JourneyStepper";
 import { courseIntent, courseStartLevel, promoAvailableLevels } from "@/lib/courseAccess";
+import { selectCourse } from "@/lib/courseSelection";
 import { useToast } from "@/hooks/use-toast";
 
 type LangCode = "no" | "en" | "de";
@@ -261,12 +262,12 @@ export default function OnboardingPage() {
             ...(selectedPlan ? { subscription_type: selectedPlan } : {}),
           }, { onConflict: "user_id" });
         if (profileError) throw profileError;
-        const { data: existing, error: enrollmentError } = await supabase.from("language_profiles").select("course_type, level, onboarding_completed").eq("user_id", user.id).eq("language", langCode).maybeSingle();
+        const { data: existing, error: enrollmentError } = await supabase.from("course_enrollments").select("course_type, level, onboarding_completed").eq("user_id", user.id).eq("language", langCode).eq("course_type", chosenCourse).maybeSingle();
         if (enrollmentError) throw enrollmentError;
         const enrolledCourse = courseIntent(existing?.course_type ?? chosenCourse, langCode);
         const enrolledLevel = existing?.onboarding_completed || (existing && enrolledCourse !== chosenCourse) ? courseStartLevel(existing.level, enrolledCourse, promoAvailableLevels(langCode, enrolledCourse)) : courseStartLevel(chosenLevel, enrolledCourse, promoAvailableLevels(langCode, enrolledCourse));
         const { error: languageError } = await supabase
-          .from("language_profiles")
+          .from("course_enrollments")
           .upsert({
             user_id: user.id,
             language: langCode,
@@ -281,16 +282,16 @@ export default function OnboardingPage() {
             life_context: form.life_context || null,
             subscription_type: selectedPlan,
             onboarding_completed: true,
-          }, { onConflict: "user_id,language" });
+          }, { onConflict: "user_id,language,course_type" });
         if (languageError) throw languageError;
         updateProfile({ ...form, level: enrolledLevel, life_context: form.life_context || "" });
-        localStorage.setItem("norskly_selected_language", selectedLang);
+        selectCourse(langCode, chosenCourse);
         localStorage.setItem("norskly_onboarding_done", "true");
         await queryClient.invalidateQueries({ queryKey: ["course-enrollment"] });
         await queryClient.invalidateQueries({ queryKey: ["onboarding-status"] });
       }
       const target = `/ucenje/${selectedLang}`;
-      const qs = selectedPlan ? `?plan=${selectedPlan}` : "";
+      const qs = `?course=${chosenCourse}${selectedPlan ? `&plan=${selectedPlan}` : ""}`;
       navigate(`${target}${qs}`);
       } catch {
         toast({ title: "Profil nije sačuvan", description: "Pokušaj ponovo. Upisani kurs ostaje nepromenjen.", variant: "destructive" });

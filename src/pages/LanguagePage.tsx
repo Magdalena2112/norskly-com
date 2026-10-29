@@ -15,6 +15,7 @@ import JourneyStepper from "@/components/onboarding/JourneyStepper";
 import { Helmet } from "react-helmet-async";
 import teacherPhotoFallback from "@/assets/teacher-photo.jpg";
 import PricingSection from "@/components/PricingSection";
+import { coursePath, loginChoices, selectCourse } from "@/lib/courseSelection";
 import CourseTypeSection from "@/components/CourseTypeSection";
 
 export default function LanguagePage() {
@@ -55,18 +56,14 @@ export default function LanguagePage() {
         navigate(extra.next);
         return;
       }
-      const { data: langProf } = await supabase
-        .from("language_profiles")
-        .select("id, onboarding_completed, course_type, level")
-        .eq("user_id", user.id)
-        .eq("language", lang.code)
-        .maybeSingle();
-      if (langProf?.onboarding_completed) {
-        const wantedCourse = extra.course === "health" ? "health" : "general";
-        if (extra.level && langProf.course_type === wantedCourse && langProf.level !== extra.level) {
-          await supabase.from("language_profiles").update({ level: extra.level }).eq("id", langProf.id);
-        }
-        navigate(`/ucenje/${lang.slug}`);
+      const { data: rows, error } = await supabase.from("course_enrollments").select("language,course_type,level,onboarding_completed").eq("user_id", user.id).eq("language", lang.code);
+      if (error) return;
+      const choices = loginChoices(rows ?? [], lang.code, extra.course);
+      if (choices.length === 1) {
+        selectCourse(lang.code, choices[0].course_type);
+        navigate(coursePath(choices[0]));
+      } else if (choices.length > 1) {
+        navigate(`/auth?lang=${lang.slug}&choose=courses`);
       } else {
         const params = new URLSearchParams({ lang: lang.slug, course: extra.course === "health" ? "health" : "general", ...(extra.level ? { level: extra.level } : {}) });
         navigate(`/onboarding?${params.toString()}`);

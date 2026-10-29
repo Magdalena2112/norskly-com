@@ -1967,10 +1967,12 @@ export type Database = {
         Args: { p_course: string; p_profile_id: string }
         Returns: Json
       }
-      submit_survey: {
-        Args: { p_answers: Json; p_language: string }
-        Returns: Json
-      }
+      submit_survey:
+        | { Args: { p_answers: Json; p_language: string }; Returns: Json }
+        | {
+            Args: { p_answers: Json; p_course: string; p_language: string }
+            Returns: Json
+          }
       teacher_has_student: {
         Args: { _student_id: string; _teacher_id: string }
         Returns: boolean

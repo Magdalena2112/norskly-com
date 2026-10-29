@@ -1,3 +1,4 @@
+import { getSelectedCourse } from "./courseSelection";
 import { supabase } from "@/integrations/supabase/client";
 import { LANGUAGE_META } from "@/hooks/useSelectedLanguage";
 import type { LanguageCode } from "@/lib/currentLanguage";
@@ -28,12 +29,13 @@ export function codeToSlug(code: LanguageCode): string {
 }
 
 /** Returns true if the user has completed onboarding for the given language. */
-export async function isLanguageOnboarded(userId: string, language: LanguageCode): Promise<boolean> {
+export async function isLanguageOnboarded(userId: string, language: LanguageCode, course = getSelectedCourse(language)): Promise<boolean> {
   const { data } = await supabase
-    .from("language_profiles")
+    .from("course_enrollments")
     .select("onboarding_completed")
     .eq("user_id", userId)
     .eq("language", language)
+    .eq("course_type", course)
     .maybeSingle();
   return !!data?.onboarding_completed;
 }

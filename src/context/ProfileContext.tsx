@@ -3,6 +3,7 @@ import { UserProfile, defaultProfile } from "@/types/profile";
 import { useAuth } from "@/context/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
 import { useSelectedLanguage } from "@/hooks/useSelectedLanguage";
+import { useSelectedCourse } from "@/hooks/useSelectedCourse";
 import { profileCacheKey } from "@/lib/currentLanguage";
 
 interface ProfileContextType {
@@ -17,6 +18,7 @@ const ProfileContext = createContext<ProfileContextType | null>(null);
 export function ProfileProvider({ children }: { children: ReactNode }) {
   const { user } = useAuth();
   const { code } = useSelectedLanguage();
+  const course = useSelectedCourse(code);
   const [loading, setLoading] = useState(true);
   const [profile, setProfile] = useState<UserProfile>(() => {
     const saved = localStorage.getItem(profileCacheKey());
@@ -26,9 +28,9 @@ export function ProfileProvider({ children }: { children: ReactNode }) {
   // Kada se jezik promeni, odmah prikaži keš tog jezika (ili prazan profil),
   // nikad profil prethodnog jezika.
   useEffect(() => {
-    const saved = localStorage.getItem(profileCacheKey(code));
+    const saved = localStorage.getItem(profileCacheKey(code, course));
     setProfile(saved ? JSON.parse(saved) : defaultProfile);
-  }, [code]);
+  }, [code, course]);
 
   useEffect(() => {
     if (!user) {
@@ -36,6 +38,8 @@ export function ProfileProvider({ children }: { children: ReactNode }) {
       return;
     }
 
+    let alive = true;
+    setLoading(true);
     (async () => {
       try {
         const [{ data: prof }, { data: lp }] = await Promise.all([
@@ -45,10 +49,11 @@ export function ProfileProvider({ children }: { children: ReactNode }) {
             .eq("user_id", user.id)
             .maybeSingle(),
           supabase
-            .from("language_profiles")
+            .from("course_enrollments")
             .select("level, learning_goal, focus_area, confidence_level, preferred_tone, lives_in_norway, life_context")
             .eq("user_id", user.id)
             .eq("language", code)
+            .eq("course_type", course)
             .maybeSingle(),
         ]);
 
@@ -62,26 +67,28 @@ export function ProfileProvider({ children }: { children: ReactNode }) {
           lives_in_norway: lp?.lives_in_norway ?? defaultProfile.lives_in_norway,
           life_context: lp?.life_context || "",
         };
+        if (!alive) return;
         setProfile(dbProfile);
-        localStorage.setItem(profileCacheKey(code), JSON.stringify(dbProfile));
+        localStorage.setItem(profileCacheKey(code, course), JSON.stringify(dbProfile));
       } catch (e) {
         console.error("Failed to fetch profile from DB", e);
       } finally {
-        setLoading(false);
+        if (alive) setLoading(false);
       }
     })();
-  }, [user, code]);
+    return () => { alive = false; };
+  }, [user, code, course]);
 
   const updateProfile = (partial: Partial<UserProfile>) => {
     setProfile((prev) => {
       const next = { ...prev, ...partial };
-      localStorage.setItem(profileCacheKey(code), JSON.stringify(next));
+      localStorage.setItem(profileCacheKey(code, course), JSON.stringify(next));
       return next;
     });
   };
 
   const setFullProfile = (p: UserProfile) => {
-    localStorage.setItem(profileCacheKey(code), JSON.stringify(p));
+    localStorage.setItem(profileCacheKey(code, course), JSON.stringify(p));
     setProfile(p);
   };
 
