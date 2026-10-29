@@ -16,7 +16,10 @@ import CorrectionResultView, { type CorrectionResult } from "@/components/writin
 type Status = "idle" | "correct" | "wrong" | "failed" | "partial" | "pending";
 interface ItemState { value: string; attempts: number; status: Status; feedback?: string; improved?: string }
 
+import { maxAttempts } from "@/lib/attemptPolicy";
+import MistakeExplanation from "./MistakeExplanation";
 const MAX_ATTEMPTS = 3;
+const limitFor = (it: { options?: string[] }) => maxAttempts({ optionCount: it.options?.length });
 
 export default function LessonExercise({
   exercise, language, level, lessonTitle, lessonCode, done, onDone,
@@ -50,7 +53,7 @@ export default function LessonExercise({
       if (isCorrect(s.value, item.answers)) next[i] = { ...s, status: "correct", attempts: s.attempts + 1 };
       else {
         const attempts = s.attempts + 1;
-        const failed = attempts >= MAX_ATTEMPTS;
+        const failed = attempts >= limitFor(item);
         next[i] = { ...s, attempts, status: failed ? "failed" : "wrong" };
         if (failed) wrongs.push({ wrong: s.value, correct: item.answers?.[0] || "", prompt: item.prompt });
       }
@@ -194,8 +197,8 @@ export default function LessonExercise({
                   onKeyDown={(e) => e.key === "Enter" && check()} placeholder="Tvoj odgovor…" className="bg-background max-w-md" />
               )}
               {s.status === "correct" && <p className="text-xs text-forest flex items-center gap-1"><CheckCircle2 className="w-3.5 h-3.5" /> Tačno!{s.feedback ? ` ${s.feedback}` : ""}</p>}
-              {s.status === "wrong" && !item.open && <p className="text-xs text-destructive flex items-center gap-1"><XCircle className="w-3.5 h-3.5" /> Nije tačno. Pokušaj ponovo ({MAX_ATTEMPTS - s.attempts} preostala).</p>}
-              {s.status === "failed" && <p className="text-xs text-destructive flex items-center gap-1"><XCircle className="w-3.5 h-3.5" /> Tačan odgovor: <strong>{item.answers?.[0]}</strong></p>}
+              {s.status === "wrong" && !item.open && <p className="text-xs text-destructive flex items-center gap-1"><XCircle className="w-3.5 h-3.5" /> Nije tačno. Pokušaj ponovo (preostalo: {limitFor(item) - s.attempts}).</p>}
+              {s.status === "failed" && <><p className="text-xs text-destructive flex items-center gap-1"><XCircle className="w-3.5 h-3.5" /> Netačno — iskorišćeni su svi pokušaji.</p><MistakeExplanation yourAnswer={s.value} correct={item.answers?.[0]} explanation={item.guide} /></>}
               {item.open && (s.status === "partial" || s.status === "wrong") && (
                 <div className="text-xs rounded-lg bg-secondary/50 p-2 space-y-1">
                   <p className="flex items-start gap-1"><AlertCircle className="w-3.5 h-3.5 mt-0.5 text-sunset shrink-0" /> {s.feedback}</p>
