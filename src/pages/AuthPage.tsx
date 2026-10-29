@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet-async";
 import norsklyLogo from "@/assets/norskly-logo-new.webp.asset.json";
 import { motion } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
+import { lovable } from "@/integrations/lovable/index";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -89,6 +90,23 @@ export default function AuthPage() {
         ? { title: "Greška", description: error.message, variant: "destructive" }
         : { title: "Proveri email", description: "Poslali smo ti link za postavljanje nove lozinke." },
     );
+  };
+
+  const handleGoogle = async () => {
+    const params = new URLSearchParams(searchParams);
+    params.set("mode", "login");
+    setLoading(true);
+    const result = await lovable.auth.signInWithOAuth("google", {
+      redirect_uri: `${window.location.origin}/auth?${params.toString()}`,
+    });
+    if (result.error) {
+      setLoading(false);
+      toast({ title: "Prijava nije uspela", description: "Pokušaj ponovo ili koristi email.", variant: "destructive" });
+      return;
+    }
+    if (result.redirected) return;
+    setLoading(false);
+    setIsLogin(true);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -251,6 +269,14 @@ export default function AuthPage() {
                 ))}
               </div>
             ) : (
+            <>
+            <Button type="button" variant="outline" className="w-full gap-2 mb-4" disabled={loading} onClick={handleGoogle}>
+              <svg viewBox="0 0 24 24" className="h-4 w-4" aria-hidden="true"><path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.4h6.5a5.5 5.5 0 0 1-2.4 3.6v3h3.9c2.2-2.1 3.5-5.1 3.5-8.7z"/><path fill="#34A853" d="M12 24c3.2 0 6-1.1 7.9-2.9l-3.9-3c-1.1.7-2.4 1.2-4 1.2-3.1 0-5.7-2.1-6.6-4.9h-4v3.1A12 12 0 0 0 12 24z"/><path fill="#FBBC05" d="M5.4 14.4a7.2 7.2 0 0 1 0-4.7V6.6h-4a12 12 0 0 0 0 10.8l4-3z"/><path fill="#EA4335" d="M12 4.8c1.8 0 3.3.6 4.6 1.8l3.4-3.4A12 12 0 0 0 1.4 6.6l4 3.1C6.3 6.9 8.9 4.8 12 4.8z"/></svg>
+              Nastavi putem Google-a
+            </Button>
+            <div className="flex items-center gap-3 mb-4 text-xs text-muted-foreground">
+              <div className="h-px flex-1 bg-border" />ili putem emaila<div className="h-px flex-1 bg-border" />
+            </div>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="space-y-2">
                 {(lockedLang || !isLogin) && <Label>{lockedLang ? "Jezik" : "Izaberi jezik"}</Label>}
