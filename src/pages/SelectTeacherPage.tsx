@@ -14,6 +14,8 @@ import { Star, Languages, GraduationCap, Sparkles } from "lucide-react";
 import { useSelectedLanguage } from "@/hooks/useSelectedLanguage";
 import teacherPhotoFallback from "@/assets/teacher-photo.jpg";
 import { useSelectedCourse } from "@/hooks/useSelectedCourse";
+import { useAuth } from "@/context/AuthContext";
+import { isRecommendedTeacher, sortByRecommendation, TEACHING_LEVELS } from "@/lib/teacherVisibility";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 type Teacher = {
@@ -27,6 +29,8 @@ type Teacher = {
   students_count: number;
   is_verified: boolean;
   healthcare_approved: boolean;
+  teaching_levels: string[] | null;
+  course_types: string[] | null;
 };
 
 type PriceInfo = { min: number; currency: string } | null;
@@ -36,6 +40,16 @@ export default function SelectTeacherPage() {
   const { code, labelSr } = useSelectedLanguage();
   const course = useSelectedCourse(code);
   const [filter, setFilter] = useState("all");
+  const [levelFilter, setLevelFilter] = useState("all");
+  const { user } = useAuth();
+  const { data: studentLevel = null } = useQuery({
+    queryKey: ["student-course-level", user?.id, code, course],
+    enabled: !!user,
+    queryFn: async () => {
+      const { data } = await supabase.from("course_enrollments").select("level").eq("user_id", user!.id).eq("language", code).eq("course_type", course).maybeSingle();
+      return (data?.level as string | null) ?? null;
+    },
+  });
 
   const { data: teachers = [], isLoading } = useQuery({
     queryKey: ["teachers-list", code, course],
@@ -69,7 +83,11 @@ export default function SelectTeacherPage() {
     },
   });
 
-  const visibleTeachers = teachers.filter(t => filter !== "health" || t.healthcare_approved);
+  const isRec = (t: Teacher) => isRecommendedTeacher(t, course, studentLevel);
+  const visibleTeachers = sortByRecommendation(
+    teachers.filter(t => (filter !== "health" || t.healthcare_approved) && (levelFilter === "all" || t.teaching_levels?.includes(levelFilter))),
+    isRec,
+  );
 
   return (
     <div className="min-h-screen bg-fjord-soft">
@@ -99,6 +117,14 @@ export default function SelectTeacherPage() {
             <TabsTrigger value="health">Specijalisti za zdravstveni jezik</TabsTrigger>
           </TabsList>
         </Tabs>
+
+        <div className="flex flex-wrap gap-2 -mt-4">
+          {["all", ...TEACHING_LEVELS].map(l => (
+            <Button key={l} size="sm" variant={levelFilter === l ? "default" : "outline"} className="rounded-full h-8" onClick={() => setLevelFilter(l)}>
+              {l === "all" ? "Svi nivoi" : l}
+            </Button>
+          ))}
+        </div>
 
         {isLoading ? (
           <div className="grid sm:grid-cols-2 gap-5">
@@ -153,6 +179,14 @@ export default function SelectTeacherPage() {
                       </div>
 
                       <p className="mt-4 text-sm text-muted-foreground line-clamp-3">{t.bio || `Iskusan nastavnik ${langGenitive()} jezika.`}</p>
+                      {isRec(t) && (
+                        <Badge className="mt-3 self-start gap-1"><Sparkles className="w-3 h-3" />Preporučeno za tvoj nivo{studentLevel ? ` (${studentLevel})` : ""}</Badge>
+                      )}
+                      {t.teaching_levels && t.teaching_levels.length > 0 && (
+                        <div className="mt-3 flex flex-wrap gap-1">
+                          {t.teaching_levels.map(l => <Badge key={l} variant="outline" className="text-xs font-normal">{l}</Badge>)}
+                        </div>
+                      )}
                       {t.healthcare_approved && <Badge variant="outline" className="mt-3 self-start">Medicinski {labelSr.toLowerCase()}</Badge>}
 
                       {t.spoken_languages?.length > 0 && (

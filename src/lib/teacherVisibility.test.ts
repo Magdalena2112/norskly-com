@@ -21,3 +21,23 @@ describe("Teacher course visibility", () => {
     expect(visibleForCourse(teacher, "no", "general", [{ language: "no", is_active: false }], [])).toBe(false);
   });
 });
+import { isRecommendedTeacher, sortByRecommendation, validateTeacherOffer } from "./teacherVisibility";
+describe("teacher recommendations", () => {
+  it("recommends general teacher teaching the student's level", () => {
+    expect(isRecommendedTeacher({ teaching_levels: ["A2"], course_types: ["general"] }, "general", "A2")).toBe(true);
+    expect(isRecommendedTeacher({ teaching_levels: ["B1"], course_types: ["general"] }, "general", "A2")).toBe(false);
+    expect(isRecommendedTeacher({ teaching_levels: ["A2"], course_types: ["health"] }, "general", "A2")).toBe(false);
+  });
+  it("health recommendation needs admin approval", () => {
+    expect(isRecommendedTeacher({ teaching_levels: ["B1"], course_types: ["health"], healthcare_approved: false }, "health", "B1")).toBe(false);
+    expect(isRecommendedTeacher({ teaching_levels: ["B1"], course_types: ["health"], healthcare_approved: true }, "health", "B1")).toBe(true);
+  });
+  it("puts recommended first but keeps all", () => {
+    expect(sortByRecommendation([1, 2, 3], n => n === 3)).toEqual([3, 1, 2]);
+  });
+  it("requires level and course type", () => {
+    expect(validateTeacherOffer([], ["general"])).not.toBeNull();
+    expect(validateTeacherOffer(["A1"], [])).not.toBeNull();
+    expect(validateTeacherOffer(["A1"], ["general"])).toBeNull();
+  });
+});

@@ -12,6 +12,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Camera, Plus, X, Save, Loader2 } from "lucide-react";
 import TeacherHeader from "@/components/teacher/TeacherHeader";
 import { useTeacherSelf } from "@/hooks/useTeacherSelf";
+import { TEACHING_LEVELS, validateTeacherOffer } from "@/lib/teacherVisibility";
 
 export default function TeacherOwnProfilePage() {
   const { toast } = useToast();
@@ -26,6 +27,10 @@ export default function TeacherOwnProfilePage() {
   const [email, setEmail] = useState("");
   const [photoUrl, setPhotoUrl] = useState<string | null>(null);
   const [uploading, setUploading] = useState(false);
+  const [levels, setLevels] = useState<string[]>([]);
+  const [courseTypes, setCourseTypes] = useState<string[]>(["general"]);
+  const offerError = validateTeacherOffer(levels, courseTypes);
+  const toggle = (list: string[], v: string) => list.includes(v) ? list.filter(x => x !== v) : [...list, v];
 
   useEffect(() => {
     if (!teacher) return;
@@ -35,13 +40,17 @@ export default function TeacherOwnProfilePage() {
     setMeetLink(teacher.meet_link || "");
     setEmail(teacher.email || "");
     setPhotoUrl(teacher.photo_url);
+    setLevels(teacher.teaching_levels || []);
+    setCourseTypes(teacher.course_types?.length ? teacher.course_types : ["general"]);
   }, [teacher]);
 
   const save = useMutation({
     mutationFn: async () => {
       if (!teacher) throw new Error("Profil nije pronađen");
+      if (offerError) throw new Error(offerError);
       const { error } = await supabase.from("teachers").update({
         name: name.trim(), bio, focus, meet_link: meetLink.trim() || null, email: email.trim() || null, photo_url: photoUrl,
+        teaching_levels: TEACHING_LEVELS.filter(l => levels.includes(l)), course_types: courseTypes,
       }).eq("id", teacher.id);
       if (error) throw error;
     },
@@ -86,7 +95,7 @@ export default function TeacherOwnProfilePage() {
                 <h1 className="text-2xl font-display font-bold text-foreground">Moj profil</h1>
                 <p className="text-sm text-muted-foreground mt-1">Ovo vide učenici kada biraju profesora.</p>
               </div>
-              <Button onClick={() => save.mutate()} disabled={save.isPending || !name.trim()}>
+              <Button onClick={() => save.mutate()} disabled={save.isPending || !name.trim() || !!offerError}>
                 {save.isPending ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : <Save className="w-4 h-4 mr-2" />}Sačuvaj
               </Button>
             </div>
@@ -131,6 +140,31 @@ export default function TeacherOwnProfilePage() {
                   <Input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
                   <p className="text-xs text-muted-foreground mt-1">Na ovu adresu stižu potvrde o zakazanim časovima.</p>
                 </div>
+              </CardContent>
+            </Card>
+
+            <Card className={cardCls}>
+              <CardHeader><CardTitle className="text-lg">Nivoi i tipovi kurseva *</CardTitle></CardHeader>
+              <CardContent className="space-y-5">
+                <div>
+                  <label className="text-sm font-medium text-foreground mb-2 block">Nivoi koje podučavaš (obavezno)</label>
+                  <div className="flex flex-wrap gap-2">
+                    {TEACHING_LEVELS.map(l => (
+                      <Button key={l} type="button" size="sm" variant={levels.includes(l) ? "default" : "outline"} className="rounded-full min-w-12" onClick={() => setLevels(toggle(levels, l))}>{l}</Button>
+                    ))}
+                  </div>
+                </div>
+                <div>
+                  <label className="text-sm font-medium text-foreground mb-2 block">Tip kursa (obavezno)</label>
+                  <div className="flex flex-wrap gap-2">
+                    {[["general", "Opšti kurs"], ["health", "Zdravstveni kurs"]].map(([v, label]) => (
+                      <Button key={v} type="button" size="sm" variant={courseTypes.includes(v) ? "default" : "outline"} className="rounded-full" onClick={() => setCourseTypes(toggle(courseTypes, v))}>{label}</Button>
+                    ))}
+                  </div>
+                  {courseTypes.includes("health") && <p className="text-xs text-muted-foreground mt-2">Za zdravstveni kurs prikazuješ se učenicima tek nakon odobrenja administratora.</p>}
+                </div>
+                {offerError && <p className="text-sm text-destructive">{offerError}</p>}
+                <p className="text-xs text-muted-foreground">Na osnovu ovoga učenicima tvog nivoa i kursa prikazujemo te kao preporučenog profesora.</p>
               </CardContent>
             </Card>
 
