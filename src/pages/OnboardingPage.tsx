@@ -360,7 +360,7 @@ export default function OnboardingPage() {
 
               {step === 0 && (
                 <div>
-                  <h2 className="text-2xl font-display font-bold text-foreground mb-2">{t.nameTitle}</h2>
+                  <h2 className="text-xl sm:text-2xl font-display font-bold text-foreground mb-2 break-words">{t.nameTitle}</h2>
                   <p className="text-muted-foreground mb-6">{t.nameDesc}</p>
                   <Input
                     placeholder={t.namePlaceholder}
@@ -373,7 +373,7 @@ export default function OnboardingPage() {
 
               {step === 1 && (
                 <div>
-                  <h2 className="text-2xl font-display font-bold text-foreground mb-2">Koliko vremena možeš da izdvojiš za učenje?</h2>
+                  <h2 className="text-xl sm:text-2xl font-display font-bold text-foreground mb-2 break-words">Koliko vremena možeš da izdvojiš za učenje?</h2>
                   <p className="text-muted-foreground mb-6">Na osnovu ovoga predlažemo dnevni plan modula i XP cilj.</p>
                   <div className="grid gap-3">
                     {TIME_OPTIONS.map((o) => (
@@ -385,7 +385,7 @@ export default function OnboardingPage() {
 
               {step === 2 && (
                 <div>
-                  <h2 className="text-2xl font-display font-bold text-foreground mb-2">{t.goalTitle}</h2>
+                  <h2 className="text-xl sm:text-2xl font-display font-bold text-foreground mb-2 break-words">{t.goalTitle}</h2>
                   <p className="text-muted-foreground mb-6">Zadaci u lekcijama su isti za sve; cilj usmerava povratne informacije i savete tokom učenja.</p>
                   <div className="grid gap-3">
                     {goals.map((g) => (
@@ -397,7 +397,7 @@ export default function OnboardingPage() {
 
               {step === 3 && (
                 <div>
-                  <h2 className="text-2xl font-display font-bold text-foreground mb-2">{t.confidenceTitle}</h2>
+                  <h2 className="text-xl sm:text-2xl font-display font-bold text-foreground mb-2 break-words">{t.confidenceTitle}</h2>
                   <p className="text-muted-foreground mb-6">1 = nesiguran/na, 5 = vrlo siguran/na. Na osnovu toga prilagođavamo stil podrške i detaljnost objašnjenja.</p>
                   <div className="flex gap-3">
                     {[1, 2, 3, 4, 5].map((n) => (
@@ -419,7 +419,7 @@ export default function OnboardingPage() {
 
               {step === 4 && (
                 <div>
-                  <h2 className="text-2xl font-display font-bold text-foreground mb-2">Kakav pristup ispravkama ti odgovara?</h2>
+                  <h2 className="text-xl sm:text-2xl font-display font-bold text-foreground mb-2 break-words">Kakav pristup ispravkama ti odgovara?</h2>
                   <p className="text-muted-foreground mb-6">Važi za ispravke u pisanju i povratne informacije u razgovoru.</p>
                   <div className="grid gap-3">
                     {SUPPORT_STYLES.map((o) => (
