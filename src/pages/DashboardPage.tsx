@@ -297,7 +297,7 @@ export default function DashboardPage() {
                       {String(l.sort_order).padStart(2, "0")}
                     </span>
                     <p className="font-script italic text-[11px] text-primary/55 mt-2">Lekcija {l.sort_order}</p>
-                    <h3 className="font-display font-semibold text-sm sm:text-base text-primary leading-snug mt-1 line-clamp-2">{l.title_target}</h3>
+                    <h3 className="font-display font-semibold text-sm sm:text-base text-primary leading-snug mt-1 break-words hyphens-auto">{l.title_target}</h3>
                   </CardContent>
                 </Card>
               </motion.div>
