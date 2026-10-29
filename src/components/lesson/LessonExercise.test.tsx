@@ -32,7 +32,7 @@ describe("Lesson exercise grading", () => {
     await waitFor(() => expect(onDone).toHaveBeenCalledWith("MIX-14"));
     expect(invoke).toHaveBeenCalledExactlyOnceWith("lesson-check", {
       body: {
-        language: "en", level: "A2", lessonTitle: "Lesson 1",
+        language: "en", level: "A2", lessonTitle: "Lesson 1", course: "general",
         exercise: { code: "MIX-14", title: exercise.title, instruction: exercise.instruction },
         items: [{ prompt: "How many days is the exhibition running?", answer: "six days", guide: "Odgovor: six days (from Tuesday to Sunday)" }],
       },
@@ -51,7 +51,7 @@ describe("Lesson exercise grading", () => {
     await waitFor(() => expect(onDone).toHaveBeenCalledWith(exercise.code));
     expect(invoke).toHaveBeenCalledExactlyOnceWith("writing-correct", {
       body: {
-        text: "I work in London.", language: "en", level: "A2", has_image: "image" in exercise && !!exercise.image,
+        text: "I work in London.", language: "en", level: "A2", course: "general", has_image: "image" in exercise && !!exercise.image,
         topic: { title: exercise.title, guiding_questions: "guiding" in exercise.items[0] ? exercise.items[0].guiding : [] },
       },
     });

@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from "react";
+import { getSelectedCourse } from "@/lib/courseSelection";
 import { langLocative } from "@/lib/currentLanguage";
 import { motion } from "framer-motion";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -57,7 +58,7 @@ interface WritingExercise {
 async function callFn<T>(name: string, body: Record<string, unknown>): Promise<T> {
   const { data: { session } } = await supabase.auth.getSession();
   const res = await supabase.functions.invoke(name, {
-    body,
+    body: {...body, course: getSelectedCourse(getCurrentLanguageCode())},
     headers: { Authorization: `Bearer ${session?.access_token}` },
   });
   if (res.error) throw new Error(res.error.message || "Provera trenutno nije dostupna.");

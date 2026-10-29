@@ -3,6 +3,8 @@
 // → localStorage → Norwegian fallback.
 // In React components, prefer the `useSelectedLanguage()` hook.
 
+import { getSelectedCourse } from "./courseSelection";
+
 export type LanguageCode = "no" | "en" | "de";
 
 export const LANG_STORAGE_KEY = "norskly_selected_language";
@@ -39,8 +41,8 @@ export function getCurrentLanguageCode(pathname?: string): LanguageCode {
 }
 
 /** localStorage key for the per-language cached profile. */
-export function profileCacheKey(code: LanguageCode = getCurrentLanguageCode()): string {
-  return `norskly_profile_${code}`;
+export function profileCacheKey(code: LanguageCode = getCurrentLanguageCode(), course: string = getSelectedCourse(code)): string {
+  return `norskly_profile_${code}_${course}`;
 }
 
 /** Clears every language-scoped cache (used on sign out). */
@@ -49,7 +51,7 @@ export function clearLanguageCaches() {
   localStorage.removeItem(LANG_STORAGE_KEY);
   localStorage.removeItem("norskly_profile");
   (["no", "en", "de"] as LanguageCode[]).forEach((c) =>
-    localStorage.removeItem(profileCacheKey(c)),
+    ["general", "health"].forEach(course => localStorage.removeItem(profileCacheKey(c, course))),
   );
   try {
     sessionStorage.removeItem(LANG_INTENT_KEY);

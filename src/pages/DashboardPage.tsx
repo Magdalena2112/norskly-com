@@ -24,6 +24,9 @@ import TrophyShelf from "@/components/student/TrophyShelf";
 import { Trophy } from "lucide-react";
 import { useSelectedLanguage } from "@/hooks/useSelectedLanguage";
 import { getLanguageBySlug, getLanguageByCode, type LanguageSlug } from "@/lib/languages";
+import { useQuery } from "@tanstack/react-query";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { courseKey, courseLabel, coursePath, selectCourse } from "@/lib/courseSelection";
 import { useCourseEnrollment } from "@/hooks/useCourseEnrollment";
 
 type ModuleDef = {
@@ -86,6 +89,7 @@ export default function DashboardPage() {
   const [lessonLoaded, setLessonLoaded] = useState(false);
   const [courseLessons, setCourseLessons] = useState<{ id: string; sort_order: number; cefr_level: string; title_target: string; summary: string; course: string }[]>([]);
   const { data: course, isLoading: enrollmentLoading } = useCourseEnrollment(code);
+  const { data: enrollments = [] } = useQuery({ queryKey: ["course-enrollments", user?.id], enabled: !!user, queryFn: async () => { const {data,error} = await supabase.from("course_enrollments").select("language,course_type,level").eq("user_id", user?.id ?? "").eq("onboarding_completed", true); if(error) throw error; return data ?? []; } });
   const [lessonProgress, setLessonProgress] = useState<Record<string, string>>({});
   const [trophies, setTrophies] = useState<Set<string>>(new Set());
   const [lessonsLoaded, setLessonsLoaded] = useState(false);
@@ -93,7 +97,7 @@ export default function DashboardPage() {
   const startLevel = normalizeLevel(profile.level);
   const [selectedLevel, setSelectedLevel] = useState<CefrLevel>(startLevel);
   const [lockedMsg, setLockedMsg] = useState<string | null>(null);
-  useEffect(() => { setSelectedLevel(startLevel); setLockedMsg(null); }, [startLevel, code]);
+  useEffect(() => { setSelectedLevel(startLevel); setLockedMsg(null); }, [startLevel, code, course]);
 
   useEffect(() => {
     setCourseLessons([]); setLessonsLoaded(false);
@@ -158,6 +162,12 @@ export default function DashboardPage() {
     <StudentLayout>
       <NordicBackdrop />
       <div className="container max-w-4xl py-8 sm:py-10 relative z-10">
+        {enrollments.length > 1 && <div className="mb-6 max-w-md">
+          <Select value={`${code}:${course}`} onValueChange={key => { const chosen = enrollments.find(e => courseKey(e) === key); if (!chosen) return; selectCourse(chosen.language, chosen.course_type); navigate(coursePath(chosen)); }}>
+            <SelectTrigger aria-label="Izaberi kurs"><SelectValue placeholder="Izaberi kurs" /></SelectTrigger>
+            <SelectContent>{enrollments.map(e => <SelectItem key={courseKey(e)} value={courseKey(e)}>{courseLabel(e)}</SelectItem>)}</SelectContent>
+          </Select>
+        </div>}
         {/* HERO POSTCARD */}
         <motion.div
           initial={{ opacity: 0, y: 18 }}
@@ -268,7 +278,7 @@ export default function DashboardPage() {
                   className={`cursor-pointer group h-full bg-cream border border-border/60 shadow-postcard overflow-hidden relative aspect-square flex flex-col transition-all duration-500 ease-out hover:-translate-y-1.5 hover:shadow-card-soft ${
                     p === "completed" ? "ring-1 ring-forest/40" : p === "in_progress" ? "ring-1 ring-sunset/50" : ""
                   }`}
-                  onClick={() => navigate(`/lekcija/${l.id}`)}
+                  onClick={() => navigate(`/lekcija/${l.id}?course=${course}`)}
                 >
                   {p === "completed" && (
                     <span className="absolute top-3 right-3 w-6 h-6 rounded-full bg-forest text-cream flex items-center justify-center z-10">

@@ -30,7 +30,7 @@ Deno.serve(async (req) => {
       const { data: roles } = await client.from("user_roles").select("role").eq("user_id", user.id);
       const staff = (roles || []).some((r: { role: string }) => ["admin", "admin_teacher", "teacher"].includes(r.role));
       if (!staff) {
-        const { data: prof } = await client.from("language_profiles").select("level").eq("user_id", user.id).eq("language", data.language).maybeSingle();
+        const { data: prof } = await client.from("course_enrollments").select("level").eq("user_id", user.id).eq("language", data.language).eq("course_type", data.course).eq("onboarding_completed", true).maybeSingle();
         const enrolled = String(prof?.level || "").match(/[ABC][12]/)?.[0];
         if (enrolled !== data.cefr_level) return reply({ error: "Ova lekcija nije deo nivoa na koji si upisan/a." }, 403);
       }

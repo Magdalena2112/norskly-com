@@ -102,7 +102,7 @@ export default function CourseLessonPage() {
       if (user && data.course === "general") {
         const [{ data: roles }, { data: prof }] = await Promise.all([
           supabase.from("user_roles").select("role").eq("user_id", user.id),
-          supabase.from("language_profiles").select("level").eq("user_id", user.id).eq("language", data.language).maybeSingle(),
+          supabase.from("course_enrollments").select("level").eq("user_id", user.id).eq("language", data.language).eq("course_type", data.course).eq("onboarding_completed", true).maybeSingle(),
         ]);
         const staff = (roles || []).some((r) => ["admin", "admin_teacher", "teacher"].includes(r.role));
         if (!alive) return;

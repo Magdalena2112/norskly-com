@@ -73,7 +73,7 @@ Deno.serve(async (req) => {
     }));
     if (!items.length) return json({ error: "Nema odgovora." }, 400);
 
-    const learnerStyle = await loadLearnerStyleLine(supabase, user.id, language);
+    const learnerStyle = await loadLearnerStyleLine(supabase, user.id, language, body.course);
     const instructions = `Ti si strpljiv tutor ${LANG[language] || "engleskog"} jezika na Norskly platformi. Ocenjuješ otvorene odgovore učenika nivoa ${level} u lekciji „${lessonTitle}“.
 Pravila:
 - Prihvati sve prirodne i semantički tačne varijante; ne traži jedan jedini odgovor.

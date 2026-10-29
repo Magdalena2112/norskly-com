@@ -34,13 +34,14 @@ export function buildLearnerStyleLine(p: LearnerStyle | null | undefined): strin
 }
 
 // deno-lint-ignore no-explicit-any
-export async function loadLearnerStyleLine(supabase: any, userId: string, language: string): Promise<string> {
+export async function loadLearnerStyleLine(supabase: any, userId: string, language: string, course: string = "general"): Promise<string> {
   try {
     const { data } = await supabase
-      .from("language_profiles")
+      .from("course_enrollments")
       .select("learning_goal, confidence_level, preferred_tone, course_type")
       .eq("user_id", userId)
       .eq("language", language)
+      .eq("course_type", course === "health" ? "health" : "general")
       .maybeSingle();
     return buildLearnerStyleLine(data);
   } catch {

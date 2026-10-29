@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { supabase } from "@/integrations/supabase/client";
+import { useSelectedCourse } from "@/hooks/useSelectedCourse";
 import { dailyPace, dailyProgress } from "@/lib/dailyPlan";
 
 type Props = {
@@ -15,6 +16,7 @@ type Props = {
 
 export default function DailyPlanCard({ userId, language, nextLesson }: Props) {
   const navigate = useNavigate();
+  const course = useSelectedCourse(language);
   const [minutes, setMinutes] = useState<number | null>(null);
   const [xpToday, setXpToday] = useState(0);
 
@@ -24,7 +26,7 @@ export default function DailyPlanCard({ userId, language, nextLesson }: Props) {
     start.setHours(0, 0, 0, 0);
     (async () => {
       const [{ data: lp }, { data: acts }] = await Promise.all([
-        supabase.from("language_profiles").select("daily_minutes").eq("user_id", userId).eq("language", language).maybeSingle(),
+        supabase.from("course_enrollments").select("daily_minutes").eq("user_id", userId).eq("language", language).eq("course_type", course).maybeSingle(),
         supabase.from("activities").select("points").eq("user_id", userId).eq("language", language).gte("created_at", start.toISOString()),
       ]);
       if (!alive) return;
@@ -32,7 +34,7 @@ export default function DailyPlanCard({ userId, language, nextLesson }: Props) {
       setXpToday((acts || []).reduce((s, a) => s + (a.points || 0), 0));
     })();
     return () => { alive = false; };
-  }, [userId, language]);
+  }, [userId, language, course]);
 
   const pace = dailyPace(minutes);
   const prog = dailyProgress(xpToday, pace);
