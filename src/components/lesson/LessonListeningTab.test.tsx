@@ -1,8 +1,14 @@
-import { fireEvent, render, screen, cleanup } from "@testing-library/react";
+import { fireEvent, render, screen, cleanup, waitFor } from "@testing-library/react";
 import { beforeEach, afterEach, describe, expect, it, vi } from "vitest";
 import LessonListeningTab from "./LessonListeningTab";
 import lesson from "@/content/lessons/EN-A1-L01.json";
-const { log, speak, stop } = vi.hoisted(() => ({ log: vi.fn(), speak: vi.fn(), stop: vi.fn() }));
+import enA2 from "@/content/lessons/EN-A2-L01.json";
+import noA2 from "@/content/lessons/NO-A2-L01.json";
+import deA2 from "@/content/lessons/DE-A2-L01.json";
+import noB1 from "@/content/lessons/NO-HC-B1-L01.json";
+import deB1 from "@/content/lessons/DE-HC-B1-L01.json";
+const { log, speak, stop, errorToast } = vi.hoisted(() => ({ log: vi.fn(), speak: vi.fn(), stop: vi.fn(), errorToast: vi.fn() }));
+vi.mock("sonner", () => ({ toast: { error: errorToast } }));
 vi.mock("@/context/AuthContext", () => ({ useAuth: () => ({ user: { id: "test-user" } }) }));
 vi.mock("@/lib/logActivity", () => ({ logActivity: log }));
 vi.mock("@/lib/courseLessons", () => ({ speakLines: speak, stopSpeaking: stop }));
@@ -10,6 +16,37 @@ const scenes = lesson.modules.listening.scenes;
 beforeEach(() => { vi.clearAllMocks(); log.mockResolvedValue({ points_awarded: 1 }); Object.defineProperty(window, "speechSynthesis", { configurable: true, value: {} }); });
 afterEach(cleanup);
 describe("Unified lesson listening", () => {
+  it.each([
+    [lesson, "en"], [enA2, "en"], [noA2, "no"],
+    [deA2, "de"], [noB1, "no"], [deB1, "de"],
+  ] as const)("keeps final answers and sends canonical reward codes for $0.code", async (content, lang) => {
+    log.mockImplementation(async (_user, _module, _type, _xp, payload) => {
+      const pattern = content.code === "EN-A1-L01"
+        ? /^LI-(0[1-9]|10)$/
+        : new RegExp(`^${content.code}-L(0[1-9]|10)$`);
+      if (!pattern.test(String(payload.code || payload.scene))) throw new Error("Invalid rewarded exercise");
+      return { points_awarded: 0 };
+    });
+    const onDone = vi.fn();
+    const activities = content.modules.listening.scenes;
+    render(<LessonListeningTab scenes={activities} lang={lang} lessonCode={content.code} onDone={onDone} />);
+    for (let i = 0; i < activities.length; i++) {
+      const activity = activities[i];
+      fireEvent.click(screen.getByRole("button", { name: new RegExp(`^Aktivnost ${i + 1}(,|$)`) }));
+      for (let j = 0; j < activity.questions.length; j++) {
+        fireEvent.click(screen.getByRole("button", { name: activity.questions[j].answer }));
+        if (j < activity.questions.length - 1) fireEvent.click(screen.getByRole("button", { name: "Sledeće pitanje" }));
+      }
+      await waitFor(() => expect(log).toHaveBeenCalledTimes(i + 1));
+      expect(log).toHaveBeenLastCalledWith("test-user", "listening", "lesson_scene", activity.xp ?? 1,
+        expect.objectContaining({ code: activity.code, scene: activity.id }),
+        expect.objectContaining({ dedupKey: `lesson_listen_${content.code}_${activity.code}_${lang}`, language: lang }));
+      expect(screen.getByRole("button", { name: activity.questions[activity.questions.length - 1].answer })).toBeDisabled();
+      expect(screen.getByText(`Rezultat: ${activity.questions.length} / ${activity.questions.length}`)).toBeInTheDocument();
+      expect(errorToast).not.toHaveBeenCalled();
+    }
+    expect(onDone.mock.calls.map(call => call[0])).toEqual(activities.map(activity => activity.code));
+  });
   it("contains ten unique audio-first variations with valid answers", () => {
     expect(scenes).toHaveLength(10);
     expect(new Set(scenes.map(s => s.code)).size).toBe(10);
