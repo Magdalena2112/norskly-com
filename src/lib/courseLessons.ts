@@ -150,6 +150,14 @@ function playClips(lines: DialogueLine[], urls: string[], rate: number, opts: { 
   playAt(0);
 }
 
+/** Warm audio links in the background (few at a time) so the first tap plays without waiting. */
+export function prefetchSpeech(lines: DialogueLine[], lang: string) {
+  const todo = lines.filter((l) => l.text && !CLIPS[`${l.speaker}|${l.text}`]);
+  let i = 0;
+  const worker = async () => { while (i < todo.length) { await naturalClip(todo[i++], lang); } };
+  for (let k = 0; k < 3; k++) void worker();
+}
+
 export function speakLines(
   lines: DialogueLine[],
   lang: string,

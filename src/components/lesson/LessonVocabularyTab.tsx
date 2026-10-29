@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/context/AuthContext";
-import { loadLessonContent, speakLines, type Exercise } from "@/lib/courseLessons";
+import { loadLessonContent, prefetchSpeech, speakLines, type Exercise } from "@/lib/courseLessons";
 import LessonExercise from "@/components/lesson/LessonExercise";
 import WordDetails from "@/components/lesson/WordDetails";
 import VocabularyPracticeExercise from "@/components/lesson/VocabularyPracticeExercise";
