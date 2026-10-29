@@ -176,6 +176,13 @@
       "when": 1793274278855,
       "tag": "0024_course_aware_rewards_and_survey",
       "breakpoints": true
+    },
+    {
+      "idx": 25,
+      "version": "7",
+      "when": 1793274597232,
+      "tag": "0025_preserve_legacy_recovery_with_multiple_courses",
+      "breakpoints": true
     }
   ]
 }

@@ -1,0 +1,1 @@
+DO $$ DECLARE definition text; BEGIN SELECT pg_get_functiondef('public.sync_legacy_course_enrollment()'::regprocedure) INTO definition; definition:=replace(definition,'VALUES(NEW.id,NEW.user_id','VALUES(gen_random_uuid(),NEW.user_id'); EXECUTE definition; END $$;
