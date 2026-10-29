@@ -9,7 +9,7 @@ export function normalizeTypedAnswer(value: string, exactForm = false): string {
     .replace(/\bcan not\b/g, "cannot")
     .replace(/\bwon't\b/g, "will not")
     .replace(/\bshan't\b/g, "shall not")
-    .replace(/\b([a-z]+)n't\b/g, "$1 not")
+    .replace(/\b(do|does|did|is|are|was|were|have|has|had|could|would|should|must|need)n't\b/g, "$1 not")
     .replace(/\bi'm\b/g, "i am")
     .replace(/\b(i|you|we|they)'re\b/g, "$1 are")
     .replace(/\b(i|you|we|they)'ve\b/g, "$1 have")

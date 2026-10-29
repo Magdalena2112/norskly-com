@@ -76,8 +76,11 @@ export function coreForm(s: string) {
 }
 
 export function isCorrect(value: string, answers: string[] = [], opts: { lenient?: boolean; typed?: boolean; exactForm?: boolean } = {}) {
-  if (opts.typed && matchesTypedAnswer(value, answers, opts.exactForm)) return true;
   if (opts.exactForm) return matchesTypedAnswer(value, answers, true);
+  if (opts.typed) {
+    if (matchesTypedAnswer(value, answers)) return true;
+    return !!opts.lenient && !!coreForm(value) && answers.some(a => coreForm(value) === coreForm(a));
+  }
   const v = normalize(value);
   if (!v) return false;
   return answers.some((a) => {

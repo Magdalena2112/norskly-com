@@ -24,6 +24,7 @@ describe("typed grammar and listening tolerance", () => {
     expect(matchesTypedAnswer("He's worked", ["He has worked"])).toBe(false);
     expect(matchesTypedAnswer("its", ["it's"])).toBe(false);
     expect(matchesTypedAnswer("", [""])).toBe(false);
+    expect(isCorrect("do not", ["donot"], { typed: true })).toBe(false);
   });
   it("uses tolerance for structured text but leaves selected gaps and order strict", () => {
     const text: PracticeExercise = { id: "t", code: "t", title: "", instruction: "", xp: 1, type: "text", inputs: [{ prompt: "", answers: ["I do not work"] }] };
