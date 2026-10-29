@@ -1,5 +1,5 @@
 # Tasks
-- [ ] Support multiple courses per account, course-specific login and general-login selection; preserve existing progress and validate authorized access.
+- [x] Support multiple courses per account, course-specific login and general-login selection; verified German general A2 plus healthcare B1 onboarding, switching, preserved original profile/progress, protected lesson loading and reload, and rejected unauthorized level changes.
 - [x] Optimize homepage font loading and relocation illustration without visual redesign; verified fonts load non-blockingly, WebP is 93% smaller, mobile layout has no horizontal overflow and guide link works; production PageSpeed score awaits publishing and a fresh scan.
 - [x] Unify six available lessons to 100 XP with atomic, deduplicated rewards and trophy-only review; allocation tests passed, signed-in Norwegian completion awarded 2 XP once and persisted on reopening; historical XP not recalculated.
 - [x] Verify German lesson recording assessment, persistent errors and retry without rerecording; six tests passed and authenticated microphone recording returned a real score after retry (physical iPad not tested).
@@ -13,7 +13,7 @@
 - [x] Secure survey responses, admin statistics/filters/spreadsheet export, and single-recipient email notifications; verify submission and readback.
 - [x] Move level selection to course cards; test level validation and registration links for all languages, and verify six-step authenticated onboarding without changing an existing enrollment.
 - [x] Separate general/health enrollment per language; protect content, direct links, progress and immutable enrollment; test both access rules and verify general-student access end to end.
-- [ ] Verify health-student access end to end (requires an enrolled health student; none exists yet).
+- [x] Verify health-student access end to end; authenticated student opened German B1 healthcare dashboard and protected lesson, preserving access on reload.
 - [x] Add 20 varied illustrated vocabulary exercises worth 20 XP to each health B1 lesson.
 - [x] Test vocabulary grading and XP deduplication; verify both languages in practice.
 - [x] Add 30 varied grammar exercises worth 40 XP to each Norwegian/German health B1 lesson.

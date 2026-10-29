@@ -34,8 +34,6 @@ export default function AuthPage() {
   useEffect(() => { if (lockedLang) setPickedLang(lockedLang); }, [lockedLang]);
   const { user: currentUser } = useAuth();
   const [chooseFrom, setChooseFrom] = useState<EnrollmentChoice[] | null>(null);
-  const LABELS: Record<string, string> = { norveski: "🇳🇴 Norveški", engleski: "🇬🇧 Engleski", nemacki: "🇩🇪 Nemački" };
-  const codeToSlug = (c: string) => (c === "en" ? "engleski" : c === "de" ? "nemacki" : c === "no" ? "norveski" : null);
 
   const openCourse = (enrollment: EnrollmentChoice) => {
     selectCourse(enrollment.language, enrollment.course_type);
@@ -60,9 +58,15 @@ export default function AuthPage() {
   };
 
   useEffect(() => {
-    if (!currentUser || searchParams.get("choose") !== "courses") return;
-    routeStudent(currentUser.id, lockedLang).catch(() => toast({ title: "Kursevi nisu učitani", variant: "destructive" }));
-  }, [currentUser?.id, searchParams.toString()]);
+    if (!currentUser || (!isLogin && searchParams.get("choose") !== "courses")) return;
+    (async () => {
+      const {data: roles, error} = await supabase.from("user_roles").select("role").eq("user_id", currentUser.id);
+      if (error) throw error;
+      if (roles?.some(r => r.role === "admin" || r.role === "admin_teacher")) { navigate("/admin/dashboard", {replace:true}); return; }
+      if (roles?.some(r => r.role === "teacher")) { navigate("/teacher/dashboard", {replace:true}); return; }
+      await routeStudent(currentUser.id, lockedLang);
+    })().catch(() => toast({ title: "Kursevi nisu učitani", variant: "destructive" }));
+  }, [currentUser?.id, searchParams.toString(), isLogin]);
 
   // Persist plan choice from the journey
   useEffect(() => {
