@@ -2377,7 +2377,7 @@
           "image": "a2:vo11",
           "items": [
             {
-              "prompt": "spise frokost",
+              "prompt": "våkne",
               "options": [
                 "M (morgen)",
                 "E (kveld)"
@@ -2387,7 +2387,7 @@
               ]
             },
             {
-              "prompt": "legge seg",
+              "prompt": "lage middag",
               "options": [
                 "M (morgen)",
                 "E (kveld)"
@@ -2397,18 +2397,7 @@
               ]
             },
             {
-              "prompt": "pusse tennene",
-              "options": [
-                "M (morgen)",
-                "E (kveld)"
-              ],
-              "answers": [
-                "M (morgen)",
-                "E (kveld)"
-              ]
-            },
-            {
-              "prompt": "stå opp",
+              "prompt": "kle på seg",
               "options": [
                 "M (morgen)",
                 "E (kveld)"
@@ -2418,13 +2407,23 @@
               ]
             },
             {
-              "prompt": "slutte på jobb",
+              "prompt": "tilbringe tid med familien",
               "options": [
                 "M (morgen)",
                 "E (kveld)"
               ],
               "answers": [
                 "E (kveld)"
+              ]
+            },
+            {
+              "prompt": "dra hjemmefra",
+              "options": [
+                "M (morgen)",
+                "E (kveld)"
+              ],
+              "answers": [
+                "M (morgen)"
               ]
             }
           ]
@@ -2438,51 +2437,51 @@
           "image": "a2:vo12",
           "items": [
             {
-              "prompt": "Når man har våknet og vasket ansiktet, må man ___ før man går ut.",
+              "prompt": "Når jeg har stått opp, går jeg på badet for å ___.",
               "options": [
-                "kle på seg",
-                "ta notater",
-                "spise frokost",
-                "ta en pause"
+                "ta en dusj",
+                "sjekke e-post",
+                "delta på et møte",
+                "komme på jobb"
               ],
               "answers": [
-                "kle på seg"
+                "ta en dusj"
               ]
             },
             {
-              "prompt": "Før jeg drar hjemmefra, vil jeg ___ så jeg ikke blir sulten.",
+              "prompt": "Når jeg setter meg ved pulten, pleier jeg først å ___.",
               "options": [
-                "kle på seg",
-                "ta notater",
-                "spise frokost",
-                "ta en pause"
+                "ta en dusj",
+                "sjekke e-post",
+                "delta på et møte",
+                "komme på jobb"
               ],
               "answers": [
-                "spise frokost"
+                "sjekke e-post"
               ]
             },
             {
-              "prompt": "På skolen må jeg ___ i timen for å huske det læreren sier.",
+              "prompt": "Klokka elleve skal jeg ___ med teamet mitt.",
               "options": [
-                "kle på seg",
-                "ta notater",
-                "spise frokost",
-                "ta en pause"
+                "ta en dusj",
+                "sjekke e-post",
+                "delta på et møte",
+                "komme på jobb"
               ],
               "answers": [
-                "ta notater"
+                "delta på et møte"
               ]
             },
             {
-              "prompt": "Klokka 10 pleier vi å ___ fra arbeidet.",
+              "prompt": "Bussen går fort, så jeg pleier å ___ klokka halv ni.",
               "options": [
-                "kle på seg",
-                "ta notater",
-                "spise frokost",
-                "ta en pause"
+                "ta en dusj",
+                "sjekke e-post",
+                "delta på et møte",
+                "komme på jobb"
               ],
               "answers": [
-                "ta en pause"
+                "komme på jobb"
               ]
             }
           ]
@@ -2496,33 +2495,34 @@
           "image": "a2:vo13",
           "items": [
             {
-              "prompt": "I timen må vi ___.",
+              "prompt": "Jeg har eksamen på mandag, så i helgen må jeg ___.",
               "options": [
-                "ta notater",
-                "legge seg"
+                "forberede meg til en prøve",
+                "gå ut med søpla"
               ],
               "answers": [
-                "ta notater"
+                "forberede meg til en prøve",
+                "forberede seg til en prøve"
               ]
             },
             {
-              "prompt": "Klokka 9 må jeg ___ på kontoret.",
+              "prompt": "Læreren gir oss oppgaver hjemme, så hver kveld må jeg ___.",
               "options": [
-                "begynne på jobb",
+                "gjøre lekser",
+                "støvsuge gulvet"
+              ],
+              "answers": [
+                "gjøre lekser"
+              ]
+            },
+            {
+              "prompt": "Jeg er sliten etter møtet, så jeg vil ___ og drikke litt vann.",
+              "options": [
+                "ta en pause",
                 "vaske klær"
               ],
               "answers": [
-                "begynne på jobb"
-              ]
-            },
-            {
-              "prompt": "Når timene er ferdige, skal jeg ___ hjem.",
-              "options": [
-                "slutte på jobb",
-                "ta bussen"
-              ],
-              "answers": [
-                "ta bussen"
+                "ta en pause"
               ]
             }
           ]
@@ -2594,51 +2594,51 @@
           "image": "a2:vo15",
           "items": [
             {
-              "prompt": "Sengen din er rotete. → Jeg må ___.",
+              "prompt": "Søppelbøtta på kjøkkenet er full. → Jeg må ___.",
               "options": [
-                "re opp sengen",
-                "ta oppvasken",
-                "handle matvarer",
-                "slappe av"
+                "gå ut med søpla",
+                "støvsuge gulvet",
+                "vaske klær",
+                "lage middag"
               ],
               "answers": [
-                "re opp sengen"
+                "gå ut med søpla"
               ]
             },
             {
-              "prompt": "Det er skitne tallerkener på kjøkkenet. → Jeg må ___.",
+              "prompt": "Det er støv overalt på gulvet. → Jeg må ___.",
               "options": [
-                "re opp sengen",
-                "ta oppvasken",
-                "handle matvarer",
-                "slappe av"
+                "gå ut med søpla",
+                "støvsuge gulvet",
+                "vaske klær",
+                "lage middag"
               ],
               "answers": [
-                "ta oppvasken"
+                "støvsuge gulvet"
               ]
             },
             {
-              "prompt": "Jeg trenger melk og brød. → Jeg må ___.",
+              "prompt": "Alle T-skjortene mine er skitne. → Jeg må ___.",
               "options": [
-                "re opp sengen",
-                "ta oppvasken",
-                "handle matvarer",
-                "slappe av"
+                "gå ut med søpla",
+                "støvsuge gulvet",
+                "vaske klær",
+                "lage middag"
               ],
               "answers": [
-                "handle matvarer"
+                "vaske klær"
               ]
             },
             {
-              "prompt": "Jeg er trøtt etter jobb. → Jeg vil ___.",
+              "prompt": "Klokka er sju, og alle er sultne. → Jeg må ___.",
               "options": [
-                "re opp sengen",
-                "ta oppvasken",
-                "handle matvarer",
-                "slappe av"
+                "gå ut med søpla",
+                "støvsuge gulvet",
+                "vaske klær",
+                "lage middag"
               ],
               "answers": [
-                "slappe av"
+                "lage middag"
               ]
             }
           ]
@@ -2710,51 +2710,51 @@
           "image": "a2:vo17",
           "items": [
             {
-              "prompt": "Denne måneden vil Henrik ___ og gjøre ting til andre tider enn før.",
+              "prompt": "Henrik klarer ikke å velge mellom Bergen og Trondheim. Han må ___.",
               "options": [
-                "endre rutinen",
-                "prøve noe nytt",
-                "få nye venner",
-                "lære en ny ferdighet"
+                "ta en beslutning",
+                "flytte til et nytt sted",
+                "venne seg til",
+                "finne seg til rette i et nytt hjem"
               ],
               "answers": [
-                "endre rutinen"
+                "ta en beslutning"
               ]
             },
             {
-              "prompt": "Han har en ny timeplan, og han vil også ___ som han aldri har gjort før.",
+              "prompt": "I mai vil han ___ nær det nye kontoret.",
               "options": [
-                "endre rutinen",
-                "prøve noe nytt",
-                "få nye venner",
-                "lære en ny ferdighet"
+                "ta en beslutning",
+                "flytte til et nytt sted",
+                "venne seg til",
+                "finne seg til rette i et nytt hjem"
               ],
               "answers": [
-                "prøve noe nytt"
+                "flytte til et nytt sted"
               ]
             },
             {
-              "prompt": "Han har blitt med i en klubb for å ___ og ha noen å være sammen med …",
+              "prompt": "Byen er veldig bråkete, så han trenger tid til å ___ bråket.",
               "options": [
-                "endre rutinen",
-                "prøve noe nytt",
-                "få nye venner",
-                "lære en ny ferdighet"
+                "ta en beslutning",
+                "flytte til et nytt sted",
+                "venne seg til",
+                "finne seg til rette i et nytt hjem"
               ],
               "answers": [
-                "få nye venner"
+                "venne seg til"
               ]
             },
             {
-              "prompt": "… og han håper å ___ snart, for eksempel å spille gitar.",
+              "prompt": "Etter noen uker håper han å ___ og føle seg hjemme.",
               "options": [
-                "endre rutinen",
-                "prøve noe nytt",
-                "få nye venner",
-                "lære en ny ferdighet"
+                "ta en beslutning",
+                "flytte til et nytt sted",
+                "venne seg til",
+                "finne seg til rette i et nytt hjem"
               ],
               "answers": [
-                "lære en ny ferdighet"
+                "finne seg til rette i et nytt hjem"
               ]
             }
           ]
@@ -2768,43 +2768,43 @@
           "image": "a2:vo18",
           "items": [
             {
-              "prompt": "Jeg leser annonser for leiligheter på nettet.",
+              "prompt": "Jeg går på matkurs for å lære italienske retter.",
               "options": [
-                "lete etter en ny leilighet",
+                "lære en ny ferdighet",
+                "endre planene"
+              ],
+              "answers": [
+                "lære en ny ferdighet"
+              ]
+            },
+            {
+              "prompt": "Jeg har møtt tre hyggelige personer på det nye treningssenteret.",
+              "options": [
+                "få nye venner",
+                "lete etter en ny leilighet"
+              ],
+              "answers": [
+                "få nye venner"
+              ]
+            },
+            {
+              "prompt": "I dag spiser jeg sushi for første gang!",
+              "options": [
+                "prøve noe nytt",
                 "begynne i ny jobb"
               ],
               "answers": [
-                "lete etter en ny leilighet"
+                "prøve noe nytt"
               ]
             },
             {
-              "prompt": "Jeg har begynt å ta gitartimer.",
+              "prompt": "Nå står jeg opp klokka seks, ikke klokka åtte som før.",
               "options": [
-                "endre planene",
+                "endre rutinen",
                 "begynne med en ny hobby"
               ],
               "answers": [
-                "begynne med en ny hobby"
-              ]
-            },
-            {
-              "prompt": "Nå trives jeg i den nye leiligheten min.",
-              "options": [
-                "finne seg til rette i et nytt hjem",
-                "ta en beslutning"
-              ],
-              "answers": [
-                "finne seg til rette i et nytt hjem"
-              ]
-            },
-            {
-              "prompt": "Vi kan ikke gå ut fordi det regner. Vi må gjøre noe annet.",
-              "options": [
-                "endre planene",
-                "få nye venner"
-              ],
-              "answers": [
-                "endre planene"
+                "endre rutinen"
               ]
             }
           ]
@@ -2818,22 +2818,22 @@
           "image": "a2:vo19",
           "items": [
             {
-              "prompt": "gå en tur",
+              "prompt": "sjekke e-post",
               "open": true,
               "guide": "Napiši jednu svoju rečenicu na norveškom u kojoj koristiš ovaj izraz."
             },
             {
-              "prompt": "forberede seg til en prøve",
+              "prompt": "re opp sengen",
               "open": true,
               "guide": "Napiši jednu svoju rečenicu na norveškom u kojoj koristiš ovaj izraz."
             },
             {
-              "prompt": "endre rutinen",
+              "prompt": "venne seg til noe",
               "open": true,
               "guide": "Napiši jednu svoju rečenicu na norveškom u kojoj koristiš ovaj izraz."
             },
             {
-              "prompt": "begynne i ny jobb",
+              "prompt": "lære en ny ferdighet",
               "open": true,
               "guide": "Napiši jednu svoju rečenicu na norveškom u kojoj koristiš ovaj izraz."
             }
@@ -2848,38 +2848,34 @@
           "image": "a2:vo20",
           "items": [
             {
-              "prompt": "Du begynner å jobbe i et nytt firma.",
+              "prompt": "Du legger de skitne klærne i vaskemaskinen.",
               "answers": [
-                "begynne i ny jobb",
-                "begynne i en ny jobb"
+                "vaske klær"
               ]
             },
             {
-              "prompt": "Du leter etter en annen leilighet.",
+              "prompt": "Du drar fra byen din og skal bo i en annen by.",
               "answers": [
-                "lete etter en ny leilighet",
-                "lete etter en annen leilighet"
+                "flytte til et nytt sted",
+                "flytte til en ny by"
               ]
             },
             {
-              "prompt": "Du begynner å trives i det nye hjemmet ditt.",
+              "prompt": "Du velger til slutt ett av to alternativer.",
               "answers": [
-                "finne seg til rette i et nytt hjem",
-                "venne seg til noe",
-                "venne seg til et nytt hjem"
+                "ta en beslutning"
               ]
             },
             {
-              "prompt": "Du gjør ikke lenger det du vanligvis gjør. Nå gjør du noe annet.",
+              "prompt": "Du spiller spill og spiser middag med foreldrene og barna dine.",
               "answers": [
-                "endre rutinen",
-                "prøve noe nytt"
+                "tilbringe tid med familien"
               ]
             },
             {
-              "prompt": "Du begynner med en ny aktivitet, som yoga eller maling.",
+              "prompt": "Du begynner i en klubb og blir kjent med nye folk der.",
               "answers": [
-                "begynne med en ny hobby"
+                "få nye venner"
               ]
             }
           ]
