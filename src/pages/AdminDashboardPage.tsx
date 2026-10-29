@@ -27,6 +27,9 @@ export default function AdminDashboardPage() {
         supabase.from("lessons").select("id, user_id, teacher_id, start_time, status, language").order("start_time", { ascending: true }),
         supabase.from("user_xp").select("user_id, total_xp"),
       ]);
+      const enrolls = await supabase.from("course_enrollments").select("id, user_id, language, course_type, level, onboarding_completed").eq("onboarding_completed", true);
+      const enrollMap = new Map<string, NonNullable<typeof enrolls.data>>();
+      (enrolls.data ?? []).forEach((e) => enrollMap.set(e.user_id, [...(enrollMap.get(e.user_id) ?? []), e]));
       const staff = new Set(
         (roles.data ?? []).filter((r) => ["admin", "admin_teacher", "teacher"].includes(r.role)).map((r) => r.user_id),
       );
@@ -45,6 +48,7 @@ export default function AdminDashboardPage() {
         scheduledCount: allLessons.filter((l) => l.status === "scheduled").length,
         completedCount: allLessons.filter((l) => l.status === "completed").length,
         xpMap,
+        enrollMap,
         nameMap,
         teacherMap,
       };
@@ -150,7 +154,13 @@ export default function AdminDashboardPage() {
                       </div>
                     </div>
                     <div className="text-right shrink-0">
-                      <Badge variant="outline">{s.level || "A1"}</Badge>
+                      <div className="flex flex-wrap justify-end gap-1">
+                        {(data!.enrollMap.get(s.user_id) ?? []).length === 0
+                          ? <Badge variant="outline" className="text-muted-foreground">Bez upisa</Badge>
+                          : data!.enrollMap.get(s.user_id)!.map((e) => (
+                            <Badge key={e.id} variant="outline">{e.language.toUpperCase()} · {e.course_type === "health" ? "Zdrav." : "Opšti"} · {e.level || "?"}</Badge>
+                          ))}
+                      </div>
                       <div className="text-xs text-muted-foreground mt-1">{data!.xpMap.get(s.user_id) ?? 0} XP</div>
                     </div>
                   </button>
