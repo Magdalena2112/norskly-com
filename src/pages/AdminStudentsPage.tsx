@@ -16,7 +16,7 @@ export default function AdminStudentsPage() {
   const { data: xpData = [], isLoading: xpLoading } = useQuery({
     queryKey: ["admin-all-xp"],
     queryFn: async () => {
-      const { data, error } = await supabase.from("user_xp").select("user_id, total_xp, level");
+      const { data, error } = await supabase.from("user_xp").select("user_id, total_xp, language");
       if (error) throw error;
       return data;
     },
@@ -31,17 +31,27 @@ export default function AdminStudentsPage() {
     },
   });
 
+  const { data: enrollments = [], isLoading: enrollmentsLoading, error: enrollmentError } = useQuery({
+    queryKey: ["admin-course-enrollments"],
+    queryFn: async () => {
+      const { data, error } = await supabase.from("course_enrollments").select("*");
+      if (error) throw error;
+      return data;
+    },
+  });
   const adminUserIds = new Set(
-    roles.filter((r) => r.role === "admin" || r.role === "admin_teacher").map((r) => r.user_id)
+    roles.filter((r) => ["admin", "admin_teacher", "teacher"].includes(r.role)).map((r) => r.user_id)
   );
-  const xpMap = new Map(xpData.map((x) => [x.user_id, x.total_xp]));
+  const xpMap = new Map<string, number>();
+  xpData.forEach(x => xpMap.set(x.user_id, (xpMap.get(x.user_id) || 0) + x.total_xp));
 
   const studentProfiles = profiles
     .filter((p) => !adminUserIds.has(p.user_id))
     .map((p) => ({
       user_id: p.user_id,
       display_name: p.display_name || "",
-      level: p.level || "A1",
+      level: "",
+      enrollments: enrollments.filter(e => e.user_id === p.user_id),
       learning_goal: p.learning_goal || "",
       total_xp: xpMap.get(p.user_id) ?? 0,
     }));
@@ -50,7 +60,8 @@ export default function AdminStudentsPage() {
     <AdminLayout>
       <div className="max-w-6xl mx-auto space-y-6">
         <h1 className="text-2xl font-display font-bold text-foreground">Svi studenti</h1>
-        <StudentList students={studentProfiles} loading={profilesLoading || xpLoading} />
+        {enrollmentError && <p className="text-destructive">Upisi nisu učitani. Osveži stranicu.</p>}
+        <StudentList students={studentProfiles} loading={profilesLoading || xpLoading || enrollmentsLoading} />
       </div>
     </AdminLayout>
   );

@@ -1,4 +1,5 @@
-import { useSavedState } from "@/lib/savedAnswers";
+import { useSavedState, useAnswerScope } from "@/lib/savedAnswers";
+import { logErrors } from "@/lib/logErrors";
 import { useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Trophy, CheckCircle2, XCircle, RotateCcw, ChevronRight } from "lucide-react";
@@ -15,6 +16,7 @@ export default function LessonReviewQuiz({ quiz, lang, lessonCode, passed, onPas
   quiz: ReviewQuiz; lang: "no" | "en" | "de"; lessonCode: string; passed: boolean; onPass: () => void;
 }) {
   const { user } = useAuth();
+  const scope = useAnswerScope();
   const pass = quiz.passScore ?? 8;
   const bestKey = `review_best_${lang}_${lessonCode}`;
   const [round, setRound] = useState(0);
@@ -27,6 +29,12 @@ export default function LessonReviewQuiz({ quiz, lang, lessonCode, passed, onPas
   const score = answers.filter((a, k) => a === quiz.questions[k].answer).length;
 
   async function choose(o: string) {
+    if (answers.length > i) return;
+    const question = quiz.questions[i];
+    if (user && o !== question.answer) void logErrors(user.id, question.area === "vocabulary" ? "vocabulary" : "grammar", "lesson_review", [{
+      category: question.area, topic: `${lessonCode} · Ponavljanje · ${i + 1}`,
+      severity: 2, example_wrong: o, example_correct: question.answer,
+    }], question.prompt, 1, lang, /^[0-9a-f-]{36}$/i.test(scope) ? scope : undefined);
     const next = [...answers, o];
     setAnswers(next);
     if (next.length < total) { setTimeout(() => setI(i + 1), 250); return; }

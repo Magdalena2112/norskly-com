@@ -1,4 +1,5 @@
 # Tasks
+- [x] Correct admin enrollment/level views and isolate lesson analytics; record grammar/vocabulary/review mistakes with lesson and attempt; verified a real wrong English answer appears in admin's English A2 errors. Historical unassigned events remain separate; legacy enrollment decisions still await administrator below.
 - [x] Extend safe typed-answer tolerance to grammar and listening; 107 checks passed and an authenticated English lesson accepted a formatting/contraction variant and preserved it after reload.
 - [x] Support multiple courses per account, course-specific login and general-login selection; verified German general A2 plus healthcare B1 onboarding, switching, preserved original profile/progress, protected lesson loading and reload, and rejected unauthorized level changes.
 - [x] Optimize homepage font loading and relocation illustration without visual redesign; verified fonts load non-blockingly, WebP is 93% smaller, mobile layout has no horizontal overflow and guide link works; production PageSpeed score awaits publishing and a fresh scan.

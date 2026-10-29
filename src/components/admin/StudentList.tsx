@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Search, Users } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { enrollmentName, matchesEnrollment, type Enrollment } from "@/lib/adminStudents";
 
 interface StudentRow {
   user_id: string;
@@ -14,6 +15,7 @@ interface StudentRow {
   learning_goal: string;
   total_xp: number;
   email?: string;
+  enrollments?: Enrollment[];
 }
 
 interface Props {
@@ -24,13 +26,15 @@ interface Props {
 export function StudentList({ students, loading }: Props) {
   const [search, setSearch] = useState("");
   const [levelFilter, setLevelFilter] = useState("all");
+  const [languageFilter, setLanguageFilter] = useState("all");
+  const [courseFilter, setCourseFilter] = useState("all");
   const navigate = useNavigate();
 
   const filtered = students.filter((s) => {
     const matchesSearch =
       s.display_name.toLowerCase().includes(search.toLowerCase()) ||
       (s.email || "").toLowerCase().includes(search.toLowerCase());
-    const matchesLevel = levelFilter === "all" || s.level === levelFilter;
+    const matchesLevel = matchesEnrollment(s.enrollments || [], languageFilter, courseFilter, levelFilter);
     return matchesSearch && matchesLevel;
   });
 
@@ -40,12 +44,20 @@ export function StudentList({ students, loading }: Props) {
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <Input
-            placeholder="Pretraži po imenu ili emailu..."
+            placeholder="Pretraži po imenu..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="pl-9"
           />
         </div>
+        <Select value={languageFilter} onValueChange={setLanguageFilter}>
+          <SelectTrigger className="w-full sm:w-40"><SelectValue /></SelectTrigger>
+          <SelectContent><SelectItem value="all">Svi jezici</SelectItem><SelectItem value="no">Norveški</SelectItem><SelectItem value="en">Engleski</SelectItem><SelectItem value="de">Nemački</SelectItem></SelectContent>
+        </Select>
+        <Select value={courseFilter} onValueChange={setCourseFilter}>
+          <SelectTrigger className="w-full sm:w-44"><SelectValue /></SelectTrigger>
+          <SelectContent><SelectItem value="all">Svi kursevi</SelectItem><SelectItem value="general">Opšti kurs</SelectItem><SelectItem value="health">Zdravstveni kurs</SelectItem></SelectContent>
+        </Select>
         <Select value={levelFilter} onValueChange={setLevelFilter}>
           <SelectTrigger className="w-32">
             <SelectValue placeholder="Nivo" />
@@ -78,9 +90,8 @@ export function StudentList({ students, loading }: Props) {
             <TableHeader>
               <TableRow>
                 <TableHead>Ime</TableHead>
-                <TableHead>Nivo</TableHead>
-                <TableHead>Cilj</TableHead>
-                <TableHead className="text-right">XP</TableHead>
+                <TableHead>Upisani kursevi i nivoi</TableHead>
+                <TableHead className="text-right">Ukupno XP</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -92,9 +103,8 @@ export function StudentList({ students, loading }: Props) {
                 >
                   <TableCell className="font-medium">{s.display_name || "Bez imena"}</TableCell>
                   <TableCell>
-                    <Badge variant="secondary">{s.level}</Badge>
+                    <div className="flex flex-wrap gap-2">{s.enrollments?.length ? s.enrollments.map(e => <Badge key={e.id} variant="secondary" className="whitespace-normal">{enrollmentName(e)}{!e.onboarding_completed && " · Upis nije završen"}</Badge>) : <span className="text-muted-foreground">Bez upisa</span>}</div>
                   </TableCell>
-                  <TableCell className="text-muted-foreground">{s.learning_goal || "—"}</TableCell>
                   <TableCell className="text-right font-semibold">{s.total_xp}</TableCell>
                 </TableRow>
               ))}

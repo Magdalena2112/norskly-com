@@ -11,6 +11,8 @@ interface ErrorEvent {
   example_correct: string;
   severity: number;
   created_at: string;
+  context?: string | null;
+  attempt_no?: number | null;
 }
 
 export function StudentErrorAnalysis({ errors, loading }: { errors: ErrorEvent[]; loading: boolean }) {
@@ -55,6 +57,7 @@ export function StudentErrorAnalysis({ errors, loading }: { errors: ErrorEvent[]
               <TableHead>Modul</TableHead>
               <TableHead>Kategorija</TableHead>
               <TableHead>Tema</TableHead>
+              <TableHead>Pokušaj / datum</TableHead>
               <TableHead>Pogrešno</TableHead>
               <TableHead>Tačno</TableHead>
             </TableRow>
@@ -67,6 +70,7 @@ export function StudentErrorAnalysis({ errors, loading }: { errors: ErrorEvent[]
                 </TableCell>
                 <TableCell className="text-sm">{e.category}</TableCell>
                 <TableCell className="text-sm text-muted-foreground">{e.topic}</TableCell>
+                <TableCell className="text-xs text-muted-foreground">{e.attempt_no || "—"} · {new Date(e.created_at).toLocaleDateString("sr-Latn")}<p className="max-w-xs whitespace-normal">{e.context}</p></TableCell>
                 <TableCell className="text-sm text-destructive">{e.example_wrong}</TableCell>
                 <TableCell className="text-sm text-accent">{e.example_correct}</TableCell>
               </TableRow>

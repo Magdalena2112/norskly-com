@@ -438,6 +438,7 @@ export type Database = {
           example_wrong: string
           id: string
           language: string
+          lesson_id: string | null
           module: string
           severity: number
           source_type: string
@@ -453,6 +454,7 @@ export type Database = {
           example_wrong: string
           id?: string
           language?: string
+          lesson_id?: string | null
           module: string
           severity?: number
           source_type: string
@@ -468,13 +470,22 @@ export type Database = {
           example_wrong?: string
           id?: string
           language?: string
+          lesson_id?: string | null
           module?: string
           severity?: number
           source_type?: string
           topic?: string
           user_id?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "error_events_lesson_id_fkey"
+            columns: ["lesson_id"]
+            isOneToOne: false
+            referencedRelation: "course_lessons"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       exercise_answers: {
         Row: {

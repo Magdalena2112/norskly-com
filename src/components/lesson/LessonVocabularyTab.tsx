@@ -262,7 +262,7 @@ export default function LessonVocabularyTab({ lessonId, mode, onPractice, onFlas
             })}
           </div>
           {areaEx[exIdx] && (practice.some((e) => e.code === areaEx[exIdx].code) ?
-            <VocabularyPracticeExercise key={areaEx[exIdx].id} exercise={areaEx[exIdx] as unknown as Practice} pictures={HC_PICS} done={isDone(areaEx[exIdx].code)} onDone={markDone} /> :
+            <VocabularyPracticeExercise key={areaEx[exIdx].id} exercise={areaEx[exIdx] as unknown as Practice} language={lang} pictures={HC_PICS} done={isDone(areaEx[exIdx].code)} onDone={markDone} /> :
             <LessonExercise key={areaEx[exIdx].id} exercise={areaEx[exIdx]} language={lang} level={row.cefr_level} lessonTitle={row.title_target || row.title} lessonCode={row.lesson_code} done={isDone(areaEx[exIdx].code)} onDone={markDone} />
           )}
           <div className="flex justify-between gap-2">
