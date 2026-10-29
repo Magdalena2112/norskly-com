@@ -1,3 +1,4 @@
+import norsklyLogo from "@/assets/norskly-logo-new.webp.asset.json";
 import { ReactNode, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
@@ -43,6 +44,7 @@ export default function StudentLayout({ children, title }: StudentLayoutProps) {
           <header className="h-14 border-b border-border/40 bg-cream/70 backdrop-blur-md sticky top-0 z-40 flex items-center justify-between px-3 sm:px-6">
             <div className="flex items-center gap-2 min-w-0">
               <SidebarTrigger className="text-primary hover:bg-primary/10" />
+              <img src={norsklyLogo.url} alt="Norskly" width={36} height={36} className="w-9 h-9 object-contain shrink-0" />
               {title && (
                 <h1 className="font-display font-semibold text-primary text-base sm:text-lg truncate">
                   {title}
