@@ -28,3 +28,6 @@ verify_jwt = false
 
 [functions.word-lookup]
 verify_jwt = false
+
+[functions.mistake-explain]
+verify_jwt = false
