@@ -2468,7 +2468,7 @@
           "image": "a2:vo11",
           "items": [
             {
-              "prompt": "frühstücken",
+              "prompt": "aufwachen",
               "options": [
                 "M (Morgen)",
                 "A (Abend)"
@@ -2478,7 +2478,7 @@
               ]
             },
             {
-              "prompt": "ins Bett gehen",
+              "prompt": "Abendessen kochen",
               "options": [
                 "M (Morgen)",
                 "A (Abend)"
@@ -2488,18 +2488,7 @@
               ]
             },
             {
-              "prompt": "sich die Zähne putzen",
-              "options": [
-                "M (Morgen)",
-                "A (Abend)"
-              ],
-              "answers": [
-                "M (Morgen)",
-                "A (Abend)"
-              ]
-            },
-            {
-              "prompt": "aufstehen",
+              "prompt": "sich anziehen",
               "options": [
                 "M (Morgen)",
                 "A (Abend)"
@@ -2509,13 +2498,23 @@
               ]
             },
             {
-              "prompt": "Feierabend machen",
+              "prompt": "Zeit mit der Familie verbringen",
               "options": [
                 "M (Morgen)",
                 "A (Abend)"
               ],
               "answers": [
                 "A (Abend)"
+              ]
+            },
+            {
+              "prompt": "aus dem Haus gehen",
+              "options": [
+                "M (Morgen)",
+                "A (Abend)"
+              ],
+              "answers": [
+                "M (Morgen)"
               ]
             }
           ]
@@ -2529,51 +2528,51 @@
           "image": "a2:vo12",
           "items": [
             {
-              "prompt": "Nach dem Duschen muss man ___, bevor man rausgeht.",
+              "prompt": "Nach dem Aufstehen gehe ich ins Bad, denn ich möchte ___.",
               "options": [
-                "sich anziehen",
-                "Notizen machen",
-                "frühstücken",
-                "eine Pause machen"
+                "duschen",
+                "E-Mails checken",
+                "an einem Meeting teilnehmen",
+                "zur Arbeit kommen"
               ],
               "answers": [
-                "sich anziehen"
+                "duschen"
               ]
             },
             {
-              "prompt": "Bevor ich aus dem Haus gehe, möchte ich ___, damit ich keinen Hunger habe.",
+              "prompt": "Wenn ich am Schreibtisch sitze, muss ich zuerst ___.",
               "options": [
-                "sich anziehen",
-                "Notizen machen",
-                "frühstücken",
-                "eine Pause machen"
+                "duschen",
+                "E-Mails checken",
+                "an einem Meeting teilnehmen",
+                "zur Arbeit kommen"
               ],
               "answers": [
-                "frühstücken"
+                "E-Mails checken"
               ]
             },
             {
-              "prompt": "In der Schule muss ich ___, damit ich mir alles merke.",
+              "prompt": "Um 11 Uhr muss ich mit meinem Team ___.",
               "options": [
-                "sich anziehen",
-                "Notizen machen",
-                "frühstücken",
-                "eine Pause machen"
+                "duschen",
+                "E-Mails checken",
+                "an einem Meeting teilnehmen",
+                "zur Arbeit kommen"
               ],
               "answers": [
-                "Notizen machen"
+                "an einem Meeting teilnehmen"
               ]
             },
             {
-              "prompt": "Um 10 Uhr möchten wir normalerweise ___.",
+              "prompt": "Der Bus ist schnell, deshalb kann ich um halb neun ___.",
               "options": [
-                "sich anziehen",
-                "Notizen machen",
-                "frühstücken",
-                "eine Pause machen"
+                "duschen",
+                "E-Mails checken",
+                "an einem Meeting teilnehmen",
+                "zur Arbeit kommen"
               ],
               "answers": [
-                "eine Pause machen"
+                "zur Arbeit kommen"
               ]
             }
           ]
@@ -2587,43 +2586,33 @@
           "image": "a2:vo13",
           "items": [
             {
-              "prompt": "Im Unterricht müssen wir ___.",
+              "prompt": "Am Montag habe ich eine Prüfung, deshalb muss ich mich am Wochenende ___.",
               "options": [
-                "Notizen machen",
-                "ins Bett gehen"
+                "auf die Prüfung vorbereiten",
+                "den Müll rausbringen"
               ],
               "answers": [
-                "Notizen machen"
+                "auf die Prüfung vorbereiten"
               ]
             },
             {
-              "prompt": "Am Morgen muss ich zuerst ___.",
+              "prompt": "Die Lehrerin gibt uns Aufgaben für zu Hause, deshalb muss ich jeden Abend ___.",
               "options": [
-                "E-Mails checken",
-                "abwaschen"
-              ],
-              "answers": [
-                "E-Mails checken"
-              ]
-            },
-            {
-              "prompt": "Um 11 Uhr muss ich ___.",
-              "options": [
-                "an einem Meeting teilnehmen",
+                "Hausaufgaben machen",
                 "staubsaugen"
               ],
               "answers": [
-                "an einem Meeting teilnehmen"
+                "Hausaufgaben machen"
               ]
             },
             {
-              "prompt": "Um 17 Uhr kann ich endlich ___.",
+              "prompt": "Nach dem Meeting bin ich müde, deshalb möchte ich ___ und Wasser trinken.",
               "options": [
-                "Feierabend machen",
-                "aufwachen"
+                "eine Pause machen",
+                "Wäsche waschen"
               ],
               "answers": [
-                "Feierabend machen"
+                "eine Pause machen"
               ]
             }
           ]
@@ -2695,51 +2684,51 @@
           "image": "a2:vo15",
           "items": [
             {
-              "prompt": "Dein Bett ist unordentlich. → Ich muss ___.",
+              "prompt": "Der Mülleimer in der Küche ist voll. → Ich muss ___.",
               "options": [
-                "das Bett machen",
-                "abwaschen",
-                "Lebensmittel einkaufen",
-                "sich entspannen"
+                "den Müll rausbringen",
+                "staubsaugen",
+                "Wäsche waschen",
+                "Abendessen kochen"
               ],
               "answers": [
-                "das Bett machen"
+                "den Müll rausbringen"
               ]
             },
             {
-              "prompt": "In der Küche steht schmutziges Geschirr. → Ich muss ___.",
+              "prompt": "Auf dem Boden liegt überall Staub. → Ich muss ___.",
               "options": [
-                "das Bett machen",
-                "abwaschen",
-                "Lebensmittel einkaufen",
-                "sich entspannen"
+                "den Müll rausbringen",
+                "staubsaugen",
+                "Wäsche waschen",
+                "Abendessen kochen"
               ],
               "answers": [
-                "abwaschen"
+                "staubsaugen"
               ]
             },
             {
-              "prompt": "Ich brauche Milch und Brot. → Ich muss ___.",
+              "prompt": "Alle meine T-Shirts sind schmutzig. → Ich muss ___.",
               "options": [
-                "das Bett machen",
-                "abwaschen",
-                "Lebensmittel einkaufen",
-                "sich entspannen"
+                "den Müll rausbringen",
+                "staubsaugen",
+                "Wäsche waschen",
+                "Abendessen kochen"
               ],
               "answers": [
-                "Lebensmittel einkaufen"
+                "Wäsche waschen"
               ]
             },
             {
-              "prompt": "Ich bin nach der Arbeit müde. → Ich möchte ___.",
+              "prompt": "Es ist 19 Uhr und alle haben Hunger. → Ich muss ___.",
               "options": [
-                "das Bett machen",
-                "abwaschen",
-                "Lebensmittel einkaufen",
-                "sich entspannen"
+                "den Müll rausbringen",
+                "staubsaugen",
+                "Wäsche waschen",
+                "Abendessen kochen"
               ],
               "answers": [
-                "sich entspannen"
+                "Abendessen kochen"
               ]
             }
           ]
@@ -2811,51 +2800,51 @@
           "image": "a2:vo17",
           "items": [
             {
-              "prompt": "Diesen Monat möchte Lukas ___ und Dinge zu anderen Zeiten machen.",
+              "prompt": "Lukas kann nicht zwischen Hamburg und München wählen. Er muss ___.",
               "options": [
-                "die Routine ändern",
-                "etwas Neues ausprobieren",
-                "neue Freunde finden",
-                "eine neue Fähigkeit lernen"
+                "eine Entscheidung treffen",
+                "in eine neue Stadt umziehen",
+                "sich an etwas gewöhnen",
+                "sich in der neuen Wohnung einleben"
               ],
               "answers": [
-                "die Routine ändern"
+                "eine Entscheidung treffen"
               ]
             },
             {
-              "prompt": "Er hat einen neuen Stundenplan und möchte auch ___, was er noch nie gemacht hat.",
+              "prompt": "Im Mai möchte er ___, nah an seinem neuen Büro.",
               "options": [
-                "die Routine ändern",
-                "etwas Neues ausprobieren",
-                "neue Freunde finden",
-                "eine neue Fähigkeit lernen"
+                "eine Entscheidung treffen",
+                "in eine neue Stadt umziehen",
+                "sich an etwas gewöhnen",
+                "sich in der neuen Wohnung einleben"
               ],
               "answers": [
-                "etwas Neues ausprobieren"
+                "in eine neue Stadt umziehen"
               ]
             },
             {
-              "prompt": "Er geht in einen Verein, um ___ …",
+              "prompt": "Die Stadt ist sehr laut. Er braucht Zeit, um ___.",
               "options": [
-                "die Routine ändern",
-                "etwas Neues ausprobieren",
-                "neue Freunde finden",
-                "eine neue Fähigkeit lernen"
+                "eine Entscheidung treffen",
+                "in eine neue Stadt umziehen",
+                "sich an etwas gewöhnen",
+                "sich in der neuen Wohnung einleben"
               ],
               "answers": [
-                "neue Freunde finden"
+                "sich an etwas gewöhnen"
               ]
             },
             {
-              "prompt": "… und er hofft, bald ___, zum Beispiel Gitarre spielen.",
+              "prompt": "Nach ein paar Wochen möchte er ___ und sich zu Hause fühlen.",
               "options": [
-                "die Routine ändern",
-                "etwas Neues ausprobieren",
-                "neue Freunde finden",
-                "eine neue Fähigkeit lernen"
+                "eine Entscheidung treffen",
+                "in eine neue Stadt umziehen",
+                "sich an etwas gewöhnen",
+                "sich in der neuen Wohnung einleben"
               ],
               "answers": [
-                "eine neue Fähigkeit lernen"
+                "sich in der neuen Wohnung einleben"
               ]
             }
           ]
@@ -2869,43 +2858,43 @@
           "image": "a2:vo18",
           "items": [
             {
-              "prompt": "Ich lese im Internet Wohnungsanzeigen.",
+              "prompt": "Ich mache einen Kochkurs und lerne italienische Gerichte.",
               "options": [
-                "eine neue Wohnung suchen",
+                "eine neue Fähigkeit lernen",
+                "die Pläne ändern"
+              ],
+              "answers": [
+                "eine neue Fähigkeit lernen"
+              ]
+            },
+            {
+              "prompt": "Im neuen Fitnessstudio habe ich drei nette Leute kennengelernt.",
+              "options": [
+                "neue Freunde finden",
+                "eine neue Wohnung suchen"
+              ],
+              "answers": [
+                "neue Freunde finden"
+              ]
+            },
+            {
+              "prompt": "Heute esse ich zum ersten Mal Sushi!",
+              "options": [
+                "etwas Neues ausprobieren",
                 "eine neue Stelle anfangen"
               ],
               "answers": [
-                "eine neue Wohnung suchen"
+                "etwas Neues ausprobieren"
               ]
             },
             {
-              "prompt": "Ich nehme jetzt Gitarrenunterricht.",
+              "prompt": "Jetzt stehe ich um 6 Uhr auf, nicht mehr um 8 Uhr wie früher.",
               "options": [
-                "die Pläne ändern",
+                "die Routine ändern",
                 "mit einem neuen Hobby anfangen"
               ],
               "answers": [
-                "mit einem neuen Hobby anfangen"
-              ]
-            },
-            {
-              "prompt": "Jetzt fühle ich mich in meiner neuen Wohnung wohl.",
-              "options": [
-                "sich in der neuen Wohnung einleben",
-                "eine Entscheidung treffen"
-              ],
-              "answers": [
-                "sich in der neuen Wohnung einleben"
-              ]
-            },
-            {
-              "prompt": "Wir können nicht rausgehen, weil es regnet. Wir müssen etwas anderes machen.",
-              "options": [
-                "die Pläne ändern",
-                "neue Freunde finden"
-              ],
-              "answers": [
-                "die Pläne ändern"
+                "die Routine ändern"
               ]
             }
           ]
@@ -2919,22 +2908,22 @@
           "image": "a2:vo19",
           "items": [
             {
-              "prompt": "spazieren gehen",
+              "prompt": "E-Mails checken",
               "open": true,
               "guide": "Napiši jednu svoju rečenicu na nemačkom u kojoj koristiš ovaj izraz."
             },
             {
-              "prompt": "sich auf eine Prüfung vorbereiten",
+              "prompt": "Zeit mit der Familie verbringen",
               "open": true,
               "guide": "Napiši jednu svoju rečenicu na nemačkom u kojoj koristiš ovaj izraz."
             },
             {
-              "prompt": "die Routine ändern",
+              "prompt": "sich an etwas gewöhnen",
               "open": true,
               "guide": "Napiši jednu svoju rečenicu na nemačkom u kojoj koristiš ovaj izraz."
             },
             {
-              "prompt": "eine neue Stelle anfangen",
+              "prompt": "eine neue Fähigkeit lernen",
               "open": true,
               "guide": "Napiši jednu svoju rečenicu na nemačkom u kojoj koristiš ovaj izraz."
             }
@@ -2949,28 +2938,34 @@
           "image": "a2:vo20",
           "items": [
             {
-              "prompt": "Du fängst in einer neuen Firma an zu arbeiten.",
+              "prompt": "Du steckst deine schmutzige Kleidung in die Waschmaschine.",
               "answers": [
-                "eine neue Stelle anfangen"
+                "Wäsche waschen"
               ]
             },
             {
-              "prompt": "Du suchst eine andere Wohnung.",
+              "prompt": "Du verlässt deine Stadt und wohnst ab jetzt in einer anderen Stadt.",
               "answers": [
-                "eine neue Wohnung suchen"
+                "in eine neue Stadt umziehen",
+                "umziehen"
               ]
             },
             {
-              "prompt": "Du fühlst dich in deinem neuen Zuhause langsam wohl.",
+              "prompt": "Du wählst endlich eine von zwei Möglichkeiten.",
               "answers": [
-                "sich in der neuen Wohnung einleben",
-                "sich an etwas gewöhnen"
+                "eine Entscheidung treffen"
               ]
             },
             {
-              "prompt": "Du machst Dinge jetzt zu anderen Zeiten als früher.",
+              "prompt": "Du spielst und isst mit deinen Eltern und Kindern zu Abend.",
               "answers": [
-                "die Routine ändern"
+                "Zeit mit der Familie verbringen"
+              ]
+            },
+            {
+              "prompt": "Du gehst in einen Verein und lernst dort neue Leute kennen.",
+              "answers": [
+                "neue Freunde finden"
               ]
             }
           ]
