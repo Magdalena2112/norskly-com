@@ -1956,7 +1956,8 @@
               "prompt": "Slika 1 (gore levo)",
               "answers": [
                 "aufwachen",
-                "aufstehen"
+                "aufstehen",
+                "wach werden"
               ]
             },
             {
@@ -1969,13 +1970,17 @@
             {
               "prompt": "Slika 3 (dole levo)",
               "answers": [
-                "frühstücken"
+                "frühstücken",
+                "Frühstück essen"
               ]
             },
             {
               "prompt": "Slika 4 (dole desno)",
               "answers": [
-                "aus dem Haus gehen"
+                "aus dem Haus gehen",
+                "das Haus verlassen",
+                "zur Arbeit gehen",
+                "von zu Hause weggehen"
               ]
             }
           ]
@@ -2940,32 +2945,40 @@
             {
               "prompt": "Du steckst deine schmutzige Kleidung in die Waschmaschine.",
               "answers": [
-                "Wäsche waschen"
+                "Wäsche waschen",
+                "Kleidung waschen",
+                "die Wäsche machen"
               ]
             },
             {
               "prompt": "Du verlässt deine Stadt und wohnst ab jetzt in einer anderen Stadt.",
               "answers": [
                 "in eine neue Stadt umziehen",
-                "umziehen"
+                "umziehen",
+                "in eine andere Stadt ziehen"
               ]
             },
             {
               "prompt": "Du wählst endlich eine von zwei Möglichkeiten.",
               "answers": [
-                "eine Entscheidung treffen"
+                "eine Entscheidung treffen",
+                "sich entscheiden",
+                "entscheiden"
               ]
             },
             {
               "prompt": "Du spielst und isst mit deinen Eltern und Kindern zu Abend.",
               "answers": [
-                "Zeit mit der Familie verbringen"
+                "Zeit mit der Familie verbringen",
+                "mit der Familie Zeit verbringen"
               ]
             },
             {
               "prompt": "Du gehst in einen Verein und lernst dort neue Leute kennen.",
               "answers": [
-                "neue Freunde finden"
+                "neue Freunde finden",
+                "neue Leute kennenlernen",
+                "neue Freunde kennenlernen"
               ]
             }
           ]

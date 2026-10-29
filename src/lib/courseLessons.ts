@@ -60,12 +60,29 @@ export function normalize(s: string) {
     .trim();
 }
 
-export function isCorrect(value: string, answers: string[] = []) {
+// Function words that don't change which action/thing a vocabulary phrase names
+// (person of a possessive, optional articles, infinitive markers, reflexives).
+const FLEX_WORDS = new Set([
+  "to", "my", "your", "his", "her", "our", "their", "the", "a", "an",
+  "å", "min", "mitt", "mine", "din", "ditt", "dine", "sin", "sitt", "sine", "en", "ei", "et",
+  "zu", "sich", "mich", "dich", "uns", "euch", "die", "der", "das", "den", "dem", "ein", "eine", "einen",
+  "meine", "deine", "seine", "ihre", "unsere", "meinen", "deinen", "seinen", "ihren",
+]);
+
+/** Core form of a phrase without person/article/infinitive markers — used only for vocabulary items. */
+export function coreForm(s: string) {
+  return normalize(s).split(" ").filter((w) => !FLEX_WORDS.has(w)).join(" ");
+}
+
+export function isCorrect(value: string, answers: string[] = [], opts: { lenient?: boolean } = {}) {
   const v = normalize(value);
   if (!v) return false;
   return answers.some((a) => {
     const n = normalize(a);
-    return n === v || n.replace(/-/g, "") === v.replace(/[-\s]/g, "");
+    if (n === v || n.replace(/-/g, "") === v.replace(/[-\s]/g, "")) return true;
+    if (!opts.lenient) return false;
+    const cv = coreForm(value);
+    return !!cv && cv === coreForm(a);
   });
 }
 

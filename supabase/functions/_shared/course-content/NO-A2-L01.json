@@ -1866,25 +1866,33 @@
               "prompt": "Slika 1 (gore levo)",
               "answers": [
                 "våkne",
-                "stå opp"
+                "stå opp",
+                "våkne opp"
               ]
             },
             {
               "prompt": "Slika 2 (gore desno)",
               "answers": [
-                "pusse tennene"
+                "pusse tennene",
+                "pusse tenner",
+                "pusse tennene sine"
               ]
             },
             {
               "prompt": "Slika 3 (dole levo)",
               "answers": [
-                "spise frokost"
+                "spise frokost",
+                "ha frokost"
               ]
             },
             {
               "prompt": "Slika 4 (dole desno)",
               "answers": [
-                "dra hjemmefra"
+                "dra hjemmefra",
+                "gå hjemmefra",
+                "forlate huset",
+                "gå på jobb",
+                "dra på jobb"
               ]
             }
           ]
@@ -2850,32 +2858,42 @@
             {
               "prompt": "Du legger de skitne klærne i vaskemaskinen.",
               "answers": [
-                "vaske klær"
+                "vaske klær",
+                "vaske klærne",
+                "vaske tøy"
               ]
             },
             {
               "prompt": "Du drar fra byen din og skal bo i en annen by.",
               "answers": [
                 "flytte til et nytt sted",
-                "flytte til en ny by"
+                "flytte til en ny by",
+                "flytte"
               ]
             },
             {
               "prompt": "Du velger til slutt ett av to alternativer.",
               "answers": [
-                "ta en beslutning"
+                "ta en beslutning",
+                "bestemme seg",
+                "ta en avgjørelse",
+                "velge"
               ]
             },
             {
               "prompt": "Du spiller spill og spiser middag med foreldrene og barna dine.",
               "answers": [
-                "tilbringe tid med familien"
+                "tilbringe tid med familien",
+                "være sammen med familien",
+                "bruke tid med familien"
               ]
             },
             {
               "prompt": "Du begynner i en klubb og blir kjent med nye folk der.",
               "answers": [
-                "få nye venner"
+                "få nye venner",
+                "finne nye venner",
+                "møte nye venner"
               ]
             }
           ]
