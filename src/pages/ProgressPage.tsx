@@ -16,6 +16,9 @@ import {
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useSelectedLanguage } from "@/hooks/useSelectedLanguage";
+import { useCourseEnrollment } from "@/hooks/useCourseEnrollment";
+import { computeReadiness, LEVEL_UP_LESSON_PCT, type ReadinessResult } from "@/lib/readiness";
+import { normalizeLevel } from "@/lib/levels";
 
 const CEFR_ORDER = ["A1", "A2", "B1", "B2", "C1"] as const;
 
@@ -52,127 +55,53 @@ export default function ProgressPage() {
 
   const [errorStats, setErrorStats] = useState<ErrorTopicStat[]>([]);
   const [loadingErrors, setLoadingErrors] = useState(true);
-  const [readinessScore, setReadinessScore] = useState<{
-    total: number;
-    grammar: number;
-    vocabulary: number;
-    communication: number;
-    consistency: number;
-  } | null>(null);
+  const [readinessScore, setReadinessScore] = useState<ReadinessResult | null>(null);
   const [loadingReadiness, setLoadingReadiness] = useState(true);
   const [showLevelUpDialog, setShowLevelUpDialog] = useState(false);
+  const { data: course } = useCourseEnrollment(code);
 
   const nextLevel = useMemo(() => {
     const idx = CEFR_ORDER.indexOf(profile.level as any);
     return idx >= 0 && idx < CEFR_ORDER.length - 1 ? CEFR_ORDER[idx + 1] : null;
   }, [profile.level]);
 
-  // Compute CEFR readiness score
+  // Compute CEFR readiness score (4 pillars, see src/lib/readiness.ts)
   useEffect(() => {
     if (!user) return;
     (async () => {
       setLoadingReadiness(true);
-      const thirtyDaysAgo = new Date();
-      thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
-      const isoDate = thirtyDaysAgo.toISOString();
+      const since = new Date();
+      since.setDate(since.getDate() - 30);
+      const isoDate = since.toISOString();
+      const level = normalizeLevel(profile.level);
 
-      // Fetch last 30 days activities and errors in parallel
-      const [activitiesRes, errorsRes, vocabRes] = await Promise.all([
-        supabase
-          .from("activities")
-          .select("module, type, points, payload, created_at")
-          .eq("user_id", user.id)
-          .eq("language", code)
-          .gte("created_at", isoDate)
-          .order("created_at", { ascending: false })
-          .limit(200),
-        supabase
-          .from("error_events")
-          .select("module, severity, category")
-          .eq("user_id", user.id)
-          .eq("language", code)
-          .gte("created_at", isoDate),
-        supabase
-          .from("vocab_items")
-          .select("status")
-          .eq("user_id", user.id)
-          .eq("language", code),
+      let lessonsQ = supabase.from("course_lessons").select("id").eq("language", code).eq("cefr_level", level).eq("is_published", true);
+      if (course) lessonsQ = lessonsQ.eq("course", course);
+
+      const [activitiesRes, errorsRes, readingRes, lessonsRes, progressRes] = await Promise.all([
+        supabase.from("activities").select("module, type, payload, created_at")
+          .eq("user_id", user.id).eq("language", code).gte("created_at", isoDate)
+          .order("created_at", { ascending: false }).limit(500),
+        supabase.from("error_events").select("module, severity")
+          .eq("user_id", user.id).eq("language", code).gte("created_at", isoDate),
+        supabase.from("reading_sessions").select("score, total")
+          .eq("user_id", user.id).eq("language", code).eq("completed", true),
+        lessonsQ,
+        supabase.from("course_lesson_progress").select("lesson_id, status")
+          .eq("user_id", user.id).eq("language", code).eq("status", "completed"),
       ]);
 
-      const activities = activitiesRes.data || [];
-      const errors = errorsRes.data || [];
-      const vocabItems = vocabRes.data || [];
-
-      // 1. Grammar accuracy (30%) – based on error rate in grammar module
-      const grammarActivities = activities.filter((a) => a.module === "grammar");
-      const grammarErrors = errors.filter((e) => e.module === "grammar");
-      let grammarScore = 0;
-      if (grammarActivities.length > 0) {
-        const errorRate = grammarErrors.length / Math.max(grammarActivities.length, 1);
-        grammarScore = Math.max(0, Math.min(100, 100 - errorRate * 40));
-        // Boost from quiz/exercise scores
-        const quizzes = grammarActivities.filter((a) => a.type === "quiz_completed" || a.type === "exercises_completed");
-        if (quizzes.length > 0) {
-          const avgPct = quizzes.reduce((sum, q) => sum + ((q.payload as any)?.percentage || 50), 0) / quizzes.length;
-          grammarScore = Math.min(100, (grammarScore + avgPct) / 2);
-        }
-      } else {
-        grammarScore = 0;
-      }
-
-      // 2. Vocabulary mastery (25%) – based on known vs total vocab
-      let vocabScore = 0;
-      if (vocabItems.length > 0) {
-        const known = vocabItems.filter((v) => v.status === "known" || v.status === "practiced").length;
-        vocabScore = Math.min(100, (known / vocabItems.length) * 100);
-        // Quiz performance boost
-        const vocabQuizzes = activities.filter((a) => a.module === "vocabulary" && a.type === "quiz_completed");
-        if (vocabQuizzes.length > 0) {
-          const avgPct = vocabQuizzes.reduce((sum, q) => sum + ((q.payload as any)?.percentage || 50), 0) / vocabQuizzes.length;
-          vocabScore = (vocabScore + avgPct) / 2;
-        }
-      }
-
-      // 3. Communication clarity (25%) – based on talk sessions and error severity
-      const talkActivities = activities.filter((a) => a.module === "talk");
-      const talkErrors = errors.filter((e) => e.module === "talk");
-      let commScore = 0;
-      if (talkActivities.length > 0) {
-        const avgSev = talkErrors.length > 0
-          ? talkErrors.reduce((s, e) => s + e.severity, 0) / talkErrors.length
-          : 1;
-        commScore = Math.max(0, Math.min(100, 100 - (avgSev - 1) * 30 - (talkErrors.length / Math.max(talkActivities.length, 1)) * 20));
-        // Bonus for volume
-        commScore = Math.min(100, commScore + Math.min(talkActivities.length * 3, 15));
-      }
-
-      // 4. Consistency (20%) – last 10 activities spread over days
-      let consistencyScore = 0;
-      const last10 = activities.slice(0, 10);
-      if (last10.length >= 5) {
-        const uniqueDays = new Set(last10.map((a) => a.created_at.slice(0, 10))).size;
-        consistencyScore = Math.min(100, (uniqueDays / Math.min(7, last10.length)) * 100);
-        // Activity variety bonus
-        const uniqueModules = new Set(last10.map((a) => a.module)).size;
-        consistencyScore = Math.min(100, consistencyScore + uniqueModules * 5);
-      } else if (last10.length > 0) {
-        consistencyScore = last10.length * 8;
-      }
-
-      const total = Math.round(
-        grammarScore * 0.3 + vocabScore * 0.25 + commScore * 0.25 + consistencyScore * 0.2
-      );
-
-      setReadinessScore({
-        total: Math.min(100, total),
-        grammar: Math.round(grammarScore),
-        vocabulary: Math.round(vocabScore),
-        communication: Math.round(commScore),
-        consistency: Math.round(consistencyScore),
-      });
+      const lessonIds = new Set((lessonsRes.data || []).map((l) => l.id));
+      setReadinessScore(computeReadiness({
+        activities: activitiesRes.data || [],
+        errors: errorsRes.data || [],
+        readingScores: readingRes.data || [],
+        lessonsTotal: lessonIds.size,
+        lessonsCompleted: (progressRes.data || []).filter((p) => lessonIds.has(p.lesson_id)).length,
+      }));
       setLoadingReadiness(false);
     })();
-  }, [user, code]);
+  }, [user, code, course, profile.level]);
 
   // Fetch error stats
   useEffect(() => {
