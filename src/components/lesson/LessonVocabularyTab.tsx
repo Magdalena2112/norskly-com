@@ -91,6 +91,11 @@ export default function LessonVocabularyTab({ lessonId, mode, onPractice, onFlas
   }, [lessonId, user]);
 
   useEffect(() => { setExIdx(0); setAiEx(null); }, [idx, mode]);
+  useEffect(() => {
+    const cur = areas[Math.min(idx, areas.length - 1)];
+    if (!row || !cur) return;
+    prefetchSpeech(cur.words.map((w) => ({ speaker: "m", text: w.word.split(" / ")[0].replace("…", "") })), row.language || "en");
+  }, [idx, areas, row]);
   const [aiEx, setAiEx] = useState<Exercise[] | null>(null);
   const [aiLoading, setAiLoading] = useState(false);
   async function genMore() {
