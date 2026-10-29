@@ -1,6 +1,7 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "jsr:@supabase/supabase-js@2";
 import { loadLearnerStyleLine } from "../_shared/learnerStyle.ts";
+import { buildRubricLine } from "../_shared/pedagogy/skillsMatrix.ts";
 
 const GATEWAY_URL = "https://ai.gateway.lovable.dev/v1/responses";
 const corsHeaders = {
@@ -98,7 +99,7 @@ Pravila:
         stream: true,
         store: false,
         reasoning: { effort: "low" },
-        instructions: learnerStyle ? `${instructions}\n\n${learnerStyle}` : instructions,
+        instructions: [instructions, buildRubricLine(language, level, ["writing", "grammar", "vocabulary", "reading"]), learnerStyle].filter(Boolean).join("\n\n"),
         input,
         text: { format: { type: "json_schema", name: "lesson_grading", strict: true, schema } },
       }),
