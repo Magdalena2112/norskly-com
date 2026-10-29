@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
-import norsklyLogo from "@/assets/norskly-logo.webp.asset.json";
+import norsklyLogo from "@/assets/norskly-logo-new.webp.asset.json";
 import {
   MessageCircle, Sparkles, BookOpen, Target, Mic, BarChart3,
   Check, X, ArrowRight, GraduationCap, Users, CalendarCheck,
@@ -119,7 +119,7 @@ export default function LandingPage() {
       {/* ============== NAV ============== */}
       <nav className="sticky top-0 inset-x-0 z-50 backdrop-blur-md bg-background/80 border-b border-border/60">
         <div className="container flex items-center justify-between h-14 sm:h-16">
-          <img src={norsklyLogo.url} alt="Norskly" width={370} height={144} fetchPriority="high" decoding="async" className="h-10 sm:h-12 w-auto select-none" draggable={false} />
+          <img src={norsklyLogo.url} alt="Norskly" width={800} height={739} fetchPriority="high" decoding="async" className="h-12 sm:h-14 w-auto select-none" draggable={false} />
           <div className="hidden md:flex md:min-w-0 md:overflow-x-auto items-center gap-4 whitespace-nowrap text-xs font-medium text-foreground/80 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:overflow-x-visible lg:gap-8 lg:text-sm">
             <a href="#features" className="hover:text-primary transition-colors">Platforma</a>
             <Link to="/relocation-hub" className="hover:text-primary transition-colors">Relocation Hub</Link>
@@ -564,7 +564,7 @@ export default function LandingPage() {
       {/* ============== FOOTER ============== */}
       <footer className="border-t border-border/60 py-8 md:py-10">
         <div className="container flex flex-col md:flex-row items-center justify-between gap-3 md:gap-4 text-xs sm:text-sm text-muted-foreground text-center md:text-left">
-          <img src={norsklyLogo.url} alt="Norskly" width={370} height={144} loading="lazy" decoding="async" className="h-12 w-auto select-none" draggable={false} />
+          <img src={norsklyLogo.url} alt="Norskly" width={800} height={739} loading="lazy" decoding="async" className="h-14 w-auto select-none" draggable={false} />
           <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-5">
             <span className="font-medium text-foreground/70">Za profesore:</span>
             <Link to="/za-profesore" className="hover:text-primary transition-colors">Postani profesor</Link>
