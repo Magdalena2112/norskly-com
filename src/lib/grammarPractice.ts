@@ -1,6 +1,7 @@
 // Structured grammar practice items (type + xp) used by lesson grammar tabs.
 // Grading is pure so it can be tested; answers are compared ignoring only
 // initial capitalisation, end punctuation and extra spaces — never word order.
+import { matchesTypedAnswer } from "./typedAnswers";
 
 export type PracticeType = "choice" | "multi" | "truefalse" | "order" | "gaps" | "text" | "match";
 
@@ -11,7 +12,7 @@ export interface PracticeExercise {
   options?: string[]; correct?: number[];
   tokens?: string[]; answer?: string[];
   text?: string; gaps?: { options: string[]; answer: string }[];
-  inputs?: { prompt: string; answers: string[] }[];
+  inputs?: { prompt: string; answers: string[]; exactForm?: boolean }[];
   left?: string[]; right?: string[]; pairs?: number[];
 }
 
@@ -45,7 +46,7 @@ export function gradePractice(ex: PracticeExercise, value: PracticeValue): boole
     case "gaps":
       return (ex.gaps || []).every((g, i) => (value as string[])[i] === g.answer);
     case "text":
-      return (ex.inputs || []).every((inp, i) => inp.answers.some((a) => sameSentence((value as string[])[i] || "", a)));
+      return (ex.inputs || []).every((inp, i) => matchesTypedAnswer((value as string[])[i] || "", inp.answers, inp.exactForm));
     case "match":
       return (ex.pairs || []).every((p, i) => (value as number[])[i] === p);
   }
