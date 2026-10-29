@@ -1,5 +1,6 @@
 import { fireEvent, render, screen, cleanup, waitFor } from "@testing-library/react";
 import { beforeEach, afterEach, describe, expect, it, vi } from "vitest";
+import { resetSavedAnswersCache } from "@/lib/savedAnswers";
 import LessonListeningTab, { type ListeningScene } from "./LessonListeningTab";
 import lesson from "@/content/lessons/EN-A1-L01.json";
 import enA2 from "@/content/lessons/EN-A2-L01.json";
@@ -13,7 +14,7 @@ vi.mock("@/context/AuthContext", () => ({ useAuth: () => ({ user: { id: "test-us
 vi.mock("@/lib/logActivity", () => ({ logActivity: log }));
 vi.mock("@/lib/courseLessons", () => ({ speakLines: speak, stopSpeaking: stop }));
 const scenes = lesson.modules.listening.scenes;
-beforeEach(() => { vi.clearAllMocks(); log.mockResolvedValue({ points_awarded: 1 }); Object.defineProperty(window, "speechSynthesis", { configurable: true, value: {} }); });
+beforeEach(() => { localStorage.clear(); resetSavedAnswersCache(); vi.clearAllMocks(); log.mockResolvedValue({ points_awarded: 1 }); Object.defineProperty(window, "speechSynthesis", { configurable: true, value: {} }); });
 afterEach(cleanup);
 describe("Unified lesson listening", () => {
   it.each([

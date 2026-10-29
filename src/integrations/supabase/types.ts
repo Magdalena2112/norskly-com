@@ -476,6 +476,30 @@ export type Database = {
         }
         Relationships: []
       }
+      exercise_answers: {
+        Row: {
+          answer_key: string
+          scope: string
+          state: Json
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          answer_key: string
+          scope: string
+          state?: Json
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          answer_key?: string
+          scope?: string
+          state?: Json
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       grammar_sessions: {
         Row: {
           correct_answers: Json
