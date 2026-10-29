@@ -41,7 +41,7 @@ export function getCurrentLanguageCode(pathname?: string): LanguageCode {
 }
 
 /** localStorage key for the per-language cached profile. */
-export function profileCacheKey(code: LanguageCode = getCurrentLanguageCode(), course = getSelectedCourse(code)): string {
+export function profileCacheKey(code: LanguageCode = getCurrentLanguageCode(), course: string = getSelectedCourse(code)): string {
   return `norskly_profile_${code}_${course}`;
 }
 

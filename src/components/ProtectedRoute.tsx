@@ -4,6 +4,7 @@ import { useUserRole } from "@/hooks/useUserRole";
 import { useQuery } from "@tanstack/react-query";
 import { getActiveLanguageCode, isLanguageOnboarded } from "@/lib/onboardingStatus";
 import { supabase } from "@/integrations/supabase/client";
+import { useSelectedCourse } from "@/hooks/useSelectedCourse";
 import { codeToSlug } from "@/lib/onboardingStatus";
 
 export function ProtectedRoute({ children }: { children: React.ReactNode }) {
@@ -11,22 +12,23 @@ export function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const { isAdmin, isTeacher, loading: roleLoading } = useUserRole();
   const location = useLocation();
   const activeLang = getActiveLanguageCode(location.pathname);
+  const activeCourse = useSelectedCourse(activeLang);
   const skipOnboarding = isAdmin || isTeacher;
   const lessonRef = new URLSearchParams(location.search).get("lesson") || location.pathname.match(/^\/lekcija\/([^/]+)/)?.[1];
   const { data: lessonAllowed, isLoading: lessonLoading } = useQuery({
-    queryKey: ["lesson-access", user?.id, lessonRef, activeLang],
+    queryKey: ["lesson-access", user?.id, lessonRef, activeLang, activeCourse],
     enabled: !!user && !skipOnboarding && !!lessonRef,
     queryFn: async () => {
       const field = /^[0-9a-f-]{36}$/i.test(lessonRef || "") ? "id" : "lesson_code";
-      const { data, error } = await supabase.from("course_lessons").select("id,language").eq(field, lessonRef || "").maybeSingle();
-      return !error && !!data && data.language === activeLang;
+      const { data, error } = await supabase.from("course_lessons").select("id,language,course").eq(field, lessonRef || "").maybeSingle();
+      return !error && !!data && data.language === activeLang && data.course === activeCourse;
     },
     staleTime: 0,
   });
 
   const { data: onboardingCompleted, isLoading: onboardingLoading } = useQuery({
-    queryKey: ["onboarding-status", user?.id, activeLang],
-    queryFn: async () => (user ? isLanguageOnboarded(user.id, activeLang) : false),
+    queryKey: ["onboarding-status", user?.id, activeLang, activeCourse],
+    queryFn: async () => (user ? isLanguageOnboarded(user.id, activeLang, activeCourse) : false),
     enabled: !!user && !skipOnboarding,
     staleTime: Infinity,
   });
@@ -46,7 +48,7 @@ export function ProtectedRoute({ children }: { children: React.ReactNode }) {
   if (!user) {
     if (location.pathname.startsWith("/teacher")) return <Navigate to="/profesori/prijava" replace />;
     const m = location.pathname.match(/^\/ucenje\/([^/]+)/);
-    return <Navigate to={m ? `/auth?lang=${m[1]}` : "/auth"} replace />;
+    return <Navigate to={m ? `/auth?lang=${m[1]}&course=${activeCourse}` : "/auth"} replace />;
   }
 
   if (isAdmin) return <>{children}</>;
@@ -58,9 +60,9 @@ export function ProtectedRoute({ children }: { children: React.ReactNode }) {
   }
 
   if (!onboardingCompleted && location.pathname !== "/onboarding") {
-    return <Navigate to={`/onboarding?lang=${codeToSlug(activeLang)}`} replace />;
+    return <Navigate to={`/onboarding?lang=${codeToSlug(activeLang)}&course=${activeCourse}`} replace />;
   }
-  if (lessonRef && !lessonAllowed) return <Navigate to={`/ucenje/${codeToSlug(activeLang)}`} state={{ courseDenied: true }} replace />;
+  if (lessonRef && !lessonAllowed) return <Navigate to={`/ucenje/${codeToSlug(activeLang)}?course=${activeCourse}`} state={{ courseDenied: true }} replace />;
 
   return <>{children}</>;
 }

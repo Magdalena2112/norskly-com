@@ -11,6 +11,8 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import BackButton from "@/components/BackButton";
 import JourneyStepper from "@/components/onboarding/JourneyStepper";
+import { useAuth } from "@/context/AuthContext";
+import { courseKey, courseLabel, coursePath, courseSlug, loginChoices, selectCourse, type EnrollmentChoice } from "@/lib/courseSelection";
 import { courseIntent, courseStartLevel, promoAvailableLevels } from "@/lib/courseAccess";
 
 export default function AuthPage() {
@@ -30,39 +32,37 @@ export default function AuthPage() {
   const lockedLang = urlLangParam && VALID.includes(urlLangParam) ? urlLangParam : null;
   const [pickedLang, setPickedLang] = useState<string | null>(lockedLang);
   useEffect(() => { if (lockedLang) setPickedLang(lockedLang); }, [lockedLang]);
-  const [chooseFrom, setChooseFrom] = useState<string[] | null>(null);
+  const { user: currentUser } = useAuth();
+  const [chooseFrom, setChooseFrom] = useState<EnrollmentChoice[] | null>(null);
   const LABELS: Record<string, string> = { norveski: "🇳🇴 Norveški", engleski: "🇬🇧 Engleski", nemacki: "🇩🇪 Nemački" };
   const codeToSlug = (c: string) => (c === "en" ? "engleski" : c === "de" ? "nemacki" : c === "no" ? "norveski" : null);
 
-  const goToLanguage = async (userId: string, lang: string, plan?: string | null) => {
-    const code = lang === "engleski" ? "en" : lang === "nemacki" ? "de" : "no";
-    localStorage.setItem("norskly_selected_language", lang);
-    try { sessionStorage.setItem("norskly_language_intent", lang); } catch { /* ignore */ }
-    await supabase.from("profiles").update({ preferred_language: lang }).eq("user_id", userId);
-    const { data: langProf } = await supabase
-      .from("language_profiles")
-      .select("onboarding_completed")
-      .eq("user_id", userId)
-      .eq("language", code)
-      .maybeSingle();
-    if (!langProf?.onboarding_completed) {
-      const { data: authData } = await supabase.auth.getUser();
-      const savedIntent = authData.user?.user_metadata;
-      const explicitIntent = lockedLang === lang && (searchParams.has("course") || searchParams.has("level"));
-      const matchingIntent = savedIntent?.signup_language === lang ? savedIntent : null;
-      const intendedCourse = explicitIntent ? searchParams.get("course") : matchingIntent?.signup_course;
-      const course = courseIntent(intendedCourse, code);
-      const level = courseStartLevel(explicitIntent ? searchParams.get("level") : matchingIntent?.signup_level, course, promoAvailableLevels(code, course));
-      navigate(`/onboarding?lang=${lang}&course=${course}&level=${level}`);
-      return;
-    }
-    navigate(`/ucenje/${lang}${plan ? `?plan=${plan}` : ""}`);
+  const openCourse = (enrollment: EnrollmentChoice) => {
+    selectCourse(enrollment.language, enrollment.course_type);
+    navigate(coursePath(enrollment));
   };
 
-  const pickAfterLogin = async (lang: string) => {
-    const { data } = await supabase.auth.getUser();
-    if (data.user) await goToLanguage(data.user.id, lang, localStorage.getItem("norskly_selected_plan"));
+  const routeStudent = async (userId: string, lang?: string | null) => {
+    const code = lang ? (lang === "engleski" ? "en" : lang === "nemacki" ? "de" : "no") : null;
+    const explicitCourse = searchParams.has("course") && code ? courseIntent(searchParams.get("course"), code) : null;
+    const { data: rows, error } = await supabase.from("course_enrollments")
+      .select("language,course_type,level,onboarding_completed").eq("user_id", userId);
+    if (error) throw error;
+    const choices = loginChoices(rows ?? [], code, explicitCourse);
+    if (choices.length === 1) { openCourse(choices[0]); return; }
+    if (choices.length > 1) { setChooseFrom(choices); return; }
+    if (lang && code) {
+      const course = explicitCourse ?? "general";
+      const level = courseStartLevel(searchParams.get("level"), course, promoAvailableLevels(code, course));
+      selectCourse(code, course);
+      navigate(`/onboarding?lang=${lang}&course=${course}&level=${level}`);
+    } else { navigate("/#courses"); }
   };
+
+  useEffect(() => {
+    if (!currentUser || searchParams.get("choose") !== "courses") return;
+    routeStudent(currentUser.id, lockedLang).catch(() => toast({ title: "Kursevi nisu učitani", variant: "destructive" }));
+  }, [currentUser?.id, searchParams.toString()]);
 
   // Persist plan choice from the journey
   useEffect(() => {
@@ -118,31 +118,7 @@ export default function AuthPage() {
             description: "Drago nam je što te ponovo vidimo.",
           });
 
-          // Jezik sa jezičke stranice ima prednost. Inače sistem sam prepoznaje šta učenik uči.
-          if (intentLang) {
-            await goToLanguage(data.user.id, intentLang, plan);
-            return;
-          }
-          const { data: lps } = await supabase
-            .from("language_profiles")
-            .select("language")
-            .eq("user_id", data.user.id)
-            .eq("onboarding_completed", true);
-          const learned = (lps ?? []).map((r) => codeToSlug(r.language as string)).filter(Boolean) as string[];
-          if (learned.length === 1) {
-            await goToLanguage(data.user.id, learned[0], plan);
-            return;
-          }
-          if (learned.length > 1) {
-            setChooseFrom(learned);
-            return;
-          }
-          const pref = prof?.preferred_language && VALID.includes(prof.preferred_language) ? prof.preferred_language : null;
-          if (pref) {
-            await goToLanguage(data.user.id, pref, plan);
-            return;
-          }
-          setChooseFrom(VALID);
+          await routeStudent(data.user.id, intentLang);
           return;
         }
         navigate("/practice");
@@ -157,7 +133,7 @@ export default function AuthPage() {
           email,
           password,
           options: {
-            emailRedirectTo: window.location.origin,
+            emailRedirectTo: `${window.location.origin}/auth?choose=courses&lang=${signupLang}&course=${signupCourse}&level=${signupLevel}`,
             data: { signup_language: signupLang, signup_course: signupCourse, signup_level: signupLevel },
           },
         });
@@ -232,10 +208,10 @@ export default function AuthPage() {
           <CardContent>
             {chooseFrom ? (
               <div className="space-y-3">
-                <p className="text-sm text-center text-muted-foreground">Koji jezik želiš sada da učiš?</p>
-                {chooseFrom.map((slug) => (
-                  <Button key={slug} variant="outline" className="w-full" onClick={() => pickAfterLogin(slug)}>
-                    {LABELS[slug]}
+                <p className="text-sm text-center text-muted-foreground">Koji kurs želiš sada da otvoriš?</p>
+                {chooseFrom.map((enrollment) => (
+                  <Button key={courseKey(enrollment)} variant="outline" className="w-full h-auto min-h-11 whitespace-normal" onClick={() => openCourse(enrollment)}>
+                    {courseLabel(enrollment)}
                   </Button>
                 ))}
               </div>

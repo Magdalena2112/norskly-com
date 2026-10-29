@@ -13,6 +13,7 @@ import {CheckCircle2,ArrowLeft,ArrowRight,Loader2} from 'lucide-react';
 import {surveySchema,COURSE_LABELS,MODULE_LABELS,CONTINUATION_LABELS,type SurveyAnswers} from '@/lib/survey';
 import StudentLayout from '@/components/student/StudentLayout';
 import {useSelectedLanguage} from '@/hooks/useSelectedLanguage';
+import {useSelectedCourse} from '@/hooks/useSelectedCourse';
 import {Helmet} from 'react-helmet-async';
 
 function Choices({id,value,onChange,options}:{id:string;value?:string;onChange:(v:string)=>void;options:Record<string,string>}) {
@@ -23,16 +24,17 @@ function Rating({id,value,onChange,max=5,low,high}:{id:string;value?:number;onCh
 }
 export default function SurveyPage(){
  const {user,loading}=useAuth(); const qc=useQueryClient(); const [params]=useSearchParams(); const {code}=useSelectedLanguage();
+ const course=useSelectedCourse(code);
  const [language,setLanguage]=useState(params.get('lang')||code); const [step,setStep]=useState(0); const [answers,setAnswers]=useState<Partial<SurveyAnswers>>({modules:[],frustration:'',suggestion:'',email:''});
  const [error,setError]=useState(''); const [busy,setBusy]=useState(false); const [success,setSuccess]=useState(false); const [points,setPoints]=useState(0); const [emailPending,setEmailPending]=useState(false); const [responseId,setResponseId]=useState<string|null>(null);
- const {data:profiles,isLoading:profilesLoading,error:profilesError}=useQuery({queryKey:['survey-enrollments',user?.id],enabled:!!user,queryFn:async()=>{const {data,error}=await supabase.from('language_profiles').select('language,course_type,level').eq('user_id',user?.id??'').eq('onboarding_completed',true);if(error)throw error;return data??[];}});
+ const {data:profiles,isLoading:profilesLoading,error:profilesError}=useQuery({queryKey:['survey-enrollments',user?.id],enabled:!!user,queryFn:async()=>{const {data,error}=await supabase.from('course_enrollments').select('language,course_type,level').eq('user_id',user?.id??'').eq('onboarding_completed',true);if(error)throw error;return data??[];}});
  useEffect(()=>{if(profiles?.length&&!profiles.some(p=>p.language===language))setLanguage(profiles[0].language)},[profiles,language]);
- const enrollment=profiles?.find(p=>p.language===language);
+ const enrollment=profiles?.find(p=>p.language===language&&p.course_type===course);
  useEffect(()=>{if(enrollment)setAnswers(a=>a.testedCourse?a:{...a,testedCourse:`${enrollment.language}:${enrollment.course_type}` as SurveyAnswers['testedCourse']})},[enrollment]);
- const {data:previous,isLoading:previousLoading}=useQuery({queryKey:['survey-status',user?.id,language],enabled:!!enrollment,queryFn:async()=>{const {data,error}=await supabase.from('survey_responses').select('id').eq('user_id',user?.id??'').eq('language',language);if(error)throw error;return data;}});
+ const {data:previous,isLoading:previousLoading}=useQuery({queryKey:['survey-status',user?.id,language,course],enabled:!!enrollment,queryFn:async()=>{const {data,error}=await supabase.from('survey_responses').select('id').eq('user_id',user?.id??'').eq('language',language).eq('course',course);if(error)throw error;return data;}});
  const update=<K extends keyof SurveyAnswers>(key:K,value:SurveyAnswers[K])=>{setAnswers(a=>({...a,[key]:value}));setError('')};
  async function notify(id:string){const {data,error}=await supabase.functions.invoke('send-transactional-email',{body:{templateName:'survey-submitted',templateData:{responseId:id}}});setEmailPending(!!error||data?.success!==true);}
- async function submit(){if(!enrollment)return;const parsed=surveySchema.safeParse(answers);if(!parsed.success){setError('Proveri odgovore i mejl adresu.');return}setBusy(true);setError('');try{const {data,error}=await supabase.rpc('submit_survey',{p_language:language,p_answers:parsed.data});if(error)throw error;const result=data as {id:string;points_awarded:number};setResponseId(result.id);setPoints(result.points_awarded);setSuccess(true);qc.invalidateQueries({queryKey:['survey-status']});await notify(result.id);}catch{setError('Odgovori nisu poslati. Pokušaj ponovo; tvoji unosi su sačuvani na ovoj stranici.')}finally{setBusy(false)}}
+ async function submit(){if(!enrollment)return;const parsed=surveySchema.safeParse(answers);if(!parsed.success){setError('Proveri odgovore i mejl adresu.');return}setBusy(true);setError('');try{const {data,error}=await supabase.rpc('submit_survey',{p_language:language,p_answers:parsed.data,p_course:course});if(error)throw error;const result=data as {id:string;points_awarded:number};setResponseId(result.id);setPoints(result.points_awarded);setSuccess(true);qc.invalidateQueries({queryKey:['survey-status']});await notify(result.id);}catch{setError('Odgovori nisu poslati. Pokušaj ponovo; tvoji unosi su sačuvani na ovoj stranici.')}finally{setBusy(false)}}
  const next=()=>{const fields=(step===0?['engagement','pace']:step===1?['modules','difficulty']:step===2?['ai','accessibility','device']:[]) as (keyof SurveyAnswers)[];if(fields.some(k=>!answers[k]||(Array.isArray(answers[k])&&answers[k]?.length===0))){setError('Odgovori na sva pitanja u ovom koraku.');return}setError('');setStep(s=>s+1);window.scrollTo({top:0,behavior:'smooth'})};
  if(loading)return <div className="p-12 text-center">Učitavanje…</div>;
  if(!user)return <main className="container max-w-xl py-16"><h1 className="font-display text-3xl">Tvoje iskustvo nam je važno</h1><p className="my-6 text-muted-foreground">Prijavi se da podeliš utiske o kursu koji si isprobao/la. Anketa traje 5–7 minuta.</p><Button asChild><Link to="/auth">Prijavi se</Link></Button></main>;
