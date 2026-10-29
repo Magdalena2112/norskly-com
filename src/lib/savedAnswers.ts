@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useInRouterContext, useLocation, useParams } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/context/AuthContext";
 
@@ -58,6 +58,10 @@ function save(uid: string, scope: string, key: string, value: unknown) {
 
 /** Current lesson/page scope: lesson id from the route or ?lesson=, else the path. */
 export function useAnswerScope() {
+  return useInRouterContext() ? RouterScope() : "local";
+}
+// eslint-disable-next-line react-hooks/rules-of-hooks -- router presence never changes for a mounted tree
+function RouterScope() {
   const { lessonId } = useParams<{ lessonId?: string }>();
   const loc = useLocation();
   const q = new URLSearchParams(loc.search).get("lesson");
