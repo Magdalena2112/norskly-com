@@ -39,7 +39,7 @@ const FEATURES = [
   { icon: MessageCircle, title: "Praktična komunikacija", desc: "Vežbaj jezik kroz realistične svakodnevne i poslovne razgovore." },
   { icon: Target, title: "Vežbe prilagođene tebi", desc: "Vežbe i sadržaj prilagođavaju se tvom nivou, ciljevima i tempu učenja." },
   { icon: BookOpen, title: "Gramatika u kontekstu", desc: "Uči gramatiku kroz primere, dijaloge i stvarnu komunikaciju." },
-  { icon: Sparkles, title: "Povratna informacija odmah", desc: "Dobij jasna objašnjenja, ispravke i predloge dok vežbaš." },
+  { icon: Sparkles, title: "Povratna informacija na tvom maternjem jeziku", desc: "Dobij jasna objašnjenja, ispravke i predloge dok vežbaš." },
   { icon: Mic, title: "Vežbanje razgovora", desc: "Vežbaj razgovore koji te stvarno čekaju — na poslu, fakultetu, kod lekara ili u svakodnevnom životu." },
   { icon: BarChart3, title: "Praćenje napretka", desc: "Prati šta si savladao, na čemu još treba da radiš i kako napreduješ kroz vreme." },
   { icon: CalendarCheck, title: "Podrška profesora", desc: "Poveži se sa profesorima i zakaži časove kada želiš dodatnu podršku u učenju." },
