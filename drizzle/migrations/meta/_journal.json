@@ -183,6 +183,13 @@
       "when": 1793274597232,
       "tag": "0025_preserve_legacy_recovery_with_multiple_courses",
       "breakpoints": true
+    },
+    {
+      "idx": 26,
+      "version": "7",
+      "when": 1793290101862,
+      "tag": "0026_exercise_answers",
+      "breakpoints": true
     }
   ]
 }
