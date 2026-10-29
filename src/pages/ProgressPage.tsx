@@ -267,7 +267,7 @@ export default function ProgressPage() {
                     <div className="flex-1">
                       <p className="text-sm font-medium text-foreground">
                         {readinessScore.canLevelUp
-                          ? "Odlično! Spremna si za sledeći nivo! 🎉"
+                          ? "Odlično! Možeš da pređeš na sledeći nivo! 🎉"
                           : readinessScore.total >= 75
                           ? "Odličan skor — završi još lekcija ovog nivoa za prelazak."
                           : readinessScore.total >= 50
