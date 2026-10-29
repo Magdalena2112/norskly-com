@@ -1,6 +1,7 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "jsr:@supabase/supabase-js@2";
 import { loadLearnerStyleLine } from "../_shared/learnerStyle.ts";
+import { getLessonMaterial } from "../_shared/course-content/talkScenarios.ts";
 import { buildRubricLine } from "../_shared/pedagogy/skillsMatrix.ts";
 import { buildPersonalizationLines, type LangCode } from "../_shared/personalization.ts";
 
@@ -91,8 +92,11 @@ Deno.serve(async (req) => {
     const topicTitle = body.topic?.title ? String(body.topic.title).slice(0, 200) : "";
     const topicQs = Array.isArray(body.topic?.guiding_questions) ? body.topic.guiding_questions.slice(0, 5).map((q: unknown) => String(q).slice(0, 200)).join(" | ") : "";
     const learnerStyle = await loadLearnerStyleLine(supabase, user.id, langCode, body.course);
+    const m = getLessonMaterial(String(body.lesson_code || "").slice(0, 40));
+    const materialLine = m ? `GRADIVO LEKCIJE (obavezni okvir ocene): ${m}\nOcenjuj u skladu sa temom i gradivom ove lekcije: posebno proveri da li učenik pravilno koristi ciljnu gramatiku i vokabular lekcije i to jasno istakni u povratnoj informaciji; greške u strukturama koje su centralna tema lekcije imaju prednost. Ne kažnjavaj strukture sa kasnijih lekcija ili viših nivoa ako su razumljive. U "overall_feedback" navedi koliko je učenik primenio gradivo lekcije.` : "";
     const personalizationLine = [
       buildRubricLine(langCode, level, ["writing", "grammar", "vocabulary"]),
+      materialLine,
       learnerStyle,
       personalization.serbianLine ? `PERSONALIZACIJA: ${personalization.serbianLine}` : "",
       topicTitle ? `ZADATA TEMA: "${topicTitle}"${topicQs ? ` (pitanja vodilje: ${topicQs})` : ""}. U "overall_feedback" ukratko oceni koliko je student odgovorio na temu i pitanja vodilje.` : "",

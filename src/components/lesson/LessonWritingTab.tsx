@@ -67,7 +67,7 @@ export default function LessonWritingTab({ lessonId, language, level, onOpenFree
         </div>
       </div>
 
-      <LessonExercise key={ex.code} exercise={ex} language={language} level={level} lessonTitle={title}
+      <LessonExercise key={ex.code} exercise={ex} language={language} level={level} lessonTitle={title} lessonCode={code}
         done={done.includes(ex.code)} onDone={markDone} />
 
       <div className="flex items-center justify-between gap-2">

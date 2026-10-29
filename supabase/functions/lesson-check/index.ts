@@ -1,6 +1,7 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "jsr:@supabase/supabase-js@2";
 import { loadLearnerStyleLine } from "../_shared/learnerStyle.ts";
+import { getLessonMaterial } from "../_shared/course-content/talkScenarios.ts";
 import { buildRubricLine } from "../_shared/pedagogy/skillsMatrix.ts";
 
 const GATEWAY_URL = "https://ai.gateway.lovable.dev/v1/responses";
@@ -74,11 +75,13 @@ Deno.serve(async (req) => {
     }));
     if (!items.length) return json({ error: "Nema odgovora." }, 400);
 
+    const m = getLessonMaterial(String(body.lessonCode || "").slice(0, 40));
+    const materialLine = m ? `GRADIVO LEKCIJE (obavezni okvir ocene): ${m}\nOcenjuj u skladu sa temom i gradivom ove lekcije: posebno proveri da li učenik pravilno koristi ciljnu gramatiku i vokabular lekcije i to jasno istakni u povratnoj informaciji; greške u strukturama koje su centralna tema lekcije imaju prednost. Ne kažnjavaj strukture sa kasnijih lekcija ili viših nivoa ako su razumljive.` : "";
     const learnerStyle = await loadLearnerStyleLine(supabase, user.id, language, body.course);
     const instructions = `Ti si strpljiv tutor ${LANG[language] || "engleskog"} jezika na Norskly platformi. Ocenjuješ otvorene odgovore učenika nivoa ${level} u lekciji „${lessonTitle}“.
 Pravila:
 - Prihvati sve prirodne i semantički tačne varijante; ne traži jedan jedini odgovor.
-- Ocenjuj samo ono što je u lekciji aktivno (za A1: kratke potvrdne rečenice, zamenice, am/is/are, a/an, pozdravi). Ne kažnjavaj nepoznate strukture ako su razumljive.
+- Ocenjuj samo ono što je u lekciji aktivno. Ne kažnjavaj nepoznate strukture ako su razumljive.
 - Uputstva i povratna informacija su na srpskom (latinica), kratko i ohrabrujuće (1–2 rečenice). Primeri ostaju na ciljnom jeziku.
 - verdict: correct (cilj ispunjen, bez važnih grešaka), partial (razumljivo ali sa greškom), incorrect (cilj nije ispunjen).
 - improved: ispravljena prirodna verzija odgovora (ili isti tekst ako je tačan).
@@ -99,7 +102,7 @@ Pravila:
         stream: true,
         store: false,
         reasoning: { effort: "low" },
-        instructions: [instructions, buildRubricLine(language, level, ["writing", "grammar", "vocabulary", "reading"]), learnerStyle].filter(Boolean).join("\n\n"),
+        instructions: [instructions, materialLine, buildRubricLine(language, level, ["writing", "grammar", "vocabulary", "reading"]), learnerStyle].filter(Boolean).join("\n\n"),
         input,
         text: { format: { type: "json_schema", name: "lesson_grading", strict: true, schema } },
       }),

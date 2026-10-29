@@ -258,7 +258,7 @@ export default function LessonVocabularyTab({ lessonId, mode, onPractice, onFlas
           </div>
           {areaEx[exIdx] && (practice.some((e) => e.code === areaEx[exIdx].code) ?
             <VocabularyPracticeExercise key={areaEx[exIdx].id} exercise={areaEx[exIdx] as unknown as Practice} pictures={HC_PICS} done={isDone(areaEx[exIdx].code)} onDone={markDone} /> :
-            <LessonExercise key={areaEx[exIdx].id} exercise={areaEx[exIdx]} language={lang} level={row.cefr_level} lessonTitle={row.title_target || row.title} done={isDone(areaEx[exIdx].code)} onDone={markDone} />
+            <LessonExercise key={areaEx[exIdx].id} exercise={areaEx[exIdx]} language={lang} level={row.cefr_level} lessonTitle={row.title_target || row.title} lessonCode={row.lesson_code} done={isDone(areaEx[exIdx].code)} onDone={markDone} />
           )}
           <div className="flex justify-between gap-2">
             <Button variant="outline" size="sm" disabled={exIdx === 0} onClick={() => setExIdx(exIdx - 1)}>← Prethodna</Button>
@@ -279,7 +279,7 @@ export default function LessonVocabularyTab({ lessonId, mode, onPractice, onFlas
               </div>
             ) : (
               <div className="space-y-4">
-                {aiEx.map((ex) => <LessonExercise key={ex.id} exercise={ex} language={lang} level={row.cefr_level} lessonTitle={row.title_target || row.title} done={false} onDone={() => {}} />)}
+                {aiEx.map((ex) => <LessonExercise key={ex.id} exercise={ex} language={lang} level={row.cefr_level} lessonTitle={row.title_target || row.title} lessonCode={row.lesson_code} done={false} onDone={() => {}} />)}
                 <Button variant="outline" size="sm" disabled={aiLoading} onClick={genMore}>
                   {aiLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Sparkles className="w-4 h-4" />} Nove vežbe
                 </Button>

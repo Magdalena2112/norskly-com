@@ -18,9 +18,9 @@ interface ItemState { value: string; attempts: number; status: Status; feedback?
 const MAX_ATTEMPTS = 3;
 
 export default function LessonExercise({
-  exercise, language, level, lessonTitle, done, onDone,
+  exercise, language, level, lessonTitle, lessonCode, done, onDone,
 }: {
-  exercise: Exercise; language: "no" | "en" | "de"; level: string; lessonTitle: string; done: boolean; onDone: (code: string) => void;
+  exercise: Exercise; language: "no" | "en" | "de"; level: string; lessonTitle: string; lessonCode?: string; done: boolean; onDone: (code: string) => void;
 }) {
   const { user } = useAuth();
   const [state, setState] = useState<ItemState[]>(() => exercise.items.map(() => ({ value: "", attempts: 0, status: "idle" })));
@@ -78,6 +78,7 @@ export default function LessonExercise({
           level,
           language,
           course: getSelectedCourse(language),
+          lesson_code: lessonCode,
           has_image: !!exercise.image,
           topic: { title: exercise.title, guiding_questions: exercise.items[0].guiding || [] },
         },
@@ -107,7 +108,7 @@ export default function LessonExercise({
       setState([...next]);
       const { data, error } = await supabase.functions.invoke("lesson-check", {
         body: {
-          language, level, lessonTitle, course: getSelectedCourse(language),
+          language, level, lessonTitle, lessonCode, course: getSelectedCourse(language),
           exercise: { code: exercise.code, title: exercise.title, instruction: exercise.instruction },
           items: openIdx.map((i) => ({ prompt: exercise.items[i].prompt, answer: next[i].value, guide: exercise.items[i].guide })),
         },
