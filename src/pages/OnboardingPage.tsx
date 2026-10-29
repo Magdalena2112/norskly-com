@@ -331,8 +331,8 @@ export default function OnboardingPage() {
         <p className="text-sm opacity-60">{t.stepCounter(step + 1, steps.length)}</p>
       </div>
 
-      <div className="flex-1 flex items-center justify-center p-6">
-        <div className="w-full max-w-lg">
+      <div className="flex-1 min-w-0 w-full flex items-center justify-center p-4 sm:p-6">
+        <div className="w-full min-w-0 max-w-lg">
           <div className="md:hidden flex items-center justify-between mb-8">
             <div className="flex items-center gap-2">
               <BackButton />
@@ -348,6 +348,7 @@ export default function OnboardingPage() {
           <AnimatePresence mode="wait">
             <motion.div
               key={step}
+              className="min-w-0"
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
