@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
-import norsklyLogo from "@/assets/norskly-logo.webp.asset.json";
+import norsklyLogo from "@/assets/norskly-logo-new.webp.asset.json";
 import {
   MessageCircle, Sparkles, BookOpen, Target, Mic, BarChart3,
   Check, X, ArrowRight, GraduationCap, Users, CalendarCheck,

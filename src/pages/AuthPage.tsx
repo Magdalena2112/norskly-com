@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
-import norsklyLogo from "@/assets/norskly-logo.webp.asset.json";
+import norsklyLogo from "@/assets/norskly-logo-new.webp.asset.json";
 import { motion } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
