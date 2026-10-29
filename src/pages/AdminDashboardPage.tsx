@@ -48,6 +48,7 @@ export default function AdminDashboardPage() {
         scheduledCount: allLessons.filter((l) => l.status === "scheduled").length,
         completedCount: allLessons.filter((l) => l.status === "completed").length,
         xpMap,
+        enrollMap,
         nameMap,
         teacherMap,
       };
