@@ -1,6 +1,6 @@
 import { fireEvent, render, screen, cleanup, waitFor } from "@testing-library/react";
 import { beforeEach, afterEach, describe, expect, it, vi } from "vitest";
-import LessonListeningTab from "./LessonListeningTab";
+import LessonListeningTab, { type ListeningScene } from "./LessonListeningTab";
 import lesson from "@/content/lessons/EN-A1-L01.json";
 import enA2 from "@/content/lessons/EN-A2-L01.json";
 import noA2 from "@/content/lessons/NO-A2-L01.json";
@@ -19,7 +19,7 @@ describe("Unified lesson listening", () => {
   it.each([
     [lesson, "en"], [enA2, "en"], [noA2, "no"],
     [deA2, "de"], [noB1, "no"], [deB1, "de"],
-  ] as const)("keeps final answers and sends canonical reward codes for $0.code", async (content, lang) => {
+  ] as const)("keeps final answers and sends canonical reward codes for lesson %#", async (content, lang) => {
     log.mockImplementation(async (_user, _module, _type, _xp, payload) => {
       const pattern = content.code === "EN-A1-L01"
         ? /^LI-(0[1-9]|10)$/
@@ -28,7 +28,7 @@ describe("Unified lesson listening", () => {
       return { points_awarded: 0 };
     });
     const onDone = vi.fn();
-    const activities = content.modules.listening.scenes;
+    const activities: ListeningScene[] = content.modules.listening.scenes;
     render(<LessonListeningTab scenes={activities} lang={lang} lessonCode={content.code} onDone={onDone} />);
     for (let i = 0; i < activities.length; i++) {
       const activity = activities[i];
