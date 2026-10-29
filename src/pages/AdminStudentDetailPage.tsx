@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { belongsToEnrollment, enrollmentName } from "@/lib/adminStudents";
+import { enrollmentName, filterStudentRecords, languageName, studentRecordLabel } from "@/lib/adminStudents";
 import { useParams, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
@@ -48,7 +48,7 @@ export default function AdminStudentDetailPage() {
     enabled: !!userId,
   });
 
-  const { data: activities = [], isLoading: activitiesLoading } = useQuery({
+  const { data: activities = [], isLoading: activitiesLoading, error: activitiesError } = useQuery({
     queryKey: ["admin-student-activities", userId],
     queryFn: async () => {
       const { data, error } = await supabase
@@ -62,7 +62,7 @@ export default function AdminStudentDetailPage() {
     enabled: !!userId,
   });
 
-  const { data: errors = [], isLoading: errorsLoading } = useQuery({
+  const { data: errors = [], isLoading: errorsLoading, error: errorsError } = useQuery({
     queryKey: ["admin-student-errors", userId],
     queryFn: async () => {
       const { data, error } = await supabase
@@ -116,26 +116,28 @@ export default function AdminStudentDetailPage() {
   const { data: legacyProfiles = [] } = useQuery({
     queryKey: ["admin-legacy-profiles", userId], enabled: !!userId,
     queryFn: async () => {
-      const { data } = await supabase.from("language_profiles").select("*").eq("user_id", userId || "");
+      const { data, error } = await supabase.from("language_profiles").select("*").eq("user_id", userId || "");
+      if (error) throw error;
       return data || [];
     },
   });
-  const knownLanguages = new Set([...legacyProfiles.map(p => p.language), ...activities.map(a => a.language), ...errors.map(e => e.language)]);
+  const knownLanguages = new Set([...enrollments.map(e => e.language), ...legacyProfiles.map(p => p.language), ...activities.map(a => a.language), ...errors.map(e => e.language), ...progress.map(p => p.language), ...(xp || []).map(x => x.language), ...lessons.map(l => l.language)]);
   const legacyEnrollments = [...knownLanguages].filter(l => l && !enrollments.some(e => e.language === l)).map(l => {
     const lp = legacyProfiles.find(p => p.language === l);
     return { id: `legacy-${l}`, user_id: userId || "", language: l, course_type: "legacy", level: lp?.level ?? null,
       onboarding_completed: lp?.onboarding_completed ?? false, learning_goal: lp?.learning_goal ?? null, focus_area: lp?.focus_area ?? null } as (typeof enrollments)[number];
   });
   const allEnrollments = [...enrollments, ...legacyEnrollments];
-  const enrollment = allEnrollments.find(e => e.id === selection) || allEnrollments[0];
-  const isLegacy = enrollment?.course_type === "legacy";
-  const unassigned = selection === "unassigned";
-  const matches = (record: Parameters<typeof belongsToEnrollment>[0]) => !!enrollment && (isLegacy ? record.language === enrollment.language : belongsToEnrollment(record, enrollment, courseLessons));
-  const scopedActivities = unassigned ? activities.filter(a => a.language === enrollment?.language && !enrollments.some(e => belongsToEnrollment(a, e, courseLessons))) : activities.filter(matches);
-  const scopedErrors = unassigned ? errors.filter(e => e.language === enrollment?.language && !enrollments.some(n => belongsToEnrollment(e, n, courseLessons))) : errors.filter(matches);
-  const scopedProgress = unassigned ? [] : progress.filter(matches);
-  const scopedLessons = lessons.filter(l => l.language === enrollment?.language);
-  const languageXp = xp?.find(x => x.language === enrollment?.language)?.total_xp ?? 0;
+  const selectedEnrollment = allEnrollments.find(e => e.id === selection);
+  const language = selectedEnrollment?.language || (selection.includes(":") ? selection.split(":")[1] : allEnrollments[0]?.language || [...knownLanguages][0] || "");
+  const scope = selection.startsWith("unassigned:") ? "unassigned" : selectedEnrollment && selectedEnrollment.course_type !== "legacy" ? "course" : "all";
+  const enrollment = selectedEnrollment || allEnrollments.find(e => e.language === language);
+  const filterRecords = <T extends Parameters<typeof filterStudentRecords>[0][number]>(records: T[]) => filterStudentRecords(records, language, scope, enrollment, courseLessons);
+  const scopedActivities = filterRecords(activities);
+  const scopedErrors = filterRecords(errors).map(e => ({ ...e, courseLabel: studentRecordLabel(e, courseLessons) }));
+  const scopedProgress = filterRecords(progress);
+  const scopedLessons = lessons.filter(l => l.language === language);
+  const languageXp = xp?.find(x => x.language === language)?.total_xp ?? 0;
 
   return (
     <AdminLayout>
@@ -151,11 +153,11 @@ export default function AdminStudentDetailPage() {
 
         {enrollmentError && <p className="text-destructive">Upisi nisu učitani. Osveži stranicu.</p>}
         <h2 className="text-lg font-semibold">Upisani kursevi</h2>
-        <div className="flex flex-wrap gap-2">{allEnrollments.map(e => <Button key={e.id} variant={!unassigned && enrollment?.id === e.id ? "secondary" : "outline"} className="h-auto whitespace-normal text-left" onClick={() => setSelection(e.id)}>{enrollmentName(e)}{!e.onboarding_completed && " · Upis nije završen"}</Button>)}</div>
+        <div className="flex flex-wrap gap-2">{allEnrollments.map(e => <Button key={e.id} variant={selectedEnrollment?.id === e.id ? "secondary" : "outline"} className="h-auto whitespace-normal text-left" onClick={() => setSelection(e.id)}>{enrollmentName(e)}{!e.onboarding_completed && " · Upis nije završen"}</Button>)}</div>
         {!allEnrollments.length && <p className="text-muted-foreground">Korisnik još nema upisan kurs.</p>}
-        {enrollment && <Select value={unassigned ? "unassigned" : enrollment.id} onValueChange={setSelection}>
-          <SelectTrigger className="w-full"><SelectValue /></SelectTrigger>
-          <SelectContent>{allEnrollments.map(e => <SelectItem key={e.id} value={e.id}>{enrollmentName(e)}</SelectItem>)}{!isLegacy && <SelectItem value="unassigned">Ostale aktivnosti i ranije greške · {enrollment.language.toUpperCase()}</SelectItem>}</SelectContent>
+        {language && <Select value={selectedEnrollment ? selectedEnrollment.id : `${scope}:${language}`} onValueChange={setSelection}>
+          <SelectTrigger aria-label="Prikaz aktivnosti" className="w-full"><SelectValue /></SelectTrigger>
+          <SelectContent>{[...knownLanguages].filter(Boolean).map(l => <SelectItem key={`all:${l}`} value={`all:${l}`}>{languageName(l)} · Sve aktivnosti i greške</SelectItem>)}{allEnrollments.filter(e => e.course_type !== "legacy").map(e => <SelectItem key={e.id} value={e.id}>{enrollmentName(e)}</SelectItem>)}{[...knownLanguages].filter(Boolean).map(l => <SelectItem key={`unassigned:${l}`} value={`unassigned:${l}`}>{languageName(l)} · Bez dodeljenog kursa</SelectItem>)}</SelectContent>
         </Select>}
         {/* Overview card */}
         <Card>
@@ -199,12 +201,12 @@ export default function AdminStudentDetailPage() {
           </TabsList>
 
           <TabsContent value="progress">
-            {!unassigned && <div className="flex flex-wrap gap-4 py-4 text-sm"><span>Započete lekcije: {scopedProgress.length}</span><span>Završene lekcije: {scopedProgress.filter(p => p.status === "completed").length}</span><span>Zabeleženi koraci: {scopedProgress.reduce((sum, p) => sum + (Array.isArray(p.completed_steps) ? p.completed_steps.length : 0), 0)}</span></div>}
-            <StudentProgressView activities={scopedActivities} loading={activitiesLoading} />
+            <div className="flex flex-wrap gap-4 py-4 text-sm"><span>Započete lekcije: {scopedProgress.length}</span><span>Završene lekcije: {scopedProgress.filter(p => p.status === "completed").length}</span><span>Zabeleženi koraci: {scopedProgress.reduce((sum, p) => sum + (Array.isArray(p.completed_steps) ? p.completed_steps.length : 0), 0)}</span><span>Aktivnosti: {scopedActivities.length}</span></div>
+            {activitiesError ? <p className="text-destructive">Aktivnosti nisu učitane. Osveži stranicu.</p> : <StudentProgressView activities={scopedActivities} loading={activitiesLoading} />}
           </TabsContent>
 
           <TabsContent value="errors">
-            <StudentErrorAnalysis errors={scopedErrors} loading={errorsLoading} />
+            {errorsError ? <p className="text-destructive">Greške nisu učitane. Osveži stranicu.</p> : <><p className="py-3 text-sm text-muted-foreground">Zabeležene greške: {scopedErrors.length}</p><StudentErrorAnalysis errors={scopedErrors} loading={errorsLoading} /></>}
           </TabsContent>
 
           <TabsContent value="lessons">
@@ -220,10 +222,11 @@ export default function AdminStudentDetailPage() {
               </div>
             ) : (
               <div className="space-y-2">
-                {scopedActivities.slice(0, 50).map((a) => (
+                {scopedActivities.map((a) => (
                   <div key={a.id} className="flex items-center justify-between rounded-lg border border-border p-3">
                     <div>
                       <p className="text-sm font-medium text-foreground capitalize">{a.module} — {a.type}</p>
+                      <p className="text-xs text-muted-foreground">{studentRecordLabel(a, courseLessons)}</p>
                       <p className="text-xs text-muted-foreground">{format(new Date(a.created_at), "dd.MM.yyyy HH:mm")}</p>
                     </div>
                     <Badge variant="outline">+{a.points} XP</Badge>
