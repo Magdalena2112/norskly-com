@@ -159,7 +159,7 @@ export default function CourseLessonPage() {
 
   const renderExercises = (list?: Exercise[]) =>
     (list || []).map((ex) => (
-      <LessonExercise key={ex.id} exercise={ex} language={lang} level={level} lessonTitle={row.title_target || row.title} done={done.includes(ex.code)} onDone={markDone} />
+      <LessonExercise key={ex.id} exercise={ex} language={lang} level={level} lessonTitle={row.title_target || row.title} lessonCode={row.lesson_code} done={done.includes(ex.code)} onDone={markDone} />
     ));
 
   if (notFound) return <StudentLayout><div className="container py-16 text-center text-muted-foreground">Lekcija nije pronađena.</div></StudentLayout>;

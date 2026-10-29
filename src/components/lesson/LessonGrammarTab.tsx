@@ -370,7 +370,7 @@ export default function LessonGrammarTab({ lessonId, onPractice, onExplain, mode
           {topicEx[exIdx] && (
             (topicEx[exIdx] as any).type
               ? <GrammarPracticeExercise key={topicEx[exIdx].id} exercise={topicEx[exIdx] as unknown as PracticeExercise} done={done.includes(topicEx[exIdx].code)} onDone={markDone} />
-              : <LessonExercise key={topicEx[exIdx].id} exercise={topicEx[exIdx]} language={lang} level={row.cefr_level} lessonTitle={row.title_target || row.title} done={done.includes(topicEx[exIdx].code)} onDone={markDone} />
+              : <LessonExercise key={topicEx[exIdx].id} exercise={topicEx[exIdx]} language={lang} level={row.cefr_level} lessonTitle={row.title_target || row.title} lessonCode={row.lesson_code} done={done.includes(topicEx[exIdx].code)} onDone={markDone} />
           )}
           <div className="flex justify-between gap-2">
             <Button variant="outline" size="sm" disabled={exIdx === 0} onClick={() => setExIdx(exIdx - 1)}>← Prethodna</Button>

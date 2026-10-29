@@ -32,7 +32,7 @@ describe("Lesson exercise grading", () => {
     await waitFor(() => expect(onDone).toHaveBeenCalledWith("MIX-14"));
     expect(invoke).toHaveBeenCalledExactlyOnceWith("lesson-check", {
       body: {
-        language: "en", level: "A2", lessonTitle: "Lesson 1", course: "general",
+        language: "en", level: "A2", lessonTitle: "Lesson 1", lessonCode: undefined, course: "general",
         exercise: { code: "MIX-14", title: exercise.title, instruction: exercise.instruction },
         items: [{ prompt: "How many days is the exhibition running?", answer: "six days", guide: "Odgovor: six days (from Tuesday to Sunday)" }],
       },
