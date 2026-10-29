@@ -1,5 +1,5 @@
 import norsklyLogo from "@/assets/norskly-logo-new.webp.asset.json";
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { LayoutDashboard, User, TrendingUp, Settings, LogOut, BookMarked, MessageSquareHeart } from "lucide-react";
 import {
   Sidebar,
