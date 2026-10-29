@@ -19,6 +19,8 @@ import { motion } from "framer-motion";
 import BackButton from "@/components/BackButton";
 import teacherPhotoFallback from "@/assets/teacher-photo.jpg";
 import { getLanguageBySlug } from "@/lib/languages";
+import { useSelectedLanguage } from "@/hooks/useSelectedLanguage";
+import { useSelectedCourse } from "@/hooks/useSelectedCourse";
 
 const KIND_LABELS: Record<string, { label: string; icon: any }> = {
   individual: { label: "Individualni", icon: GraduationCap },
@@ -33,6 +35,8 @@ export default function TeacherProfilePage() {
   const params = useParams();
   const queryClient = useQueryClient();
   const teacherId = params.teacherId;
+  const { code } = useSelectedLanguage();
+  const course = useSelectedCourse(code);
 
   const [selectedTypeId, setSelectedTypeId] = useState<string | null>(null);
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
@@ -43,24 +47,25 @@ export default function TeacherProfilePage() {
   if (!teacherId) return <Navigate to="/select-teacher" replace />;
 
   const { data: teacher, isLoading: teacherLoading } = useQuery({
-    queryKey: ["teacher", teacherId],
+    queryKey: ["teacher", teacherId, code, course],
     queryFn: async () => {
-      const { data, error } = await supabase.rpc("get_teacher_public_by_id", {
-        p_teacher_id: teacherId,
+      const { data, error } = await supabase.rpc("get_course_teachers", {
+        p_language: code, p_course: course,
       });
       if (error) throw error;
-      return (data && data[0]) || null;
+      return data?.find(t => t.id === teacherId) ?? null;
     },
   });
 
   const { data: lessonTypes = [] } = useQuery({
-    queryKey: ["lesson-types", teacherId],
+    queryKey: ["lesson-types", teacherId, code],
     queryFn: async () => {
       const { data, error } = await supabase
         .from("lesson_types")
         .select("*")
         .eq("teacher_id", teacherId)
         .eq("is_active", true)
+        .eq("language", code)
         .order("price_cents", { ascending: true });
       if (error) throw error;
       return data || [];
@@ -73,13 +78,14 @@ export default function TeacherProfilePage() {
   );
 
   const { data: slots = [], isLoading: slotsLoading } = useQuery({
-    queryKey: ["open-slots", teacherId],
+    queryKey: ["open-slots", teacherId, code],
     queryFn: async () => {
       const { data, error } = await supabase
         .from("availability_slots")
         .select("*")
         .eq("teacher_id", teacherId)
         .eq("status", "open")
+        .eq("language", code)
         .gte("start_time", new Date().toISOString())
         .order("start_time", { ascending: true });
       if (error) throw error;
@@ -123,7 +129,7 @@ export default function TeacherProfilePage() {
 
   const bookMutation = useMutation({
     mutationFn: async () => {
-      if (!user || !selectedSlot || !selectedType) throw new Error("Nedostaju podaci");
+      if (!user || !teacher || !selectedSlot || !selectedType) throw new Error("Nedostaju podaci");
       const startTime = new Date(selectedSlot.start_time);
       const endTime = addMinutes(startTime, selectedType.duration_minutes || 90);
 
@@ -223,11 +229,18 @@ export default function TeacherProfilePage() {
 
   const initials = (teacher?.name || "??").split(" ").map((n: string) => n[0]).join("").slice(0, 2);
 
+  if (!teacherLoading && !teacher) return (
+    <div className="container py-12 space-y-4 text-foreground">
+      <p>Ovaj profesor trenutno nije dostupan za izabrani kurs i jezik.</p>
+      <Button onClick={() => navigate(`/select-teacher?course=${course}`)}>Izaberi profesora</Button>
+    </div>
+  );
+
   return (
     <div className="min-h-screen bg-fjord-soft">
       <header className="border-b border-border/50 bg-cream/80 backdrop-blur-md sticky top-0 z-50">
         <div className="container flex items-center gap-3 h-14">
-          <BackButton to="/select-teacher" />
+          <BackButton to={`/select-teacher?course=${course}`} />
           <span className="font-display font-bold text-lg text-primary">Profil nastavnika</span>
         </div>
       </header>
