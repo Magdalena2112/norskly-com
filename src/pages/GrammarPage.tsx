@@ -20,6 +20,7 @@ import GrammarHistoryTab from "@/components/grammar/GrammarHistoryTab";
 import GrammarProgressTab from "@/components/grammar/GrammarProgressTab";
 import { getCurrentLanguageCode, getCurrentPersonalization } from "@/lib/currentLanguage";
 import LessonGrammarTab, { LESSON_GRAMMAR_TOPICS } from "@/components/lesson/LessonGrammarTab";
+import { matchesTypedAnswer } from "@/lib/typedAnswers";
 
 // ─── Types ───
 interface Exercise {
@@ -193,10 +194,6 @@ interface ExerciseState {
 
 const MAX_ATTEMPTS = 3;
 
-function normalizeAnswer(s: string) {
-  return s.trim().toLowerCase().replace(/\s+/g, " ");
-}
-
 function fallbackHint(attempt: number): string {
   if (attempt === 1) return "Obrati pažnju na oblik reči i pravilo iz teme.";
   if (attempt === 2) return "Pogledaj koji deo rečenice određuje oblik (vreme, rod, član, red reči).";
@@ -254,10 +251,7 @@ function ExercisesTab({ level, userId, initialTopic, onGoToExplain }: { level: s
   const checkAnswer = async (i: number) => {
     const ex = exercises[i];
     const st = states[i];
-    const userAns = normalizeAnswer(st.answer);
-    const correctAns = normalizeAnswer(ex.solution);
-
-    if (userAns === correctAns) {
+    if (matchesTypedAnswer(st.answer, [ex.solution])) {
       updateState(i, { status: "correct", feedback: "Odlično! Tačan odgovor. 🎉", attempts: st.attempts + 1 });
       if (userId && !st.logged) {
         updateState(i, { logged: true });

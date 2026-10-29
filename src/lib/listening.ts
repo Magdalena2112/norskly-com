@@ -2,6 +2,7 @@
  * Listening module — shared types, level guidelines and the activity-type /
  * question-type registry. Add new types here instead of changing pages.
  */
+import { matchesTypedAnswer } from "./typedAnswers";
 export type CefrLevel = "A1" | "A2" | "B1" | "B2" | "C1";
 
 export type ActivityType =
@@ -19,7 +20,7 @@ export type Segment = { start: number; end: number; text: string; speaker?: stri
 type Base = { id: string; prompt: string; explanation?: string; seg?: number | null };
 export type McQuestion = Base & { type: "mc" | "heard"; options: string[]; answer: string };
 export type TfQuestion = Base & { type: "tf"; answer: boolean };
-export type GapQuestion = Base & { type: "gap"; answer: string };
+export type GapQuestion = Base & { type: "gap"; answer: string; answers?: string[]; exactForm?: boolean };
 export type MatchQuestion = Base & { type: "match"; pairs: { left: string; right: string }[] };
 export type RepeatQuestion = Base & { type: "repeat"; text: string };
 export type Question = McQuestion | TfQuestion | GapQuestion | MatchQuestion | RepeatQuestion;
@@ -70,9 +71,6 @@ export const LEVEL_GUIDELINES: Record<CefrLevel, string[]> = {
   C1: ["autentičan govor", "složene i apstraktne teme"],
 };
 
-const norm = (s: string) =>
-  s.toLowerCase().normalize("NFC").replace(/[.,!?;:"„“”']/g, "").replace(/\s+/g, " ").trim();
-
 /** Whether a question counts toward the score. */
 export const isScored = (q: Question) => q.type !== "repeat";
 
@@ -85,7 +83,7 @@ export function gradeQuestion(q: Question, answer: unknown): boolean {
     case "tf":
       return answer === q.answer;
     case "gap":
-      return typeof answer === "string" && norm(answer) === norm(q.answer);
+      return typeof answer === "string" && matchesTypedAnswer(answer, [q.answer, ...(q.answers || [])], q.exactForm);
     case "match": {
       const a = (answer || {}) as Record<string, string>;
       return q.pairs.every((p) => a[p.left] === p.right);

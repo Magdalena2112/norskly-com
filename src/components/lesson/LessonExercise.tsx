@@ -50,7 +50,7 @@ export default function LessonExercise({
       const s = next[i];
       if (s.status === "correct" || s.status === "failed") return;
       if (!s.value.trim()) return;
-      if (isCorrect(s.value, item.answers, { lenient: exercise.kind === "vocabulary" })) next[i] = { ...s, status: "correct", attempts: s.attempts + 1 };
+      if (isCorrect(s.value, item.answers, { lenient: exercise.kind === "vocabulary", typed: !item.options, exactForm: item.exactForm })) next[i] = { ...s, status: "correct", attempts: s.attempts + 1 };
       else {
         const attempts = s.attempts + 1;
         const failed = attempts >= limitFor(item);
