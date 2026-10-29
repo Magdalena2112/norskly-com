@@ -57,9 +57,11 @@ Deno.serve(async (req) => {
       ? `${lang}/az-${await sha1(`${azureVoice}|${text}`)}.wav`
       : `${lang}/${await sha1(`${voice}|${text}`)}.wav`;
 
-    // Reuse cached clip when it already exists.
-    const { data: existing } = await admin.storage.from(BUCKET).list(key.split("/")[0], { search: key.split("/")[1] });
-    if (!existing?.some((f) => f.name === key.split("/")[1])) {
+    // Reuse cached clip when it already exists (one storage call instead of list + sign).
+    const TTL = 7 * 24 * 3600;
+    const { data: hit } = await admin.storage.from(BUCKET).createSignedUrl(key, TTL);
+    if (hit?.signedUrl) return json({ url: hit.signedUrl, ttl: TTL });
+    {
       let audio: Uint8Array | null = null;
       if (useAzure) {
         const ssml = `<speak version="1.0" xmlns="http://www.w3.org/2001/10/synthesis" xml:lang="${AZURE_LOCALE[lang]}"><voice name="${azureVoice}"><prosody rate="-8%">${toSsml(text)}</prosody></voice></speak>`;
@@ -95,9 +97,9 @@ Deno.serve(async (req) => {
       if (upErr) console.error("upload error", upErr);
     }
 
-    const { data: signed, error: signErr } = await admin.storage.from(BUCKET).createSignedUrl(key, 3600);
+    const { data: signed, error: signErr } = await admin.storage.from(BUCKET).createSignedUrl(key, TTL);
     if (signErr || !signed?.signedUrl) return json({ error: "Audio nije dostupan." }, 500);
-    return json({ url: signed.signedUrl });
+    return json({ url: signed.signedUrl, ttl: TTL });
   } catch (e) {
     console.error("lesson-tts error", e);
     return json({ error: "Greška na serveru." }, 500);

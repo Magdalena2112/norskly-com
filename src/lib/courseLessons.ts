@@ -101,6 +101,11 @@ const ttsCache = new Map<string, Promise<string | null>>();
 function naturalClip(line: DialogueLine, lang: string): Promise<string | null> {
   const key = `${lang}|${line.speaker}|${line.text}`;
   if (!ttsCache.has(key)) {
+    const lsKey = `tts:${key}`;
+    try {
+      const s = localStorage.getItem(lsKey);
+      if (s) { const v = JSON.parse(s) as { url: string; exp: number }; if (v.exp > Date.now()) { ttsCache.set(key, Promise.resolve(v.url)); return ttsCache.get(key)!; } localStorage.removeItem(lsKey); }
+    } catch { /* ignore */ }
     ttsCache.set(key, (async () => {
       try {
         const { supabase } = await import("@/integrations/supabase/client");
@@ -112,9 +117,13 @@ function naturalClip(line: DialogueLine, lang: string): Promise<string | null> {
           headers: { Authorization: `Bearer ${s.access_token}`, "Content-Type": "application/json" },
           body: JSON.stringify({ text: line.text, language: lang, voice }),
         });
-        if (!res.ok) return null;
+        if (!res.ok) { ttsCache.delete(key); return null; }
         const data = await res.json();
-        return typeof data?.url === "string" ? data.url : null;
+        if (typeof data?.url !== "string") return null;
+        // Remember the link on this device (minus a safety margin) so replays are instant after reloads.
+        const ttl = typeof data.ttl === "number" ? data.ttl : 3600;
+        try { localStorage.setItem(lsKey, JSON.stringify({ url: data.url, exp: Date.now() + (ttl - 600) * 1000 })); } catch { /* quota */ }
+        return data.url as string;
       } catch {
         return null;
       }
