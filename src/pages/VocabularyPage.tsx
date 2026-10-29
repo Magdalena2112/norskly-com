@@ -805,7 +805,7 @@ function FlashcardsTab({ userId, lessonId, startArea }: { userId?: string; lesso
                 : "text-muted-foreground hover:text-foreground"
             }`}
           >
-            NO → SR
+            {getCurrentLanguageCode().toUpperCase()} → SR
           </button>
           <button
             onClick={() => handleDirectionChange("sr-no")}
@@ -815,7 +815,7 @@ function FlashcardsTab({ userId, lessonId, startArea }: { userId?: string; lesso
                 : "text-muted-foreground hover:text-foreground"
             }`}
           >
-            SR → NO
+            SR → {getCurrentLanguageCode().toUpperCase()}
           </button>
         </div>
       </div>
