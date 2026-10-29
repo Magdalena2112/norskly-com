@@ -1,9 +1,12 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { AdminLayout } from "@/components/admin/AdminLayout";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Mail, Star, CheckCircle2, CalendarDays, Users } from "lucide-react";
+import { Switch } from "@/components/ui/switch";
+import { useToast } from "@/hooks/use-toast";
+import { visibleForCourse } from "@/lib/teacherVisibility";
 
 const LANG: Record<string, string> = { no: "🇳🇴 Norveški", en: "🇬🇧 Engleski", de: "🇩🇪 Nemački" };
 
@@ -11,20 +14,40 @@ const formatPrice = (cents: number, currency: string) =>
   `${(cents / 100).toLocaleString("sr-RS", { maximumFractionDigits: 2 })} ${currency}`;
 
 export default function AdminTeachersPage() {
+  const queryClient = useQueryClient();
+  const { toast } = useToast();
+  const approval = useMutation({
+    mutationFn: async ({ teacherId, language, enabled }: { teacherId: string; language: string; enabled: boolean }) => {
+      const result = enabled
+        ? await supabase.from("teacher_course_approvals").insert({ teacher_id: teacherId, language })
+        : await supabase.from("teacher_course_approvals").delete().eq("teacher_id", teacherId).eq("language", language).eq("course_type", "health");
+      if (result.error) throw result.error;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["admin-teachers-overview"] });
+      queryClient.invalidateQueries({ queryKey: ["teachers-list"] });
+      toast({ title: "Vidljivost sačuvana" });
+    },
+    onError: () => toast({ title: "Vidljivost nije sačuvana", variant: "destructive" }),
+  });
   const { data, isLoading } = useQuery({
     queryKey: ["admin-teachers-overview"],
     queryFn: async () => {
-      const [teachers, types, lessons] = await Promise.all([
+      const [teachers, types, lessons, approvals] = await Promise.all([
         supabase.from("teachers").select("id, name, email, photo_url, is_active, teaching_languages, language, rating, focus").order("name"),
         supabase.from("lesson_types").select("id, teacher_id, title, duration_minutes, price_cents, currency, is_active, language"),
         supabase.from("lessons").select("teacher_id, user_id, status, start_time"),
+        supabase.from("teacher_course_approvals").select("teacher_id, language"),
       ]);
       if (teachers.error) throw teachers.error;
+      if (types.error) throw types.error;
+      if (approvals.error) throw approvals.error;
       const now = new Date().toISOString();
       return (teachers.data ?? []).map((t) => {
         const ls = (lessons.data ?? []).filter((l) => l.teacher_id === t.id);
         return {
           ...t,
+          approvedLanguages: (approvals.data ?? []).filter(a => a.teacher_id === t.id).map(a => a.language),
           completed: ls.filter((l) => l.status === "completed" || (l.status === "scheduled" && l.start_time < now)).length,
           upcoming: ls.filter((l) => l.status === "scheduled" && l.start_time >= now).length,
           students: new Set(ls.map((l) => l.user_id)).size,
@@ -94,6 +117,20 @@ export default function AdminTeachersPage() {
                         <s.icon className="h-4 w-4 mx-auto text-muted-foreground" />
                         <div className="text-lg font-bold text-foreground">{s.value}</div>
                         <div className="text-[11px] text-muted-foreground">{s.label}</div>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="space-y-3 border-t border-border pt-3">
+                    <h2 className="text-sm font-semibold text-foreground">Vidljivost na kursevima</h2>
+                    {langs.map(language => (
+                      <div key={language} className="space-y-1">
+                        <div className="text-xs text-muted-foreground">{LANG[language] ?? language} · Opšti: {visibleForCourse(t, language, "general", t.offers, t.approvedLanguages) ? "Vidljiv" : "Bez aktivne ponude"}</div>
+                        <label className="flex items-center justify-between gap-3 text-sm text-foreground">
+                          <span>Zdravstveni · {LANG[language] ?? language}</span>
+                          <Switch aria-label={`Zdravstveni ${language} za ${t.name}`} checked={t.approvedLanguages.includes(language)} disabled={approval.isPending}
+                            onCheckedChange={enabled => approval.mutate({ teacherId: t.id, language, enabled })} />
+                        </label>
                       </div>
                     ))}
                   </div>
