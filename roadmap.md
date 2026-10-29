@@ -1,4 +1,5 @@
 # Tasks
+- [ ] Add automatic general teacher visibility and admin-approved healthcare visibility per language; test approval isolation and student listing without changing admin accounts.
 - [x] Restore default visibility of all saved student errors and activity, with per-language and course filters; verified admin readback of Pavle's 120 errors/19 activities and Dobrila's 46 errors/5 activities without changing accounts.
 - [x] Correct admin enrollment/level views and isolate lesson analytics; record grammar/vocabulary/review mistakes with lesson and attempt; verified a real wrong English answer appears in admin's English A2 errors. Historical unassigned events remain separate; legacy enrollment decisions still await administrator below.
 - [x] Extend safe typed-answer tolerance to grammar and listening; 107 checks passed and an authenticated English lesson accepted a formatting/contraction variant and preserved it after reload.
