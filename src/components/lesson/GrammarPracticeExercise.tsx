@@ -89,6 +89,16 @@ export default function GrammarPracticeExercise({ exercise: ex, done, onDone, im
     `px-3 py-2 rounded-xl text-sm border text-left transition-colors ${active ? "bg-primary text-primary-foreground border-primary" : "bg-background border-border hover:border-primary/50"} disabled:opacity-70`;
 
   const gapParts = (ex.text || "").split("___");
+  const describe = (mine: boolean) => {
+    switch (ex.type) {
+      case "order": return mine ? placed.map((i) => ex.tokens?.[i]).join(" ") : (ex.answer || []).join(" ");
+      case "gaps": return mine ? gapVals.join(" / ") : (ex.gaps || []).map((g) => g.answer).join(" / ");
+      case "text": return mine ? texts.join(" / ") : (ex.inputs || []).map((x) => x.answers[0]).join(" / ");
+      case "match": return (ex.left || []).map((l, i) => `${l} → ${ex.right?.[mine ? matches[i] : (ex.pairs?.[i] ?? -1)] ?? "?"}`).join("; ");
+      default: return (mine ? picked : ex.correct || []).map((i) => ex.options?.[i]).join(", ");
+    }
+  };
+  const questionText = [ex.instruction, ex.context, ex.prompt, ex.text].filter(Boolean).join("\n");
 
   return (
     <div className="rounded-2xl border border-border/60 bg-cream/90 p-4 sm:p-5 shadow-card-soft space-y-4">
@@ -212,7 +222,7 @@ export default function GrammarPracticeExercise({ exercise: ex, done, onDone, im
       {result === "failed" && (
         <div className="space-y-2">
           <p className="text-sm font-semibold text-destructive flex items-center gap-1"><AlertCircle className="w-4 h-4" /> Netačno — iskorišćeni su svi pokušaji.</p>
-          <MistakeExplanation explanation={[ex.explanation, ex.grammarFocus && `Pravilo: ${ex.grammarFocus}`].filter(Boolean).join(" ") || ex.hint2 || ex.hint} />
+          <MistakeExplanation question={questionText} yourAnswer={describe(true)} correct={describe(false)} explanation={[ex.explanation, ex.grammarFocus && `Pravilo: ${ex.grammarFocus}`].filter(Boolean).join(" ") || ex.hint2 || ex.hint} />
         </div>
       )}
 
