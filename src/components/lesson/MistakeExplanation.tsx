@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { ChevronDown, Lightbulb, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { getCurrentLanguageCode } from "@/lib/currentLanguage";
+import { getSelectedCourse } from "@/lib/courseSelection";
 
-const KEY = "mistake-expl:v1:";
+// v2: explanations follow the learner's chosen support style, so old neutral cache is skipped.
+const KEY = "mistake-expl:v2:";
 
 /** Explains the student's own mistake: diagnosis is generated from their actual answer, cached per device. */
 export default function MistakeExplanation({ correct, explanation, yourAnswer, question }: {
@@ -18,7 +21,8 @@ export default function MistakeExplanation({ correct, explanation, yourAnswer, q
     const cached = localStorage.getItem(k);
     if (cached) { setDiag(cached); return; }
     setLoading(true);
-    const { data } = await supabase.functions.invoke("mistake-explain", { body: { question: question || "", yourAnswer, correct, rule: explanation || "" } });
+    const language = getCurrentLanguageCode();
+    const { data } = await supabase.functions.invoke("mistake-explain", { body: { question: question || "", yourAnswer, correct, rule: explanation || "", language, course: getSelectedCourse(language) } });
     setLoading(false);
     if (data?.explanation) { setDiag(data.explanation); try { localStorage.setItem(k, data.explanation); } catch { /* full */ } }
   }
