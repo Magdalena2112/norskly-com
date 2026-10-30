@@ -157,6 +157,10 @@ export default function DashboardPage() {
       </div>
     );
   }
+  const nextLesson =
+    visibleLessons.find((l) => lessonProgress[l.id] === "in_progress") ??
+    visibleLessons.find((l) => lessonProgress[l.id] !== "completed") ??
+    null;
 
   return (
     <StudentLayout>
