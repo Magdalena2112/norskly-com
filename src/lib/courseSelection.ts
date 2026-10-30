@@ -11,6 +11,12 @@ export function loginChoices(rows: EnrollmentChoice[], language?: string | null,
 }
 
 /** Selection is navigation intent only; database enrollment still authorizes access. */
+export function hasStoredCourse(language: string): boolean {
+  if (typeof window === "undefined") return false;
+  const value = localStorage.getItem(`norskly_course_${language}`);
+  return value === "general" || (value === "health" && language !== "en");
+}
+
 export function getSelectedCourse(language: string): CourseType {
   if (typeof window === "undefined") return "general";
   const query = new URLSearchParams(window.location.search).get("course");

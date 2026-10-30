@@ -6,6 +6,8 @@ import { getActiveLanguageCode, isLanguageOnboarded } from "@/lib/onboardingStat
 import { supabase } from "@/integrations/supabase/client";
 import { useSelectedCourse } from "@/hooks/useSelectedCourse";
 import { codeToSlug } from "@/lib/onboardingStatus";
+import { hasStoredCourse } from "@/lib/courseSelection";
+import { Button } from "@/components/ui/button";
 
 export function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const { user, loading } = useAuth();
@@ -13,11 +15,13 @@ export function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const location = useLocation();
   const activeLang = getActiveLanguageCode(location.pathname);
   const activeCourse = useSelectedCourse(activeLang);
+  const explicitCourse = new URLSearchParams(location.search).has("course");
+  const needsCourseChoice = !explicitCourse && !hasStoredCourse(activeLang) && location.pathname !== "/onboarding";
   const skipOnboarding = isAdmin || isTeacher;
   const lessonRef = new URLSearchParams(location.search).get("lesson") || location.pathname.match(/^\/lekcija\/([^/]+)/)?.[1];
   const { data: lessonAllowed, isLoading: lessonLoading } = useQuery({
     queryKey: ["lesson-access", user?.id, lessonRef, activeLang, activeCourse],
-    enabled: !!user && !skipOnboarding && !!lessonRef,
+    enabled: !!user && !skipOnboarding && !needsCourseChoice && !!lessonRef,
     queryFn: async () => {
       const field = /^[0-9a-f-]{36}$/i.test(lessonRef || "") ? "id" : "lesson_code";
       const { data, error } = await supabase.from("course_lessons").select("id,language,course").eq(field, lessonRef || "").maybeSingle();
@@ -26,10 +30,10 @@ export function ProtectedRoute({ children }: { children: React.ReactNode }) {
     staleTime: 0,
   });
 
-  const { data: onboardingCompleted, isLoading: onboardingLoading } = useQuery({
+  const { data: onboardingCompleted, isLoading: onboardingLoading, isError: onboardingError, refetch } = useQuery({
     queryKey: ["onboarding-status", user?.id, activeLang, activeCourse],
     queryFn: async () => (user ? isLanguageOnboarded(user.id, activeLang, activeCourse) : false),
-    enabled: !!user && !skipOnboarding,
+    enabled: !!user && !skipOnboarding && !needsCourseChoice,
     staleTime: Infinity,
   });
 
@@ -48,7 +52,7 @@ export function ProtectedRoute({ children }: { children: React.ReactNode }) {
   if (!user) {
     if (location.pathname.startsWith("/teacher")) return <Navigate to="/profesori/prijava" replace />;
     const m = location.pathname.match(/^\/ucenje\/([^/]+)/);
-    return <Navigate to={m ? `/auth?lang=${m[1]}&course=${activeCourse}` : "/auth"} replace />;
+    return <Navigate to={m ? `/auth?lang=${m[1]}${explicitCourse ? `&course=${activeCourse}` : ""}` : "/auth"} replace />;
   }
 
   if (isAdmin) return <>{children}</>;
@@ -57,6 +61,19 @@ export function ProtectedRoute({ children }: { children: React.ReactNode }) {
   if (isTeacher) {
     if (!location.pathname.startsWith("/teacher")) return <Navigate to="/teacher/dashboard" replace />;
     return <>{children}</>;
+  }
+
+  // Reuse the enrollment-aware chooser before an implicit default can create
+  // onboarding intent. It opens a sole enrollment or offers all existing ones.
+  if (location.pathname !== "/onboarding" && !explicitCourse && (needsCourseChoice || (!onboardingError && !onboardingCompleted))) {
+    return <Navigate to={`/auth?choose=courses&lang=${codeToSlug(activeLang)}`} replace />;
+  }
+
+  if (onboardingError) {
+    return <div className="min-h-screen bg-background flex flex-col items-center justify-center gap-4">
+      <p>Kurs nije učitan. Pokušaj ponovo.</p>
+      <Button onClick={() => void refetch()}>Pokušaj ponovo</Button>
+    </div>;
   }
 
   if (!onboardingCompleted && location.pathname !== "/onboarding") {
