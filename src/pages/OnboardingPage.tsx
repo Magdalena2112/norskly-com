@@ -324,8 +324,9 @@ export default function OnboardingPage() {
 
   if (done) {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center p-4">
-        <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="w-full max-w-md rounded-3xl border border-border bg-card p-8 text-center shadow-sm">
+      <div className="relative min-h-screen overflow-hidden bg-background flex items-center justify-center p-4">
+        <OnboardingBackdrop />
+        <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="relative z-10 w-full max-w-md rounded-3xl border border-border bg-card p-8 text-center shadow-sm">
           <img src={logo} alt="Norskly" className="h-10 mx-auto mb-6" />
           <h2 className="text-2xl font-display font-bold text-primary break-words">Hvala ti{firstName ? `, ${firstName}` : ""}!</h2>
           <p className="text-muted-foreground mt-2">Sve je spremno za tvoju prvu lekciju.</p>
@@ -335,8 +336,9 @@ export default function OnboardingPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center p-4 sm:p-6">
-      <div className="w-full min-w-0 max-w-lg">
+    <div className="relative min-h-screen overflow-hidden bg-background flex items-center justify-center p-4 sm:p-6">
+      <OnboardingBackdrop />
+      <div className="relative z-10 w-full min-w-0 max-w-lg">
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-2 min-w-0">
             <BackButton />
