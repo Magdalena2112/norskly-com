@@ -242,7 +242,7 @@ export default function DashboardPage() {
                   }`}
                   onClick={() => navigate(`/lekcija/${l.id}?course=${course}`)}
                 >
-                  <CardContent className="p-5 flex gap-4 items-start">
+                  <CardContent className="p-5 h-full flex gap-4 items-center">
                     <span className={`shrink-0 w-14 h-14 rounded-2xl flex items-center justify-center font-display font-bold text-2xl ${
                       p === "completed" ? "bg-forest text-cream" : isNext ? "bg-primary text-primary-foreground" : "bg-secondary text-primary"
                     }`}>
@@ -270,7 +270,7 @@ export default function DashboardPage() {
           {lessonsLoaded && visibleLessons.length > 0 && (
             <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: visibleLessons.length * 0.06 + 0.1 }}>
               <Card className="h-full bg-secondary/40 border border-dashed border-primary/30">
-                <CardContent className="p-5 flex gap-4 items-start">
+                <CardContent className="p-5 h-full flex gap-4 items-center">
                   <span className="shrink-0 w-14 h-14 rounded-2xl flex items-center justify-center bg-accent/20 text-primary">
                     <CalendarClock className="w-7 h-7" aria-hidden="true" />
                   </span>
