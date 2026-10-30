@@ -161,6 +161,7 @@ const TIME_OPTIONS = [
 const GENERAL_GOALS = [
   { value: "svakodnevni život", title: "Svakodnevni život i snalaženje", desc: "Fokus na tečnost i prirodan govorni jezik" },
   { value: "posao i karijera", title: "Posao i karijera", desc: "Fokus na formalnost i profesionalne formulacije" },
+  { value: "preseljenje", title: "Preseljenje u novu zemlju", desc: "Fokus na svakodnevno snalaženje u novim situacijama" },
   { value: "ispit", title: "Polaganje ispita", desc: "Fokus na gramatičku preciznost i strukture koje se boduju" },
 ];
 const HEALTH_GOALS = [
@@ -310,14 +311,14 @@ export default function OnboardingPage() {
   const titles = [
     "Hajde da se upoznamo",
     `${firstName ? `Drago nam je, ${firstName}! ` : ""}Koliko vremena imaš za učenje?`,
-    `${hi}šta te najviše motiviše?`,
+    `${hi}koji ti je glavni cilj?`,
     t.confidenceTitle,
     "Kakav pristup ispravkama ti prija?",
   ];
   const descs = [
     "Kako želiš da ti se obraćamo tokom učenja?",
     "Prilagodićemo preporučene vežbe tvom svakodnevnom rasporedu.",
-    "Cilj usmerava povratne informacije i savete tokom učenja.",
+    "Pomaže nam da teme za razgovor i predloge vežbanja usmerimo na ono što ti je najpotrebnije.",
     "1 = tek počinjem, 5 = osećam se sigurno. Prilagodićemo detaljnost objašnjenja.",
     "Važi za ispravke u pisanju i povratne informacije u razgovoru.",
   ];
