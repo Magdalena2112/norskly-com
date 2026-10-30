@@ -210,8 +210,15 @@ export default function CourseLessonPage() {
             <span className="text-[11px] bg-secondary/60 text-primary px-2 py-0.5 rounded-full">~{Math.max(30, Math.round(exercises.length * 1.5 / 5) * 5)} min</span>
             <span className="text-[11px] bg-secondary/60 text-primary px-2 py-0.5 rounded-full">100 XP</span>
           </div>
-          <h1 className="text-display text-2xl sm:text-3xl text-primary leading-tight mt-1">{row.title_target}</h1>
-          <p className="text-sm text-muted-foreground mt-1">{row.title}{row.summary ? ` — ${row.summary}` : ""}</p>
+          <div className="flex items-start gap-4 mt-1">
+            <div className="min-w-0 flex-1">
+              <h1 className="text-display text-2xl sm:text-3xl text-primary leading-tight">{row.title_target}</h1>
+              <p className="text-sm text-muted-foreground mt-1">{row.title}{row.summary ? ` — ${row.summary}` : ""}</p>
+            </div>
+            {imgs?.cover && (
+              <img src={imgs.cover} alt="" aria-hidden="true" loading="lazy" className="shrink-0 w-20 h-20 sm:w-32 sm:h-32 rounded-2xl object-cover border border-border/50 shadow-card-soft opacity-90 rotate-2" />
+            )}
+          </div>
           {Array.isArray(row.goals) && row.goals.length > 0 && (
             <div className="mt-4">
               <p className="text-xs font-medium text-primary mb-1.5">Na kraju lekcije moći ćeš da:</p>
