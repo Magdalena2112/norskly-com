@@ -211,6 +211,13 @@
       "when": 1793304898325,
       "tag": "0029_teacher_levels_course_types",
       "breakpoints": true
+    },
+    {
+      "idx": 30,
+      "version": "7",
+      "when": 1793341432146,
+      "tag": "0030_tighten_vocab_images_avatars_read",
+      "breakpoints": true
     }
   ]
 }
