@@ -227,39 +227,7 @@ export default function DashboardPage() {
 
         {activeCourse === "health" && <h2 className="font-display text-xl text-primary mb-4">Za zdravstvene radnike · B1</h2>}
 
-        {activeCourse === "general" && <div className="flex gap-2 overflow-x-auto pb-2 mb-4 -mx-1 px-1">
-          {levelStates.map((s, i) => {
-            const active = s.level === selectedLevel;
-            return (
-              <button
-                key={s.level}
-                onClick={() => onLevelClick(s, i)}
-                aria-disabled={!s.unlocked}
-                className={`shrink-0 rounded-full border px-4 py-2 text-sm font-medium transition-colors flex items-center gap-1.5 ${
-                  active
-                    ? "bg-primary text-primary-foreground border-primary"
-                    : s.unlocked
-                      ? "bg-cream text-primary border-border hover:border-primary/50"
-                      : "bg-muted text-muted-foreground border-border/60"
-                }`}
-              >
-                {!s.unlocked && <Lock className="w-3.5 h-3.5" />}
-                {s.level}
-                {s.unlocked && s.total > 0 && (
-                  <span className="text-xs opacity-75">{Math.round(s.ratio * 100)}%{s.ratio >= LEVEL_UNLOCK_THRESHOLD ? " ✓" : ""}</span>
-                )}
-              </button>
-            );
-          })}
-        </div>}
-
-        {lockedMsg && (
-          <Card className="mb-6 bg-cream/90 border-border/60 shadow-card-soft">
-            <CardContent className="py-4 text-sm text-primary flex items-start gap-2">
-              <Lock className="w-4 h-4 mt-0.5 shrink-0" /> {lockedMsg}
-            </CardContent>
-          </Card>
-        )}
+        {activeCourse === "general" && <h2 className="font-display text-xl text-primary mb-4">Lekcije · Nivo {selectedLevel}</h2>}
 
         {lessonsLoaded && visibleLessons.length === 0 && (
           <Card className="mb-6 bg-cream/90 border-border/60 shadow-card-soft">
@@ -269,35 +237,40 @@ export default function DashboardPage() {
           </Card>
         )}
 
-        <div className={`grid ${visibleLessons.length === 1 ? "grid-cols-1" : "grid-cols-2"} sm:grid-cols-3 lg:grid-cols-4 gap-4`}>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {visibleLessons.map((l, i) => {
             const p = lessonProgress[l.id];
+            const isNext = nextLesson?.id === l.id;
+            const pct = p === "completed" ? 100 : p === "in_progress" ? 50 : 0;
+            const statusLabel = p === "completed" ? "Završeno" : p === "in_progress" ? "U toku" : "Nije započeto";
             return (
-              <motion.div key={l.id} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.08 + 0.15 }}>
+              <motion.div key={l.id} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.06 + 0.1 }}>
                 <Card
-                  className={`cursor-pointer group h-full bg-cream border border-border/60 shadow-postcard overflow-hidden relative ${visibleLessons.length === 1 ? "aspect-[2/1]" : "aspect-square"} sm:aspect-square flex flex-col transition-all duration-500 ease-out hover:-translate-y-1.5 hover:shadow-card-soft ${
-                    p === "completed" ? "ring-1 ring-forest/40" : p === "in_progress" ? "ring-1 ring-sunset/50" : ""
+                  className={`cursor-pointer group h-full bg-cream border shadow-postcard relative transition-all duration-300 hover:-translate-y-1 hover:shadow-card-soft ${
+                    isNext ? "border-primary ring-2 ring-primary/30" : "border-border/60"
                   }`}
                   onClick={() => navigate(`/lekcija/${l.id}?course=${course}`)}
                 >
-                  {p === "completed" && (
-                    <span className="absolute top-3 right-3 w-6 h-6 rounded-full bg-forest text-cream flex items-center justify-center z-10">
-                      <CheckCircle2 className="w-4 h-4" />
+                  <CardContent className="p-5 flex gap-4 items-start">
+                    <span className={`shrink-0 w-14 h-14 rounded-2xl flex items-center justify-center font-display font-bold text-2xl ${
+                      p === "completed" ? "bg-forest text-cream" : isNext ? "bg-primary text-primary-foreground" : "bg-secondary text-primary"
+                    }`}>
+                      {p === "completed" ? <CheckCircle2 className="w-7 h-7" /> : String(l.sort_order).padStart(2, "0")}
                     </span>
-                  )}
-                  {trophies.has(l.id) && (
-                    <span className="absolute top-3 left-3 z-10" title="Trofej osvojen"><Trophy className="w-5 h-5 text-sunset" /></span>
-                  )}
-                  {p === "in_progress" && (
-                    <span className="absolute top-3 right-3 w-2.5 h-2.5 rounded-full bg-sunset z-10" />
-                  )}
-
-                  <CardContent className="flex-1 flex flex-col items-center justify-center text-center p-4 sm:p-5">
-                    <span className="font-display font-bold text-3xl sm:text-4xl text-primary/25 group-hover:text-primary/40 transition-colors">
-                      {String(l.sort_order).padStart(2, "0")}
-                    </span>
-                    <p className="font-script italic text-[11px] text-primary/55 mt-2">Lekcija {l.sort_order}</p>
-                    <h3 className="font-display font-semibold text-sm sm:text-base text-primary leading-snug mt-1 break-words hyphens-auto">{l.title_target}</h3>
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                        <span>Lekcija {l.sort_order}</span>
+                        {isNext && <span className="rounded-full bg-primary/10 text-primary px-2 py-0.5 font-medium">Na redu</span>}
+                        {trophies.has(l.id) && <Trophy className="w-4 h-4 text-sunset" aria-label="Trofej osvojen" />}
+                      </div>
+                      <h3 className="font-display font-semibold text-lg text-primary leading-snug mt-1 break-words">{l.title_target}</h3>
+                      <div className="mt-3 flex items-center gap-3">
+                        <div className="h-1.5 flex-1 rounded-full bg-border/70 overflow-hidden">
+                          <div className={`h-full rounded-full ${p === "completed" ? "bg-forest" : "bg-primary"}`} style={{ width: `${pct}%` }} />
+                        </div>
+                        <span className="text-xs text-muted-foreground shrink-0">{statusLabel}</span>
+                      </div>
+                    </div>
                   </CardContent>
                 </Card>
               </motion.div>
