@@ -14,6 +14,7 @@ import { supabase } from "@/integrations/supabase/client";
 import WeeklyDigest from "@/components/WeeklyDigest";
 import TeacherWorkWidget from "@/components/student/TeacherWorkWidget";
 import DailyPlanCard from "@/components/student/DailyPlanCard";
+import TimeSuggestion from "@/components/dashboard/TimeSuggestion";
 import SurveyInvitation from "@/components/survey/SurveyInvitation";
 import { format } from "date-fns";
 import StudentLayout from "@/components/student/StudentLayout";
@@ -209,6 +210,7 @@ export default function DashboardPage() {
           </div>
           </div>
         </motion.div>
+        {user && <TimeSuggestion userId={user.id} language={code} course={course} />}
         {location.state?.courseDenied && <p role="alert" className="my-4 text-sm text-destructive">Ova lekcija nije deo kursa na koji si upisan/a.</p>}
 
         <TeacherWorkWidget language={code} />
