@@ -353,7 +353,7 @@ export default function OnboardingPage() {
           ))}
         </div>
 
-        <div className="rounded-3xl border border-border bg-card p-5 sm:p-8 shadow-sm">
+        <div className="rounded-3xl border border-border/70 bg-card/85 backdrop-blur-sm p-5 sm:p-8 shadow-sm">
           <AnimatePresence mode="wait">
             <motion.div
               key={step}
@@ -372,7 +372,7 @@ export default function OnboardingPage() {
                 </span>
               </div>
               <h2 className="text-display text-2xl sm:text-3xl text-primary mb-2 break-words">
-                {titles[step]} <span className="font-script text-primary/70">✦</span>
+                {titles[step]}
               </h2>
               <p className="text-muted-foreground mb-6 break-words leading-relaxed">{descs[step]}</p>
 
