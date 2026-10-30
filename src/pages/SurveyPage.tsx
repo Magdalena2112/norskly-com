@@ -59,7 +59,7 @@ export default function SurveyPage(){
  {answers.continueUsing==='yes'&&<fieldset><legend className="font-semibold">13. Da li želiš da dobiješ obaveštenje kada dodamo ostale kurseve?</legend><Choices id="notify" value={answers.notifyCourses===undefined?undefined:String(answers.notifyCourses)} onChange={v=>update('notifyCourses',v==='true')} options={{true:'Da, želim obaveštenja na mejl svog naloga',false:'Ne, hvala'}}/></fieldset>}</>}
  {error&&<p role="alert" className="text-destructive text-sm">{error}</p>}
  <div className="flex justify-between gap-3 pt-4 border-t border-border"><Button type="button" variant="ghost" disabled={step===0||busy} onClick={()=>{setStep(s=>s-1);setError('')}}><ArrowLeft className="w-4 h-4 mr-2"/>Nazad</Button><Button type="submit" disabled={busy}>{busy?<Loader2 className="w-4 h-4 animate-spin mr-2"/>:null}{step===3?'Pošalji utiske':'Dalje'}{step<3&&<ArrowRight className="w-4 h-4 ml-2"/>}</Button></div>
- <p className="text-xs text-muted-foreground">+50 XP za prvu anketu o ovom kursu. Poeni ne menjaju završene lekcije.</p>
+ 
  </form></>}
  </main></StudentLayout>;
 }
