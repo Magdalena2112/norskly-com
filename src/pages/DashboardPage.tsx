@@ -276,8 +276,8 @@ export default function DashboardPage() {
                   </span>
                   <div className="min-w-0 flex-1">
                     <p className="text-xs text-muted-foreground">U pripremi</p>
-                    <h3 className="font-display font-semibold text-base text-primary leading-snug mt-1 break-words">Trenutno se nalaziš u promo periodu testiranja Norskly platforme.</h3>
-                    <p className="text-sm text-muted-foreground mt-2 leading-relaxed">Nove lekcije i napredniji moduli biće dodati po završetku testiranja. Tvoji utisci i vežbanje nam pomažu da usavršimo svaki detalj — hvala ti što zajedno sa nama gradiš platformu!</p>
+                    <h3 className="font-display font-semibold text-lg text-primary leading-snug mt-1 break-words">Nove lekcije uskoro</h3>
+                    <p className="text-xs text-muted-foreground mt-2 leading-relaxed">Trenutno se nalaziš u promo periodu testiranja Norskly platforme. Nove lekcije i napredniji moduli biće dodati po završetku testiranja. Tvoji utisci i vežbanje nam pomažu da usavršimo svaki detalj — hvala ti što zajedno sa nama gradiš platformu!</p>
                   </div>
                 </CardContent>
               </Card>
