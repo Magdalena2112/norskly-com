@@ -162,7 +162,7 @@ const GENERAL_GOALS = [
   { value: "svakodnevni život", title: "Svakodnevni život i snalaženje", desc: "Fokus na tečnost i prirodan govorni jezik" },
   { value: "posao i karijera", title: "Posao i karijera", desc: "Fokus na formalnost i profesionalne formulacije" },
   { value: "preseljenje", title: "Preseljenje u novu zemlju", desc: "Fokus na svakodnevno snalaženje u novim situacijama" },
-  { value: "ispit", title: "Polaganje ispita", desc: "Fokus na gramatičku preciznost i strukture koje se boduje" },
+  { value: "ispit", title: "Polaganje ispita", desc: "Fokus na gramatičku preciznost i strukture koje se boduju" },
 ];
 const HEALTH_GOALS = [
   { value: "rad sa pacijentima", title: "Rad sa pacijentima i anamneza", desc: "Simptomi, empatija, jasna pitanja" },
