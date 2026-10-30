@@ -30,12 +30,13 @@ export function codeToSlug(code: LanguageCode): string {
 
 /** Returns true if the user has completed onboarding for the given language. */
 export async function isLanguageOnboarded(userId: string, language: LanguageCode, course = getSelectedCourse(language)): Promise<boolean> {
-  const { data } = await supabase
+  const { data, error } = await supabase
     .from("course_enrollments")
     .select("onboarding_completed")
     .eq("user_id", userId)
     .eq("language", language)
     .eq("course_type", course)
     .maybeSingle();
+  if (error) throw error;
   return !!data?.onboarding_completed;
 }
