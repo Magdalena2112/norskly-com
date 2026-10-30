@@ -159,10 +159,9 @@ const TIME_OPTIONS = [
   { value: 60, title: "60 min dnevno · Intenzivni tempo", desc: "Temeljan rad i brži napredak — odlično ako se spremaš za posao, preseljenje ili ispit." },
 ];
 const GENERAL_GOALS = [
-  { value: "svakodnevni život", title: "Svakodnevni život i snalaženje", desc: "Fokus na tečnost i prirodan govorni jezik" },
-  { value: "posao i karijera", title: "Posao i karijera", desc: "Fokus na formalnost i profesionalne formulacije" },
-  { value: "preseljenje", title: "Preseljenje u novu zemlju", desc: "Fokus na svakodnevno snalaženje u novim situacijama" },
-  { value: "ispit", title: "Polaganje ispita", desc: "Fokus na gramatičku preciznost i strukture koje se boduju" },
+  { value: "svakodnevni život", title: "Svakodnevni život i snalaženje", desc: "Tečnost i prirodan govor u svakodnevnim situacijama" },
+  { value: "posao i karijera", title: "Posao i karijera", desc: "Poslovni izrazi i profesionalna komunikacija" },
+  { value: "ispit", title: "Ispit i sertifikat", desc: "Gramatička preciznost i strukture koje se boduju" },
 ];
 const HEALTH_GOALS = [
   { value: "rad sa pacijentima", title: "Rad sa pacijentima i anamneza", desc: "Simptomi, empatija, jasna pitanja" },
