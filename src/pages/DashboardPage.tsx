@@ -8,7 +8,6 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { BookOpen, Languages, MessageSquare, GraduationCap, CalendarCheck, PenLine, BookOpenText, Headphones, Mic, Lock, CheckCircle2 } from "lucide-react";
 import { computeLevelStates, normalizeLevel, LEVEL_UNLOCK_THRESHOLD, type CefrLevel, type LevelState } from "@/lib/levels";
-import XpProgressCard from "@/components/XpProgressCard";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import WeeklyDigest from "@/components/WeeklyDigest";
@@ -325,7 +324,6 @@ export default function DashboardPage() {
 
         <div className="mt-10 space-y-4">
           {user && <DailyPlanCard userId={user.id} language={code} nextLesson={nextLesson} />}
-          {xpData && <XpProgressCard level={xpData.level} totalXp={xpData.total_xp} />}
           {lessonsLoaded && (
             <TrophyShelf level={activeCourse === "health" ? "B1" : selectedLevel} lessons={visibleLessons} won={trophies} />
           )}
