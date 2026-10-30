@@ -215,15 +215,7 @@ export default function DashboardPage() {
         <TeacherWorkWidget language={code} />
         <SurveyInvitation language={code} />
 
-        <div className="mt-10 mb-5 flex items-center gap-3">
-          <span className="h-px flex-1 bg-border" />
-          <span className="font-script italic text-sm text-primary/70 flex items-center gap-2">
-            <span className="text-primary/40">✦</span>
-            {ui.modulesDivider}
-            <span className="text-primary/40">✦</span>
-          </span>
-          <span className="h-px flex-1 bg-border" />
-        </div>
+        <div className="mt-8" />
 
         {activeCourse === "health" && <h2 className="font-display text-xl text-primary mb-4">Za zdravstvene radnike · B1</h2>}
 
