@@ -5,7 +5,9 @@ import { useNavigate } from "react-router-dom";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { StudentSidebar } from "./StudentSidebar";
 import { Button } from "@/components/ui/button";
-import { Shield, Zap } from "lucide-react";
+import { Shield, Zap, ChevronDown } from "lucide-react";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import XpProgressCard from "@/components/XpProgressCard";
 import { useUserRole } from "@/hooks/useUserRole";
 import { useAuth } from "@/context/AuthContext";
 import { useProfile } from "@/context/ProfileContext";
@@ -60,9 +62,18 @@ export default function StudentLayout({ children, title }: StudentLayoutProps) {
                 </Button>
               )}
               {xp && (
-                <span className="hidden sm:flex text-xs bg-primary/10 text-primary px-2.5 py-1 rounded-full font-semibold items-center gap-1 border border-primary/15">
-                  <Zap className="w-3 h-3" /> {xpTitle(xp.level, langSlug)} · {xp.total_xp} XP
-                </span>
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <button type="button" aria-label="Prikaži napredak" className="flex text-xs bg-primary/10 text-primary px-2.5 py-1 rounded-full font-semibold items-center gap-1 border border-primary/15 hover:bg-primary/15 transition-colors">
+                      <Zap className="w-3 h-3" />
+                      <span className="hidden sm:inline">{xpTitle(xp.level, langSlug)} ·</span> {xp.total_xp} XP
+                      <ChevronDown className="w-3 h-3" />
+                    </button>
+                  </PopoverTrigger>
+                  <PopoverContent align="end" className="w-[min(22rem,calc(100vw-1.5rem))] p-0 border-0 bg-transparent shadow-none">
+                    <XpProgressCard level={xp.level} totalXp={xp.total_xp} />
+                  </PopoverContent>
+                </Popover>
               )}
               <span className="hidden md:inline text-xs bg-accent/30 text-primary px-3 py-1 rounded-full font-medium border border-accent/30">
                 {profile.level} · {profile.learning_goal}

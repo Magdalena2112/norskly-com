@@ -325,7 +325,6 @@ export default function DashboardPage() {
 
         <div className="mt-10 space-y-4">
           {user && <DailyPlanCard userId={user.id} language={code} nextLesson={nextLesson} />}
-          {xpData && <XpProgressCard level={xpData.level} totalXp={xpData.total_xp} />}
           {lessonsLoaded && (
             <TrophyShelf level={activeCourse === "health" ? "B1" : selectedLevel} lessons={visibleLessons} won={trophies} />
           )}
