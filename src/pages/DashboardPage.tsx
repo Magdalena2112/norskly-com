@@ -24,6 +24,7 @@ import TrophyShelf from "@/components/student/TrophyShelf";
 import { Trophy } from "lucide-react";
 import { useSelectedLanguage } from "@/hooks/useSelectedLanguage";
 import { getLanguageBySlug, getLanguageByCode, type LanguageSlug } from "@/lib/languages";
+import FlagStamp from "@/components/dashboard/FlagStamp";
 import { useQuery } from "@tanstack/react-query";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { courseKey, courseLabel, coursePath, selectCourse } from "@/lib/courseSelection";
@@ -181,15 +182,7 @@ export default function DashboardPage() {
         >
           <div className="note-scalloped drop-shadow-sm">
           <div className="note-lined relative rounded-sm p-5 sm:p-7 pr-24 sm:pr-32">
-            <svg aria-hidden="true" viewBox="0 0 80 96" className="absolute top-4 right-4 w-16 sm:w-20 rotate-[4deg]">
-              <rect x="2" y="2" width="76" height="92" rx="3" className="fill-background stroke-accent" strokeWidth="2" strokeDasharray="3 3" />
-              <rect x="9" y="9" width="62" height="64" rx="2" className="fill-secondary" />
-              <circle cx="56" cy="24" r="6" className="fill-accent" />
-              <path d="M9 58 L28 34 L40 48 L50 38 L71 58 L71 73 L9 73 Z" className="fill-fjord/60" />
-              <path d="M9 66 Q25 60 40 66 T71 66 L71 73 L9 73 Z" className="fill-fjord" />
-              <path d="M20 58 h10 v-8 l-5 -5 l-5 5 Z" className="fill-primary" />
-              <text x="40" y="86" textAnchor="middle" className="fill-primary" fontSize="7" fontStyle="italic">norskly</text>
-            </svg>
+            <FlagStamp language={code} className="absolute top-4 right-4 w-16 sm:w-20 rotate-[4deg]" />
             <p className="font-script italic text-primary text-2xl sm:text-3xl">
               {({ en: "Hi", de: "Hallo" } as Record<string, string>)[getCurrentLanguageCode()] ?? "Hei"}, {profile.name || "korisniče"}
             </p>
