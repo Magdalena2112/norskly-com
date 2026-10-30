@@ -19,7 +19,7 @@ import StudentLayout from "@/components/student/StudentLayout";
 import NordicBackdrop from "@/components/student/NordicBackdrop";
 import FjordHero from "@/components/student/FjordHero";
 import PostcardVignette from "@/components/student/PostcardVignette";
-import TrophyShelf from "@/components/student/TrophyShelf";
+// import TrophyShelf from "@/components/student/TrophyShelf";
 import { Trophy } from "lucide-react";
 import { useSelectedLanguage } from "@/hooks/useSelectedLanguage";
 import { getLanguageBySlug, getLanguageByCode, type LanguageSlug } from "@/lib/languages";
@@ -305,7 +305,7 @@ export default function DashboardPage() {
 
         <div className="mt-10 space-y-4">
           {lessonsLoaded && (
-            <TrophyShelf level={activeCourse === "health" ? "B1" : selectedLevel} lessons={visibleLessons} won={trophies} />
+            {/* TrophyShelf privremeno sakrivena tokom promo perioda */}
           )}
           <WeeklyDigest />
         </div>
