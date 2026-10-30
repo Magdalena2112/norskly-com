@@ -179,13 +179,23 @@ export default function DashboardPage() {
           transition={{ duration: 0.5, ease: "easeOut" }}
           className="relative mb-8"
         >
-          <div className="rounded-3xl border border-border/50 bg-cream/90 backdrop-blur-md shadow-postcard p-5 sm:p-7">
-            <p className="font-script italic text-primary/60 text-sm">
+          <div className="note-scalloped drop-shadow-sm">
+          <div className="note-lined relative rounded-sm p-5 sm:p-7 pr-24 sm:pr-32">
+            <svg aria-hidden="true" viewBox="0 0 80 96" className="absolute top-4 right-4 w-16 sm:w-20 rotate-[4deg]">
+              <rect x="2" y="2" width="76" height="92" rx="3" className="fill-background stroke-accent" strokeWidth="2" strokeDasharray="3 3" />
+              <rect x="9" y="9" width="62" height="64" rx="2" className="fill-secondary" />
+              <circle cx="56" cy="24" r="6" className="fill-accent" />
+              <path d="M9 58 L28 34 L40 48 L50 38 L71 58 L71 73 L9 73 Z" className="fill-fjord/60" />
+              <path d="M9 66 Q25 60 40 66 T71 66 L71 73 L9 73 Z" className="fill-fjord" />
+              <path d="M20 58 h10 v-8 l-5 -5 l-5 5 Z" className="fill-primary" />
+              <text x="40" y="86" textAnchor="middle" className="fill-primary" fontSize="7" fontStyle="italic">norskly</text>
+            </svg>
+            <p className="font-script italic text-primary text-2xl sm:text-3xl">
               {({ en: "Hi", de: "Hallo" } as Record<string, string>)[getCurrentLanguageCode()] ?? "Hei"}, {profile.name || "korisniče"}
             </p>
             {nextLesson ? (
               <>
-                <p className="mt-3 text-xs uppercase tracking-wide text-muted-foreground">
+                <p className="mt-4 text-xs uppercase tracking-wide text-muted-foreground">
                   {lessonProgress[nextLesson.id] === "in_progress" ? "Nastavi gde si stao/la" : "Tvoj sledeći korak"} · Lekcija {nextLesson.sort_order}
                 </p>
                 <h1 className="text-display text-2xl sm:text-3xl text-primary mt-1 leading-tight break-words">{nextLesson.title_target}</h1>
@@ -195,14 +205,15 @@ export default function DashboardPage() {
                   className="mt-5 w-full sm:w-auto"
                   onClick={() => navigate(`/lekcija/${nextLesson.id}?course=${course}`)}
                 >
-                  {lessonProgress[nextLesson.id] === "in_progress" ? "Nastavi lekciju" : "Započni lekciju"}
+                  {lessonProgress[nextLesson.id] === "in_progress" ? "Nastavi gde si stao/la" : "Započni lekciju"}
                 </Button>
               </>
             ) : (
-              <h1 className="text-display text-2xl sm:text-3xl text-primary mt-2 leading-tight">
+              <h1 className="text-display text-2xl sm:text-3xl text-primary mt-4 leading-tight">
                 {lessonsLoaded && visibleLessons.length > 0 ? "Sve lekcije su završene. Bravo!" : ui.heroBody}
               </h1>
             )}
+          </div>
           </div>
         </motion.div>
         {location.state?.courseDenied && <p role="alert" className="my-4 text-sm text-destructive">Ova lekcija nije deo kursa na koji si upisan/a.</p>}
