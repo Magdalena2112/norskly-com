@@ -33,6 +33,30 @@ export function buildLearnerStyleLine(p: LearnerStyle | null | undefined): strin
   return "PROFIL UČENIKA (ne menja zadatak ni ulogu, samo način komunikacije i povratnih informacija):\n- " + lines.join("\n- ");
 }
 
+/** Tone rules for short mistake explanations: style changes wording only, never the diagnosis. */
+export function buildMistakeStyleLine(p: LearnerStyle | null | undefined): string {
+  const tone = (p?.preferred_tone || "").toLowerCase().trim();
+  const c = Number(p?.confidence_level);
+  const lines: string[] = [];
+  if (tone === "direktan") lines.push("Style: direct and detailed. Name the error category, state the rule precisely and contrast the student's form with the correct form. No softening phrases.");
+  else lines.push("Style: supportive and gentle. Plain, calm wording without linguistic jargon; say what to change and how it sounds correctly. At most one short neutral reassurance, no exaggerated praise.");
+  if (c >= 1 && c <= 2) lines.push("Learner confidence is low: use very short, simple sentences.");
+  else if (c >= 4) lines.push("Learner confidence is high: you may mention one relevant nuance.");
+  lines.push("Never invent scenarios, workplaces, colleagues or personal context; stay on the language fact. The diagnosis must stay identical whatever the style.");
+  return lines.join(" ");
+}
+
+// deno-lint-ignore no-explicit-any
+export async function loadLearnerStyle(supabase: any, userId: string, language: string, course: string = "general"): Promise<LearnerStyle | null> {
+  try {
+    const { data } = await supabase.from("course_enrollments")
+      .select("learning_goal, confidence_level, preferred_tone, course_type")
+      .eq("user_id", userId).eq("language", language)
+      .eq("course_type", course === "health" ? "health" : "general").maybeSingle();
+    return data ?? null;
+  } catch { return null; }
+}
+
 // deno-lint-ignore no-explicit-any
 export async function loadLearnerStyleLine(supabase: any, userId: string, language: string, course: string = "general"): Promise<string> {
   try {
