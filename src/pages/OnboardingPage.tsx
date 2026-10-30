@@ -363,11 +363,18 @@ export default function OnboardingPage() {
               exit={{ opacity: 0, x: -20 }}
               transition={{ duration: 0.25 }}
             >
-              <div className="w-12 h-12 rounded-2xl bg-fjord/10 flex items-center justify-center mb-5">
-                <StepIcon className="w-6 h-6 text-fjord" />
+              <div className="flex items-center gap-3 mb-5">
+                <div className="w-11 h-11 rounded-full bg-secondary/70 flex items-center justify-center shrink-0">
+                  <StepIcon className="w-5 h-5 text-primary" />
+                </div>
+                <span className="inline-block px-3 py-1 rounded-full bg-secondary/70 text-primary text-[10px] sm:text-xs font-semibold tracking-widest uppercase">
+                  {["Upoznavanje", "Tvoj tempo", "Tvoj cilj", "Samopouzdanje", "Stil učenja"][step]}
+                </span>
               </div>
-              <h2 className="text-xl sm:text-2xl font-display font-bold text-primary mb-2 break-words">{titles[step]}</h2>
-              <p className="text-muted-foreground mb-6 break-words">{descs[step]}</p>
+              <h2 className="text-display text-2xl sm:text-3xl text-primary mb-2 break-words">
+                {titles[step]} <span className="font-script text-primary/70">✦</span>
+              </h2>
+              <p className="text-muted-foreground mb-6 break-words leading-relaxed">{descs[step]}</p>
 
               {step === 0 && (
                 <Input
@@ -441,15 +448,9 @@ export default function OnboardingPage() {
 function OnboardingBackdrop() {
   return (
     <div aria-hidden className="pointer-events-none absolute inset-0">
-      <div className="absolute inset-0 bg-grid-soft opacity-50 [mask-image:radial-gradient(ellipse_at_center,black_25%,transparent_75%)]" />
-      <div className="absolute -top-24 -right-20 h-72 w-72 rounded-full bg-[hsl(var(--pink-soft))] opacity-70 blur-3xl" />
-      <div className="absolute -bottom-28 -left-24 h-80 w-80 rounded-full bg-[hsl(var(--fjord)/0.18)] blur-3xl" />
-      <svg className="absolute bottom-0 left-0 w-full h-40 sm:h-56 text-primary/10" viewBox="0 0 1440 220" preserveAspectRatio="none" fill="currentColor">
-        <path d="M0 220V150l120-50 110 40 150-90 140 70 120-40 160 80 140-60 130 50 150-70 120 40 100-20v120z" />
-      </svg>
-      <svg className="absolute bottom-0 left-0 w-full h-24 sm:h-32 text-[hsl(var(--fjord)/0.14)]" viewBox="0 0 1440 120" preserveAspectRatio="none" fill="currentColor">
-        <path d="M0 120V70c160-30 320 20 480 0s320-40 480-10 320 30 480 0v60z" />
-      </svg>
+      <div className="absolute inset-0 bg-grid-soft opacity-60 [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_75%)]" />
+      <div className="absolute top-10 -right-20 w-56 h-56 md:w-96 md:h-96 rounded-full bg-secondary/60 blur-3xl opacity-70" />
+      <div className="absolute bottom-0 -left-20 w-48 h-48 md:w-80 md:h-80 rounded-full bg-accent/40 blur-3xl opacity-60" />
     </div>
   );
 }
