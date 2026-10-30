@@ -10,7 +10,7 @@ import { Input } from "@/components/ui/input";
 import { UserProfile } from "@/types/profile";
 import { ChevronRight, ChevronLeft, User, Target, MessageSquare, Gauge, Clock } from "lucide-react";
 import BackButton from "@/components/BackButton";
-import JourneyStepper from "@/components/onboarding/JourneyStepper";
+import logo from "@/assets/norskly-logo-local.webp";
 import { courseIntent, courseStartLevel, promoAvailableLevels } from "@/lib/courseAccess";
 import { selectCourse } from "@/lib/courseSelection";
 import { useToast } from "@/hooks/use-toast";
@@ -179,10 +179,10 @@ function ChoiceRow({ title, desc, selected, onClick }: { title: string; desc: st
     <button
       onClick={onClick}
       className={`w-full text-left px-4 py-3 rounded-xl border-2 transition-all duration-200 ${
-        selected ? "border-accent bg-accent/10 shadow-accent-glow" : "border-border bg-background hover:border-accent/40"
+        selected ? "border-primary bg-primary/5" : "border-border bg-background hover:border-primary/40"
       }`}
     >
-      <span className={`block text-sm font-semibold break-words ${selected ? "text-accent" : "text-foreground"}`}>{title}</span>
+      <span className={`block text-sm font-semibold break-words ${selected ? "text-primary" : "text-foreground"}`}>{title}</span>
       <span className="block text-xs text-muted-foreground mt-0.5 break-words">{desc}</span>
     </button>
   );
@@ -219,6 +219,7 @@ export default function OnboardingPage() {
   const [params] = useSearchParams();
   const { toast } = useToast();
   const [saving, setSaving] = useState(false);
+  const [done, setDone] = useState(false);
 
   // Resolve the language being onboarded from the selection made earlier in the journey.
   const selectedLang = params.get("lang") || (typeof window !== "undefined" && localStorage.getItem("norskly_selected_language")) || "norveski";
@@ -292,7 +293,8 @@ export default function OnboardingPage() {
       }
       const target = `/ucenje/${selectedLang}`;
       const qs = `?course=${chosenCourse}${selectedPlan ? `&plan=${selectedPlan}` : ""}`;
-      navigate(`${target}${qs}`);
+      setDone(true);
+      setTimeout(() => navigate(`${target}${qs}`), 1400);
       } catch {
         toast({ title: "Profil nije sačuvan", description: "Pokušaj ponovo. Upisani kurs ostaje nepromenjen.", variant: "destructive" });
       } finally { setSaving(false); }
@@ -401,7 +403,7 @@ export default function OnboardingPage() {
                       className={`flex-1 max-w-14 aspect-square rounded-xl text-base sm:text-lg font-bold transition-all ${
                         form.confidence_level === n
                           ? "bg-primary text-primary-foreground"
-                          : "bg-secondary text-secondary-foreground hover:bg-pink/40"
+                          : "bg-secondary text-secondary-foreground hover:bg-accent/20"
                       }`}
                     >
                       {n}
