@@ -437,3 +437,19 @@ export default function OnboardingPage() {
     </div>
   );
 }
+
+function OnboardingBackdrop() {
+  return (
+    <div aria-hidden className="pointer-events-none absolute inset-0">
+      <div className="absolute inset-0 bg-grid-soft opacity-50 [mask-image:radial-gradient(ellipse_at_center,black_25%,transparent_75%)]" />
+      <div className="absolute -top-24 -right-20 h-72 w-72 rounded-full bg-[hsl(var(--pink-soft))] opacity-70 blur-3xl" />
+      <div className="absolute -bottom-28 -left-24 h-80 w-80 rounded-full bg-[hsl(var(--fjord)/0.18)] blur-3xl" />
+      <svg className="absolute bottom-0 left-0 w-full h-40 sm:h-56 text-primary/10" viewBox="0 0 1440 220" preserveAspectRatio="none" fill="currentColor">
+        <path d="M0 220V150l120-50 110 40 150-90 140 70 120-40 160 80 140-60 130 50 150-70 120 40 100-20v120z" />
+      </svg>
+      <svg className="absolute bottom-0 left-0 w-full h-24 sm:h-32 text-[hsl(var(--fjord)/0.14)]" viewBox="0 0 1440 120" preserveAspectRatio="none" fill="currentColor">
+        <path d="M0 120V70c160-30 320 20 480 0s320-40 480-10 320 30 480 0v60z" />
+      </svg>
+    </div>
+  );
+}
