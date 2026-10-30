@@ -304,9 +304,6 @@ export default function DashboardPage() {
         </div>
 
         <div className="mt-10 space-y-4">
-          {lessonsLoaded && (
-            {/* TrophyShelf privremeno sakrivena tokom promo perioda */}
-          )}
           <WeeklyDigest />
         </div>
 
