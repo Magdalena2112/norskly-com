@@ -10,7 +10,7 @@ import { Input } from "@/components/ui/input";
 import { UserProfile } from "@/types/profile";
 import { ChevronRight, ChevronLeft, User, Target, MessageSquare, Gauge, Clock } from "lucide-react";
 import BackButton from "@/components/BackButton";
-import JourneyStepper from "@/components/onboarding/JourneyStepper";
+import logo from "@/assets/norskly-logo-local.webp";
 import { courseIntent, courseStartLevel, promoAvailableLevels } from "@/lib/courseAccess";
 import { selectCourse } from "@/lib/courseSelection";
 import { useToast } from "@/hooks/use-toast";
@@ -179,10 +179,10 @@ function ChoiceRow({ title, desc, selected, onClick }: { title: string; desc: st
     <button
       onClick={onClick}
       className={`w-full text-left px-4 py-3 rounded-xl border-2 transition-all duration-200 ${
-        selected ? "border-accent bg-accent/10 shadow-accent-glow" : "border-border bg-background hover:border-accent/40"
+        selected ? "border-primary bg-primary/5" : "border-border bg-background hover:border-primary/40"
       }`}
     >
-      <span className={`block text-sm font-semibold break-words ${selected ? "text-accent" : "text-foreground"}`}>{title}</span>
+      <span className={`block text-sm font-semibold break-words ${selected ? "text-primary" : "text-foreground"}`}>{title}</span>
       <span className="block text-xs text-muted-foreground mt-0.5 break-words">{desc}</span>
     </button>
   );
@@ -219,6 +219,7 @@ export default function OnboardingPage() {
   const [params] = useSearchParams();
   const { toast } = useToast();
   const [saving, setSaving] = useState(false);
+  const [done, setDone] = useState(false);
 
   // Resolve the language being onboarded from the selection made earlier in the journey.
   const selectedLang = params.get("lang") || (typeof window !== "undefined" && localStorage.getItem("norskly_selected_language")) || "norveski";
@@ -292,7 +293,8 @@ export default function OnboardingPage() {
       }
       const target = `/ucenje/${selectedLang}`;
       const qs = `?course=${chosenCourse}${selectedPlan ? `&plan=${selectedPlan}` : ""}`;
-      navigate(`${target}${qs}`);
+      setDone(true);
+      setTimeout(() => navigate(`${target}${qs}`), 1400);
       } catch {
         toast({ title: "Profil nije sačuvan", description: "Pokušaj ponovo. Upisani kurs ostaje nepromenjen.", variant: "destructive" });
       } finally { setSaving(false); }
@@ -302,49 +304,54 @@ export default function OnboardingPage() {
 
   const stepIcons = [User, Clock, Target, Gauge, MessageSquare];
   const StepIcon = stepIcons[step];
+  const firstName = (form.name || "").trim().split(/\s+/)[0];
+  const hi = firstName ? `${firstName}, ` : "";
 
-  const sidebarBg = langCode === "no" ? "bg-nordic-gradient" : "bg-gradient-to-br from-primary via-fjord to-accent";
+  const titles = [
+    "Hajde da se upoznamo",
+    `${firstName ? `Drago nam je, ${firstName}! ` : ""}Koliko vremena imaš za učenje?`,
+    `${hi}šta te najviše motiviše?`,
+    t.confidenceTitle,
+    "Kakav pristup ispravkama ti prija?",
+  ];
+  const descs = [
+    "Kako želiš da ti se obraćamo tokom učenja?",
+    "Na osnovu toga predlažemo dnevni plan modula i XP cilj.",
+    "Cilj usmerava povratne informacije i savete tokom učenja.",
+    "1 = tek počinjem, 5 = osećam se sigurno. Prilagodićemo detaljnost objašnjenja.",
+    "Važi za ispravke u pisanju i povratne informacije u razgovoru.",
+  ];
 
-  const lastStepDisabled = useMemo(() => {
-    return false;
-  }, []);
+  if (done) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center p-4">
+        <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="w-full max-w-md rounded-3xl border border-border bg-card p-8 text-center shadow-sm">
+          <img src={logo} alt="Norskly" className="h-10 mx-auto mb-6" />
+          <h2 className="text-2xl font-display font-bold text-primary break-words">Hvala ti{firstName ? `, ${firstName}` : ""}!</h2>
+          <p className="text-muted-foreground mt-2">Sve je spremno za tvoju prvu lekciju.</p>
+        </motion.div>
+      </div>
+    );
+  }
 
   return (
-    <div className="min-h-screen bg-background flex">
-      {/* Left sidebar progress */}
-      <div className={`hidden md:flex w-72 ${sidebarBg} flex-col p-8 text-primary-foreground`}>
-        <span className="font-display font-bold text-2xl mb-12">{t.brand}</span>
-        <div className="space-y-3 flex-1">
+    <div className="min-h-screen bg-background flex items-center justify-center p-4 sm:p-6">
+      <div className="w-full min-w-0 max-w-lg">
+        <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center gap-2 min-w-0">
+            <BackButton />
+            <img src={logo} alt="Norskly" className="h-8" />
+          </div>
+          <span className="text-sm text-muted-foreground shrink-0">Korak {step + 1} od {steps.length}</span>
+        </div>
+
+        <div className="flex gap-1.5 mb-6" aria-hidden>
           {steps.map((s, i) => (
-            <div key={s} className="flex items-center gap-3">
-              <div
-                className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all ${
-                  i <= step ? "bg-accent text-accent-foreground" : "bg-primary-foreground/20 text-primary-foreground/60"
-                }`}
-              >
-                {i + 1}
-              </div>
-              <span className={`text-sm ${i <= step ? "opacity-100 font-medium" : "opacity-50"}`}>{s}</span>
-            </div>
+            <div key={s} className={`h-1.5 flex-1 rounded-full transition-colors ${i <= step ? "bg-primary" : "bg-secondary"}`} />
           ))}
         </div>
-        <p className="text-sm opacity-60">{t.stepCounter(step + 1, steps.length)}</p>
-      </div>
 
-      <div className="flex-1 min-w-0 w-full flex items-center justify-center p-4 sm:p-6">
-        <div className="w-full min-w-0 max-w-lg">
-          <div className="md:hidden flex items-center justify-between mb-8">
-            <div className="flex items-center gap-2">
-              <BackButton />
-              <span className="font-display font-bold text-xl text-foreground">{t.brand}</span>
-            </div>
-            <span className="text-sm text-muted-foreground">{step + 1}/{steps.length}</span>
-          </div>
-
-          <div className="mb-8">
-            <JourneyStepper current="trial" />
-          </div>
-
+        <div className="rounded-3xl border border-border bg-card p-5 sm:p-8 shadow-sm">
           <AnimatePresence mode="wait">
             <motion.div
               key={step}
@@ -352,94 +359,74 @@ export default function OnboardingPage() {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
-              transition={{ duration: 0.3 }}
+              transition={{ duration: 0.25 }}
             >
-              <div className="w-14 h-14 rounded-2xl bg-accent/10 flex items-center justify-center mb-6">
-                <StepIcon className="w-7 h-7 text-accent" />
+              <div className="w-12 h-12 rounded-2xl bg-fjord/10 flex items-center justify-center mb-5">
+                <StepIcon className="w-6 h-6 text-fjord" />
               </div>
+              <h2 className="text-xl sm:text-2xl font-display font-bold text-primary mb-2 break-words">{titles[step]}</h2>
+              <p className="text-muted-foreground mb-6 break-words">{descs[step]}</p>
 
               {step === 0 && (
-                <div>
-                  <h2 className="text-xl sm:text-2xl font-display font-bold text-foreground mb-2 break-words">{t.nameTitle}</h2>
-                  <p className="text-muted-foreground mb-6">{t.nameDesc}</p>
-                  <Input
-                    placeholder={t.namePlaceholder}
-                    value={form.name || ""}
-                    onChange={(e) => setForm({ ...form, name: e.target.value })}
-                    className="text-lg h-12"
-                  />
-                </div>
+                <Input
+                  placeholder="Tvoje ime"
+                  value={form.name || ""}
+                  onChange={(e) => setForm({ ...form, name: e.target.value })}
+                  onKeyDown={(e) => e.key === "Enter" && form.name?.trim() && next()}
+                  className="text-lg h-12"
+                  autoFocus
+                />
               )}
 
               {step === 1 && (
-                <div>
-                  <h2 className="text-xl sm:text-2xl font-display font-bold text-foreground mb-2 break-words">Koliko vremena možeš da izdvojiš za učenje?</h2>
-                  <p className="text-muted-foreground mb-6">Na osnovu ovoga predlažemo dnevni plan modula i XP cilj.</p>
-                  <div className="grid gap-3">
-                    {TIME_OPTIONS.map((o) => (
-                      <ChoiceRow key={o.value} title={o.title} desc={o.desc} selected={form.daily_minutes === o.value} onClick={() => setForm({ ...form, daily_minutes: o.value })} />
-                    ))}
-                  </div>
+                <div className="grid gap-3">
+                  {TIME_OPTIONS.map((o) => (
+                    <ChoiceRow key={o.value} title={o.title} desc={o.desc} selected={form.daily_minutes === o.value} onClick={() => setForm({ ...form, daily_minutes: o.value })} />
+                  ))}
                 </div>
               )}
 
               {step === 2 && (
-                <div>
-                  <h2 className="text-xl sm:text-2xl font-display font-bold text-foreground mb-2 break-words">{t.goalTitle}</h2>
-                  <p className="text-muted-foreground mb-6">Zadaci u lekcijama su isti za sve; cilj usmerava povratne informacije i savete tokom učenja.</p>
-                  <div className="grid gap-3">
-                    {goals.map((g) => (
-                      <ChoiceRow key={g.value} title={g.title} desc={g.desc} selected={form.learning_goal === g.value} onClick={() => setForm({ ...form, learning_goal: g.value })} />
-                    ))}
-                  </div>
+                <div className="grid gap-3">
+                  {goals.map((g) => (
+                    <ChoiceRow key={g.value} title={g.title} desc={g.desc} selected={form.learning_goal === g.value} onClick={() => setForm({ ...form, learning_goal: g.value })} />
+                  ))}
                 </div>
               )}
 
               {step === 3 && (
-                <div>
-                  <h2 className="text-xl sm:text-2xl font-display font-bold text-foreground mb-2 break-words">{t.confidenceTitle}</h2>
-                  <p className="text-muted-foreground mb-6">1 = nesiguran/na, 5 = vrlo siguran/na. Na osnovu toga prilagođavamo stil podrške i detaljnost objašnjenja.</p>
-                  <div className="flex gap-2 sm:gap-3">
-                    {[1, 2, 3, 4, 5].map((n) => (
-                      <button
-                        key={n}
-                        onClick={() => setForm({ ...form, confidence_level: n })}
-                        className={`w-11 h-11 sm:w-14 sm:h-14 rounded-xl text-base sm:text-lg font-bold transition-all ${
-                          form.confidence_level === n
-                            ? "bg-accent text-accent-foreground shadow-accent-glow scale-110"
-                            : "bg-secondary text-secondary-foreground hover:bg-accent/20"
-                        }`}
-                      >
-                        {n}
-                      </button>
-                    ))}
-                  </div>
+                <div className="flex gap-2 sm:gap-3">
+                  {[1, 2, 3, 4, 5].map((n) => (
+                    <button
+                      key={n}
+                      onClick={() => setForm({ ...form, confidence_level: n })}
+                      className={`flex-1 max-w-14 aspect-square rounded-xl text-base sm:text-lg font-bold transition-all ${
+                        form.confidence_level === n
+                          ? "bg-primary text-primary-foreground"
+                          : "bg-secondary text-secondary-foreground hover:bg-accent/20"
+                      }`}
+                    >
+                      {n}
+                    </button>
+                  ))}
                 </div>
               )}
 
               {step === 4 && (
-                <div>
-                  <h2 className="text-xl sm:text-2xl font-display font-bold text-foreground mb-2 break-words">Kakav pristup ispravkama ti odgovara?</h2>
-                  <p className="text-muted-foreground mb-6">Važi za ispravke u pisanju i povratne informacije u razgovoru.</p>
-                  <div className="grid gap-3">
-                    {SUPPORT_STYLES.map((o) => (
-                      <ChoiceRow key={o.value} title={o.title} desc={o.desc} selected={form.preferred_tone === o.value} onClick={() => setForm({ ...form, preferred_tone: o.value })} />
-                    ))}
-                  </div>
+                <div className="grid gap-3">
+                  {SUPPORT_STYLES.map((o) => (
+                    <ChoiceRow key={o.value} title={o.title} desc={o.desc} selected={form.preferred_tone === o.value} onClick={() => setForm({ ...form, preferred_tone: o.value })} />
+                  ))}
                 </div>
               )}
             </motion.div>
           </AnimatePresence>
 
-          <div className="flex items-center justify-between mt-10">
+          <div className="flex items-center justify-between mt-8 gap-2">
             <Button variant="ghost" onClick={prev} disabled={step === 0 || saving}>
               <ChevronLeft className="w-4 h-4 mr-1" /> {t.back}
             </Button>
-            <Button
-              variant="hero"
-              onClick={next}
-              disabled={saving || (step === 0 && !form.name?.trim()) || lastStepDisabled}
-            >
+            <Button onClick={next} disabled={saving || (step === 0 && !form.name?.trim())}>
               {saving ? "Čuvanje…" : step === steps.length - 1 ? t.finish : t.next} <ChevronRight className="w-4 h-4 ml-1" />
             </Button>
           </div>
