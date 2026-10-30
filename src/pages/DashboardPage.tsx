@@ -210,7 +210,7 @@ export default function DashboardPage() {
           </div>
           </div>
         </motion.div>
-        {user && <TimeSuggestion userId={user.id} language={code} course={course} />}
+        {user && <TimeSuggestion userId={user.id} language={code} course={course} nextLesson={nextLesson} nextStatus={nextLesson ? lessonProgress[nextLesson.id] : undefined} doneCount={visibleLessons.filter((l) => lessonProgress[l.id] === "completed").length} />}
         {location.state?.courseDenied && <p role="alert" className="my-4 text-sm text-destructive">Ova lekcija nije deo kursa na koji si upisan/a.</p>}
 
         <TeacherWorkWidget language={code} />
