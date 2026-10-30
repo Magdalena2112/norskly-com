@@ -6,7 +6,7 @@ import { useProfile } from "@/context/ProfileContext";
 import { useAuth } from "@/context/AuthContext";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { BookOpen, Languages, MessageSquare, GraduationCap, CalendarCheck, PenLine, BookOpenText, Headphones, Mic, Lock, CheckCircle2 } from "lucide-react";
+import { BookOpen, Languages, MessageSquare, GraduationCap, CalendarCheck, PenLine, BookOpenText, Headphones, Mic, Lock, CheckCircle2, CalendarClock } from "lucide-react";
 import { computeLevelStates, normalizeLevel, LEVEL_UNLOCK_THRESHOLD, type CefrLevel, type LevelState } from "@/lib/levels";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
@@ -267,6 +267,22 @@ export default function DashboardPage() {
               </motion.div>
             );
           })}
+          {lessonsLoaded && visibleLessons.length > 0 && (
+            <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: visibleLessons.length * 0.06 + 0.1 }}>
+              <Card className="h-full bg-secondary/40 border border-dashed border-primary/30">
+                <CardContent className="p-5 flex gap-4 items-start">
+                  <span className="shrink-0 w-14 h-14 rounded-2xl flex items-center justify-center bg-accent/20 text-primary">
+                    <CalendarClock className="w-7 h-7" aria-hidden="true" />
+                  </span>
+                  <div className="min-w-0 flex-1">
+                    <p className="text-xs text-muted-foreground">U pripremi</p>
+                    <h3 className="font-display font-semibold text-base text-primary leading-snug mt-1 break-words">Trenutno se nalaziš u promo periodu testiranja Norskly platforme.</h3>
+                    <p className="text-sm text-muted-foreground mt-2 leading-relaxed">Nove lekcije i napredniji moduli biće dodati po završetku testiranja. Tvoji utisci i vežbanje nam pomažu da usavršimo svaki detalj — hvala ti što zajedno sa nama gradiš platformu!</p>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+          )}
           {modules.filter((m) => m.fullWidth).map((mod) => (
             <motion.div key={mod.route} className="col-span-full" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}>
               <Card className="cursor-pointer group h-full bg-cream border border-border/60 shadow-postcard overflow-hidden relative transition-all duration-500 hover:-translate-y-1.5" onClick={() => navigate(mod.route)}>
