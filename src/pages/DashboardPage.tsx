@@ -237,24 +237,25 @@ export default function DashboardPage() {
             return (
               <motion.div key={l.id} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.06 + 0.1 }}>
                 <Card
-                  className={`cursor-pointer group h-full bg-cream border shadow-postcard relative transition-all duration-300 hover:-translate-y-1 hover:shadow-card-soft ${
+                  className={`cursor-pointer group h-full bg-cream border shadow-postcard relative overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-card-soft ${
                     isNext ? "border-primary ring-2 ring-primary/30" : "border-border/60"
                   }`}
                   onClick={() => navigate(`/lekcija/${l.id}?course=${course}`)}
                 >
-                  <CardContent className="p-5 h-full flex gap-4 items-center">
-                    <span className={`shrink-0 w-14 h-14 rounded-2xl flex items-center justify-center font-display font-bold text-2xl ${
-                      p === "completed" ? "bg-forest text-cream" : isNext ? "bg-primary text-primary-foreground" : "bg-secondary text-primary"
+                  <CardContent className="p-0 h-full flex min-h-[8.5rem]">
+                    <div className={`shrink-0 w-24 sm:w-28 flex flex-col items-center justify-center gap-1 ${
+                      p === "completed" ? "bg-forest text-cream" : l.course === "health" ? "bg-fjord-deep text-cream" : "bg-primary text-primary-foreground"
                     }`}>
-                      {p === "completed" ? <CheckCircle2 className="w-7 h-7" /> : String(l.sort_order).padStart(2, "0")}
-                    </span>
-                    <div className="min-w-0 flex-1">
+                      <span className="font-display font-bold text-5xl leading-none">{String(l.sort_order).padStart(2, "0")}</span>
+                      {p === "completed" && <CheckCircle2 className="w-5 h-5 opacity-90" aria-label="Završeno" />}
+                    </div>
+                    <div className="min-w-0 flex-1 p-5 flex flex-col justify-center">
                       <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                        <span>Lekcija {l.sort_order}</span>
+                        <span className="uppercase tracking-wider font-medium">{l.cefr_level} · Lekcija {l.sort_order}</span>
                         {isNext && <span className="rounded-full bg-primary/10 text-primary px-2 py-0.5 font-medium">Na redu</span>}
                         {trophies.has(l.id) && <Trophy className="w-4 h-4 text-sunset" aria-label="Trofej osvojen" />}
                       </div>
-                      <h3 className="font-display font-semibold text-lg text-primary leading-snug mt-1 break-words">{l.title_target}</h3>
+                      <h3 className="font-display font-semibold text-xl text-primary leading-snug mt-1.5 break-words">{l.title_target}</h3>
                       <div className="mt-3 flex items-center gap-3">
                         <div className="h-1.5 flex-1 rounded-full bg-border/70 overflow-hidden">
                           <div className={`h-full rounded-full ${p === "completed" ? "bg-forest" : "bg-primary"}`} style={{ width: `${pct}%` }} />
@@ -269,14 +270,14 @@ export default function DashboardPage() {
           })}
           {lessonsLoaded && visibleLessons.length > 0 && (
             <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: visibleLessons.length * 0.06 + 0.1 }}>
-              <Card className="h-full bg-secondary/40 border border-dashed border-primary/30">
-                <CardContent className="p-5 h-full flex gap-4 items-center">
-                  <span className="shrink-0 w-14 h-14 rounded-2xl flex items-center justify-center bg-accent/20 text-primary">
-                    <CalendarClock className="w-7 h-7" aria-hidden="true" />
-                  </span>
-                  <div className="min-w-0 flex-1">
-                    <p className="text-xs text-muted-foreground">U pripremi</p>
-                    <h3 className="font-display font-semibold text-lg text-primary leading-snug mt-1 break-words">Nove lekcije uskoro</h3>
+              <Card className="h-full bg-secondary/40 border border-dashed border-primary/30 overflow-hidden">
+                <CardContent className="p-0 h-full flex min-h-[8.5rem]">
+                  <div className="shrink-0 w-24 sm:w-28 flex items-center justify-center bg-accent/25 text-primary">
+                    <CalendarClock className="w-9 h-9" aria-hidden="true" />
+                  </div>
+                  <div className="min-w-0 flex-1 p-5 flex flex-col justify-center">
+                    <p className="text-xs uppercase tracking-wider font-medium text-muted-foreground">U pripremi</p>
+                    <h3 className="font-display font-semibold text-xl text-primary leading-snug mt-1.5 break-words">Nove lekcije uskoro</h3>
                     <p className="text-xs text-muted-foreground mt-2 leading-relaxed">Trenutno se nalaziš u promo periodu testiranja Norskly platforme. Nove lekcije i napredniji moduli biće dodati po završetku testiranja. Tvoji utisci i vežbanje nam pomažu da usavršimo svaki detalj — hvala ti što zajedno sa nama gradiš platformu!</p>
                   </div>
                 </CardContent>
