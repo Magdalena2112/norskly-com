@@ -12,7 +12,6 @@ import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import WeeklyDigest from "@/components/WeeklyDigest";
 import TeacherWorkWidget from "@/components/student/TeacherWorkWidget";
-import DailyPlanCard from "@/components/student/DailyPlanCard";
 import TimeSuggestion from "@/components/dashboard/TimeSuggestion";
 import SurveyInvitation from "@/components/survey/SurveyInvitation";
 import { format } from "date-fns";
@@ -288,7 +287,6 @@ export default function DashboardPage() {
         </div>
 
         <div className="mt-10 space-y-4">
-          {user && <DailyPlanCard userId={user.id} language={code} nextLesson={nextLesson} />}
           {lessonsLoaded && (
             <TrophyShelf level={activeCourse === "health" ? "B1" : selectedLevel} lessons={visibleLessons} won={trophies} />
           )}
