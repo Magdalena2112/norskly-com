@@ -154,9 +154,9 @@ const COPY: Record<LangCode, Copy> = {
 
 const ONBOARDING_STEPS = ["Ime", "Vreme", "Cilj", "Samopouzdanje", "Stil podrške"];
 const TIME_OPTIONS = [
-  { value: 15, title: "15 min dnevno · Lagani ritam", desc: "1 modul dnevno, lekcija za ~9–10 dana, cilj 15–20 XP" },
-  { value: 30, title: "30 min dnevno · Optimalni ritam", desc: "2–3 modula dnevno, lekcija za ~4–5 dana, cilj 30–40 XP" },
-  { value: 60, title: "60+ min dnevno · Intenzivni ritam", desc: "Cela lekcija za 1–2 dana, cilj 80–100 XP" },
+  { value: 15, title: "15 min dnevno · Lagani ritam", desc: "Kratko vežbanje uz jutarnju kafu ili pauzu." },
+  { value: 30, title: "30 min dnevno · Preporučeni tempo", desc: "Jedna zaokružena celina dnevno — stabilan kontinuitet bez pritiska." },
+  { value: 60, title: "60 min dnevno · Intenzivni tempo", desc: "Temeljan rad i brži napredak — odlično ako se spremaš za posao, preseljenje ili ispit." },
 ];
 const GENERAL_GOALS = [
   { value: "svakodnevni život", title: "Svakodnevni život i snalaženje", desc: "Fokus na tečnost i prirodan govorni jezik" },
@@ -316,7 +316,7 @@ export default function OnboardingPage() {
   ];
   const descs = [
     "Kako želiš da ti se obraćamo tokom učenja?",
-    "Na osnovu toga predlažemo dnevni plan modula i XP cilj.",
+    "Prilagodićemo preporučene vežbe tvom svakodnevnom rasporedu.",
     "Cilj usmerava povratne informacije i savete tokom učenja.",
     "1 = tek počinjem, 5 = osećam se sigurno. Prilagodićemo detaljnost objašnjenja.",
     "Važi za ispravke u pisanju i povratne informacije u razgovoru.",
