@@ -321,3 +321,28 @@
   .rotate-card-3 { transform: rotate(-0.4deg); }
   .rotate-card-4 { transform: rotate(0.3deg); }
 }
+
+@layer components {
+  /* Mentor's note: scalloped pink stationery card */
+  .note-scalloped {
+    --s: 10px;
+    padding: var(--s);
+    background: hsl(var(--pink-mid));
+    -webkit-mask:
+      radial-gradient(var(--s) at var(--s) var(--s), #000 98%, #0000) 0 0 / calc(2 * var(--s)) calc(2 * var(--s)) round,
+      linear-gradient(#000 0 0) var(--s) var(--s) / calc(100% - 2 * var(--s)) calc(100% - 2 * var(--s)) no-repeat;
+    mask:
+      radial-gradient(var(--s) at var(--s) var(--s), #000 98%, #0000) 0 0 / calc(2 * var(--s)) calc(2 * var(--s)) round,
+      linear-gradient(#000 0 0) var(--s) var(--s) / calc(100% - 2 * var(--s)) calc(100% - 2 * var(--s)) no-repeat;
+  }
+  .note-lined {
+    background-color: hsl(var(--cream));
+    background-image: repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 31px,
+      hsl(var(--fjord) / 0.14) 31px,
+      hsl(var(--fjord) / 0.14) 32px
+    );
+  }
+}
