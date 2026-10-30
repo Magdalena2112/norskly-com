@@ -42,7 +42,7 @@ export default function LessonReviewQuiz({ quiz, lang, lessonCode, passed, onPas
     if (s > best) { setBest(s); localStorage.setItem(bestKey, String(s)); }
     // Review awards a trophy only (0 XP) so each lesson stays at exactly 100 XP.
     if (s >= pass && !passed && user) {
-      toast.success("Trofej osvojen! Pogledaj svoju policu sa trofejima.");
+      toast.success("Bravo! Lekcija je uspešno završena.");
       onPass();
     }
   }
@@ -57,7 +57,7 @@ export default function LessonReviewQuiz({ quiz, lang, lessonCode, passed, onPas
           <Trophy className={`w-12 h-12 mx-auto ${ok ? "text-sunset" : "text-muted-foreground/50"}`} />
           <p className="font-display text-3xl font-bold text-primary">{score}/{total}</p>
           <p className="text-sm text-muted-foreground">
-            {ok ? "Bravo! Trofej za ovu lekciju je na tvojoj polici." : `Za trofej ti treba bar ${pass}/${total}. Pogledaj greške i pokušaj ponovo.`}
+            {ok ? "Bravo! Uspešno si završio/la ovu lekciju." : `Za završetak lekcije treba ti bar ${pass}/${total}. Pogledaj greške i pokušaj ponovo.`}
           </p>
         </div>
         <ul className="space-y-2">
