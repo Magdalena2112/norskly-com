@@ -157,6 +157,10 @@ export default function DashboardPage() {
       </div>
     );
   }
+  const nextLesson =
+    visibleLessons.find((l) => lessonProgress[l.id] === "in_progress") ??
+    visibleLessons.find((l) => lessonProgress[l.id] !== "completed") ??
+    null;
 
   return (
     <StudentLayout>
@@ -168,48 +172,39 @@ export default function DashboardPage() {
             <SelectContent>{enrollments.map(e => <SelectItem key={courseKey(e)} value={courseKey(e)}>{courseLabel(e)}</SelectItem>)}</SelectContent>
           </Select>
         </div>}
-        {/* HERO POSTCARD */}
+        {/* CONTINUE CARD — one clear next step */}
         <motion.div
-          initial={{ opacity: 0, y: 18 }}
+          initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="relative mb-8 washi-tape"
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          className="relative mb-8"
         >
-          <div className="rounded-3xl border border-border/50 bg-cream/90 backdrop-blur-md shadow-postcard overflow-hidden grid md:grid-cols-5">
-            <div className="md:col-span-3 p-6 sm:p-8 flex flex-col justify-center">
-              <p className="font-script italic text-primary/60 text-sm mb-1">{ui.heroScript}</p>
-              <h1 className="text-display text-3xl sm:text-4xl text-primary mb-3 leading-[0.95]">
-                {({ en: "Hi", de: "Hallo" } as Record<string, string>)[getCurrentLanguageCode()] ?? "Hei"}, {profile.name || "korisniče"}.
+          <div className="rounded-3xl border border-border/50 bg-cream/90 backdrop-blur-md shadow-postcard p-5 sm:p-7">
+            <p className="font-script italic text-primary/60 text-sm">
+              {({ en: "Hi", de: "Hallo" } as Record<string, string>)[getCurrentLanguageCode()] ?? "Hei"}, {profile.name || "korisniče"}
+            </p>
+            {nextLesson ? (
+              <>
+                <p className="mt-3 text-xs uppercase tracking-wide text-muted-foreground">
+                  {lessonProgress[nextLesson.id] === "in_progress" ? "Nastavi gde si stao/la" : "Tvoj sledeći korak"} · Lekcija {nextLesson.sort_order}
+                </p>
+                <h1 className="text-display text-2xl sm:text-3xl text-primary mt-1 leading-tight break-words">{nextLesson.title_target}</h1>
+                <Button
+                  variant="hero"
+                  size="lg"
+                  className="mt-5 w-full sm:w-auto"
+                  onClick={() => navigate(`/lekcija/${nextLesson.id}?course=${course}`)}
+                >
+                  {lessonProgress[nextLesson.id] === "in_progress" ? "Nastavi lekciju" : "Započni lekciju"}
+                </Button>
+              </>
+            ) : (
+              <h1 className="text-display text-2xl sm:text-3xl text-primary mt-2 leading-tight">
+                {lessonsLoaded && visibleLessons.length > 0 ? "Sve lekcije su završene. Bravo!" : ui.heroBody}
               </h1>
-              <p className="text-muted-foreground text-sm sm:text-base max-w-md leading-relaxed">
-                {ui.heroBody}
-              </p>
-              <div className="mt-4 flex items-center gap-2 text-xs">
-                <span className="bg-secondary/60 text-primary px-2.5 py-1 rounded-full border border-border/50 font-medium">
-                  {profile.level}
-                </span>
-                <span className="text-primary/50 font-script italic">·</span>
-                <span className="text-primary/70">{profile.learning_goal}</span>
-              </div>
-            </div>
-            <div className="md:col-span-2 relative min-h-[160px] md:min-h-[240px] border-t md:border-t-0 md:border-l border-border/40">
-              <FjordHero className="absolute inset-0 w-full h-full" language={getCurrentLanguageCode()} />
-            </div>
-
+            )}
           </div>
         </motion.div>
-
-        {xpData && (
-          <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
-            <XpProgressCard level={xpData.level} totalXp={xpData.total_xp} />
-          </motion.div>
-        )}
-        {lessonsLoaded && (
-          <TrophyShelf level={activeCourse === "health" ? "B1" : selectedLevel} lessons={visibleLessons} won={trophies} />
-        )}
-
-        {user && <DailyPlanCard userId={user.id} language={code} nextLesson={visibleLessons.find((l) => lessonProgress[l.id] !== "completed") ?? null} />}
-        <WeeklyDigest />
         {location.state?.courseDenied && <p role="alert" className="my-4 text-sm text-destructive">Ova lekcija nije deo kursa na koji si upisan/a.</p>}
 
         <TeacherWorkWidget language={code} />
@@ -320,6 +315,15 @@ export default function DashboardPage() {
               </Card>
             </motion.div>
           ))}
+        </div>
+
+        <div className="mt-10 space-y-4">
+          {user && <DailyPlanCard userId={user.id} language={code} nextLesson={nextLesson} />}
+          {xpData && <XpProgressCard level={xpData.level} totalXp={xpData.total_xp} />}
+          {lessonsLoaded && (
+            <TrophyShelf level={activeCourse === "health" ? "B1" : selectedLevel} lessons={visibleLessons} won={trophies} />
+          )}
+          <WeeklyDigest />
         </div>
 
         {lessonLoaded && (
